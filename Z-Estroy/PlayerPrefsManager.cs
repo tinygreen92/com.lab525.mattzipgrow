@@ -42,7 +42,6 @@ public class PlayerPrefsManager : MonoBehaviour
     [HideInInspector]
     public string[] megaDamColl;
 
-    [HideInInspector]
     public string[,] muganTopColl;
     //[HideInInspector]
     //public string[,] flagDataColl;
@@ -423,6 +422,7 @@ public class PlayerPrefsManager : MonoBehaviour
             {
                 PlayerPrefs.SetInt("isFirstPVP", 0);
             }
+            PlayerPrefs.Save();
 
         }
     }
@@ -459,6 +459,7 @@ public class PlayerPrefsManager : MonoBehaviour
             {
                 PlayerPrefs.SetInt("isFristGameStart", 0);
             }
+            PlayerPrefs.Save();
 
         }
     }
@@ -495,7 +496,11 @@ public class PlayerPrefsManager : MonoBehaviour
             return _daily;
         }
 
-        set { PlayerPrefs.SetInt("NewDailyCount", value); }
+        set 
+        { 
+            PlayerPrefs.SetInt("NewDailyCount", value);
+            PlayerPrefs.Save();
+        }
     }
 
     // 3시간 짜리 스핀 보상용
@@ -511,7 +516,12 @@ public class PlayerPrefsManager : MonoBehaviour
             return _daily;
         }
 
-        set { PlayerPrefs.SetInt("DailySpinReword", value); }
+        set 
+        { 
+            PlayerPrefs.SetInt("DailySpinReword", value);
+            PlayerPrefs.Save();
+
+        }
     }
 
     /// (i)현재 장착한 펀치 인덱스           PunchIndex
@@ -525,7 +535,7 @@ public class PlayerPrefsManager : MonoBehaviour
             return _daily;
         }
 
-        set { PlayerPrefs.SetInt("PunchIndex", value); }
+        set { PlayerPrefs.SetInt("PunchIndex", value); PlayerPrefs.Save(); }
     }
 
     /// (i)방어전 성공 여부 성공 = 0 / 실패 = 1           DefendTrigger
@@ -539,7 +549,7 @@ public class PlayerPrefsManager : MonoBehaviour
             return _daily;
         }
 
-        set { PlayerPrefs.SetInt("DefendTrigger", value); }
+        set { PlayerPrefs.SetInt("DefendTrigger", value); PlayerPrefs.Save(); }
     }
 
     /// 음소거 설정.
@@ -555,8 +565,12 @@ public class PlayerPrefsManager : MonoBehaviour
 
         set
         {
-            if (value == false) PlayerPrefs.SetInt("isAllmute", 0);
-            else PlayerPrefs.SetInt("isAllmute", 1);
+            if (value == false) 
+                PlayerPrefs.SetInt("isAllmute", 0);
+            else 
+                PlayerPrefs.SetInt("isAllmute", 1);
+
+            PlayerPrefs.Save();
         }
     }
 
@@ -573,8 +587,12 @@ public class PlayerPrefsManager : MonoBehaviour
 
         set
         {
-            if (value == false) PlayerPrefs.SetInt("isGoingGOSO", 0);
-            else PlayerPrefs.SetInt("isGoingGOSO", 1);
+            if (value == false) 
+                PlayerPrefs.SetInt("isGoingGOSO", 0);
+            else 
+                PlayerPrefs.SetInt("isGoingGOSO", 1);
+
+            PlayerPrefs.Save();
         }
     }
 
@@ -592,8 +610,12 @@ public class PlayerPrefsManager : MonoBehaviour
 
         set
         {
-            if (value == false) PlayerPrefs.SetInt("isDataLoaded", 0);
-            else PlayerPrefs.SetInt("isDataLoaded", 1);
+            if (value == false) 
+                PlayerPrefs.SetInt("isDataLoaded", 0);
+            else 
+                PlayerPrefs.SetInt("isDataLoaded", 1);
+
+            PlayerPrefs.Save();
         }
     }
 
@@ -611,7 +633,7 @@ public class PlayerPrefsManager : MonoBehaviour
             return _daily;
         }
 
-        set { PlayerPrefs.SetInt("DailyCount_Cheak", value); }
+        set { PlayerPrefs.SetInt("DailyCount_Cheak", value); PlayerPrefs.Save(); }
     }
 
 
@@ -664,6 +686,7 @@ public class PlayerPrefsManager : MonoBehaviour
         {
             //allMoneyInfo[0].dGold = double.Parse(value);
             PlayerPrefs.SetString("gold", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -684,6 +707,7 @@ public class PlayerPrefsManager : MonoBehaviour
         {
             //allMoneyInfo[0].dDiamond = double.Parse(value);
             PlayerPrefs.SetString("diamond", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -704,6 +728,7 @@ public class PlayerPrefsManager : MonoBehaviour
         {
             //allMoneyInfo[0].dGupbap = double.Parse(value);
             PlayerPrefs.SetString("gupbap", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -725,6 +750,7 @@ public class PlayerPrefsManager : MonoBehaviour
         {
             //allMoneyInfo[0].dSSalbap = double.Parse(value);
             PlayerPrefs.SetString("ssalbap", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -744,9 +770,8 @@ public class PlayerPrefsManager : MonoBehaviour
             // 최대 열쇠 범위 20억
             if (value >= 2000000000) kkey = 2000000000;
 
-
-
             PlayerPrefs.SetInt("key", kkey);
+            PlayerPrefs.Save();
         }
     }
 
@@ -767,6 +792,7 @@ public class PlayerPrefsManager : MonoBehaviour
             if (value >= 2000000000) kkey = 2000000000;
 
             PlayerPrefs.SetInt("ticket", kkey);
+            PlayerPrefs.Save();
         }
     }
 
@@ -785,6 +811,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetInt("VIP", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -859,6 +886,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetString("InfiPersonalRecord", value);
+            PlayerPrefs.Save();
         }
     }
     
@@ -883,6 +911,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetFloat("BG_CoinStat", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -902,6 +931,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetString("BG_Data", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -920,6 +950,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetInt("BG_Curent", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -941,6 +972,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetString("Uniform_Data", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -976,6 +1008,7 @@ public class PlayerPrefsManager : MonoBehaviour
             {
                 PlayerPrefs.SetInt("isGoldTriple", 1);
             }
+            PlayerPrefs.Save();
         }
     }
 
@@ -1000,6 +1033,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetString("CriticalDPS", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -1018,6 +1052,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetString("Critical_Per", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -1055,6 +1090,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetString("PlayerDPS", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -1074,6 +1110,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetString("RawAttackDamage", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -1093,6 +1130,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetFloat("AttackPerPunch", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -1129,6 +1167,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetString("Mat_MaxHP", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -1145,6 +1184,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetString("Stat_MaxHP", value);
+            PlayerPrefs.Save();
 
             var result = dts.AddStringDouble(Arti_MaxHP, value);
             Mat_MaxHP = result;
@@ -1164,6 +1204,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetString("Arti_MaxHP", value);
+            PlayerPrefs.Save();
 
             var result = dts.AddStringDouble(Stat_MaxHP, value);
             Mat_MaxHP = result;
@@ -1183,6 +1224,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetString("Mat_currentHP", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -1235,6 +1277,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetString("Mat_Mattzip", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -1268,6 +1311,7 @@ public class PlayerPrefsManager : MonoBehaviour
             {
                 PlayerPrefs.SetInt("isBoosterMattzip", 1);
             }
+            PlayerPrefs.Save();
         }
     }
 
@@ -1284,6 +1328,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetFloat("Mat_Mattzip_Hit", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -1300,6 +1345,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetFloat("MattzipStat", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -1316,6 +1362,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetFloat("MattzipArtif", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -1342,6 +1389,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetString("Mat_Recov", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -1358,6 +1406,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetString("ATK_PER_UP", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -1374,6 +1423,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetString("HP_PER_UP", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -1390,6 +1440,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetInt("ATK_PER_UP_Lv", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -1406,6 +1457,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetInt("HP_PER_UP_Lv", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -1429,6 +1481,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetString("Dia_ATK_PER_UP", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -1445,6 +1498,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetString("Dia_HP_PER_UP", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -1462,6 +1516,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetInt("Dia_ATK_PER_UP_Lv", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -1479,6 +1534,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetInt("Dia_HP_PER_UP_Lv", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -1497,6 +1553,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetInt("CRC_UP_Lv", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -1513,6 +1570,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetInt("CRD_UP_Lv", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -1531,6 +1589,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetInt("Dia_CRC_UP_Lv", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -1547,6 +1606,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetInt("Dia_CRD_UP_Lv", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -1563,6 +1623,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetString("Dia_CRC_UP", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -1579,6 +1640,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetString("Dia_CRD_UP", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -1595,6 +1657,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetString("CRC_UP", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -1611,6 +1674,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetString("CRD_UP", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -1627,6 +1691,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetInt("Gold_RECOV_UP_Lv", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -1642,6 +1707,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetInt("Dia_RECOV_UP_Lv", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -1656,14 +1722,14 @@ public class PlayerPrefsManager : MonoBehaviour
     {
         get
         {
-            if (!PlayerPrefs.HasKey("Mat_100")) return 0;
-            var tmp = PlayerPrefs.GetInt("Mat_100");
+            var tmp = PlayerPrefs.GetInt("Mat_100", 0);
             return tmp;
         }
 
         set
         {
             PlayerPrefs.SetInt("Mat_100", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -1680,6 +1746,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetInt("Mat_Skill_300", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -1696,6 +1763,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetFloat("LuckyProb", (1.0f + value));
+            PlayerPrefs.Save();
         }
     }
 
@@ -1712,6 +1780,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetInt("ATK_Lv", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -1728,6 +1797,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetInt("Mat_HP_Lv", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -1744,6 +1814,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetInt("Recov_Lv", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -1760,6 +1831,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetInt("Mattzip_Lv", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -1776,6 +1848,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetFloat("GroggyTouch", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -1792,6 +1865,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetInt("Arti_PunchTouch", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -1808,6 +1882,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetInt("Arti_Mattzip", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -1824,6 +1899,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetInt("Arti_HP", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -1840,6 +1916,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetInt("Arti_GroggyTouch", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -1856,6 +1933,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetInt("Arti_GAL", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -1873,6 +1951,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetInt("Arti_DefenceTime", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -1889,6 +1968,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetInt("Arti_GoldBox", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -1905,6 +1985,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetInt("Arti_OffGold", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -1921,6 +2002,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetInt("Arti_MuganTime", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -1939,6 +2021,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetInt("Arti_AttackPower", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -1960,6 +2043,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetInt("Arti_GoldPer", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -1975,6 +2059,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetInt("Arti_LuckyBoxPer", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -1990,6 +2075,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetInt("Arti_DefencePer", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -2005,6 +2091,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetInt("Arti_GoldUpgrade", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -2020,6 +2107,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetInt("Arti_InfiReword", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -2035,6 +2123,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetInt("Arti_MiniReword", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -2050,6 +2139,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetInt("Arti_MiniGameTime", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -2070,6 +2160,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetInt("is1Recov", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -2086,6 +2177,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetInt("is2Stamina", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -2102,6 +2194,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetInt("is3ATK", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -2118,6 +2211,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetInt("is4Mattzip", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -2139,6 +2233,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetFloat("Stat_is1Recov", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -2157,6 +2252,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetFloat("Stat_is2Stamina", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -2175,6 +2271,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetFloat("Stat_is3ATK", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -2193,6 +2290,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetFloat("Stat_is4Mattzip", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -2214,6 +2312,7 @@ public class PlayerPrefsManager : MonoBehaviour
             if (value >= MaxGet_GookBap)
             {
                 PlayerPrefs.SetInt("MaxGet_GookBap", value);
+                PlayerPrefs.Save();
             }
 
         }
@@ -2229,17 +2328,17 @@ public class PlayerPrefsManager : MonoBehaviour
         ///
         get
         {
-            if (!PlayerPrefs.HasKey("MaxGet_MuganTop2")) return 1;
-            var tmp = PlayerPrefs.GetInt("MaxGet_MuganTop2");
+            var tmp = PlayerPrefs.GetInt("MaxGet_MuganTop2", 1);
             return tmp;
         }
 
         set
         {
             // 값비교
-            if (value >= MaxGet_MuganTop)
+            if (value >= PlayerPrefs.GetInt("MaxGet_MuganTop2", 1))
             {
                 PlayerPrefs.SetInt("MaxGet_MuganTop2", value);
+                PlayerPrefs.Save();
                 playNANOO.RankingRecordMuganTop();
             }
 
@@ -2265,6 +2364,7 @@ public class PlayerPrefsManager : MonoBehaviour
             if (value >= MaxGet_MiniGame)
             {
                 PlayerPrefs.SetInt("MaxGet_MiniGame", value);
+                PlayerPrefs.Save();
                 playNANOO.RankingRecordMinini();
 
             }
@@ -2282,8 +2382,7 @@ public class PlayerPrefsManager : MonoBehaviour
     {
         get
         {
-            if (!PlayerPrefs.HasKey("Cilcked_Cnt_MattZip")) return 3f;
-            var tmp = PlayerPrefs.GetFloat("Cilcked_Cnt_MattZip");
+            var tmp = PlayerPrefs.GetFloat("Cilcked_Cnt_MattZip", 3f);
 
             tmp = tmp - (tmp * Pet_Touch_Lv * 0.05f * 0.01f);
             return tmp;
@@ -2292,6 +2391,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetFloat("Cilcked_Cnt_MattZip", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -2311,6 +2411,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetFloat("Mattzip_Dia_Weap", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -2326,6 +2427,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetInt("Chara_Lv", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -2356,6 +2458,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetInt("Pet_Touch_Lv", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -2374,6 +2477,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetInt("Pet_Buff_Lv", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -2391,6 +2495,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetInt("Pet_Matt_Up_Lv", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -2408,6 +2513,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetInt("Pet_PVP_Matt_Lv", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -2428,6 +2534,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetInt("Pet_PVP_Speed_Lv", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -2446,6 +2553,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetInt("Friend_01_MattzipPer_Lv", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -2463,6 +2571,7 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetInt("Friend_02_OffTimeUp_Lv", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -3766,6 +3875,7 @@ public class PlayerPrefsManager : MonoBehaviour
         SavequestInfo6();
 
         //SaveAllMoneyData();
+        listGPGS.Clear();
         //
         listGPGS.Add(new GPGSsavedPrefList
         {
@@ -3806,7 +3916,7 @@ public class PlayerPrefsManager : MonoBehaviour
             cloudTmpForGPGS_035 = PlayerPrefs.GetFloat("GroggyTouch", 0),
             cloudTmpForGPGS_036 = PlayerPrefs.GetFloat("LuckyProb", 1.0f),
             cloudTmpForGPGS_037 = PlayerPrefs.GetInt("MaxGet_GookBap", 0),
-            cloudTmpForGPGS_038 = PlayerPrefs.GetFloat("Cilcked_Cnt_MattZip", 5f),
+            cloudTmpForGPGS_038 = PlayerPrefs.GetFloat("Cilcked_Cnt_MattZip", 3f),
             //0515
             cloudTmpForGPGS_101 = PlayerPrefs.GetInt("Arti_DefenceTime", 0),
             cloudTmpForGPGS_102 = PlayerPrefs.GetInt("Arti_GoldBox", 0),
@@ -3928,8 +4038,9 @@ public class PlayerPrefsManager : MonoBehaviour
 
         binaryFormatter.Serialize(memoryStream, listGPGS);
 
-        /// 데이터 저장해라.
-        PlayerPrefs.SetString("GAME_DATA_MATT", Convert.ToBase64String(memoryStream.GetBuffer()));
+        ///// 데이터 저장해라.
+        //PlayerPrefs.SetString("GAME_DATA_MATT", Convert.ToBase64String(memoryStream.GetBuffer()));
+        //PlayerPrefs.Save();
 
         return Convert.ToBase64String(memoryStream.GetBuffer());
     }
@@ -3947,18 +4058,15 @@ public class PlayerPrefsManager : MonoBehaviour
             BinaryFormatter binaryFormatter = new BinaryFormatter();
             MemoryStream memoryStream = new MemoryStream(Convert.FromBase64String(data));
 
-            listGPGS = (List<GPGSsavedPrefList>)binaryFormatter.Deserialize(memoryStream);
-
+            //listGPGS = (List<GPGSsavedPrefList>)binaryFormatter.Deserialize(memoryStream);
             /// 데이터 넣어줘라.
-            InitAllGameData();
+            InitAllGameData((List<GPGSsavedPrefList>)binaryFormatter.Deserialize(memoryStream));
 
-            Debug.Log("LoadAllPrefsData :: Success");
-
+            Debug.LogWarning("LoadAllPrefsData :: Success");
         }
         else
         {
-            Debug.Log("LoadAllPrefsData :: Faill");
-
+            Debug.LogWarning("LoadAllPrefsData :: Faill");
         }
 
 
@@ -3968,8 +4076,9 @@ public class PlayerPrefsManager : MonoBehaviour
     /// <summary>
     /// 실제로 게임에 데이터 씌워주기
     /// </summary>
-    void InitAllGameData()
+    void InitAllGameData(List<GPGSsavedPrefList> _lists)
     {
+        listGPGS = _lists;
         //SaveAllPrefsData();
 
         PlayerPrefs.SetString("weaponInfo", listGPGS[0].cloudTmpForGPGS_029);
@@ -3994,11 +4103,11 @@ public class PlayerPrefsManager : MonoBehaviour
         //
         //LoadAllMoneyData();
         LoaduniformData();
-
         //서순
         PlayerPrefs.SetInt("isFristGameStart", listGPGS[0].cloudTmpForGPGS_001);
         PlayerPrefs.SetInt("DailyCount", listGPGS[0].cloudTmpForGPGS_002);
-        PlayerPrefs.SetInt("PunchIndex", listGPGS[0].cloudTmpForGPGS_003);
+        //PlayerPrefs.SetInt("PunchIndex", listGPGS[0].cloudTmpForGPGS_003);
+        PlayerPrefs.SetInt("PunchIndex", 0);
         PlayerPrefs.SetInt("DefendTrigger", listGPGS[0].cloudTmpForGPGS_004);
         PlayerPrefs.SetInt("key", listGPGS[0].cloudTmpForGPGS_005);
         PlayerPrefs.SetInt("VIP", listGPGS[0].cloudTmpForGPGS_006);

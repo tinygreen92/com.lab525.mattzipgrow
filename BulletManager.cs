@@ -1097,9 +1097,12 @@ public class BulletManager : MonoBehaviour
         if (!PlayerPrefsManager.GetInstance().isFristGameStart) return;
 
         /// 동료 한명씩 해제할 때 마다 게이지 올라가는거 올라감
-        if(PlayerPrefsManager.GetInstance().Friend_01_MattzipPer_Lv > 0 && PlayerPrefsManager.GetInstance().Friend_02_OffTimeUp_Lv > 0) PlayerPrefsManager.GetInstance().Mat_100+= 3; // 1씩 증가
-        else if(PlayerPrefsManager.GetInstance().Friend_01_MattzipPer_Lv > 0) PlayerPrefsManager.GetInstance().Mat_100+=2; // 1씩 증가
-        else if(PlayerPrefsManager.GetInstance().Friend_02_OffTimeUp_Lv > 0) PlayerPrefsManager.GetInstance().Mat_100+=2; // 1씩 증가
+        if(PlayerPrefsManager.GetInstance().Friend_01_MattzipPer_Lv > 0 && PlayerPrefsManager.GetInstance().Friend_02_OffTimeUp_Lv > 0) 
+            PlayerPrefsManager.GetInstance().Mat_100+= 3; // 1씩 증가
+        else if(PlayerPrefsManager.GetInstance().Friend_01_MattzipPer_Lv > 0) 
+            PlayerPrefsManager.GetInstance().Mat_100+=2; // 1씩 증가
+        else if(PlayerPrefsManager.GetInstance().Friend_02_OffTimeUp_Lv > 0) 
+            PlayerPrefsManager.GetInstance().Mat_100+=2; // 1씩 증가
         else PlayerPrefsManager.GetInstance().Mat_100++; // 1씩 증가
 
 
@@ -1108,17 +1111,14 @@ public class BulletManager : MonoBehaviour
         /// 현재 내 맷집 float
         intMattzip = float.Parse(PlayerPrefsManager.GetInstance().Mat_Mattzip);
 
-        var tresultMattHead = intMattzip * 0.0000001f;
+        ///var tresultMattHead = intMattzip * 0.0000001f;
         resultMattHead = intMattzip * 0.00000001f;
 
         if (resultMattHead <= 0.1f)
-        {
             maxMat = 0;
-        }
         else
-        {
             maxMat *= resultMattHead;
-        }
+        /// 이미지 fill
         MattzipGauge.fillAmount = PlayerPrefsManager.GetInstance().Mat_100 / (100.0f + Mathf.Floor(maxMat));
 
         Debug.LogWarning("맷집 타격 기본 100대에서 " + maxMat + "만큼 증가");
@@ -1126,7 +1126,7 @@ public class BulletManager : MonoBehaviour
         ///PopUpObjectManager.GetInstance().TestText[1].text = ("변경 후 : 100대에서 " + Mathf.Floor(maxMat) + "만큼 증가");
 
 
-        // 맷집은 기본 100회 타격당 1씩 증가 + 현재 공격력의 1%
+        /// 맷집은 기본 100회 타격당 1씩 증가 + 현재 공격력의 1%
         if (PlayerPrefsManager.GetInstance().Mat_100 >= (100.0f + Mathf.Floor(maxMat)))
         {
 

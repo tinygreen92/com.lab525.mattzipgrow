@@ -48,12 +48,11 @@ public class MuganMode : MonoBehaviour
     bool isStart;
 
     /// <summary>
-    /// 외부에서 호출
+    /// 무한의 탑 팝업 버튼에서 호출
     /// </summary>
     public void StartInfi()
     {
-
-
+        /// 열쇠 체크
         if (PlayerPrefsManager.GetInstance().key <= 0)
         {
             PopUpObjectManager.GetInstance().ShowWarnnigProcess("열쇠가 부족하여 입장할 수 없습니다.");

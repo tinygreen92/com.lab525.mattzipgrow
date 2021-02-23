@@ -438,11 +438,15 @@ public class GameStart : MonoBehaviour
         //PlayerPrefs.SetString("BG_Data", "0+0+0+0+0");
 
         //0601
-        if (PlayerPrefs.GetString("diaBuyWeaponList") == "" || !PlayerPrefs.HasKey("diaBuyWeaponList")) PlayerPrefs.SetString("diaBuyWeaponList", "525*");
+        if (PlayerPrefs.GetString("diaBuyWeaponList") == "" || !PlayerPrefs.HasKey("diaBuyWeaponList")) 
+            PlayerPrefs.SetString("diaBuyWeaponList", "525*");
 
         //0622
-        if (PlayerPrefs.GetString("InfiPersonalRecord") == "0" || !PlayerPrefs.HasKey("InfiPersonalRecord")) PlayerPrefs.SetString("InfiPersonalRecord", "0*0*0*0*0*0*0*0*0*0*");
-        if (PlayerPrefs.GetInt("MaxGet_MuganTop2") == 0 || !PlayerPrefs.HasKey("MaxGet_MuganTop2")) PlayerPrefs.SetInt("MaxGet_MuganTop2", 1);
+        if (PlayerPrefs.GetString("InfiPersonalRecord") == "0" || !PlayerPrefs.HasKey("InfiPersonalRecord")) 
+            PlayerPrefs.SetString("InfiPersonalRecord", "0*0*0*0*0*0*0*0*0*0*");
+
+        if (PlayerPrefs.GetInt("MaxGet_MuganTop2") == 0 || !PlayerPrefs.HasKey("MaxGet_MuganTop2")) 
+            PlayerPrefs.SetInt("MaxGet_MuganTop2", 1);
 
 
 

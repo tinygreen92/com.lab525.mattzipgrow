@@ -34,6 +34,10 @@ public class PunchManager : MonoBehaviour
     bool isUnlock;
     string[] thisDiaBuyWeapArray;
 
+
+    /// <summary>
+    /// 게임 시작할때 펀치 세팅 초기화
+    /// </summary>
     public void PunchInit()
     {
         string tmpDiaBuyWeap = "";
@@ -41,6 +45,7 @@ public class PunchManager : MonoBehaviour
 
         //
         int ccnt = PunchGrid.childCount;
+
         POWER_UP_LV = new Text[ccnt];
         POWER_UP_TEXT = new Text[ccnt];
         POWER_UP_Price = new Text[ccnt];
@@ -86,7 +91,7 @@ public class PunchManager : MonoBehaviour
                 tmpDiaBuyWeap += "0*";
             }
 
-            //
+            /// 구매한 펀치라면 언락 이미지 표기
             UnlockNewPunch(i);
         }
 
@@ -280,6 +285,12 @@ public class PunchManager : MonoBehaviour
 
     }
 
+
+
+    /// <summary>
+    /// 훈련 장비 업그레이드 버튼에 붙여
+    /// </summary>
+    /// <param name="p_index"></param>
     public void ClickedPunchUPgra(int p_index)
     {
         // 저장된 해당 펀치 리스트 가져와서 뿌려주고
@@ -346,7 +357,8 @@ public class PunchManager : MonoBehaviour
 
 
         // 해당 코스트 넣어서 통과 못하면 리턴
-        if (!MilkPass(thisWeaponCost)) return;
+        if (!MilkPass(thisWeaponCost)) 
+            return;
 
         // 정상적 국밥 소모
         PlayerPrefsManager.GetInstance().gupbap = result;
@@ -361,14 +373,13 @@ public class PunchManager : MonoBehaviour
 
         // 정상적으로 소모했다면 훈련도구 강화
         //float weaponATK = float.Parse(PlayerPrefsManager.GetInstance().weaponColl[p_index, thisWeaponLevel - 1]);
-        float weaponATK = 0;
         /// 레벨 1일때 초기값 예외 처리
-        weaponATK = (thisWeaponLevel * (0.5f * (p_index + 1)));
+        float weaponATK = (thisWeaponLevel * (0.5f * (p_index + 1)));
 
 
         // 훈련도구 가격
         //string tmpPrice = PlayerPrefsManager.GetInstance().shopColl[p_index, thisWeaponLevel - 1];
-        string tmpPrice = "0";
+        string tmpPrice;
         ///// 레벨 1일때 초기값 예외 처리
         //if (thisWeaponLevel == 1)
         //{
@@ -388,8 +399,8 @@ public class PunchManager : MonoBehaviour
 
         //}
 
-                    /// 첫번재 무기라면 예외처리
-            if (p_index == 0)
+        /// 첫번재 무기라면 예외처리
+        if (p_index == 0)
             {
                 tmpPrice = (thisWeaponLevel + 10).ToString();
             }
