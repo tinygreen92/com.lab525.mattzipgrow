@@ -32,13 +32,13 @@ public class Booster_Body : MonoBehaviour
             // 온/오프 기능
             if (!transform.GetChild(0).gameObject.activeSelf)
             {
-                transform.GetChild(1).GetComponent<Text>().text = "맷집버프 ON";
+                transform.GetChild(1).GetComponent<Text>().text = "공격력버프 ON";
                 PlayerPrefsManager.GetInstance().isBoosterMattzip = true;
                 UserWallet.GetInstance().ShowUserMatZip();
             }
             else
             {
-                transform.GetChild(1).GetComponent<Text>().text = "맷집버프 OFF";
+                transform.GetChild(1).GetComponent<Text>().text = "공격력버프 OFF";
                 PlayerPrefsManager.GetInstance().isBoosterMattzip = false;
                 UserWallet.GetInstance().ShowUserMatZip();
 

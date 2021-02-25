@@ -6,8 +6,10 @@ using UnityEngine.UI;
 
 public class MINIgameManager : MonoBehaviour
 {
+    public GameObject Btn_Exit;
+    [Space]
     public Booster_KEY booster_KEY;
-
+    [Space]
     bool isAnimPlaying = false;
     public GotoMINIgame gotoMINIgame;
     [Header("- 버튼 번쩍이")]
@@ -44,8 +46,6 @@ public class MINIgameManager : MonoBehaviour
 
         R_Content = R_scrollRect.transform.GetChild(0).GetChild(0).GetComponent<RectTransform>();
         L_Content = L_scrollRect.transform.GetChild(0).GetChild(0).GetComponent<RectTransform>();
-
-
     }
 
 
@@ -214,6 +214,8 @@ public class MINIgameManager : MonoBehaviour
     /// </summary>
     public void InitMiniGame()
     {
+        Btn_Exit.SetActive(true);
+
         isGameEnding = false;
 
         isRightBtnClicked = false;
@@ -311,6 +313,8 @@ public class MINIgameManager : MonoBehaviour
     /// </summary>
     void MiniGameOver()
     {
+        Btn_Exit.SetActive(false);
+
         Debug.LogWarning("미니게임 보상 받고 종료");
         //타이머 초기화.
         StopCoroutine(MiniGameCo);
@@ -369,21 +373,22 @@ public class MINIgameManager : MonoBehaviour
     /// </summary>
     public void EndBtnClicked()
     {
-        //타이머 초기화.
-        StopCoroutine(MiniGameCo);
+        ////타이머 초기화.
+        //StopCoroutine(MiniGameCo);
 
-        PopUpObjectManager.GetInstance().ShowWarnnigProcess("미니게임 종료.");
-        //퀘스트
-        PlayerPrefsManager.GetInstance().questInfo3[0].All_MiniGame_Cnt++;
-        isStart = false;
+        //PopUpObjectManager.GetInstance().ShowWarnnigProcess("미니게임 종료.");
+        ////퀘스트
+        //PlayerPrefsManager.GetInstance().questInfo3[0].All_MiniGame_Cnt++;
+        //isStart = false;
 
-        Invoke("InvoBackHome", 1.0f);
+        //Invoke("InvoBackHome", 1.0f);
 
+        MiniGameOver();
     }
-    void InvoBackHome()
-    {
-        gotoMINIgame.BackFromMiniGameView();
-    }
+    //void InvoBackHome()
+    //{
+    //    gotoMINIgame.BackFromMiniGameView();
+    //}
 
     [Header("- 먹는 모습")]
     public GameObject EattingMotion;

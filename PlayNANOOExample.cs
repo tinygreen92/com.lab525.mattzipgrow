@@ -37,13 +37,6 @@ public class PlayNANOOExample : MonoBehaviour
     }
 
 
-    void OnApplicationQuit()
-    {
-        /* 앱이 종료 될 때 처리 */
-        StorageSaveForBuy();
-    }
-
-
     ///// <summary>
     ///// Open Forum Banner
     ///// </summary>
@@ -590,17 +583,17 @@ public class PlayNANOOExample : MonoBehaviour
     /// </summary>
     public void StorageSaveForBuy()
     {
-        PlayerPrefs.Save();
-        plugin.StorageSave(GPGSManager.GetLocalUserId(), playerPrefsManager.SaveAllPrefsData(), true, (state, message, rawData, dictionary) => {
-            if (state.Equals(Configure.PN_API_STATE_SUCCESS))
-            {
-                Debug.LogWarning("StorageSave Success ::");
-            }
-            else
-            {
-                Debug.LogWarning("StorageSave Fail");
-            }
-        });
+        //PlayerPrefs.Save();
+        //plugin.StorageSave(GPGSManager.GetLocalUserId(), playerPrefsManager.SaveAllPrefsData(), true, (state, message, rawData, dictionary) => {
+        //    if (state.Equals(Configure.PN_API_STATE_SUCCESS))
+        //    {
+        //        Debug.LogWarning("StorageSave Success ::");
+        //    }
+        //    else
+        //    {
+        //        Debug.LogWarning("StorageSave Fail");
+        //    }
+        //});
     }
 
     public void StorageSaveForCheack()

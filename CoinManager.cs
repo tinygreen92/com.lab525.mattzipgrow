@@ -182,34 +182,16 @@ public class CoinManager : MonoBehaviour
         }
         else
         {
-            // 동영상 보고 3배 버프 적용 받으면?
+            /// 동영상 보고 3배 버프 적용 받으면? -> 2배로 수정
             if (PlayerPrefsManager.GetInstance().isGoldTriple)
             {
-                if (dts.SubStringDouble("10", tmpDps)  == "-1")
-                {
-                    result = dts.multipleStringDouble(tmpDps, 6d * (goldPer + (artiGoldPer * 0.01d)));
-                }
-                else
-                {
-                    result = dts.multipleStringDouble(tmpDps, 6d * (goldPer + (artiGoldPer * 0.01d)));
-                }
-
+                result = dts.multipleStringDouble(tmpDps, 2d * 2d * (goldPer + (artiGoldPer * 0.01d)));
                 //Debug.Log("동영상 세배: " + result);
             }
             else // 아무 버프 없을 때.
             {
-                if (dts.SubStringDouble("10", tmpDps) == "-1")
-                {
-                    result = dts.multipleStringDouble(tmpDps, 2d * (goldPer + (artiGoldPer * 0.01d)));
-                }
-                else
-                {
-                    result = dts.multipleStringDouble(tmpDps, 2d * (goldPer + (artiGoldPer * 0.01d)));
-                }
+                result = dts.multipleStringDouble(tmpDps, 2d * (goldPer + (artiGoldPer * 0.01d)));
                 //Debug.Log("아무 버프 없 : "+result);
-                //Debug.Log("goldPer : " + goldPer);
-                //Debug.Log("tmpDps  : " + tmpDps);
-
             }
         }
 

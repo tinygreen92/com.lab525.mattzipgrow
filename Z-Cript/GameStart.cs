@@ -35,22 +35,21 @@ public class GameStart : MonoBehaviour
     {
         // 프레임레이트 고정
         Application.targetFrameRate = 60;
-
         // 오디오 매니저 세팅
         audioManager.AudioInit();
-
-        if (isDebugMode) 
+        /// 
+        if (isDebugMode)
+        {
             return;
+        }
 
         ///
         /// 여기 아래는 모바일 기기에서만 적용하게끔.
         ///
-
         // 로그 비활성화
         Debug.unityLogger.logEnabled = false;
         // 화면 꺼짐 방지
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
-
     }
 
     DoubleToStringNum dts = new DoubleToStringNum();
@@ -78,52 +77,30 @@ public class GameStart : MonoBehaviour
         {
             AllObject[i].SetActive(false);
         }
-
         // 광고판 초기화.
         GetComponent<EasyMobileInitializer>().AdmobInit();
-
         // GPSS 긁어오기
         GetComponent<GPGS_Linker>().Init();
-
         // 오디오 매니저 세팅
         audioManager.AudioSetting();
-
-
         // CSV 시트 긁기
-        //PlayerPrefsManager.GetInstance().InitTrainingData();
         PlayerPrefsManager.GetInstance().InitMegaDamData();
-        //PlayerPrefsManager.GetInstance().InitWeaponData();
-        //PlayerPrefsManager.GetInstance().InitShopData();
-        //
         PlayerPrefsManager.GetInstance().InitMuganData();
-        //PlayerPrefsManager.GetInstance().InitFlagData();
-        //
-        //PlayerPrefsManager.GetInstance().InitDiaStatData();
         //
         PlayerPrefsManager.GetInstance().LoadWeaponInfo();
         PlayerPrefsManager.GetInstance().LoadquestInfo();
         PlayerPrefsManager.GetInstance().LoaduniformData();
         ///
-        ///
-        ///
         ///     추가된 퀘스트 
-        ///
         ///
         PlayerPrefsManager.GetInstance().LoadquestInfo2();
         PlayerPrefsManager.GetInstance().LoadquestInfo3();
         PlayerPrefsManager.GetInstance().LoadquestInfo4();
         PlayerPrefsManager.GetInstance().LoadquestInfo5();
         PlayerPrefsManager.GetInstance().LoadquestInfo6();
-
-        // 재화
-        //PlayerPrefsManager.GetInstance().LoadAllMoneyData();
-        ///
-        ///
         ///
         ///     추가된 퀘스트 
         ///
-        ///
-
         // 로딩 다 될때까지 무한 대기
         while (!PlayerPrefsManager.GetInstance().isReadyQuest)
         {
@@ -153,11 +130,6 @@ public class GameStart : MonoBehaviour
         {
             yield return new WaitForFixedUpdate();
         }
-        //while (!PlayerPrefsManager.GetInstance().isAllMoneyReady)
-        //{
-        //    yield return new WaitForFixedUpdate();
-        //}
-
 
         string tmpPrice = "";
         string weaponPrice = "";
@@ -166,7 +138,6 @@ public class GameStart : MonoBehaviour
         // 무기 리스트와 퀘스트 리스트가 비어 있다면?
         if (PlayerPrefsManager.GetInstance().weaponInfo.Count == 0)
         {
-
             // 무기 50개까지 레벨 0 초기화.
             for (int i = 0; i < 50; i++)
             {
@@ -179,7 +150,6 @@ public class GameStart : MonoBehaviour
 
                 PlayerPrefsManager.GetInstance().AddWeaponData(0, weaponPrice, 0, isUnlock);
             }
-
         }
 
         /// 추가된 무기 리스트
@@ -194,7 +164,6 @@ public class GameStart : MonoBehaviour
 
                 PlayerPrefsManager.GetInstance().AddWeaponData(0, weaponPrice, 0, isUnlock);
             }
-
         }
 
         /// 추가된 무기 리스트 0517
@@ -212,7 +181,6 @@ public class GameStart : MonoBehaviour
 
         }
 
-
         /// 추가된 무기 리스트 0529
         if (PlayerPrefsManager.GetInstance().weaponInfo.Count == 80)
         {
@@ -225,9 +193,7 @@ public class GameStart : MonoBehaviour
 
                 PlayerPrefsManager.GetInstance().AddWeaponData(0, weaponPrice, 0, isUnlock);
             }
-
         }
-
 
         /// 추가된 무기 리스트 0622
         if (PlayerPrefsManager.GetInstance().weaponInfo.Count == 90)
@@ -243,7 +209,6 @@ public class GameStart : MonoBehaviour
             }
             //무기 정보 pref에 저장.
             PlayerPrefsManager.GetInstance().SaveWeaponInfo();
-
         }
 
         /// 유니폼 데이터 초기화.
@@ -258,45 +223,37 @@ public class GameStart : MonoBehaviour
             PlayerPrefsManager.GetInstance().SaveuniformData();
         }
 
-
         // 그리고!!!! 
-        // 퀘스트 관리용 초기화.
+        /// 퀘스트 관리용 초기화.
         if (PlayerPrefsManager.GetInstance().questInfo.Count == 0)
         {
             PlayerPrefsManager.GetInstance().AddQuestData();
         }
-
         /// 퀘스트 관리용 초기화. ~~~ 업데이트 05-06
         if (PlayerPrefsManager.GetInstance().questInfo2.Count == 0)
         {
             PlayerPrefsManager.GetInstance().AddQuestData2();
         }
-
         /// 퀘스트 관리용 초기화. ~~~ 업데이트 05-17
         if (PlayerPrefsManager.GetInstance().questInfo3.Count == 0)
         {
             PlayerPrefsManager.GetInstance().AddQuestData3();
         }
-
-
         /// 퀘스트 관리용 초기화. ~~~ 업데이트 05-29
         if (PlayerPrefsManager.GetInstance().questInfo4.Count == 0)
         {
             PlayerPrefsManager.GetInstance().AddQuestData4();
         }
-
         /// 퀘스트 관리용 초기화. ~~~ 업데이트 06-22
         if (PlayerPrefsManager.GetInstance().questInfo5.Count == 0)
         {
             PlayerPrefsManager.GetInstance().AddQuestData5();
         }
-
         /// 퀘스트 관리용 초기화. ~~~ 업데이트 07-16
         if (PlayerPrefsManager.GetInstance().questInfo6.Count == 0)
         {
             PlayerPrefsManager.GetInstance().AddQuestData6();
         }
-
 
         ///
         ///
@@ -312,25 +269,13 @@ public class GameStart : MonoBehaviour
             if (PlayerPrefsManager.GetInstance().Mat_HP_Lv > 9999) PlayerPrefsManager.GetInstance().Mat_HP_Lv = 9999;
             if (PlayerPrefsManager.GetInstance().Recov_Lv > 9999) PlayerPrefsManager.GetInstance().Recov_Lv = 9999;
             if (PlayerPrefsManager.GetInstance().Mattzip_Lv > 9999) PlayerPrefsManager.GetInstance().Mattzip_Lv = 9999;
-
-
-
         }
 
-
-
-
-
-
-        //if (PlayerPrefsManager.GetInstance().allMoneyInfo.Count == 0)
-        //{
-        //    PlayerPrefsManager.GetInstance().AddAllMoneyData();
-        //}
-
         PlayerPrefsManager.GetInstance().isGoldTriple = false;
+        /// 맷집이 아니라 공격력 2배로 변경
         PlayerPrefsManager.GetInstance().isBoosterMattzip = false;
 
-        /// 두자리 오류 해결
+        /// 체력 두자리 오류 해결
         string errorHp = PlayerPrefs.GetString("Mat_currentHP");
 
         if (errorHp.Contains(".")) // 네자리수 이상?
@@ -342,35 +287,22 @@ public class GameStart : MonoBehaviour
             {
                 string alpa = sNumberList[1].Substring(0,2); // 00K 에서 00만 남기기.
                 string beta = sNumberList[1].Substring(2); // 00K 에서 K만 남기기.
-
                 string sResult = sNumberList[0] + "." + alpa + "0" + beta;
-
                 // 고쳐줌.
                 PlayerPrefsManager.GetInstance().Mat_currentHP = sResult;
             }
         }
 
-
         // 컨피그 매니저 데려오기.
         if (!isDebugMode) 
             configManager = GameObject.Find("ConfigManager").GetComponent<ConfigManager>();
-        
 
         // 튜토리얼 창 활성화.
         tutorialManager.gameObject.SetActive(true);
-
-
-
-        // 튜토리얼 스킵
+        tutorialManager.TutoStart();
+        // 튜토리얼 스킵 판별
         if (PlayerPrefsManager.GetInstance().isFristGameStart)
-        {
-            tutorialManager.TutoStart();
             tutorialManager.RealSkipBtn();
-        }
-        else
-        {
-            tutorialManager.TutoStart();
-        }
 
 
         ///
@@ -381,26 +313,10 @@ public class GameStart : MonoBehaviour
 
         if (PlayerPrefs.GetInt("is0517shock", 0) == 0)
         {
-            //PlayerPrefs.SetString("HP_PER_UP", "1");
-            //PlayerPrefs.SetString("ATK_PER_UP", "1");
-
-            ///
-            ///
-            /// 다이아 임시 해제
-            /// 
-            ///
-
             var value = PlayerPrefsManager.GetInstance().diamond;
             float dDiamond = (float)dts.PanByulGi(value);
 
             PlayerPrefs.SetFloat("dDiamond", dDiamond);
-
-            ///
-            ///
-            /// 다이아 임시 해제
-            /// 
-            ///
-
             PlayerPrefs.SetInt("is0517shock", 525);
             PlayerPrefs.Save();
         }
@@ -412,11 +328,6 @@ public class GameStart : MonoBehaviour
 
             PlayerPrefs.SetFloat("dDiamond", dDiamond);
         }
-
-
-
-
-
 
         ///
         ///
@@ -434,9 +345,6 @@ public class GameStart : MonoBehaviour
         PlayerPrefs.SetString("Dia_CRC_UP", "1");
         PlayerPrefs.SetString("Dia_CRD_UP", "1");
 
-        //
-        //PlayerPrefs.SetString("BG_Data", "0+0+0+0+0");
-
         //0601
         if (PlayerPrefs.GetString("diaBuyWeaponList") == "" || !PlayerPrefs.HasKey("diaBuyWeaponList")) 
             PlayerPrefs.SetString("diaBuyWeaponList", "525*");
@@ -449,16 +357,10 @@ public class GameStart : MonoBehaviour
             PlayerPrefs.SetInt("MaxGet_MuganTop2", 1);
 
 
-
-
-
-
-
-
-
         // 골드 알파벳
         string oldValue = PlayerPrefs.GetString("gold", "0");
         double dGold = dts.PanByulGi(oldValue);
+
         // float로 저장된 다이아도 double로 바꿔주기
         double dDia = PlayerPrefs.GetFloat("dDiamond", 0);
         Debug.LogWarning("dDia " + dDia);
@@ -479,63 +381,16 @@ public class GameStart : MonoBehaviour
         PlayerPrefs.SetString("gold", dGold.ToString("f0"));
         PlayerPrefs.SetString("diamond", dDia.ToString("f0"));
         PlayerPrefs.SetString("gupbap", dGupbab.ToString("f0"));
-        if (!PlayerPrefs.HasKey("ssalbap")) PlayerPrefs.SetString("ssalbap", "0");
-        if (PlayerPrefs.GetString("ssalbap") == "") PlayerPrefs.SetString("ssalbap", "0");
-
-
-        //PlayerPrefsManager.GetInstance().AddAllMoneyData(dGold, dDia, dGupbab, 0);
-
-
-
-        //// 한 턴 쉬어주고
-        //yield return null;
-
-        //PlayerPrefs.SetInt("is0517shock", 525);
-        //PlayerPrefs.Save();
-
+        //쌀밥
+        if (!PlayerPrefs.HasKey("ssalbap")) 
+            PlayerPrefs.SetString("ssalbap", "0");
+        if (PlayerPrefs.GetString("ssalbap") == "") 
+            PlayerPrefs.SetString("ssalbap", "0");
         ///
         ///
         /// 0517 재화 단위 해제
         /// 
         ///
-
-
-        ///
-        ///
-        /// 0508 패치시 소유골드 1/10 축소
-        ///
-        ///
-
-        //if (PlayerPrefs.GetInt("is0508shock", 0) == 0)
-        //{
-        //    var UserGold = PlayerPrefsManager.GetInstance().gold;
-        //    Debug.LogWarning("감소전 " + PlayerPrefsManager.GetInstance().gold);
-        //    //
-        //    var LessGold = dts.SubStringDouble(UserGold, "10");
-
-        //    if (LessGold == "-1") goto HELL;
-
-
-        //    var AfterGold = dts.multipleStringDouble(UserGold, 0.1f);
-
-        //    PlayerPrefsManager.GetInstance().gold = dts.PanByulGi(AfterGold).ToString();
-
-        //    Debug.LogWarning("감소후 " + PlayerPrefsManager.GetInstance().gold);
-
-        //    HELL:
-        //    //
-        //    PlayerPrefs.SetInt("is0508shock", 525);
-        //    // 강제 데이터 파일 세이브
-        //    //GameObject.Find("PlayNanoo").GetComponent<PlayNANOOExample>().StorageSaveForBuy();
-        //}
-
-
-
-      
-
-
-
-
 
         if (PlayerPrefsManager.GetInstance().questInfo[0].Pun_01_Cnt >= 19) PlayerPrefsManager.GetInstance().questInfo[0].Pun_01_Cnt = 19;
         if (PlayerPrefsManager.GetInstance().questInfo[0].Pun_02_Cnt >= 19) PlayerPrefsManager.GetInstance().questInfo[0].Pun_02_Cnt = 19;
@@ -642,8 +497,6 @@ public class GameStart : MonoBehaviour
 
 
 
-
-
         ///
         ///
         /// 0516 패치시 강제세이브
@@ -653,59 +506,39 @@ public class GameStart : MonoBehaviour
         if (PlayerPrefs.GetInt("is0515shock",0) == 0)
         {
             PlayerPrefs.SetInt("is0515shock", 525);
-            // 강제 데이터 파일 세이브
-            //GameObject.Find("PlayNanoo").GetComponent<PlayNANOOExample>().StorageSaveForBuy();
         }
-
-
-
-
-
 
 
         // 배경 깃발 초기화.
         flagManager.InitFlags();
-
-
+        // 캐릭터 레벨 초기화
         charactherMang.Characther_UP_Update();
         // 강화 페이지 레벨 초기화.
         groggyManager.PowerUP_Init();
-
-
         // 체력 회복 자동 코루틴 <시작>
         groggyManager.HP_AutoReco(true);
         // 오프라인 보상 띄우기
         offlineManager.OfflineInit();
-
         // 미션 이미지 초기화.
         questManager.SpecialMissonImgInit();
-
         // 미션 달성 뭐있나 계속 초기화.
         StartCoroutine(MissionChechecak());
-
         // 펀치 초기화
         punchManager.PunchInit();
-
         // 무기 인덱스 저장된거 불러오기
         tapToSpawnLimit.PunchIndexUpdate(PlayerPrefsManager.GetInstance().PunchIndex);
-
         // VIP 계급 초기화.
         vipManager.VIPINIT();
-
         //지갑 표시
         UserWallet.GetInstance().ShowAllMoney();
-
         // 초기 HP/공격력/맷집  표기
         groggyManager.HP_barInit();
-
-        // 최초 한번
+        // 유니폼 초기화
         charactherMang.UniformInit();
 
-
-
         // 디버그 모드 아닐때만 채팅창 접속
-        if (!isDebugMode) GameObject.Find("Scripts").GetComponent<NamePickGui>().AutoStartChat();
-
+        if (!isDebugMode) 
+            GameObject.Find("Scripts").GetComponent<NamePickGui>().AutoStartChat();
     }
 
     IEnumerator MissionChechecak()

@@ -839,8 +839,8 @@ public class PopUpObjectManager : MonoBehaviour
         InfinityPopUP.transform.GetChild(1).GetChild(3).gameObject.SetActive(false);
         InfinityPopUP.transform.GetChild(1).GetChild(4).gameObject.SetActive(true);
 
-        InfinityPopUP.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = "국밥 " + (_amount * 5).ToString("f0") + " 그릇을 얻었다!";
-        PlayerPrefsManager.GetInstance().gupbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().gupbap, (_amount * 4).ToString("f0"));
+        InfinityPopUP.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = "국밥 " + (_amount * 2).ToString("f0") + " 그릇을 얻었다!";
+        PlayerPrefsManager.GetInstance().gupbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().gupbap, _amount.ToString("f0"));
         UserWallet.GetInstance().ShowUserMilk();
         //전체 켜줌
         InfinityPopUP.SetActive(true);
@@ -1159,8 +1159,8 @@ public class PopUpObjectManager : MonoBehaviour
         Debug.LogWarning("SSalBapAmount X3 " + SSalBapAmount);
 
 
-        MiniGamereword.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = "쌀밥 " + (SSalBapAmount * 3) + " 그릇을 얻었다!";
-        PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().ssalbap, (SSalBapAmount * 2).ToString());
+        MiniGamereword.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = "쌀밥 " + (SSalBapAmount * 2) + " 그릇을 얻었다!";
+        PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().ssalbap, SSalBapAmount.ToString());
         UserWallet.GetInstance().ShowUserSSalbap();
         PlayerPrefs.Save();
         //전체 켜줌

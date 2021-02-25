@@ -254,8 +254,8 @@ public class OfflineManager : MonoBehaviour
 
         //Debug.LogWarning("오프라인 gold " + gold);
         //Debug.LogWarning("오프라인 gettingGold " + gettingGold);
-
-        gettingGold = dts.multipleStringDouble(gettingGold, 5.0f);
+        /// 광고 보고 골드 5배에서 2배로 변경
+        gettingGold = dts.multipleStringDouble(gettingGold, 2.0f);
         PlayerPrefsManager.GetInstance().gold = dts.AddStringDouble(gold, gettingGold);
 
 

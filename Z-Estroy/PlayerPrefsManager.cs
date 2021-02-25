@@ -62,117 +62,14 @@ public class PlayerPrefsManager : MonoBehaviour
     void Awake()
     {
         instance = this;
-        //
-        //weaponsData = CSVReader.Read("weaponsDataCSV");
-        //shopData = CSVReader.Read("shopDataCSV");
-        //trainingData = CSVReader.Read("trainingDataCSV"); // 훈련 강화
         magaDamageData = CSVReader.Read("MainGameDam"); // 방어전 대미지
         muganTopCollData = CSVReader.Read("MuganTopCSV"); // 무한의 탑 대미지
-        //flagData = CSVReader.Read("flagCSV"); // 깃발 대미지
-
-
-        //DiaStatData = CSVReader.Read("diaStatData");
-
-
         // 펀치 갯수 몇개?
         punchAmont = 100;
         // 초기값 필요해?
-        //weaponColl = new string[90, 100];
-        //shopColl = new string[90, 100];
-        //trainColl = new string[8, 10001];
         megaDamColl = new string[100];
-
         muganTopColl = new string[2, 200];
-        //flagDataColl = new string[4, 10001];
-
-
-        //diaStatDataColl = new string[4, 1001];
-
-
-
     }
-
-
-
-    ///// <summary>
-    ///// 시트 미리 메모리에 올려두기
-    ///// </summary>
-    //public void InitDiaStatData()
-    //{
-    //    string tmp = "0";
-
-    //    for (int j = 0; j < 1001; j++)
-    //    {
-    //        tmp = DiaStatData[j]["Attack"].ToString();
-    //        diaStatDataColl[0, j] = dts.fDoubleToStringNumber(tmp);
-
-    //        tmp = DiaStatData[j]["Attack Price"].ToString();
-    //        diaStatDataColl[1, j] = dts.fDoubleToStringNumber(tmp);
-
-    //        tmp = DiaStatData[j]["Health"].ToString();
-    //        diaStatDataColl[2, j] = dts.fDoubleToStringNumber(tmp);
-
-    //        tmp = DiaStatData[j]["Health Price"].ToString();
-    //        diaStatDataColl[3, j] = dts.fDoubleToStringNumber(tmp);
-    //    }
-
-    //}
-
-
-
-
-
-    /// <summary>
-    /// 시트 미리 메모리에 올려두기
-    /// </summary>
-    public void InitFlagData()
-    {
-        //string tmp = "0";
-
-        //for (int j = 0; j < 10001; j++)
-        //{
-        //    //tmp = flagData[j]["Attack flag"].ToString();
-        //    //flagDataColl[0, j] = dts.fDoubleToStringNumber(tmp);
-
-        //    //tmp = flagData[j]["Attack flag price"].ToString();
-        //    //flagDataColl[1, j] = dts.fDoubleToStringNumber(tmp);
-
-        //    //tmp = flagData[j]["Health flag"].ToString();
-        //    //flagDataColl[2, j] = dts.fDoubleToStringNumber(tmp);
-
-        //    //tmp = flagData[j]["Health flag price"].ToString();
-        //    //flagDataColl[3, j] = dts.fDoubleToStringNumber(tmp);
-
-        //    //tmp = flagData[j]["Mattzip flag"].ToString();
-        //    //flagDataColl[4, j] = dts.fDoubleToStringNumber(tmp);
-
-        //    //tmp = flagData[j]["Mattzip flag price"].ToString();
-        //    //flagDataColl[5, j] = dts.fDoubleToStringNumber(tmp);
-
-        //    //tmp = flagData[j]["Recovery flag"].ToString();
-        //    //flagDataColl[6, j] = dts.fDoubleToStringNumber(tmp);
-
-        //    //tmp = flagData[j]["Recovery flag price"].ToString();
-        //    //flagDataColl[7, j] = dts.fDoubleToStringNumber(tmp);
-
-        //    tmp = flagData[j]["Attack flag price"].ToString();
-        //    flagDataColl[0, j] = dts.fDoubleToStringNumber(tmp);
-
-        //    tmp = flagData[j]["Health flag price"].ToString();
-        //    flagDataColl[1, j] = dts.fDoubleToStringNumber(tmp);
-
-        //    tmp = flagData[j]["Mattzip flag price"].ToString();
-        //    flagDataColl[2, j] = dts.fDoubleToStringNumber(tmp);
-
-        //    tmp = flagData[j]["Recovery flag price"].ToString();
-        //    flagDataColl[3, j] = dts.fDoubleToStringNumber(tmp);
-
-
-
-        //}
-
-    }
-
 
 
     /// <summary>
@@ -193,46 +90,6 @@ public class PlayerPrefsManager : MonoBehaviour
 
     }
 
-    ///// <summary>
-    ///// 시트 미리 메모리에 올려두기
-    ///// </summary>
-    //public void InitWeaponData()
-    //{
-    //    string tmp = "0";
-
-    //    for (int i = 0; i < punchAmont; i++)
-    //    {
-    //        string _index = (i + 1).ToString();
-
-    //        for (int j = 0; j < 100; j++)
-    //        {
-    //            tmp = weaponsData[j][_index].ToString();
-    //            //
-    //            weaponColl[i, j] = tmp; // 스트링값으로 배수 저장.
-    //        }
-    //    }
-    //}
-
-    ///// <summary>
-    ///// 시트 미리 메모리에 올려두기
-    ///// </summary>
-    //public void InitShopData()
-    //{
-    //    string tmp = "0";
-
-    //    for (int i = 0; i < punchAmont; i++)
-    //    {
-    //        string _index = (i + 1).ToString();
-
-    //        for (int j = 0; j < 100; j++)
-    //        {
-    //            tmp = shopData[j][_index].ToString();
-    //            //
-    //            shopColl[i, j] = tmp; // 스트링값으로 배수 저장.
-    //        }
-    //    }
-    //}
-
     /// <summary>
     /// 시트 미리 메모리에 올려두기
     /// </summary>
@@ -244,59 +101,8 @@ public class PlayerPrefsManager : MonoBehaviour
         {
             tmp = magaDamageData[j]["Damage"].ToString();
             megaDamColl[j - 1] = tmp;
-
-            //Debug.LogWarning(tmp);
         }
     }
-
-    /// <summary>
-    /// 시트 미리 메모리에 올려두기
-    /// </summary>
-    public void InitTrainingData()
-    {
-        //string tmp = "0";
-
-        //for (int j = 0; j < 10000; j++)
-        //{
-        //    //tmp = trainingData[j]["Attack Price"].ToString();
-        //    trainColl[0, j] = null;
-
-        //    //tmp = trainingData[j]["Health Price"].ToString();
-        //    trainColl[1, j] = null;
-
-        //    //tmp = trainingData[j]["Recovery Price"].ToString();
-        //    trainColl[2, j] = null;
-
-        //    //tmp = trainingData[j]["Mattzip Price gookbab"].ToString();
-        //    trainColl[3, j] = null;
-
-        //    tmp = trainingData[j]["Attack per price"].ToString();
-        //    trainColl[4, j] = tmp;
-
-        //    tmp = trainingData[j]["Health per price"].ToString();
-        //    trainColl[5, j] = tmp;
-
-        //    tmp = trainingData[j]["Cri Chance price"].ToString();
-        //    trainColl[6, j] = tmp;
-
-        //     tmp = trainingData[j]["Cri Damage price"].ToString();
-        //    trainColl[7, j] = tmp;
-
-        //    tmp = trainingData[j]["Recovery per price"].ToString();
-        //    trainColl[3, j] = tmp;
-
-
-        //}
-
-        //Debug.LogWarning("trainColl[4, j] : " + trainColl[0, 19999]);
-
-    }
-
-
-
-    //------------------------------------------------------------------------------
-    //------------------------------------------------------------------------------
-    //------------------------------------------------------------------------------
 
 
     [HideInInspector]
@@ -396,34 +202,19 @@ public class PlayerPrefsManager : MonoBehaviour
     {
         get
         {
-            // 값 존재 안하면 0값.
-            var tmp = PlayerPrefs.GetInt("isFirstPVP", 0);
-            bool result = false;
-
+            var tmp = PlayerPrefs.GetInt("isFirstPVP", 0); // 값 존재 안하면 0값.
             if (tmp == 0)
-            {
-                result = false;
-            }
+                return false;
             else
-            {
-                result = true;
-            }
-
-            return result;
+                return true;
         }
         set
         {
-
             if (value) // true 값이면?
-            {
                 PlayerPrefs.SetInt("isFirstPVP", 1);
-            }
             else
-            {
                 PlayerPrefs.SetInt("isFirstPVP", 0);
-            }
             PlayerPrefs.Save();
-
         }
     }
 
@@ -831,7 +622,7 @@ public class PlayerPrefsManager : MonoBehaviour
     /// (string)최근 체력                         Mat_currentHP
     ///                                         
     /// (string)맷집                              Mat_Mattzip
-    /// (bool)맷집 세배                           isBoosterMattzip
+    /// (bool)맷집 세배                           isBoosterMattzip -> 공격력 2배로 바꿔
     /// (float)맷집 소줏점 히트                     Mat_Mattzip_Hit
     /// (float)맷집 스탯                        MattzipStat
     /// (float)맷집 유물 (유물 강화로만 증가)                       MattzipArtif
@@ -1079,10 +870,16 @@ public class PlayerPrefsManager : MonoBehaviour
 
             tmp1 = dts.AddStringDouble(RawAttackDamage, AtkPercent);
             tmp2 = 1.0f + (0.01f * (Stat_is3ATK + float.Parse(ATK_PER_UP) + float.Parse(Dia_ATK_PER_UP) + (uniformInfo[0].Skill_LV *1f)));
-            //플로트 최종 공격
-            _PlayerDPSfloat = (float.Parse(tmp1) * tmp2);
-            //스트링 최종 공격
-            _PlayerDPS = (float.Parse(tmp1) * tmp2).ToString("f0");
+
+            /// 맷집3배 버프 삭제후 -> 공격력 2배 버프로 변경됨
+            if(isBoosterMattzip)
+                _PlayerDPSfloat = (float.Parse(tmp1) * tmp2 * 2f); //플로트 최종 공격  -> 외부에 저장되어서 크리티컬 공격력에 계산
+            else
+                _PlayerDPSfloat = (float.Parse(tmp1) * tmp2); //플로트 최종 공격  -> 외부에 저장되어서 크리티컬 공격력에 계산
+
+
+            ///스트링 최종 공격
+            _PlayerDPS = _PlayerDPSfloat.ToString("f0");
 
             return _PlayerDPS;
         }
@@ -1239,39 +1036,8 @@ public class PlayerPrefsManager : MonoBehaviour
             float matArti = GetInstance().MattzipArtif; // 유물 뽑기 하면 증가
 
             var value = matHit + matStat + matArti;
-
-            if (isBoosterMattzip) // 3배 파워 시
-            {
-                double tmppp = value + (value * (Mattzip_Dia_Weap + weaponInfo[PunchIndex].weaponEffect + Stat_is4Mattzip) * 0.01f);
-                double tmpDPS = tmppp * 3.0f;
-
-                return tmpDPS.ToString("f0");
-            }
-            else
-            {
-                double tmppp = value + (value * (Mattzip_Dia_Weap + weaponInfo[PunchIndex].weaponEffect + Stat_is4Mattzip) * 0.01f);
-
-                //Debug.Log("맞으면 증가값 matHit" + matHit);
-                //Debug.Log("국밥 강화값 matStat" + matStat);
-                //Debug.Log("유물 강화값 matArti" + matArti);
-                //Debug.Log("무기 퍼센트 적용 값" + (value * weaponInfo[PunchIndex].weaponEffect * 0.01f));
-
-                //UserWallet.GetInstance().Matt_Test.text =
-                //    "맞으면 증가값 matHit :: " + matHit + System.Environment.NewLine +
-                //    "국밥 강화값 matStat :: " + matStat + System.Environment.NewLine +
-                //    "유물 강화값 matArti :: " + matArti + System.Environment.NewLine +
-                //    "착용 무기 퍼센트 값 :: " + (value * weaponInfo[PunchIndex].weaponEffect * 0.01f);
-
-                //UserWallet.GetInstance().DefenceText.text =
-                //    "시트 값 :: " + megaDamColl[PunchIndex] + System.Environment.NewLine +
-                //    "맷집 :: " + tmppp + System.Environment.NewLine +
-                //    "방어전 대미지 :: " + UserWallet.GetInstance().PunchDPS ;
-
-                //Debug.LogError("맷집 퍼센트 값 : " + (Mattzip_Dia_Weap + weaponInfo[PunchIndex].weaponEffect + Stat_is4Mattzip) * 0.01f);
-
-                return tmppp.ToString("f0");
-            }
-
+            double tmppp = value + (value * (Mattzip_Dia_Weap + weaponInfo[PunchIndex].weaponEffect + Stat_is4Mattzip) * 0.01f);
+            return tmppp.ToString("f0");
         }
 
         set

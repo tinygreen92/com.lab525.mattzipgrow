@@ -50,13 +50,6 @@ public class ShopManager : MonoBehaviour
     /// <param name="_index"></param>
     public void BuySomeThing(int _index)
     {
-        //var dia = PlayerPrefsManager.GetInstance().diamond;
-        //var result = dts.SubStringDouble(dia, "100");
-
-
-
-
-        var gold = PlayerPrefsManager.GetInstance().gold;
 
         switch (_index)
         {
@@ -141,95 +134,6 @@ public class ShopManager : MonoBehaviour
                 else PopUpObjectManager.GetInstance().ShowWarnnigProcess("보유 다이아가 부족합니다.");
 
                 break;
-
-
-
-            ///
-
-
-            // 골드 박스 A
-            case 5:
-                var price = dts.PanByulGi("5.250AA");
-                var currenGold = double.Parse(gold);
-
-                //BigInteger number1 = (BigInteger)double.MaxValue;
-                //BigInteger number2 = number1;
-                //number2 = number2 + (BigInteger)9.999e291;
-                //Debug.LogWarning("BigIntegers equal: " + number2.Equals(number1));
-
-                //double dbl = (double)number2;
-
-                //Debug.LogWarning("BigInteger: "+ number2);
-                //Debug.LogWarning("Double:     " + dbl);
-                //BigInteger goodDouble = (BigInteger)102.43e22;
-                //BigInteger badDouble = (BigInteger)double.MaxValue;
-                //badDouble = badDouble * 2;
-
-                //double doubleFromBigInteger;
-
-                //// successful conversion using cast operator.
-                //doubleFromBigInteger = (double)goodDouble;
-                //Debug.LogWarning(doubleFromBigInteger);
-
-                //// Convert an out-of-bounds BigInteger value to a Double.
-                //doubleFromBigInteger = (double)badDouble;
-                //Debug.LogWarning(doubleFromBigInteger);
-
-
-                //Debug.LogWarning("currenGold :" + currenGold);
-                //Debug.LogWarning("price :" + price);
-                //Debug.LogWarning("doublegoldResult :" + (currenGold - price));
-
-                var doublegoldResult = (currenGold - price);
-                //goldResult = dts.SubStringDouble(gold, dts.PanByulGi("5.250AA").ToString());
-
-                if (doublegoldResult > 0)
-                {
-                    // 골드 소모
-                    PlayerPrefsManager.GetInstance().gold = doublegoldResult.ToString("f0");
-
-                    GoldBoxOpen(_index);
-                }
-                else PopUpObjectManager.GetInstance().ShowWarnnigProcess("보유 골드가 부족합니다.");
-
-                break;
-
-            // 골드 박스 B
-            case 6:
-                price = dts.PanByulGi("5.250BA");
-                currenGold = double.Parse(gold);
-
-                doublegoldResult = (currenGold - price);
-                if (doublegoldResult > 0)
-                {
-                    // 골드 소모
-                    PlayerPrefsManager.GetInstance().gold = doublegoldResult.ToString("f0");
-
-                    GoldBoxOpen(_index);
-                }
-                else PopUpObjectManager.GetInstance().ShowWarnnigProcess("보유 골드가 부족합니다.");
-
-                break;
-
-            // 골드 박스 C
-            case 7:
-                price = dts.PanByulGi("5.250CA");
-                currenGold = double.Parse(gold);
-
-                doublegoldResult = (currenGold - price);
-                if (doublegoldResult > 0)
-                {
-                    // 골드 소모
-                    PlayerPrefsManager.GetInstance().gold = doublegoldResult.ToString("f0");
-
-                    GoldBoxOpen(_index);
-                }
-                else PopUpObjectManager.GetInstance().ShowWarnnigProcess("보유 골드가 부족합니다.");
-
-                break;
-
-
-
 
             // 쌀밥
             case 8:

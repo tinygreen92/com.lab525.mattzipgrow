@@ -207,6 +207,7 @@ public class ConfigManager : MonoBehaviour
                 // Button 1 was clicked
                 break;
             case 1:
+                PlayerPrefs.Save();
                 Application.Quit();
                 break;
             default:

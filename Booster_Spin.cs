@@ -29,6 +29,8 @@ public class Booster_Spin : MonoBehaviour
         // 값 없으면 다음날 0시 시간. / 저장된 값
         unbiasedTimerEndTimestamp = LoadDateTime().Date;
 
+        Debug.LogError("앞 : " + currentTime  +" / 뒤 : " + unbiasedTimerEndTimestamp);
+
         if (currentTime > unbiasedTimerEndTimestamp)
         {
             /// 최신값이 바뀌었다 = 날짜가 바뀌었다 = 스핀 조건 충족
@@ -42,7 +44,8 @@ public class Booster_Spin : MonoBehaviour
         }
         else /// 그렇지 않다 = 같은 날이다 = 아직 0시 안 지났다. = 스핀 못함.
         {
-            //transform.GetChild(0).gameObject.SetActive(true);
+            /// 같은 날이지만 출석을 체크 안했을때 -> 퀘스트 초기화 시키지 마
+            isSameDayReCheck = true;
         }
 
         if (unbiasedRemaining.TotalSeconds > 0 && PlayerPrefsManager.GetInstance().NewDailyCount == 1)
@@ -95,10 +98,6 @@ public class Booster_Spin : MonoBehaviour
         }
         else // 카운트 0미만 이면 하루 지났다 / 아님 출석 안했다.
         {
-            //transform.GetChild(1).GetComponent<Text>().text = "Spin Now";
-            //SpinText.text = "Spin Now";
-            //// 온 했다가 시간 다되면 커버 꺼줌 = 원이미지임
-            //transform.GetChild(0).gameObject.SetActive(false);
             // 날짜 바뀌면 체크.
             ResetDailyQuest();
 
@@ -107,6 +106,12 @@ public class Booster_Spin : MonoBehaviour
 
     public DailyRewardController drc;
     bool isReset;
+
+    /// <summary>
+    ///  같은 날에 접속 했니?
+    /// </summary>
+    bool isSameDayReCheck;
+
     /// <summary>
     /// 날짜 바뀌었을때 체크 해준다.
     /// </summary>
@@ -115,6 +120,10 @@ public class Booster_Spin : MonoBehaviour
         // 중복 방지. = 계쏙 리셋 되는거 방지.
         if (!isReset && PlayerPrefsManager.GetInstance().isReadyWeapon)
         {
+            /// 같은 날이면 일퀘 갱신 시도 저지
+            if (isSameDayReCheck)
+                return;
+
             Debug.LogError("!!!!! Quest Reset !!!!!");
 
             isReset = true;
