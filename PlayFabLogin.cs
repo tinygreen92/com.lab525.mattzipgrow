@@ -428,7 +428,7 @@ public class PlayFabLogin : MonoBehaviour
     {
         gold = obj.VirtualCurrency["RC"];
 
-        Debug.LogWarning("pvp 랭킹 계수 : " + gold);
+        Debug.LogWarning("pvp 랭킹 계수 [RC] : " + gold);
 
         /// 플레이펩 서버에 PVP에 필요한 데이터 갱신
         SetDataInit();
@@ -795,7 +795,7 @@ public class PlayFabLogin : MonoBehaviour
             {
                 foreach (var eachData in result.Data)
                 {
-                    Debug.Log(eachData.Key + " : " + eachData.Value.Value + "\n");
+                    //Debug.Log(eachData.Key + " : " + eachData.Value.Value + "\n");
                     enemyAllData[_cnt] = eachData.Value.Value;
                     //
                     _cnt++;

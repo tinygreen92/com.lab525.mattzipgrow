@@ -1525,12 +1525,10 @@ public class PlayerPrefsManager : MonoBehaviour
             var tmp = PlayerPrefs.GetFloat("LuckyProb");
             return tmp;
         }
-
-        set
-        {
-            PlayerPrefs.SetFloat("LuckyProb", (1.0f + value));
-            PlayerPrefs.Save();
-        }
+        //set
+        //{
+        //    PlayerPrefs.Save();
+        //}
     }
 
     /// (int)공격력 레벨                          ATK_Lv
@@ -3997,13 +3995,30 @@ public class PlayerPrefsManager : MonoBehaviour
         PlayerPrefs.SetInt("Pet_PVP_Matt_Lv", listGPGS[0].cloudTmpForGPGS_176);
         PlayerPrefs.Save();
         isDataLoaded = true;
-        /// 0번 씬 불러오기
-        UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+        /// 씬 갱신
+        RestartAppForAOS();
+        //UnityEngine.SceneManagement.SceneManager.LoadScene("SampleScene");
     }
 
     #endregion
 
-
+    /// <summary>
+    /// 안드로이드 네이티브 코드
+    /// </summary>
+    void RestartAppForAOS()
+    {
+        AndroidJavaObject AOSUnityActivity = new AndroidJavaClass("com.unity3d.player.UnityPlayer").GetStatic<AndroidJavaObject>("currentActivity");
+        AndroidJavaObject baseContext = AOSUnityActivity.Call<AndroidJavaObject>("getBaseContext");
+        AndroidJavaObject intentObj = baseContext.Call<AndroidJavaObject>("getPackageManager").Call<AndroidJavaObject>("getLaunchIntentForPackage", baseContext.Call<string>("getPackageName"));
+        AndroidJavaObject componentName = intentObj.Call<AndroidJavaObject>("getComponent");
+        AndroidJavaObject mainIntent = intentObj.CallStatic<AndroidJavaObject>("makeMainActivity", componentName);
+        AndroidJavaClass intentClass = new AndroidJavaClass("android.content.Intent");
+        mainIntent = mainIntent.Call<AndroidJavaObject>("addFlags", intentClass.GetStatic<int>("FLAG_ACTIVITY_NEW_TASK"));
+        mainIntent = mainIntent.Call<AndroidJavaObject>("addFlags", intentClass.GetStatic<int>("FLAG_ACTIVITY_CLEAR_TASK"));
+        baseContext.Call("startActivity", mainIntent);
+        AndroidJavaClass JavaSystemClass = new AndroidJavaClass("java.lang.System");
+        JavaSystemClass.CallStatic("exit", 0);
+    }
 
 
     #region 쪼꼬미 데이타용 저장고
@@ -4046,37 +4061,7 @@ public class PlayerPrefsManager : MonoBehaviour
 
 
 
-    #region 0601 무기 누적 구매 
 
-
-    public void DiaBuyWeaponListSave(string result)
-    {
-        PlayerPrefs.SetString("diaBuyWeaponList", result);
-        PlayerPrefs.Save();
-    }
-
-    public string[] DiaBuyWeaponListLoad()
-    {
-        string _Data = PlayerPrefs.GetString("diaBuyWeaponList", "525*");
-        Debug.LogWarning("로드 : "+_Data);
-        string[] sDataList = (_Data).Split('*');
-
-        /// 긴급탈출
-        if (sDataList[0] == "525")
-        {
-            sDataList = new string[100];
-            for (int i = 0; i < 100; i++)
-            {
-                sDataList[i] = "0*";
-            }
-        }
-
-        return sDataList;
-    }
-
-
-
-    #endregion
 
 
 

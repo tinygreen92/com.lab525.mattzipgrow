@@ -165,7 +165,7 @@ public class IAPManager : MonoBehaviour
 
             case EM_IAPConstants.Product_mattzipbuff:
 
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("맷집 무한 버프 구매 성공");
+                PopUpObjectManager.GetInstance().ShowWarnnigProcess("공격력 무한 버프 구매 성공");
 
                 if (PlayerPrefsManager.GetInstance().VIP == 525) PlayerPrefsManager.GetInstance().VIP = 825;
                 else if (PlayerPrefsManager.GetInstance().VIP == 526) PlayerPrefsManager.GetInstance().VIP = 925;

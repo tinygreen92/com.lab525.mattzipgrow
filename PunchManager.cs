@@ -35,13 +35,44 @@ public class PunchManager : MonoBehaviour
     string[] thisDiaBuyWeapArray;
 
 
+
+    #region 0601 무기 누적 구매 세이브/로드
+
+
+    public void DiaBuyWeaponListSave(string result)
+    {
+        PlayerPrefs.SetString("diaBuyWeaponList", result);
+        PlayerPrefs.Save();
+    }
+
+    string[] DiaBuyWeaponListLoad()
+    {
+        string _Data = PlayerPrefs.GetString("diaBuyWeaponList", "525*");
+        string[] sDataList = (_Data).Split('*');
+
+        /// diaBuyWeaponList 가 제일 처음 생성될때
+        if (sDataList[0] == "525")
+        {
+            sDataList = new string[100];
+            for (int i = 0; i < 100; i++)
+            {
+                sDataList[i] = "0*";
+            }
+        }
+
+        return sDataList;
+    }
+
+    #endregion
+
+
     /// <summary>
     /// 게임 시작할때 펀치 세팅 초기화
     /// </summary>
     public void PunchInit()
     {
         string tmpDiaBuyWeap = "";
-        string[] tmpDiaBuyWeapArray = PlayerPrefsManager.GetInstance().DiaBuyWeaponListLoad();
+        string[] tmpDiaBuyWeapArray = DiaBuyWeaponListLoad();
 
         //
         int ccnt = PunchGrid.childCount;
@@ -103,8 +134,8 @@ public class PunchManager : MonoBehaviour
         PlayerPrefsManager.GetInstance().SaveWeaponInfo();
 
         /// 무기 데이터 다이아몬드 구매 여부 저장
-        PlayerPrefsManager.GetInstance().DiaBuyWeaponListSave(tmpDiaBuyWeap);
-        thisDiaBuyWeapArray = PlayerPrefsManager.GetInstance().DiaBuyWeaponListLoad();
+        DiaBuyWeaponListSave(tmpDiaBuyWeap);
+        thisDiaBuyWeapArray = DiaBuyWeaponListLoad();
 
     }
 
@@ -339,8 +370,8 @@ public class PunchManager : MonoBehaviour
             }
 
             /// 무기 데이터 다이아몬드 구매 여부 저장
-            PlayerPrefsManager.GetInstance().DiaBuyWeaponListSave(tmpDiaBuyWeap);
-            thisDiaBuyWeapArray = PlayerPrefsManager.GetInstance().DiaBuyWeaponListLoad();
+            DiaBuyWeaponListSave(tmpDiaBuyWeap);
+            thisDiaBuyWeapArray = DiaBuyWeaponListLoad();
 
             ///TODO : 만렙 처리 회색 커버
             PunchGrid.GetChild(p_index).GetChild(4).GetChild(1).GetChild(1).gameObject.SetActive(true); // Cover_Btn

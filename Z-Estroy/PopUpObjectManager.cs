@@ -701,7 +701,7 @@ public class PopUpObjectManager : MonoBehaviour
         WarnningPopUP.SetActive(true);
         WarnningPopUP.GetComponentInChildren<Text>().text = tmp;
         //AudioManager.instance.Btn_warnnig();
-        Invoke("HIdeWarnnigProcess", 1f);
+        Invoke("HIdeWarnnigProcess", 1.6f);
     }
     void HIdeWarnnigProcess()
     {

@@ -21,6 +21,11 @@ public class PlayNANOOExample : MonoBehaviour
     [Header("- PostBoxManager")]
     public RankingPage rankingPage;
 
+    private const string INFI_TOWER = "mattzip-RANK-1FA6C851-CDA0F163";
+    private const string MINI_GAME = "mattzip-RANK-6A98CF32-E7586172";
+    private const string NEW_RANKING = "mattzip-RANK-00B363A1-8630431C";
+
+
     void Start()
     {
 
@@ -610,7 +615,26 @@ public class PlayNANOOExample : MonoBehaviour
         PlayerPrefs.SetInt("isDataLoaded", 1);
         PlayerPrefs.Save();
         /// 씬갱신
-        UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+        RestartAppForAOS();
+    //
+    }
+
+    /// <summary>
+    /// 안드로이드 네이티브 코드
+    /// </summary>
+    void RestartAppForAOS()
+    {
+        AndroidJavaObject AOSUnityActivity = new AndroidJavaClass("com.unity3d.player.UnityPlayer").GetStatic<AndroidJavaObject>("currentActivity");
+        AndroidJavaObject baseContext = AOSUnityActivity.Call<AndroidJavaObject>("getBaseContext");
+        AndroidJavaObject intentObj = baseContext.Call<AndroidJavaObject>("getPackageManager").Call<AndroidJavaObject>("getLaunchIntentForPackage", baseContext.Call<string>("getPackageName"));
+        AndroidJavaObject componentName = intentObj.Call<AndroidJavaObject>("getComponent");
+        AndroidJavaObject mainIntent = intentObj.CallStatic<AndroidJavaObject>("makeMainActivity", componentName);
+        AndroidJavaClass intentClass = new AndroidJavaClass("android.content.Intent");
+        mainIntent = mainIntent.Call<AndroidJavaObject>("addFlags", intentClass.GetStatic<int>("FLAG_ACTIVITY_NEW_TASK"));
+        mainIntent = mainIntent.Call<AndroidJavaObject>("addFlags", intentClass.GetStatic<int>("FLAG_ACTIVITY_CLEAR_TASK"));
+        baseContext.Call("startActivity", mainIntent);
+        AndroidJavaClass JavaSystemClass = new AndroidJavaClass("java.lang.System");
+        JavaSystemClass.CallStatic("exit", 0);
     }
 
 
@@ -699,7 +723,7 @@ public class PlayNANOOExample : MonoBehaviour
     {
         PlayerPrefsManager.GetInstance().IN_APP.SetActive(true);
 
-        plugin.Ranking("mattzip-RANK-F81A740E-61075C7F", 49, (state, message, rawData, dictionary) => {
+        plugin.Ranking(NEW_RANKING, 50, (state, message, rawData, dictionary) => {
             if (state.Equals(Configure.PN_API_STATE_SUCCESS))
             {
                 ArrayList list = (ArrayList)dictionary["list"];
@@ -736,7 +760,7 @@ public class PlayNANOOExample : MonoBehaviour
     {
         PlayerPrefsManager.GetInstance().IN_APP.SetActive(true);
 
-        plugin.Ranking("mattzip-RANK-2EF12273-3A89840D", 49, (state, message, rawData, dictionary) =>
+        plugin.Ranking(MINI_GAME, 50, (state, message, rawData, dictionary) =>
         {
             if (state.Equals(Configure.PN_API_STATE_SUCCESS))
             {
@@ -771,7 +795,7 @@ public class PlayNANOOExample : MonoBehaviour
     {
         PlayerPrefsManager.GetInstance().IN_APP.SetActive(true);
 
-        plugin.Ranking("mattzip-RANK-97541010-7347427F", 49, (state, message, rawData, dictionary) => {
+        plugin.Ranking(INFI_TOWER, 50, (state, message, rawData, dictionary) => {
             if (state.Equals(Configure.PN_API_STATE_SUCCESS))
             {
                 ArrayList list = (ArrayList)dictionary["list"];
@@ -820,7 +844,7 @@ public class PlayNANOOExample : MonoBehaviour
     {
         int tmp = PlayerPrefsManager.GetInstance().MaxGet_MiniGame;
 
-        plugin.RankingRecord("mattzip-RANK-2EF12273-3A89840D", tmp, "Mini", (state, message, rawData, dictionary) => {
+        plugin.RankingRecord(MINI_GAME, tmp, "Mini", (state, message, rawData, dictionary) => {
             if (state.Equals(Configure.PN_API_STATE_SUCCESS))
             {
                 Debug.LogError("Success MiniGame" + tmp);
@@ -842,7 +866,7 @@ public class PlayNANOOExample : MonoBehaviour
         /// TODO : 무한의 탑 층수 등록해야한다.
         int tmp = PlayerPrefsManager.GetInstance().MaxGet_MuganTop - 1;
 
-        plugin.RankingRecord("mattzip-RANK-97541010-7347427F", tmp, "2", (state, message, rawData, dictionary) => {
+        plugin.RankingRecord(INFI_TOWER, tmp, "2", (state, message, rawData, dictionary) => {
             if (state.Equals(Configure.PN_API_STATE_SUCCESS))
             {
                 Debug.Log("Success");
@@ -883,7 +907,7 @@ public class PlayNANOOExample : MonoBehaviour
         long mattzip = long.Parse(UserWallet.GetInstance().GetMattzipForCul(tmp));
 
 
-        plugin.RankingRecord("mattzip-RANK-F81A740E-61075C7F", mattzip, "0", (state, message, rawData, dictionary) => {
+        plugin.RankingRecord(NEW_RANKING, mattzip, "0", (state, message, rawData, dictionary) => {
             if (state.Equals(Configure.PN_API_STATE_SUCCESS))
             {
                 Debug.Log("Success");
@@ -902,7 +926,7 @@ public class PlayNANOOExample : MonoBehaviour
     /// </summary>
     public void RankingPersonal()
     {
-        plugin.RankingPersonal("mattzip-RANK-97541010-7347427F", (state, message, rawData, dictionary) => {
+        plugin.RankingPersonal(INFI_TOWER, (state, message, rawData, dictionary) => {
             if (state.Equals(Configure.PN_API_STATE_SUCCESS))
             {
                 Debug.Log(dictionary["ranking"]);
@@ -1061,6 +1085,6 @@ public class PlayNANOOExample : MonoBehaviour
         {
             AccessEvent();
         }
-        Debug.Log("Focus");
+        //Debug.Log("Focus");
     }
 }

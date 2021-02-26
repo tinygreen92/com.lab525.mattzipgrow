@@ -77,8 +77,6 @@ public class GameStart : MonoBehaviour
         {
             AllObject[i].SetActive(false);
         }
-        // 광고판 초기화.
-        GetComponent<EasyMobileInitializer>().AdmobInit();
         // GPSS 긁어오기
         GetComponent<GPGS_Linker>().Init();
         // 오디오 매니저 세팅
@@ -293,8 +291,11 @@ public class GameStart : MonoBehaviour
             }
         }
 
-        // 컨피그 매니저 데려오기.
-        configManager = GameObject.Find("ConfigManager").GetComponent<ConfigManager>();
+        /// 디버그 모드 아닐때만  안드로이드 기능 데려오기.
+        if (!isDebugMode)
+        {
+            configManager = GameObject.Find("ConfigManager").GetComponent<ConfigManager>();
+        }
 
         // 튜토리얼 창 활성화.
         tutorialManager.gameObject.SetActive(true);

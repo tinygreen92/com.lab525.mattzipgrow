@@ -189,7 +189,10 @@ public class GatChaManager : MonoBehaviour
         ppm.GroggyTouch = (5.0f - (ppm.Arti_GroggyTouch * 0.1f));
         
         ///
-        ppm.LuckyProb = (ppm.Arti_GoldBox * 0.1f);
+        //ppm.LuckyProb = (ppm.Arti_GoldBox * 0.1f);
+        PlayerPrefs.SetFloat("LuckyProb", (1.0f + (ppm.Arti_GoldBox * 0.1f)));
+        PlayerPrefs.Save();
+
         //
         ppm.AttackPunch = (ppm.Arti_AttackPower * 100f);
 

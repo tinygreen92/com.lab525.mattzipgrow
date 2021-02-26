@@ -69,13 +69,11 @@ public class GroggyManager : MonoBehaviour
         var tmp2 = PlayerPrefsManager.GetInstance().Mat_MaxHP;
         PlayerPrefsManager.GetInstance().Mat_currentHP = tmp2;
         var resultMax = UserWallet.GetInstance().SeetheNatural(double.Parse(tmp2));
-        Debug.LogWarning("cur" + tmp1);
-        Debug.LogWarning("max" + tmp2);
+        Debug.LogWarning("Mat_currentHP" + tmp1);
+        Debug.LogWarning("Mat_MaxHP" + tmp2);
 
         HP_Bar.fillAmount = 1;
         HP_Bar.GetComponentInChildren<Text>().text = resultMax + "/" + resultMax;
-
-        Debug.LogWarning("text" + HP_Bar.GetComponentInChildren<Text>().text);
 
         _PlayerDPS = PlayerPrefsManager.GetInstance().PlayerDPS;
 

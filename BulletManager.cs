@@ -254,7 +254,7 @@ public class BulletManager : MonoBehaviour
 
             float RanDam = Random.Range(0f, 100f);
             bool isCriiiiiiiii = false;
-
+            /// 크리티컬 발동
             if (RanDam < float.Parse(PlayerPrefsManager.GetInstance().Critical_Per))
             {
                 //transform.GetChild(1).GetComponent<SpriteRenderer>().sprite = CriticalAtk;
@@ -262,14 +262,14 @@ public class BulletManager : MonoBehaviour
                 if (transform.childCount == 3) transform.GetChild(2).gameObject.SetActive(false);
                 isCriiiiiiiii = true;
             }
+            /// 일반 타격
             else
             {
                 transform.GetChild(1).gameObject.SetActive(true);
             }
-
+            /// 몸통 번쩍거리기
             StartCoroutine(WitheMan(other, isCriiiiiiiii));
-
-
+            /// 돌아가는 코루틴 정지.
             StopCoroutine(spinning);
         }
         else if (other.gameObject.tag == "Defence")
@@ -450,7 +450,7 @@ public class BulletManager : MonoBehaviour
     /// <returns></returns>
     IEnumerator WitheMan(Collider tmpC, bool _isCritic)
     {
-        //코인 생성
+        ///코인 프리팹
         tmp = PlayerPrefsManager.GetInstance().CoinOB;
         coin = Lean.Pool.LeanPool.Spawn(tmp, transform.position, transform.rotation);
         coin.GetComponent<CoinManager>().CoinInit(_isCritic);
@@ -1108,20 +1108,19 @@ public class BulletManager : MonoBehaviour
 
         /// 맷집 터치 요구횟수 감소 적용치
         maxMat = PlayerPrefsManager.GetInstance().Cilcked_Cnt_MattZip;
-        /// 현재 내 맷집 float
+        /// 현재 내 맷집
         intMattzip = float.Parse(PlayerPrefsManager.GetInstance().Mat_Mattzip);
-
-        ///var tresultMattHead = intMattzip * 0.0000001f;
+        ///내 맷집의 0.0000000001%
         resultMattHead = intMattzip * 0.00000001f;
-
+        /// 내 맷집의 0.0000000001%가 0.1 이하라면 맷집 터치 요구 횟수는 0
         if (resultMattHead <= 0.1f)
             maxMat = 0;
+        /// 내 맷집의 0.0000000001%가 0.1를 초과한다면 맷집 터치 요구횟수 감소 적용치에 내 맷집의 0.0000000001%를 곱해준다.
         else
             maxMat *= resultMattHead;
-        /// 이미지 fill
+        /// 이미지 fill 기본 횟수 100에 최종 맷집 터치 요구횟수의 소수점 절삭감을 더해준다.
         MattzipGauge.fillAmount = PlayerPrefsManager.GetInstance().Mat_100 / (100.0f + Mathf.Floor(maxMat));
-
-        Debug.LogWarning("맷집 타격 기본 100대에서 " + maxMat + "만큼 증가");
+        Debug.LogWarning("맷집 타격 기본 100대에서 " + Mathf.Floor(maxMat) + "만큼 증가");
         ///PopUpObjectManager.GetInstance().TestText[0].text = ("변경 전 : 100대에서 " + Mathf.Floor(PlayerPrefsManager.GetInstance().Cilcked_Cnt_MattZip * tresultMattHead) + "만큼 증가");
         ///PopUpObjectManager.GetInstance().TestText[1].text = ("변경 후 : 100대에서 " + Mathf.Floor(maxMat) + "만큼 증가");
 
@@ -1129,11 +1128,11 @@ public class BulletManager : MonoBehaviour
         /// 맷집은 기본 100회 타격당 1씩 증가 + 현재 공격력의 1%
         if (PlayerPrefsManager.GetInstance().Mat_100 >= (100.0f + Mathf.Floor(maxMat)))
         {
-
+            /// 펀치 최종 공격력
             playerDPS = PlayerPrefsManager.GetInstance().PlayerDPS;
+            /// 현재 맷집
             playerMattzip = PlayerPrefsManager.GetInstance().Mat_Mattzip;
-
-            // 크리티컬 터지면 크리 만큼
+            /// 크리티컬 터지면 크리 만큼
             if (_isCritic) playerDPS = PlayerPrefsManager.GetInstance().CriticalDPS;
 
 
@@ -1152,7 +1151,7 @@ public class BulletManager : MonoBehaviour
             //PopUpObjectManager.GetInstance().TestText[2].text = ("기본 1 + 공격력 1% + 맷집 증가 : " + (1.0f + tunderDps + tunderMatt));
 
 
-            /// (타격 공격력의 0.1%) + (현재 맷집의 (0.0001% + 펫, 스킬 증가량 합산) )
+            /// (최종 공격력의 0.1%) + (현재 맷집의 (0.0001% + 펫, 스킬 증가량 합산) )
             float underDps = float.Parse(playerDPS) * 0.001f;
             Debug.LogWarning("underDps : " + underDps);
             /// 현재 맷집의 (0.0001% + 펫, 스킬 증가량 합산) 

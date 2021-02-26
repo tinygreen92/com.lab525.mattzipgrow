@@ -7,42 +7,28 @@ public class EasyMobileInitializer : MonoBehaviour
 
     // Checks if EM has been initialized and initialize it if not.
     // This must be done once before other EM APIs can be used.
-    void Awake()
+    void Start()
     {
-        if (!RuntimeManager.IsInitialized())
-            RuntimeManager.Init();
+        /// 이지모바일 로그인
+        StartCoroutine(initEM());
     }
 
-    public void AdmobInit()
+    IEnumerator initEM()
     {
+        /// 이지모바일  init
+        RuntimeManager.Init();
+        Debug.LogError("이지모바일  init");
+        while (!RuntimeManager.IsInitialized())
+        {
+            yield return null;
+        }
+
         // Grants the vendor-level consent for AdMob.
         Advertising.GrantDataPrivacyConsent(AdNetwork.AdMob);
-        Advertising.GrantDataPrivacyConsent(AdNetwork.AudienceNetwork);
-
         // Revokes the vendor-level consent of AdMob.
         Advertising.RevokeDataPrivacyConsent(AdNetwork.AdMob);
-        Advertising.RevokeDataPrivacyConsent(AdNetwork.AudienceNetwork);
-
-        // Reads the current vendor-level consent of AdMob.
-        //ConsentStatus admobConsent = Advertising.GetDataPrivacyConsent(AdNetwork.AdMob);
+        Debug.LogError("이지모바일  GrantDataPrivacyConsent");
     }
-
-
-    public void ShowBannerAd()
-    {
-        // Show banner ad
-        Advertising.ShowBannerAd(BannerAdPosition.Top, BannerAdSize.SmartBanner);
-        //Time.timeScale = 1.1f;
-    }
-
-    public void HideBannerAd()
-    {
-        // Hide banner ad
-        Advertising.HideBannerAd();
-        //Time.timeScale = 1;
-    }
-
-    
 
 
 }
