@@ -24,7 +24,7 @@ public class Booster_AUTO : MonoBehaviour
     {
         unbiasedTimerEndTimestamp = ReadTimestamp("Booster_AUTO", UnbiasedTime.Instance.Now());
         // 공격 딜레이 1초당 10f
-        fInputActionsPerSecond = 8f;
+        fInputActionsPerSecond = 5f;
         fUserClickedCnt = 0f;
     }
 
@@ -33,20 +33,21 @@ public class Booster_AUTO : MonoBehaviour
     /// </summary>
     public void ClickedAuto()
     {
-        if (fUserClickedCnt != 0f && Time.unscaledTime < fUserClickedCnt)
-        {
-            //Debug.Log("[Skip Click Event] Max Action Per Second");
-            return;
-        }
+        tapToSpawnLimit.ClickedSkyBox();
 
-        tapToSpawnLimit.ClickedSomeThing();
-        ComputeNextAction();
+        //// 그로기 상태면 리턴
+        //if (PlayerPrefsManager.GetInstance().isGroggy) return;
+        ///// 연속클릭 딜레이
+        //if (fUserClickedCnt != 0f && Time.unscaledTime < fUserClickedCnt) return;
+
+        //tapToSpawnLimit.ClickedSomeThing();
+        //ComputeNextAction();
     }
 
     void ComputeNextAction()
     {
-        /// TODO : 자동 공격 횟수 올리기.
-        float tmp = fInputActionsPerSecond;
+        /// 초당터치 횟수 증가
+        float tmp = fInputActionsPerSecond + PlayerPrefsManager.GetInstance().Arti_PunchTouch;
         // 국밥 스킬 발동하면 공속 1.5배
         if (PlayerPrefsManager.GetInstance().isGupSpeed)
         {
@@ -57,11 +58,11 @@ public class Booster_AUTO : MonoBehaviour
             tmp *= 1.0f;
         }
 
-        fUserClickedCnt = Time.unscaledTime + (1f / tmp);
+        fUserClickedCnt = Time.unscaledTime + (2f / tmp);
     }
 
 
-    void FixedUpdate()
+    void FixedUpdate ()
     {
         if (!PlayerPrefsManager.GetInstance().isReadyQuest && !PlayerPrefsManager.GetInstance().isReadyWeapon) return;
 

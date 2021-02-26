@@ -553,29 +553,15 @@ public class PlayNANOOExample : MonoBehaviour
             if (state.Equals(Configure.PN_API_STATE_SUCCESS))
             {
                 Debug.LogWarning("StorageSave Success ::");
-                PlayerPrefsManager.GetInstance().IN_APP.SetActive(false);
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("데이터가 정상적으로 저장되었습니다.");
                 StorageSaveForCheack();
-                //Invoke("InvoSave", 0.5f);
             }
             else
             {
                 Debug.LogWarning("StorageSave Fail");
                 PlayerPrefsManager.GetInstance().IN_APP.SetActive(false);
                 PopUpObjectManager.GetInstance().ShowWarnnigProcess("서버 데이터 저장 오류. 앱 재실행 후 다시 시도해주세요.");
-
-
             }
         });
-    }
-
-    /// <summary>
-    /// 위에서 세이브할때 메세지 띄우고 호출
-    /// </summary>
-    void InvoSave()
-    {
-        PlayerPrefsManager.GetInstance().isDataLoaded = true;
-        UnityEngine.SceneManagement.SceneManager.LoadScene("SampleScene");
     }
 
     /// <summary>
@@ -603,14 +589,29 @@ public class PlayNANOOExample : MonoBehaviour
             if (state.Equals(Configure.PN_API_STATE_SUCCESS))
             {
                 Debug.LogWarning("StorageSave Success ::" + playerPrefsManager.ZZoGGoMiDataSave());
+                PopUpObjectManager.GetInstance().ShowWarnnigProcess("데이터가 정상적으로 저장되었습니다. 앱이 재실행됩니다.");
+                Invoke(nameof(Reebooting),1.3f );
             }
             else
             {
                 Debug.LogWarning("StorageSave Fail");
+                PlayerPrefsManager.GetInstance().IN_APP.SetActive(false);
+                PopUpObjectManager.GetInstance().ShowWarnnigProcess("서버 데이터 저장 오류. 앱 재실행 후 다시 시도해주세요.");
             }
         });
     }
 
+
+    void Reebooting()
+    {
+        PlayerPrefs.DeleteAll();
+        PlayerPrefs.SetInt("isFristGameStart", 1);
+        PlayerPrefs.SetInt("isSignFirst", 1);
+        PlayerPrefs.SetInt("isDataLoaded", 1);
+        PlayerPrefs.Save();
+        /// 씬갱신
+        UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+    }
 
 
     //public void SaveJSON_test(string _payload)

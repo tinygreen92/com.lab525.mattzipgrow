@@ -7,18 +7,25 @@ using UnityEngine.UI;
 
 public class GPGSManager : MonoBehaviour
 {
+    public LoadingM lm;
     [Header("- 경고 텍스트")]
     public GameObject loginPlease;
 
 
-    private static string userID = "test"; // 유저 ID 저장하라.
-    private static string userName = "test"; // 유저 닉네임 저장하라.
+    private static string userID = "UnknownUser"; // 유저 ID 저장하라.
+    private static string userName = "UnknownUser"; // 유저 닉네임 저장하라.
     private static bool isUserLogin; // 유저 로그인 했냐?
 
 
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
+
+        ///디버그 모드면 리턴
+        if (lm.debugBtton)
+        {
+            return;
+        }
 
         StartCoroutine(NickUpd());
     }
@@ -35,7 +42,7 @@ public class GPGSManager : MonoBehaviour
     {
         //int RanRotat = UnityEngine.Random.Range(0, 659421);
         //userName = userName + RanRotat;
-
+        Debug.LogError("userName : " + userName);
         return userName;
     }
 

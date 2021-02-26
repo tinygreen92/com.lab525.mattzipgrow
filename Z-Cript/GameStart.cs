@@ -294,8 +294,7 @@ public class GameStart : MonoBehaviour
         }
 
         // 컨피그 매니저 데려오기.
-        if (!isDebugMode) 
-            configManager = GameObject.Find("ConfigManager").GetComponent<ConfigManager>();
+        configManager = GameObject.Find("ConfigManager").GetComponent<ConfigManager>();
 
         // 튜토리얼 창 활성화.
         tutorialManager.gameObject.SetActive(true);

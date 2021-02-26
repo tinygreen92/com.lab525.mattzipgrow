@@ -23,7 +23,7 @@ public class TapToSpawnLimit : MonoBehaviour
     {
         // 그로기 상태면 리턴
         if (PlayerPrefsManager.GetInstance().isGroggy) return;
-
+        /// 연속클릭 딜레이
         if (fUserClickedCnt != 0f && Time.unscaledTime < fUserClickedCnt) return;
 
         ClickedSomeThing();
@@ -31,6 +31,7 @@ public class TapToSpawnLimit : MonoBehaviour
     }
     void ComputeNextAction()
     {
+        /// 초당터치 횟수 증가
         float tmp = fInputActionsPerSecond + PlayerPrefsManager.GetInstance().Arti_PunchTouch;
         // 국밥 스킬 발동하면 공속 1.5배
         if (PlayerPrefsManager.GetInstance().isGupSpeed)
@@ -140,15 +141,10 @@ public class TapToSpawnLimit : MonoBehaviour
 
         // 그로기 상태면 리턴
         if (PlayerPrefsManager.GetInstance().isGroggy) return;
-
-        //punchIndex = Random.Range(0, 50);
-
+        /// 펀치 모양 프리팹
         tmp = OP[punchIndex].GetComponent<Lean.Pool.LeanGameObjectPool>().Prefab;
-
-
-        /// 주먹 카운팅
+        /// 주먹 카운팅 누적 퀘스트
         CountingPunch(punchIndex);
-
 
         if (isPunchSwitch)
         {

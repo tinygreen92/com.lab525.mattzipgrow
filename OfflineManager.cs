@@ -69,12 +69,15 @@ public class OfflineManager : MonoBehaviour
     {
         string tmp = dateTime.ToString("yyyyMMddHHmmss");
         PlayerPrefs.SetString("DateTime", tmp);
+        PlayerPrefs.Save();
     }
 
     DateTime LoadDateTime()
     {
-        if(!PlayerPrefsManager.GetInstance().isFristGameStart) return UnbiasedTime.Instance.Now();
+        if(!PlayerPrefsManager.GetInstance().isFristGameStart) 
+            return UnbiasedTime.Instance.Now();
 
+        /// 불러올 시간 데이터가 존재한다먄?
         string data = PlayerPrefs.GetString("DateTime", "19000101120000");
         var saveDateTime = DateTime.ParseExact(data, "yyyyMMddHHmmss", System.Globalization.CultureInfo.InvariantCulture);
 
@@ -189,7 +192,7 @@ public class OfflineManager : MonoBehaviour
     /// <param name="_Bae">1f 혹은 5f</param>
     void RewordFriendBae(float _Bae)
     {
-        PlayerPrefsManager.GetInstance().Mat_100 += Mathf.CeilToInt(gettingMatt * _Bae);
+        //PlayerPrefsManager.GetInstance().Mat_100 += Mathf.CeilToInt(gettingMatt * _Bae);
     }
 
 
@@ -206,6 +209,7 @@ public class OfflineManager : MonoBehaviour
         if (vvip == 526 || vvip == 625 || vvip == 725 || vvip == 925)
         {
             GetDoubleGold();
+            rewordPOPup.SetActive(false);
             return;
         }
 
@@ -221,7 +225,6 @@ public class OfflineManager : MonoBehaviour
         {
             PopUpObjectManager.GetInstance().ShowWarnnigProcess("광고를 준비중입니다. 잠시 후에 시도해주세요.");
             PlayerPrefsManager.GetInstance().IN_APP.SetActive(false);
-
         }
 
     }
@@ -229,10 +232,11 @@ public class OfflineManager : MonoBehaviour
     // Event handler called when a rewarded ad has completed
     void GoldBoxAdsCompleated(RewardedAdNetwork network, AdPlacement location)
     {
+        rewordPOPup.SetActive(false);
+
         Invoke("GetDoubleGold", 0.5f);
         Advertising.RewardedAdCompleted -= GoldBoxAdsCompleated;
         Advertising.RewardedAdSkipped -= GoldBoxAdsSkipped;
-
     }
 
     // Event handler called when a rewarded ad has been skipped
@@ -269,11 +273,11 @@ public class OfflineManager : MonoBehaviour
         //골드 를 곱해 준다.
         gettingGupBap = timeBae * 2f * ArtiGold * 5f; // 분당 2개;
         gettingSSal = timeBae * 1f * ArtiGold * 5f; // 분당 2개;
-        /// 국밥이랑 쌀밥 다섯배
+        /// 국밥이랑 쌀밥 다섯배 -> 2배로 올려
         PlayerPrefsManager.GetInstance().gupbap = dts.AddStringDouble(double.Parse(PlayerPrefs.GetString("gupbap")), gettingGupBap); // 분당 2개;
         PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(double.Parse(PlayerPrefs.GetString("ssalbap")), gettingSSal); // 분당 2개;
-        /// 맷집 게이지 5배 올려주기
-        RewordFriendBae(5f); 
+        /// 맷집 게이지 2배 올려주기
+        RewordFriendBae(2f); 
 
 
         UserWallet.GetInstance().ShowAllMoney();
@@ -311,6 +315,10 @@ public class OfflineManager : MonoBehaviour
         PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(double.Parse(PlayerPrefs.GetString("ssalbap")), gettingSSal); // 분당 1개;
         /// 맷집 게이지 1배 올려주기
         RewordFriendBae(1f);
+        ///
+        PopUpObjectManager.GetInstance().ShowWarnnigProcess(
+    UserWallet.GetInstance().SeetheNatural(double.Parse(gettingGold)) +
+    " 골드를 획득하셨습니다.");
 
         UserWallet.GetInstance().ShowAllMoney();
     }

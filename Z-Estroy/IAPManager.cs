@@ -689,9 +689,9 @@ public class IAPManager : MonoBehaviour
     }
 
     // Failed purchase handler
-    void PurchaseFailedHandler(IAPProduct product)
+    void PurchaseFailedHandler(IAPProduct product, string failureReason)
     {
-        //Debug.Log("The purchase of product " + product.Name + " has failed.");
+        Debug.LogError("The purchase of product " + product.Name + " has failed : " + failureReason);
         // 구매실패시 핸들러 떼주고.
         InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
         InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;

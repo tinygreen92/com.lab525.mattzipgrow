@@ -77,8 +77,8 @@ public class Booster_KEY : MonoBehaviour
                     isTimerOn = false;
                 }
 
-                // 초기값 5분
-                transform.GetChild(1).GetComponent<Text>().text = "05:00";
+                /// 초기값 5분 -> 30분으로 변경
+                transform.GetChild(1).GetComponent<Text>().text = "30:00";
 
                 // 키가 정상적으로 됐으면 타이머 꺼줌.
                 if (keyAmount >= 20)
@@ -93,7 +93,7 @@ public class Booster_KEY : MonoBehaviour
                 {
                     transform.GetChild(1).gameObject.SetActive(true);
 
-                    unbiasedTimerEndTimestamp = UnbiasedTime.Instance.Now().AddSeconds(300);
+                    unbiasedTimerEndTimestamp = UnbiasedTime.Instance.Now().AddSeconds(1800);
                     this.WriteTimestamp("Booster_KEY", unbiasedTimerEndTimestamp);
                 }
             }
@@ -120,7 +120,7 @@ public class Booster_KEY : MonoBehaviour
         // 타이머 표시
         transform.GetChild(1).gameObject.SetActive(true);
         //초기화 하고 시간 추가.
-        unbiasedTimerEndTimestamp = UnbiasedTime.Instance.Now().AddSeconds(300);
+        unbiasedTimerEndTimestamp = UnbiasedTime.Instance.Now().AddSeconds(1800);
         this.WriteTimestamp("Booster_KEY", unbiasedTimerEndTimestamp);
 
         if (keyAmount < 20)

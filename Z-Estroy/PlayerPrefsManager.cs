@@ -1618,7 +1618,9 @@ public class PlayerPrefsManager : MonoBehaviour
         }
     }
 
+    /// <summary>
     /// (int)런닝화- 초당 터치 횟수 증가          Arti_PunchTouch
+    /// </summary>
     public int Arti_PunchTouch
     {
         get
@@ -3623,7 +3625,7 @@ public class PlayerPrefsManager : MonoBehaviour
 
     }
 
-    public List<GPGSsavedPrefList> listGPGS = new List<GPGSsavedPrefList>();
+    //public List<GPGSsavedPrefList> listGPGS = new List<GPGSsavedPrefList>();
 
     /// <summary>
     /// 나누에서 데이터 저장하는 것
@@ -3640,164 +3642,161 @@ public class PlayerPrefsManager : MonoBehaviour
         SavequestInfo5();
         SavequestInfo6();
 
-        //SaveAllMoneyData();
-        listGPGS.Clear();
-        //
-        listGPGS.Add(new GPGSsavedPrefList
+        List<GPGSsavedPrefList> listGPGS = new List<GPGSsavedPrefList>
         {
-            cloudTmpForGPGS_001 = PlayerPrefs.GetInt("isFristGameStart", 1),
-            cloudTmpForGPGS_002 = PlayerPrefs.GetInt("DailyCount", 0),
-            cloudTmpForGPGS_003 = PlayerPrefs.GetInt("PunchIndex", 0),
-            cloudTmpForGPGS_004 = PlayerPrefs.GetInt("DefendTrigger", 0),
-            cloudTmpForGPGS_005 = PlayerPrefs.GetInt("key", 20),
-            cloudTmpForGPGS_006 = PlayerPrefs.GetInt("VIP", 0),
-            cloudTmpForGPGS_007 = PlayerPrefs.GetInt("isGoldTriple", 0),
-            cloudTmpForGPGS_008 = PlayerPrefs.GetInt("Mat_100", 0),
-            cloudTmpForGPGS_009 = PlayerPrefs.GetInt("Mat_Skill_300", 0),
-            cloudTmpForGPGS_010 = PlayerPrefs.GetInt("ATK_Lv", 0),
-            cloudTmpForGPGS_011 = PlayerPrefs.GetInt("Mat_HP_Lv", 0),
-            cloudTmpForGPGS_012 = PlayerPrefs.GetInt("Recov_Lv", 0),
-            cloudTmpForGPGS_013 = PlayerPrefs.GetInt("Mattzip_Lv", 0),
-            cloudTmpForGPGS_014 = PlayerPrefs.GetInt("Arti_PunchTouch", 0),
-            cloudTmpForGPGS_015 = PlayerPrefs.GetInt("Arti_Mattzip", 0),
-            cloudTmpForGPGS_016 = PlayerPrefs.GetInt("Arti_HP", 0),
-            cloudTmpForGPGS_017 = PlayerPrefs.GetInt("Arti_GroggyTouch", 0),
-            cloudTmpForGPGS_018 = PlayerPrefs.GetInt("Arti_GAL", 0),
-            cloudTmpForGPGS_019 = PlayerPrefs.GetInt("isBoosterMattzip", 0),
-            cloudTmpForGPGS_020 = PlayerPrefs.GetString("RawAttackDamage", "1"),
-            cloudTmpForGPGS_021 = PlayerPrefs.GetString("gold", "0"),
-            cloudTmpForGPGS_022 = PlayerPrefs.GetString("diamond", "0"),
-            cloudTmpForGPGS_023 = PlayerPrefs.GetString("gupbap", "0"),
-            cloudTmpForGPGS_024 = PlayerPrefs.GetString("Mat_MaxHP", "100"),
-            cloudTmpForGPGS_025 = PlayerPrefs.GetString("Stat_MaxHP", "0"),
-            cloudTmpForGPGS_026 = PlayerPrefs.GetString("Arti_MaxHP", "0"),
-            cloudTmpForGPGS_027 = PlayerPrefs.GetString("Mat_currentHP", "100"),
-            cloudTmpForGPGS_028 = PlayerPrefs.GetString("Mat_Recov", "1"),
-            cloudTmpForGPGS_029 = PlayerPrefs.GetString("weaponInfo"),
-            cloudTmpForGPGS_030 = PlayerPrefs.GetString("questInfo"),
-            cloudTmpForGPGS_031 = PlayerPrefs.GetFloat("Mat_Mattzip_Hit", 0),
-            cloudTmpForGPGS_032 = PlayerPrefs.GetFloat("MattzipStat", 0),
-            cloudTmpForGPGS_033 = PlayerPrefs.GetFloat("MattzipArtif", 0),
-            cloudTmpForGPGS_034 = PlayerPrefs.GetFloat("AttackPerPunch", 0),
-            cloudTmpForGPGS_035 = PlayerPrefs.GetFloat("GroggyTouch", 0),
-            cloudTmpForGPGS_036 = PlayerPrefs.GetFloat("LuckyProb", 1.0f),
-            cloudTmpForGPGS_037 = PlayerPrefs.GetInt("MaxGet_GookBap", 0),
-            cloudTmpForGPGS_038 = PlayerPrefs.GetFloat("Cilcked_Cnt_MattZip", 3f),
-            //0515
-            cloudTmpForGPGS_101 = PlayerPrefs.GetInt("Arti_DefenceTime", 0),
-            cloudTmpForGPGS_102 = PlayerPrefs.GetInt("Arti_GoldBox", 0),
-            cloudTmpForGPGS_103 = PlayerPrefs.GetInt("Arti_OffGold", 0),
-            cloudTmpForGPGS_104 = PlayerPrefs.GetInt("MaxGet_MuganTop", 1),
-            cloudTmpForGPGS_105 = PlayerPrefs.GetInt("is0508shock", 0),
-            cloudTmpForGPGS_106 = PlayerPrefs.GetInt("is0515shock", 0),
-            cloudTmpForGPGS_107 = PlayerPrefs.GetString("questInfo2"),
-            cloudTmpForGPGS_108 = PlayerPrefs.GetFloat("dDiamond", 0),
-            //0518
-            cloudTmpForGPGS_109 = PlayerPrefs.GetInt("isAllmute", 0),
-            cloudTmpForGPGS_110 = PlayerPrefs.GetInt("is0515shock", 0),
-            cloudTmpForGPGS_111 = PlayerPrefs.GetString("AllMoneyData"),
+            new GPGSsavedPrefList
+            {
+                cloudTmpForGPGS_001 = PlayerPrefs.GetInt("isFristGameStart", 1),
+                cloudTmpForGPGS_002 = PlayerPrefs.GetInt("DailyCount", 0),
+                cloudTmpForGPGS_003 = PlayerPrefs.GetInt("PunchIndex", 0),
+                cloudTmpForGPGS_004 = PlayerPrefs.GetInt("DefendTrigger", 0),
+                cloudTmpForGPGS_005 = PlayerPrefs.GetInt("key", 20),
+                cloudTmpForGPGS_006 = PlayerPrefs.GetInt("VIP", 0),
+                cloudTmpForGPGS_007 = PlayerPrefs.GetInt("isGoldTriple", 0),
+                cloudTmpForGPGS_008 = PlayerPrefs.GetInt("Mat_100", 0),
+                cloudTmpForGPGS_009 = PlayerPrefs.GetInt("Mat_Skill_300", 0),
+                cloudTmpForGPGS_010 = PlayerPrefs.GetInt("ATK_Lv", 0),
+                cloudTmpForGPGS_011 = PlayerPrefs.GetInt("Mat_HP_Lv", 0),
+                cloudTmpForGPGS_012 = PlayerPrefs.GetInt("Recov_Lv", 0),
+                cloudTmpForGPGS_013 = PlayerPrefs.GetInt("Mattzip_Lv", 0),
+                cloudTmpForGPGS_014 = PlayerPrefs.GetInt("Arti_PunchTouch", 0),
+                cloudTmpForGPGS_015 = PlayerPrefs.GetInt("Arti_Mattzip", 0),
+                cloudTmpForGPGS_016 = PlayerPrefs.GetInt("Arti_HP", 0),
+                cloudTmpForGPGS_017 = PlayerPrefs.GetInt("Arti_GroggyTouch", 0),
+                cloudTmpForGPGS_018 = PlayerPrefs.GetInt("Arti_GAL", 0),
+                cloudTmpForGPGS_019 = PlayerPrefs.GetInt("isBoosterMattzip", 0),
+                cloudTmpForGPGS_020 = PlayerPrefs.GetString("RawAttackDamage", "1"),
+                cloudTmpForGPGS_021 = PlayerPrefs.GetString("gold", "0"),
+                cloudTmpForGPGS_022 = PlayerPrefs.GetString("diamond", "0"),
+                cloudTmpForGPGS_023 = PlayerPrefs.GetString("gupbap", "0"),
+                cloudTmpForGPGS_024 = PlayerPrefs.GetString("Mat_MaxHP", "100"),
+                cloudTmpForGPGS_025 = PlayerPrefs.GetString("Stat_MaxHP", "0"),
+                cloudTmpForGPGS_026 = PlayerPrefs.GetString("Arti_MaxHP", "0"),
+                cloudTmpForGPGS_027 = PlayerPrefs.GetString("Mat_currentHP", "100"),
+                cloudTmpForGPGS_028 = PlayerPrefs.GetString("Mat_Recov", "1"),
+                cloudTmpForGPGS_029 = PlayerPrefs.GetString("weaponInfo"),
+                cloudTmpForGPGS_030 = PlayerPrefs.GetString("questInfo"),
+                cloudTmpForGPGS_031 = PlayerPrefs.GetFloat("Mat_Mattzip_Hit", 0),
+                cloudTmpForGPGS_032 = PlayerPrefs.GetFloat("MattzipStat", 0),
+                cloudTmpForGPGS_033 = PlayerPrefs.GetFloat("MattzipArtif", 0),
+                cloudTmpForGPGS_034 = PlayerPrefs.GetFloat("AttackPerPunch", 0),
+                cloudTmpForGPGS_035 = PlayerPrefs.GetFloat("GroggyTouch", 0),
+                cloudTmpForGPGS_036 = PlayerPrefs.GetFloat("LuckyProb", 1.0f),
+                cloudTmpForGPGS_037 = PlayerPrefs.GetInt("MaxGet_GookBap", 0),
+                cloudTmpForGPGS_038 = PlayerPrefs.GetFloat("Cilcked_Cnt_MattZip", 3f),
+                //0515
+                cloudTmpForGPGS_101 = PlayerPrefs.GetInt("Arti_DefenceTime", 0),
+                cloudTmpForGPGS_102 = PlayerPrefs.GetInt("Arti_GoldBox", 0),
+                cloudTmpForGPGS_103 = PlayerPrefs.GetInt("Arti_OffGold", 0),
+                cloudTmpForGPGS_104 = PlayerPrefs.GetInt("MaxGet_MuganTop", 1),
+                cloudTmpForGPGS_105 = PlayerPrefs.GetInt("is0508shock", 0),
+                cloudTmpForGPGS_106 = PlayerPrefs.GetInt("is0515shock", 0),
+                cloudTmpForGPGS_107 = PlayerPrefs.GetString("questInfo2"),
+                cloudTmpForGPGS_108 = PlayerPrefs.GetFloat("dDiamond", 0),
+                //0518
+                cloudTmpForGPGS_109 = PlayerPrefs.GetInt("isAllmute", 0),
+                cloudTmpForGPGS_110 = PlayerPrefs.GetInt("is0515shock", 0),
+                cloudTmpForGPGS_111 = PlayerPrefs.GetString("AllMoneyData"),
 
 
-            cloudTmpForGPGS_112 = PlayerPrefs.GetInt("is1Recov", 0),
-            cloudTmpForGPGS_113 = PlayerPrefs.GetInt("is2Stamina", 0),
-            cloudTmpForGPGS_114 = PlayerPrefs.GetInt("is3ATK", 0),
-            cloudTmpForGPGS_115 = PlayerPrefs.GetInt("is4Mattzip", 0),
+                cloudTmpForGPGS_112 = PlayerPrefs.GetInt("is1Recov", 0),
+                cloudTmpForGPGS_113 = PlayerPrefs.GetInt("is2Stamina", 0),
+                cloudTmpForGPGS_114 = PlayerPrefs.GetInt("is3ATK", 0),
+                cloudTmpForGPGS_115 = PlayerPrefs.GetInt("is4Mattzip", 0),
 
-            cloudTmpForGPGS_116 = PlayerPrefs.GetString("questInfo3"),
+                cloudTmpForGPGS_116 = PlayerPrefs.GetString("questInfo3"),
 
-            cloudTmpForGPGS_117 = PlayerPrefs.GetString("ATK_PER_UP", "1"),
-            cloudTmpForGPGS_118 = PlayerPrefs.GetString("HP_PER_UP", "1"),
+                cloudTmpForGPGS_117 = PlayerPrefs.GetString("ATK_PER_UP", "1"),
+                cloudTmpForGPGS_118 = PlayerPrefs.GetString("HP_PER_UP", "1"),
 
-            cloudTmpForGPGS_119 = PlayerPrefs.GetInt("ATK_PER_UP_Lv", 0),
-            cloudTmpForGPGS_120 = PlayerPrefs.GetInt("HP_PER_UP_Lv", 0),
+                cloudTmpForGPGS_119 = PlayerPrefs.GetInt("ATK_PER_UP_Lv", 0),
+                cloudTmpForGPGS_120 = PlayerPrefs.GetInt("HP_PER_UP_Lv", 0),
 
-            cloudTmpForGPGS_121 = PlayerPrefs.GetFloat("Stat_is1Recov", 0),
-            cloudTmpForGPGS_122 = PlayerPrefs.GetFloat("Stat_is2Stamina", 0),
-            cloudTmpForGPGS_123 = PlayerPrefs.GetFloat("Stat_is3ATK", 0),
-            cloudTmpForGPGS_124 = PlayerPrefs.GetFloat("Stat_is4Mattzip", 0),
+                cloudTmpForGPGS_121 = PlayerPrefs.GetFloat("Stat_is1Recov", 0),
+                cloudTmpForGPGS_122 = PlayerPrefs.GetFloat("Stat_is2Stamina", 0),
+                cloudTmpForGPGS_123 = PlayerPrefs.GetFloat("Stat_is3ATK", 0),
+                cloudTmpForGPGS_124 = PlayerPrefs.GetFloat("Stat_is4Mattzip", 0),
 
-            cloudTmpForGPGS_125 = PlayerPrefs.GetInt("MaxGet_MiniGame", 0),
-            cloudTmpForGPGS_126 = PlayerPrefs.GetString("ssalbap", "0"),
+                cloudTmpForGPGS_125 = PlayerPrefs.GetInt("MaxGet_MiniGame", 0),
+                cloudTmpForGPGS_126 = PlayerPrefs.GetString("ssalbap", "0"),
 
-            //
-            //cloudTmpForGPGS_127 = PlayerPrefs.GetString("Bosster_Daily", "0"),
-            cloudTmpForGPGS_128 = PlayerPrefs.GetString("BG_Data", "0+0+0+0+0"),
-            cloudTmpForGPGS_129 = PlayerPrefs.GetString("questInfo4"),
+                //
+                //cloudTmpForGPGS_127 = PlayerPrefs.GetString("Bosster_Daily", "0"),
+                cloudTmpForGPGS_128 = PlayerPrefs.GetString("BG_Data", "0+0+0+0+0"),
+                cloudTmpForGPGS_129 = PlayerPrefs.GetString("questInfo4"),
 
-            cloudTmpForGPGS_130 = PlayerPrefs.GetFloat("BG_CoinStat", 1f),
+                cloudTmpForGPGS_130 = PlayerPrefs.GetFloat("BG_CoinStat", 1f),
 
-            cloudTmpForGPGS_131 = PlayerPrefs.GetInt("DailySpinReword", 0),
-            cloudTmpForGPGS_132 = PlayerPrefs.GetInt("BG_Curent", 525),
-            cloudTmpForGPGS_133 = PlayerPrefs.GetInt("Dia_ATK_PER_UP_Lv", 0),
-            cloudTmpForGPGS_134 = PlayerPrefs.GetInt("Dia_HP_PER_UP_Lv", 0),
+                cloudTmpForGPGS_131 = PlayerPrefs.GetInt("DailySpinReword", 0),
+                cloudTmpForGPGS_132 = PlayerPrefs.GetInt("BG_Curent", 525),
+                cloudTmpForGPGS_133 = PlayerPrefs.GetInt("Dia_ATK_PER_UP_Lv", 0),
+                cloudTmpForGPGS_134 = PlayerPrefs.GetInt("Dia_HP_PER_UP_Lv", 0),
 
-            cloudTmpForGPGS_135 = PlayerPrefs.GetString("Dia_ATK_PER_UP", "1"),
-            cloudTmpForGPGS_136 = PlayerPrefs.GetString("Dia_HP_PER_UP", "1"),
+                cloudTmpForGPGS_135 = PlayerPrefs.GetString("Dia_ATK_PER_UP", "1"),
+                cloudTmpForGPGS_136 = PlayerPrefs.GetString("Dia_HP_PER_UP", "1"),
 
-            cloudTmpForGPGS_137 = PlayerPrefs.GetInt("Arti_MuganTime", 0),
-            cloudTmpForGPGS_138 = PlayerPrefs.GetInt("Arti_AttackPower", 0),
+                cloudTmpForGPGS_137 = PlayerPrefs.GetInt("Arti_MuganTime", 0),
+                cloudTmpForGPGS_138 = PlayerPrefs.GetInt("Arti_AttackPower", 0),
 
-            //0601
-            cloudTmpForGPGS_139 = PlayerPrefs.GetString("diaBuyWeaponList", "525*"),
-            cloudTmpForGPGS_140 = PlayerPrefs.GetFloat("Mattzip_Dia_Weap", 0),
+                //0601
+                cloudTmpForGPGS_139 = PlayerPrefs.GetString("diaBuyWeaponList", "525*"),
+                cloudTmpForGPGS_140 = PlayerPrefs.GetFloat("Mattzip_Dia_Weap", 0),
 
-            //0608
-            cloudTmpForGPGS_141 = PlayerPrefs.GetInt("Arti_GoldPer", 0),
-            cloudTmpForGPGS_142 = PlayerPrefs.GetInt("Arti_LuckyBoxPer", 0),
-            cloudTmpForGPGS_143 = PlayerPrefs.GetInt("Arti_DefencePer", 0),
-            cloudTmpForGPGS_144 = PlayerPrefs.GetInt("Arti_GoldUpgrade", 0),
-            cloudTmpForGPGS_145 = PlayerPrefs.GetInt("Arti_InfiReword", 0),
-            cloudTmpForGPGS_146 = PlayerPrefs.GetInt("Arti_MiniReword", 0),
-            cloudTmpForGPGS_147 = PlayerPrefs.GetInt("Arti_MiniGameTime", 0),
-            cloudTmpForGPGS_148 = PlayerPrefs.GetInt("DailyCount_Cheak", 0),
-            cloudTmpForGPGS_149 = PlayerPrefs.GetInt("NewDailyCount", 0),
+                //0608
+                cloudTmpForGPGS_141 = PlayerPrefs.GetInt("Arti_GoldPer", 0),
+                cloudTmpForGPGS_142 = PlayerPrefs.GetInt("Arti_LuckyBoxPer", 0),
+                cloudTmpForGPGS_143 = PlayerPrefs.GetInt("Arti_DefencePer", 0),
+                cloudTmpForGPGS_144 = PlayerPrefs.GetInt("Arti_GoldUpgrade", 0),
+                cloudTmpForGPGS_145 = PlayerPrefs.GetInt("Arti_InfiReword", 0),
+                cloudTmpForGPGS_146 = PlayerPrefs.GetInt("Arti_MiniReword", 0),
+                cloudTmpForGPGS_147 = PlayerPrefs.GetInt("Arti_MiniGameTime", 0),
+                cloudTmpForGPGS_148 = PlayerPrefs.GetInt("DailyCount_Cheak", 0),
+                cloudTmpForGPGS_149 = PlayerPrefs.GetInt("NewDailyCount", 0),
 
-            //0615
-            cloudTmpForGPGS_150 = PlayerPrefs.GetInt("CRC_UP_Lv", 0),
-            cloudTmpForGPGS_151 = PlayerPrefs.GetInt("CRD_UP_Lv", 0),
-            cloudTmpForGPGS_152 = PlayerPrefs.GetInt("Dia_CRC_UP_Lv", 0),
-            cloudTmpForGPGS_153 = PlayerPrefs.GetInt("Dia_CRD_UP_Lv", 0),
-            cloudTmpForGPGS_154 = PlayerPrefs.GetString("CRC_UP", "1"),
-            cloudTmpForGPGS_155 = PlayerPrefs.GetString("CRD_UP", "1"),
-            cloudTmpForGPGS_156 = PlayerPrefs.GetString("Dia_CRC_UP", "1"),
-            cloudTmpForGPGS_157 = PlayerPrefs.GetString("Dia_CRD_UP", "1"),
+                //0615
+                cloudTmpForGPGS_150 = PlayerPrefs.GetInt("CRC_UP_Lv", 0),
+                cloudTmpForGPGS_151 = PlayerPrefs.GetInt("CRD_UP_Lv", 0),
+                cloudTmpForGPGS_152 = PlayerPrefs.GetInt("Dia_CRC_UP_Lv", 0),
+                cloudTmpForGPGS_153 = PlayerPrefs.GetInt("Dia_CRD_UP_Lv", 0),
+                cloudTmpForGPGS_154 = PlayerPrefs.GetString("CRC_UP", "1"),
+                cloudTmpForGPGS_155 = PlayerPrefs.GetString("CRD_UP", "1"),
+                cloudTmpForGPGS_156 = PlayerPrefs.GetString("Dia_CRC_UP", "1"),
+                cloudTmpForGPGS_157 = PlayerPrefs.GetString("Dia_CRD_UP", "1"),
 
-            //0622
-            cloudTmpForGPGS_158 = PlayerPrefs.GetString("InfiPersonalRecord", "0*0*0*0*0*0*0*0*0*0*"),
-            cloudTmpForGPGS_159 = PlayerPrefs.GetString("questInfo5", "1"),
-            cloudTmpForGPGS_160 = PlayerPrefs.GetInt("MaxGet_MuganTop2", 1),
+                //0622
+                cloudTmpForGPGS_158 = PlayerPrefs.GetString("InfiPersonalRecord", "0*0*0*0*0*0*0*0*0*0*"),
+                cloudTmpForGPGS_159 = PlayerPrefs.GetString("questInfo5", "1"),
+                cloudTmpForGPGS_160 = PlayerPrefs.GetInt("MaxGet_MuganTop2", 1),
 
-            cloudTmpForGPGS_161 = PlayerPrefs.GetString("uniformInfo"), 
-            cloudTmpForGPGS_162 = PlayerPrefs.GetString("Uniform_Data", "1+0+0+0+0+0+0"),
-            cloudTmpForGPGS_163 = PlayerPrefs.GetInt("Uniform_Curent", 0),
+                cloudTmpForGPGS_161 = PlayerPrefs.GetString("uniformInfo"),
+                cloudTmpForGPGS_162 = PlayerPrefs.GetString("Uniform_Data", "1+0+0+0+0+0+0"),
+                cloudTmpForGPGS_163 = PlayerPrefs.GetInt("Uniform_Curent", 0),
 
-            cloudTmpForGPGS_164 = PlayerPrefs.GetInt("Chara_Lv", 0),
-            cloudTmpForGPGS_165 = PlayerPrefs.GetInt("Pet_Curent", 0),
-            cloudTmpForGPGS_166 = PlayerPrefs.GetInt("Pet_BuyData", 000),
-            cloudTmpForGPGS_167 = PlayerPrefs.GetInt("Pet_Touch_Lv", 0),
-            cloudTmpForGPGS_168 = PlayerPrefs.GetInt("Pet_Buff_Lv", 0),
-            cloudTmpForGPGS_169 = PlayerPrefs.GetInt("Pet_Matt_Up_Lv", 0),
+                cloudTmpForGPGS_164 = PlayerPrefs.GetInt("Chara_Lv", 0),
+                cloudTmpForGPGS_165 = PlayerPrefs.GetInt("Pet_Curent", 0),
+                cloudTmpForGPGS_166 = PlayerPrefs.GetInt("Pet_BuyData", 000),
+                cloudTmpForGPGS_167 = PlayerPrefs.GetInt("Pet_Touch_Lv", 0),
+                cloudTmpForGPGS_168 = PlayerPrefs.GetInt("Pet_Buff_Lv", 0),
+                cloudTmpForGPGS_169 = PlayerPrefs.GetInt("Pet_Matt_Up_Lv", 0),
 
-            //0710
-            cloudTmpForGPGS_170 = PlayerPrefs.GetInt("ticket", 5),
-            cloudTmpForGPGS_171 = PlayerPrefs.GetInt("isFirstPVP", 0),
-            cloudTmpForGPGS_172 = PlayerPrefs.GetInt("Gold_RECOV_UP_Lv", 0),
-            cloudTmpForGPGS_173 = PlayerPrefs.GetInt("Dia_RECOV_UP_Lv", 0),
-            cloudTmpForGPGS_174 = PlayerPrefs.GetInt("is0707shock", 0),
+                //0710
+                cloudTmpForGPGS_170 = PlayerPrefs.GetInt("ticket", 5),
+                cloudTmpForGPGS_171 = PlayerPrefs.GetInt("isFirstPVP", 0),
+                cloudTmpForGPGS_172 = PlayerPrefs.GetInt("Gold_RECOV_UP_Lv", 0),
+                cloudTmpForGPGS_173 = PlayerPrefs.GetInt("Dia_RECOV_UP_Lv", 0),
+                cloudTmpForGPGS_174 = PlayerPrefs.GetInt("is0707shock", 0),
 
-            // 0717
-            cloudTmpForGPGS_175 = PlayerPrefs.GetInt("Pet_BuyData_Cape", 0),
-            cloudTmpForGPGS_176 = PlayerPrefs.GetInt("Pet_PVP_Matt_Lv", 0)
+                // 0717
+                cloudTmpForGPGS_175 = PlayerPrefs.GetInt("Pet_BuyData_Cape", 0),
+                cloudTmpForGPGS_176 = PlayerPrefs.GetInt("Pet_PVP_Matt_Lv", 0)
 
-            // 0803
-            //cloudTmpForGPGS_177 = PlayerPrefs.GetInt("Pet_BuyData_Something", 0),
-            //cloudTmpForGPGS_178 = PlayerPrefs.GetInt("Pet_PVP_Speed_Lv", 0)
-            //cloudTmpForGPGS_179 = PlayerPrefs.GetInt("Friend_01_MattzipPer_Lv", 0)
-            //cloudTmpForGPGS_180 = PlayerPrefs.GetInt("Friend_02_OffTimeUp_Lv", 0)
-
-
-
-        });
+                // 0803
+                //cloudTmpForGPGS_177 = PlayerPrefs.GetInt("Pet_BuyData_Something", 0),
+                //cloudTmpForGPGS_178 = PlayerPrefs.GetInt("Pet_PVP_Speed_Lv", 0)
+                //cloudTmpForGPGS_179 = PlayerPrefs.GetInt("Friend_01_MattzipPer_Lv", 0)
+                //cloudTmpForGPGS_180 = PlayerPrefs.GetInt("Friend_02_OffTimeUp_Lv", 0)
+            }
+        };
 
         BinaryFormatter binaryFormatter = new BinaryFormatter();
         MemoryStream memoryStream = new MemoryStream();
@@ -3842,11 +3841,8 @@ public class PlayerPrefsManager : MonoBehaviour
     /// <summary>
     /// 실제로 게임에 데이터 씌워주기
     /// </summary>
-    void InitAllGameData(List<GPGSsavedPrefList> _lists)
+    void InitAllGameData(List<GPGSsavedPrefList> listGPGS)
     {
-        listGPGS = _lists;
-        //SaveAllPrefsData();
-
         PlayerPrefs.SetString("weaponInfo", listGPGS[0].cloudTmpForGPGS_029);
         PlayerPrefs.SetString("questInfo", listGPGS[0].cloudTmpForGPGS_030);
         PlayerPrefs.SetString("questInfo2", listGPGS[0].cloudTmpForGPGS_107);
@@ -3999,9 +3995,10 @@ public class PlayerPrefsManager : MonoBehaviour
         //0727 Gold_Matto
         PlayerPrefs.SetInt("Pet_BuyData_Cape", listGPGS[0].cloudTmpForGPGS_175);
         PlayerPrefs.SetInt("Pet_PVP_Matt_Lv", listGPGS[0].cloudTmpForGPGS_176);
-
+        PlayerPrefs.Save();
         isDataLoaded = true;
-        UnityEngine.SceneManagement.SceneManager.LoadScene("SampleScene");
+        /// 0번 씬 불러오기
+        UnityEngine.SceneManagement.SceneManager.LoadScene(1);
     }
 
     #endregion

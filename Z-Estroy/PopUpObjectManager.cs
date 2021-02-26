@@ -471,6 +471,10 @@ public class PopUpObjectManager : MonoBehaviour
         LuckyBoxPopUP.GetComponent<Animation>()["Roll_Incre"].speed = 1;
         LuckyBoxPopUP.GetComponent<Animation>().Play("Roll_Incre");
     }
+
+    /// <summary>
+    /// 펀치 럭키박스 클릭시 애니메이션 재생하고 팝업 닫아
+    /// </summary>
     public void HIdeLuckyProcess()
     {
         if (isHideAnim) return;
@@ -543,7 +547,7 @@ public class PopUpObjectManager : MonoBehaviour
                     return;
                 }
 
-                BuffDesc.text = "300초동안 골드 획득 3배";
+                BuffDesc.text = "300초동안 골드 획득 2배";
                 MotherIconPos.GetChild(0).gameObject.SetActive(false);
                 MotherIconPos.GetChild(1).gameObject.SetActive(true);
                 MotherIconPos.GetChild(2).gameObject.SetActive(false);
@@ -560,7 +564,7 @@ public class PopUpObjectManager : MonoBehaviour
                     return;
                 }
 
-                BuffDesc.text = "300초동안 맷집 3배";
+                BuffDesc.text = "300초동안 공격력 2배";
                 MotherIconPos.GetChild(0).gameObject.SetActive(false);
                 MotherIconPos.GetChild(1).gameObject.SetActive(false);
                 MotherIconPos.GetChild(2).gameObject.SetActive(true);
@@ -888,7 +892,7 @@ public class PopUpObjectManager : MonoBehaviour
 
 
 
-    #region <Rewarded Ads> 골드 상자 뻥튀기 광고
+    #region <Rewarded Ads> 럭키 골드 상자 뻥튀기 광고
 
     public void GoldBoxFantasy()
     {
@@ -912,7 +916,7 @@ public class PopUpObjectManager : MonoBehaviour
         }
         else
         {
-            PopUpObjectManager.GetInstance().ShowWarnnigProcess("광고를 준비중입니다. 잠시 후에 시도해주세요.");
+            ShowWarnnigProcess("광고를 준비중입니다. 잠시 후에 시도해주세요.");
             PlayerPrefsManager.GetInstance().IN_APP.SetActive(false);
 
         }
@@ -939,12 +943,12 @@ public class PopUpObjectManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 골드 - 10배짜리 -> 광고 보면 5배 광고 박스
+    /// 펀치 골드박스에서 골드 2배 적용으로 변경
     /// </summary>
     void GoldBoxAds()
     {
         PlayerPrefsManager.GetInstance().IN_APP.SetActive(false);
-        PopUpObjectManager.GetInstance().HIdeLuckyProcess();
+        HIdeLuckyProcess();
 
         float Gatcha = UserWallet.GetInstance().Gatcha;
         int target = UserWallet.GetInstance().target;
@@ -955,22 +959,21 @@ public class PopUpObjectManager : MonoBehaviour
             float artiGoldPer = PlayerPrefsManager.GetInstance().Arti_GoldPer * 1.0f;
             string gold = PlayerPrefsManager.GetInstance().gold;
             var value = PlayerPrefsManager.GetInstance().PlayerDPS;
-            value = dts.multipleStringDouble(value, 100d * (goldPer + (artiGoldPer * 0.01d)));
+            /// 2배 지급이므로, 다시한번더 같은 양을 더해줌
+            value = dts.multipleStringDouble(value, 10d * 2d * (goldPer + (artiGoldPer * 0.01d)));
 
             PlayerPrefsManager.GetInstance().gold = dts.AddStringDouble(gold, value);
-            GettingGoldMessage(double.Parse(value));
-            ShowWarnnigProcess(UserWallet.GetInstance().SeetheNatural(double.Parse(value)) +" 골드를 획득하셨습니다.");
-
+            GettingGoldMessage(double.Parse(value) * 2d);
+            ShowWarnnigProcess(UserWallet.GetInstance().SeetheNatural(double.Parse(value) * 2d) +" 골드를 획득하셨습니다.");
         }
         else if (Gatcha < 90f)
         {
             float luckyPer = PlayerPrefsManager.GetInstance().Arti_LuckyBoxPer;
 
             double getAmount = (target * (1.0d + (luckyPer * 0.01d)));
-            getAmount *= 5d;
             string gupbap = PlayerPrefsManager.GetInstance().gupbap;
             PlayerPrefsManager.GetInstance().gupbap = dts.AddStringDouble(gupbap, getAmount.ToString("f0"));
-            PopUpObjectManager.GetInstance().ShowWarnnigProcess("국밥 " + getAmount.ToString("f0") + " 그릇을 획득하셨습니다.");
+            ShowWarnnigProcess("국밥 " + (getAmount * 2d).ToString("f0") + " 그릇을 획득하셨습니다.");
 
         }
         else if (Gatcha <= 100f)
@@ -978,10 +981,9 @@ public class PopUpObjectManager : MonoBehaviour
             float luckyPer = PlayerPrefsManager.GetInstance().Arti_LuckyBoxPer;
 
             double getAmount = (target * (1.0d + (luckyPer * 0.01d)));
-            getAmount *= 5d;
             string ssal = PlayerPrefsManager.GetInstance().ssalbap;
             PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(ssal, getAmount.ToString("f0"));
-            PopUpObjectManager.GetInstance().ShowWarnnigProcess("쌀밥 " + getAmount.ToString("f0") + " 그릇을 획득하셨습니다.");
+            ShowWarnnigProcess("쌀밥 " + (getAmount * 2d).ToString("f0") + " 그릇을 획득하셨습니다.");
 
         }
 
@@ -1048,7 +1050,7 @@ public class PopUpObjectManager : MonoBehaviour
         }
         else
         {
-            PopUpObjectManager.GetInstance().ShowWarnnigProcess("광고를 준비중입니다. 잠시 후에 시도해주세요.");
+            ShowWarnnigProcess("광고를 준비중입니다. 잠시 후에 시도해주세요.");
             PlayerPrefsManager.GetInstance().IN_APP.SetActive(false);
 
         }
@@ -1058,7 +1060,7 @@ public class PopUpObjectManager : MonoBehaviour
     // Event handler called when a rewarded ad has completed
     void GupBapFantasyCompleated(RewardedAdNetwork network, AdPlacement location)
     {
-        PopUpObjectManager.GetInstance().HIdeLuckyProcess();
+        HIdeLuckyProcess();
         Invoke("GupBapFantasyAds", 0.5f);
         Advertising.RewardedAdCompleted -= GupBapFantasyCompleated;
         Advertising.RewardedAdSkipped -= GupBapFantasySkipped;
@@ -1080,7 +1082,7 @@ public class PopUpObjectManager : MonoBehaviour
     void GupBapFantasyAds()
     {
         PlayerPrefsManager.GetInstance().IN_APP.SetActive(false);
-        PopUpObjectManager.GetInstance().HIdeLuckyProcess();
+        HIdeLuckyProcess();
 
         ShowInfinity3X_PopUP(GupBapAmount);
 
@@ -1200,7 +1202,7 @@ public class PopUpObjectManager : MonoBehaviour
         }
         else
         {
-            PopUpObjectManager.GetInstance().ShowWarnnigProcess("광고를 준비중입니다. 잠시 후에 시도해주세요.");
+            ShowWarnnigProcess("광고를 준비중입니다. 잠시 후에 시도해주세요.");
             PlayerPrefsManager.GetInstance().IN_APP.SetActive(false);
 
         }
@@ -1210,7 +1212,7 @@ public class PopUpObjectManager : MonoBehaviour
     // Event handler called when a rewarded ad has completed
     void SSalBapFantasyCompleated(RewardedAdNetwork network, AdPlacement location)
     {
-        PopUpObjectManager.GetInstance().HIdeLuckyProcess();
+        HIdeLuckyProcess();
         Invoke("SSalBapFantasyAds", 0.5f);
         Advertising.RewardedAdCompleted -= SSalBapFantasyCompleated;
         Advertising.RewardedAdSkipped -= SSalBapFantasySkipped;
@@ -1232,7 +1234,7 @@ public class PopUpObjectManager : MonoBehaviour
     void SSalBapFantasyAds()
     {
         PlayerPrefsManager.GetInstance().IN_APP.SetActive(false);
-        PopUpObjectManager.GetInstance().HIdeLuckyProcess();
+        HIdeLuckyProcess();
 
         ShowSSal3X_PopUP(SSalBapAmount);
 

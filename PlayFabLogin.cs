@@ -58,6 +58,7 @@ public class PlayFabLogin : MonoBehaviour
 
 
     /* PvP 데이터들*/
+    [SerializeField]
     private string myPlayFabId; // 내 플레이펩 아이디.
     private int myRankingPosition;
     //

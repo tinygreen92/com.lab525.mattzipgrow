@@ -123,7 +123,14 @@ public class LoadingM : MonoBehaviour
             if (asyncScene.progress >= 0.9f)
             {
                 loadingBar.fillAmount = Mathf.Lerp(loadingBar.fillAmount, 0.7f, timeC);
-
+                /// 디버그 모드일때 돌리고
+                if (debugBtton)
+                {
+                    StartCoroutine(RealStart(asyncScene));
+                    StopCoroutine(LoadAsyncScene());
+                    break;
+                }
+                /// 실제 빌드일때 돌리고
                 if (GPGSManager.GPGS_Progress())
                 {
                     loadingBar.fillAmount = Mathf.Lerp(loadingBar.fillAmount, 1f, timeC);
@@ -142,14 +149,6 @@ public class LoadingM : MonoBehaviour
 
                     }
                 }
-                else
-                {
-                    if(debugBtton)
-                    {
-                        StartCoroutine(RealStart(asyncScene));
-                        StopCoroutine(LoadAsyncScene());
-                    }
-                }
             }
             else
             {
@@ -165,6 +164,7 @@ public class LoadingM : MonoBehaviour
     public GameObject ClikMe;
     IEnumerator RealStart(AsyncOperation asyncScene)
     {
+        yield return new WaitForSeconds(1);
 
         var isSignFirst = PlayerPrefs.GetInt("isSignFirst", 0);
 
@@ -198,9 +198,8 @@ public class LoadingM : MonoBehaviour
     public void TimeToStart()
     {
         PlayerPrefs.SetInt("isSignFirst", 1);
-        isClickToStart = true;
-
         PlayerPrefs.Save();
+        isClickToStart = true;
     }
 
 }

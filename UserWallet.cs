@@ -307,7 +307,7 @@ public class UserWallet : MonoBehaviour
     public GameObject GupIcon; // 아이콘들
     public GameObject SalIcon; // 아이콘들
     /// <summary>
-    /// 럭키 박스에서 호출시
+    /// 펀치시 드롭되는 럭키 박스에서 호출시
     /// 0.골드 10배 텍스트에 출력 80%
     /// 1.국밥 10배 텍스트에 출력 10 %
     /// 2.쌀밥 10배 텍스트에 출력 10%
@@ -329,7 +329,7 @@ public class UserWallet : MonoBehaviour
             GoldIcon.SetActive(true);
             Desc_Text.text = "골드 상자를 획득했다!";
             var value = PlayerPrefsManager.GetInstance().PlayerDPS;
-            value = dts.multipleStringDouble(value, 20d * (goldPer + (artiGoldPer * 0.01d)));
+            value = dts.multipleStringDouble(value, 10d * 2d * (goldPer + (artiGoldPer * 0.01d)));
             Gold_5_Text.text = SeetheNatural(double.Parse(value));
 
         }
@@ -371,12 +371,11 @@ public class UserWallet : MonoBehaviour
 
 
     /// <summary>
-    /// 광고 안보기 버튼 눌렀을때 기본 제공량만 받아먹기
+    /// [펀치 럭키박스] 광고 안보기 버튼 눌렀을때 기본 제공량(10배)만 받아먹기
     /// </summary>
     public void RewordGold5()
     {
-
-        Debug.LogError("Gatcha : " + Gatcha);
+        Debug.LogError("Punch Lucky Box : " + Gatcha);
 
         if (Gatcha < 80f)
         {
@@ -384,7 +383,7 @@ public class UserWallet : MonoBehaviour
             float artiGoldPer = PlayerPrefsManager.GetInstance().Arti_GoldPer * 1.0f;
             string gold = PlayerPrefsManager.GetInstance().gold;
             var value = PlayerPrefsManager.GetInstance().PlayerDPS;
-            value = dts.multipleStringDouble(value, 20d * (goldPer + (artiGoldPer * 0.01d)));
+            value = dts.multipleStringDouble(value, 10d * 2d * (goldPer + (artiGoldPer * 0.01d)));
 
             //
             PlayerPrefsManager.GetInstance().gold = dts.AddStringDouble(gold, value);
@@ -417,9 +416,7 @@ public class UserWallet : MonoBehaviour
 
         }
 
-
-
-
+        // 돈 표시
         ShowAllMoney();
     }
 
