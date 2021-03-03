@@ -26,17 +26,15 @@ public class PlayNANOOExample : MonoBehaviour
     private const string NEW_RANKING = "mattzip-RANK-00B363A1-8630431C";
 
 
-    void Start()
+    /// <summary>
+    /// 이제 플레이팹 접속되어야 나누 접속
+    /// </summary>
+    public void NanooStart()
     {
-
-        string tmp = GPGSManager.GetLocalUserId();
-        string tmp2 = GPGSManager.GetLocalUserName();
-
         plugin = Plugin.GetInstance();
-        plugin.SetUUID(tmp);
-        plugin.SetNickname(tmp2);
+        plugin.SetUUID(GPGSManager.GetLocalUserId());
+        plugin.SetNickname(GPGSManager.GetLocalUserName());
         plugin.SetLanguage(Configure.PN_LANG_KO);
-
         //
         AccessEvent();
     }
@@ -552,12 +550,13 @@ public class PlayNANOOExample : MonoBehaviour
     public void StorageSave()
     {
         PlayerPrefsManager.GetInstance().IN_APP.SetActive(true);
-
         PlayerPrefs.Save();
+        //
         plugin.StorageSave(GPGSManager.GetLocalUserId(), playerPrefsManager.SaveAllPrefsData(), true, (state, message, rawData, dictionary) => {
             if (state.Equals(Configure.PN_API_STATE_SUCCESS))
             {
-                Debug.LogWarning("StorageSave Success ::");
+                Debug.LogWarning("StorageSave Success");
+                /// 쪼꼬미 데이터도 같이 저장.
                 StorageSaveForCheack();
             }
             else
@@ -594,8 +593,13 @@ public class PlayNANOOExample : MonoBehaviour
             if (state.Equals(Configure.PN_API_STATE_SUCCESS))
             {
                 Debug.LogWarning("StorageSave Success ::" + playerPrefsManager.ZZoGGoMiDataSave());
+                PlayerPrefsManager.GetInstance().IN_APP.SetActive(false);
                 PopUpObjectManager.GetInstance().ShowWarnnigProcess("데이터가 정상적으로 저장되었습니다. 앱이 재실행됩니다.");
-                Invoke(nameof(Reebooting),1.3f );
+                /// 데이터 세이브 플러그 세워주고 종료
+                PlayerPrefs.SetInt("isDataSaved", 1);
+                PlayerPrefs.Save();
+                //
+                Invoke(nameof(RestartAppForAOS),1f );
             }
             else
             {
@@ -607,23 +611,14 @@ public class PlayNANOOExample : MonoBehaviour
     }
 
 
-    void Reebooting()
-    {
-        PlayerPrefs.DeleteAll();
-        PlayerPrefs.SetInt("isFristGameStart", 1);
-        PlayerPrefs.SetInt("isSignFirst", 1);
-        PlayerPrefs.SetInt("isDataLoaded", 1);
-        PlayerPrefs.Save();
-        /// 씬갱신
-        RestartAppForAOS();
-    //
-    }
-
     /// <summary>
     /// 안드로이드 네이티브 코드
     /// </summary>
     void RestartAppForAOS()
     {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false; //play모드를 false로.
+#else
         AndroidJavaObject AOSUnityActivity = new AndroidJavaClass("com.unity3d.player.UnityPlayer").GetStatic<AndroidJavaObject>("currentActivity");
         AndroidJavaObject baseContext = AOSUnityActivity.Call<AndroidJavaObject>("getBaseContext");
         AndroidJavaObject intentObj = baseContext.Call<AndroidJavaObject>("getPackageManager").Call<AndroidJavaObject>("getLaunchIntentForPackage", baseContext.Call<string>("getPackageName"));
@@ -635,6 +630,8 @@ public class PlayNANOOExample : MonoBehaviour
         baseContext.Call("startActivity", mainIntent);
         AndroidJavaClass JavaSystemClass = new AndroidJavaClass("java.lang.System");
         JavaSystemClass.CallStatic("exit", 0);
+#endif
+
     }
 
 

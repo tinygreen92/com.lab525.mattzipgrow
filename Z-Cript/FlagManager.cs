@@ -253,7 +253,7 @@ public class FlagManager : MonoBehaviour
 
         // 다음 레벨의 가격 불러오고.
         string nextPrice = GetPerUpPrice(1, is2Stamina).ToString("f0");
-        Debug.LogWarning("??? : " + PlayerPrefsManager.GetInstance().ssalbap);
+        Debug.LogWarning("ssalbap : " + PlayerPrefsManager.GetInstance().ssalbap);
 
         GoldPass = dts.SubStringDouble(PlayerPrefsManager.GetInstance().ssalbap, nextPrice);
 

@@ -1120,7 +1120,7 @@ public class BulletManager : MonoBehaviour
             maxMat *= resultMattHead;
         /// 이미지 fill 기본 횟수 100에 최종 맷집 터치 요구횟수의 소수점 절삭감을 더해준다.
         MattzipGauge.fillAmount = PlayerPrefsManager.GetInstance().Mat_100 / (100.0f + Mathf.Floor(maxMat));
-        Debug.LogWarning("맷집 타격 기본 100대에서 " + Mathf.Floor(maxMat) + "만큼 증가");
+        //Debug.LogWarning("맷집 타격 기본 100대에서 " + Mathf.Floor(maxMat) + "만큼 증가");
         ///PopUpObjectManager.GetInstance().TestText[0].text = ("변경 전 : 100대에서 " + Mathf.Floor(PlayerPrefsManager.GetInstance().Cilcked_Cnt_MattZip * tresultMattHead) + "만큼 증가");
         ///PopUpObjectManager.GetInstance().TestText[1].text = ("변경 후 : 100대에서 " + Mathf.Floor(maxMat) + "만큼 증가");
 

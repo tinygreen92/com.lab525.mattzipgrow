@@ -411,7 +411,7 @@ public class GotoMINIgame : MonoBehaviour
         // 체력 회복.
         BackToFuture();
 
-        GameObject.Find("PlayfabManager").GetComponent<PlayFabLogin>().RevovGrogy();
+        playfabMag.RevovGrogy();
     }
 
 

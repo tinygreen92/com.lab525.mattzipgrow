@@ -197,59 +197,59 @@ public class CoinManager : MonoBehaviour
         }
 
 
-        /// 보험용 골드 증가. 스택 500번 쌓으면 증가.
-        string SameSame = dts.AddStringDouble(double.Parse(tmpGold), double.Parse(result));
-        string stackGold = PlayerPrefsManager.GetInstance().gold;
+        ///// 보험용 골드 증가. 스택 500번 쌓으면 증가.
+        //string SameSame = dts.AddStringDouble(double.Parse(tmpGold), double.Parse(result));
+        //string stackGold = PlayerPrefsManager.GetInstance().gold;
 
-        if (SameSame == stackGold)
-        {
-            PlayerPrefsManager.GetInstance().GoldStack++;
+        //if (SameSame == stackGold)
+        //{
+        //    PlayerPrefsManager.GetInstance().GoldStack++;
 
-            //Debug.LogWarning(" 골드 스택 : " + PlayerPrefsManager.GetInstance().GoldStack);
+        //    //Debug.LogWarning(" 골드 스택 : " + PlayerPrefsManager.GetInstance().GoldStack);
 
-            if (PlayerPrefsManager.GetInstance().GoldStack > 5000)
-            {
-                PlayerPrefsManager.GetInstance().GoldStack = 0;
+        //    if (PlayerPrefsManager.GetInstance().GoldStack > 5000)
+        //    {
+        //        PlayerPrefsManager.GetInstance().GoldStack = 0;
 
-                // 실제 골드 창에 표기 되는거.
-                string panda = dts.fDoubleToGoldOutPut(stackGold);
-                string[] sNumberList = panda.Split('.');
-                // sNumberList[0] 길이에 따라.
-                int pandaZzang = sNumberList[0].Length;
-                double rawGold = 1;
-                if (pandaZzang == 1)
-                {
-                    // 골드값 더블로 받음
-                    rawGold = (double.Parse(stackGold) * 0.001d);
-                }
-                else if (pandaZzang == 2)
-                {
-                    // 골드값 더블로 받음
-                    rawGold = (double.Parse(stackGold) * 0.0001d);
-                }
-                else
-                {
-                    // 골드값 더블로 받음
-                    rawGold = (double.Parse(stackGold) * 0.00001d);
-                }
+        //        // 실제 골드 창에 표기 되는거.
+        //        string panda = dts.fDoubleToGoldOutPut(stackGold);
+        //        string[] sNumberList = panda.Split('.');
+        //        // sNumberList[0] 길이에 따라.
+        //        int pandaZzang = sNumberList[0].Length;
+        //        double rawGold = 1;
+        //        if (pandaZzang == 1)
+        //        {
+        //            // 골드값 더블로 받음
+        //            rawGold = (double.Parse(stackGold) * 0.001d);
+        //        }
+        //        else if (pandaZzang == 2)
+        //        {
+        //            // 골드값 더블로 받음
+        //            rawGold = (double.Parse(stackGold) * 0.0001d);
+        //        }
+        //        else
+        //        {
+        //            // 골드값 더블로 받음
+        //            rawGold = (double.Parse(stackGold) * 0.00001d);
+        //        }
 
-                //Debug.LogWarning(" 골드 rawGold : " + rawGold);
+        //        //Debug.LogWarning(" 골드 rawGold : " + rawGold);
 
-                result = rawGold.ToString("f0");
-                var dak = stackGold.Substring(0,1);
+        //        result = rawGold.ToString("f0");
+        //        var dak = stackGold.Substring(0,1);
 
-                //Debug.LogWarning(" 골드 dak : " + dak);
+        //        //Debug.LogWarning(" 골드 dak : " + dak);
 
-                rawGold = rawGold / double.Parse(dak);
-                result = rawGold.ToString("f0");
+        //        rawGold = rawGold / double.Parse(dak);
+        //        result = rawGold.ToString("f0");
 
-                //Debug.LogWarning(" rawGold rawGold : " + rawGold);
+        //        //Debug.LogWarning(" rawGold rawGold : " + rawGold);
 
 
-                //Debug.LogWarning("rawGold : " + rawGold);
-                //
-            }
-        }
+        //        //Debug.LogWarning("rawGold : " + rawGold);
+        //        //
+        //    }
+        //}
 
         //Debug.LogWarning("result " + result);
         PlayerPrefsManager.GetInstance().gold = dts.AddStringDouble(double.Parse(tmpGold), double.Parse(result));

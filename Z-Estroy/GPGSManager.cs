@@ -14,7 +14,7 @@ public class GPGSManager : MonoBehaviour
 
     private static string userID = "UnknownUser"; // 유저 ID 저장하라.
     private static string userName = "UnknownUser"; // 유저 닉네임 저장하라.
-    private static bool isUserLogin; // 유저 로그인 했냐?
+    public static bool isUserLogin; // 유저 로그인 했냐?
 
 
     private void Start()
@@ -24,6 +24,7 @@ public class GPGSManager : MonoBehaviour
         ///디버그 모드면 리턴
         if (lm.debugBtton)
         {
+            isUserLogin = true;
             return;
         }
 
@@ -57,6 +58,11 @@ public class GPGSManager : MonoBehaviour
         userName = _Name; // 유저 닉네임 저장하라.
     }
 
+    public static void SetNickName(string _Name)
+    {
+        userName = _Name; // 유저 닉네임 저장하라.
+    }
+
 
 
     // 구글 로그인 되면 바로 닉네임 설정하게
@@ -64,7 +70,10 @@ public class GPGSManager : MonoBehaviour
     {
         yield return new WaitForSeconds(1.0f);
 
-        GameServices.Init();
+        if (!Social.localUser.authenticated)
+        {
+            GameServices.Init();
+        }
 
         yield return new WaitForSeconds(2.0f);
 
@@ -100,7 +109,8 @@ public class GPGSManager : MonoBehaviour
             userID = Social.localUser.id;
             userName = Social.localUser.userName;
 
-            if (loginPlease != null) loginPlease.SetActive(false);
+            if (loginPlease != null) 
+                loginPlease.SetActive(false);
 
             // 로그인 됐으면 로딩바 올려준다.
             isUserLogin = true;

@@ -10,10 +10,10 @@ public class PlayFabAuthenticator : MonoBehaviour
     private string _playFabPlayerIdCache;
 
     //Run the entire thing on awake
-    public void Awake()
-    {
-        AuthenticateWithPlayFab();
-    }
+    //public void Awake()
+    //{
+    //    AuthenticateWithPlayFab();
+    //}
 
     /*
      * Step 1

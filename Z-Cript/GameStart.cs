@@ -33,6 +33,16 @@ public class GameStart : MonoBehaviour
 
     private void Awake()
     {
+        /// 데이터 세이브가 일어났다면 있던 데이터 지워줌
+        if (PlayerPrefs.GetInt("isDataSaved", 0) == 1)
+        {
+            Debug.LogError("데이터 세이브가 일어났다면 있던 데이터 지워줌");
+            PlayerPrefs.DeleteAll();
+            PlayerPrefs.SetInt("isFristGameStart", 1);
+            PlayerPrefs.SetInt("isSignFirst", 1);
+            PlayerPrefs.SetInt("isDataSaved", 1);
+            PlayerPrefs.Save();
+        }
         // 프레임레이트 고정
         Application.targetFrameRate = 60;
         // 오디오 매니저 세팅
@@ -40,6 +50,7 @@ public class GameStart : MonoBehaviour
         /// 
         if (isDebugMode)
         {
+            GPGSManager.isUserLogin = true;
             return;
         }
 
@@ -535,10 +546,6 @@ public class GameStart : MonoBehaviour
         groggyManager.HP_barInit();
         // 유니폼 초기화
         charactherMang.UniformInit();
-
-        // 디버그 모드 아닐때만 채팅창 접속
-        if (!isDebugMode) 
-            GameObject.Find("Scripts").GetComponent<NamePickGui>().AutoStartChat();
     }
 
     IEnumerator MissionChechecak()

@@ -28,9 +28,7 @@ public class Booster_Spin : MonoBehaviour
         DateTime currentTime = UnbiasedTime.Instance.Now().Date.AddDays(1);
         // 값 없으면 다음날 0시 시간. / 저장된 값
         unbiasedTimerEndTimestamp = LoadDateTime().Date;
-
-        Debug.LogError("앞 : " + currentTime  +" / 뒤 : " + unbiasedTimerEndTimestamp);
-
+        //Debug.LogError("앞 : " + currentTime  +" / 뒤 : " + unbiasedTimerEndTimestamp);
         if (currentTime > unbiasedTimerEndTimestamp)
         {
             /// 최신값이 바뀌었다 = 날짜가 바뀌었다 = 스핀 조건 충족

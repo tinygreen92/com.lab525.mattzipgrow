@@ -188,12 +188,12 @@ public class QuestManager : MonoBehaviour
 
         UserWallet.GetInstance().ShowAllMoney();
 
-        PlayerPrefsManager.GetInstance().SavequestInfo();
-        PlayerPrefsManager.GetInstance().SavequestInfo2();
-        PlayerPrefsManager.GetInstance().SavequestInfo3();
-        PlayerPrefsManager.GetInstance().SavequestInfo4();
-        PlayerPrefsManager.GetInstance().SavequestInfo5();
-        PlayerPrefsManager.GetInstance().SavequestInfo6();
+        //PlayerPrefsManager.GetInstance().SavequestInfo();
+        //PlayerPrefsManager.GetInstance().SavequestInfo2();
+        //PlayerPrefsManager.GetInstance().SavequestInfo3();
+        //PlayerPrefsManager.GetInstance().SavequestInfo4();
+        //PlayerPrefsManager.GetInstance().SavequestInfo5();
+        //PlayerPrefsManager.GetInstance().SavequestInfo6();
 
     }
 
@@ -956,15 +956,12 @@ public class QuestManager : MonoBehaviour
             case 99: PlayerPrefsManager.GetInstance().questInfo5[0].Pun_100_Cnt++; break;
 
         }
-        PlayerPrefsManager.GetInstance().SavequestInfo();
-        PlayerPrefsManager.GetInstance().SavequestInfo2();
-        PlayerPrefsManager.GetInstance().SavequestInfo3();
-        PlayerPrefsManager.GetInstance().SavequestInfo4();
-        PlayerPrefsManager.GetInstance().SavequestInfo5();
-        PlayerPrefsManager.GetInstance().SavequestInfo6();
-
-
-        PlayerPrefs.Save();
+        //PlayerPrefsManager.GetInstance().SavequestInfo();
+        //PlayerPrefsManager.GetInstance().SavequestInfo2();
+        //PlayerPrefsManager.GetInstance().SavequestInfo3();
+        //PlayerPrefsManager.GetInstance().SavequestInfo4();
+        //PlayerPrefsManager.GetInstance().SavequestInfo5();
+        //PlayerPrefsManager.GetInstance().SavequestInfo6();
 
         // 보상 더 있나 새로고침
         SpecMissionUpdate();
@@ -985,19 +982,13 @@ public class QuestManager : MonoBehaviour
         PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + float.Parse(_Dia));
 
 
-        UserWallet.GetInstance().ShowUserDia();
-
-        PlayerPrefsManager.GetInstance().SavequestInfo();
-        PlayerPrefsManager.GetInstance().SavequestInfo2();
-        PlayerPrefsManager.GetInstance().SavequestInfo3();
-        PlayerPrefsManager.GetInstance().SavequestInfo4();
-        PlayerPrefsManager.GetInstance().SavequestInfo5();
-        PlayerPrefsManager.GetInstance().SavequestInfo6();
-
-
-        PlayerPrefs.Save();
-
-
+        UserWallet.GetInstance().ShowAllMoney();
+        //PlayerPrefsManager.GetInstance().SavequestInfo();
+        //PlayerPrefsManager.GetInstance().SavequestInfo2();
+        //PlayerPrefsManager.GetInstance().SavequestInfo3();
+        //PlayerPrefsManager.GetInstance().SavequestInfo4();
+        //PlayerPrefsManager.GetInstance().SavequestInfo5();
+        //PlayerPrefsManager.GetInstance().SavequestInfo6();
     }
 
 

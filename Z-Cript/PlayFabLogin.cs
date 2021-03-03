@@ -8,6 +8,10 @@ using UnityEngine.UI;
 
 public class PlayFabLogin : MonoBehaviour
 {
+    [Header("- 닉네임 설정 자식 원투")]
+    public InputField nickInputText;
+    public GameObject  nickPopObject;
+    //
     public Dictionary<string, CatalogItem> catalogItemDic = new Dictionary<string, CatalogItem>();
     public List<ItemInstance> playerInventory = new List<ItemInstance>();
 
@@ -60,6 +64,8 @@ public class PlayFabLogin : MonoBehaviour
     /* PvP 데이터들*/
     [SerializeField]
     private string myPlayFabId; // 내 플레이펩 아이디.
+    [SerializeField]
+    private string myDisplayName; // 내 플레이펩 닉네임
     private int myRankingPosition;
     //
     private int rankAmount = 100; // 목록 몇개 불러올지?
@@ -100,7 +106,7 @@ public class PlayFabLogin : MonoBehaviour
     void OnApplicationQuit()
     {
         /* 앱이 종료 될 때 처리 */
-        if(isTalZoo)
+        if (isTalZoo)
         {
             SubmitScore(myTierScore - 2);
             isTalZoo = false;
@@ -161,7 +167,7 @@ public class PlayFabLogin : MonoBehaviour
         /// 내 스펙 기본 세팅 맷집 10% + (0.04d * PlayerPrefsManager.GetInstance().Pet_PVP_Matt_Lv)
         /// 
 
-        var dsfds = (float.Parse(PlayerPrefsManager.GetInstance().Mat_Mattzip) * (0.1f + (0.04f * PlayerPrefsManager.GetInstance().Pet_PVP_Matt_Lv)));
+        float dsfds = (float.Parse(PlayerPrefsManager.GetInstance().Mat_Mattzip) * (0.1f + (0.04f * PlayerPrefsManager.GetInstance().Pet_PVP_Matt_Lv)));
 
         myMattzip = dsfds.ToString("f0");
 
@@ -363,7 +369,7 @@ public class PlayFabLogin : MonoBehaviour
     /// </summary>
     public void SetDataInit()
     {
-        var request = new UpdateUserDataRequest()
+        UpdateUserDataRequest request = new UpdateUserDataRequest()
         {
             Data = new Dictionary<string, string>()
             {
@@ -385,7 +391,7 @@ public class PlayFabLogin : MonoBehaviour
         };
 
         PlayFabClientAPI.UpdateUserData(request,
-            (result) => 
+            (result) =>
             {
                 RequestMyBored();
             },
@@ -399,28 +405,187 @@ public class PlayFabLogin : MonoBehaviour
     public void Start()
     {
         instance = this;
-
-        RewordRC();
+        /// 플래이팹 로그인 시도
+        StartCoroutine(InitPlayfab());
     }
 
-    public void RewordRC()
+
+    //private void OnLoginSuccess(LoginResult result)
+    //{
+    //    Debug.LogError("플레이팹 로그인 성공!");
+
+    //    myPlayFabId = result.PlayFabId;
+
+    //    // 인벤토리 열어봐서 동전 찾기
+    //    PlayFabClientAPI.GetUserInventory(new GetUserInventoryRequest(),
+    //        OnGetUserInventory,
+    //        (error) => Debug.LogError(error.GenerateErrorReport()));
+    //}
+
+    /// <summary>
+    /// 구글 아이디로 플레이팹 로그인 시도
+    /// </summary>
+    IEnumerator InitPlayfab()
     {
+        yield return null;
+        while (!GPGSManager.GPGS_Progress())
+        {
+            yield return new WaitForFixedUpdate();
+        }
+
         if (string.IsNullOrEmpty(PlayFabSettings.staticSettings.TitleId))
         {
             PlayFabSettings.staticSettings.TitleId = "A42E1";
         }
-        var request = new LoginWithCustomIDRequest { CustomId = GPGSManager.GetLocalUserId(), CreateAccount = true };
+        LoginWithCustomIDRequest request = new LoginWithCustomIDRequest { CustomId = GPGSManager.GetLocalUserId(), CreateAccount = true };
         PlayFabClientAPI.LoginWithCustomID(request, OnLoginSuccess, OnLoginFailure);
     }
 
-    private void OnLoginSuccess(LoginResult result)
+    private void OnLoginSuccess(LoginResult obj)
     {
-        Debug.LogWarning("Congratulations, you made your first successful API call!");
+        /// 로그인 성공시 내 아이디 기억
+        myPlayFabId = obj.PlayFabId;
+        /// 주간 pvp 보상 조회후 지급
+        RewordRC();
+        /// 맷집 공통 데이터 조회
+        PlayFabClientAPI.GetTitleData(new GetTitleDataRequest(),
+                result =>
+                {
+                    /// 클라이언트 버전 체크용으로 사용
+                    if (result.Data == null || !result.Data.ContainsKey("CurrentVersion"))
+                    {
+                        Debug.LogWarning("No CurrentVersion");
+                    }
+                    /// 데이터 호출 성공시.
+                    else
+                    {
+                        /// 최신 버전이면 패스.
+                        if (Application.version == result.Data["CurrentVersion"] || Application.version == result.Data["TEST_Mode"])
+                        {
+                            /// 공지사항 넣어주고
+                            //PlayerPrefsManager.instance.CH_NOTICE = result.Data["ChatNotice"];
+                        }
+                        /// 최신 버전 아님
+                        else
+                        {
+                            /// 업데이트 팝업
+                            //PopUpManager.instance.ShowPopUP(31);
+                        }
+                    }
+                },
+                error =>
+                {
+                    Debug.Log("Got error getting titleData:");
+                    Debug.Log(error.GenerateErrorReport());
+                });
+        /// 닉네임 설정 관련
+        PlayFabClientAPI.GetAccountInfo(new GetAccountInfoRequest { PlayFabId = myPlayFabId },
+                                GetAccountSuccess,
+                                (error) => Debug.LogError(" GetAccountInfo error"));
+    }
 
-        myPlayFabId = result.PlayFabId;
+    private void GetAccountSuccess(GetAccountInfoResult obj)
+    {
+        myDisplayName = obj.AccountInfo.TitleInfo.DisplayName;
+        /// 닉네임 설정이 안되었다 ||  혹은 도중에 취소했다 (임시로 구글 아이디로 저장)
+        if (myDisplayName == null || myDisplayName == myPlayFabId)          
+        {
+            /// TODO : 닉네임 설정 팝업창. 표기
+            /// 
+        }
+        else
+        {
+            /// 재접속시 닉네임 설정되어 있네? 
+            GPGSManager.SetNickName(myDisplayName);
+            /// 나누 접속
+            GameObject.Find("PlayNanoo").GetComponent<PlayNANOOExample>().NanooStart();
+            /// 포톤 접속
+            GameObject.Find("Scripts").GetComponent<NamePickGui>().AutoStartChat();
+        }
+    }
 
+    /// <summary>
+    ///5.SetNickNameCanvas 에서 확인 누르면 닉네임 중복확인 해보기
+    /// </summary>
+    public void CheckSameName()
+    {
+        /// 유저 디스플레이 네임 세팅 nickInputText
+        UpdateUserName(nickInputText.text);
+    }
+
+    /// <summary>
+    /// 닉네임 중복확인
+    /// </summary>
+    /// <param name="_dpName">방금 입력한 닉네임</param>
+    void UpdateUserName(string _dpName)
+    {
+        /// 유저 디스플레이 네임 세팅
+        PlayFabClientAPI.UpdateUserTitleDisplayName(new UpdateUserTitleDisplayNameRequest { DisplayName = _dpName },
+        (result) =>
+        {
+            Debug.LogWarning("유저 디스플레이 네임 : " + result.DisplayName);
+            myDisplayName = _dpName;
+            /// 이걸로 할래? -> 생성하시겠습니까?
+            nickPopObject.SetActive(true);
+            //PopUpManager.instance.SetNickCheckTxt(_dpName);
+            //PopUpManager.instance.ShowNickPanel(2);
+        },
+        (error) =>
+        {
+            /// 중복 !! 경고 팝업 호출 -> 중복된 닉네임입니다.
+            //PopUpManager.instance.ShowNickPanel(1);
+        });
+    }
+
+    /// <summary>
+    /// 팝업에서 닉네임 확정
+    /// </summary>
+    public void OkayMyNick()
+    {
+        /// 닉 팝업 끄기
+        nickPopObject.SetActive(false);
+        /// 닉네임을 설정하자
+        GPGSManager.SetNickName(myDisplayName);
+        /// 나누 접속
+        GameObject.Find("PlayNanoo").GetComponent<PlayNANOOExample>().NanooStart();
+        /// 포톤 접속
+        GameObject.Find("Scripts").GetComponent<NamePickGui>().AutoStartChat();
+    }
+
+    /// <summary>
+    /// 으로 하시겠습니까? -> 취소 누르면 다시 입력 기회 줌
+    /// </summary>
+    public void NoThisName()
+    {
+        /// 닉 팝업 끄기
+        nickPopObject.SetActive(false);
+        /// 널 되돌려 달라고
+        PlayFabClientAPI.UpdateUserTitleDisplayName(new UpdateUserTitleDisplayNameRequest { DisplayName = myPlayFabId },
+        (result) => myDisplayName = myPlayFabId,
+        (error) => Debug.LogError(error.GenerateErrorReport()));
+    }
+
+
+
+    private void OnLoginFailure(PlayFabError error)
+    {
+        Debug.LogWarning("Something went wrong with your first API call.  :(");
+        Debug.LogError("Here's some debug information:");
+        /// 차단 계정 메시지는 여기로
+        Debug.LogError(error.GenerateErrorReport());
+    }
+
+
+
+    /// <summary>
+    /// 랭킹 코인 조회
+    /// </summary>
+    private void RewordRC()
+    {
         // 인벤토리 열어봐서 동전 찾기
-        PlayFabClientAPI.GetUserInventory(new GetUserInventoryRequest(), OnGetUserInventory, (error) => Debug.LogError(error.GenerateErrorReport()));
+        PlayFabClientAPI.GetUserInventory(new GetUserInventoryRequest(),
+            OnGetUserInventory,
+            (error) => Debug.LogError(error.GenerateErrorReport()));
     }
 
     int gold = 0;
@@ -434,7 +599,7 @@ public class PlayFabLogin : MonoBehaviour
         SetDataInit();
 
         // 카탈로그 생성
-        var request = new GetCatalogItemsRequest() { CatalogVersion = "0" };
+        GetCatalogItemsRequest request = new GetCatalogItemsRequest() { CatalogVersion = "0" };
 
         PlayFabClientAPI.GetCatalogItems(request, OnGetCatalogItem,
             (error) => Debug.LogError(error.GenerateErrorReport()));
@@ -444,9 +609,9 @@ public class PlayFabLogin : MonoBehaviour
     {
         //Debug.LogError("OnGetCatalogITem\n" + result.ToJson());
 
-        if(catalogItemDic.Count == 0)
+        if (catalogItemDic.Count == 0)
         {
-            foreach (var item in result.Catalog)
+            foreach (CatalogItem item in result.Catalog)
             {
                 catalogItemDic.Add(item.ItemId, item);
             }
@@ -460,8 +625,8 @@ public class PlayFabLogin : MonoBehaviour
             case 1:
                 if (catalogItemDic.ContainsKey("Ranking_1"))
                 {
-                    var item = catalogItemDic["Ranking_1"];
-                    var request = new PurchaseItemRequest()
+                    CatalogItem item = catalogItemDic["Ranking_1"];
+                    PurchaseItemRequest request = new PurchaseItemRequest()
                     {
                         CatalogVersion = item.CatalogVersion,
                         ItemId = item.ItemId,
@@ -477,8 +642,8 @@ public class PlayFabLogin : MonoBehaviour
             case 2:
                 if (catalogItemDic.ContainsKey("Ranking_2"))
                 {
-                    var item = catalogItemDic["Ranking_2"];
-                    var request = new PurchaseItemRequest()
+                    CatalogItem item = catalogItemDic["Ranking_2"];
+                    PurchaseItemRequest request = new PurchaseItemRequest()
                     {
                         CatalogVersion = item.CatalogVersion,
                         ItemId = item.ItemId,
@@ -493,8 +658,8 @@ public class PlayFabLogin : MonoBehaviour
             case 3:
                 if (catalogItemDic.ContainsKey("Ranking_3"))
                 {
-                    var item = catalogItemDic["Ranking_3"];
-                    var request = new PurchaseItemRequest()
+                    CatalogItem item = catalogItemDic["Ranking_3"];
+                    PurchaseItemRequest request = new PurchaseItemRequest()
                     {
                         CatalogVersion = item.CatalogVersion,
                         ItemId = item.ItemId,
@@ -509,8 +674,8 @@ public class PlayFabLogin : MonoBehaviour
             case 4:
                 if (catalogItemDic.ContainsKey("Ranking_4-10"))
                 {
-                    var item = catalogItemDic["Ranking_4-10"];
-                    var request = new PurchaseItemRequest()
+                    CatalogItem item = catalogItemDic["Ranking_4-10"];
+                    PurchaseItemRequest request = new PurchaseItemRequest()
                     {
                         CatalogVersion = item.CatalogVersion,
                         ItemId = item.ItemId,
@@ -525,8 +690,8 @@ public class PlayFabLogin : MonoBehaviour
             case 5:
                 if (catalogItemDic.ContainsKey("Ranking_11-30"))
                 {
-                    var item = catalogItemDic["Ranking_11-30"];
-                    var request = new PurchaseItemRequest()
+                    CatalogItem item = catalogItemDic["Ranking_11-30"];
+                    PurchaseItemRequest request = new PurchaseItemRequest()
                     {
                         CatalogVersion = item.CatalogVersion,
                         ItemId = item.ItemId,
@@ -541,8 +706,8 @@ public class PlayFabLogin : MonoBehaviour
             case 6:
                 if (catalogItemDic.ContainsKey("Ranking_31-50"))
                 {
-                    var item = catalogItemDic["Ranking_31-50"];
-                    var request = new PurchaseItemRequest()
+                    CatalogItem item = catalogItemDic["Ranking_31-50"];
+                    PurchaseItemRequest request = new PurchaseItemRequest()
                     {
                         CatalogVersion = item.CatalogVersion,
                         ItemId = item.ItemId,
@@ -557,8 +722,8 @@ public class PlayFabLogin : MonoBehaviour
             case 7:
                 if (catalogItemDic.ContainsKey("Ranking_51-100"))
                 {
-                    var item = catalogItemDic["Ranking_51-100"];
-                    var request = new PurchaseItemRequest()
+                    CatalogItem item = catalogItemDic["Ranking_51-100"];
+                    PurchaseItemRequest request = new PurchaseItemRequest()
                     {
                         CatalogVersion = item.CatalogVersion,
                         ItemId = item.ItemId,
@@ -573,8 +738,8 @@ public class PlayFabLogin : MonoBehaviour
             case 8:
                 if (catalogItemDic.ContainsKey("Ranking_101"))
                 {
-                    var item = catalogItemDic["Ranking_101"];
-                    var request = new PurchaseItemRequest()
+                    CatalogItem item = catalogItemDic["Ranking_101"];
+                    PurchaseItemRequest request = new PurchaseItemRequest()
                     {
                         CatalogVersion = item.CatalogVersion,
                         ItemId = item.ItemId,
@@ -593,8 +758,8 @@ public class PlayFabLogin : MonoBehaviour
 
                 if (catalogItemDic.ContainsKey("Ranking_525"))
                 {
-                    var item = catalogItemDic["Ranking_525"];
-                    var request = new PurchaseItemRequest()
+                    CatalogItem item = catalogItemDic["Ranking_525"];
+                    PurchaseItemRequest request = new PurchaseItemRequest()
                     {
                         CatalogVersion = item.CatalogVersion,
                         ItemId = item.ItemId,
@@ -612,26 +777,21 @@ public class PlayFabLogin : MonoBehaviour
 
     private void OnPurchaseItemFail(PlayFabError obj)
     {
-        Debug.LogError("OnPurchaseItemFail -> 그럼 지갑 초기화 >" + gold +"<");
+        Debug.LogError("OnPurchaseItemFail -> 그럼 지갑 초기화 >" + gold + "<");
 
-        var request = new SubtractUserVirtualCurrencyRequest() { VirtualCurrency = "RC", Amount = gold };
+        SubtractUserVirtualCurrencyRequest request = new SubtractUserVirtualCurrencyRequest() { VirtualCurrency = "RC", Amount = gold };
         PlayFabClientAPI.SubtractUserVirtualCurrency(request, (result) => Debug.LogError("돈 빼기 성공! 현재 돈 : " + result.Balance), (error) => Debug.LogError("돈 빼기 실패"));
     }
 
     private void OnPurchaseItemSuccess(PurchaseItemResult obj)
     {
-        foreach (var item in obj.Items)
+        foreach (ItemInstance item in obj.Items)
         {
             //Debug.LogError("item.UnitPrice : " + item.UnitPrice.ToString());
         }
     }
 
-    private void OnLoginFailure(PlayFabError error)
-    {
-        Debug.LogWarning("Something went wrong with your first API call.  :(");
-        Debug.LogError("Here's some debug information:");
-        Debug.LogError(error.GenerateErrorReport());
-    }
+
 
 
 
@@ -640,7 +800,7 @@ public class PlayFabLogin : MonoBehaviour
     /// </summary>
     public void SetData()
     {
-        var request = new UpdateUserDataRequest()
+        UpdateUserDataRequest request = new UpdateUserDataRequest()
         {
             Data = new Dictionary<string, string>()
             {
@@ -685,9 +845,9 @@ public class PlayFabLogin : MonoBehaviour
             MaxResultsCount = 1 //나만
         }, result =>
         {
-            foreach (var entry in result.Leaderboard)
+            foreach (PlayerLeaderboardEntry entry in result.Leaderboard)
             {
-                Debug.LogError(entry.Position + " 내 ID : " + entry.PlayFabId + " Tier Score : " + entry.StatValue);
+                Debug.LogError(entry.Position + " 내 ID : " + entry.PlayFabId + " PVP_Tier : " + entry.StatValue);
                 myTierScore = entry.StatValue;
             }
 
@@ -725,7 +885,7 @@ public class PlayFabLogin : MonoBehaviour
     public void GetData(string _playFabId, int _tierScore)
     {
         string tmoStr = "";
-        var request = new GetUserDataRequest() { PlayFabId = _playFabId };
+        GetUserDataRequest request = new GetUserDataRequest() { PlayFabId = _playFabId };
         PlayFabClientAPI.GetUserData(request, (result) =>
         {
             if (result.Data.Count == 0)
@@ -775,7 +935,7 @@ public class PlayFabLogin : MonoBehaviour
         // 인텍스 0 부터 시작 0~9 / 10~ 19/ 20~29
         _cnt = _cnt * 10;
 
-        var request = new GetUserDataRequest() { PlayFabId = _playFabId };
+        GetUserDataRequest request = new GetUserDataRequest() { PlayFabId = _playFabId };
         PlayFabClientAPI.GetUserData(request, (result) =>
         {
             if (result.Data.Count == 1)
@@ -793,7 +953,7 @@ public class PlayFabLogin : MonoBehaviour
             }
             else
             {
-                foreach (var eachData in result.Data)
+                foreach (KeyValuePair<string, UserDataRecord> eachData in result.Data)
                 {
                     //Debug.Log(eachData.Key + " : " + eachData.Value.Value + "\n");
                     enemyAllData[_cnt] = eachData.Value.Value;
@@ -849,7 +1009,7 @@ public class PlayFabLogin : MonoBehaviour
         // 0~ 5 카운트 
         int _index = 0;
 
-        foreach (var entry in result.Leaderboard)
+        foreach (PlayerLeaderboardEntry entry in result.Leaderboard)
         {
             //Debug.LogError(entry.Position + " Leaderboard ID : " + entry.PlayFabId + " Tier Score : " + entry.StatValue);
             //자기 자신은 제외하고
@@ -943,7 +1103,7 @@ public class PlayFabLogin : MonoBehaviour
         // 0~ 100 카운트 
         int _index = 0;
 
-        foreach (var entry in result.Leaderboard)
+        foreach (PlayerLeaderboardEntry entry in result.Leaderboard)
         {
             //Debug.LogError(entry.Position + " Leaderboard ID : " + entry.PlayFabId + " Tier Score : " + entry.StatValue);
             // 이걸로 플레이어 데이터 긁어오기 가능
@@ -1015,7 +1175,7 @@ public class PlayFabLogin : MonoBehaviour
     /// <param name="score">순위</param>
     public void CardInit(string name, string score)
     {
-        var eneObj = RankingCard;
+        Transform eneObj = RankingCard;
         //프리팹에서 박스 생성
         Transform initBox = Lean.Pool.LeanPool.Spawn(eneObj);
 
@@ -1131,9 +1291,9 @@ public class PlayFabLogin : MonoBehaviour
         TimerFillamount.text = string.Format("{0:f0}", 30f);
 
         MY_PunchCnt = 0;
-        Enemy_PunchCnt = 0; 
+        Enemy_PunchCnt = 0;
 
-         MiniGameCo = StartCoroutine(TimerReset());
+        MiniGameCo = StartCoroutine(TimerReset());
 
         CountText.text = "FIGHT!";
 
@@ -1560,7 +1720,7 @@ public class PlayFabLogin : MonoBehaviour
             goto HELL;
         }
 
-        HELL:
+    HELL:
         //이번 시즌 결투장 이용했다
         PlayerPrefsManager.GetInstance().isFirstPVP = true;
         // 탈주 안했다.
@@ -1575,7 +1735,7 @@ public class PlayFabLogin : MonoBehaviour
 
         SubmitScore(myTierScore);
 
-        if(_isVictory) resultPanel.transform.GetChild(3).gameObject.SetActive(true);
+        if (_isVictory) resultPanel.transform.GetChild(3).gameObject.SetActive(true);
         yield return new WaitForSeconds(0.3f);
         resultPanel.transform.GetChild(4).gameObject.SetActive(true);
 

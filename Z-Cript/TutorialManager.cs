@@ -1177,7 +1177,7 @@ public class TutorialManager : MonoBehaviour
 
         FakeLoading.SetActive(false);
 
-        playNANOO.OpenBanner();
+        //playNANOO.OpenBanner();
 
     }
     public AudioManager audioManager;
@@ -1216,7 +1216,7 @@ public class TutorialManager : MonoBehaviour
         //    PlayerPrefsManager.GetInstance().LoadAllPrefsData(data);
         //}
 
-        playNANOO.OpenBanner();
+        //playNANOO.OpenBanner();
 
     }
 

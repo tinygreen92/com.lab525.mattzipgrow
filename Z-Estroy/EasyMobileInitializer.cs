@@ -17,7 +17,6 @@ public class EasyMobileInitializer : MonoBehaviour
     {
         /// 이지모바일  init
         RuntimeManager.Init();
-        Debug.LogError("이지모바일  init");
         while (!RuntimeManager.IsInitialized())
         {
             yield return null;
@@ -27,7 +26,6 @@ public class EasyMobileInitializer : MonoBehaviour
         Advertising.GrantDataPrivacyConsent(AdNetwork.AdMob);
         // Revokes the vendor-level consent of AdMob.
         Advertising.RevokeDataPrivacyConsent(AdNetwork.AdMob);
-        Debug.LogError("이지모바일  GrantDataPrivacyConsent");
     }
 
 

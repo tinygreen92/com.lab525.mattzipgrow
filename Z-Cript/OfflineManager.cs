@@ -101,9 +101,11 @@ public class OfflineManager : MonoBehaviour
     public void OfflineInit()
     {
         /// 세이브 로드로 앱 재실행하면 보상 주지마.
-        if (PlayerPrefsManager.GetInstance().isDataLoaded)
+        if (PlayerPrefsManager.GetInstance().isDataLoaded || PlayerPrefs.GetInt("isDataSaved", 0) == 1)
         {
             PlayerPrefsManager.GetInstance().isDataLoaded = false;
+            PlayerPrefs.SetInt("isDataSaved", 0);
+            PlayerPrefs.Save();
             return;
         }
 

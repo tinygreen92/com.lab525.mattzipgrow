@@ -2592,6 +2592,7 @@ public class PlayerPrefsManager : MonoBehaviour
 
     public void AddQuestData()
     {
+        Debug.LogError("AddQuestData()");
         //새로운 데이터를 추가해주고
         questInfo.Add(new QuestEntry
         {
@@ -2741,7 +2742,7 @@ public class PlayerPrefsManager : MonoBehaviour
     public void LoadquestInfo()
     {
         string data = PlayerPrefs.GetString("questInfo");
-
+        Debug.LogError("LoadquestInfo() ㄴ" + data + "ㄱ");
         if (!string.IsNullOrEmpty(data))
         {
             BinaryFormatter binaryFormatter = new BinaryFormatter();
@@ -2894,7 +2895,7 @@ public class PlayerPrefsManager : MonoBehaviour
     public void LoadquestInfo2()
     {
         string data = PlayerPrefs.GetString("questInfo2");
-
+        Debug.LogError("로드인포2 data : " + data);
         if (!string.IsNullOrEmpty(data))
         {
             BinaryFormatter binaryFormatter = new BinaryFormatter();
@@ -3993,8 +3994,9 @@ public class PlayerPrefsManager : MonoBehaviour
         //0727 Gold_Matto
         PlayerPrefs.SetInt("Pet_BuyData_Cape", listGPGS[0].cloudTmpForGPGS_175);
         PlayerPrefs.SetInt("Pet_PVP_Matt_Lv", listGPGS[0].cloudTmpForGPGS_176);
-        PlayerPrefs.Save();
+        /// 로드한다 트리거
         isDataLoaded = true;
+        PlayerPrefs.Save();
         /// 씬 갱신
         RestartAppForAOS();
         //UnityEngine.SceneManagement.SceneManager.LoadScene("SampleScene");
@@ -4007,6 +4009,9 @@ public class PlayerPrefsManager : MonoBehaviour
     /// </summary>
     void RestartAppForAOS()
     {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false; //play모드를 false로.
+#else
         AndroidJavaObject AOSUnityActivity = new AndroidJavaClass("com.unity3d.player.UnityPlayer").GetStatic<AndroidJavaObject>("currentActivity");
         AndroidJavaObject baseContext = AOSUnityActivity.Call<AndroidJavaObject>("getBaseContext");
         AndroidJavaObject intentObj = baseContext.Call<AndroidJavaObject>("getPackageManager").Call<AndroidJavaObject>("getLaunchIntentForPackage", baseContext.Call<string>("getPackageName"));
@@ -4018,6 +4023,7 @@ public class PlayerPrefsManager : MonoBehaviour
         baseContext.Call("startActivity", mainIntent);
         AndroidJavaClass JavaSystemClass = new AndroidJavaClass("java.lang.System");
         JavaSystemClass.CallStatic("exit", 0);
+#endif
     }
 
 
