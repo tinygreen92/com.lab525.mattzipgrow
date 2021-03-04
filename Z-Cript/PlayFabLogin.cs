@@ -8,9 +8,11 @@ using UnityEngine.UI;
 
 public class PlayFabLogin : MonoBehaviour
 {
-    [Header("- 닉네임 설정 자식 원투")]
+    public TutorialManager tm;
+    [Header("- 닉네임 설정")]
     public InputField nickInputText;
     public GameObject  nickPopObject;
+    public GameObject  nickParentsObject;
     //
     public Dictionary<string, CatalogItem> catalogItemDic = new Dictionary<string, CatalogItem>();
     public List<ItemInstance> playerInventory = new List<ItemInstance>();
@@ -240,8 +242,7 @@ public class PlayFabLogin : MonoBehaviour
         pvppoup.SetActive(true);
         // 티켓 갯수
         pvpTicket.text = PlayerPrefsManager.GetInstance().ticket.ToString();
-
-
+        /// 랭킹 갱신
         Tap_Click(0);
     }
     /// <summary>
@@ -491,7 +492,7 @@ public class PlayFabLogin : MonoBehaviour
         if (myDisplayName == null || myDisplayName == myPlayFabId)          
         {
             /// TODO : 닉네임 설정 팝업창. 표기
-            /// 
+            nickParentsObject.SetActive(true);
         }
         else
         {
@@ -501,6 +502,8 @@ public class PlayFabLogin : MonoBehaviour
             GameObject.Find("PlayNanoo").GetComponent<PlayNANOOExample>().NanooStart();
             /// 포톤 접속
             GameObject.Find("Scripts").GetComponent<NamePickGui>().AutoStartChat();
+            /// 페이크 로딩창 꺼줌
+            tm.FakeloadingOnOff(false);
         }
     }
 
@@ -509,8 +512,23 @@ public class PlayFabLogin : MonoBehaviour
     /// </summary>
     public void CheckSameName()
     {
+        string _userName;
+        switch (nickInputText.text.Length)
+        {
+            case 0:
+                return;
+            case 1:
+                return;
+            case 2:
+                _userName = nickInputText.text + " ";
+                break;
+                /// 3글자 이상은 시스템.
+            default:
+                _userName = nickInputText.text;
+                break;
+        }
         /// 유저 디스플레이 네임 세팅 nickInputText
-        UpdateUserName(nickInputText.text);
+        UpdateUserName(_userName);
     }
 
     /// <summary>
@@ -523,17 +541,22 @@ public class PlayFabLogin : MonoBehaviour
         PlayFabClientAPI.UpdateUserTitleDisplayName(new UpdateUserTitleDisplayNameRequest { DisplayName = _dpName },
         (result) =>
         {
-            Debug.LogWarning("유저 디스플레이 네임 : " + result.DisplayName);
+            Debug.LogWarning("유저 디스플레이 네임 : " + _dpName);
             myDisplayName = _dpName;
+            /// 팝업 씹고 바로 생성.
+            OkayMyNick();
+
+            /// 창꺼줌
+            nickParentsObject.SetActive(false);
             /// 이걸로 할래? -> 생성하시겠습니까?
-            nickPopObject.SetActive(true);
+            //nickPopObject.SetActive(true);
             //PopUpManager.instance.SetNickCheckTxt(_dpName);
             //PopUpManager.instance.ShowNickPanel(2);
         },
         (error) =>
         {
             /// 중복 !! 경고 팝업 호출 -> 중복된 닉네임입니다.
-            //PopUpManager.instance.ShowNickPanel(1);
+            PopUpObjectManager.GetInstance().ShowWarnnigProcess("중복된 닉네임입니다.");
         });
     }
 
@@ -550,6 +573,15 @@ public class PlayFabLogin : MonoBehaviour
         GameObject.Find("PlayNanoo").GetComponent<PlayNANOOExample>().NanooStart();
         /// 포톤 접속
         GameObject.Find("Scripts").GetComponent<NamePickGui>().AutoStartChat();
+        /// 최초 한번 랭킹 차등 보상 지급
+        Invoke(nameof(InvoDDD), 0.6f);
+        /// 페이크 로딩창 꺼줌
+        tm.FakeloadingOnOff(false);
+    }
+
+    void InvoDDD()
+    {
+        GameObject.Find("PlayNanoo").GetComponent<PlayNANOOExample>().BeforeRankingMatt();
     }
 
     /// <summary>

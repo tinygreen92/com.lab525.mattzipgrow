@@ -27,7 +27,7 @@ public class GPGSManager : MonoBehaviour
             isUserLogin = true;
             return;
         }
-
+        /// 구글 로그인 시도
         StartCoroutine(NickUpd());
     }
 
@@ -65,7 +65,10 @@ public class GPGSManager : MonoBehaviour
 
 
 
-    // 구글 로그인 되면 바로 닉네임 설정하게
+    /// <summary>
+    ///  구글 로그인 시도
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator NickUpd()
     {
         yield return new WaitForSeconds(1.0f);
@@ -78,7 +81,7 @@ public class GPGSManager : MonoBehaviour
         yield return new WaitForSeconds(2.0f);
 
         // 랜덤 초기화
-        float RanRotat = UnityEngine.Random.Range(0, 659421);
+        //float RanRotat = UnityEngine.Random.Range(0, 659421);
         int logCnt = 0;
 
         while (!Social.localUser.authenticated)
@@ -92,35 +95,27 @@ public class GPGSManager : MonoBehaviour
             if (logCnt >= 3) break;
         }
 
-        /// 3 번 시도 후에도 구글 로그인 안되었으면
+        /// 3 번 시도 후에도 구글 로그인 안되었으면 임시 번호 부여
         if (!Social.localUser.authenticated)
         {
-            userID = "u-" + RanRotat.ToString();
-            userName = "Geust-" + RanRotat.ToString();
-
-            if(loginPlease != null) loginPlease.SetActive(true);
-
+            //userID = "u-" + RanRotat.ToString();
+            //userName = "Geust-" + RanRotat.ToString();
+            /// 그리고 구글 로그인 해주세요 팝업 출력
+            if(loginPlease != null) 
+                loginPlease.SetActive(true);
         }
-
-        while (Social.localUser.authenticated)
+        /// 구글 로그인 로그인 확인 되면
+        else
         {
-            yield return new WaitForSeconds(2.0f);
-
             userID = Social.localUser.id;
             userName = Social.localUser.userName;
-
-            if (loginPlease != null) 
+            /// 로그인 플르지 팝업 꺼줌
+            if (loginPlease != null)
                 loginPlease.SetActive(false);
 
             // 로그인 됐으면 로딩바 올려준다.
             isUserLogin = true;
-
-            break;
         }
-
-        //게임 세이브 오픈
-        //InitGameSave();
-
     }
 
 

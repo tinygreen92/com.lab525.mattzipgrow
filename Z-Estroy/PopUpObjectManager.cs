@@ -1027,7 +1027,7 @@ public class PopUpObjectManager : MonoBehaviour
 
     public void GupBapFantasy()
     {
-
+        /// 튜토리얼 중이면 광고 X
         if (!PlayerPrefsManager.GetInstance().isFristGameStart) return;
 
         //PlayerPrefsManager.GetInstance().IN_APP.SetActive(true);
@@ -1179,7 +1179,7 @@ public class PopUpObjectManager : MonoBehaviour
 
     public void SSalBapFantasy()
     {
-
+        /// 튜토리얼 중이면 광고 X
         if (!PlayerPrefsManager.GetInstance().isFristGameStart) return;
 
         //PlayerPrefsManager.GetInstance().IN_APP.SetActive(true);

@@ -99,6 +99,7 @@ public class ArtifactPopManager : MonoBehaviour
     // 스킵이나 X 누르면 호출
     public void HideArtiPop()
     {
+        /// 인트로 시청 안했으면 리턴
         if (!PlayerPrefsManager.GetInstance().isFristGameStart) return;
 
         for (int i = 0; i < IconSet.childCount; i++)

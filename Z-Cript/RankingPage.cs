@@ -30,16 +30,25 @@ public class RankingPage : MonoBehaviour
     /// </summary>
     public void OpenPopUP()
     {
+
         thisSCRect = GetComponentInChildren<ScrollRect>();
-
-        /// TODO : 에니메이션 효과
-
-        if (gameObject.activeSelf) return;
-        gameObject.SetActive(true);
         thisSCRect.verticalNormalizedPosition = 1f; // 세로 스크롤 뷰
 
-        Tap_Click(1);
+        if (gameObject.activeSelf) 
+            return;
+        /// 안켜져있으면 켜줌
+        gameObject.SetActive(true);
+        // 맷집 기록후 열람
+        playNANOO.RankingRecordMattzip();
+        // 로딩중 애니메이션
+        PlayerPrefsManager.GetInstance().IN_APP.SetActive(true);
+        Invoke(nameof(InvoRank), 0.6f);
+    }
 
+    void InvoRank()
+    {
+        PlayerPrefsManager.GetInstance().IN_APP.SetActive(false);
+        Tap_Click(1);
     }
 
     /// <summary>
@@ -57,10 +66,9 @@ public class RankingPage : MonoBehaviour
                 trainnig_TAP.SetActive(false);
                 mini_TAP.SetActive(false);
 
-                // 맷집 기록
-                playNANOO.RankingRecordMattzip();
+                /// 맷집력 조회
                 playNANOO.RankingMatt();
-
+                //playNANOO.BeforeRankingMatt();
 
                 while (train_Rect.childCount != 0)
                 {
@@ -83,7 +91,6 @@ public class RankingPage : MonoBehaviour
                 //
                 MaxValuText.text = "최대 맷집";
 
-
                 break;
 
             case 2:
@@ -93,7 +100,7 @@ public class RankingPage : MonoBehaviour
 
 
                 // 버티기 기록
-                playNANOO.RankingRecordMuganTop();
+                //playNANOO.RankingRecordMuganTop();
                 playNANOO.RankingMuganTop();
 
                 while (train_Rect.childCount != 0)
@@ -125,9 +132,9 @@ public class RankingPage : MonoBehaviour
                 trainnig_TAP.SetActive(false);
                 mini_TAP.SetActive(true);
 
-                // 미니게임 기록
+                ///미니게임 기록 보기
                 //playNANOO.RankingRecordMinini();
-                //playNANOO.RankingMini();
+                playNANOO.RankingMini();
 
                 while (train_Rect.childCount != 0)
                 {

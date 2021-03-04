@@ -70,7 +70,6 @@ public class UserWallet : MonoBehaviour
         PlayerPrefsManager.GetInstance().SavequestInfo4();
         PlayerPrefsManager.GetInstance().SavequestInfo5();
         PlayerPrefsManager.GetInstance().SavequestInfo6();
-        PlayerPrefs.Save();
 
     }
 
@@ -81,7 +80,7 @@ public class UserWallet : MonoBehaviour
     {
         var value = PlayerPrefsManager.GetInstance().gold;
         GoldText.text = dts.fDoubleToGoldOutPut(value);
-
+        PlayerPrefs.Save();
     }
 
     /// 다이아
@@ -90,8 +89,8 @@ public class UserWallet : MonoBehaviour
         double dDiamond = PlayerPrefs.GetFloat("dDiamond", 0);
         PlayerPrefsManager.GetInstance().diamond = dDiamond.ToString();
         //
-
         DiaText.text = SeetheNatural(dDiamond);
+        PlayerPrefs.Save();
 
     }
 
@@ -100,6 +99,7 @@ public class UserWallet : MonoBehaviour
     {
         var value = PlayerPrefsManager.GetInstance().gupbap;
         MilkText.text = SeetheNatural(double.Parse(value));
+        PlayerPrefs.Save();
     }
 
     /// 쌀밥
@@ -107,6 +107,7 @@ public class UserWallet : MonoBehaviour
     {
         var value = PlayerPrefsManager.GetInstance().ssalbap;
         SSalText.text = SeetheNatural(double.Parse(value));
+        PlayerPrefs.Save();
 
     }
 
@@ -115,6 +116,7 @@ public class UserWallet : MonoBehaviour
     {
         var value = PlayerPrefsManager.GetInstance().key;
         KeyText.text = value + "/20";
+        PlayerPrefs.Save();
     }
 
     /// 캐릭터 정보 체력
@@ -123,6 +125,7 @@ public class UserWallet : MonoBehaviour
         var tmp = PlayerPrefsManager.GetInstance().Mat_MaxHP;
         var value = SeetheTruth(double.Parse(tmp));
         HP_Text.text = value;
+        PlayerPrefs.Save();
 
     }
 
@@ -132,6 +135,7 @@ public class UserWallet : MonoBehaviour
         var tmp = PlayerPrefsManager.GetInstance().PlayerDPS;
         var value = SeetheTruth(double.Parse(SeetheTruth(tmp)));
         ATK_Text.text = value;
+        PlayerPrefs.Save();
 
     }
 
@@ -145,6 +149,7 @@ public class UserWallet : MonoBehaviour
         CRD_Text.text = value;
         // 크리티컬 확률
         CRC_Text.text = PlayerPrefsManager.GetInstance().Critical_Per + "%";
+        PlayerPrefs.Save();
     }
 
 
@@ -488,35 +493,34 @@ public class UserWallet : MonoBehaviour
     {
 
         PlayerPrefsManager.GetInstance().IN_APP.SetActive(false);
+        /// 상점 내 무료다이아 광고 시청당 보상 다이아 50개 고정으로 수정
+        string targetDia = "50";
 
-        string targetDia = string.Empty;
+        //int RanDia = Random.Range(0, 100);
 
-        int RanDia = Random.Range(0, 100);
-
-        if (RanDia < 5)
-        {
-            targetDia = "100";
-        }
-        else if (RanDia < 15)
-        {
-            targetDia = "50";
-        }
-        else if (RanDia < 40)
-        {
-            targetDia = "20";
-        }
-        else
-        {
-            targetDia = "10";
-        }
+        //if (RanDia < 5)
+        //{
+        //    targetDia = "100";
+        //}
+        //else if (RanDia < 15)
+        //{
+        //    targetDia = "50";
+        //}
+        //else if (RanDia < 40)
+        //{
+        //    targetDia = "20";
+        //}
+        //else
+        //{
+        //    targetDia = "10";
+        //}
 
 
         //다이아 확률
         //PlayerPrefsManager.GetInstance().diamond = dts.AddStringDouble(PlayerPrefsManager.GetInstance().diamond, targetDia);
         var ddd = PlayerPrefs.GetFloat("dDiamond") + float.Parse(targetDia);
+
         PlayerPrefs.SetFloat("dDiamond", ddd);
-
-
         ShowUserDia();
 
         PopUpObjectManager.GetInstance().ShowWarnnigProcess(targetDia + " 다이아를 획득하셨습니다.");

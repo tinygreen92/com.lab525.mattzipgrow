@@ -35,8 +35,10 @@ public class PlayNANOOExample : MonoBehaviour
         plugin.SetUUID(GPGSManager.GetLocalUserId());
         plugin.SetNickname(GPGSManager.GetLocalUserName());
         plugin.SetLanguage(Configure.PN_LANG_KO);
-        //
-        AccessEvent();
+        /// 우편함 체크
+        PostboxCheck();
+        /// 배너 출력
+        OpenBanner();
     }
 
 
@@ -714,6 +716,40 @@ public class PlayNANOOExample : MonoBehaviour
 
 
     /// <summary>
+    /// 최초 접속시 이전 맷집력 랭킹 비례 다이아몬드 지급
+    /// </summary>
+    public void BeforeRankingMatt()
+    {
+        plugin.RankingPersonal("mattzip-RANK-F81A740E-61075C7F", (state, message, rawData, dictionary) => {
+            if (state.Equals(Configure.PN_API_STATE_SUCCESS))
+            {
+                if (dictionary["ranking"] == null)
+                    return;
+                float ddd = PlayerPrefs.GetFloat("dDiamond");
+                int iRank = (int)dictionary["ranking"];
+                /// 101위 부터는 1000개
+                if (iRank > 100)
+                {
+                    ddd += Mathf.RoundToInt(100000 / iRank);
+                    ///PostboxItemSend("diamond", ddd, "랭킹 순위권 보상");
+                    PlayerPrefs.SetFloat("dDiamond", ddd);
+                }
+                else
+                {
+                    ddd += 100;
+                    ///PostboxItemSend("diamond", ddd, "랭킹 순위권 보상");
+                    PlayerPrefs.SetFloat("dDiamond", ddd);
+                }
+                UserWallet.GetInstance().ShowUserDia();
+            }
+            else
+            {
+                Debug.Log("Fail");
+            }
+        });
+    }
+
+    /// <summary>
     /// Data Query in LeaderBoard
     /// </summary>
     public void RankingMatt()
@@ -1080,7 +1116,8 @@ public class PlayNANOOExample : MonoBehaviour
     {
         if (plugin != null && focus)
         {
-            AccessEvent();
+            if(GPGSManager.GPGS_Progress())
+                AccessEvent();
         }
         //Debug.Log("Focus");
     }

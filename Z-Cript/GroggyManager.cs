@@ -176,8 +176,6 @@ public class GroggyManager : MonoBehaviour
     {
         yield return null;
 
-        GameObject.Find("PlayNanoo").GetComponent<PlayNANOOExample>().PostboxCheck();
-
         for (; ; )
         {
             yield return new WaitForSeconds(PostCheckDelay);

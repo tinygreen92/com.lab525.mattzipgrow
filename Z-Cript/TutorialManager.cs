@@ -22,7 +22,6 @@ public class TutorialManager : MonoBehaviour
     /// </summary>
     public void TutoStart()
     {
-        FakeLoading.SetActive(false);
         transform.parent.gameObject.SetActive(true);
         Tutorial = StartCoroutine(TextPractice());
         if (PlayerPrefsManager.GetInstance().ATK_Lv == 0) PlayerPrefsManager.GetInstance().ATK_Lv++;
@@ -998,7 +997,7 @@ public class TutorialManager : MonoBehaviour
     //bool Index_GoopBapc;
     bool Index_MiniGamec;
     /// <summary>
-    /// 공격력 강화 버튼에서 호출해서 값 넘겨준다.
+    /// 튜토리얼 공격력 강화 버튼에서 호출해서 값 넘겨준다.
     /// </summary>
     public void Index_Case_2Cheack()
     {
@@ -1121,8 +1120,6 @@ public class TutorialManager : MonoBehaviour
     IEnumerator StroyEnd()
     {
         //
-        FakeLoading.SetActive(false);
-        //
         float alpha = 255.0f;
 
         while (alpha > 0)
@@ -1158,7 +1155,6 @@ public class TutorialManager : MonoBehaviour
         /// TODO : 보상 받고게임 시작
         PopUpObjectManager.GetInstance().TutorialComp.SetActive(true);
 
-
         //PlayerPrefsManager.GetInstance().diamond = "100";
 
         var ddd = PlayerPrefs.GetFloat("dDiamond") + 100;
@@ -1174,8 +1170,6 @@ public class TutorialManager : MonoBehaviour
         transform.parent.gameObject.SetActive(false);
         /// 
         StopCoroutine(Tutorial);
-
-        FakeLoading.SetActive(false);
 
         //playNANOO.OpenBanner();
 
@@ -1197,15 +1191,14 @@ public class TutorialManager : MonoBehaviour
     /// </summary>
     public void RealSkipBtn()
     {
+        /// 인트로 시청 완료 트리거
         PlayerPrefsManager.GetInstance().isFristGameStart = true;
-        gameObject.SetActive(false);
         StopCoroutine(Tutorial);
         // 메인 브금 재생
         audioManager.PlayMainBGM();
-        //
-        FakeLoading.SetActive(false);
+        /// 스스로 업데이트문 멈추어 줌
+        gameObject.SetActive(false);
         transform.parent.gameObject.SetActive(false);
-
         ///// 천호역?
         //if (GPGSManager.GetLocalUserId() == "g00792471786467216794" && PlayerPrefs.GetInt("isHim",0) == 0)
         //{
@@ -1220,10 +1213,10 @@ public class TutorialManager : MonoBehaviour
 
     }
 
- 
 
-    public void FakeloadingOn()
+
+    public void FakeloadingOnOff(bool _bool)
     {
-        FakeLoading.SetActive(true);
+        FakeLoading.SetActive(_bool);
     }
 }

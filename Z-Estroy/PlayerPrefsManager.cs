@@ -218,38 +218,28 @@ public class PlayerPrefsManager : MonoBehaviour
         }
     }
 
-
-    // 튜토리얼 트리거
+    /// <summary>
+    /// true 라면 튜토리얼 인트로를 시청한 상태다.
+    /// 다음 실행시 튜토리얼 건너뛰기 자동
+    /// </summary>
     public bool isFristGameStart
     {
         get
         {
             // 값 존재 안하면 0값.
-            var tmp = PlayerPrefs.GetInt("isFristGameStart", 0);
-            bool result = false;
-
-            if (tmp == 0)
-            {
-                result = false;
-            }
+            if (PlayerPrefs.GetInt("isFristGameStart", 0) == 0)
+                return false;
             else
-            {
-                result = true;
-            }
-
-            return result;
+                return true;
         }
         set
         {
 
             if (value) // true 값이면?
-            {
                 PlayerPrefs.SetInt("isFristGameStart", 1);
-            }
             else
-            {
                 PlayerPrefs.SetInt("isFristGameStart", 0);
-            }
+            //
             PlayerPrefs.Save();
 
         }

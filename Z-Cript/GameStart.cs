@@ -67,7 +67,7 @@ public class GameStart : MonoBehaviour
 
     private void Start()
     {
-        tutorialManager.FakeloadingOn();
+        tutorialManager.FakeloadingOnOff(true);
 
         StartCoroutine(SetPart_01());
     }
@@ -310,8 +310,9 @@ public class GameStart : MonoBehaviour
 
         // 튜토리얼 창 활성화.
         tutorialManager.gameObject.SetActive(true);
+        /// 튜토리얼 스타트하면 ATK_Lv++;
         tutorialManager.TutoStart();
-        // 튜토리얼 스킵 판별
+        /// 만약 이미 튜토 끝난 사람이면 자동 스킵
         if (PlayerPrefsManager.GetInstance().isFristGameStart)
             tutorialManager.RealSkipBtn();
 

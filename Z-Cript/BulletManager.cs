@@ -1094,6 +1094,7 @@ public class BulletManager : MonoBehaviour
     /// </summary>
     void Mat_100_Count(bool _isCritic)
     {
+        /// 인트로 시청 안했으면 리턴
         if (!PlayerPrefsManager.GetInstance().isFristGameStart) return;
 
         /// 동료 한명씩 해제할 때 마다 게이지 올라가는거 올라감
