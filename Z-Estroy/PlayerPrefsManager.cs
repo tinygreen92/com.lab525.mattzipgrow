@@ -2427,6 +2427,11 @@ public class PlayerPrefsManager : MonoBehaviour
             // 가져온 데이터를 바이트 배열로 변환 -> 리스트로 캐스팅
             weaponInfo = (List<WeaponEntry>)binaryFormatter.Deserialize(memoryStream);
 
+            /// 맷집 적용 수치를 변경함 값으로 바꿔줌.
+            for (int i = 0; i < weaponInfo.Count; i++)
+            {
+                weaponInfo[i].weaponEffect = (weaponInfo[i].weaponLevel * (0.1f * (i + 1)));
+            }
         }
 
         isReadyWeapon = true;
@@ -3828,7 +3833,7 @@ public class PlayerPrefsManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 실제로 게임에 데이터 씌워주기
+    /// 데이터 불러오기 시에 실제로 게임에 데이터 씌워주기
     /// </summary>
     void InitAllGameData(List<GPGSsavedPrefList> listGPGS)
     {

@@ -13,9 +13,6 @@ public class PunchManager : MonoBehaviour
     public Sprite DiaImg;
     public Sprite GookBapImg;
 
-
-
-
     [Header("-클릭 발싸 펀치 수정할거")]
     public TapToSpawnLimit tapToSpawnLimit;
 
@@ -23,9 +20,9 @@ public class PunchManager : MonoBehaviour
     public Transform PunchGrid;
 
     // 무기 배열로 만들어서 관리 혀라
-    Text[] POWER_UP_LV;                 // 해당 무기 레벨 
-    Text[] POWER_UP_TEXT;               // 공격력 50% 증가
-    Text[] POWER_UP_Price;              // 우유 가격
+    //Text[] POWER_UP_LV;                 // 해당 무기 레벨 
+    //Text[] POWER_UP_TEXT;               // 공격력 50% 증가
+    //Text[] POWER_UP_Price;              // 우유 가격
 
     // 데이터 임시 저장
     int thisWeaponLevel;
@@ -38,7 +35,10 @@ public class PunchManager : MonoBehaviour
 
     #region 0601 무기 누적 구매 세이브/로드
 
-
+    /// <summary>
+    /// 다이아로 해금한 펀치 해금 여부 저장
+    /// </summary>
+    /// <param name="result"></param>
     public void DiaBuyWeaponListSave(string result)
     {
         PlayerPrefs.SetString("diaBuyWeaponList", result);
@@ -74,12 +74,13 @@ public class PunchManager : MonoBehaviour
         string tmpDiaBuyWeap = "";
         string[] tmpDiaBuyWeapArray = DiaBuyWeaponListLoad();
 
-        //
+        /// 총 펀치 갯수 현재 100 개
         int ccnt = PunchGrid.childCount;
-
-        POWER_UP_LV = new Text[ccnt];
-        POWER_UP_TEXT = new Text[ccnt];
-        POWER_UP_Price = new Text[ccnt];
+        /// 다이아로 펀치 해금 초기화.
+        PlayerPrefsManager.GetInstance().Mattzip_Dia_Weap = 0;
+        //POWER_UP_LV = new Text[ccnt];
+        //POWER_UP_TEXT = new Text[ccnt];
+        //POWER_UP_Price = new Text[ccnt];
 
         for (int i = 0; i < ccnt; i++)
         {
@@ -87,7 +88,7 @@ public class PunchManager : MonoBehaviour
             PunchGrid.GetChild(i).GetChild(4).GetChild(0).GetChild(1).gameObject.SetActive(false);
             // 리스트 긁기
             GetThisWeaponInfo(i);
-            // 각 항목 수정
+            // 리스트 긁은걸로 각 항목 수정
             SetPunchLv(i, thisWeaponLevel);
             SetPunchText(i, thisWeaponEffect);
             SetPunchPrice(i, thisWeaponCost);
@@ -104,13 +105,14 @@ public class PunchManager : MonoBehaviour
                     PunchGrid.GetChild(i).GetChild(4).GetChild(1).GetChild(2).GetChild(0).GetChild(0).GetComponent<Image>().sprite = DiaImg;
                     PunchGrid.GetChild(i).GetChild(4).GetChild(1).GetComponentInChildren<Text>().text = "MAX";
                     // 구매 완료
+                    PlayerPrefsManager.GetInstance().Mattzip_Dia_Weap += 10f * (i + 1);
                     tmpDiaBuyWeap += "1*";
                 }
                 else  /// 아직 만렙만 찍은 상태 - 다이아몬드 구입창 보여줘라.
                 {
                     PunchGrid.GetChild(i).GetChild(4).GetChild(1).GetChild(1).gameObject.SetActive(false); // Cover_Btn
                     PunchGrid.GetChild(i).GetChild(4).GetChild(1).GetChild(2).GetChild(0).GetChild(0).GetComponent<Image>().sprite = DiaImg;
-                    PunchGrid.GetChild(i).GetChild(4).GetChild(1).GetComponentInChildren<Text>().text = ((i +1) * 500).ToString();
+                    PunchGrid.GetChild(i).GetChild(4).GetChild(1).GetComponentInChildren<Text>().text = ((i +1) * 100).ToString();
 
                     // 미구매
                     tmpDiaBuyWeap += "0*";
@@ -153,7 +155,7 @@ public class PunchManager : MonoBehaviour
 
     void SetPunchText(int _index, float _contents)
     {
-        string result = "맷집 " + _contents + "% 증가";
+        string result = "맷집 " + _contents.ToString("f1") + "% 증가";
         PunchGrid.GetChild(_index).GetChild(3).GetComponent<Text>().text = result;
         PlayerPrefsManager.GetInstance().weaponInfo[_index].weaponEffect = _contents;
     }
@@ -326,8 +328,6 @@ public class PunchManager : MonoBehaviour
     {
         // 저장된 해당 펀치 리스트 가져와서 뿌려주고
         GetThisWeaponInfo(p_index);
-
-
         // 회색 Cover Img로 덮여 있으면 리턴 -> 업그레이드 재화 소모없음 / 레벨 증가 없음.
         if (PunchGrid.GetChild(p_index).GetChild(4).GetChild(1).GetChild(1).gameObject.activeSelf)
         {
@@ -340,7 +340,7 @@ public class PunchManager : MonoBehaviour
             thisWeaponLevel = 100;
 
             float dia = PlayerPrefs.GetFloat("dDiamond");
-            float diaPrice = ((p_index + 1) * 500);
+            float diaPrice = ((p_index + 1) * 100);
 
             //다이아 체크
             if (dia - diaPrice < 0)
@@ -352,9 +352,6 @@ public class PunchManager : MonoBehaviour
             // 다이아 체크 통과후 소모
             PlayerPrefs.SetFloat("dDiamond", dia - diaPrice);
             UserWallet.GetInstance().ShowUserDia();
-
-            //구입 했다 도장 찍기
-            //thisDiaBuyWeapArray[p_index] = "1";
 
             string tmpDiaBuyWeap = "";
             for (int i = 0; i < PunchGrid.childCount; i++)
@@ -368,7 +365,6 @@ public class PunchManager : MonoBehaviour
                     tmpDiaBuyWeap += "0*";
                 }
             }
-
             /// 무기 데이터 다이아몬드 구매 여부 저장
             DiaBuyWeaponListSave(tmpDiaBuyWeap);
             thisDiaBuyWeapArray = DiaBuyWeaponListLoad();
@@ -377,15 +373,13 @@ public class PunchManager : MonoBehaviour
             PunchGrid.GetChild(p_index).GetChild(4).GetChild(1).GetChild(1).gameObject.SetActive(true); // Cover_Btn
             PunchGrid.GetChild(p_index).GetChild(4).GetChild(1).GetChild(2).GetChild(0).GetChild(0).GetComponent<Image>().sprite = DiaImg;
             PunchGrid.GetChild(p_index).GetChild(4).GetChild(1).GetComponentInChildren<Text>().text = "MAX";
-            //
+
+            /// 다이아로 구매했으면 맷집 증가 효과 더해줌 -> 한번만 적용됨
             var dfsd = PlayerPrefsManager.GetInstance().weaponInfo[p_index].weaponEffect;
             PlayerPrefsManager.GetInstance().Mattzip_Dia_Weap += dfsd;
 
             return;
         }
-
-
-
 
         // 해당 코스트 넣어서 통과 못하면 리턴
         if (!MilkPass(thisWeaponCost)) 
@@ -401,34 +395,10 @@ public class PunchManager : MonoBehaviour
         {
             thisWeaponLevel = 100;
         }
-
-        // 정상적으로 소모했다면 훈련도구 강화
-        //float weaponATK = float.Parse(PlayerPrefsManager.GetInstance().weaponColl[p_index, thisWeaponLevel - 1]);
-        /// 레벨 1일때 초기값 예외 처리
-        float weaponATK = (thisWeaponLevel * (0.5f * (p_index + 1)));
-
-
+        /// 레벨 1일때 초기값 예외 처리 (맷집 최대 증가량)
+        float weaponATK = (thisWeaponLevel * (0.1f * (p_index + 1)));
         // 훈련도구 가격
-        //string tmpPrice = PlayerPrefsManager.GetInstance().shopColl[p_index, thisWeaponLevel - 1];
         string tmpPrice;
-        ///// 레벨 1일때 초기값 예외 처리
-        //if (thisWeaponLevel == 1)
-        //{
-        //    tmpPrice = (thisWeaponLevel * 10).ToString();
-        //}
-        //else
-        //{
-        //    /// 첫번재 무기라면 예외처리
-        //    if (p_index == 0)
-        //    {
-        //        tmpPrice = (thisWeaponLevel + 9).ToString();
-        //    }
-        //    else
-        //    {
-        //        tmpPrice = (thisWeaponLevel * (5 * p_index)) + (10 + (5 * p_index)).ToString();
-        //    }
-
-        //}
 
         /// 첫번재 무기라면 예외처리
         if (p_index == 0)
@@ -464,7 +434,7 @@ public class PunchManager : MonoBehaviour
         {
             PunchGrid.GetChild(p_index).GetChild(4).GetChild(1).GetChild(1).gameObject.SetActive(false); // Cover_Btn
             PunchGrid.GetChild(p_index).GetChild(4).GetChild(1).GetChild(2).GetChild(0).GetChild(0).GetComponent<Image>().sprite = DiaImg;
-            PunchGrid.GetChild(p_index).GetChild(4).GetChild(1).GetComponentInChildren<Text>().text = ((p_index + 1) * 500).ToString();
+            PunchGrid.GetChild(p_index).GetChild(4).GetChild(1).GetComponentInChildren<Text>().text = ((p_index + 1) * 100).ToString();
         }
 
 

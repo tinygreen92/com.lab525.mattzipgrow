@@ -790,13 +790,13 @@ public class QuestManager : MonoBehaviour
         for (int i = 0; i < SpecilMiss.childCount -2; i++)
         {
             txtTop = SpecilMiss.GetChild(i).GetChild(1).GetComponent<Text>();
-            txtTop.text = (Spec_UP[i] * 500) + "대 훈련";
+            txtTop.text = (Spec_UP[i] * 1000) + "대 훈련";
 
             txt = SpecilMiss.GetChild(i).GetChild(2).GetComponent<Text>();
             // 달성해서 다이아 받은 지점에서 10 곱해서 맥스값
-            txt.text = "횟수 : ( " + Spec_M[i] + " / " + (Spec_UP[i] * 500) + " )";
+            txt.text = "횟수 : ( " + Spec_M[i] + " / " + (Spec_UP[i] * 1000) + " )";
             // 달성했다면 커버 이미지 제거
-            if (Spec_M[i] >= (Spec_UP[i] * 500))
+            if (Spec_M[i] >= (Spec_UP[i] * 1000))
             {
                 /// 10,000회 제한.
                 if (Spec_UP[i] >= 20)
