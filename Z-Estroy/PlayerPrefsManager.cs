@@ -13,6 +13,8 @@ using System;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 
+using CodeStage.AntiCheat.ObscuredTypes;
+
 public class PlayerPrefsManager : MonoBehaviour
 {
     static PlayerPrefsManager instance;
@@ -3332,15 +3334,22 @@ public class PlayerPrefsManager : MonoBehaviour
     [Serializable]
     public class UniformEntry
     {
+        /// <summary>
+        /// 유니폼 - 능력에 관여
+        /// </summary>
         public int Uniform_LV; // 현재 무기 레벨 1/100
         public double Uniform_Price; // 레벨업시 소모 골드
-                                   //
+        /// <summary>
+        /// 캐릭터 - 스킬 에 관여
+        /// </summary>
         public int Skill_LV; // 현재 무기 레벨 1/100
         public double Skill_Price; // 레벨업시 소모 골드
 
     }
 
-    // 만든 클래스를 리스트에 담아서 테이블처럼 사용
+    /// <summary>
+    /// 유니폼은 유니폼 레벨 스킬은 스킬 레벨 공용으로 사용중
+    /// </summary>
     public List<UniformEntry> uniformInfo = new List<UniformEntry>();
 
     public void AdduniformData(int _LV, double _Price, int s_LV, double s_Price)

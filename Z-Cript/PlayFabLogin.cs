@@ -257,11 +257,11 @@ public class PlayFabLogin : MonoBehaviour
                 //// 들어간다 멈춰줌.
                 //if (popopopom != null) StopCoroutine(popopopom);
                 //isGetAllDataCheak3 = true;
+                /// 사용자 pvp 데이터 최신화.
                 RewordRC();
                 // 로딩중 애니메이션
                 PlayerPrefsManager.GetInstance().IN_APP.SetActive(true);
-                // 사용자 pvp 데이터 최신화.
-                SetData();
+                //SetData();
 
                 TAB_Fight.SetActive(true);
                 TAB_Ranking.SetActive(false);
@@ -501,7 +501,7 @@ public class PlayFabLogin : MonoBehaviour
             /// 나누 접속
             GameObject.Find("PlayNanoo").GetComponent<PlayNANOOExample>().NanooStart();
             /// 포톤 접속
-            GameObject.Find("Scripts").GetComponent<NamePickGui>().AutoStartChat();
+            //GameObject.Find("Scripts").GetComponent<NamePickGui>().AutoStartChat();
             /// 페이크 로딩창 꺼줌
             tm.FakeloadingOnOff(false);
         }
@@ -572,7 +572,7 @@ public class PlayFabLogin : MonoBehaviour
         /// 나누 접속
         GameObject.Find("PlayNanoo").GetComponent<PlayNANOOExample>().NanooStart();
         /// 포톤 접속
-        GameObject.Find("Scripts").GetComponent<NamePickGui>().AutoStartChat();
+        //GameObject.Find("Scripts").GetComponent<NamePickGui>().AutoStartChat();
         /// 최초 한번 랭킹 차등 보상 지급
         Invoke(nameof(InvoDDD), 0.6f);
         /// 페이크 로딩창 꺼줌
@@ -827,43 +827,43 @@ public class PlayFabLogin : MonoBehaviour
 
 
 
-    /// <summary>
-    /// PVP 데이터 갱신
-    /// </summary>
-    public void SetData()
-    {
-        UpdateUserDataRequest request = new UpdateUserDataRequest()
-        {
-            Data = new Dictionary<string, string>()
-            {
-                /// 알파벳 순서 enemyAllData 에 차곡 차곡 10개씩 cnt / 10 == index 0 부터 시작
-                { "ACC", PlayerPrefs.GetInt("Pet_Curent", 0).ToString() },
-                { "ATK", PlayerPrefsManager.GetInstance().PlayerDPS },
-                { "BACK_GND", PlayerPrefs.GetInt("PunchIndex", 0).ToString() },
-                { "CRC", PlayerPrefsManager.GetInstance().Critical_Per },
-                { "CRD", PlayerPrefsManager.GetInstance().CriticalDPS },
-                { "HP", PlayerPrefsManager.GetInstance().Mat_MaxHP },
-                { "HP_REC", (0.04d * PlayerPrefsManager.GetInstance().Pet_PVP_Matt_Lv).ToString("f2") },
-                { "MATT", PlayerPrefsManager.GetInstance().Mat_Mattzip },
-                { "UNIFORM", PlayerPrefs.GetInt("Uniform_Curent", 0).ToString() },
-                { "userName", GPGSManager.GetLocalUserName() },
+    ///// <summary>
+    ///// PVP 데이터 갱신
+    ///// </summary>
+    //public void SetData()
+    //{
+    //    UpdateUserDataRequest request = new UpdateUserDataRequest()
+    //    {
+    //        Data = new Dictionary<string, string>()
+    //        {
+    //            /// 알파벳 순서 enemyAllData 에 차곡 차곡 10개씩 cnt / 10 == index 0 부터 시작
+    //            { "ACC", PlayerPrefs.GetInt("Pet_Curent", 0).ToString() },
+    //            { "ATK", PlayerPrefsManager.GetInstance().PlayerDPS },
+    //            { "BACK_GND", PlayerPrefs.GetInt("PunchIndex", 0).ToString() },
+    //            { "CRC", PlayerPrefsManager.GetInstance().Critical_Per },
+    //            { "CRD", PlayerPrefsManager.GetInstance().CriticalDPS },
+    //            { "HP", PlayerPrefsManager.GetInstance().Mat_MaxHP },
+    //            { "HP_REC", (0.04d * PlayerPrefsManager.GetInstance().Pet_PVP_Matt_Lv).ToString("f2") },
+    //            { "MATT", PlayerPrefsManager.GetInstance().Mat_Mattzip },
+    //            { "UNIFORM", PlayerPrefs.GetInt("Uniform_Curent", 0).ToString() },
+    //            { "userName", GPGSManager.GetLocalUserName() },
 
-            },
+    //        },
 
-            Permission = UserDataPermission.Public
-        };
+    //        Permission = UserDataPermission.Public
+    //    };
 
-        PlayFabClientAPI.UpdateUserData(request,
-            (result) => SuccessSetData(),
-            (error) => Debug.LogWarning("데이터 저장 실패")
-            );
-    }
+    //    PlayFabClientAPI.UpdateUserData(request,
+    //        (result) => SuccessSetData(),
+    //        (error) => Debug.LogWarning("데이터 저장 실패")
+    //        );
+    //}
 
-    // setData 성공했다면
-    private void SuccessSetData()
-    {
-        RequestMyBored();
-    }
+    //// setData 성공했다면
+    //private void SuccessSetData()
+    //{
+    //    RequestMyBored();
+    //}
 
     /// <summary>
     /// 내 랭킹

@@ -76,6 +76,7 @@ public class QuestManager : MonoBehaviour
             if(day.daily_Abs >= 52525)
             {
                 dailyBtn[0].GetChild(1).gameObject.SetActive(true);
+                dailyBtn[0].GetChild(3).gameObject.SetActive(true);
             }
             else //아직 보상 안받음.
             {
@@ -91,6 +92,7 @@ public class QuestManager : MonoBehaviour
             if (day.daily_Atk >= 52525)
             {
                 dailyBtn[1].GetChild(1).gameObject.SetActive(true);
+                dailyBtn[1].GetChild(3).gameObject.SetActive(true);
             }
             else
             {
@@ -107,6 +109,7 @@ public class QuestManager : MonoBehaviour
             if (day.daily_HP >= 52525)
             {
                 dailyBtn[2].GetChild(1).gameObject.SetActive(true);
+                dailyBtn[2].GetChild(3).gameObject.SetActive(true);
             }
             else
             {
@@ -124,6 +127,7 @@ public class QuestManager : MonoBehaviour
             if (day.daily_Punch >= 52525)
             {
                 dailyBtn[3].GetChild(1).gameObject.SetActive(true);
+                dailyBtn[3].GetChild(3).gameObject.SetActive(true);
             }
             else
             {
@@ -141,6 +145,7 @@ public class QuestManager : MonoBehaviour
             if (day.daily_MiniCombo >= 52525)
             {
                 dailyBtn[4].GetChild(1).gameObject.SetActive(true);
+                dailyBtn[4].GetChild(3).gameObject.SetActive(true);
             }
             else
             {
@@ -158,6 +163,7 @@ public class QuestManager : MonoBehaviour
             if (day.daily_ArtiGatcha >= 52525)
             {
                 dailyBtn[5].GetChild(1).gameObject.SetActive(true);
+                dailyBtn[5].GetChild(3).gameObject.SetActive(true);
             }
             else
             {
@@ -176,6 +182,7 @@ public class QuestManager : MonoBehaviour
             if (day3.daily_MiniGameCombo >= 52525)
             {
                 dailyBtn[6].GetChild(1).gameObject.SetActive(true);
+                dailyBtn[6].GetChild(3).gameObject.SetActive(true);
             }
             else
             {
@@ -212,6 +219,7 @@ public class QuestManager : MonoBehaviour
         PopUpObjectManager.GetInstance().ShowWarnnigProcess("보상으로 10 다이아를 받았습니다.");
         // 다이아 얻으면 커버 씌우기.
         dailyBtn[_index].GetChild(1).gameObject.SetActive(true);
+        dailyBtn[_index].GetChild(3).gameObject.SetActive(true);
 
         // 횟수 부분 할당
         var day = PlayerPrefsManager.GetInstance().questInfo[0];

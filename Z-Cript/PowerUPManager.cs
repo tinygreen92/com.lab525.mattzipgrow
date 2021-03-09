@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class PowerUPManager : MonoBehaviour
 {
+    public RectTransform rt;
+    private float rtChogi;
     public GroggyManager groggyManager;
     public ScrollRect topSCrect;
     [Header("-상단 Clickable 탭")]
@@ -35,6 +37,9 @@ public class PowerUPManager : MonoBehaviour
     Text[] punchSet;
     bool isInitFinish;
     ScrollRect thisSCRect;
+
+
+
     public void Init()
     {
         // 디폴트 펀치 갯수
@@ -50,7 +55,7 @@ public class PowerUPManager : MonoBehaviour
         //펀치 50개 정의
         for (int i = 0; i < p_among; i++)
         {
-            punchSet[i] = train_Rect.GetChild(i).GetChild(4).GetComponentInChildren<Text>();
+            punchSet[i] = power_Rect.GetChild(i).GetChild(4).GetComponentInChildren<Text>();
         }
         // 훈련강화 페이지면 
         if (name == "POWERUP_POP")
@@ -76,13 +81,26 @@ public class PowerUPManager : MonoBehaviour
         thisSCRect.horizontalNormalizedPosition = 0f; // 모든 스크롤뷰 왼쪽 정렬 시켜
         verticalSCRect.verticalNormalizedPosition = 1f; // 세로 스크롤 뷰 = 유물 재정렬
 
+        if (rt != null)
+        {
+            /// rt 있는 Euip_Canvas 에서만 초기값.
+            rtChogi = rt.anchoredPosition.x;
+            Debug.LogError(" sdadas  :" + rtChogi);
+        }
+
         if (gameObject.name == "STATUS_POP")
         {
             Tap_Click_First(1);
-            return;
+        }
+        else if (gameObject.name == "Artifect_POP")
+        {
+            Tap_Click(3);
+        }
+        else
+        {
+            Tap_Click(1);
         }
 
-        Tap_Click(1);
 
     }
 
@@ -112,7 +130,11 @@ public class PowerUPManager : MonoBehaviour
 
                 if (Flag_TAP != null) Flag_TAP.SetActive(false);
                 if (Special_TAP != null) Special_TAP.SetActive(false);
-
+                // 훈련강화 페이지 새로 고침
+                if (name == "POWERUP_POP")
+                {
+                    groggyManager.PowerUP_Init();
+                }
 
                 InitPowerUP();
 
@@ -141,11 +163,6 @@ public class PowerUPManager : MonoBehaviour
                 if (Flag_TAP != null) Flag_TAP.SetActive(false);
                 if (Special_TAP != null) Special_TAP.SetActive(false);
 
-                // 훈련강화 페이지 새로 고침
-                if (name == "POWERUP_POP")
-                {
-                    groggyManager.PowerUP_Init();
-                }
 
                 InitArti();
                 break;
@@ -286,6 +303,11 @@ public class PowerUPManager : MonoBehaviour
         thisSCRect.content = power_Rect;
         thisSCRect.viewport = power_View;
 
+        if (name == "POWERUP_POP")
+        {
+            float pp = Mathf.Floor(PlayerPrefsManager.GetInstance().PunchIndex / 4f);
+            rt.anchoredPosition = new Vector2(rtChogi -(1650 *pp), 0);
+        }
     }
     void InitTrain()
     {
@@ -299,6 +321,7 @@ public class PowerUPManager : MonoBehaviour
         //스크롤 뷰 교체
         thisSCRect.content = train_Rect;
         thisSCRect.viewport = train_View;
+        thisSCRect.horizontalNormalizedPosition = 0f; // 모든 스크롤뷰 왼쪽 정렬 시켜
     }
     void InitArti()
     {
@@ -312,6 +335,7 @@ public class PowerUPManager : MonoBehaviour
         //스크롤 뷰 교체
         thisSCRect.content = train_Rect; /// train_Rect 가 맞음.
         thisSCRect.viewport = arti_View;
+        thisSCRect.horizontalNormalizedPosition = 0f; // 모든 스크롤뷰 왼쪽 정렬 시켜
     }
     void InitAllMission()
     {
@@ -325,6 +349,7 @@ public class PowerUPManager : MonoBehaviour
         //스크롤 뷰 교체
         thisSCRect.content = artf_Rect; /// 미션페이지에서 씀
         thisSCRect.viewport = arti_View;
+        thisSCRect.horizontalNormalizedPosition = 0f; // 모든 스크롤뷰 왼쪽 정렬 시켜
     }
     void InitFlagPage()
     {
@@ -339,6 +364,7 @@ public class PowerUPManager : MonoBehaviour
         //스크롤 뷰 교체
         thisSCRect.content = Conent_4; /// 미션페이지에서 씀
         thisSCRect.viewport = Viewport_4;
+        thisSCRect.horizontalNormalizedPosition = 0f; // 모든 스크롤뷰 왼쪽 정렬 시켜
     }
     void InitSpecialPage()
     {
@@ -352,6 +378,7 @@ public class PowerUPManager : MonoBehaviour
         //스크롤 뷰 교체
         thisSCRect.content = Conent_5; /// 미션페이지에서 씀
         thisSCRect.viewport = Viewport_5;
+        thisSCRect.horizontalNormalizedPosition = 0f; // 모든 스크롤뷰 왼쪽 정렬 시켜
     }
 
 
