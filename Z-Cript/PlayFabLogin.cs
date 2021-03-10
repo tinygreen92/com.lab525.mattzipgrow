@@ -574,7 +574,7 @@ public class PlayFabLogin : MonoBehaviour
         /// 포톤 접속
         //GameObject.Find("Scripts").GetComponent<NamePickGui>().AutoStartChat();
         /// 최초 한번 랭킹 차등 보상 지급
-        Invoke(nameof(InvoDDD), 0.6f);
+        Invoke(nameof(InvoDDD), 2.6f);
         /// 페이크 로딩창 꺼줌
         tm.FakeloadingOnOff(false);
     }

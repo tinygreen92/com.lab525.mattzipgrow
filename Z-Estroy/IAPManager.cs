@@ -675,17 +675,13 @@ public class IAPManager : MonoBehaviour
 
         }
 
-
-
         UserWallet.GetInstance().ShowAllMoney();
-        // 자동 강제 서버 세이브
-        //playNANOO.StorageSaveForBuy();
         // VIP 승급에 따라 구매버튼 잠그기.
         VIPManager.GetInstance().VIPINIT();
-        PlayerPrefs.Save();
-
         GameObject.Find("CharacterManager").GetComponent<CharacterManager>().UniformInit();
-
+        // 자동 강제 서버 세이브
+        PlayerPrefs.Save();
+        playNANOO.StorageSaveForBuy();
     }
 
     // Failed purchase handler

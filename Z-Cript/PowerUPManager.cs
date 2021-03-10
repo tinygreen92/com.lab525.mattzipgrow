@@ -85,7 +85,6 @@ public class PowerUPManager : MonoBehaviour
         {
             /// rt 있는 Euip_Canvas 에서만 초기값.
             rtChogi = rt.anchoredPosition.x;
-            Debug.LogError(" sdadas  :" + rtChogi);
         }
 
         if (gameObject.name == "STATUS_POP")

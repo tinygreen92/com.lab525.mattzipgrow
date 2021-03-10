@@ -39,6 +39,7 @@ public class PlayNANOOExample : MonoBehaviour
         PostboxCheck();
         /// 배너 출력
         OpenBanner();
+        //
     }
 
 
@@ -575,17 +576,28 @@ public class PlayNANOOExample : MonoBehaviour
     /// </summary>
     public void StorageSaveForBuy()
     {
-        //PlayerPrefs.Save();
-        //plugin.StorageSave(GPGSManager.GetLocalUserId(), playerPrefsManager.SaveAllPrefsData(), true, (state, message, rawData, dictionary) => {
-        //    if (state.Equals(Configure.PN_API_STATE_SUCCESS))
-        //    {
-        //        Debug.LogWarning("StorageSave Success ::");
-        //    }
-        //    else
-        //    {
-        //        Debug.LogWarning("StorageSave Fail");
-        //    }
-        //});
+        plugin.StorageSave(GPGSManager.GetLocalUserId(), playerPrefsManager.SaveAllPrefsData(), true, (state, message, rawData, dictionary) =>
+        {
+            if (state.Equals(Configure.PN_API_STATE_SUCCESS))
+            {
+                Debug.LogWarning("StorageSave Success ::");
+            }
+            else
+            {
+                Debug.LogWarning("StorageSave Fail");
+            }
+        });
+
+        plugin.StorageSave(GPGSManager.GetLocalUserId() + "_Check", playerPrefsManager.ZZoGGoMiDataSave(), true, (state, message, rawData, dictionary) => {
+            if (state.Equals(Configure.PN_API_STATE_SUCCESS))
+            {
+                Debug.LogWarning("StorageSave Success ::");
+            }
+            else
+            {
+                Debug.LogWarning("StorageSave Fail");
+            }
+        });
     }
 
     public void StorageSaveForCheack()
@@ -725,20 +737,19 @@ public class PlayNANOOExample : MonoBehaviour
             {
                 if (dictionary["ranking"] == null)
                     return;
-                float ddd = PlayerPrefs.GetFloat("dDiamond");
-                int iRank = (int)dictionary["ranking"];
-                /// 101위 부터는 1000개
-                if (iRank > 100)
+                Debug.LogError("dictionary[ranking] 값은?? : " + dictionary["ranking"]);
+                int iRank = int.Parse(dictionary["ranking"].ToString());
+                /// -1 이라면 순위밖
+
+                if (iRank < 0)
                 {
-                    ddd += Mathf.RoundToInt(100000 / iRank);
-                    ///PostboxItemSend("diamond", ddd, "랭킹 순위권 보상");
-                    PlayerPrefs.SetFloat("dDiamond", ddd);
+                    PostboxItemSend("diamond", 1000, "시즌 1 종료 보상");
                 }
-                else
+                /// 101위 부터는 1000개
+                else if (iRank > 0)
                 {
-                    ddd += 100;
-                    ///PostboxItemSend("diamond", ddd, "랭킹 순위권 보상");
-                    PlayerPrefs.SetFloat("dDiamond", ddd);
+                    int ddd = Mathf.RoundToInt(100000 / iRank);
+                    PostboxItemSend("diamond", ddd, "시즌 1 종료 보상");
                 }
                 UserWallet.GetInstance().ShowUserDia();
             }
@@ -943,7 +954,7 @@ public class PlayNANOOExample : MonoBehaviour
         plugin.RankingRecord(NEW_RANKING, mattzip, "0", (state, message, rawData, dictionary) => {
             if (state.Equals(Configure.PN_API_STATE_SUCCESS))
             {
-                Debug.Log("Success");
+                Debug.LogError("mattzip-RANK-F81A740E-61075C7F NEW_RANKING 저장 Success");
             }
             else
             {

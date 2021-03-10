@@ -1520,8 +1520,8 @@ public class GroggyManager : MonoBehaviour
         //-------------------------------------------------------------------------------------------------------//
         //
 
-        currentAtk = (10 * Dia_ATK_PER_UP_Lv).ToString();
-        nextAtk = (10 * (Dia_ATK_PER_UP_Lv + 1)).ToString();
+        currentAtk = (5 * Dia_ATK_PER_UP_Lv).ToString();
+        nextAtk = (5 * (Dia_ATK_PER_UP_Lv + 1)).ToString();
 
         if (Dia_ATK_PER_UP_Lv == 0) currentAtk = "0";
 
@@ -1542,8 +1542,8 @@ public class GroggyManager : MonoBehaviour
         //-------------------------------------------------------------------------------------------------------//
         //
 
-        currentAtk = (10 * Dia_HP_PER_UP_Lv).ToString();
-        nextAtk = (10 * (Dia_HP_PER_UP_Lv + 1)).ToString();
+        currentAtk = (5 * Dia_HP_PER_UP_Lv).ToString();
+        nextAtk = (5 * (Dia_HP_PER_UP_Lv + 1)).ToString();
 
         tmpATK = (currentAtk);
         tmptmpATK = (nextAtk);
@@ -1638,8 +1638,8 @@ public class GroggyManager : MonoBehaviour
         ///  0615
         // 다이아 크댐
         ///  
-        currentAtk = (10 * Dia_CRD_Lv).ToString();
-        nextAtk = (10 * (Dia_CRD_Lv + 1)).ToString();
+        currentAtk = (5 * Dia_CRD_Lv).ToString();
+        nextAtk = (5 * (Dia_CRD_Lv + 1)).ToString();
 
         tmpATK = (currentAtk);
         tmptmpATK = (nextAtk);
@@ -1681,8 +1681,8 @@ public class GroggyManager : MonoBehaviour
         ///  0615
         // 다이아 체회퍼
         ///  
-        tmpATK = (10 * Dia_HPPER_Lv).ToString();
-        tmptmpATK = (10 * (Dia_HPPER_Lv + 1)).ToString();
+        tmpATK = (5 * Dia_HPPER_Lv).ToString();
+        tmptmpATK = (5 * (Dia_HPPER_Lv + 1)).ToString();
 
         Dia_Recov_Per_UP_TEXT.text = "체력 회복력 " + tmpATK + "% > " + tmptmpATK + "%";
         /// 

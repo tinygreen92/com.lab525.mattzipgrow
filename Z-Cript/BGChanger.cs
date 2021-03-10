@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using CodeStage.AntiCheat.ObscuredTypes;
 
 public class BGChanger : MonoBehaviour
 {
@@ -16,6 +17,10 @@ public class BGChanger : MonoBehaviour
     public Sprite[] allImege; // 배경 스프라이트 5 + 1 
     public SpriteRenderer[] backGndObj; // 실제 게임 배경에서 바꿔줄 거
 
+    /// <summary>
+    /// 훈련장 5개 가격 지정
+    /// </summary>
+    private readonly ObscuredInt BG_0 = 300, BG_1 = 550, BG_2 = 990, BG_3 = 1790, BG_4 = 3290;
 
     /// <summary>
     /// 배경 초기 세팅 해준다.
@@ -70,23 +75,23 @@ public class BGChanger : MonoBehaviour
                 break;
 
             case 0:
-                price = 500;
+                price = BG_0;
                 break;
 
             case 1:
-                price = 900;
+                price = BG_1;
                 break;
 
             case 2:
-                price = 1590;
+                price = BG_2;
                 break;
 
             case 3:
-                price = 2790;
+                price = BG_3;
                 break;
 
             case 4:
-                price = 4900;
+                price = BG_4;
                 break;
 
         }
@@ -118,7 +123,7 @@ public class BGChanger : MonoBehaviour
                     if (sDataList[_index] == "1") break;
 
                     // 구매한적 없다면 다이아 소모
-                    PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") - 500);
+                    PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") - BG_0);
                     PopUpObjectManager.GetInstance().ShowWarnnigProcess("성공적으로 구입하셨습니다.");
 
                     sDataList[_index] = "1";
@@ -139,7 +144,7 @@ public class BGChanger : MonoBehaviour
                     if (sDataList[_index] == "1") break;
 
                     // 구매한적 없다면 다이아 소모
-                    PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") - 900);
+                    PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") - BG_1);
                     PopUpObjectManager.GetInstance().ShowWarnnigProcess("성공적으로 구입하셨습니다.");
 
                     sDataList[_index] = "1";
@@ -160,7 +165,7 @@ public class BGChanger : MonoBehaviour
                     if (sDataList[_index] == "1") break;
 
                     // 구매한적 없다면 다이아 소모
-                    PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") - 1590);
+                    PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") - BG_2);
                     PopUpObjectManager.GetInstance().ShowWarnnigProcess("성공적으로 구입하셨습니다.");
 
                     sDataList[_index] = "1";
@@ -181,7 +186,7 @@ public class BGChanger : MonoBehaviour
                     if (sDataList[_index] == "1") break;
 
                     // 구매한적 없다면 다이아 소모
-                    PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") - 2790);
+                    PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") - BG_3);
                     PopUpObjectManager.GetInstance().ShowWarnnigProcess("성공적으로 구입하셨습니다.");
 
                     sDataList[_index] = "1";
@@ -202,7 +207,7 @@ public class BGChanger : MonoBehaviour
                     if (sDataList[_index] == "1") break;
 
                     // 구매한적 없다면 다이아 소모
-                    PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") - 4900);
+                    PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") - BG_4);
                     PopUpObjectManager.GetInstance().ShowWarnnigProcess("성공적으로 구입하셨습니다.");
 
                     sDataList[_index] = "1";
@@ -317,9 +322,6 @@ public class BGChanger : MonoBehaviour
     /// </summary>
     void SetBGsTat(int _index)
     {
-        Debug.LogWarning("메ㅐ소드 안 에 들어옴");
-
-
         // 캐릭터 창 배경 초기화.
         for (int i = 0; i < charaBGmask.Length; i++)
         {
@@ -340,7 +342,7 @@ public class BGChanger : MonoBehaviour
                 // 캐릭터 창 배경 화면 바꿈
                 charaBGmask[1].SetActive(true);
                 //PlayerPrefsManager.GetInstance().BG_CoinStat = 2f;
-                PlayerPrefs.SetFloat("BG_CoinStat", 2f);
+                PlayerPrefs.SetFloat("BG_CoinStat", 1.1f);
 
                 break;
 
@@ -348,7 +350,7 @@ public class BGChanger : MonoBehaviour
                 // 캐릭터 창 배경 화면 바꿈
                 charaBGmask[2].SetActive(true);
                 //PlayerPrefsManager.GetInstance().BG_CoinStat = 3f;
-                PlayerPrefs.SetFloat("BG_CoinStat", 3f);
+                PlayerPrefs.SetFloat("BG_CoinStat", 1.2f);
 
                 break;
 
@@ -356,7 +358,7 @@ public class BGChanger : MonoBehaviour
                 // 캐릭터 창 배경 화면 바꿈
                 charaBGmask[3].SetActive(true);
                 //PlayerPrefsManager.GetInstance().BG_CoinStat = 5f;
-                PlayerPrefs.SetFloat("BG_CoinStat", 5f);
+                PlayerPrefs.SetFloat("BG_CoinStat", 1.4f);
 
                 break;
 
@@ -364,7 +366,7 @@ public class BGChanger : MonoBehaviour
                 // 캐릭터 창 배경 화면 바꿈
                 charaBGmask[4].SetActive(true);
                 //PlayerPrefsManager.GetInstance().BG_CoinStat = 9f;
-                PlayerPrefs.SetFloat("BG_CoinStat", 9f);
+                PlayerPrefs.SetFloat("BG_CoinStat", 1.8f);
 
                 break;
 
@@ -372,7 +374,7 @@ public class BGChanger : MonoBehaviour
                 // 캐릭터 창 배경 화면 바꿈
                 charaBGmask[5].SetActive(true);
                 //PlayerPrefsManager.GetInstance().BG_CoinStat = 17f;
-                PlayerPrefs.SetFloat("BG_CoinStat", 17f);
+                PlayerPrefs.SetFloat("BG_CoinStat", 2.6f);
 
                 Debug.LogWarning("적용 안돼? : " + PlayerPrefsManager.GetInstance().BG_CoinStat);
                 break;

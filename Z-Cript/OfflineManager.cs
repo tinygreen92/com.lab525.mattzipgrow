@@ -132,7 +132,7 @@ public class OfflineManager : MonoBehaviour
         dateTime = LoadDateTime();
 
         /// 1분 이상 떠나있었다면
-        if (dateTime.AddSeconds(62) < UnbiasedTime.Instance.Now())
+        if (dateTime.AddSeconds(61) < UnbiasedTime.Instance.Now())
         {
             TimeSpan resultTime = (UnbiasedTime.Instance.Now() - dateTime);
             // 분 단위로 저장.
@@ -147,7 +147,9 @@ public class OfflineManager : MonoBehaviour
             // 최근 획득 골드 공식 시작
             gettingGold = PlayerPrefsManager.GetInstance().PlayerDPS;
 
-            float ArtiGold = 1.0f + (PlayerPrefsManager.GetInstance().Arti_OffGold * 0.5f) + (PlayerPrefsManager.GetInstance().uniformInfo[4].Skill_LV * 0.005f);
+            float ArtiGold = 1.0f 
+                + (PlayerPrefsManager.GetInstance().Arti_OffGold * 0.5f) // 오프라인 보상 유물
+                + (PlayerPrefsManager.GetInstance().uniformInfo[4].Skill_LV * 0.005f); // 오프라인 보상 강화
             //골드 를 곱해 준다.
             gettingGold = dts.multipleStringDouble(double.Parse(gettingGold).ToString(), (timeBae * 20f * ArtiGold)); // 분당 10대. 100 = 1000 ;
 
@@ -162,10 +164,6 @@ public class OfflineManager : MonoBehaviour
             rewordText.text =  UserWallet.GetInstance().SeetheNatural(double.Parse(gettingGold));
             GupBapText.text = UserWallet.GetInstance().SeetheNatural(gettingGupBap);
             SSalText.text = UserWallet.GetInstance().SeetheNatural(gettingSSal);
-
-
-
-
 
             // 오프라인 보상창 열어준다.
             rewordPOPup.SetActive(true);
