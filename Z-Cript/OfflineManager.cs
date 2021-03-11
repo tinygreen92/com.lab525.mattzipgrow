@@ -142,23 +142,33 @@ public class OfflineManager : MonoBehaviour
 
             if (timeBae == 0) return;
 
+            /// start ---------------- 동료로 맷집 올려주는 텍스트 출력  ------------------
+            /// 
+            int MaxFriendTime = (60 + (1 * PlayerPrefsManager.GetInstance().Friend_02_OffTimeUp_Lv));
+
+            if (timeBae > MaxFriendTime)
+                timeBae = MaxFriendTime;
+
+            gettingMatt = (timeBae * ((PlayerPrefsManager.GetInstance().Friend_01_MattzipPer_Lv * 0.1f) + 1.0f)); /// 분당 0.1 맷집게이지;
+            mattText.text = UserWallet.GetInstance().SeetheNatural(gettingMatt);
+
+            /// start ---------------- 골드 / 국밥 / 쌀밥  ------------------
+
             // 최대 6시간 고정
             if (timeBae > 360) timeBae = 360;
             // 최근 획득 골드 공식 시작
-            gettingGold = PlayerPrefsManager.GetInstance().PlayerDPS;
+            gettingGold = PlayerPrefsManager.GetInstance().Mat_Mattzip;
 
             float ArtiGold = 1.0f 
                 + (PlayerPrefsManager.GetInstance().Arti_OffGold * 0.5f) // 오프라인 보상 유물
                 + (PlayerPrefsManager.GetInstance().uniformInfo[4].Skill_LV * 0.005f); // 오프라인 보상 강화
             //골드 를 곱해 준다.
-            gettingGold = dts.multipleStringDouble(double.Parse(gettingGold).ToString(), (timeBae * 20f * ArtiGold)); // 분당 10대. 100 = 1000 ;
+            gettingGold = dts.multipleStringDouble(gettingGold, (timeBae * ArtiGold * 20f)); // 분당 10대. 100 = 1000 ;
+            gettingGupBap = timeBae * ArtiGold * 2f; // 분당 2개;
+            gettingSSal = timeBae  * ArtiGold * 1f; // 분당 1개;
 
-            gettingGupBap = timeBae * 2f * ArtiGold; // 분당 2개;
-            gettingSSal = timeBae * 1f * ArtiGold; // 분당 1개;
 
-         
-            /// start ---------------- 동료로 맷집 올려줌 ------------------
-            //OfflineFriendReword();
+
 
             //획득 골드 만큼 복제해서 팝업 텍스트에 표기
             rewordText.text =  UserWallet.GetInstance().SeetheNatural(double.Parse(gettingGold));
@@ -171,28 +181,15 @@ public class OfflineManager : MonoBehaviour
     }
 
 
-    /// <summary>
-    /// 동료로 맷집 올려줌 
-    /// </summary>
-    void OfflineFriendReword()
-    {
-        int MaxFriendTime = (60 + (1 * PlayerPrefsManager.GetInstance().Friend_02_OffTimeUp_Lv));
-
-        if (timeBae > MaxFriendTime) timeBae = MaxFriendTime;
-
-        gettingMatt = (timeBae * 0.1f * PlayerPrefsManager.GetInstance().Friend_01_MattzipPer_Lv); /// 분당 0.1 맷집게이지;
-        mattText.text = UserWallet.GetInstance().SeetheNatural(gettingMatt);
-    }
-
 
 
     /// <summary>
-    /// 실제로 맷집 게이지 올려주기 광고 안봄 = 1 / 광고 봄 = 5
+    /// 실제로 맷집 게이지 올려주기 광고 안봄 = 1f / 광고 봄 = 2f
     /// </summary>
     /// <param name="_Bae">1f 혹은 5f</param>
     void RewordFriendBae(float _Bae)
     {
-        //PlayerPrefsManager.GetInstance().Mat_100 += Mathf.CeilToInt(gettingMatt * _Bae);
+        PlayerPrefsManager.GetInstance().Mat_100 += Mathf.CeilToInt(gettingMatt * _Bae);
     }
 
 
@@ -338,5 +335,6 @@ public class OfflineManager : MonoBehaviour
     private void WriteTimestamp(string key, DateTime time)
     {
         PlayerPrefs.SetString(key, time.ToBinary().ToString());
+        PlayerPrefs.Save();
     }
 }

@@ -20,7 +20,7 @@ public class Booster_AUTO : MonoBehaviour
     private DateTime unbiasedTimerEndTimestamp;
     TimeSpan unbiasedRemaining;
 
-    private void Awake()
+    private void Start()
     {
         unbiasedTimerEndTimestamp = ReadTimestamp("Booster_AUTO", UnbiasedTime.Instance.Now());
         // 공격 딜레이 1초당 10f
@@ -264,6 +264,7 @@ public class Booster_AUTO : MonoBehaviour
     private void WriteTimestamp(string key, DateTime time)
     {
         PlayerPrefs.SetString(key, time.ToBinary().ToString());
+        PlayerPrefs.Save();
     }
 
 

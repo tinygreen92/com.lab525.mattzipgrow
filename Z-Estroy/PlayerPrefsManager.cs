@@ -975,8 +975,15 @@ public class PlayerPrefsManager : MonoBehaviour
             PlayerPrefs.SetString("Stat_MaxHP", value);
             PlayerPrefs.Save();
 
-            var result = dts.AddStringDouble(Arti_MaxHP, value);
-            Mat_MaxHP = result;
+            if (Arti_MaxHP != "0")
+            {
+                var result = double.Parse(Arti_MaxHP);
+                Mat_MaxHP = dts.multipleStringDouble(value, result);
+            }
+            else
+            {
+                Mat_MaxHP = value;
+            }
         }
     }
 
@@ -995,8 +1002,13 @@ public class PlayerPrefsManager : MonoBehaviour
             PlayerPrefs.SetString("Arti_MaxHP", value);
             PlayerPrefs.Save();
 
-            var result = dts.AddStringDouble(Stat_MaxHP, value);
-            Mat_MaxHP = result;
+            if (value != "0")
+            {
+                double dresult = double.Parse(value);
+                Mat_MaxHP = dts.multipleStringDouble(Stat_MaxHP, dresult);
+            }
+            else
+                Mat_MaxHP = Stat_MaxHP;
         }
     }
 
@@ -1022,13 +1034,12 @@ public class PlayerPrefsManager : MonoBehaviour
     {
         get
         {
-            /// 맷집 히트 + 맷집 유물 + 맷집 스탯
-            float matHit = GetInstance().Mat_Mattzip_Hit; // 맞으면 증가
-            float matStat = GetInstance().MattzipStat; // 국밥으로 강화하면 증가
-            float matArti = GetInstance().MattzipArtif; // 유물 뽑기 하면 증가
+            /// Mat_Mattzip_Hit 맞으면 증가
+            /// MattzipStat 국밥으로 강화하면 증가
+            /// MattzipArtif 유물 뽑기 하면 증가
 
-            var value = matHit + matStat + matArti;
-            double tmppp = value + (value * (Mattzip_Dia_Weap + weaponInfo[PunchIndex].weaponEffect + Stat_is4Mattzip) * 0.01f);
+            var value = Mat_Mattzip_Hit + MattzipStat;
+            double tmppp = value + (value * (Mattzip_Dia_Weap + weaponInfo[PunchIndex].weaponEffect + Stat_is4Mattzip + MattzipArtif) * 0.01f);
             return tmppp.ToString("f0");
         }
 

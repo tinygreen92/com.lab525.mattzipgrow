@@ -48,7 +48,7 @@ public class MuganMode : MonoBehaviour
     bool isStart;
 
     /// <summary>
-    /// 무한의 탑 팝업 버튼에서 호출
+    /// 무한의 탑 팝업 버튼에서 호출 "1층 입장 >"
     /// </summary>
     public void StartInfi()
     {
@@ -62,26 +62,26 @@ public class MuganMode : MonoBehaviour
         isWaiting = false;
         // 이어하기 초기화.
         PlayerPrefsManager.GetInstance().isSecondChan = false;
-
+        //입장팝업 꺼주고
         popupMugan.SetActive(false);
-
-        //실드 꺼져
+        //실드 이미지 꺼주고
         Left.SetActive(false);
         Right.SetActive(false);
         // 무한의 탑 층수.
-        var Stage = PlayerPrefsManager.GetInstance().MaxGet_MuganTop;
-
+        int Stage = PlayerPrefsManager.GetInstance().MaxGet_MuganTop;
+        /// 입장 스테이지 써주고
         stageName.text = "무한의 탑 "+ Stage + "층";
         //보스 체력 설정
         PlayerPrefsManager.GetInstance().bossHP = PlayerPrefsManager.GetInstance().muganTopColl[1, Stage-1];
-        //
+        // 입장 완료되면 키 하나 소모
         PlayerPrefsManager.GetInstance().key--;
         UserWallet.GetInstance().ShowUserKey();
+        // 키회복 코루틴 스타트
         booster_KEY.KeyTimerStart();
 
-        //
+        /// 무한의 탑 게임 화면으로 전환.
         gotoMINIgame.ChangeCamMUGANTOP();
-        //
+        ///
         var maxHP = PlayerPrefsManager.GetInstance().Mat_MaxHP;
         PlayerPrefsManager.GetInstance().Mat_currentHP = maxHP;
 

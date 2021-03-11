@@ -38,27 +38,36 @@ public class InfinitiMode : MonoBehaviour
 
         // 필수 맷집력 거르고
         /// 맷집으로 거르기
-
         string currentMattzip = UserWallet.GetInstance().GetMattzipForCul(PlayerPrefsManager.GetInstance().Mat_Mattzip);
-        //
-        var tmp = dts.SubStringDouble(currentMattzip, "1000");
-        if (_index == "1000" && tmp == "-1") return;
-        tmp = dts.SubStringDouble(currentMattzip, "10000");
-        if (_index == "10000" && tmp == "-1") return;
-        tmp = dts.SubStringDouble(currentMattzip, "100000");
-        if (_index == "100000" && tmp == "-1") return;
-        tmp = dts.SubStringDouble(currentMattzip, "1000000");
-        if (_index == "1000000" && tmp == "-1") return;
-        tmp = dts.SubStringDouble(currentMattzip, "10000000");
-        if (_index == "10000000" && tmp == "-1") return;
-        tmp = dts.SubStringDouble(currentMattzip, "100000000");
-        if (_index == "100000000" && tmp == "-1") return;
-        tmp = dts.SubStringDouble(currentMattzip, "1000000000");
-        if (_index == "1000000000" && tmp == "-1") return;
-        tmp = dts.SubStringDouble(currentMattzip, "10000000000");
-        if (_index == "10000000000" && tmp == "-1") return;
-        tmp = dts.SubStringDouble(currentMattzip, "100000000000");
-        if (_index == "100000000000" && tmp == "-1") return;
+        /// 1단계
+        string tmp = "100";
+        /// 2단계
+        tmp = dts.SubStringDouble(currentMattzip, "1100");
+        if (_index == "1050" && tmp == "-1") return;
+        /// 3단계
+        tmp = dts.SubStringDouble(currentMattzip, "12100");
+        if (_index == "11025" && tmp == "-1") return;
+        /// 4단계
+        tmp = dts.SubStringDouble(currentMattzip, "133100");
+        if (_index == "115763" && tmp == "-1") return;
+        /// 5단계
+        tmp = dts.SubStringDouble(currentMattzip, "1464100");
+        if (_index == "1215506" && tmp == "-1") return;
+        /// 6단계
+        tmp = dts.SubStringDouble(currentMattzip, "16105100");
+        if (_index == "12762816" && tmp == "-1") return;
+        /// 7단계
+        tmp = dts.SubStringDouble(currentMattzip, "177156100");
+        if (_index == "134009564" && tmp == "-1") return;
+        /// 8단계
+        tmp = dts.SubStringDouble(currentMattzip, "1948717100");
+        if (_index == "1407100423" && tmp == "-1") return;
+        /// 9단계
+        tmp = dts.SubStringDouble(currentMattzip, "21435888100");
+        if (_index == "14774554438" && tmp == "-1") return;
+        /// 10단계
+        tmp = dts.SubStringDouble(currentMattzip, "235794769100");
+        if (_index == "155132821598" && tmp == "-1") return;
 
         /// 열쇠 충분하다면 입장 /소탕 팝업 호출
         CallPopUp(_index);
@@ -94,39 +103,39 @@ public class InfinitiMode : MonoBehaviour
                 if (sDataList[0] == "0") SkipGameBtn.GetChild(1).gameObject.SetActive(true);
                 break;
 
-            case "1000":
+            case "1050":
                 if (sDataList[1] == "0") SkipGameBtn.GetChild(1).gameObject.SetActive(true);
                 break;
 
-            case "10000":
+            case "11025":
                 if (sDataList[2] == "0") SkipGameBtn.GetChild(1).gameObject.SetActive(true);
                 break;
 
-            case "100000":
+            case "115763":
                 if (sDataList[3] == "0") SkipGameBtn.GetChild(1).gameObject.SetActive(true);
                 break;
 
-            case "1000000":
+            case "1215506":
                 if (sDataList[4] == "0") SkipGameBtn.GetChild(1).gameObject.SetActive(true);
                 break;
 
-            case "10000000":
+            case "12762816":
                 if (sDataList[5] == "0") SkipGameBtn.GetChild(1).gameObject.SetActive(true);
                 break;
 
-            case "100000000":
+            case "134009564":
                 if (sDataList[6] == "0") SkipGameBtn.GetChild(1).gameObject.SetActive(true);
                 break;
 
-            case "1000000000":
+            case "1407100423":
                 if (sDataList[7] == "0") SkipGameBtn.GetChild(1).gameObject.SetActive(true);
                 break;
 
-            case "10000000000":
+            case "14774554438":
                 if (sDataList[8] == "0") SkipGameBtn.GetChild(1).gameObject.SetActive(true);
                 break;
 
-            case "100000000000":
+            case "155132821598":
                 if (sDataList[9] == "0") SkipGameBtn.GetChild(1).gameObject.SetActive(true);
                 break;
 
@@ -221,40 +230,40 @@ public class InfinitiMode : MonoBehaviour
                 gettingGoop = int.Parse(sDataList[0]) * 5;
                 break;
 
-            case "1000":
-                gettingGoop = int.Parse(sDataList[1]) * 30;
+            case "1050":
+                gettingGoop = int.Parse(sDataList[1]) * 11;
                 break;
 
-            case "10000":
-                gettingGoop = int.Parse(sDataList[2]) * 60;
+            case "11025":
+                gettingGoop = int.Parse(sDataList[2]) * 24;
                 break;
 
-            case "100000":
-                gettingGoop = int.Parse(sDataList[3]) * 120;
+            case "115763":
+                gettingGoop = int.Parse(sDataList[3]) * 54;
                 break;
 
-            case "1000000":
-                gettingGoop = int.Parse(sDataList[4]) * 240;
+            case "1215506":
+                gettingGoop = int.Parse(sDataList[4]) * 106;
                 break;
 
-            case "10000000":
-                gettingGoop = int.Parse(sDataList[5]) * 480;
+            case "12762816":
+                gettingGoop = int.Parse(sDataList[5]) * 217;
                 break;
 
-            case "100000000":
-                gettingGoop = int.Parse(sDataList[6]) * 960;
+            case "134009564":
+                gettingGoop = int.Parse(sDataList[6]) * 440;
                 break;
 
-            case "1000000000":
-                gettingGoop = int.Parse(sDataList[7]) * 1920;
+            case "1407100423":
+                gettingGoop = int.Parse(sDataList[7]) * 887;
                 break;
 
-            case "10000000000":
-                gettingGoop = int.Parse(sDataList[8]) * 3840;
+            case "14774554438":
+                gettingGoop = int.Parse(sDataList[8]) * 1782;
                 break;
 
-            case "100000000000":
-                gettingGoop = int.Parse(sDataList[9]) * 19200;
+            case "155132821598":
+                gettingGoop = int.Parse(sDataList[9]) * 3573;
                 break;
 
         }

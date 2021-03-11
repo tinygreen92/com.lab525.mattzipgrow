@@ -16,7 +16,7 @@ public class DenfenceMode : MonoBehaviour
     public GameObject PreparedPanel;
     public TapToSpawnLimit tapToSpawnLimit;
 
-    private void Awake()
+    private void Start()
     {
         unbiasedTimerEndTimestamp = ReadTimestamp("DenfenceMode", UnbiasedTime.Instance.Now());
         unbiasedRemaining = unbiasedTimerEndTimestamp - UnbiasedTime.Instance.Now();
@@ -499,6 +499,7 @@ public class DenfenceMode : MonoBehaviour
     private void WriteTimestamp(string key, DateTime time)
     {
         PlayerPrefs.SetString(key, time.ToBinary().ToString());
+        PlayerPrefs.Save();
     }
 
 

@@ -609,55 +609,55 @@ public class PopUpObjectManager : MonoBehaviour
         string infiPR = PlayerPrefsManager.GetInstance().InfiPersonalRecord;
         string[] sDataList = (infiPR).Split('*');
 
-        var tmp = dts.SubStringDouble(currentMattzip, "1000");
+        var tmp = dts.SubStringDouble(currentMattzip, "1100");
         if (tmp == "-1")
         {
             btnSpace.GetChild(1).GetChild(1).gameObject.SetActive(true);
         }
 
-        tmp = dts.SubStringDouble(currentMattzip, "10000");
+        tmp = dts.SubStringDouble(currentMattzip, "12100");
         if (tmp == "-1")
         {
             btnSpace.GetChild(2).GetChild(1).gameObject.SetActive(true);
         }
 
-        tmp = dts.SubStringDouble(currentMattzip, "100000");
+        tmp = dts.SubStringDouble(currentMattzip, "133100");
         if (tmp == "-1")
         {
             btnSpace.GetChild(3).GetChild(1).gameObject.SetActive(true);
         }
 
-        tmp = dts.SubStringDouble(currentMattzip, "1000000");
+        tmp = dts.SubStringDouble(currentMattzip, "1464100");
         if (tmp == "-1")
         {
             btnSpace.GetChild(4).GetChild(1).gameObject.SetActive(true);
         }
 
-        tmp = dts.SubStringDouble(currentMattzip, "10000000");
+        tmp = dts.SubStringDouble(currentMattzip, "16105100");
         if (tmp == "-1")
         {
             btnSpace.GetChild(5).GetChild(1).gameObject.SetActive(true);
         }
 
-        tmp = dts.SubStringDouble(currentMattzip, "100000000");
+        tmp = dts.SubStringDouble(currentMattzip, "177156100");
         if (tmp == "-1")
         {
             btnSpace.GetChild(6).GetChild(1).gameObject.SetActive(true);
         }
 
-        tmp = dts.SubStringDouble(currentMattzip, "1000000000");
+        tmp = dts.SubStringDouble(currentMattzip, "1948717100");
         if (tmp == "-1")
         {
             btnSpace.GetChild(7).GetChild(1).gameObject.SetActive(true);
         }
 
-        tmp = dts.SubStringDouble(currentMattzip, "10000000000");
+        tmp = dts.SubStringDouble(currentMattzip, "21435888100");
         if (tmp == "-1")
         {
             btnSpace.GetChild(8).GetChild(1).gameObject.SetActive(true);
         }
 
-        tmp = dts.SubStringDouble(currentMattzip, "100000000000");
+        tmp = dts.SubStringDouble(currentMattzip, "235794769100");
         if (tmp == "-1")
         {
             btnSpace.GetChild(9).GetChild(1).gameObject.SetActive(true);

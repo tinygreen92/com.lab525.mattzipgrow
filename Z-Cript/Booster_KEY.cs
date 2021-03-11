@@ -11,7 +11,7 @@ public class Booster_KEY : MonoBehaviour
     private DateTime unbiasedTimerEndTimestamp;
     TimeSpan unbiasedRemaining;
 
-    private void Awake()
+    private void Start()
     {
         unbiasedTimerEndTimestamp = ReadTimestamp("Booster_KEY", UnbiasedTime.Instance.Now());
         unbiasedRemaining = unbiasedTimerEndTimestamp - UnbiasedTime.Instance.Now();
@@ -142,6 +142,7 @@ public class Booster_KEY : MonoBehaviour
     private void WriteTimestamp(string key, DateTime time)
     {
         PlayerPrefs.SetString(key, time.ToBinary().ToString());
+        PlayerPrefs.Save();
     }
 
 

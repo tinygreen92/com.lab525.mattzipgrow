@@ -1209,27 +1209,27 @@ public class GroggyManager : MonoBehaviour
         switch (index)
         {
             case 0: // 공격력 골드 강화
-                _defalt = 100.0d; // 디폴트 값
-                if (lv != 0) _defalt *= Math.Pow(1.01, lv);
+                _defalt = 10.0d; // 디폴트 값
+                if (lv != 0) _defalt *= Math.Pow(1.05, lv);
                 _result = _defalt.ToString("f0");
                 break;
 
 
             case 1: // 체력 골드 강화
-                _defalt = 250.0d; // 디폴트 값
-                if (lv != 0) _defalt *= Math.Pow(1.01, lv);
+                _defalt = 25.0d; // 디폴트 값
+                if (lv != 0) _defalt *= Math.Pow(1.07, lv);
                 _result = _defalt.ToString("f0");
                 break;
 
 
-            case 2: // 체력 골드 강화
-                _defalt = 63.0d; // 디폴트 값
-                if (lv != 0) _defalt *= Math.Pow(1.01, lv);
+            case 2: // 체력회복 골드 강화
+                _defalt = 7.0d; // 디폴트 값
+                if (lv != 0) _defalt *= Math.Pow(1.05, lv);
                 _result = _defalt.ToString("f0");
                 break;
 
 
-            case 3: // 공격력 골드 강화
+            case 3: // 맷집 골드 강화
                 _defalt = 500.0d; // 디폴트 값
                 if (lv != 0) _defalt *= Math.Pow(1.01, lv);
                 _result = _defalt.ToString("f0");
@@ -1369,8 +1369,8 @@ public class GroggyManager : MonoBehaviour
         //-------------------------------------------------------------------------------------------------------//
         //
 
-        currentAtk = (PowerLv * 5).ToString();
-        nextAtk = ((PowerLv + 1) * 5).ToString();
+        currentAtk = (PowerLv * 1).ToString();
+        nextAtk = ((PowerLv + 1) * 1).ToString();
         
         if(PowerLv == 0) currentAtk = "1";
 
@@ -1392,8 +1392,8 @@ public class GroggyManager : MonoBehaviour
 
         //-------------------------------------------------------------------------------------------------------//
 
-        currentHP = (HP_Lv * 50).ToString();
-        nextHP = ((HP_Lv + 1) * 50).ToString();
+        currentHP = (HP_Lv * 10).ToString();
+        nextHP = ((HP_Lv + 1) * 10).ToString();
 
         if (HP_Lv == 0) currentHP = "0";
 
@@ -1419,8 +1419,8 @@ public class GroggyManager : MonoBehaviour
 
         //-------------------------------------------------------------------------------------------------------//
 
-        currentRec = (Rec_Lv * 25).ToString();
-        nextRec = ((Rec_Lv + 1) * 25).ToString();
+        currentRec = (Rec_Lv * 5).ToString();
+        nextRec = ((Rec_Lv + 1) * 5).ToString();
 
         if (Rec_Lv == 0) currentRec = "1";
 

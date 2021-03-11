@@ -57,72 +57,46 @@ public class FlagManager : MonoBehaviour
 
 
     /// <summary>
-    /// 골드 소모 CSV 삭제하고 공식으로 대체
+    /// 깃발 레벨업시 쌀밥 소모 공식
     /// </summary>
     /// <param name="index"></param>
     /// <returns></returns>
     double GetPerUpPrice(int index, int lv)
     {
         double _defalt = 0;
-        double _Mutiple = 0;
-        double _bojung = 0;
 
         switch (index)
         {
             case 0: // 공격력  강화.
-                _defalt = 5.0d; // 디폴트 값
                 if (lv != 0)
                 {
-                    _Mutiple = 1;
-
-                    for (int i = 0; i < lv; i++)
-                    {
-                        _bojung = Mathf.FloorToInt(i / 20) * _Mutiple;
-                        _defalt += (3 + _bojung);
-                    }
+                    _defalt = 5d * Math.Pow(1.03d, lv);
                 }
+                else _defalt = 5d;
                 break;
 
             case 1: // 체력  강화.
-                _defalt = 13.0d; // 디폴트 값
                 if (lv != 0)
                 {
-                    _Mutiple = 3;
-
-                    for (int i = 0; i < lv; i++)
-                    {
-                        _bojung = Mathf.FloorToInt(i / 20) * _Mutiple;
-                        _defalt += (6 + _bojung);
-                    }
+                    _defalt = 13d * Math.Pow(1.05d, lv);
                 }
+                else _defalt = 13d;
                 break;
 
             case 2: // 맷집 강화
-                _defalt = 25.0d; // 디폴트 값
                 if (lv != 0)
                 {
-                    _Mutiple = 6;
-
-                    for (int i = 0; i < lv; i++)
-                    {
-                        _bojung = Mathf.FloorToInt(i / 20) * _Mutiple;
-                        _defalt += (13 + _bojung);
-                    }
+                    _defalt = 25d * Math.Pow(1.07d, lv);
                 }
+                else _defalt = 25d;
                 break;
 
             case 3: // 체력 회복
-                _defalt = 6.0d; // 디폴트 값
                 if (lv != 0)
                 {
-                    _Mutiple = 2;
-
-                    for (int i = 0; i < lv; i++)
-                    {
-                        _bojung = Mathf.FloorToInt(i / 20) * _Mutiple;
-                        _defalt += (3 + _bojung);
-                    }
+                    _defalt = 6d * Math.Pow(1.04d, lv);
                 }
+                else _defalt = 6d;
                 break;
 
         }
@@ -165,30 +139,30 @@ public class FlagManager : MonoBehaviour
 
         double currentAtk = 0;
 
-        var tmpATK = (ppm.is3ATK + 1);
+        float tmpATK = ppm.is3ATK * 0.25f;
         // 플로트 파서
         PlayerPrefsManager.GetInstance().Stat_is3ATK = tmpATK;
-        is3ATK_Desc.text = "공격력 " + string.Format("{0:F1}", tmpATK) + "% 증가";
+        is3ATK_Desc.text = "공격력 " + string.Format("{0:F2}", tmpATK) + "% 증가";
         /// 소비 골드 표기
         currentAtk = GetPerUpPrice(0, ppm.is3ATK);
         is3ATK_Price.text = UserWallet.GetInstance().SeetheNatural(currentAtk);
 
         //===========================================================================================
 
-        tmpATK = (ppm.is4Mattzip + 1);
+        tmpATK = (ppm.is4Mattzip * 0.1f);
         // 플로트 파서
         PlayerPrefsManager.GetInstance().Stat_is4Mattzip = tmpATK;
-        is4Mattzip_Desc.text = "맷집 " + string.Format("{0:F1}", tmpATK) + "% 증가";
+        is4Mattzip_Desc.text = "맷집 " + string.Format("{0:F2}", tmpATK) + "% 증가";
         /// 소비 골드 표기
         currentAtk = GetPerUpPrice(2, ppm.is4Mattzip);
         is4Mattzip_Price.text = UserWallet.GetInstance().SeetheNatural(currentAtk);
 
         //===========================================================================================
 
-        tmpATK = (ppm.is2Stamina + 1);
+        tmpATK = (ppm.is2Stamina * 0.5f);
         // 플로트 파서
         PlayerPrefsManager.GetInstance().Stat_is2Stamina = tmpATK;
-        is2Stamina_Desc.text = "체력 " + string.Format("{0:F1}", tmpATK) + "% 증가";
+        is2Stamina_Desc.text = "체력 " + string.Format("{0:F2}", tmpATK) + "% 증가";
         /// 소비 골드 표기
         currentAtk = GetPerUpPrice(1, ppm.is2Stamina);
         is2Stamina_Price.text = UserWallet.GetInstance().SeetheNatural(currentAtk);
@@ -196,10 +170,10 @@ public class FlagManager : MonoBehaviour
 
         //===========================================================================================
 
-        tmpATK = (ppm.is1Recov + 1);
+        tmpATK = (ppm.is1Recov * 0.3f);
         // 플로트 파서
         PlayerPrefsManager.GetInstance().Stat_is1Recov = tmpATK;
-        is1Recov_Desc.text = "체력 회복 " + string.Format("{0:F1}", tmpATK) + "% 증가";
+        is1Recov_Desc.text = "체력 회복 " + string.Format("{0:F2}", tmpATK) + "% 증가";
         /// 소비 골드 표기
         currentAtk = GetPerUpPrice(3, ppm.is1Recov);
         is1Recov_Price.text = UserWallet.GetInstance().SeetheNatural(currentAtk);

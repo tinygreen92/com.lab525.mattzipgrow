@@ -800,49 +800,49 @@ public class BulletManager : MonoBehaviour
                         gettingGoop *= 5;
                         break;
 
-                    case "1000":
+                    case "1050":
                         if(sDataList[1] != "600") sDataList[1] = gettingGoop.ToString();
-                        gettingGoop *= 30;
+                        gettingGoop *= 11;
                         break;
 
-                    case "10000":
+                    case "11025":
                         if(sDataList[2] != "600") sDataList[2] = gettingGoop.ToString();
-                        gettingGoop *= 60;
+                        gettingGoop *= 24;
                         break;
 
-                    case "100000":
+                    case "115763":
                         if(sDataList[3] != "600") sDataList[3] = gettingGoop.ToString();
-                        gettingGoop *= 120;
+                        gettingGoop *= 51;
                         break;
 
-                    case "1000000":
+                    case "1215506":
                         if(sDataList[4] != "600") sDataList[4] = gettingGoop.ToString();
-                        gettingGoop *= 240;
+                        gettingGoop *= 106;
                         break;
 
-                    case "10000000":
+                    case "12762816":
                         if(sDataList[5] != "600") sDataList[5] = gettingGoop.ToString();
-                        gettingGoop *= 480;
+                        gettingGoop *= 217;
                         break;
 
-                    case "100000000":
+                    case "134009564":
                         if(sDataList[6] != "600") sDataList[6] = gettingGoop.ToString();
-                        gettingGoop *= 960;
+                        gettingGoop *= 440;
                         break;
 
-                    case "1000000000":
+                    case "1407100423":
                         if(sDataList[7] != "600") sDataList[7] = gettingGoop.ToString();
-                        gettingGoop *= 1920;
+                        gettingGoop *= 887;
                         break;
 
-                    case "10000000000":
+                    case "14774554438":
                         if(sDataList[8] != "600") sDataList[8] = gettingGoop.ToString();
-                        gettingGoop *= 3840;
+                        gettingGoop *= 1782;
                         break;
 
-                    case "100000000000":
+                    case "155132821598":
                         if(sDataList[9] != "600") sDataList[9] = gettingGoop.ToString();
-                        gettingGoop *= 19200;
+                        gettingGoop *= 3573;
                         break;
 
 

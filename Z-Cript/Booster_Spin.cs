@@ -16,14 +16,9 @@ public class Booster_Spin : MonoBehaviour
     private DateTime dailyEndTimestamp;
     TimeSpan unbiasedRemaining;
     TimeSpan dailydRemaining;
-
-    private void Awake()
-    {
-        dailyEndTimestamp = ReadTimestamp("Bosster_Daily", UnbiasedTime.Instance.Now());
-    }
-
     private void Start()
     {
+        dailyEndTimestamp = ReadTimestamp("Bosster_Daily", UnbiasedTime.Instance.Now());
         // 다음날 0시 시간. /  최신값
         DateTime currentTime = UnbiasedTime.Instance.Now().Date.AddDays(1);
         // 값 없으면 다음날 0시 시간. / 저장된 값
@@ -176,8 +171,6 @@ public class Booster_Spin : MonoBehaviour
         }
         else // 부스터 버튼 꺼져있으면 초기화 하고 시간 추가.
         {
-
-            PlayerPrefs.Save();
             dailyEndTimestamp = UnbiasedTime.Instance.Now().AddSeconds(10800 - 1);
             this.WriteTimestamp("Bosster_Daily", dailyEndTimestamp);
 
@@ -197,6 +190,7 @@ public class Booster_Spin : MonoBehaviour
     {
         string tmp = dateTime.ToString("yyyyMMddHHmmss");
         PlayerPrefs.SetString("Booster_SPIN", tmp);
+        PlayerPrefs.Save();
     }
 
     DateTime LoadDateTime()
@@ -223,5 +217,6 @@ public class Booster_Spin : MonoBehaviour
     private void WriteTimestamp(string key, DateTime time)
     {
         PlayerPrefs.SetString(key, time.ToBinary().ToString());
+        PlayerPrefs.Save();
     }
 }

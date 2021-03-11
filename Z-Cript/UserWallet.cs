@@ -290,6 +290,8 @@ public class UserWallet : MonoBehaviour
     /// <param name="tmpStr"></param>
     public string SeetheNatural(double tmpDouble)
     {
+        if (tmpDouble == 0) return "0";
+
         string tmpStr = dts.fDoubleToStringNumber(tmpDouble);
 
         string sResult = string.Empty;

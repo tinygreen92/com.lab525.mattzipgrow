@@ -16,7 +16,7 @@ public class Booster_Power : MonoBehaviour
     private DateTime unbiasedTimerEndTimestamp;
     TimeSpan unbiasedRemaining;
 
-    private void Awake()
+    private void Start()
     {
         unbiasedTimerEndTimestamp = ReadTimestamp("Booster_Power", UnbiasedTime.Instance.Now());
     }
@@ -229,5 +229,6 @@ public class Booster_Power : MonoBehaviour
     private void WriteTimestamp(string key, DateTime time)
     {
         PlayerPrefs.SetString(key, time.ToBinary().ToString());
+        PlayerPrefs.Save();
     }
 }
