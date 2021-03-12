@@ -334,17 +334,28 @@ public class UserWallet : MonoBehaviour
 
         Gatcha = Random.Range(0f, 100f);
 
-        var goldPer = PlayerPrefsManager.GetInstance().BG_CoinStat;
-        float artiGoldPer = PlayerPrefsManager.GetInstance().Arti_GoldPer * 1.0f;
+        //var goldPer = PlayerPrefsManager.GetInstance().BG_CoinStat;
+        //float artiGoldPer = PlayerPrefsManager.GetInstance().Arti_GoldPer * 1.0f;
         float luckyPer = PlayerPrefsManager.GetInstance().Arti_LuckyBoxPer;
+        ///골드 획득  계산식 수정 > 골드 획득량 = 맷집 * 1 * (유니폼 + 스킬 + 유물 + 훈련장)
+        var tmpDps = PlayerPrefsManager.GetInstance().Mat_Mattzip;
+        /// 훈련장 골드 버프
+        double goldPer = PlayerPrefsManager.GetInstance().BG_CoinStat;
+        double artiGoldPer = 1d * (
+            // 골드 증가 유물
+            PlayerPrefsManager.GetInstance().Arti_GoldPer +
+            //유니폼 골드증가
+            PlayerPrefsManager.GetInstance().uniformInfo[1].Uniform_LV +
+            PlayerPrefsManager.GetInstance().uniformInfo[2].Uniform_LV +
+            // 캐릭터 스킬 골드 증가
+            PlayerPrefsManager.GetInstance().uniformInfo[3].Skill_LV);
 
         if (Gatcha < 80f)
         {
             GoldIcon.SetActive(true);
             Desc_Text.text = "골드 상자를 획득했다!";
-            var value = PlayerPrefsManager.GetInstance().PlayerDPS;
-            value = dts.multipleStringDouble(value, 10d * 2d * (goldPer + (artiGoldPer * 0.01d)));
-            Gold_5_Text.text = SeetheNatural(double.Parse(value));
+            tmpDps = dts.multipleStringDouble(tmpDps, 5d * (goldPer + (artiGoldPer * 0.01d)));
+            Gold_5_Text.text = SeetheNatural(double.Parse(tmpDps));
 
         }
         else if (Gatcha < 90f)
@@ -371,7 +382,7 @@ public class UserWallet : MonoBehaviour
             double getAmount = (target * (1.0d + (luckyPer * 0.01d)));
             Gold_5_Text.text = getAmount.ToString("f0");
 
-            Debug.LogError("국밥 Gatcha : " + Gatcha);
+            Debug.LogError("쌀밥 Gatcha : " + Gatcha);
 
 
         }

@@ -102,12 +102,12 @@ public class GatChaManager : MonoBehaviour
         if (ppm.Arti_MiniReword >= 1000) ppm.Arti_MiniReword = 1000;
         if (ppm.Arti_MiniGameTime >= 300) ppm.Arti_MiniGameTime = 300;
 
-        Arti01_Lv.text = "Lv."+ ppm.Arti_PunchTouch + "( Max Lv. 10 )";
-        Arti02_Lv.text = "Lv."+ ppm.Arti_Mattzip + "( Max Lv. 1000 )";
-        Arti03_Lv.text = "Lv."+ ppm.Arti_HP + "( Max Lv. 1000 )";
-        Arti04_Lv.text = "Lv."+ ppm.Arti_GroggyTouch + "( Max Lv. 49 )";
+        Arti01_Lv.text = "Lv."+ ppm.Arti_PunchTouch + "  ( Max Lv. 10 )";
+        Arti02_Lv.text = "Lv."+ ppm.Arti_Mattzip + "  ( Max Lv. 1000 )";
+        Arti03_Lv.text = "Lv."+ ppm.Arti_HP + "  ( Max Lv. 1000 )";
+        Arti04_Lv.text = "Lv."+ ppm.Arti_GroggyTouch + "  ( Max Lv. 49 )";
 
-        Arti05_Lv.text = "Lv."+ ppm.Arti_GAL + "( Max Lv. 100 )";
+        Arti05_Lv.text = "Lv."+ ppm.Arti_GAL + "  ( Max Lv. 100 )";
 
         Arti01_Effect.text = "초당 터치횟수 "+ ppm.Arti_PunchTouch + "회 증가 ( 레벨당 1회 증가 )";
         Arti02_Effect.text = "맷집 "+string.Format("{0:F1}", ppm.Arti_Mattzip * 0.1f) + "% 증가 ( 레벨당 0.1% 증가 )";
@@ -120,12 +120,12 @@ public class GatChaManager : MonoBehaviour
         Arti05_Effect.text = "국밥 버프 시간 "+ string.Format("{0:F1}", result) + "초 증가 ( 레벨당 0.1초 증가 )";
 
         /// --------------------------------------------------------------- 신규 추가
-        Arti06_Lv.text = "Lv." + ppm.Arti_DefenceTime + "( Max Lv. 100 )";
-        Arti07_Lv.text = "Lv." + ppm.Arti_GoldBox + "( Max Lv. 300 )";
-        Arti08_Lv.text = "Lv." + ppm.Arti_OffGold + "( Max Lv. 500 )";
+        Arti06_Lv.text = "Lv." + ppm.Arti_DefenceTime + "  ( Max Lv. 100 )";
+        Arti07_Lv.text = "Lv." + ppm.Arti_GoldBox + "  ( Max Lv. 300 )";
+        Arti08_Lv.text = "Lv." + ppm.Arti_OffGold + "  ( Max Lv. 500 )";
 
-        Arti09_Lv.text = "Lv." + ppm.Arti_MuganTime + "( Max Lv. 300 )";
-        Arti10_Lv.text = "Lv." + ppm.Arti_AttackPower + "( Max Lv. 999 )";
+        Arti09_Lv.text = "Lv." + ppm.Arti_MuganTime + "  ( Max Lv. 300 )";
+        Arti10_Lv.text = "Lv." + ppm.Arti_AttackPower + "  ( Max Lv. 999 )";
 
 
         result = ppm.Arti_DefenceTime * 0.1f;
@@ -144,13 +144,13 @@ public class GatChaManager : MonoBehaviour
 
         /// --------------------------------------------------------------- 신규 추가 0608
 
-        Arti11_Lv.text = "Lv." + ppm.Arti_GoldPer + "( Max Lv. 1000 )";
-        Arti12_Lv.text = "Lv." + ppm.Arti_LuckyBoxPer + "( Max Lv. 1000 )";
-        Arti13_Lv.text = "Lv." + ppm.Arti_DefencePer + "( Max Lv. 500 )";
-        Arti14_Lv.text = "Lv." + ppm.Arti_GoldUpgrade + "( Max Lv. 500 )";
-        Arti15_Lv.text = "Lv." + ppm.Arti_InfiReword + "( Max Lv. 1000 )";
-        Arti16_Lv.text = "Lv." + ppm.Arti_MiniReword + "( Max Lv. 1000 )";
-        Arti17_Lv.text = "Lv." + ppm.Arti_MiniGameTime + "( Max Lv. 300 )";
+        Arti11_Lv.text = "Lv." + ppm.Arti_GoldPer + "  ( Max Lv. 1000 )";
+        Arti12_Lv.text = "Lv." + ppm.Arti_LuckyBoxPer + "  ( Max Lv. 1000 )";
+        Arti13_Lv.text = "Lv." + ppm.Arti_DefencePer + "  ( Max Lv. 500 )";
+        Arti14_Lv.text = "Lv." + ppm.Arti_GoldUpgrade + "  ( Max Lv. 500 )";
+        Arti15_Lv.text = "Lv." + ppm.Arti_InfiReword + "  ( Max Lv. 1000 )";
+        Arti16_Lv.text = "Lv." + ppm.Arti_MiniReword + "  ( Max Lv. 1000 )";
+        Arti17_Lv.text = "Lv." + ppm.Arti_MiniGameTime + "  ( Max Lv. 300 )";
 
         result = ppm.Arti_GoldPer * 0.5f;
         Arti11_Effect.text = "골드 획득량 " + string.Format("{0:F1}", result) + "% 증가 ( 레벨당 0.5% 증가 )";

@@ -34,13 +34,11 @@ public class Booster_Body : MonoBehaviour
             {
                 transform.GetChild(1).GetComponent<Text>().text = "공격력버프 ON";
                 PlayerPrefsManager.GetInstance().isBoosterMattzip = true;
-                UserWallet.GetInstance().ShowUserMatZip();
             }
             else
             {
                 transform.GetChild(1).GetComponent<Text>().text = "공격력버프 OFF";
                 PlayerPrefsManager.GetInstance().isBoosterMattzip = false;
-                UserWallet.GetInstance().ShowUserMatZip();
 
             }
 
@@ -61,8 +59,6 @@ public class Booster_Body : MonoBehaviour
 
 
                 PlayerPrefsManager.GetInstance().isBoosterMattzip = true;
-                UserWallet.GetInstance().ShowUserMatZip();
-
             }
             else
             {
@@ -71,7 +67,6 @@ public class Booster_Body : MonoBehaviour
                 transform.GetChild(0).gameObject.SetActive(true);
 
                 PlayerPrefsManager.GetInstance().isBoosterMattzip = false;
-                UserWallet.GetInstance().ShowUserMatZip();
             }
         }
 

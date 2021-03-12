@@ -545,6 +545,7 @@ public class PlayerPrefsManager : MonoBehaviour
         {
             if (!PlayerPrefs.HasKey("key")) return 20;
             var _key = PlayerPrefs.GetInt("key");
+            UserWallet.GetInstance().ShowUserKey();
             return _key;
         }
 
@@ -556,6 +557,7 @@ public class PlayerPrefsManager : MonoBehaviour
 
             PlayerPrefs.SetInt("key", kkey);
             PlayerPrefs.Save();
+            UserWallet.GetInstance().ShowUserKey();
         }
     }
 
@@ -1041,6 +1043,7 @@ public class PlayerPrefsManager : MonoBehaviour
 
             var value = Mat_Mattzip_Hit + MattzipStat;
             double tmppp = value + (value * (Mattzip_Dia_Weap + weaponInfo[PunchIndex].weaponEffect + Stat_is4Mattzip + MattzipArtif) * 0.01f);
+            
             return tmppp.ToString("f0");
         }
 
@@ -1059,6 +1062,7 @@ public class PlayerPrefsManager : MonoBehaviour
             if (!PlayerPrefs.HasKey("isBoosterMattzip")) return false;
 
             var _intBoosterDPS = PlayerPrefs.GetInt("isBoosterMattzip");
+            UserWallet.GetInstance().ShowUserMatZip();
 
             if (_intBoosterDPS == 0)
             {
@@ -1081,6 +1085,7 @@ public class PlayerPrefsManager : MonoBehaviour
             {
                 PlayerPrefs.SetInt("isBoosterMattzip", 1);
             }
+            UserWallet.GetInstance().ShowUserMatZip();
             PlayerPrefs.Save();
         }
     }

@@ -179,25 +179,24 @@ public class CoinManager : MonoBehaviour
         //if (_isCritic) tmpDps = PlayerPrefsManager.GetInstance().CriticalDPS;
 
         var result = "0";
-        /// VIP 선물 상자라면? 10배
+        /// VIP 선물 상자라면?
         if (transform.childCount == 1)
         {
             ///골드 획득  계산식 수정 > 골드 획득량 = 맷집 X (유니폼 + 스킬 + 유물 + 훈련장)
             //result = dts.multipleStringDouble(tmpDps, 10d *  2d * (goldPer + (artiGoldPer * 0.01d)));
-            result = dts.multipleStringDouble(tmpDps,  (goldPer + (artiGoldPer * 0.01d)));
+            result = dts.multipleStringDouble(tmpDps, 5d *  (goldPer + (artiGoldPer * 0.01d)));
         }
         else
         {
             /// 동영상 보고 [코인 3배 버프] 적용 받으면? -> 2배로 수정
             if (PlayerPrefsManager.GetInstance().isGoldTriple)
             {
-                result = dts.multipleStringDouble(tmpDps, 2d * 2d * (goldPer + (artiGoldPer * 0.01d)));
+                result = dts.multipleStringDouble(tmpDps,  2d * (goldPer + (artiGoldPer * 0.01d)));
                 //Debug.Log("동영상 세배: " + result);
             }
             else // 아무 버프 없을 때.
             {
-                /// 기본 배수 2배
-                result = dts.multipleStringDouble(tmpDps, 2d * (goldPer + (artiGoldPer * 0.01d)));
+                result = dts.multipleStringDouble(tmpDps, (goldPer + (artiGoldPer * 0.01d)));
                 //Debug.Log("아무 버프 없 : "+result);
             }
         }

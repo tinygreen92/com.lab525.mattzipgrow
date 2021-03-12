@@ -508,7 +508,6 @@ public class BulletManager : MonoBehaviour
         if (transform.childCount == 3) transform.GetChild(2).gameObject.SetActive(false);
 
         Lean.Pool.LeanPool.Despawn(gameObject, 1.5f);
-
     }
 
     /// <summary>

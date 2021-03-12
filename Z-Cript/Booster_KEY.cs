@@ -32,7 +32,6 @@ public class Booster_KEY : MonoBehaviour
             if (PlayerPrefsManager.GetInstance().key < 20)
             {
                 PlayerPrefsManager.GetInstance().key = 20;
-                UserWallet.GetInstance().ShowUserKey();
             }
 
         }
@@ -59,7 +58,6 @@ public class Booster_KEY : MonoBehaviour
                 if (keyAmount >= 20)
                 {
                     isTimerOn = false;
-                    UserWallet.GetInstance().ShowUserKey();
                     transform.GetChild(1).GetComponent<Text>().text = "00:00";
                 }
             }
@@ -68,12 +66,10 @@ public class Booster_KEY : MonoBehaviour
                 if(isTimerOn) // 타이머만 끝남
                 {
                     PlayerPrefsManager.GetInstance().key++;
-                    UserWallet.GetInstance().ShowUserKey();
                     keyAmount = PlayerPrefsManager.GetInstance().key;
                 }
                 else // 타이머 안끝났는데 열쇠 많음.
                 {
-                    UserWallet.GetInstance().ShowUserKey();
                     isTimerOn = false;
                 }
 
@@ -85,7 +81,6 @@ public class Booster_KEY : MonoBehaviour
                 {
                     // 5개 이상이면 타이머 오브젝트 숨겨줌
                     transform.GetChild(1).GetComponent<Text>().text = "00:00";
-                    UserWallet.GetInstance().ShowUserKey();
                     // 타이머 꺼줌
                     isTimerOn = false;
                 }

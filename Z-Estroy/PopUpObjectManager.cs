@@ -955,14 +955,25 @@ public class PopUpObjectManager : MonoBehaviour
 
         if (Gatcha < 80f)
         {
-            var goldPer = PlayerPrefsManager.GetInstance().BG_CoinStat;
-            float artiGoldPer = PlayerPrefsManager.GetInstance().Arti_GoldPer * 1.0f;
-            string gold = PlayerPrefsManager.GetInstance().gold;
-            var value = PlayerPrefsManager.GetInstance().PlayerDPS;
-            /// 2배 지급이므로, 다시한번더 같은 양을 더해줌
-            value = dts.multipleStringDouble(value, 10d * 2d * (goldPer + (artiGoldPer * 0.01d)));
+            //골드 획득
+            var tmpGold = PlayerPrefsManager.GetInstance().gold;
+            ///골드 획득  계산식 수정 > 골드 획득량 = 맷집 * 1 * (유니폼 + 스킬 + 유물 + 훈련장)
+            var value = PlayerPrefsManager.GetInstance().Mat_Mattzip;
+            /// 훈련장 골드 버프
+            double goldPer = PlayerPrefsManager.GetInstance().BG_CoinStat;
+            double artiGoldPer = 1d * (
+                // 골드 증가 유물
+                PlayerPrefsManager.GetInstance().Arti_GoldPer +
+                //유니폼 골드증가
+                PlayerPrefsManager.GetInstance().uniformInfo[1].Uniform_LV +
+                PlayerPrefsManager.GetInstance().uniformInfo[2].Uniform_LV +
+                // 캐릭터 스킬 골드 증가
+                PlayerPrefsManager.GetInstance().uniformInfo[3].Skill_LV);
 
-            PlayerPrefsManager.GetInstance().gold = dts.AddStringDouble(gold, value);
+            /// 2배 지급이므로, 다시한번더 같은 양을 더해줌
+            value = dts.multipleStringDouble(value, 5d * (goldPer + (artiGoldPer * 0.01d)));
+
+            PlayerPrefsManager.GetInstance().gold = dts.AddStringDouble(double.Parse(tmpGold), double.Parse(value));
             GettingGoldMessage(double.Parse(value) * 2d);
             ShowWarnnigProcess(UserWallet.GetInstance().SeetheNatural(double.Parse(value) * 2d) +" 골드를 획득하셨습니다.");
         }
