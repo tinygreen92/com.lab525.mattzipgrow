@@ -78,7 +78,7 @@ public class GroggyManager : MonoBehaviour
         _PlayerDPS = PlayerPrefsManager.GetInstance().PlayerDPS;
 
 
-        Mat_100_Count();
+        //Mat_100_Count();
         //PlayerPrefsManager.GetInstance().Mat_100 = 0;
 
         Skill300.fillAmount = 0;

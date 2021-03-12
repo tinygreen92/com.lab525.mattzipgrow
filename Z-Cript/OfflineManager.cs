@@ -271,8 +271,8 @@ public class OfflineManager : MonoBehaviour
         gettingGupBap = timeBae * 2f * ArtiGold * 5f; // 분당 2개;
         gettingSSal = timeBae * 1f * ArtiGold * 5f; // 분당 2개;
         /// 국밥이랑 쌀밥 다섯배 -> 2배로 올려
-        PlayerPrefsManager.GetInstance().gupbap = dts.AddStringDouble(double.Parse(PlayerPrefs.GetString("gupbap")), gettingGupBap); // 분당 2개;
-        PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(double.Parse(PlayerPrefs.GetString("ssalbap")), gettingSSal); // 분당 2개;
+        PlayerPrefsManager.GetInstance().gupbap = dts.AddStringDouble(double.Parse(PlayerPrefsManager.GetInstance().gupbap), gettingGupBap); // 분당 2개;
+        PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(double.Parse(PlayerPrefsManager.GetInstance().ssalbap), gettingSSal); // 분당 2개;
         /// 맷집 게이지 2배 올려주기
         RewordFriendBae(2f); 
 
@@ -308,8 +308,8 @@ public class OfflineManager : MonoBehaviour
         var gold = PlayerPrefsManager.GetInstance().gold;
         PlayerPrefsManager.GetInstance().gold = dts.AddStringDouble(gold, gettingGold);
         /// 국밥이랑 쌀밥
-        PlayerPrefsManager.GetInstance().gupbap = dts.AddStringDouble(double.Parse(PlayerPrefs.GetString("gupbap")), gettingGupBap); // 분당 2개;
-        PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(double.Parse(PlayerPrefs.GetString("ssalbap")), gettingSSal); // 분당 1개;
+        PlayerPrefsManager.GetInstance().gupbap = dts.AddStringDouble(double.Parse(PlayerPrefsManager.GetInstance().gupbap), gettingGupBap); // 분당 2개;
+        PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(double.Parse(PlayerPrefsManager.GetInstance().ssalbap), gettingSSal); // 분당 1개;
         /// 맷집 게이지 1배 올려주기
         RewordFriendBae(1f);
         ///

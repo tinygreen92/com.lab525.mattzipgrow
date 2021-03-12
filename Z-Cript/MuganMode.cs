@@ -1,8 +1,9 @@
 ﻿using EasyMobile;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
+
 
 public class MuganMode : MonoBehaviour
 {
@@ -26,7 +27,6 @@ public class MuganMode : MonoBehaviour
     public Text stageName;
 
 
-    
     public void popupStart()
     {
         int Stage = PlayerPrefsManager.GetInstance().MaxGet_MuganTop;
@@ -42,10 +42,31 @@ public class MuganMode : MonoBehaviour
         }
 
         popupMugan.SetActive(true);
+
+        popupMugan.GetComponent<Animation>()["Roll_Incre"].speed = 1;
+        popupMugan.GetComponent<Animation>().Play("Roll_Incre");
     }
 
 
     bool isStart;
+
+    /// <summary>
+    /// 보스 체력 계산해서 가져옴
+    /// - 보스 HP 시작값 200
+    ///- 보스 HP 증가 계산식 >  200 * 1.3 ^ stage
+    /// </summary>
+    string GetBossHp(int stage)
+    {
+        /// 1층일때는 200
+        if (stage == 1)
+            return "200";
+        /// 1층 이상일때
+        else
+        {
+            double tmp = 200d * System.Math.Pow(1.3d, stage);
+            return tmp.ToString("F0");
+        }
+    }
 
     /// <summary>
     /// 무한의 탑 팝업 버튼에서 호출 "1층 입장 >"
@@ -67,12 +88,11 @@ public class MuganMode : MonoBehaviour
         //실드 이미지 꺼주고
         Left.SetActive(false);
         Right.SetActive(false);
-        // 무한의 탑 층수.
-        int Stage = PlayerPrefsManager.GetInstance().MaxGet_MuganTop;
         /// 입장 스테이지 써주고
-        stageName.text = "무한의 탑 "+ Stage + "층";
+        stageName.text = "무한의 탑 " + PlayerPrefsManager.GetInstance().MaxGet_MuganTop + "층";
         //보스 체력 설정
-        PlayerPrefsManager.GetInstance().bossHP = PlayerPrefsManager.GetInstance().muganTopColl[1, Stage-1];
+        PlayerPrefsManager.GetInstance().MAX_boss_HP = GetBossHp(PlayerPrefsManager.GetInstance().MaxGet_MuganTop);
+        PlayerPrefsManager.GetInstance().bossHP = PlayerPrefsManager.GetInstance().MAX_boss_HP;
         // 입장 완료되면 키 하나 소모
         PlayerPrefsManager.GetInstance().key--;
         UserWallet.GetInstance().ShowUserKey();
@@ -82,21 +102,19 @@ public class MuganMode : MonoBehaviour
         /// 무한의 탑 게임 화면으로 전환.
         gotoMINIgame.ChangeCamMUGANTOP();
         ///
-        var maxHP = PlayerPrefsManager.GetInstance().Mat_MaxHP;
+        string maxHP = PlayerPrefsManager.GetInstance().Mat_MaxHP;
+        /// 최대 체력으로 회복 해줌
         PlayerPrefsManager.GetInstance().Mat_currentHP = maxHP;
-
+        /// 체력바 게이지 초기화
         fiilAmount.fillAmount = 1f;
         boss_fiilAmount.fillAmount = 1f;
-
+        /// 체력바 수치 텍스트 적어주고
         hp_text.text = UserWallet.GetInstance().SeetheNatural(double.Parse(maxHP)) + "/" + UserWallet.GetInstance().SeetheNatural(double.Parse(maxHP));
-
-
         // 카운트 다운 온!
         PreparedPanel.SetActive(true);
         // 3 2 1카운트 다운
         StartCoroutine(CountTimer());
     }
-
 
     public Text CountText;
     public GameObject PreparedPanel;
@@ -119,17 +137,14 @@ public class MuganMode : MonoBehaviour
             cnt--;
         }
 
-
-        yield return new WaitForSeconds(0.1f);
-
+        yield return new WaitForFixedUpdate();
         //
-        isStart = true;
         PlayerPrefsManager.GetInstance().isMuGanTopEnd = false;
-
+        isStart = true;
+        ///
         stromking = StartCoroutine(PunchStorm());
-
+        /// 카운트 다운 패널 끄고
         PreparedPanel.SetActive(false);
-
     }
 
 
@@ -152,8 +167,8 @@ public class MuganMode : MonoBehaviour
     /// <returns></returns>
     IEnumerator PunchStorm()
     {
-        float cnt = 30f + (PlayerPrefsManager.GetInstance().Arti_MuganTime * 0.1f);
         float Maxcnt = 30f + (PlayerPrefsManager.GetInstance().Arti_MuganTime * 0.1f);
+        float cnt = Maxcnt;
 
         while (cnt > 0)
         {
@@ -171,19 +186,17 @@ public class MuganMode : MonoBehaviour
         }
         /// 30초 동안 못이기면 실패.
         StopCoroutine(stromking);
-
+        /// 2번째 기회를 이미 사용했다면 종료
         if (PlayerPrefsManager.GetInstance().isSecondChan)
         {
             EndBtnClicked();
         }
         else
         {
+            PlayerPrefsManager.GetInstance().isMuGanTopEnd = true;
             /// TODO : 이어하기 팝업 호출.
             PopUpObjectManager.GetInstance().ShowMuganCountinue();
         }
-
-
-
 
     }
 
@@ -199,42 +212,47 @@ public class MuganMode : MonoBehaviour
         isRightBtnClicked = false;
         //타이머 초기화.
         StopCoroutine(stromking);
-
         // 무한의 탑 층수.
-        var Stage = PlayerPrefsManager.GetInstance().MaxGet_MuganTop;
-
+        int Stage = PlayerPrefsManager.GetInstance().MaxGet_MuganTop;
+        /// 다이아 지급
         if ((Stage % 5) == 0)
         {
+            int getDia = 50 + (50 * (Stage / 5));
             // 다이아
-            //var diaaa = PlayerPrefsManager.GetInstance().diamond;
-            //PlayerPrefsManager.GetInstance().diamond = dts.AddStringDouble(diaaa, "525");
-            PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 525);
-
-            PopUpObjectManager.GetInstance().ShowMuganRewordpop(1, 525);
-
-
+            PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + getDia);
+            PopUpObjectManager.GetInstance().ShowMuganRewordpop(1, getDia);
         }
-        else if((Stage % 5) == 4)
+        /// 국밥 지급
+        else if ((Stage % 5) == 2)
         {
-            var tmp = Stage / 5;
-            tmp++;
-
+            int getGupbap = Stage / 5;
+            getGupbap++;
             // 국밥 획득.
-            var gupbap = PlayerPrefsManager.GetInstance().gupbap;
-            PlayerPrefsManager.GetInstance().gupbap = dts.AddStringDouble(gupbap, (500 * tmp).ToString());
-
-            PopUpObjectManager.GetInstance().ShowMuganRewordpop(2, (500 * tmp));
-
+            string gupbap = PlayerPrefsManager.GetInstance().gupbap;
+            PlayerPrefsManager.GetInstance().gupbap = dts.AddStringDouble(gupbap, (500 * getGupbap).ToString());
+            PopUpObjectManager.GetInstance().ShowMuganRewordpop(2, (500 * getGupbap));
         }
+        /// 쌀밥 지급
+        else if ((Stage % 5) == 4)
+        {
+            int getSSSal = Stage / 5;
+            getSSSal++;
+            // 국밥 획득.
+            string gupbap = PlayerPrefsManager.GetInstance().gupbap;
+            PlayerPrefsManager.GetInstance().gupbap = dts.AddStringDouble(gupbap, (250 * getSSSal).ToString());
+            PopUpObjectManager.GetInstance().ShowMuganRewordpop(3, (250 * getSSSal));
+        }
+        /// 그 외는 열쇠 획득.
         else
         {
-            // 열쇠 획득.
-            PopUpObjectManager.GetInstance().ShowMuganRewordpop(0 , 1);
+            PopUpObjectManager.GetInstance().ShowMuganRewordpop(0, 3);
             PlayerPrefsManager.GetInstance().key++;
         }
 
-        if (Stage != 200) PlayerPrefsManager.GetInstance().MaxGet_MuganTop++;
-        else if (Stage >= 200) PlayerPrefsManager.GetInstance().MaxGet_MuganTop = 201;
+        if (Stage != 200) 
+            PlayerPrefsManager.GetInstance().MaxGet_MuganTop++;
+        else if (Stage >= 200) 
+            PlayerPrefsManager.GetInstance().MaxGet_MuganTop = 201;
 
         UserWallet.GetInstance().ShowAllMoney();
 
@@ -250,14 +268,14 @@ public class MuganMode : MonoBehaviour
     }
 
 
-    
+
     /// <summary>
     /// 이어하기 팝업해서 행동
     /// 1. 다이아 소모하고 한번 더.
     /// </summary>
     public void MuganCoutiForDia()
     {
-        var dia = PlayerPrefs.GetFloat("dDiamond");
+        float dia = PlayerPrefs.GetFloat("dDiamond");
         //다이아 체크
         if (dia < 100)
         {
@@ -276,7 +294,7 @@ public class MuganMode : MonoBehaviour
         // 카운트 멈춰주고.
         StopCoroutine(stromking);
         // 주인공 체력 회복 시키고.
-        var maxHP = PlayerPrefsManager.GetInstance().Mat_MaxHP;
+        string maxHP = PlayerPrefsManager.GetInstance().Mat_MaxHP;
         PlayerPrefsManager.GetInstance().Mat_currentHP = maxHP;
 
         fiilAmount.fillAmount = 1f;
@@ -347,7 +365,7 @@ public class MuganMode : MonoBehaviour
         // 카운트 멈춰주고.
         StopCoroutine(stromking);
         // 주인공 체력 회복 시키고.
-        var maxHP = PlayerPrefsManager.GetInstance().Mat_MaxHP;
+        string maxHP = PlayerPrefsManager.GetInstance().Mat_MaxHP;
         PlayerPrefsManager.GetInstance().Mat_currentHP = maxHP;
 
         fiilAmount.fillAmount = 1f;
@@ -388,6 +406,7 @@ public class MuganMode : MonoBehaviour
     public void EndBtnClicked()
     {
         PlayerPrefsManager.GetInstance().isMuGanTopEnd = true;
+
         //타이머 초기화.
         StopCoroutine(stromking);
         //실드 꺼져

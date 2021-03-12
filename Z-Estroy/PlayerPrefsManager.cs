@@ -28,7 +28,7 @@ public class PlayerPrefsManager : MonoBehaviour
     //List<Dictionary<string, object>> trainingData;
     List<Dictionary<string, object>> magaDamageData;
 
-    List<Dictionary<string, object>> muganTopCollData;
+    //List<Dictionary<string, object>> muganTopCollData;
     //List<Dictionary<string, object>> flagData;
 
     //List<Dictionary<string, object>> DiaStatData;
@@ -44,7 +44,7 @@ public class PlayerPrefsManager : MonoBehaviour
     [HideInInspector]
     public string[] megaDamColl;
 
-    public string[,] muganTopColl;
+    //public string[,] muganTopColl;
     //[HideInInspector]
     //public string[,] flagDataColl;
 
@@ -65,35 +65,35 @@ public class PlayerPrefsManager : MonoBehaviour
     {
         instance = this;
         magaDamageData = CSVReader.Read("MainGameDam"); // 방어전 대미지
-        muganTopCollData = CSVReader.Read("MuganTopCSV"); // 무한의 탑 대미지
+        //muganTopCollData = CSVReader.Read("MuganTopCSV"); // 무한의 탑 대미지
         // 펀치 갯수 몇개?
         punchAmont = 100;
         // 초기값 필요해?
         megaDamColl = new string[100];
-        muganTopColl = new string[2, 200];
+        //muganTopColl = new string[2, 200];
     }
 
 
+    ///// <summary>
+    ///// 시트 미리 메모리에 올려두기
+    ///// </summary>
+    //public void InitMuganData()
+    //{
+    //    string tmp = "0";
+
+    //    for (int j = 0; j < 200; j++)
+    //    {
+    //        tmp = muganTopCollData[j]["PhaseDamage"].ToString();
+    //        muganTopColl[0, j] = dts.fDoubleToStringNumber(tmp);
+
+    //        tmp = muganTopCollData[j]["BossHp"].ToString();
+    //        muganTopColl[1, j] = dts.fDoubleToStringNumber(tmp);
+    //    }
+
+    //}
+
     /// <summary>
-    /// 시트 미리 메모리에 올려두기
-    /// </summary>
-    public void InitMuganData()
-    {
-        string tmp = "0";
-
-        for (int j = 0; j < 200; j++)
-        {
-            tmp = muganTopCollData[j]["PhaseDamage"].ToString();
-            muganTopColl[0, j] = dts.fDoubleToStringNumber(tmp);
-
-            tmp = muganTopCollData[j]["BossHp"].ToString();
-            muganTopColl[1, j] = dts.fDoubleToStringNumber(tmp);
-        }
-
-    }
-
-    /// <summary>
-    /// 시트 미리 메모리에 올려두기
+    /// 방어 전 시트 올려두기
     /// </summary>
     public void InitMegaDamData()
     {
@@ -163,6 +163,7 @@ public class PlayerPrefsManager : MonoBehaviour
     /// 무한의 탑 보스 체력
     /// </summary>
     public string bossHP;
+    public string MAX_boss_HP;
     /// <summary>
     /// 무한 탑 이어하기는 한번만 하는 불린 값
     /// </summary>
@@ -1084,7 +1085,9 @@ public class PlayerPrefsManager : MonoBehaviour
         }
     }
 
-    /// (int)맷집 히트 (맞아서만 증가) 1 + 공격력 1%                      Mat_Mattzip_Hit
+    /// <summary>
+    /// 맞아서 증가하는 맷집 레벨 (1씩 증가)
+    /// </summary>
     public float Mat_Mattzip_Hit
     {
         get
@@ -1486,18 +1489,20 @@ public class PlayerPrefsManager : MonoBehaviour
 
 
 
-    /// (int)맷집 100카운트                 Mat_100
-    public int Mat_100
+    /// <summary>
+    /// 맷집 상승을 위해 누적한 대미지
+    /// </summary>
+    public float Mat_100
     {
         get
         {
-            var tmp = PlayerPrefs.GetInt("Mat_100", 0);
+            var tmp = PlayerPrefs.GetFloat("Mat_100", 0);
             return tmp;
         }
 
         set
         {
-            PlayerPrefs.SetInt("Mat_100", value);
+            PlayerPrefs.SetFloat("Mat_100", value);
             PlayerPrefs.Save();
         }
     }
@@ -2088,7 +2093,7 @@ public class PlayerPrefsManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 랭킹 등록용 최대 무한의 탑 정복 수
+    /// (시작값 1) 랭킹 등록용 최대 무한의 탑 정복 수
     /// </summary>
     public int MaxGet_MuganTop
     {
@@ -2108,6 +2113,7 @@ public class PlayerPrefsManager : MonoBehaviour
             {
                 PlayerPrefs.SetInt("MaxGet_MuganTop2", value);
                 PlayerPrefs.Save();
+                // 무탑 랭킹 등록
                 playNANOO.RankingRecordMuganTop();
             }
 
@@ -2145,15 +2151,14 @@ public class PlayerPrefsManager : MonoBehaviour
 
 
     /// <summary>
-    /// 맷집 클릭시 맷집 게이지 증가 덧셈 용 (10000 당 25 증가해야 한다.)
+    /// 맷집 증가에 필요한 대미지 게이지
     /// </summary>
     public float Cilcked_Cnt_MattZip
     {
         get
         {
-            var tmp = PlayerPrefs.GetFloat("Cilcked_Cnt_MattZip", 3f);
-
-            tmp = tmp - (tmp * Pet_Touch_Lv * 0.05f * 0.01f);
+            var tmp = PlayerPrefs.GetFloat("Cilcked_Cnt_MattZip", 5f);
+            tmp = tmp - (tmp * Pet_Touch_Lv * 0.01f);
             return tmp;
         }
 
@@ -2214,7 +2219,7 @@ public class PlayerPrefsManager : MonoBehaviour
 
 
     /// <summary>
-    /// 1. 맷집 요구 터치 횟수 차감 ( % )
+    /// 1. 맷집 증가에 필요한 대미지 게이지 감소 %
     /// </summary>
     public int Pet_Touch_Lv
     {
@@ -3510,7 +3515,7 @@ public class PlayerPrefsManager : MonoBehaviour
         public int cloudTmpForGPGS_005;
         public int cloudTmpForGPGS_006;
         public int cloudTmpForGPGS_007;
-        public int cloudTmpForGPGS_008;
+        public float cloudTmpForGPGS_008;
         public int cloudTmpForGPGS_009;
         public int cloudTmpForGPGS_010;
         public int cloudTmpForGPGS_011;
@@ -3667,7 +3672,7 @@ public class PlayerPrefsManager : MonoBehaviour
                 cloudTmpForGPGS_005 = PlayerPrefs.GetInt("key", 20),
                 cloudTmpForGPGS_006 = PlayerPrefs.GetInt("VIP", 0),
                 cloudTmpForGPGS_007 = PlayerPrefs.GetInt("isGoldTriple", 0),
-                cloudTmpForGPGS_008 = PlayerPrefs.GetInt("Mat_100", 0),
+                cloudTmpForGPGS_008 = PlayerPrefs.GetFloat("Mat_100", 0),
                 cloudTmpForGPGS_009 = PlayerPrefs.GetInt("Mat_Skill_300", 0),
                 cloudTmpForGPGS_010 = PlayerPrefs.GetInt("ATK_Lv", 0),
                 cloudTmpForGPGS_011 = PlayerPrefs.GetInt("Mat_HP_Lv", 0),
@@ -3697,7 +3702,7 @@ public class PlayerPrefsManager : MonoBehaviour
                 cloudTmpForGPGS_035 = PlayerPrefs.GetFloat("GroggyTouch", 0),
                 cloudTmpForGPGS_036 = PlayerPrefs.GetFloat("LuckyProb", 1.0f),
                 cloudTmpForGPGS_037 = PlayerPrefs.GetInt("MaxGet_GookBap", 0),
-                cloudTmpForGPGS_038 = PlayerPrefs.GetFloat("Cilcked_Cnt_MattZip", 3f),
+                cloudTmpForGPGS_038 = PlayerPrefs.GetFloat("Cilcked_Cnt_MattZip", 5f),
                 //0515
                 cloudTmpForGPGS_101 = PlayerPrefs.GetInt("Arti_DefenceTime", 0),
                 cloudTmpForGPGS_102 = PlayerPrefs.GetInt("Arti_GoldBox", 0),
@@ -3888,7 +3893,7 @@ public class PlayerPrefsManager : MonoBehaviour
         PlayerPrefs.SetInt("key", listGPGS[0].cloudTmpForGPGS_005);
         PlayerPrefs.SetInt("VIP", listGPGS[0].cloudTmpForGPGS_006);
         PlayerPrefs.SetInt("isGoldTriple", listGPGS[0].cloudTmpForGPGS_007);
-        PlayerPrefs.SetInt("Mat_100", listGPGS[0].cloudTmpForGPGS_008);
+        PlayerPrefs.SetFloat("Mat_100", listGPGS[0].cloudTmpForGPGS_008);
         PlayerPrefs.SetInt("Mat_Skill_300", listGPGS[0].cloudTmpForGPGS_009);
         PlayerPrefs.SetInt("ATK_Lv", listGPGS[0].cloudTmpForGPGS_010);
         PlayerPrefs.SetInt("Mat_HP_Lv", listGPGS[0].cloudTmpForGPGS_011);

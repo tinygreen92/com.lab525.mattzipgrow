@@ -491,6 +491,16 @@ public class PlayFabLogin : MonoBehaviour
         /// 닉네임 설정이 안되었다 ||  혹은 도중에 취소했다 (임시로 구글 아이디로 저장)
         if (myDisplayName == null || myDisplayName == myPlayFabId)          
         {
+            /// 유료 결제 내역 복구
+            var tmp = PlayerPrefs.GetInt("VIP", 0);
+            /// 모든 데이터 삭제
+            PlayerPrefs.DeleteAll();
+            PlayerPrefs.SetInt("isFristGameStart", 1);
+            PlayerPrefs.SetInt("isSignFirst", 1);
+            PlayerPrefs.SetInt("isDataSaved", 1);
+            PlayerPrefs.SetInt("VIP", tmp);
+            PlayerPrefs.Save();
+            //
             /// TODO : 닉네임 설정 팝업창. 표기
             nickParentsObject.SetActive(true);
         }
@@ -501,8 +511,8 @@ public class PlayFabLogin : MonoBehaviour
             /// 나누 접속
             GameObject.Find("PlayNanoo").GetComponent<PlayNANOOExample>().NanooStart();
             /// 포톤 접속
-            //GameObject.Find("Scripts").GetComponent<NamePickGui>().AutoStartChat();
-            /// 페이크 로딩창 꺼줌
+            GameObject.Find("Scripts").GetComponent<NamePickGui>().AutoStartChat();
+            /// 페이크 로딩창 꺼줌 
             tm.FakeloadingOnOff(false);
         }
     }
@@ -572,7 +582,7 @@ public class PlayFabLogin : MonoBehaviour
         /// 나누 접속
         GameObject.Find("PlayNanoo").GetComponent<PlayNANOOExample>().NanooStart();
         /// 포톤 접속
-        //GameObject.Find("Scripts").GetComponent<NamePickGui>().AutoStartChat();
+        GameObject.Find("Scripts").GetComponent<NamePickGui>().AutoStartChat();
         /// 최초 한번 랭킹 차등 보상 지급
         Invoke(nameof(InvoDDD), 2.6f);
         /// 페이크 로딩창 꺼줌
@@ -581,6 +591,7 @@ public class PlayFabLogin : MonoBehaviour
 
     void InvoDDD()
     {
+        /// 최초 접속시 이전 맷집력 랭킹 비례 다이아몬드 지급
         GameObject.Find("PlayNanoo").GetComponent<PlayNANOOExample>().BeforeRankingMatt();
     }
 

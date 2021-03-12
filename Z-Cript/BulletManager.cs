@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -58,6 +57,65 @@ public class BulletManager : MonoBehaviour
     }
 
     Coroutine spinning;
+
+
+    /// <summary>
+    /// 젠되는 파이어볼 타입
+    /// </summary>
+    enum FireType
+    {
+        Normal,
+        Strong,
+        Heal
+    }
+    /// <summary>
+    /// 평타 파이어볼 / 스트롱 볼  대미지 계산해서 가져옴
+    /// 스트롱 볼은 평타의 1.5배 대미지
+    /// 힐링볼은 평타의 0.5배 힐링
+    /// </summary>
+    string GetFireBall(int stage, FireType type)
+    {
+        double tmp = 0;
+
+        switch (type)
+        {
+            case FireType.Normal:
+                if (stage == 1)
+                {
+                    tmp = 100;
+                }
+                else
+                {
+                    tmp = 100d * System.Math.Pow(1.3d, stage);
+                }
+                break;
+            case FireType.Strong:
+                if (stage == 1)
+                {
+                    tmp = 100;
+                }
+                else
+                {
+                    tmp = 100d * System.Math.Pow(1.3d, stage);
+                }
+                break;
+            case FireType.Heal:
+                if (stage == 1)
+                {
+                    tmp = 100;
+                }
+                else
+                {
+                    tmp = 100d * System.Math.Pow(1.3d, stage);
+                }
+                break;
+            default:
+                break;
+        }
+
+        return tmp.ToString("F0");
+    }
+
     /// <summary>
     /// 호출할때 회전각 / 스케일 배정
     /// </summary>
@@ -77,7 +135,7 @@ public class BulletManager : MonoBehaviour
 
         spinning = StartCoroutine(SpinPunch());
 
-        if (name == "ArmBall")
+        if (name == "ArmBall" || name == "ArStrongBall" || name == "AsHealBall")
         {
             float mutop = PlayerPrefsManager.GetInstance().MaxGet_MuganTop;
             bulletSpeed = 15f + (mutop * 0.1f);
@@ -96,22 +154,13 @@ public class BulletManager : MonoBehaviour
     /// <returns></returns>
     IEnumerator SpinPunch()
     {
-        if (name == "PunchPrefab 0" || name == "PunchPrefab 1" || name == "PunchPrefab 2" || name == "PunchPrefab 3" || name == "ArmBall")
+        if (name == "PunchPrefab 0" || name == "PunchPrefab 1" || name == "PunchPrefab 2" || name == "PunchPrefab 3" 
+            || name == "ArmBall" || name == "ArStrongBall" || name == "AsHealBall" )
         {
             goto HELL;
         }
 
-        if (name == "ArmBall")
-        {
-            float mutop = PlayerPrefsManager.GetInstance().MaxGet_MuganTop;
-            bulletSpeed = 15f + (mutop * 0.1f);
-        }
-        else
-        {
-            bulletSpeed = 30f;
-        }
-
-        var rotation = 0f;
+        float rotation = 0f;
         while (true)
         {
             //계속 회전 되라
@@ -120,7 +169,7 @@ public class BulletManager : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
 
-        HELL:
+    HELL:
         yield return null;
     }
 
@@ -130,22 +179,13 @@ public class BulletManager : MonoBehaviour
     /// <returns></returns>
     IEnumerator SpinPunch0()
     {
-        if (name == "PunchPrefab 0" || name == "PunchPrefab 1" || name == "PunchPrefab 2" || name == "PunchPrefab 3" || name == "ArmBall")
+        if (name == "PunchPrefab 0" || name == "PunchPrefab 1" || name == "PunchPrefab 2" || name == "PunchPrefab 3"
+            || name == "ArmBall" || name == "ArStrongBall" || name == "AsHealBall")
         {
             goto HELL;
         }
 
-        if (name == "ArmBall")
-        {
-            float mutop = PlayerPrefsManager.GetInstance().MaxGet_MuganTop;
-            bulletSpeed = 15f + (mutop * 0.1f);
-        }
-        else
-        {
-            bulletSpeed = 30f;
-        }
-
-        var rotation = 0f;
+        float rotation = 0f;
         while (true)
         {
             //계속 회전 되라
@@ -154,7 +194,7 @@ public class BulletManager : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
 
-        HELL:
+    HELL:
         yield return null;
     }
 
@@ -164,7 +204,7 @@ public class BulletManager : MonoBehaviour
         transform.GetChild(0).gameObject.SetActive(true);
         transform.GetChild(1).gameObject.SetActive(false);
 
-        if(transform.childCount == 3) transform.GetChild(2).gameObject.SetActive(false);
+        if (transform.childCount == 3) transform.GetChild(2).gameObject.SetActive(false);
 
         thisRigidbody.isKinematic = false;
         thisCollider.enabled = true;
@@ -202,7 +242,7 @@ public class BulletManager : MonoBehaviour
 
         spinning = StartCoroutine(SpinPunch0());
 
-        if (name == "ArmBall")
+        if (name == "ArmBall" || name == "ArStrongBall" || name == "AsHealBall")
         {
             float mutop = PlayerPrefsManager.GetInstance().MaxGet_MuganTop;
             bulletSpeed = 15f + (mutop * 0.1f);
@@ -269,7 +309,7 @@ public class BulletManager : MonoBehaviour
             }
             /// 몸통 번쩍거리기
             StartCoroutine(WitheMan(other, isCriiiiiiiii));
-            /// 돌아가는 코루틴 정지.
+            /// 총알 돌아가는 코루틴 정지.
             StopCoroutine(spinning);
         }
         else if (other.gameObject.tag == "Defence")
@@ -318,7 +358,7 @@ public class BulletManager : MonoBehaviour
             transform.GetChild(1).gameObject.SetActive(true);
 
             other.GetComponentInChildren<SpriteRenderer>().color = new Color(1, 1, 1, 128 / 255f);
-                     
+
             StopCoroutine(spinning);
 
             //코인말고 국밥  생성
@@ -343,34 +383,24 @@ public class BulletManager : MonoBehaviour
             if (PlayerPrefsManager.GetInstance().isMuGanTopEnd)
             {
                 Lean.Pool.LeanPool.Despawn(gameObject, 0.05f);
+                return;
             }
-
+            /// 사운드
             AudioManager.instance.Mugan_Block();
-
-
             /// TODO : 그로기 말고 종료 플래그로
             if (PlayerPrefsManager.GetInstance().isGroggy)
             {
                 Lean.Pool.LeanPool.Despawn(gameObject, 0.1f);
                 return;
             }
-
-
             // 배경 쉐이크
             other.GetComponent<CameraShaker>().Shake();
             /// TODO : 타격 처리.
             //thisRigidbody.isKinematic = true;
             thisCollider.enabled = false;
-
-            //transform.GetChild(0).gameObject.SetActive(false);
-            //transform.GetChild(1).gameObject.SetActive(true);
-
-            //StopCoroutine(spinning);
-
-            //transform.GetChild(1).gameObject.SetActive(false);
-            // 번쩍
+            /// 실드  몸 번쩍
             other.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 128 / 255f);
-
+            /// 파이어볼 로테이션
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, 180));
             Vector3 direction = transform.position - other.gameObject.transform.position;
             direction = direction.normalized * 1000;
@@ -385,6 +415,7 @@ public class BulletManager : MonoBehaviour
             if (PlayerPrefsManager.GetInstance().isMuGanTopEnd)
             {
                 Lean.Pool.LeanPool.Despawn(gameObject, 0.05f);
+                return;
             }
 
             AudioManager.instance.Mugan_Hit();
@@ -412,6 +443,7 @@ public class BulletManager : MonoBehaviour
             if (PlayerPrefsManager.GetInstance().isPVPtoEnd)
             {
                 Lean.Pool.LeanPool.Despawn(gameObject, 0.05f);
+                return;
             }
 
             AudioManager.instance.Btn_hit();
@@ -435,7 +467,7 @@ public class BulletManager : MonoBehaviour
             StartCoroutine(PVPPVP(other));
         }
     }
-    
+
 
 
     GameObject tmp;
@@ -457,7 +489,9 @@ public class BulletManager : MonoBehaviour
 
         // 체력 게이지 DOWN / 피버 게이지 UP // 주사위 굴림 - 선물상자 드랍
         HP_Calculate(tmpC, _isCritic);
+        /// 맷집 게이지 증가
         Mat_100_Count(_isCritic);
+        /// 스킬 게이지 증가
         Skill_500_Count(tmpC);
 
         yield return new WaitForSeconds(0.05f);
@@ -504,6 +538,9 @@ public class BulletManager : MonoBehaviour
     /// <returns></returns>
     IEnumerator MuGanMan(Collider tmpC)
     {
+        yield return null;
+
+        /// 몸체맞고 체력 감소
         Mugan_HP_Calculate(tmpC);
 
         yield return new WaitForSeconds(0.05f);
@@ -514,7 +551,6 @@ public class BulletManager : MonoBehaviour
 
         Lean.Pool.LeanPool.Despawn(gameObject, 1.0f);
     }
-
     /// <summary>
     /// 무한의 탑 모드에서 실드로 막음
     /// </summary>
@@ -528,48 +564,73 @@ public class BulletManager : MonoBehaviour
         transform.GetChild(1).gameObject.SetActive(false);
         if (transform.childCount == 3) transform.GetChild(2).gameObject.SetActive(false);
 
-        // 무겐 스테이지 파이어볼 공격력
-        var mega = PlayerPrefsManager.GetInstance().muganTopColl[0, PlayerPrefsManager.GetInstance().MaxGet_MuganTop-1];
-        // 보스 체력
-        var bossHp = PlayerPrefsManager.GetInstance().bossHP;
-        var maxBossHp = PlayerPrefsManager.GetInstance().muganTopColl[1, PlayerPrefsManager.GetInstance().MaxGet_MuganTop-1];
-        // 맷집력
-        var vallu = UserWallet.GetInstance().GetMattzipForCul(PlayerPrefsManager.GetInstance().Mat_Mattzip);
+        /// 보스 체력
+        string maxBossHp = PlayerPrefsManager.GetInstance().MAX_boss_HP;
+        string bossHp = PlayerPrefsManager.GetInstance().bossHP;
+        /// 플레이어 체력
+        string Mat_currentHP = PlayerPrefsManager.GetInstance().Mat_currentHP;
+        string Mat_MaxHP = PlayerPrefsManager.GetInstance().Mat_MaxHP;
+        /// 맷집력
+        string Mattzip = UserWallet.GetInstance().GetMattzipForCul(PlayerPrefsManager.GetInstance().Mat_Mattzip);
+        /// 순수 파이어볼 공격력
+        string FireBall = GetFireBall(PlayerPrefsManager.GetInstance().MaxGet_MuganTop, FireType.Normal);
+        /// 강력 파이어볼이라면 대미지 1.5배
+        if (name == "ArStrongBall")
+            FireBall = dts.multipleStringDouble(FireBall, 1.5d);
+        else if (name == "AsHealBall")
+        {
+            FireBall = dts.multipleStringDouble(FireBall, 0.5d);
 
-        var PunchDPS = dts.SubStringDouble(mega, vallu);
+            Mat_currentHP = dts.AddStringDouble(Mat_currentHP, FireBall);
+            Mugan_HP.transform.GetChild(0).GetComponent<Text>().text =
+                UserWallet.GetInstance().SeetheNatural(double.Parse(Mat_currentHP)) + "/" +
+                UserWallet.GetInstance().SeetheNatural(double.Parse(Mat_MaxHP));
+            Mugan_HP.fillAmount = (float)dts.DevideStringDouble(Mat_currentHP, Mat_MaxHP);
+            /// 최근 체력 갱신
+            PlayerPrefsManager.GetInstance().Mat_currentHP = Mat_currentHP;
+            goto HELL;
+        }
 
-        Debug.LogError("무한 공격력 " + PunchDPS);
+        /// 맷집 뺀 공격력
+        string PunchDPS = dts.SubStringDouble(FireBall, Mattzip);
 
-        // 만약 맷집이 더 높으면 반사댐 없다.
+        Debug.LogError("무한의 탑 파이어볼 공격력 " + PunchDPS);
+
+        /// 만약 맷집이 공격력보다 더 높으면 반사댐 없다.
         if (PunchDPS == "-1")
         {
-            PlayerPrefsManager.GetInstance().bossHP = dts.SubStringDouble(bossHp, mega);
-            Boss_HP.fillAmount = (float)dts.DevideStringDouble(PlayerPrefsManager.GetInstance().bossHP, maxBossHp);
+            bossHp = dts.SubStringDouble(bossHp, FireBall);
+            Boss_HP.fillAmount = (float)dts.DevideStringDouble(bossHp, maxBossHp);
         }
+        /// 반사 대미지 까지 받는다.
         else // 아니면 반사 댐 얼마.
         {
-            // 플레이어 체력 부터 깎은 다음에
-            var tmp1 = PlayerPrefsManager.GetInstance().Mat_currentHP;
-            var tmp2 = PlayerPrefsManager.GetInstance().Mat_MaxHP;
-            PlayerPrefsManager.GetInstance().Mat_currentHP = dts.SubStringDouble(tmp1, PunchDPS);
-            Mugan_HP.fillAmount = (float)dts.DevideStringDouble(PlayerPrefsManager.GetInstance().Mat_currentHP, tmp2);
-            Mugan_HP.transform.GetChild(0).GetComponent<Text>().text = UserWallet.GetInstance().SeetheNatural(double.Parse(tmp1)) + "/" + UserWallet.GetInstance().SeetheNatural(double.Parse(tmp2));
-            
-            // 반사댐 제외하고 보스 체력 깎음 
-            PunchDPS = dts.SubStringDouble(mega, vallu);
-            PlayerPrefsManager.GetInstance().bossHP = dts.SubStringDouble(bossHp, vallu);
-            Boss_HP.fillAmount = (float)dts.DevideStringDouble(PlayerPrefsManager.GetInstance().bossHP, maxBossHp);
+            //
+            Mat_currentHP = dts.SubStringDouble(Mat_currentHP, PunchDPS);
+
+            Mugan_HP.fillAmount = (float)dts.DevideStringDouble(Mat_currentHP, Mat_MaxHP);
+
+            Mugan_HP.transform.GetChild(0).GetComponent<Text>().text =
+                UserWallet.GetInstance().SeetheNatural(double.Parse(Mat_currentHP)) + "/" +
+                UserWallet.GetInstance().SeetheNatural(double.Parse(Mat_MaxHP));
+
+            /// 맷집만큼 보스 체력 깎음
+            bossHp = dts.SubStringDouble(bossHp, Mattzip);
+            Boss_HP.fillAmount = (float)dts.DevideStringDouble(bossHp, maxBossHp);
         }
 
-        /// 플레이어 체력 0이 되었다!!
-        if (PlayerPrefsManager.GetInstance().Mat_currentHP == "0" || PlayerPrefsManager.GetInstance().Mat_currentHP == "-1")
+        /// 현재 보스 체력 최신화
+        PlayerPrefsManager.GetInstance().bossHP = bossHp;
+        /// 플레이어 체력 최신화
+        PlayerPrefsManager.GetInstance().Mat_currentHP = Mat_currentHP;
+
+        /// 1순위 계산 플레이어 체력 0이 되었다!!
+        if (Mat_currentHP == "0" || Mat_currentHP == "-1")
         {
             Mugan_HP.fillAmount = 0;
-            Mugan_HP.transform.GetChild(0).GetComponent<Text>().text = "0/" + UserWallet.GetInstance().SeetheNatural(double.Parse(PlayerPrefsManager.GetInstance().Mat_MaxHP));
-
+            Mugan_HP.transform.GetChild(0).GetComponent<Text>().text = "0/" + UserWallet.GetInstance().SeetheNatural(double.Parse(Mat_MaxHP));
 
             PlayerPrefsManager.GetInstance().isMuGanTopEnd = true;
-
             // 이미 이어하기를 썼다면 바로 종료
             if (PlayerPrefsManager.GetInstance().isSecondChan)
             {
@@ -582,11 +643,10 @@ public class BulletManager : MonoBehaviour
                 PopUpObjectManager.GetInstance().ShowMuganCountinue();
             }
         }
-        /// 보스 체력 0이 되었다!!
-        else if (PlayerPrefsManager.GetInstance().bossHP == "0" || PlayerPrefsManager.GetInstance().bossHP == "-1")
+        /// 2순위 계산 보스 체력 0이 되었다!!
+        else if (bossHp == "0" || bossHp == "-1")
         {
             Boss_HP.fillAmount = 0;
-
             // 펀치 그만 나오게.
             PlayerPrefsManager.GetInstance().isMuGanTopEnd = true;
 
@@ -594,10 +654,9 @@ public class BulletManager : MonoBehaviour
             GameObject.Find("MUGANNOTOPManager").GetComponent<MuganMode>().ClearMuGanTop();
         }
 
-
-
-        Lean.Pool.LeanPool.Despawn(gameObject, 0.5f);
-
+        HELL:
+        /// 오브젝트 풀링 해제
+        Lean.Pool.LeanPool.Despawn(gameObject, 1.0f);
     }
 
 
@@ -610,13 +669,13 @@ public class BulletManager : MonoBehaviour
     private void DropTheLuckyBox()
     {
         // min 값 = 나올 확률
-        float dropTable= Random.Range(0f, 100.0f);
+        float dropTable = Random.Range(0f, 100.0f);
         //
         if (dropTable < PlayerPrefsManager.GetInstance().LuckyProb)
         {
             /// TODO : 박스 프리팹으로 교체좀
             tmp2 = PlayerPrefsManager.GetInstance().LucBox;
-            LucBox = Lean.Pool.LeanPool.Spawn(tmp2, coin.transform.position, Quaternion.Euler(0,0,0));
+            LucBox = Lean.Pool.LeanPool.Spawn(tmp2, coin.transform.position, Quaternion.Euler(0, 0, 0));
             LucBox.GetComponent<CoinManager>().CoinInit(false);
         }
 
@@ -634,7 +693,7 @@ public class BulletManager : MonoBehaviour
 
         PlayerPrefsManager.GetInstance().isGroggy = true;
 
-        var hitBody = tmpC.transform.parent;
+        Transform hitBody = tmpC.transform.parent;
         // 타격 스프라이트 비활성화
         transform.GetChild(1).gameObject.SetActive(false);
         if (transform.childCount == 3) transform.GetChild(2).gameObject.SetActive(false);
@@ -643,9 +702,9 @@ public class BulletManager : MonoBehaviour
         hitBody.GetComponent<SpriteRenderer>().enabled = false;
         // 그로기 애니메이션 재생
         hitBody.GetComponent<Animation>().Play("Groggy");
-        
-        
-        
+
+
+
 
 
         //// 맷집력 000.00 숫자 감춰줌
@@ -691,8 +750,8 @@ public class BulletManager : MonoBehaviour
 
         PlayerPrefsManager.GetInstance().isHPsubing = true;
 
-        var vallu = UserWallet.GetInstance().GetMattzipForCul(PlayerPrefsManager.GetInstance().Mat_Mattzip);
-        var PunchDPS = dts.SubStringDouble(PlayerPrefsManager.GetInstance().PlayerDPS, vallu);
+        string vallu = UserWallet.GetInstance().GetMattzipForCul(PlayerPrefsManager.GetInstance().Mat_Mattzip);
+        string PunchDPS = dts.SubStringDouble(PlayerPrefsManager.GetInstance().PlayerDPS, vallu);
         //var PunchDPS = PlayerPrefsManager.GetInstance().PlayerDPS;
 
         ///true 라면 크리티컬 터진거임.
@@ -711,7 +770,7 @@ public class BulletManager : MonoBehaviour
         /// 체력 0이 되었다!!
         if (PlayerPrefsManager.GetInstance().Mat_currentHP == "0" || PlayerPrefsManager.GetInstance().Mat_currentHP == "-1")
         {
-            var tmps = PlayerPrefsManager.GetInstance().Mat_MaxHP;
+            string tmps = PlayerPrefsManager.GetInstance().Mat_MaxHP;
             PlayerPrefsManager.GetInstance().Mat_currentHP = "0";
 
             HP_Bar.GetComponentInChildren<Text>().text = "0/" + UserWallet.GetInstance().SeetheNatural(double.Parse(tmps));
@@ -723,8 +782,8 @@ public class BulletManager : MonoBehaviour
         }
         else /// 아직 안죽었다!
         {
-            var tmp1 = PlayerPrefsManager.GetInstance().Mat_currentHP;
-            var tmp2 = PlayerPrefsManager.GetInstance().Mat_MaxHP;
+            string tmp1 = PlayerPrefsManager.GetInstance().Mat_currentHP;
+            string tmp2 = PlayerPrefsManager.GetInstance().Mat_MaxHP;
 
             HP_Bar.GetComponentInChildren<Text>().text = UserWallet.GetInstance().SeetheNatural(double.Parse(tmp1)) + "/" + UserWallet.GetInstance().SeetheNatural(double.Parse(tmp2));
         }
@@ -749,9 +808,9 @@ public class BulletManager : MonoBehaviour
         //인피니티 모드 dps 할당
         string InfiPunchDPS = dts.fDoubleToStringNumber(PlayerPrefsManager.GetInstance().InfiPunchDPS);
 
-        var vallu = UserWallet.GetInstance().GetMattzipForCul(PlayerPrefsManager.GetInstance().Mat_Mattzip);
+        string vallu = UserWallet.GetInstance().GetMattzipForCul(PlayerPrefsManager.GetInstance().Mat_Mattzip);
 
-        var PunchDPS = dts.SubStringDouble(InfiPunchDPS, vallu);
+        string PunchDPS = dts.SubStringDouble(InfiPunchDPS, vallu);
         if (PunchDPS == "-1") PunchDPS = "0";
 
         PlayerPrefsManager.GetInstance().Mat_currentHP = dts.SubStringDouble(PlayerPrefsManager.GetInstance().Mat_currentHP, PunchDPS);
@@ -759,14 +818,14 @@ public class BulletManager : MonoBehaviour
 
         Debug.LogWarning("최근 체력 : " + PlayerPrefsManager.GetInstance().Mat_currentHP);
 
-        HELL:
+    HELL:
 
         /// 체력 0이 되었다!!
         if (PlayerPrefsManager.GetInstance().Mat_currentHP == "0" || PlayerPrefsManager.GetInstance().Mat_currentHP == "-1")
         {
             PopUpObjectManager.GetInstance().ComboCnt++;
 
-            var tmps = PlayerPrefsManager.GetInstance().Mat_MaxHP;
+            string tmps = PlayerPrefsManager.GetInstance().Mat_MaxHP;
             PlayerPrefsManager.GetInstance().Mat_currentHP = "0";
 
             HP_Bar.GetComponentInChildren<Text>().text = "0/" + UserWallet.GetInstance().SeetheNatural(double.Parse(tmps));
@@ -781,7 +840,7 @@ public class BulletManager : MonoBehaviour
 
                 tmpC.GetComponentInChildren<SpriteRenderer>().color = new Color(1, 1, 1, 0);
 
-                var hitBody = tmpC.transform.parent;
+                Transform hitBody = tmpC.transform.parent;
                 // 스프라이트 비활성화
                 transform.GetChild(1).gameObject.SetActive(false);
                 if (transform.childCount == 3) transform.GetChild(2).gameObject.SetActive(false);
@@ -796,52 +855,52 @@ public class BulletManager : MonoBehaviour
                 switch (ttmmpp)
                 {
                     case "100":
-                        if(sDataList[0] != "600") sDataList[0] = gettingGoop.ToString();
+                        if (sDataList[0] != "600") sDataList[0] = gettingGoop.ToString();
                         gettingGoop *= 5;
                         break;
 
                     case "1050":
-                        if(sDataList[1] != "600") sDataList[1] = gettingGoop.ToString();
+                        if (sDataList[1] != "600") sDataList[1] = gettingGoop.ToString();
                         gettingGoop *= 11;
                         break;
 
                     case "11025":
-                        if(sDataList[2] != "600") sDataList[2] = gettingGoop.ToString();
+                        if (sDataList[2] != "600") sDataList[2] = gettingGoop.ToString();
                         gettingGoop *= 24;
                         break;
 
                     case "115763":
-                        if(sDataList[3] != "600") sDataList[3] = gettingGoop.ToString();
+                        if (sDataList[3] != "600") sDataList[3] = gettingGoop.ToString();
                         gettingGoop *= 51;
                         break;
 
                     case "1215506":
-                        if(sDataList[4] != "600") sDataList[4] = gettingGoop.ToString();
+                        if (sDataList[4] != "600") sDataList[4] = gettingGoop.ToString();
                         gettingGoop *= 106;
                         break;
 
                     case "12762816":
-                        if(sDataList[5] != "600") sDataList[5] = gettingGoop.ToString();
+                        if (sDataList[5] != "600") sDataList[5] = gettingGoop.ToString();
                         gettingGoop *= 217;
                         break;
 
                     case "134009564":
-                        if(sDataList[6] != "600") sDataList[6] = gettingGoop.ToString();
+                        if (sDataList[6] != "600") sDataList[6] = gettingGoop.ToString();
                         gettingGoop *= 440;
                         break;
 
                     case "1407100423":
-                        if(sDataList[7] != "600") sDataList[7] = gettingGoop.ToString();
+                        if (sDataList[7] != "600") sDataList[7] = gettingGoop.ToString();
                         gettingGoop *= 887;
                         break;
 
                     case "14774554438":
-                        if(sDataList[8] != "600") sDataList[8] = gettingGoop.ToString();
+                        if (sDataList[8] != "600") sDataList[8] = gettingGoop.ToString();
                         gettingGoop *= 1782;
                         break;
 
                     case "155132821598":
-                        if(sDataList[9] != "600") sDataList[9] = gettingGoop.ToString();
+                        if (sDataList[9] != "600") sDataList[9] = gettingGoop.ToString();
                         gettingGoop *= 3573;
                         break;
 
@@ -885,11 +944,11 @@ public class BulletManager : MonoBehaviour
                 /// 국밥 획득량 % 증가
                 double getSSalAmount = ((gettingGoop * 1d) * (1.0d + PlayerPrefsManager.GetInstance().Arti_InfiReword * 0.01d));
 
-                getSSalAmount = getSSalAmount * 
-                    (1.0d + ((PlayerPrefsManager.GetInstance().uniformInfo[3].Uniform_LV + 
-                    (PlayerPrefsManager.GetInstance().uniformInfo[4].Uniform_LV * 0.05d) + 
+                getSSalAmount = getSSalAmount *
+                    (1.0d + ((PlayerPrefsManager.GetInstance().uniformInfo[3].Uniform_LV +
+                    (PlayerPrefsManager.GetInstance().uniformInfo[4].Uniform_LV * 0.05d) +
                     (PlayerPrefsManager.GetInstance().uniformInfo[5].Skill_LV * 0.5d))
-                
+
 
                     * 0.01d));
                 Debug.LogError("보통 국밥 : " + getSSalAmount);
@@ -904,8 +963,8 @@ public class BulletManager : MonoBehaviour
         }
         else /// 아직 안죽었다!
         {
-            var tmp1 = PlayerPrefsManager.GetInstance().Mat_currentHP;
-            var tmp2 = PlayerPrefsManager.GetInstance().Mat_MaxHP;
+            string tmp1 = PlayerPrefsManager.GetInstance().Mat_currentHP;
+            string tmp2 = PlayerPrefsManager.GetInstance().Mat_MaxHP;
 
             HP_Bar.GetComponentInChildren<Text>().text = UserWallet.GetInstance().SeetheNatural(double.Parse(tmp1)) + "/" + UserWallet.GetInstance().SeetheNatural(double.Parse(tmp2));
             HP_Bar.fillAmount = (float)dts.DevideStringDouble(PlayerPrefsManager.GetInstance().Mat_currentHP, PlayerPrefsManager.GetInstance().Mat_MaxHP);
@@ -938,7 +997,7 @@ public class BulletManager : MonoBehaviour
 
     void Healing_Infi()
     {
-        var tmps = PlayerPrefsManager.GetInstance().Mat_MaxHP;
+        string tmps = PlayerPrefsManager.GetInstance().Mat_MaxHP;
         PlayerPrefsManager.GetInstance().Mat_currentHP = tmps;
         HP_Bar.GetComponentInChildren<Text>().text = UserWallet.GetInstance().SeetheNatural(double.Parse(tmps)) + "/" + UserWallet.GetInstance().SeetheNatural(double.Parse(tmps));
         HP_Bar.fillAmount = (float)dts.DevideStringDouble(PlayerPrefsManager.GetInstance().Mat_currentHP, PlayerPrefsManager.GetInstance().Mat_MaxHP);
@@ -959,15 +1018,15 @@ public class BulletManager : MonoBehaviour
     /// </summary>
     void Defence_HP_Calculate(Collider tmpC)
     {
-        var mega = PlayerPrefsManager.GetInstance().megaDamColl[PlayerPrefsManager.GetInstance().PunchIndex];
+        string mega = PlayerPrefsManager.GetInstance().megaDamColl[PlayerPrefsManager.GetInstance().PunchIndex];
 
         /// 방어전 모드 대미지 % 감소
         double doublePrice = double.Parse(mega);
         doublePrice = (doublePrice * (1.0d - PlayerPrefsManager.GetInstance().Arti_DefencePer * 0.001d));
 
 
-        var vallu = UserWallet.GetInstance().GetMattzipForCul(PlayerPrefsManager.GetInstance().Mat_Mattzip);
-        var PunchDPS = dts.SubStringDouble(doublePrice.ToString("f0"), vallu);
+        string vallu = UserWallet.GetInstance().GetMattzipForCul(PlayerPrefsManager.GetInstance().Mat_Mattzip);
+        string PunchDPS = dts.SubStringDouble(doublePrice.ToString("f0"), vallu);
 
         UserWallet.GetInstance().PunchDPS = PunchDPS;
 
@@ -979,14 +1038,14 @@ public class BulletManager : MonoBehaviour
         /// 체력 0이 되었다!!
         if (PlayerPrefsManager.GetInstance().Mat_currentHP == "0" || PlayerPrefsManager.GetInstance().Mat_currentHP == "-1")
         {
-            var tmps = PlayerPrefsManager.GetInstance().Mat_MaxHP;
+            string tmps = PlayerPrefsManager.GetInstance().Mat_MaxHP;
             PlayerPrefsManager.GetInstance().Mat_currentHP = "0";
 
             DefHP_Bar.GetComponentInChildren<Text>().text = "0/" + UserWallet.GetInstance().SeetheNatural(double.Parse(tmps));
 
             // 그로기 상태 돌입
             tmpC.GetComponentInChildren<SpriteRenderer>().color = new Color(1, 1, 1, 0);
-            var hitBody = tmpC.transform.parent;
+            Transform hitBody = tmpC.transform.parent;
             // 스프라이트 비활성화
             transform.GetChild(1).gameObject.SetActive(false);
             if (transform.childCount == 3) transform.GetChild(2).gameObject.SetActive(false);
@@ -998,8 +1057,8 @@ public class BulletManager : MonoBehaviour
         }
         else
         {
-            var tmp1 = PlayerPrefsManager.GetInstance().Mat_currentHP;
-            var tmp2 = PlayerPrefsManager.GetInstance().Mat_MaxHP;
+            string tmp1 = PlayerPrefsManager.GetInstance().Mat_currentHP;
+            string tmp2 = PlayerPrefsManager.GetInstance().Mat_MaxHP;
 
 
             DefHP_Bar.GetComponentInChildren<Text>().text = UserWallet.GetInstance().SeetheNatural(double.Parse(tmp1)) + "/" + UserWallet.GetInstance().SeetheNatural(double.Parse(tmp2));
@@ -1019,25 +1078,38 @@ public class BulletManager : MonoBehaviour
         Boss_HP = boop;
     }
     /// <summary>
-    /// 무한의 탑 모드 체력 감소
+    /// 무한의 탑 모드에서 방어실패 - 몸체 맞고 체력 감소
     /// </summary>
     void Mugan_HP_Calculate(Collider tmpC)
     {
-        var tmp1 = PlayerPrefsManager.GetInstance().Mat_currentHP;
+        string playerCurrentHP = PlayerPrefsManager.GetInstance().Mat_currentHP;
+        string playerMaxHP = PlayerPrefsManager.GetInstance().Mat_MaxHP;
 
-        // 무겐 스테이지 파이어볼 공격력
-        var PunchDPS = PlayerPrefsManager.GetInstance().muganTopColl[0, PlayerPrefsManager.GetInstance().MaxGet_MuganTop-1];
+        /// 순수 파이어볼 공격력
+        string FireBall = GetFireBall(PlayerPrefsManager.GetInstance().MaxGet_MuganTop, FireType.Normal);
+        /// 강력 파이어볼이라면 대미지 1.5배
+        if (name == "ArStrongBall")
+            FireBall = dts.multipleStringDouble(FireBall, 1.5d);
+        else if(name == "AsHealBall")
+        {
+            FireBall = dts.multipleStringDouble(FireBall, 0.5d);
+            playerCurrentHP = dts.AddStringDouble(playerCurrentHP, FireBall);
+            Mugan_HP.transform.GetChild(0).GetComponent<Text>().text =
+                UserWallet.GetInstance().SeetheNatural(double.Parse(playerCurrentHP)) + "/" +
+                UserWallet.GetInstance().SeetheNatural(double.Parse(playerMaxHP));
+            Mugan_HP.fillAmount = (float)dts.DevideStringDouble(playerCurrentHP, playerMaxHP);
+            /// 최근 체력 갱신
+            PlayerPrefsManager.GetInstance().Mat_currentHP = playerCurrentHP;
+            return;
+        }
 
-        PlayerPrefsManager.GetInstance().Mat_currentHP = dts.SubStringDouble(tmp1, PunchDPS);
+        playerCurrentHP = dts.SubStringDouble(playerCurrentHP, FireBall);
 
         /// 체력 0이 되었다!!
-        if (PlayerPrefsManager.GetInstance().Mat_currentHP == "0" || PlayerPrefsManager.GetInstance().Mat_currentHP == "-1")
+        if (playerCurrentHP == "0" || playerCurrentHP == "-1")
         {
-            var tmps = PlayerPrefsManager.GetInstance().Mat_MaxHP;
-            PlayerPrefsManager.GetInstance().Mat_currentHP = "0";
-
-            Mugan_HP.transform.GetChild(0).GetComponent<Text>().text = "0/" + UserWallet.GetInstance().SeetheNatural(double.Parse(tmps));
-
+            playerCurrentHP = "0";
+            Mugan_HP.transform.GetChild(0).GetComponent<Text>().text = "0/" + UserWallet.GetInstance().SeetheNatural(double.Parse(playerMaxHP));
             PlayerPrefsManager.GetInstance().isMuGanTopEnd = true;
 
             // 이미 이어하기를 썼다면 바로 종료
@@ -1052,18 +1124,13 @@ public class BulletManager : MonoBehaviour
                 PopUpObjectManager.GetInstance().ShowMuganCountinue();
             }
         }
-        else
-        {
-            tmp1 = PlayerPrefsManager.GetInstance().Mat_currentHP;
-            var tmp2 = PlayerPrefsManager.GetInstance().Mat_MaxHP;
 
-            Mugan_HP.transform.GetChild(0).GetComponent<Text>().text = UserWallet.GetInstance().SeetheNatural(double.Parse(tmp1)) + "/" + UserWallet.GetInstance().SeetheNatural(double.Parse(tmp2));
-
-
-        }
-        //
-        Mugan_HP.fillAmount = (float)dts.DevideStringDouble(PlayerPrefsManager.GetInstance().Mat_currentHP, PlayerPrefsManager.GetInstance().Mat_MaxHP);
-
+        Mugan_HP.transform.GetChild(0).GetComponent<Text>().text =
+            UserWallet.GetInstance().SeetheNatural(double.Parse(playerCurrentHP)) + "/" +
+            UserWallet.GetInstance().SeetheNatural(double.Parse(playerMaxHP));
+        Mugan_HP.fillAmount = (float)dts.DevideStringDouble(playerCurrentHP, playerMaxHP);
+        /// 최근 체력 갱신
+        PlayerPrefsManager.GetInstance().Mat_currentHP = playerCurrentHP;
 
     }
 
@@ -1084,11 +1151,6 @@ public class BulletManager : MonoBehaviour
         Lean.Pool.LeanPool.Despawn(gameObject, 1.0f);
     }
 
-    float maxMat;
-    float intMattzip;
-    float resultMattHead;
-    string playerDPS;
-    string playerMattzip;
     /// <summary>
     /// 맷집 증가 메소드
     /// </summary>
@@ -1097,77 +1159,33 @@ public class BulletManager : MonoBehaviour
         /// 인트로 시청 안했으면 리턴
         if (!PlayerPrefsManager.GetInstance().isFristGameStart) return;
 
-        /// 동료 한명씩 해제할 때 마다 게이지 올라가는거 올라감
-        if(PlayerPrefsManager.GetInstance().Friend_01_MattzipPer_Lv > 0 && PlayerPrefsManager.GetInstance().Friend_02_OffTimeUp_Lv > 0) 
-            PlayerPrefsManager.GetInstance().Mat_100+= 3; // 1씩 증가
-        else if(PlayerPrefsManager.GetInstance().Friend_01_MattzipPer_Lv > 0) 
-            PlayerPrefsManager.GetInstance().Mat_100+=2; // 1씩 증가
-        else if(PlayerPrefsManager.GetInstance().Friend_02_OffTimeUp_Lv > 0) 
-            PlayerPrefsManager.GetInstance().Mat_100+=2; // 1씩 증가
-        else PlayerPrefsManager.GetInstance().Mat_100++; // 1씩 증가
+        ///// 동료 한명씩 해제할 때 마다 게이지 올라가는거 올라감
+        //if (PlayerPrefsManager.GetInstance().Friend_01_MattzipPer_Lv > 0 && PlayerPrefsManager.GetInstance().Friend_02_OffTimeUp_Lv > 0)
+        //    PlayerPrefsManager.GetInstance().Mat_100 += 3; // 1씩 증가
+        //else if (PlayerPrefsManager.GetInstance().Friend_01_MattzipPer_Lv > 0)
+        //    PlayerPrefsManager.GetInstance().Mat_100 += 2; // 1씩 증가
+        //else if (PlayerPrefsManager.GetInstance().Friend_02_OffTimeUp_Lv > 0)
+        //    PlayerPrefsManager.GetInstance().Mat_100 += 2; // 1씩 증가
+        //else PlayerPrefsManager.GetInstance().Mat_100++; // 1씩 증가
 
-
-        /// 맷집 터치 요구횟수 감소 적용치
-        maxMat = PlayerPrefsManager.GetInstance().Cilcked_Cnt_MattZip;
-        /// 현재 내 맷집
-        intMattzip = float.Parse(PlayerPrefsManager.GetInstance().Mat_Mattzip);
-        ///내 맷집의 0.0000000001%
-        resultMattHead = intMattzip * 0.00000001f;
-        /// 내 맷집의 0.0000000001%가 0.1 이하라면 맷집 터치 요구 횟수는 0
-        if (resultMattHead <= 0.1f)
-            maxMat = 0;
-        /// 내 맷집의 0.0000000001%가 0.1를 초과한다면 맷집 터치 요구횟수 감소 적용치에 내 맷집의 0.0000000001%를 곱해준다.
-        else
-            maxMat *= resultMattHead;
-        /// 이미지 fill 기본 횟수 100에 최종 맷집 터치 요구횟수의 소수점 절삭감을 더해준다.
-        MattzipGauge.fillAmount = PlayerPrefsManager.GetInstance().Mat_100 / (100.0f + Mathf.Floor(maxMat));
-        //Debug.LogWarning("맷집 타격 기본 100대에서 " + Mathf.Floor(maxMat) + "만큼 증가");
-        ///PopUpObjectManager.GetInstance().TestText[0].text = ("변경 전 : 100대에서 " + Mathf.Floor(PlayerPrefsManager.GetInstance().Cilcked_Cnt_MattZip * tresultMattHead) + "만큼 증가");
-        ///PopUpObjectManager.GetInstance().TestText[1].text = ("변경 후 : 100대에서 " + Mathf.Floor(maxMat) + "만큼 증가");
-
-
-        /// 맷집은 기본 100회 타격당 1씩 증가 + 현재 공격력의 1%
-        if (PlayerPrefsManager.GetInstance().Mat_100 >= (100.0f + Mathf.Floor(maxMat)))
+        /// 펀치 최종 공격력
+        float playerDPS = float.Parse(PlayerPrefsManager.GetInstance().PlayerDPS);
+        if (_isCritic) playerDPS = float.Parse(PlayerPrefsManager.GetInstance().CriticalDPS);
+        /// 대미지 누적
+        PlayerPrefsManager.GetInstance().Mat_100 += playerDPS;
+        /// 맷집 증가에 필요한 대미지 게이지 (Max치)
+        float needGaugeMat = PlayerPrefsManager.GetInstance().Cilcked_Cnt_MattZip;
+        /// 누적 대미지 / 증가 필요 대미지
+        MattzipGauge.fillAmount = PlayerPrefsManager.GetInstance().Mat_100 / needGaugeMat;
+        /// 게이지 100% 채웠으면?
+        if (PlayerPrefsManager.GetInstance().Mat_100 >= needGaugeMat)
         {
-            /// 펀치 최종 공격력
-            playerDPS = PlayerPrefsManager.GetInstance().PlayerDPS;
-            /// 현재 맷집
-            playerMattzip = PlayerPrefsManager.GetInstance().Mat_Mattzip;
-            /// 크리티컬 터지면 크리 만큼
-            if (_isCritic) playerDPS = PlayerPrefsManager.GetInstance().CriticalDPS;
-
-
-            /// ////////////////////////////////////////////////////////////////////////////////
-
-
-            ///// (타격 공격력의 1%) + (현재 맷집의 (0.001% + 펫, 스킬 증가량 합산) )
-            //float tunderDps = float.Parse(playerDPS) * 0.01f;
-            //Debug.LogWarning("underDps : " + tunderDps);
-            ///// 현재 맷집의 (0.001% + 펫, 스킬 증가량 합산) 
-            //float tunderMatt = float.Parse(playerMattzip) * (0.00001f + (PlayerPrefsManager.GetInstance().Pet_Matt_Up_Lv * 0.005f * 0.01f));
-            //Debug.LogWarning("underMatt : " + tunderMatt);
-            ///// 증가값은 기본 1 + 공격력 1% + 맷집 증가
-            ////PlayerPrefsManager.GetInstance().Mat_Mattzip_Hit += (1.0f + tunderDps + tunderMatt);
-            //Debug.LogWarning("기본 1 + 공격력 1% + 맷집 증가 : " + (1.0f + tunderDps + tunderMatt));
-            //PopUpObjectManager.GetInstance().TestText[2].text = ("기본 1 + 공격력 1% + 맷집 증가 : " + (1.0f + tunderDps + tunderMatt));
-
-
-            /// (최종 공격력의 0.1%) + (현재 맷집의 (0.0001% + 펫, 스킬 증가량 합산) )
-            float underDps = float.Parse(playerDPS) * 0.001f;
-            Debug.LogWarning("underDps : " + underDps);
-            /// 현재 맷집의 (0.0001% + 펫, 스킬 증가량 합산) 
-            float underMatt = float.Parse(playerMattzip) * (0.000001f + (PlayerPrefsManager.GetInstance().Pet_Matt_Up_Lv * 0.005f * 0.01f));
-            Debug.LogWarning("underMatt : " + underMatt);
-            /// 증가값은 기본 1 + 공격력 1% + 맷집 증가
-            PlayerPrefsManager.GetInstance().Mat_Mattzip_Hit += (1.0f + underDps + underMatt);
-            Debug.LogWarning("기본 1 + 공격력 1% + 맷집 증가 : " + (1.0f + underDps + underMatt));
-
-            ///PopUpObjectManager.GetInstance().TestText[3].text = ("기본 1 + 공격력 0.1% + 맷집 증가*0.1 : " + (1.0f + underDps + underMatt));
-
-            /// ////////////////////////////////////////////////////////////////////////////////
-
+            /// 최종 공격력 0.1% + 1 증가
+            PlayerPrefsManager.GetInstance().Mat_Mattzip_Hit += 1f + (playerDPS * 0.0001f);
+            ///맷집 증가에 필요한 대미지 증가 계산식 = 시작값 5, 시작값 * ( 1 + 0.03 ) ^ Lv
+            PlayerPrefsManager.GetInstance().Cilcked_Cnt_MattZip = (float)(5f * System.Math.Pow(1.03f, PlayerPrefsManager.GetInstance().Mat_Mattzip_Hit));
             UserWallet.GetInstance().ShowUserMatZip();
-
+            /// 초기화
             PlayerPrefsManager.GetInstance().Mat_100 = 0;
             MattzipGauge.fillAmount = 0;
         }
@@ -1181,7 +1199,7 @@ public class BulletManager : MonoBehaviour
     {
         PlayerPrefsManager.GetInstance().Mat_Skill_300++;
         //
-        SkillGauge.fillAmount = PlayerPrefsManager.GetInstance().Mat_Skill_300 / (1000f - (float)PlayerPrefsManager.GetInstance().Pet_Buff_Lv);
+        SkillGauge.fillAmount = PlayerPrefsManager.GetInstance().Mat_Skill_300 / (1000f - PlayerPrefsManager.GetInstance().Pet_Buff_Lv);
 
         if (PlayerPrefsManager.GetInstance().Mat_Skill_300 >= (1000 - PlayerPrefsManager.GetInstance().Pet_Buff_Lv))
         {
@@ -1189,7 +1207,7 @@ public class BulletManager : MonoBehaviour
             tmpC.GetComponentInChildren<SpriteRenderer>().color = new Color(1, 1, 1, 0);
             PlayerPrefsManager.GetInstance().isGroggy = true;
 
-            var hitBody = tmpC.transform.parent;
+            Transform hitBody = tmpC.transform.parent;
             // 스프라이트 비활성화
             transform.GetChild(1).gameObject.SetActive(false);
             if (transform.childCount == 3) transform.GetChild(2).gameObject.SetActive(false);

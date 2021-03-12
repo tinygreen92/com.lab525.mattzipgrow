@@ -79,7 +79,9 @@ public class TapToSpawnLimit : MonoBehaviour
         fUserClickedCnt = Time.unscaledTime + (1f / 10f);
     }
 
-
+    /// <summary>
+    /// 무한의 탑 파이어볼 발싸
+    /// </summary>
     public void ClickedMuGanTop()
     {
         if (fUserClickedCnt != 0f && Time.unscaledTime < fUserClickedCnt) return;
@@ -567,27 +569,50 @@ public class TapToSpawnLimit : MonoBehaviour
     public Image Mugan_FilledHP;
     public Image Boss_FilledHP;
     public Transform MUGAN_Pos;
+    /// <summary>
+    ///  평타 파이어볼
+    /// </summary>
     public GameObject MUGAN_Bullet;
+    public GameObject MUGAN_StrongBullet;
+    public GameObject MUGAN_HealBullet;
+
+
+
+
     /// <summary>
     /// 무한의~~~ 탑
     /// </summary>
     public void MUGAN_Punch()
     {
         float pun_Random = Random.Range(0, 100f);
+        /// 파이어볼 종류 뭐니?
+        GameObject bullet;
+        /// 5% 5% 90%
+        if (pun_Random < 5f)
+            bullet = MUGAN_HealBullet;
+        else if (pun_Random < 10f)
+            bullet = MUGAN_StrongBullet;
+        else
+            bullet = MUGAN_Bullet;
+
 
         if (isPunchSwitch)
         {
-            bullet_Left = Lean.Pool.LeanPool.Spawn(MUGAN_Bullet, MUGAN_Pos.GetChild(0).position, MUGAN_Pos.GetChild(0).rotation);
+            bullet_Left = Lean.Pool.LeanPool.Spawn(bullet, MUGAN_Pos.GetChild(0).position, MUGAN_Pos.GetChild(0).rotation);
             bullet_Left.GetComponent<BulletManager>().BulletInit();
             bullet_Left.GetComponent<BulletManager>().SetMuganBar(Mugan_FilledHP, Boss_FilledHP);
-            if (pun_Random > 50f) isPunchSwitch = !isPunchSwitch;
+            ///랜덤으로 다음 펀치 바꿔준다.
+            if (pun_Random > 50f) 
+                isPunchSwitch = !isPunchSwitch;
         }
         else
         {
-            bullet_Right = Lean.Pool.LeanPool.Spawn(MUGAN_Bullet, MUGAN_Pos.GetChild(1).position, MUGAN_Pos.GetChild(1).rotation);
+            bullet_Right = Lean.Pool.LeanPool.Spawn(bullet, MUGAN_Pos.GetChild(1).position, MUGAN_Pos.GetChild(1).rotation);
             bullet_Right.GetComponent<BulletManager>().BulletInit0();
             bullet_Right.GetComponent<BulletManager>().SetMuganBar(Mugan_FilledHP, Boss_FilledHP);
-            if (pun_Random > 50f) isPunchSwitch = !isPunchSwitch;
+            ///랜덤으로 다음 펀치 바꿔준다.
+            if (pun_Random > 50f) 
+                isPunchSwitch = !isPunchSwitch;
 
         }
     }

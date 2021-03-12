@@ -665,7 +665,7 @@ public class CharacterManager : MonoBehaviour
             switch (i)
             {
                 case 0:
-                    result = "맷집 증가 요구 횟수 " + (0.05f * PlayerPrefsManager.GetInstance().Pet_Touch_Lv).ToString("f2") + "% 차감";
+                    result = "맷집 게이지 " + (0.05f * PlayerPrefsManager.GetInstance().Pet_Touch_Lv).ToString("f2") + "% 감소";
                     Pet_UP_LV[i].text = "Lv." + PlayerPrefsManager.GetInstance().Pet_Touch_Lv;
                     break;
 

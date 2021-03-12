@@ -576,7 +576,7 @@ public class PlayNANOOExample : MonoBehaviour
     /// </summary>
     public void StorageSaveForBuy()
     {
-        plugin.StorageSave(GPGSManager.GetLocalUserId(), playerPrefsManager.SaveAllPrefsData(), true, (state, message, rawData, dictionary) =>
+        plugin.StorageSave(GPGSManager.GetLocalUserId() + "_S2", playerPrefsManager.SaveAllPrefsData(), true, (state, message, rawData, dictionary) =>
         {
             if (state.Equals(Configure.PN_API_STATE_SUCCESS))
             {
@@ -588,7 +588,7 @@ public class PlayNANOOExample : MonoBehaviour
             }
         });
 
-        plugin.StorageSave(GPGSManager.GetLocalUserId() + "_Check", playerPrefsManager.ZZoGGoMiDataSave(), true, (state, message, rawData, dictionary) => {
+        plugin.StorageSave(GPGSManager.GetLocalUserId() + "_Check_S2", playerPrefsManager.ZZoGGoMiDataSave(), true, (state, message, rawData, dictionary) => {
             if (state.Equals(Configure.PN_API_STATE_SUCCESS))
             {
                 Debug.LogWarning("StorageSave Success ::");
@@ -603,7 +603,7 @@ public class PlayNANOOExample : MonoBehaviour
     public void StorageSaveForCheack()
     {
         PlayerPrefs.Save();
-        plugin.StorageSave(GPGSManager.GetLocalUserId() + "_Check", playerPrefsManager.ZZoGGoMiDataSave(), true, (state, message, rawData, dictionary) => {
+        plugin.StorageSave(GPGSManager.GetLocalUserId() + "_Check_S2", playerPrefsManager.ZZoGGoMiDataSave(), true, (state, message, rawData, dictionary) => {
             if (state.Equals(Configure.PN_API_STATE_SUCCESS))
             {
                 Debug.LogWarning("StorageSave Success ::" + playerPrefsManager.ZZoGGoMiDataSave());
@@ -670,7 +670,7 @@ public class PlayNANOOExample : MonoBehaviour
     {
         PlayerPrefsManager.GetInstance().IN_APP.SetActive(true);
 
-        plugin.StorageLoad(GPGSManager.GetLocalUserId() + "_Check", (state, message, rawData, dictionary) => {
+        plugin.StorageLoad(GPGSManager.GetLocalUserId() + "_Check_S2", (state, message, rawData, dictionary) => {
             if (state.Equals(Configure.PN_API_STATE_SUCCESS))
             {
                 PlayerPrefsManager.GetInstance().IN_APP.SetActive(false);
@@ -702,7 +702,7 @@ public class PlayNANOOExample : MonoBehaviour
     {
         PlayerPrefsManager.GetInstance().IN_APP.SetActive(true);
 
-        plugin.StorageLoad(GPGSManager.GetLocalUserId(), (state, message, rawData, dictionary) => {
+        plugin.StorageLoad(GPGSManager.GetLocalUserId() + "_S2", (state, message, rawData, dictionary) => {
             if (state.Equals(Configure.PN_API_STATE_SUCCESS))
             {
 

@@ -5,7 +5,10 @@ using UnityEngine.UI;
 
 public class PowerUPManager : MonoBehaviour
 {
+    public GameObject helpme;
+    [Space]
     public RectTransform rt;
+    [Space]
     private float rtChogi;
     public GroggyManager groggyManager;
     public ScrollRect topSCrect;
@@ -38,6 +41,13 @@ public class PowerUPManager : MonoBehaviour
     bool isInitFinish;
     ScrollRect thisSCRect;
 
+
+    public void HelpmeDora()
+    {
+        helpme.SetActive(true);
+        helpme.GetComponent<Animation>()["Roll_Incre"].speed = 1;
+        helpme.GetComponent<Animation>().Play("Roll_Incre");
+    }
 
 
     public void Init()

@@ -94,7 +94,7 @@ public class GameStart : MonoBehaviour
         audioManager.AudioSetting();
         // CSV 시트 긁기
         PlayerPrefsManager.GetInstance().InitMegaDamData();
-        PlayerPrefsManager.GetInstance().InitMuganData();
+        //PlayerPrefsManager.GetInstance().InitMuganData();
         //
         PlayerPrefsManager.GetInstance().LoadWeaponInfo();
         PlayerPrefsManager.GetInstance().LoadquestInfo();
