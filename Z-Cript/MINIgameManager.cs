@@ -222,7 +222,7 @@ public class MINIgameManager : MonoBehaviour
         isLeftBtnClicked = false;
 
         PlayerPrefsManager.GetInstance().key--;
-        UserWallet.GetInstance().ShowUserKey();
+        //UserWallet.GetInstance().ShowUserKey();
         booster_KEY.KeyTimerStart();
 
         FlashEnd();
@@ -354,7 +354,7 @@ public class MINIgameManager : MonoBehaviour
     public void ExGameClear()
     {
         PlayerPrefsManager.GetInstance().key--;
-        UserWallet.GetInstance().ShowUserKey();
+        //UserWallet.GetInstance().ShowUserKey();
         booster_KEY.KeyTimerStart();
 
         int Combo = PlayerPrefsManager.GetInstance().MaxGet_MiniGame;

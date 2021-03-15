@@ -104,7 +104,7 @@ public class RouletteInit : MonoBehaviour
         else if(36.5 < result && result < 72.5)
         {
             PlayerPrefsManager.GetInstance().key += 5;
-            UserWallet.GetInstance().ShowUserKey();
+            //UserWallet.GetInstance().ShowUserKey();
             r_Index = 1;
             r_Content = "열쇠 5 개를 획득했다!";
             tmpContent = "열쇠 10 개를 획득했다!";
@@ -158,7 +158,7 @@ public class RouletteInit : MonoBehaviour
         else if (216.5 < result && result < 252.5)
         {
             PlayerPrefsManager.GetInstance().key += 10;
-            UserWallet.GetInstance().ShowUserKey();
+            //UserWallet.GetInstance().ShowUserKey();
             r_Index = 6;
             r_Content = "열쇠 10 개를 획득했다!";
             tmpContent = "열쇠 20 개를 획득했다!";

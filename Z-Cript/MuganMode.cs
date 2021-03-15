@@ -95,7 +95,7 @@ public class MuganMode : MonoBehaviour
         PlayerPrefsManager.GetInstance().bossHP = PlayerPrefsManager.GetInstance().MAX_boss_HP;
         // 입장 완료되면 키 하나 소모
         PlayerPrefsManager.GetInstance().key--;
-        UserWallet.GetInstance().ShowUserKey();
+        //UserWallet.GetInstance().ShowUserKey();
         // 키회복 코루틴 스타트
         booster_KEY.KeyTimerStart();
 

@@ -1,6 +1,4 @@
 ﻿using EasyMobile;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -57,7 +55,8 @@ public class UserWallet : MonoBehaviour
         ShowUserGold();
         ShowUserDia();
         ShowUserMilk();
-        ShowUserKey();
+        //ShowUserKey();
+        PlayerPrefsManager.GetInstance().key += 0;
         ShowUserMatZip();
         ShowUserHP();
         ShowUserATK();
@@ -78,7 +77,7 @@ public class UserWallet : MonoBehaviour
     /// 골드
     public void ShowUserGold()
     {
-        var value = PlayerPrefsManager.GetInstance().gold;
+        string value = PlayerPrefsManager.GetInstance().gold;
         GoldText.text = dts.fDoubleToGoldOutPut(value);
         PlayerPrefs.Save();
     }
@@ -97,7 +96,7 @@ public class UserWallet : MonoBehaviour
     /// 국밥
     public void ShowUserMilk()
     {
-        var value = PlayerPrefsManager.GetInstance().gupbap;
+        string value = PlayerPrefsManager.GetInstance().gupbap;
         MilkText.text = SeetheNatural(double.Parse(value));
         PlayerPrefs.Save();
     }
@@ -105,25 +104,25 @@ public class UserWallet : MonoBehaviour
     /// 쌀밥
     public void ShowUserSSalbap()
     {
-        var value = PlayerPrefsManager.GetInstance().ssalbap;
+        string value = PlayerPrefsManager.GetInstance().ssalbap;
         SSalText.text = SeetheNatural(double.Parse(value));
         PlayerPrefs.Save();
 
     }
 
     /// 열쇠
-    public void ShowUserKey()
-    {
-        var value = PlayerPrefsManager.GetInstance().key;
-        KeyText.text = value + "/20";
-        PlayerPrefs.Save();
-    }
+    //public void ShowUserKey()
+    //{
+    //    var value = PlayerPrefsManager.GetInstance().key;
+    //    KeyText.text = value + "/20";
+    //    PlayerPrefs.Save();
+    //}
 
     /// 캐릭터 정보 체력
     public void ShowUserHP()
     {
-        var tmp = PlayerPrefsManager.GetInstance().Mat_MaxHP;
-        var value = SeetheTruth(double.Parse(tmp));
+        string tmp = PlayerPrefsManager.GetInstance().Mat_MaxHP;
+        string value = SeetheTruth(double.Parse(tmp));
         HP_Text.text = value;
         PlayerPrefs.Save();
 
@@ -132,8 +131,8 @@ public class UserWallet : MonoBehaviour
     /// 캐릭터 정보 공격력
     public void ShowUserATK()
     {
-        var tmp = PlayerPrefsManager.GetInstance().PlayerDPS;
-        var value = SeetheTruth(double.Parse(SeetheTruth(tmp)));
+        string tmp = PlayerPrefsManager.GetInstance().PlayerDPS;
+        string value = SeetheTruth(double.Parse(SeetheTruth(tmp)));
         ATK_Text.text = value;
         PlayerPrefs.Save();
 
@@ -142,8 +141,8 @@ public class UserWallet : MonoBehaviour
     /// 캐릭터 정보 크확 크댐
     public void ShowUserCritical_2_()
     {
-        var tmp = PlayerPrefsManager.GetInstance().CriticalDPS;
-        var value = SeetheTruth(double.Parse(SeetheTruth(tmp)));
+        string tmp = PlayerPrefsManager.GetInstance().CriticalDPS;
+        string value = SeetheTruth(double.Parse(SeetheTruth(tmp)));
 
         // 크리티컬 대미지
         CRD_Text.text = value;
@@ -159,7 +158,7 @@ public class UserWallet : MonoBehaviour
     public void ShowUserMatZip()
     {
         /// 계산 완료 뽑아먹기
-        var value = PlayerPrefsManager.GetInstance().Mat_Mattzip;
+        string value = PlayerPrefsManager.GetInstance().Mat_Mattzip;
 
         ///// 맷집 별로 방어 게이지 곱 연산
         //int mattmp = Mathf.FloorToInt(float.Parse(value) * 0.0001f);
@@ -338,7 +337,7 @@ public class UserWallet : MonoBehaviour
         //float artiGoldPer = PlayerPrefsManager.GetInstance().Arti_GoldPer * 1.0f;
         float luckyPer = PlayerPrefsManager.GetInstance().Arti_LuckyBoxPer;
         ///골드 획득  계산식 수정 > 골드 획득량 = 맷집 * 1 * (유니폼 + 스킬 + 유물 + 훈련장)
-        var tmpDps = PlayerPrefsManager.GetInstance().Mat_Mattzip;
+        string tmpDps = PlayerPrefsManager.GetInstance().Mat_Mattzip;
         /// 훈련장 골드 버프
         double goldPer = PlayerPrefsManager.GetInstance().BG_CoinStat;
         double artiGoldPer = 1d * (
@@ -396,24 +395,37 @@ public class UserWallet : MonoBehaviour
 
 
     /// <summary>
-    /// [펀치 럭키박스] 광고 안보기 버튼 눌렀을때 기본 제공량(10배)만 받아먹기
+    /// [펀치 럭키박스] 광고 안보기 버튼 눌렀을때 기본 제공량만 받아먹기
     /// </summary>
     public void RewordGold5()
     {
         Debug.LogError("Punch Lucky Box : " + Gatcha);
 
+
+
+
         if (Gatcha < 80f)
         {
-            var goldPer = PlayerPrefsManager.GetInstance().BG_CoinStat;
-            float artiGoldPer = PlayerPrefsManager.GetInstance().Arti_GoldPer * 1.0f;
-            string gold = PlayerPrefsManager.GetInstance().gold;
-            var value = PlayerPrefsManager.GetInstance().PlayerDPS;
-            value = dts.multipleStringDouble(value, 10d * 2d * (goldPer + (artiGoldPer * 0.01d)));
+            //골드 획득
+            string tmpGold = PlayerPrefsManager.GetInstance().gold;
+            ///골드 획득  계산식 수정 > 골드 획득량 = 맷집 * 1 * (유니폼 + 스킬 + 유물 + 훈련장)
+            string value = PlayerPrefsManager.GetInstance().Mat_Mattzip;
+            /// 훈련장 골드 버프
+            double goldPer = PlayerPrefsManager.GetInstance().BG_CoinStat;
+            double artiGoldPer = 1d * (
+                // 골드 증가 유물
+                PlayerPrefsManager.GetInstance().Arti_GoldPer +
+                //유니폼 골드증가
+                PlayerPrefsManager.GetInstance().uniformInfo[1].Uniform_LV +
+                PlayerPrefsManager.GetInstance().uniformInfo[2].Uniform_LV +
+                // 캐릭터 스킬 골드 증가
+                PlayerPrefsManager.GetInstance().uniformInfo[3].Skill_LV);
 
+            value = dts.multipleStringDouble(value, 5d * (goldPer + (artiGoldPer * 0.01d)));
             //
-            PlayerPrefsManager.GetInstance().gold = dts.AddStringDouble(gold, value);
+            PlayerPrefsManager.GetInstance().gold = dts.AddStringDouble(double.Parse(tmpGold), double.Parse(value));
             PopUpObjectManager.GetInstance().GettingGoldMessage(double.Parse(value));
-            PopUpObjectManager.GetInstance().ShowWarnnigProcess(SeetheNatural(double.Parse(value)) + " 골드를 획득하셨습니다.");
+            PopUpObjectManager.GetInstance().ShowWarnnigProcess(UserWallet.GetInstance().SeetheNatural(double.Parse(value)) + " 골드를 획득하셨습니다.");
 
             Gold_5_Text.text = SeetheNatural(double.Parse(value));
 
@@ -447,7 +459,7 @@ public class UserWallet : MonoBehaviour
 
 
 
-   
+
 
 
 
@@ -459,7 +471,7 @@ public class UserWallet : MonoBehaviour
 
     public void DiamondForFreeAB()
     {
-        if(PlayerPrefsManager.GetInstance().questInfo[0].daily_LMITABS >= 10)
+        if (PlayerPrefsManager.GetInstance().questInfo[0].daily_LMITABS >= 10)
         {
             PopUpObjectManager.GetInstance().ShowWarnnigProcess("일일 제한 광고 횟수를 모두 소진하셨습니다.");
             return;
@@ -531,7 +543,7 @@ public class UserWallet : MonoBehaviour
 
         //다이아 확률
         //PlayerPrefsManager.GetInstance().diamond = dts.AddStringDouble(PlayerPrefsManager.GetInstance().diamond, targetDia);
-        var ddd = PlayerPrefs.GetFloat("dDiamond") + float.Parse(targetDia);
+        float ddd = PlayerPrefs.GetFloat("dDiamond") + float.Parse(targetDia);
 
         PlayerPrefs.SetFloat("dDiamond", ddd);
         ShowUserDia();
@@ -560,7 +572,7 @@ public class UserWallet : MonoBehaviour
     void SucessAbsComp()
     {
         PlayerPrefsManager.GetInstance().questInfo[0].daily_LMITABS++;
-        DailyText.text = "일일 제한 10회 ( "+ PlayerPrefsManager.GetInstance().questInfo[0].daily_LMITABS + " / 10 )";
+        DailyText.text = "일일 제한 10회 ( " + PlayerPrefsManager.GetInstance().questInfo[0].daily_LMITABS + " / 10 )";
     }
 
 

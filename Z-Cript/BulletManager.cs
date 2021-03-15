@@ -8,7 +8,6 @@ public class BulletManager : MonoBehaviour
     //public Sprite CriticalAtk;
 
     float bulletSpeed = 30;
-    bool isFristbullet;
 
     public Rigidbody thisRigidbody;
     public CapsuleCollider thisCollider;
@@ -487,7 +486,7 @@ public class BulletManager : MonoBehaviour
         coin = Lean.Pool.LeanPool.Spawn(tmp, transform.position, transform.rotation);
         coin.GetComponent<CoinManager>().CoinInit(_isCritic);
 
-        // 체력 게이지 DOWN / 피버 게이지 UP // 주사위 굴림 - 선물상자 드랍
+        /// 체력 게이지 DOWN / 피버 게이지 UP // 주사위 굴림 - 선물상자 드랍
         HP_Calculate(tmpC, _isCritic);
         /// 맷집 게이지 증가
         Mat_100_Count(_isCritic);
@@ -748,8 +747,16 @@ public class BulletManager : MonoBehaviour
         if (PlayerPrefsManager.GetInstance().isHPsubing) return;
 
         PlayerPrefsManager.GetInstance().isHPsubing = true;
+        /// 방패 방어력 계산
+         
+        /// 방어력 계산 값  ( 스탯 방어력 + 방패 방어력 + 보유 방패 방어력 ) * 유물 방어력
+        string vallu = PlayerPrefsManager.GetInstance().Defence_Lv.ToString();
+            //(PlayerPrefsManager.GetInstance().Defence_Lv 
+            //+ PlayerPrefsManager.GetInstance().Defence_Lv) 
+            //* PlayerPrefsManager.GetInstance().Defence_Lv)
+            //.ToString();
 
-        string vallu = UserWallet.GetInstance().GetMattzipForCul(PlayerPrefsManager.GetInstance().Mat_Mattzip);
+        /// 공격력 - 방어력
         string PunchDPS = dts.SubStringDouble(PlayerPrefsManager.GetInstance().PlayerDPS, vallu);
         //var PunchDPS = PlayerPrefsManager.GetInstance().PlayerDPS;
 

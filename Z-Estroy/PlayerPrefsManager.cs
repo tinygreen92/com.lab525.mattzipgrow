@@ -545,7 +545,6 @@ public class PlayerPrefsManager : MonoBehaviour
         {
             if (!PlayerPrefs.HasKey("key")) return 20;
             var _key = PlayerPrefs.GetInt("key");
-            UserWallet.GetInstance().ShowUserKey();
             return _key;
         }
 
@@ -554,10 +553,11 @@ public class PlayerPrefsManager : MonoBehaviour
             int kkey = value;
             // 최대 열쇠 범위 20억
             if (value >= 2000000000) kkey = 2000000000;
-
+            //
+            UserWallet.GetInstance().KeyText.text = kkey + "/20";
+            //
             PlayerPrefs.SetInt("key", kkey);
             PlayerPrefs.Save();
-            UserWallet.GetInstance().ShowUserKey();
         }
     }
 
@@ -864,7 +864,7 @@ public class PlayerPrefsManager : MonoBehaviour
 
 
             tmp1 = dts.AddStringDouble(RawAttackDamage, AtkPercent);
-            tmp2 = 1.0f + (0.01f * (Stat_is3ATK + float.Parse(ATK_PER_UP) + float.Parse(Dia_ATK_PER_UP) + (uniformInfo[0].Skill_LV *1f)));
+            tmp2 = 1.0f + (0.01f * (Stat_is3ATK + float.Parse(Dia_ATK_PER_UP) + (uniformInfo[0].Skill_LV *1f)));
 
             /// 맷집3배 버프 삭제후 -> 공격력 2배 버프로 변경됨
             if(isBoosterMattzip)
@@ -941,7 +941,6 @@ public class PlayerPrefsManager : MonoBehaviour
             double tmptmp = 1.0d+ (0.01d * 
                 
                 (double.Parse(Dia_HP_PER_UP) +
-                double.Parse(HP_PER_UP) + 
                 Stat_is2Stamina + 
                 (uniformInfo[1].Skill_LV * 1d) +
                 double.Parse(PlayerPrefs.GetString("Chara_HP_UP", "0")))
@@ -1170,12 +1169,16 @@ public class PlayerPrefsManager : MonoBehaviour
         }
     }
 
-    /// (string)공격력 % 증가량                       ATK_PER_UP
-    public string ATK_PER_UP
+
+
+
+
+    /// (string)방패 방어력으로 사용 
+    public string Defence_Shiled
     {
         get
         {
-            if (!PlayerPrefs.HasKey("ATK_PER_UP")) return "1";
+            if (!PlayerPrefs.HasKey("ATK_PER_UP")) return "0";
             var tmp = PlayerPrefs.GetString("ATK_PER_UP");
             return tmp;
         }
@@ -1192,7 +1195,7 @@ public class PlayerPrefsManager : MonoBehaviour
     {
         get
         {
-            if (!PlayerPrefs.HasKey("HP_PER_UP")) return "1";
+            if (!PlayerPrefs.HasKey("HP_PER_UP")) return "0";
             var tmp = PlayerPrefs.GetString("HP_PER_UP");
             return tmp;
         }
@@ -1595,8 +1598,10 @@ public class PlayerPrefsManager : MonoBehaviour
         }
     }
 
-    /// (int)맷집 레벨                          Mattzip_Lv
-    public int Mattzip_Lv
+    /// <summary>
+    /// 스탯 방어력 강화 레벨
+    /// </summary>
+    public int Defence_Lv
     {
         get
         {
@@ -1611,6 +1616,7 @@ public class PlayerPrefsManager : MonoBehaviour
             PlayerPrefs.Save();
         }
     }
+
 
     /// (float)그로기 터치 횟수                          GroggyTouch
     public float GroggyTouch
@@ -3730,8 +3736,8 @@ public class PlayerPrefsManager : MonoBehaviour
 
                 cloudTmpForGPGS_116 = PlayerPrefs.GetString("questInfo3"),
 
-                cloudTmpForGPGS_117 = PlayerPrefs.GetString("ATK_PER_UP", "1"),
-                cloudTmpForGPGS_118 = PlayerPrefs.GetString("HP_PER_UP", "1"),
+                cloudTmpForGPGS_117 = PlayerPrefs.GetString("ATK_PER_UP", "0"),
+                cloudTmpForGPGS_118 = PlayerPrefs.GetString("HP_PER_UP", "0"),
 
                 cloudTmpForGPGS_119 = PlayerPrefs.GetInt("ATK_PER_UP_Lv", 0),
                 cloudTmpForGPGS_120 = PlayerPrefs.GetInt("HP_PER_UP_Lv", 0),

@@ -77,10 +77,11 @@ public class GroggyManager : MonoBehaviour
 
         _PlayerDPS = PlayerPrefsManager.GetInstance().PlayerDPS;
 
-
-        //Mat_100_Count();
+        /// 껏다 키면 맷집 증가 게이지 복구
+        Mat_100_Count();
         //PlayerPrefsManager.GetInstance().Mat_100 = 0;
 
+        /// 껏다 키면 스킬게이지 초기화
         Skill300.fillAmount = 0;
         PlayerPrefsManager.GetInstance().Mat_Skill_300 = 0;
     }
@@ -93,19 +94,8 @@ public class GroggyManager : MonoBehaviour
     {
         if (!PlayerPrefsManager.GetInstance().isFristGameStart) return;
 
-        var maxMat = PlayerPrefsManager.GetInstance().Cilcked_Cnt_MattZip;
-        var intMattzip = float.Parse(PlayerPrefsManager.GetInstance().Mat_Mattzip);
-        var resultMattHead = intMattzip * 0.00000001f;
-
-        if (resultMattHead <= 0)
-        {
-            maxMat = 0;
-        }
-        else
-        {
-            maxMat *= resultMattHead;
-        }
-        Mattzip100.fillAmount = PlayerPrefsManager.GetInstance().Mat_100 / (100.0f + Mathf.Floor(maxMat));
+        /// 누적 대미지 / 증가 필요 대미지
+        Mattzip100.fillAmount = PlayerPrefsManager.GetInstance().Mat_100 / PlayerPrefsManager.GetInstance().Cilcked_Cnt_MattZip;
     }
     //Coroutine skillcd;
     //
@@ -751,13 +741,13 @@ public class GroggyManager : MonoBehaviour
     public Text Mat_HP_UP_Price;
     public Text Mat_HP_UP_LV;
 
-    public Text ATK_PER_UP_TEXT;
-    public Text ATK_PER_UP_Price;
-    public Text ATK_PER_UP_LV;
+    //public Text ATK_PER_UP_TEXT;
+    //public Text ATK_PER_UP_Price;
+    //public Text ATK_PER_UP_LV;
 
-    public Text HP_PER_UP_TEXT;
-    public Text HP_PER_UP_Price;
-    public Text HP_PER_UP_LV;
+    //public Text HP_PER_UP_TEXT;
+    //public Text HP_PER_UP_Price;
+    //public Text HP_PER_UP_LV;
 
     public Text Dia_ATK_PER_UP_TEXT;
     public Text Dia_ATK_PER_UP_Price;
@@ -787,9 +777,9 @@ public class GroggyManager : MonoBehaviour
 
     //0709
 
-    public Text Gold_Recov_Per_UP_TEXT;
-    public Text Gold_Recov_Per_UP_Price;
-    public Text Gold_Recov_Per_UP_LV;
+    //public Text Gold_Recov_Per_UP_TEXT;
+    //public Text Gold_Recov_Per_UP_Price;
+    //public Text Gold_Recov_Per_UP_LV;
 
     public Text Dia_Recov_Per_UP_TEXT;
     public Text Dia_Recov_Per_UP_Price;
@@ -802,8 +792,8 @@ public class GroggyManager : MonoBehaviour
     public GameObject Recov_UP_Gray;
     public GameObject Mat_HP_UP_Gray;
 
-    public GameObject ATK_PER_UP_Gray;
-    public GameObject HP_PER_UP_Gray;
+    //public GameObject ATK_PER_UP_Gray;
+    //public GameObject HP_PER_UP_Gray;
 
     public GameObject Dia_ATK_PER_UP_Gray;
     public GameObject Dia_HP_PER_UP_Gray;
@@ -816,7 +806,7 @@ public class GroggyManager : MonoBehaviour
     public GameObject Dia_CRC_UP_Gray;
     public GameObject Dia_CRD_UP_Gray;
 
-    public GameObject Gold_Recov_Per_UP_Gray;
+    //public GameObject Gold_Recov_Per_UP_Gray;
     public GameObject Dia_Recov_Per_UP_Gray;
 
 
@@ -827,8 +817,8 @@ public class GroggyManager : MonoBehaviour
     public GameObject Recov_UP_Max;
     public GameObject Mat_HP_UP_May;
 
-    public GameObject ATK_PER_UP_Max;
-    public GameObject HP_PER_UP_Max;
+    //public GameObject ATK_PER_UP_Max;
+    //public GameObject HP_PER_UP_Max;
 
     public GameObject Dia_ATK_PER_UP_Max;
     public GameObject Dia_HP_PER_UP_Max;
@@ -843,7 +833,7 @@ public class GroggyManager : MonoBehaviour
 
     //
 
-    public GameObject Gold_Recov_Per_UP_Max;
+    //public GameObject Gold_Recov_Per_UP_Max;
     public GameObject Dia_Recov_Per_UP_Max;
 
 
@@ -1154,8 +1144,8 @@ public class GroggyManager : MonoBehaviour
         if (isBtnDown3) TEST_Recov_UP();
         if (isBtnDown4) TEST_Mattzip_up();
 
-        if (isBtnDown5) TEST_ATK_PER_UP();
-        if (isBtnDown6) TEST_HP_PER_UP();
+        //if (isBtnDown5) TEST_ATK_PER_UP();
+        //if (isBtnDown6) TEST_HP_PER_UP();
 
         if (isBtnDown7) DIA_ATK_PER_UP();
         if (isBtnDown8) DIA_HP_PER_UP();
@@ -1169,7 +1159,7 @@ public class GroggyManager : MonoBehaviour
         if (isBtnDown12) DIA_CRD_UP();
 
         // 0709
-        if (isBtnDown13) Gold_RECOV_UP();
+        //if (isBtnDown13) Gold_RECOV_UP();
         if (isBtnDown14) DIA_RECOV_UP();
 
     }
@@ -1178,7 +1168,7 @@ public class GroggyManager : MonoBehaviour
     int PowerLv;
     int HP_Lv;
     int Rec_Lv;
-    int Mat_HP_Lv;
+    int Defend_Lv;
     int ATK_PER_UP_Lv;
     int HP_PER_UP_Lv;
     int Dia_ATK_PER_UP_Lv;
@@ -1229,9 +1219,10 @@ public class GroggyManager : MonoBehaviour
                 break;
 
 
-            case 3: // 맷집 골드 강화
-                _defalt = 500.0d; // 디폴트 값
-                if (lv != 0) _defalt *= Math.Pow(1.01, lv);
+            /// 50 * ( 1 + 0.07 ) ^ Lv   
+            case 3: // 방어력  골드 강화 
+                _defalt = 50.0d; // 디폴트 값
+                if (lv != 0) _defalt *= Math.Pow(1.07, lv);
                 _result = _defalt.ToString("f0");
                 break;
 
@@ -1294,10 +1285,10 @@ public class GroggyManager : MonoBehaviour
         PowerLv = PlayerPrefsManager.GetInstance().ATK_Lv;
         HP_Lv = PlayerPrefsManager.GetInstance().Mat_HP_Lv;
         Rec_Lv = PlayerPrefsManager.GetInstance().Recov_Lv;
-        Mat_HP_Lv = PlayerPrefsManager.GetInstance().Mattzip_Lv;
+        Defend_Lv = PlayerPrefsManager.GetInstance().Defence_Lv;
 
-        ATK_PER_UP_Lv = PlayerPrefsManager.GetInstance().ATK_PER_UP_Lv;
-        HP_PER_UP_Lv = PlayerPrefsManager.GetInstance().HP_PER_UP_Lv;
+        //ATK_PER_UP_Lv = PlayerPrefsManager.GetInstance().ATK_PER_UP_Lv;
+        //HP_PER_UP_Lv = PlayerPrefsManager.GetInstance().HP_PER_UP_Lv;
 
         Dia_ATK_PER_UP_Lv = PlayerPrefsManager.GetInstance().Dia_ATK_PER_UP_Lv;
         Dia_HP_PER_UP_Lv = PlayerPrefsManager.GetInstance().Dia_HP_PER_UP_Lv;
@@ -1311,7 +1302,7 @@ public class GroggyManager : MonoBehaviour
 
         //0709
 
-        Gold_HPPER_Lv = PlayerPrefsManager.GetInstance().Gold_RECOV_UP_Lv;
+        //Gold_HPPER_Lv = PlayerPrefsManager.GetInstance().Gold_RECOV_UP_Lv;
         Dia_HPPER_Lv = PlayerPrefsManager.GetInstance().Dia_RECOV_UP_Lv;
 
 
@@ -1320,7 +1311,7 @@ public class GroggyManager : MonoBehaviour
         if (PowerLv >= 50000) PowerLv = 50000;
         if (HP_Lv >= 50000) HP_Lv = 50000;
         if (Rec_Lv >= 50000) Rec_Lv = 50000;
-        if (Mat_HP_Lv >= 50000) Mat_HP_Lv = 50000;
+        if (Defend_Lv >= 50000) Defend_Lv = 50000;
 
         if (ATK_PER_UP_Lv >= 10000) ATK_PER_UP_Lv = 10000;
         if (HP_PER_UP_Lv >= 10000) HP_PER_UP_Lv = 10000;
@@ -1344,10 +1335,10 @@ public class GroggyManager : MonoBehaviour
         POWER_UP_LV.text = "Lv. " + PowerLv;
         HP_UP_LV.text = "Lv. " + HP_Lv;
         Recov_UP_LV.text = "Lv. " + Rec_Lv;
-        Mat_HP_UP_LV.text = "Lv. " + Mat_HP_Lv;
+        Mat_HP_UP_LV.text = "Lv. " + Defend_Lv;
 
-        ATK_PER_UP_LV.text = "Lv. " + ATK_PER_UP_Lv;
-        HP_PER_UP_LV.text = "Lv. " + HP_PER_UP_Lv;
+        //ATK_PER_UP_LV.text = "Lv. " + ATK_PER_UP_Lv;
+        //HP_PER_UP_LV.text = "Lv. " + HP_PER_UP_Lv;
 
         Dia_ATK_PER_UP_LV.text = "Lv. " + Dia_ATK_PER_UP_Lv;
         Dia_HP_PER_UP_LV.text = "Lv. " + Dia_HP_PER_UP_Lv;
@@ -1362,15 +1353,15 @@ public class GroggyManager : MonoBehaviour
 
         // 0709
 
-        Gold_Recov_Per_UP_LV.text = "Lv. " + Gold_HPPER_Lv;
+        //Gold_Recov_Per_UP_LV.text = "Lv. " + Gold_HPPER_Lv;
         Dia_Recov_Per_UP_LV.text = "Lv. " + Dia_HPPER_Lv;
 
 
         //-------------------------------------------------------------------------------------------------------//
         //
 
-        currentAtk = (PowerLv * 1).ToString();
-        nextAtk = ((PowerLv + 1) * 1).ToString();
+        currentAtk = PowerLv.ToString();
+        nextAtk = (PowerLv + 1).ToString();
         
         if(PowerLv == 0) currentAtk = "1";
 
@@ -1445,16 +1436,16 @@ public class GroggyManager : MonoBehaviour
 
         //-------------------------------------------------------------------------------------------------------//
 
-        currentRec = (Mat_HP_Lv * 10).ToString();
-        nextRec = ((Mat_HP_Lv + 1) * 10).ToString();
+        currentRec = Defend_Lv.ToString();
+        nextRec = (Defend_Lv + 1).ToString();
 
         tmpATK = currentRec;
         tmptmpATK = nextRec;
 
         PlayerPrefsManager.GetInstance().MattzipStat = float.Parse(tmpATK);
-        Mat_HP_UP_TEXT.text = "맷집 " + UserWallet.GetInstance().SeetheNatural(double.Parse(tmpATK)) + " > " + UserWallet.GetInstance().SeetheNatural(double.Parse(tmptmpATK));
+        Mat_HP_UP_TEXT.text = "방어력 " + UserWallet.GetInstance().SeetheNatural(double.Parse(tmpATK)) + " > " + UserWallet.GetInstance().SeetheNatural(double.Parse(tmptmpATK));
         /// 소비 국밥 표기
-        currentRec = GetNormalUpPrice(3, Mat_HP_Lv);
+        currentRec = GetNormalUpPrice(3, Defend_Lv);
 
         /// 골드 업그레이드 비용 감소.
         doublePrice = double.Parse(currentRec);
@@ -1462,56 +1453,52 @@ public class GroggyManager : MonoBehaviour
 
         Mat_HP_UP_Price.text = UserWallet.GetInstance().SeetheNatural(doublePrice);
 
-        /// 맷집 표기
-        UserWallet.GetInstance().ShowUserMatZip();
-
-
         //-------------------------------------------------------------------------------------------------------//
         //
 
-        currentAtk = (ATK_PER_UP_Lv * 0.5d).ToString();
-        nextAtk = ((ATK_PER_UP_Lv + 1) * 0.5d).ToString();
+        //currentAtk = (ATK_PER_UP_Lv * 0.5d).ToString();
+        //nextAtk = ((ATK_PER_UP_Lv + 1) * 0.5d).ToString();
 
-        tmpATK = (currentAtk);
-        tmptmpATK = (nextAtk);
+        //tmpATK = (currentAtk);
+        //tmptmpATK = (nextAtk);
 
-        PlayerPrefsManager.GetInstance().ATK_PER_UP = tmpATK;
+        //PlayerPrefsManager.GetInstance().ATK_PER_UP = tmpATK;
         //ChraterInfo.GetChild(1).GetChild(2).GetComponent<Text>().text = UserWallet.GetInstance().SeetheTruth(PlayerPrefsManager.GetInstance().PlayerDPS);
 
-        ATK_PER_UP_TEXT.text = "공격력 " + tmpATK + "% > " + tmptmpATK + "%";
-        /// 소비 골드 표기
-        doublePrice = GetPerUpPrice(4, ATK_PER_UP_Lv);
+        //ATK_PER_UP_TEXT.text = "공격력 " + tmpATK + "% > " + tmptmpATK + "%";
+        ///// 소비 골드 표기
+        //doublePrice = GetPerUpPrice(4, ATK_PER_UP_Lv);
 
-        /// 골드 업그레이드 비용 감소.
-        doublePrice = (doublePrice * (1.0d - PlayerPrefsManager.GetInstance().Arti_GoldUpgrade * 0.001d));
+        ///// 골드 업그레이드 비용 감소.
+        //doublePrice = (doublePrice * (1.0d - PlayerPrefsManager.GetInstance().Arti_GoldUpgrade * 0.001d));
 
-        ATK_PER_UP_Price.text = UserWallet.GetInstance().SeetheNatural(doublePrice);
+        //ATK_PER_UP_Price.text = UserWallet.GetInstance().SeetheNatural(doublePrice);
 
 
 
         //-------------------------------------------------------------------------------------------------------//
         //
 
-        currentAtk = (HP_PER_UP_Lv * 0.5d).ToString();
-        nextAtk = ((HP_PER_UP_Lv + 1) * 0.5d).ToString();
+        //currentAtk = (HP_PER_UP_Lv * 0.5d).ToString();
+        //nextAtk = ((HP_PER_UP_Lv + 1) * 0.5d).ToString();
 
-        tmpATK = (currentAtk);
-        tmptmpATK = (nextAtk);
+        //tmpATK = (currentAtk);
+        //tmptmpATK = (nextAtk);
 
-        PlayerPrefsManager.GetInstance().HP_PER_UP = tmpATK;
+        //PlayerPrefsManager.GetInstance().HP_PER_UP = tmpATK;
         //ChraterInfo.GetChild(1).GetChild(2).GetComponent<Text>().text = UserWallet.GetInstance().SeetheTruth(PlayerPrefsManager.GetInstance().PlayerDPS);
 
-        HP_PER_UP_TEXT.text = "체력 " + tmpATK + "% > " + tmptmpATK + "%";
+        //HP_PER_UP_TEXT.text = "체력 " + tmpATK + "% > " + tmptmpATK + "%";
 
 
 
-        /// 소비 골드 표기
-        doublePrice = GetPerUpPrice(5, HP_PER_UP_Lv);
+        ///// 소비 골드 표기
+        //doublePrice = GetPerUpPrice(5, HP_PER_UP_Lv);
 
-        /// 골드 업그레이드 비용 감소.
-        doublePrice = (doublePrice * (1.0d - PlayerPrefsManager.GetInstance().Arti_GoldUpgrade * 0.001d));
+        ///// 골드 업그레이드 비용 감소.
+        //doublePrice = (doublePrice * (1.0d - PlayerPrefsManager.GetInstance().Arti_GoldUpgrade * 0.001d));
 
-        HP_PER_UP_Price.text = UserWallet.GetInstance().SeetheNatural(doublePrice);
+        //HP_PER_UP_Price.text = UserWallet.GetInstance().SeetheNatural(doublePrice);
 
 
 
@@ -1613,7 +1600,6 @@ public class GroggyManager : MonoBehaviour
 
 
 
-
         //-----------------------------------------------------------------------------------------------------
         ///  0615
         // 다이아 크확
@@ -1658,21 +1644,21 @@ public class GroggyManager : MonoBehaviour
         //////////////////////////////////////////////////////////
 
 
-        ///  0709
-        // 골드 체회퍼
-        ///  
-        tmpATK = (10 * Gold_HPPER_Lv).ToString();
-        tmptmpATK = (10 * (Gold_HPPER_Lv + 1)).ToString();
+        /////  0709
+        //// 골드 체회퍼
+        /////  
+        //tmpATK = (10 * Gold_HPPER_Lv).ToString();
+        //tmptmpATK = (10 * (Gold_HPPER_Lv + 1)).ToString();
 
-        Gold_Recov_Per_UP_TEXT.text = "체력 회복력 " + tmpATK + "% > " + tmptmpATK + "%";
+        //Gold_Recov_Per_UP_TEXT.text = "체력 회복력 " + tmpATK + "% > " + tmptmpATK + "%";
 
-        /// 소비 골드 표기
-        doublePrice = GetPerUpPrice(8, Gold_HPPER_Lv);
+        ///// 소비 골드 표기
+        //doublePrice = GetPerUpPrice(8, Gold_HPPER_Lv);
 
-        /// 골드 업그레이드 비용 감소.
-        doublePrice = (doublePrice * (1.0d - PlayerPrefsManager.GetInstance().Arti_GoldUpgrade * 0.001d));
+        ///// 골드 업그레이드 비용 감소.
+        //doublePrice = (doublePrice * (1.0d - PlayerPrefsManager.GetInstance().Arti_GoldUpgrade * 0.001d));
 
-        Gold_Recov_Per_UP_Price.text = UserWallet.GetInstance().SeetheNatural(doublePrice);
+        //Gold_Recov_Per_UP_Price.text = UserWallet.GetInstance().SeetheNatural(doublePrice);
 
 
 
@@ -1690,38 +1676,18 @@ public class GroggyManager : MonoBehaviour
 
         Dia_Recov_Per_UP_Price.text = UserWallet.GetInstance().SeetheNatural(double.Parse(tmpATK));
 
+        /// 퀘스트 올려줌
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        ///////////////////////////////////////////
-
-        PlayerPrefsManager.GetInstance().questInfo[0].All_Mattzip = PlayerPrefsManager.GetInstance().Mattzip_Lv;
+        PlayerPrefsManager.GetInstance().questInfo[0].All_Mattzip = PlayerPrefsManager.GetInstance().Defence_Lv;
         PlayerPrefsManager.GetInstance().questInfo[0].All_Atk = PlayerPrefsManager.GetInstance().ATK_Lv;
         PlayerPrefsManager.GetInstance().questInfo[0].All_HP = PlayerPrefsManager.GetInstance().Mat_HP_Lv;
         // 일단 세개
 
-        PlayerPrefsManager.GetInstance().questInfo4[0].All_Per_Atk = PlayerPrefsManager.GetInstance().ATK_PER_UP_Lv;
-        PlayerPrefsManager.GetInstance().questInfo4[0].All_Per_HP = PlayerPrefsManager.GetInstance().HP_PER_UP_Lv;
+        //PlayerPrefsManager.GetInstance().questInfo4[0].All_Per_Atk = PlayerPrefsManager.GetInstance().ATK_PER_UP_Lv;
+        //PlayerPrefsManager.GetInstance().questInfo4[0].All_Per_HP = PlayerPrefsManager.GetInstance().HP_PER_UP_Lv;
 
         PlayerPrefsManager.GetInstance().questInfo4[0].All_Dia_Atk = PlayerPrefsManager.GetInstance().Dia_ATK_PER_UP_Lv;
         PlayerPrefsManager.GetInstance().questInfo4[0].All_Dia_HP = PlayerPrefsManager.GetInstance().Dia_HP_PER_UP_Lv;
-
-        //
-
 
 
         ////////////////////////////////////////////
@@ -1731,8 +1697,8 @@ public class GroggyManager : MonoBehaviour
         Recov_UP_Cheak();
         Mattzip_UP_Cheak();
 
-        ATK_PER_UP_Cheak();
-        HP_PER_UP_Cheak();
+        //ATK_PER_UP_Cheak();
+        //HP_PER_UP_Cheak();
 
         Dia_ATK_PER_UP_Cheak();
         Dia_HP_PER_UP_Cheak();
@@ -1746,7 +1712,7 @@ public class GroggyManager : MonoBehaviour
 
         // 0709
 
-        Gold_RECOV_Cheak();
+        //Gold_RECOV_Cheak();
         DIA_RECOV_UP_Cheak();
 
         PlayerPrefs.Save();
@@ -1755,39 +1721,39 @@ public class GroggyManager : MonoBehaviour
 
     string ATK_PER_UPgoldPass;
 
-    /// <summary>
-    /// 돈이 안되면 회색으로.
-    /// </summary>
-    bool ATK_PER_UP_Cheak()
-    {
-        // 현재 공격력 퍼센트 레벨
-        int PowerLv = PlayerPrefsManager.GetInstance().ATK_PER_UP_Lv;
+    ///// <summary>
+    ///// 돈이 안되면 회색으로.
+    ///// </summary>
+    //bool ATK_PER_UP_Cheak()
+    //{
+    //    // 현재 공격력 퍼센트 레벨
+    //    int PowerLv = PlayerPrefsManager.GetInstance().ATK_PER_UP_Lv;
 
-        if (PowerLv >= 10000)
-        {
-            ATK_PER_UP_Max.SetActive(true);
-            return false;
-        }
+    //    if (PowerLv >= 10000)
+    //    {
+    //        ATK_PER_UP_Max.SetActive(true);
+    //        return false;
+    //    }
 
-        // 다음 레벨의 가격 불러오고.
-        double doublePrice = GetPerUpPrice(4, PowerLv);
-        /// 골드 업그레이드 비용 감소.
-        doublePrice = (doublePrice * (1.0d - PlayerPrefsManager.GetInstance().Arti_GoldUpgrade * 0.001d));
+    //    // 다음 레벨의 가격 불러오고.
+    //    double doublePrice = GetPerUpPrice(4, PowerLv);
+    //    /// 골드 업그레이드 비용 감소.
+    //    doublePrice = (doublePrice * (1.0d - PlayerPrefsManager.GetInstance().Arti_GoldUpgrade * 0.001d));
 
-        ATK_PER_UPgoldPass = dts.SubStringDouble(PlayerPrefsManager.GetInstance().gold, doublePrice);
-        // 골드 없으면 false
-        if (ATK_PER_UPgoldPass == "-1")
-        {
-            ATK_PER_UP_Gray.SetActive(true);
-            return false;
-        }
-        else // 구매 가능하면 트루
-        {
-            ATK_PER_UP_Gray.SetActive(false);
-            return true;
-        }
+    //    ATK_PER_UPgoldPass = dts.SubStringDouble(PlayerPrefsManager.GetInstance().gold, doublePrice);
+    //    // 골드 없으면 false
+    //    if (ATK_PER_UPgoldPass == "-1")
+    //    {
+    //        ATK_PER_UP_Gray.SetActive(true);
+    //        return false;
+    //    }
+    //    else // 구매 가능하면 트루
+    //    {
+    //        ATK_PER_UP_Gray.SetActive(false);
+    //        return true;
+    //    }
 
-    }
+    //}
 
 
     string HP_PER_UP_goldPass;
@@ -1795,38 +1761,38 @@ public class GroggyManager : MonoBehaviour
     /// <summary>
     /// 돈이 안되면 회색으로.
     /// </summary>
-    bool HP_PER_UP_Cheak()
-    {
-        // 현재 공격력 퍼센트 레벨
-        int PowerLv = PlayerPrefsManager.GetInstance().HP_PER_UP_Lv;
+    //bool HP_PER_UP_Cheak()
+    //{
+    //    // 현재 공격력 퍼센트 레벨
+    //    int PowerLv = PlayerPrefsManager.GetInstance().HP_PER_UP_Lv;
 
-        if (PowerLv >= 10000)
-        {
-            HP_PER_UP_Max.SetActive(true);
-            return false;
-        }
+    //    if (PowerLv >= 10000)
+    //    {
+    //        HP_PER_UP_Max.SetActive(true);
+    //        return false;
+    //    }
 
-        // 다음 레벨의 가격 불러오고.
-        double doublePrice = GetPerUpPrice(5, PowerLv);
+    //    // 다음 레벨의 가격 불러오고.
+    //    double doublePrice = GetPerUpPrice(5, PowerLv);
 
-        /// 골드 업그레이드 비용 감소.
-        doublePrice = (doublePrice * (1.0d - PlayerPrefsManager.GetInstance().Arti_GoldUpgrade * 0.001d));
+    //    /// 골드 업그레이드 비용 감소.
+    //    doublePrice = (doublePrice * (1.0d - PlayerPrefsManager.GetInstance().Arti_GoldUpgrade * 0.001d));
 
-        HP_PER_UP_goldPass = dts.SubStringDouble(PlayerPrefsManager.GetInstance().gold, doublePrice);
+    //    HP_PER_UP_goldPass = dts.SubStringDouble(PlayerPrefsManager.GetInstance().gold, doublePrice);
 
-        // 골드 없으면 false
-        if (HP_PER_UP_goldPass == "-1")
-        {
-            HP_PER_UP_Gray.SetActive(true);
-            return false;
-        }
-        else // 구매 가능하면 트루
-        {
-            HP_PER_UP_Gray.SetActive(false);
-            return true;
-        }
+    //    // 골드 없으면 false
+    //    if (HP_PER_UP_goldPass == "-1")
+    //    {
+    //        HP_PER_UP_Gray.SetActive(true);
+    //        return false;
+    //    }
+    //    else // 구매 가능하면 트루
+    //    {
+    //        HP_PER_UP_Gray.SetActive(false);
+    //        return true;
+    //    }
 
-    }
+    //}
 
 
     /// <summary>
@@ -2144,39 +2110,39 @@ public class GroggyManager : MonoBehaviour
 
 
 
-    public void TEST_ATK_PER_UP()
-    {
-        if (!ATK_PER_UP_Cheak()) return;
+    //public void TEST_ATK_PER_UP()
+    //{
+    //    if (!ATK_PER_UP_Cheak()) return;
 
-        //골드 감소 처리
-        PlayerPrefsManager.GetInstance().gold = ATK_PER_UPgoldPass;
-        UserWallet.GetInstance().ShowUserGold();
-        // 퀘스트
-        PlayerPrefsManager.GetInstance().questInfo[0].daily_Atk++;
-        // 맷집 레벨 상승
-        PlayerPrefsManager.GetInstance().ATK_PER_UP_Lv++;
-        // 퀘스트
+    //    //골드 감소 처리
+    //    PlayerPrefsManager.GetInstance().gold = ATK_PER_UPgoldPass;
+    //    UserWallet.GetInstance().ShowUserGold();
+    //    // 퀘스트
+    //    PlayerPrefsManager.GetInstance().questInfo[0].daily_Atk++;
+    //    // 맷집 레벨 상승
+    //    PlayerPrefsManager.GetInstance().ATK_PER_UP_Lv++;
+    //    // 퀘스트
 
-        PowerUP_Init();
-    }
-
-
+    //    PowerUP_Init();
+    //}
 
 
-    public void TEST_HP_PER_UP()
-    {
-        if (!HP_PER_UP_Cheak()) return;
 
-        //골드 감소 처리
-        PlayerPrefsManager.GetInstance().gold = HP_PER_UP_goldPass;
-        UserWallet.GetInstance().ShowUserGold();
-        // 퀘스트
-        PlayerPrefsManager.GetInstance().questInfo[0].daily_HP++;
-        // 맷집 레벨 상승
-        PlayerPrefsManager.GetInstance().HP_PER_UP_Lv++;
 
-        PowerUP_Init();
-    }
+    //public void TEST_HP_PER_UP()
+    //{
+    //    if (!HP_PER_UP_Cheak()) return;
+
+    //    //골드 감소 처리
+    //    PlayerPrefsManager.GetInstance().gold = HP_PER_UP_goldPass;
+    //    UserWallet.GetInstance().ShowUserGold();
+    //    // 퀘스트
+    //    PlayerPrefsManager.GetInstance().questInfo[0].daily_HP++;
+    //    // 맷집 레벨 상승
+    //    PlayerPrefsManager.GetInstance().HP_PER_UP_Lv++;
+
+    //    PowerUP_Init();
+    //}
 
 
 
@@ -2229,55 +2195,55 @@ public class GroggyManager : MonoBehaviour
 
 
 
-    string Gold_RECOV_UPgoldPass;
-    /// <summary>
-    /// 돈이 안되면 회색으로.
-    /// </summary>
-    bool Gold_RECOV_Cheak()
-    {
-        // 현재 골드 체력 회복 체크
-        int PowerLv = PlayerPrefsManager.GetInstance().Gold_RECOV_UP_Lv;
+    //string Gold_RECOV_UPgoldPass;
+    ///// <summary>
+    ///// 돈이 안되면 회색으로.
+    ///// </summary>
+    //bool Gold_RECOV_Cheak()
+    //{
+    //    // 현재 골드 체력 회복 체크
+    //    int PowerLv = PlayerPrefsManager.GetInstance().Gold_RECOV_UP_Lv;
 
-        if (PowerLv >= 9999)
-        {
-            Gold_Recov_Per_UP_Max.SetActive(true);
-            return false;
-        }
+    //    if (PowerLv >= 9999)
+    //    {
+    //        Gold_Recov_Per_UP_Max.SetActive(true);
+    //        return false;
+    //    }
 
-        // 다음 레벨의 가격 불러오고.
-        double doublePrice = GetPerUpPrice(8, PowerLv);
+    //    // 다음 레벨의 가격 불러오고.
+    //    double doublePrice = GetPerUpPrice(8, PowerLv);
 
-        /// 골드 업그레이드 비용 감소.
-        doublePrice = (doublePrice * (1.0d - PlayerPrefsManager.GetInstance().Arti_GoldUpgrade * 0.001d));
+    //    /// 골드 업그레이드 비용 감소.
+    //    doublePrice = (doublePrice * (1.0d - PlayerPrefsManager.GetInstance().Arti_GoldUpgrade * 0.001d));
 
-        Gold_RECOV_UPgoldPass = dts.SubStringDouble(PlayerPrefsManager.GetInstance().gold, doublePrice);
+    //    Gold_RECOV_UPgoldPass = dts.SubStringDouble(PlayerPrefsManager.GetInstance().gold, doublePrice);
 
-        // 골드 없으면 false
-        if (Gold_RECOV_UPgoldPass == "-1")
-        {
-            Gold_Recov_Per_UP_Gray.SetActive(true);
-            return false;
-        }
-        else // 구매 가능하면 트루
-        {
-            Gold_Recov_Per_UP_Gray.SetActive(false);
-            return true;
-        }
+    //    // 골드 없으면 false
+    //    if (Gold_RECOV_UPgoldPass == "-1")
+    //    {
+    //        Gold_Recov_Per_UP_Gray.SetActive(true);
+    //        return false;
+    //    }
+    //    else // 구매 가능하면 트루
+    //    {
+    //        Gold_Recov_Per_UP_Gray.SetActive(false);
+    //        return true;
+    //    }
 
-    }
+    //}
 
-    public void Gold_RECOV_UP()
-    {
-        if (!Gold_RECOV_Cheak()) return;
+    //public void Gold_RECOV_UP()
+    //{
+    //    if (!Gold_RECOV_Cheak()) return;
 
-        //골드 감소 처리
-        PlayerPrefsManager.GetInstance().gold = Gold_RECOV_UPgoldPass;
-        UserWallet.GetInstance().ShowUserGold();
-        // 공격력 레벨 상승
-        PlayerPrefsManager.GetInstance().Gold_RECOV_UP_Lv++;
+    //    //골드 감소 처리
+    //    PlayerPrefsManager.GetInstance().gold = Gold_RECOV_UPgoldPass;
+    //    UserWallet.GetInstance().ShowUserGold();
+    //    // 공격력 레벨 상승
+    //    PlayerPrefsManager.GetInstance().Gold_RECOV_UP_Lv++;
 
-        PowerUP_Init();
-    }
+    //    PowerUP_Init();
+    //}
 
 
 
@@ -2519,20 +2485,23 @@ public class GroggyManager : MonoBehaviour
     }
 
 
-
+    /// <summary>
+    /// 방어력 올릴때 골드 여유 있나 체크
+    /// </summary>
+    /// <returns></returns>
     bool Mattzip_UP_Cheak()
     {
-        // 현재 맷집 레벨
-        int Mattzip_Lv = PlayerPrefsManager.GetInstance().Mattzip_Lv;
+        /// 현재 방어력 레벨
+        int Defend_Lv = PlayerPrefsManager.GetInstance().Defence_Lv;
 
-        if (Mattzip_Lv >= 50000)
+        if (Defend_Lv >= 50000)
         {
             Mat_HP_UP_May.SetActive(true);
             return false;
         }
 
         // 다음 레벨의 가격 불러오고.
-        string nextPrice = GetNormalUpPrice(3, Mattzip_Lv);
+        string nextPrice = GetNormalUpPrice(3, Defend_Lv);
 
         /// 골드 업그레이드 비용 감소.
         double doublePrice = double.Parse(nextPrice);
@@ -2554,7 +2523,10 @@ public class GroggyManager : MonoBehaviour
     }
 
     string MattzipgupbapPass;
-
+    /// <summary>
+    /// 방어방어력 강화로 대체
+    /// 50 * ( 1 + 0.07 ) ^ Lv    
+    /// /// </summary>
     public void TEST_Mattzip_up()
     {
         if (!Mattzip_UP_Cheak()) return;
@@ -2563,7 +2535,7 @@ public class GroggyManager : MonoBehaviour
         PlayerPrefsManager.GetInstance().gold = MattzipgupbapPass;
         UserWallet.GetInstance().ShowUserGold();
         // 맷집 레벨 상승
-        PlayerPrefsManager.GetInstance().Mattzip_Lv++;
+        PlayerPrefsManager.GetInstance().Defence_Lv++;
         // 퀘스트
         if(PlayerPrefsManager.GetInstance().questInfo[0].All_Mattzip < 1000)
         {

@@ -157,7 +157,7 @@ public class InfinitiMode : MonoBehaviour
         }
 
         PlayerPrefsManager.GetInstance().key--;
-        UserWallet.GetInstance().ShowUserKey();
+        //UserWallet.GetInstance().ShowUserKey();
         // 팝업 꺼주기
         PopUpObjectManager.GetInstance().NewInfinityPopUp.SetActive(false);
         EnterPop.SetActive(false);
@@ -165,13 +165,13 @@ public class InfinitiMode : MonoBehaviour
         gotoMINIgame.ChangeCamToMiniView();
         booster_KEY.KeyTimerStart();
         //
-        Left.GetChild(0).GetChild(0).gameObject.SetActive(true);
-        Left.GetChild(1).GetChild(0).gameObject.SetActive(true);
-        Left.GetChild(2).GetChild(0).gameObject.SetActive(true);
-        Left.GetChild(3).GetChild(0).gameObject.SetActive(true);
-        Left.GetChild(4).GetChild(0).gameObject.SetActive(true);
-        Left.GetChild(5).GetChild(0).gameObject.SetActive(true);
-        Left.GetChild(6).GetChild(0).gameObject.SetActive(true);
+        Left.GetChild(0).GetChild(1).gameObject.SetActive(true);
+        Left.GetChild(1).GetChild(1).gameObject.SetActive(true);
+        Left.GetChild(2).GetChild(1).gameObject.SetActive(true);
+        Left.GetChild(3).GetChild(1).gameObject.SetActive(true);
+        Left.GetChild(4).GetChild(4).gameObject.SetActive(true);
+        Left.GetChild(5).GetChild(1).gameObject.SetActive(true);
+        Left.GetChild(6).GetChild(1).gameObject.SetActive(true);
         //
         isStart = true;
 
@@ -210,7 +210,7 @@ public class InfinitiMode : MonoBehaviour
         }
 
         PlayerPrefsManager.GetInstance().key--;
-        UserWallet.GetInstance().ShowUserKey();
+        //UserWallet.GetInstance().ShowUserKey();
         booster_KEY.KeyTimerStart();
 
         // 팝업 꺼주기
@@ -314,13 +314,13 @@ public class InfinitiMode : MonoBehaviour
             isStart = false;
             PlayerPrefsManager.GetInstance().isInfinityEnd = false;
             //
-            Left.GetChild(0).GetChild(0).gameObject.SetActive(false);
-            Left.GetChild(1).GetChild(0).gameObject.SetActive(false);
-            Left.GetChild(2).GetChild(0).gameObject.SetActive(false);
-            Left.GetChild(3).GetChild(0).gameObject.SetActive(false);
-            Left.GetChild(4).GetChild(0).gameObject.SetActive(false);
-            Left.GetChild(5).GetChild(0).gameObject.SetActive(false);
-            Left.GetChild(6).GetChild(0).gameObject.SetActive(false);
+            Left.GetChild(0).GetChild(1).gameObject.SetActive(false);
+            Left.GetChild(1).GetChild(1).gameObject.SetActive(false);
+            Left.GetChild(2).GetChild(1).gameObject.SetActive(false);
+            Left.GetChild(3).GetChild(1).gameObject.SetActive(false);
+            Left.GetChild(4).GetChild(4).gameObject.SetActive(false);
+            Left.GetChild(5).GetChild(1).gameObject.SetActive(false);
+            Left.GetChild(6).GetChild(1).gameObject.SetActive(false);
 
 
             Blank.SetActive(false);

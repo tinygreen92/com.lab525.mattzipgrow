@@ -410,7 +410,7 @@ public class PlayNANOOExample : MonoBehaviour
         if (_code == "key")
         {
             PlayerPrefsManager.GetInstance().key += int.Parse(_count);
-            UserWallet.GetInstance().ShowUserKey();
+            //UserWallet.GetInstance().ShowUserKey();
             PopUpObjectManager.GetInstance().ShowWarnnigProcess("열쇠 " + _count + " 개 획득.");
 
             return;
@@ -555,7 +555,7 @@ public class PlayNANOOExample : MonoBehaviour
         PlayerPrefsManager.GetInstance().IN_APP.SetActive(true);
         PlayerPrefs.Save();
         //
-        plugin.StorageSave(GPGSManager.GetLocalUserId(), playerPrefsManager.SaveAllPrefsData(), true, (state, message, rawData, dictionary) => {
+        plugin.StorageSave(GPGSManager.GetLocalUserId() + "_S2", playerPrefsManager.SaveAllPrefsData(), true, (state, message, rawData, dictionary) => {
             if (state.Equals(Configure.PN_API_STATE_SUCCESS))
             {
                 Debug.LogWarning("StorageSave Success");

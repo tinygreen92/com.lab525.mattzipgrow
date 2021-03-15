@@ -277,7 +277,7 @@ public class GameStart : MonoBehaviour
             if (PlayerPrefsManager.GetInstance().ATK_Lv > 9999) PlayerPrefsManager.GetInstance().ATK_Lv = 9999;
             if (PlayerPrefsManager.GetInstance().Mat_HP_Lv > 9999) PlayerPrefsManager.GetInstance().Mat_HP_Lv = 9999;
             if (PlayerPrefsManager.GetInstance().Recov_Lv > 9999) PlayerPrefsManager.GetInstance().Recov_Lv = 9999;
-            if (PlayerPrefsManager.GetInstance().Mattzip_Lv > 9999) PlayerPrefsManager.GetInstance().Mattzip_Lv = 9999;
+            if (PlayerPrefsManager.GetInstance().Defence_Lv > 9999) PlayerPrefsManager.GetInstance().Defence_Lv = 9999;
         }
 
         PlayerPrefsManager.GetInstance().isGoldTriple = false;
