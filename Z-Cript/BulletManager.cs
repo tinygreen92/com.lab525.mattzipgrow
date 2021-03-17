@@ -749,15 +749,14 @@ public class BulletManager : MonoBehaviour
         PlayerPrefsManager.GetInstance().isHPsubing = true;
         /// 방패 방어력 계산
          
-        /// 방어력 계산 값  ( 스탯 방어력 + 방패 방어력 + 보유 방패 방어력 ) * 유물 방어력
-        string vallu = PlayerPrefsManager.GetInstance().Defence_Lv.ToString();
-            //(PlayerPrefsManager.GetInstance().Defence_Lv 
-            //+ PlayerPrefsManager.GetInstance().Defence_Lv) 
-            //* PlayerPrefsManager.GetInstance().Defence_Lv)
-            //.ToString();
+        /// 방어력 
+        string vallu = PlayerPrefsManager.GetInstance().GetPlayerDefence();
 
         /// 공격력 - 방어력
         string PunchDPS = dts.SubStringDouble(PlayerPrefsManager.GetInstance().PlayerDPS, vallu);
+        Debug.LogWarning("공격력 : " + PlayerPrefsManager.GetInstance().PlayerDPS);
+        Debug.LogWarning("방어력 : " + vallu);
+        Debug.LogWarning("받는 대미지 : " + PunchDPS);
         //var PunchDPS = PlayerPrefsManager.GetInstance().PlayerDPS;
 
         ///true 라면 크리티컬 터진거임.
@@ -1188,8 +1187,10 @@ public class BulletManager : MonoBehaviour
         {
             /// 최종 공격력 0.1% + 1 증가
             PlayerPrefsManager.GetInstance().Mat_Mattzip_Hit += 1f + (playerDPS * 0.0001f);
+            var mattLv = PlayerPrefsManager.GetInstance().Mat_Mattzip_Hit;
             ///맷집 증가에 필요한 대미지 증가 계산식 = 시작값 5, 시작값 * ( 1 + 0.03 ) ^ Lv
-            PlayerPrefsManager.GetInstance().Cilcked_Cnt_MattZip = (float)(5f * System.Math.Pow(1.03f, PlayerPrefsManager.GetInstance().Mat_Mattzip_Hit));
+            //PlayerPrefsManager.GetInstance().Cilcked_Cnt_MattZip = (float)(5f * System.Math.Pow(1.03f, PlayerPrefsManager.GetInstance().Mat_Mattzip_Hit));
+            PlayerPrefsManager.GetInstance().Cilcked_Cnt_MattZip = (0.5f * mattLv * mattLv) + mattLv * 0.5f + 4.5f;
             UserWallet.GetInstance().ShowUserMatZip();
             /// 초기화
             PlayerPrefsManager.GetInstance().Mat_100 = 0;

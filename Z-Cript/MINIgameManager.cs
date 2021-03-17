@@ -90,7 +90,9 @@ public class MINIgameManager : MonoBehaviour
         L_scrollRect.horizontalNormalizedPosition = 1f;
     }
 
-
+    /// <summary>
+    /// 별 모양 박스로 바꿔줌
+    /// </summary>
     void InitFeverBox()
     {
         CenterImgIndx.Clear();
@@ -532,9 +534,11 @@ public class MINIgameManager : MonoBehaviour
     {
         if (cnt < 29.8f)
         {
+            var bonusTime = Combo / 100;
+            /// 콤보시 시간 증가
             if (!isFeverTime)
             {
-                cnt += 0.2f;
+                cnt += bonusTime > 10 ? (0.2f - (bonusTime * 0.01f)) : 0.1f;
             }
             else
             {

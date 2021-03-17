@@ -86,7 +86,6 @@ public class UserWallet : MonoBehaviour
     public void ShowUserDia()
     {
         double dDiamond = PlayerPrefs.GetFloat("dDiamond", 0);
-        PlayerPrefsManager.GetInstance().diamond = dDiamond.ToString();
         //
         DiaText.text = SeetheNatural(dDiamond);
         PlayerPrefs.Save();

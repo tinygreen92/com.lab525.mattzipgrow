@@ -332,7 +332,7 @@ public class QuestManager : MonoBehaviour
         /// 앞에 4개는 50회
         for (int i = 0; i < 4; i++)
         {
-            if (i == 0) tmpString = "맷집 ";
+            if (i == 0) tmpString = "방어력 ";
             else if (i == 1) tmpString = "공격력 ";
             else if (i == 2) tmpString = "체력 ";
             else if (i == 3) tmpString = "장비 ";

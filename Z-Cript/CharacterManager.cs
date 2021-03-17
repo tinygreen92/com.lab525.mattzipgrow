@@ -2019,7 +2019,7 @@ public class CharacterManager : MonoBehaviour
             Chara_Attack_UP = Mathf.Round((CharaLv - 1) * 2.5f).ToString("f0");
             Chara_HP_UP = Mathf.Round((CharaLv - 1) * 25f).ToString("f0");
             Chara_Recov_UP = Mathf.Round((CharaLv - 1) * 12.5f).ToString("f0");
-
+            /// 캐릭터 레벨 올리면 세개가 올라감
             PlayerPrefs.SetString("Chara_Attack_UP", Chara_Attack_UP);
             PlayerPrefs.SetString("Chara_HP_UP", Chara_HP_UP);
             PlayerPrefs.SetString("Chara_Recov_UP", Chara_Recov_UP);

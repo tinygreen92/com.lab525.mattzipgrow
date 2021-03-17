@@ -329,14 +329,8 @@ public class GatChaManager : MonoBehaviour
         }
 
         // 다이아 소모
-        //var dia = PlayerPrefsManager.GetInstance().diamond;
-        //var result = dts.SubStringDouble(dia, "100");
-        //PlayerPrefsManager.GetInstance().diamond = result;
-
         PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") - 100);
         UserWallet.GetInstance().ShowUserDia();
-
-
 
         GoGoGatCha(0);
         artifactPopManager.SetTextAll(index, name, 0);
@@ -442,13 +436,9 @@ public class GatChaManager : MonoBehaviour
     /// <param name="seed">몇번 뽑을지?</param>
     public void GoGoGatCha(int seed)
     {
-        //
         var ppm = PlayerPrefsManager.GetInstance();
 
         HELL:
-
-
-
 
         // 팝업에 전달해줄 값.
         name[seed] = "";
@@ -601,15 +591,11 @@ public class GatChaManager : MonoBehaviour
             index[seed] = 9;
 
         }
-
-
         ///
         ///
         ///                 신규 유물 추가 0608
         ///
         ///
-
-
         else if (artiGatcha <= 72f)
         {
             /// (int)     -골드 획득 증가                
@@ -709,12 +695,8 @@ public class GatChaManager : MonoBehaviour
 
         }
 
-
-
         // 아이템 효과 적용 바로.
         RefreshItem();
-
-
     }
 
 

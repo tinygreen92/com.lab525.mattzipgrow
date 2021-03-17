@@ -223,7 +223,7 @@ public class GameStart : MonoBehaviour
         /// 유니폼 데이터 초기화.
         if (PlayerPrefsManager.GetInstance().uniformInfo.Count == 0)
         {
-            // 무기 50개 이후 레벨 0 초기화.
+            // 유니폼 초기화
             for (int i = 0; i < 7; i++)
             {
                 PlayerPrefsManager.GetInstance().AdduniformData(0, 0, 0, 0);
@@ -263,25 +263,9 @@ public class GameStart : MonoBehaviour
         {
             PlayerPrefsManager.GetInstance().AddQuestData6();
         }
-
-        ///
-        ///
-        /// 0516 패치시 강제세이브
-        ///
-        ///
-
-        if (PlayerPrefs.GetInt("is0707shock", 0) == 0)
-        {
-            PlayerPrefs.SetInt("is0707shock", 525);
-            // 강제 데이터 파일 세이브
-            if (PlayerPrefsManager.GetInstance().ATK_Lv > 9999) PlayerPrefsManager.GetInstance().ATK_Lv = 9999;
-            if (PlayerPrefsManager.GetInstance().Mat_HP_Lv > 9999) PlayerPrefsManager.GetInstance().Mat_HP_Lv = 9999;
-            if (PlayerPrefsManager.GetInstance().Recov_Lv > 9999) PlayerPrefsManager.GetInstance().Recov_Lv = 9999;
-            if (PlayerPrefsManager.GetInstance().Defence_Lv > 9999) PlayerPrefsManager.GetInstance().Defence_Lv = 9999;
-        }
-
+        /// 부스터 - 획득 골드 2배
         PlayerPrefsManager.GetInstance().isGoldTriple = false;
-        /// 맷집이 아니라 공격력 2배로 변경
+        /// 부스터 -공격력 2배로 변경
         PlayerPrefsManager.GetInstance().isBoosterMattzip = false;
 
         /// 체력 두자리 오류 해결
@@ -316,39 +300,12 @@ public class GameStart : MonoBehaviour
         if (PlayerPrefsManager.GetInstance().isFristGameStart)
             tutorialManager.RealSkipBtn();
 
-
-        ///
-        ///
-        /// 0517 재화 단위 해제
-        /// 
-        ///
-
-        if (PlayerPrefs.GetInt("is0517shock", 0) == 0)
-        {
-            var value = PlayerPrefsManager.GetInstance().diamond;
-            float dDiamond = (float)dts.PanByulGi(value);
-
-            PlayerPrefs.SetFloat("dDiamond", dDiamond);
-            PlayerPrefs.SetInt("is0517shock", 525);
-            PlayerPrefs.Save();
-        }
-
-        if (PlayerPrefs.GetFloat("dDiamond", 0) == 0)
-        {
-            var value = PlayerPrefsManager.GetInstance().diamond;
-            float dDiamond = (float)dts.PanByulGi(value);
-
-            PlayerPrefs.SetFloat("dDiamond", dDiamond);
-        }
-
         ///
         ///
         ///  새로 추가 되는 초기 값 여기다가 적어!!!
         ///
         ///
 
-        PlayerPrefs.SetString("HP_PER_UP", "1");
-        PlayerPrefs.SetString("ATK_PER_UP", "1");
         PlayerPrefs.SetString("Dia_HP_PER_UP", "1");
         PlayerPrefs.SetString("Dia_ATK_PER_UP", "1");
         //
@@ -369,35 +326,36 @@ public class GameStart : MonoBehaviour
             PlayerPrefs.SetInt("MaxGet_MuganTop2", 1);
 
 
-        // 골드 알파벳
-        string oldValue = PlayerPrefs.GetString("gold", "0");
-        double dGold = dts.PanByulGi(oldValue);
+        //// 골드 알파벳
+        //string oldValue = PlayerPrefs.GetString("gold", "0");
+        //double dGold = dts.PanByulGi(oldValue);
 
-        // float로 저장된 다이아도 double로 바꿔주기
-        double dDia = PlayerPrefs.GetFloat("dDiamond", 0);
-        Debug.LogWarning("dDia " + dDia);
-        // 국밥 알파벳
-        oldValue = PlayerPrefs.GetString("gupbap", "0");
-        double dGupbab = dts.PanByulGi(oldValue);
+        //float로 저장된 다이아도 double로 바꿔주기
+        //double dDia = PlayerPrefs.GetFloat("dDiamond", 0);
+        //Debug.LogWarning("dDia " + dDia);
+        //국밥 알파벳
+        //oldValue = PlayerPrefs.GetString("gupbap", "0");
+        //double dGupbab = dts.PanByulGi(oldValue);
 
-        // 체력
-        oldValue = PlayerPrefs.GetString("Mat_MaxHP", "100");
-        PlayerPrefsManager.GetInstance().Mat_MaxHP = dts.PanByulGi(oldValue).ToString();
-        //Debug.LogError("초반 맥스" + dts.PanByulGi(oldValue).ToString());
-        PlayerPrefsManager.GetInstance().Mat_currentHP = PlayerPrefsManager.GetInstance().Mat_MaxHP;
+        //// 체력
+        //oldValue = PlayerPrefs.GetString("Mat_MaxHP", "100");
+        //PlayerPrefsManager.GetInstance().Mat_MaxHP = dts.PanByulGi(oldValue).ToString();
+        ////Debug.LogError("초반 맥스" + dts.PanByulGi(oldValue).ToString());
+        //PlayerPrefsManager.GetInstance().Mat_currentHP = PlayerPrefsManager.GetInstance().Mat_MaxHP;
 
-        // 체력 회복량
-        oldValue = PlayerPrefs.GetString("Mat_Recov", "1");
-        PlayerPrefsManager.GetInstance().Mat_Recov = dts.PanByulGi(oldValue).ToString();
+        //// 체력 회복량
+        //oldValue = PlayerPrefs.GetString("Mat_Recov", "1");
+        //PlayerPrefsManager.GetInstance().Mat_Recov = dts.PanByulGi(oldValue).ToString();
 
-        PlayerPrefs.SetString("gold", dGold.ToString("f0"));
-        PlayerPrefs.SetString("diamond", dDia.ToString("f0"));
-        PlayerPrefs.SetString("gupbap", dGupbab.ToString("f0"));
-        //쌀밥
-        if (!PlayerPrefs.HasKey("ssalbap")) 
-            PlayerPrefs.SetString("ssalbap", "0");
-        if (PlayerPrefs.GetString("ssalbap") == "") 
-            PlayerPrefs.SetString("ssalbap", "0");
+        //PlayerPrefs.SetString("gold", dGold.ToString("f0"));
+        //PlayerPrefs.SetString("diamond", dDia.ToString("f0"));
+        //PlayerPrefs.SetString("gupbap", dGupbab.ToString("f0"));
+        ////쌀밥
+        //if (!PlayerPrefs.HasKey("ssalbap")) 
+        //    PlayerPrefs.SetString("ssalbap", "0");
+        //if (PlayerPrefs.GetString("ssalbap") == "") 
+        //    PlayerPrefs.SetString("ssalbap", "0");
+
         ///
         ///
         /// 0517 재화 단위 해제
@@ -506,20 +464,6 @@ public class GameStart : MonoBehaviour
         if (PlayerPrefsManager.GetInstance().questInfo5[0].Pun_98_Cnt >= 19) PlayerPrefsManager.GetInstance().questInfo5[0].Pun_98_Cnt = 19;
         if (PlayerPrefsManager.GetInstance().questInfo5[0].Pun_99_Cnt >= 19) PlayerPrefsManager.GetInstance().questInfo5[0].Pun_99_Cnt = 19;
         if (PlayerPrefsManager.GetInstance().questInfo5[0].Pun_100_Cnt >= 19) PlayerPrefsManager.GetInstance().questInfo5[0].Pun_100_Cnt = 19;
-
-
-
-        ///
-        ///
-        /// 0516 패치시 강제세이브
-        ///
-        ///
-
-        if (PlayerPrefs.GetInt("is0515shock",0) == 0)
-        {
-            PlayerPrefs.SetInt("is0515shock", 525);
-        }
-
 
         // 배경 깃발 초기화.
         flagManager.InitFlags();

@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class ArtifactPopManager : MonoBehaviour
 {
+    public GameObject Btn1set;
+    public GameObject Btn2set;
+    [Space]
     public Transform IconSet; // 아이콘 부모
     public Text DescText; // 설명 텍스트.
 
@@ -30,7 +33,18 @@ public class ArtifactPopManager : MonoBehaviour
         index = _index;
         name = _name;
         seed = _seed;
-
+        /// 버튼 교란
+        if (seed == 0 || seed > 10)
+        {
+            Btn2set.SetActive(false);
+            Btn1set.SetActive(true);
+        }
+        else
+        {
+            Btn2set.SetActive(true);
+            Btn1set.SetActive(false);
+        }
+        /// 아이콘
         switch (_index[seed])
         {
             case 0: IconSet.GetChild(0).gameObject.SetActive(true); break;
@@ -115,8 +129,8 @@ public class ArtifactPopManager : MonoBehaviour
     {
         HideArtiPop();
 
-        if (seed == 0 || seed > 10) return;
-
+        if (seed == 0 || seed > 10) 
+            return;
         seed++;
         //Debug.LogWarning("seed " + seed);
         // 한번더?

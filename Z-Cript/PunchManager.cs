@@ -9,6 +9,8 @@ public class PunchManager : MonoBehaviour
 {
     DoubleToStringNum dts = new DoubleToStringNum();
 
+    [Header("다이아 영구 해제 팝업 오브젝트")]
+    public GameObject SomeThingPop;
     [Header("-만렙 찍으면 다이아로 산다 스프라이트")]
     public Sprite DiaImg;
     public Sprite GookBapImg;
@@ -45,6 +47,10 @@ public class PunchManager : MonoBehaviour
         PlayerPrefs.Save();
     }
 
+    /// <summary>
+    /// 펀치 영구 구매 배열 반환
+    /// </summary>
+    /// <returns></returns>
     string[] DiaBuyWeaponListLoad()
     {
         string _Data = PlayerPrefs.GetString("diaBuyWeaponList", "525*");
@@ -155,7 +161,7 @@ public class PunchManager : MonoBehaviour
 
     void SetPunchText(int _index, float _contents)
     {
-        string result = "맷집 " + _contents.ToString("f1") + "% 증가";
+        string result = "공격력 " + _contents.ToString("f1") + "% 증가";
         PunchGrid.GetChild(_index).GetChild(3).GetComponent<Text>().text = result;
         PlayerPrefsManager.GetInstance().weaponInfo[_index].weaponEffect = _contents;
     }
@@ -187,7 +193,7 @@ public class PunchManager : MonoBehaviour
             string result = PunchNames[_index];
             PunchGrid.GetChild(_index).GetChild(1).GetComponent<Text>().text = result;
             // 우유 갯수 충분하면 버튼 회색커버 꺼줌
-            if (MilkPass(thisWeaponCost) && thisWeaponLevel != 100) PunchGrid.GetChild(_index).GetChild(4).GetChild(1).GetChild(1).gameObject.SetActive(false);
+            if (GupbapPass(thisWeaponCost) && thisWeaponLevel != 100) PunchGrid.GetChild(_index).GetChild(4).GetChild(1).GetChild(1).gameObject.SetActive(false);
             // 아이콘 색상 
             PunchGrid.GetChild(_index).GetChild(0).GetChild(0).GetComponent<Image>().color = Color.white;
         }
@@ -246,7 +252,7 @@ public class PunchManager : MonoBehaviour
                     /// thislevel 넣어줌
                     GetThisWeaponInfo(i);
                     // 우유 갯수 충분하면 버튼 회색커버 꺼줌(만렙 아니어야함)
-                    if (MilkPass(thisWeaponCost))
+                    if (GupbapPass(thisWeaponCost))
                     {
                         PunchGrid.GetChild(i).GetChild(4).GetChild(1).GetChild(1).gameObject.SetActive(false);
 
@@ -326,9 +332,9 @@ public class PunchManager : MonoBehaviour
     /// <param name="p_index"></param>
     public void ClickedPunchUPgra(int p_index)
     {
-        // 저장된 해당 펀치 리스트 가져와서 뿌려주고
+        /// 저장된 해당 펀치 리스트 가져와서 뿌려주고
         GetThisWeaponInfo(p_index);
-        // 회색 Cover Img로 덮여 있으면 리턴 -> 업그레이드 재화 소모없음 / 레벨 증가 없음.
+        /// 해당 펀치 회색 Cover Img로 덮여 있으면 리턴 -> 업그레이드 재화 소모없음 / 레벨 증가 없음.
         if (PunchGrid.GetChild(p_index).GetChild(4).GetChild(1).GetChild(1).gameObject.activeSelf)
         {
             return;
@@ -337,52 +343,12 @@ public class PunchManager : MonoBehaviour
         /// 다이아 구매 || 국밥 구매 판별
         if (thisWeaponLevel >= 100 && thisDiaBuyWeapArray[p_index] == "0")
         {
-            thisWeaponLevel = 100;
-
-            float dia = PlayerPrefs.GetFloat("dDiamond");
-            float diaPrice = ((p_index + 1) * 100);
-
-            //다이아 체크
-            if (dia - diaPrice < 0)
-            {
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("보유 다이아가 부족합니다.");
-                return;
-            }
-
-            // 다이아 체크 통과후 소모
-            PlayerPrefs.SetFloat("dDiamond", dia - diaPrice);
-            UserWallet.GetInstance().ShowUserDia();
-
-            string tmpDiaBuyWeap = "";
-            for (int i = 0; i < PunchGrid.childCount; i++)
-            {
-                if (i == p_index || thisDiaBuyWeapArray[i] == "1")
-                {
-                    tmpDiaBuyWeap += "1*";
-                }
-                else
-                {
-                    tmpDiaBuyWeap += "0*";
-                }
-            }
-            /// 무기 데이터 다이아몬드 구매 여부 저장
-            DiaBuyWeaponListSave(tmpDiaBuyWeap);
-            thisDiaBuyWeapArray = DiaBuyWeaponListLoad();
-
-            ///TODO : 만렙 처리 회색 커버
-            PunchGrid.GetChild(p_index).GetChild(4).GetChild(1).GetChild(1).gameObject.SetActive(true); // Cover_Btn
-            PunchGrid.GetChild(p_index).GetChild(4).GetChild(1).GetChild(2).GetChild(0).GetChild(0).GetComponent<Image>().sprite = DiaImg;
-            PunchGrid.GetChild(p_index).GetChild(4).GetChild(1).GetComponentInChildren<Text>().text = "MAX";
-
-            /// 다이아로 구매했으면 맷집 증가 효과 더해줌 -> 한번만 적용됨
-            var dfsd = PlayerPrefsManager.GetInstance().weaponInfo[p_index].weaponEffect;
-            PlayerPrefsManager.GetInstance().Mattzip_Dia_Weap += dfsd;
-
+            ShowDiaPunchOkay(p_index);
             return;
         }
 
         // 해당 코스트 넣어서 통과 못하면 리턴
-        if (!MilkPass(thisWeaponCost)) 
+        if (!GupbapPass(thisWeaponCost)) 
             return;
 
         // 정상적 국밥 소모
@@ -416,7 +382,7 @@ public class PunchManager : MonoBehaviour
         string weaponPrice = dts.fDoubleToStringNumber(tmpPrice);
 
         //
-        if (MilkPass(weaponPrice))
+        if (GupbapPass(weaponPrice))
         {
             PunchGrid.GetChild(p_index).GetChild(4).GetChild(1).GetChild(1).gameObject.SetActive(false);
         }
@@ -459,6 +425,67 @@ public class PunchManager : MonoBehaviour
     }
 
     /// <summary>
+    /// 펀치 레벨 100일때 팝업 띄워줌
+    /// </summary>
+    private void ShowDiaPunchOkay(int p_index)
+    {
+        SD_PunchIndex = p_index;
+        // 애니메 재생
+        SomeThingPop.SetActive(true);
+        SomeThingPop.GetComponent<Animation>()["Roll_Incre"].speed = 1;
+        SomeThingPop.GetComponent<Animation>().Play("Roll_Incre");
+    }
+
+    int SD_PunchIndex;
+
+    /// <summary>
+    /// 팝업 띄워주면 다이아 있을때 영구 보유
+    /// </summary>
+    public void SummitDiaPunch()
+    {
+        thisWeaponLevel = 100;
+
+        float dia = PlayerPrefs.GetFloat("dDiamond");
+        float diaPrice = ((SD_PunchIndex + 1) * 100);
+
+        //다이아 체크
+        if (dia - diaPrice < 0)
+        {
+            PopUpObjectManager.GetInstance().ShowWarnnigProcess("보유 다이아가 부족합니다.");
+            return;
+        }
+
+        // 다이아 체크 통과후 소모
+        PlayerPrefs.SetFloat("dDiamond", dia - diaPrice);
+        UserWallet.GetInstance().ShowUserDia();
+
+        /// 무기 데이터 다이아몬드 구매 여부 저장
+        string tmpDiaBuyWeap = "";
+        for (int i = 0; i < PunchGrid.childCount; i++)
+        {
+            if (i == SD_PunchIndex || thisDiaBuyWeapArray[i] == "1")
+            {
+                tmpDiaBuyWeap += "1*";
+            }
+            else
+            {
+                tmpDiaBuyWeap += "0*";
+            }
+        }
+        DiaBuyWeaponListSave(tmpDiaBuyWeap);
+        thisDiaBuyWeapArray = DiaBuyWeaponListLoad();
+
+        ///다이아로 구매했으면 만렙 처리 회색 커버
+        PunchGrid.GetChild(SD_PunchIndex).GetChild(4).GetChild(1).GetChild(1).gameObject.SetActive(true); // Cover_Btn
+        PunchGrid.GetChild(SD_PunchIndex).GetChild(4).GetChild(1).GetChild(2).GetChild(0).GetChild(0).GetComponent<Image>().sprite = DiaImg;
+        PunchGrid.GetChild(SD_PunchIndex).GetChild(4).GetChild(1).GetComponentInChildren<Text>().text = "MAX";
+
+        /// 다이아로 구매했으면 맷집 증가 효과 더해줌 -> 한번만 적용됨
+        var dfsd = PlayerPrefsManager.GetInstance().weaponInfo[SD_PunchIndex].weaponEffect;
+        PlayerPrefsManager.GetInstance().Mattzip_Dia_Weap += dfsd;
+    }
+
+    /// <summary>
     /// 강화 페이지 열때 같이 초기화 해줌. 디스레벨/디스코스트/디스이펙트
     /// </summary>
     /// <param name="p_index"></param>
@@ -475,11 +502,12 @@ public class PunchManager : MonoBehaviour
     }
 
     string result;
+
     /// <summary>
-    /// 우유 소모 로직
+    /// 국밥 소모 로직
     /// </summary>
     /// <returns></returns>
-    bool MilkPass(string _somo)
+    bool GupbapPass(string _somo)
     {
         var mlikAmount = PlayerPrefsManager.GetInstance().gupbap;
         result = dts.SubStringDouble(mlikAmount, _somo);

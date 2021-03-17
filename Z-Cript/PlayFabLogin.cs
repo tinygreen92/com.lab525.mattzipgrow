@@ -139,7 +139,7 @@ public class PlayFabLogin : MonoBehaviour
         if (_HP_REC > 50f) _HP_REC = 0;
         else if (_HP_REC > 40f) _HP_REC = 40f;
 
-        _MATT = (double.Parse(enemyAllData[(_index * 10) + 7]) * (0.1d + (_HP_REC * 0.01d))); //  세팅 맷집 10%
+        _MATT = double.Parse(enemyAllData[(_index * 10) + 7]);
         _UNIFORM = int.Parse(enemyAllData[(_index * 10) + 8]);
         _userName = enemyAllData[(_index * 10) + 9];
 
@@ -147,14 +147,13 @@ public class PlayFabLogin : MonoBehaviour
 
 
 
-        /// 에너미 스펙 세팅
+        /// 소숫점 절삭 string 맷집+방어
         enemyMattzip = _MATT.ToString("f0");
-
+        /// 절삭 후 맷집 + 방어
         eBlockedDam = double.Parse(enemyMattzip);
-
-        // 맷집 뺀 펀치공격력
+        /// 상대방의 맷집 + 방어를 뺀 나의 공격력
         myPunchDPS = dts.SubStringDouble(PlayerPrefsManager.GetInstance().PlayerDPS, enemyMattzip);
-        Debug.LogWarning("myPunchDPS :: " + myPunchDPS);
+        Debug.LogWarning("상대방의 맷집 + 방어를 뺀 나의 공격력 :: " + myPunchDPS);
 
         if (myPunchDPS == "-1")
         {
@@ -167,12 +166,9 @@ public class PlayFabLogin : MonoBehaviour
         }
 
         /// 내 스펙 기본 세팅 맷집 10% + (0.04d * PlayerPrefsManager.GetInstance().Pet_PVP_Matt_Lv)
-        /// 
-
-        float dsfds = (float.Parse(PlayerPrefsManager.GetInstance().Mat_Mattzip) * (0.1f + (0.04f * PlayerPrefsManager.GetInstance().Pet_PVP_Matt_Lv)));
-
+        double dsfds = double.Parse(PlayerPrefsManager.GetInstance().GetPvpMattDefence());
+        /// 소수점 절삭
         myMattzip = dsfds.ToString("f0");
-
         // 맷집 뺀 펀치공격력
         enemyPunchDPS = dts.SubStringDouble(_ATK.ToString("f0"), myMattzip);
         Debug.LogWarning("enemyPunchDPS :: " + enemyPunchDPS);
@@ -234,7 +230,7 @@ public class PlayFabLogin : MonoBehaviour
     }
 
     /// <summary>
-    /// 팝업 버튼 클릭시 이 메소드로 호출
+    /// pvp 팝업 버튼 클릭시 이 메소드로 호출
     /// </summary>
     public void OpenPopUP()
     {
@@ -246,7 +242,7 @@ public class PlayFabLogin : MonoBehaviour
         Tap_Click(0);
     }
     /// <summary>
-    /// 상단 버튼 누르기 관리
+    /// pvp 상단 버튼 누르기 관리
     /// </summary>
     /// <param name="_buttonIndex">버튼 이벤트에 붙일때 인덱스 지정</param>
     public void Tap_Click(int _buttonIndex)
@@ -254,19 +250,14 @@ public class PlayFabLogin : MonoBehaviour
         switch (_buttonIndex)
         {
             case 0:
-                //// 들어간다 멈춰줌.
-                //if (popopopom != null) StopCoroutine(popopopom);
-                //isGetAllDataCheak3 = true;
                 /// 사용자 pvp 데이터 최신화.
-                RewordRC();
+                SetDataInit();
                 // 로딩중 애니메이션
                 PlayerPrefsManager.GetInstance().IN_APP.SetActive(true);
                 //SetData();
-
                 TAB_Fight.SetActive(true);
                 TAB_Ranking.SetActive(false);
                 TAB_Reword.SetActive(false);
-
 
                 View_Fight.GetChild(0).gameObject.SetActive(false);
 
@@ -277,7 +268,7 @@ public class PlayFabLogin : MonoBehaviour
                     userName[i].text = "";
                     userMattzip[i].text = "";
                 }
-
+                // 빈 창에다가 내용물 채워줌
                 Init_Fight();
 
                 break;
@@ -310,7 +301,7 @@ public class PlayFabLogin : MonoBehaviour
                 }
                 // 랭킹 인덱스 초기화.
                 rank_index = 0;
-
+                /// 랭킹 표시 초기화
                 Init_Rank();
                 break;
 
@@ -345,8 +336,6 @@ public class PlayFabLogin : MonoBehaviour
         View_Ranking.gameObject.SetActive(false);
         View_Ranking_Child.gameObject.SetActive(false);
         View_Reword.gameObject.SetActive(false);
-
-
     }
 
     /// <summary>
@@ -382,7 +371,7 @@ public class PlayFabLogin : MonoBehaviour
                 { "CRD", PlayerPrefsManager.GetInstance().CriticalDPS },
                 { "HP", PlayerPrefsManager.GetInstance().Mat_MaxHP },
                 { "HP_REC", (0.04d * PlayerPrefsManager.GetInstance().Pet_PVP_Matt_Lv).ToString("f2") },
-                { "MATT", PlayerPrefsManager.GetInstance().Mat_Mattzip },
+                { "MATT", PlayerPrefsManager.GetInstance().GetPvpMattDefence() },
                 { "UNIFORM", PlayerPrefs.GetInt("Uniform_Curent", 0).ToString() },
                 { "userName", GPGSManager.GetLocalUserName() },
 
@@ -877,7 +866,7 @@ public class PlayFabLogin : MonoBehaviour
     //}
 
     /// <summary>
-    /// 내 랭킹
+    /// 피비피 내 랭킹
     /// </summary>
     void RequestMyBored()
     {
@@ -1068,13 +1057,7 @@ public class PlayFabLogin : MonoBehaviour
                 tierText[_index].text = entry.StatValue.ToString();
                 // 내부 아이디 저장
                 userInnerId[_index] = entry.PlayFabId;
-
-                //GetAllData(entry.PlayFabId, _index);
-                //// 나누 아이디로 변환해서 텍스트 채우기
-                //userName[_index].text = enemyAllData[(10 * _index) + 9];
-                //// 맷집 택스트 채우기
-                //userMattzip[_index].text = enemyAllData[(10 * _index) + 7];
-                ////
+                // 다음
                 _index++;
             }
         }
@@ -1100,12 +1083,10 @@ public class PlayFabLogin : MonoBehaviour
             isGetAllDataCheak = false;
             // 내부 아이디 획득 후 일괄 데이터 저장
             GetAllData(userInnerId[_index], _index);
-
             while (!isGetAllDataCheak)
             {
                 yield return new WaitForFixedUpdate();
             }
-
             // 나누 아이디로 변환해서 텍스트 채우기
             userName[_index].text = enemyAllData[(10 * _index) + 9];
             // 맷집 택스트 채우기

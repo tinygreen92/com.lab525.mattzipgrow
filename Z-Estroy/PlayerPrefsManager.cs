@@ -7,12 +7,10 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;   // 리스트를 쓰기 위해 추가합니다.
-
 // BinaryFormatter를 사용하기 위해서는 반드시 아래의 네임스페이스를 추가해줘야 해요.
 using System;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
-
 using CodeStage.AntiCheat.ObscuredTypes;
 
 public class PlayerPrefsManager : MonoBehaviour
@@ -59,18 +57,14 @@ public class PlayerPrefsManager : MonoBehaviour
     }
 
     [HideInInspector]
-    public int punchAmont = 100; // 펀치갯수
+    public readonly ObscuredInt punchAmont = 100; // 펀치갯수
 
     void Awake()
     {
         instance = this;
         magaDamageData = CSVReader.Read("MainGameDam"); // 방어전 대미지
-        //muganTopCollData = CSVReader.Read("MuganTopCSV"); // 무한의 탑 대미지
-        // 펀치 갯수 몇개?
-        punchAmont = 100;
         // 초기값 필요해?
         megaDamColl = new string[100];
-        //muganTopColl = new string[2, 200];
     }
 
 
@@ -799,7 +793,7 @@ public class PlayerPrefsManager : MonoBehaviour
     }
 
     string _CriticalDPS;
-    float criDPS;
+    double criDPS;
 
     /// <summary>
     /// (string)크리티컬 공격력            CriticalDPS    
@@ -809,7 +803,7 @@ public class PlayerPrefsManager : MonoBehaviour
         /// 크리티컬 = 공격력 x 크리티컬대미지
         get
         {
-            criDPS = _PlayerDPSfloat + (_PlayerDPSfloat * (float.Parse(CRD_UP) + float.Parse(Dia_CRD_UP)) * 0.01f);
+            criDPS = _PlayerDPSfloat + (_PlayerDPSfloat * (float.Parse(CRD_UP) + float.Parse(Dia_CRD_UP)) * 0.01d);
 
             _CriticalDPS = criDPS.ToString("f0");
 
@@ -848,9 +842,9 @@ public class PlayerPrefsManager : MonoBehaviour
     string CharaDps;
 
     string tmp1;
-    float tmp2;
+    double tmp2;
 
-    float _PlayerDPSfloat;
+    double _PlayerDPSfloat;
     /// <summary>
     /// (string)주먹 최종 공격력            PlayerDPS    
     /// </summary>
@@ -859,18 +853,24 @@ public class PlayerPrefsManager : MonoBehaviour
         get
         {
             _PlayerDPS = "0";
+            /// 캐릭터 레벨 올리면 증가하는 공격력 스탯 값
             CharaDps = PlayerPrefs.GetString("Chara_Attack_UP", "0");
-            AtkPercent = (AttackPunch + float.Parse(CharaDps)).ToString("f0");
+            /// (캐릭터 렙업 공격력 + 스탯 공격력 ) * 유물 공격력 % 증가
+            //AtkPercent = (AttackPunch + float.Parse(CharaDps)).ToString("f0");
+            AtkPercent = dts.AddStringDouble(CharaDps, RawAttackDamage);
+            ///
+            tmp1 = dts.multipleStringDouble(AtkPercent, AttackPunch);
 
-
-            tmp1 = dts.AddStringDouble(RawAttackDamage, AtkPercent);
-            tmp2 = 1.0f + (0.01f * (Stat_is3ATK + float.Parse(Dia_ATK_PER_UP) + (uniformInfo[0].Skill_LV *1f)));
+            tmp2 = 1.0d 
+                + (0.01d * (Stat_is3ATK + double.Parse(Dia_ATK_PER_UP) 
+                + weaponInfo[PunchIndex].weaponEffect + Mattzip_Dia_Weap 
+                + (uniformInfo[0].Skill_LV *1f)));
 
             /// 맷집3배 버프 삭제후 -> 공격력 2배 버프로 변경됨
             if(isBoosterMattzip)
-                _PlayerDPSfloat = (float.Parse(tmp1) * tmp2 * 2f); //플로트 최종 공격  -> 외부에 저장되어서 크리티컬 공격력에 계산
+                _PlayerDPSfloat = (double.Parse(tmp1) * tmp2 * 2d); //플로트 최종 공격  -> 외부에 저장되어서 크리티컬 공격력에 계산
             else
-                _PlayerDPSfloat = (float.Parse(tmp1) * tmp2); //플로트 최종 공격  -> 외부에 저장되어서 크리티컬 공격력에 계산
+                _PlayerDPSfloat = (double.Parse(tmp1) * tmp2); //플로트 최종 공격  -> 외부에 저장되어서 크리티컬 공격력에 계산
 
 
             ///스트링 최종 공격
@@ -906,7 +906,9 @@ public class PlayerPrefsManager : MonoBehaviour
         }
     }
 
+    /// <summary>
     /// (float) 주먹 공격력 유물 강화             AttackPunch
+    /// </summary>
     public float AttackPunch
     {
         get
@@ -915,7 +917,6 @@ public class PlayerPrefsManager : MonoBehaviour
             if (!PlayerPrefs.HasKey("AttackPerPunch")) return 0;
             var tmp = PlayerPrefs.GetFloat("AttackPerPunch");
             //Debug.LogWarning("tmp : " + tmp);
-
             return tmp;
         }
 
@@ -1041,7 +1042,7 @@ public class PlayerPrefsManager : MonoBehaviour
             /// MattzipArtif 유물 뽑기 하면 증가
 
             var value = Mat_Mattzip_Hit + MattzipStat;
-            double tmppp = value + (value * (Mattzip_Dia_Weap + weaponInfo[PunchIndex].weaponEffect + Stat_is4Mattzip + MattzipArtif) * 0.01f);
+            double tmppp = value + (value * MattzipArtif * 0.01f);
             
             return tmppp.ToString("f0");
         }
@@ -1159,7 +1160,7 @@ public class PlayerPrefsManager : MonoBehaviour
             ttmmpp = (tmp + ttmp + (uniformInfo[3].Skill_LV *1f)) * Stat_is1Recov * 0.01f;
 
 
-            return ((tmp + ttmmpp) * ( 1.0f + (Gold_RECOV_UP_Lv + Dia_RECOV_UP_Lv) * 0.1f)).ToString("f0");
+            return ((tmp + ttmmpp) * ( 1.0f + Dia_RECOV_UP_Lv * 0.1f)).ToString("f0");
         }
 
         set
@@ -1169,11 +1170,78 @@ public class PlayerPrefsManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// pvp 방어력은 상대방의 공격력 - ( 맷집 + 방어력 ) 만큼 체력이 깎임
+    /// </summary>
+    /// <returns></returns>
+    public string GetPvpMattDefence()
+    {
+        string result = dts.AddStringDouble(Mat_Mattzip, GetPlayerDefence());
+        return result;
+    }
 
 
+    /// <summary>
+    /// 총 방어력 계산 값  ( 스탯 방어력 + 방패 방어력 + 보유 방패 방어력 ) * 유물 방어력
+    /// </summary>
+    /// <returns></returns>
+    public string GetPlayerDefence()
+    {
+        
+        // 스탯 방어력  = ( * 깃발 방어력 %)
+        string result = (Defence_Lv * Stat_is4Mattzip).ToString("F0");
+        // 스탯 방어력 + 방패 방어력 
+        result = dts.AddStringDouble(result, Defence_Shiled);
+        // 스탯 방어력 + 방패 방어력  + 보유 방패 방어력
+        result = dts.AddStringDouble(result, Defence_Dia_Shiled);
+        // ( 스탯 방어력 + 방패 방어력 + 보유 방패 방어력 ) * 유물 방어력
+        float artiDefence = 1.0f + (Defence_Artifact_Lv * 1.0f);
+        /// 총 방어력
+        if (result != "0")
+            return dts.multipleStringDouble(result, artiDefence);
+        else
+            return "0";
+    }
+
+    /// (int) 아직 안 쓰는거
+    public int Gold_RECOV_UP_Lv
+    {
+        get
+        {
+            var tmp = PlayerPrefs.GetInt("Gold_RECOV_UP_Lv", 0);
+            return tmp;
+        }
+
+        set
+        {
+            PlayerPrefs.SetInt("Gold_RECOV_UP_Lv", value);
+            PlayerPrefs.Save();
+        }
+    }
 
 
-    /// (string)방패 방어력으로 사용 
+    /// <summary>
+    /// [스탯 방어력] 레벨
+    /// </summary>
+    public int Defence_Lv
+    {
+        get
+        {
+            if (!PlayerPrefs.HasKey("Mattzip_Lv")) return 0;
+            var tmp = PlayerPrefs.GetInt("Mattzip_Lv");
+            return tmp;
+        }
+
+        set
+        {
+            PlayerPrefs.SetInt("Mattzip_Lv", value);
+            PlayerPrefs.Save();
+        }
+    }
+
+    /// <summary>
+    /// (string) [착용 방패 방어력]
+    /// </summary>
     public string Defence_Shiled
     {
         get
@@ -1190,8 +1258,8 @@ public class PlayerPrefsManager : MonoBehaviour
         }
     }
 
-    /// (string)체력 % 증가량                       HP_PER_UP
-    public string HP_PER_UP
+    /// (string)[보유 방패 방어력]
+    public string Defence_Dia_Shiled
     {
         get
         {
@@ -1207,8 +1275,8 @@ public class PlayerPrefsManager : MonoBehaviour
         }
     }
 
-    /// (string)공격력 % 증가량 레벨                     ATK_PER_UP_Lv
-    public int ATK_PER_UP_Lv
+    /// (string)[방어력 유물] 레벨
+    public int Defence_Artifact_Lv
     {
         get
         {
@@ -1459,22 +1527,6 @@ public class PlayerPrefsManager : MonoBehaviour
     }
 
 
-    /// (int)골드 체력 회복 % 레벨
-    public int Gold_RECOV_UP_Lv
-    {
-        get
-        {
-            var tmp = PlayerPrefs.GetInt("Gold_RECOV_UP_Lv", 0);
-            return tmp;
-        }
-
-        set
-        {
-            PlayerPrefs.SetInt("Gold_RECOV_UP_Lv", value);
-            PlayerPrefs.Save();
-        }
-    }
-
     /// (int)다이아 체력 회복 % 레벨
     public int Dia_RECOV_UP_Lv
     {
@@ -1598,24 +1650,7 @@ public class PlayerPrefsManager : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// 스탯 방어력 강화 레벨
-    /// </summary>
-    public int Defence_Lv
-    {
-        get
-        {
-            if (!PlayerPrefs.HasKey("Mattzip_Lv")) return 0;
-            var tmp = PlayerPrefs.GetInt("Mattzip_Lv");
-            return tmp;
-        }
 
-        set
-        {
-            PlayerPrefs.SetInt("Mattzip_Lv", value);
-            PlayerPrefs.Save();
-        }
-    }
 
 
     /// (float)그로기 터치 횟수                          GroggyTouch
@@ -2069,7 +2104,7 @@ public class PlayerPrefsManager : MonoBehaviour
         {
             if (!PlayerPrefs.HasKey("Stat_is4Mattzip")) return 0;
             var tmp = PlayerPrefs.GetFloat("Stat_is4Mattzip");
-            return tmp;
+            return tmp * 0.01f;
         }
 
         set
@@ -2162,7 +2197,7 @@ public class PlayerPrefsManager : MonoBehaviour
 
 
     /// <summary>
-    /// 맷집 증가에 필요한 대미지 게이지
+    /// 맷집 증가에 필요한 대미지 게이지 (맷집 게이지 감소 장신구 적용) 
     /// </summary>
     public float Cilcked_Cnt_MattZip
     {
@@ -2183,7 +2218,7 @@ public class PlayerPrefsManager : MonoBehaviour
 
 
     /// <summary>
-    /// 무기 다이아 영구구매하면 맷집 퍼센트 누적용
+    /// 훈련장비 다이아 구매시 맷집 증가 → 공격력 증가로 수정
     /// </summary>
     public float Mattzip_Dia_Weap
     {

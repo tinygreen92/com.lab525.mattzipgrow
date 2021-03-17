@@ -8,6 +8,9 @@ public class ShopManager : MonoBehaviour
 {
     DoubleToStringNum dts = new DoubleToStringNum();
 
+    public GameObject SomeThingPop;
+    public Transform SomeThingTrans;
+    [Header("-부스터 땡겨오기")]
     public Booster_Power booster_Power;
     public Booster_Body booster_Body;
 
@@ -45,13 +48,12 @@ public class ShopManager : MonoBehaviour
 
 
     /// <summary>
-    /// 다이아 100개 짜리 상품 팔때 호출
+    /// 확정 구매 버튼 누르면
     /// </summary>
     /// <param name="_index"></param>
-    public void BuySomeThing(int _index)
+    public void ShowBuySomePop()
     {
-
-        switch (_index)
+        switch (normal_dex)
         {
             // 골드
             case 0:
@@ -65,7 +67,8 @@ public class ShopManager : MonoBehaviour
                     GetNormalGold();
 
                     PopUpObjectManager.GetInstance().ShowWarnnigProcess("성공적으로 구입하셨습니다.");
-                }else PopUpObjectManager.GetInstance().ShowWarnnigProcess("보유 다이아가 부족합니다.");
+                }
+                else PopUpObjectManager.GetInstance().ShowWarnnigProcess("보유 다이아가 부족합니다.");
                 break;
 
             // 열쇠
@@ -84,8 +87,8 @@ public class ShopManager : MonoBehaviour
                 else PopUpObjectManager.GetInstance().ShowWarnnigProcess("보유 다이아가 부족합니다.");
 
                 break;
-            
-            // 공격 3배
+
+            // 골드 2배
             case 2:
                 if (DiaPass())
                 {
@@ -101,7 +104,7 @@ public class ShopManager : MonoBehaviour
 
                 break;
 
-            // 맷집 3배
+            // 공격 2배
             case 3:
                 if (DiaPass())
                 {
@@ -169,11 +172,77 @@ public class ShopManager : MonoBehaviour
                 else PopUpObjectManager.GetInstance().ShowWarnnigProcess("보유 다이아가 부족합니다.");
 
                 break;
-
         }
 
         UserWallet.GetInstance().ShowAllMoney();
 
+    }
+
+    /// <summary>
+    ///  노말 상품 팝업 호출할때 할당 인덱스
+    /// </summary>
+    int normal_dex;
+    /// <summary>
+    /// 다이아 100개 짜리 상품 팔때 팝업 호출
+    /// </summary>
+    /// <param name="_index"></param>
+    public void BuySomeThing(int _index)
+    {
+        normal_dex = _index;
+        /// 아이콘 세팅 해주고
+        for (int i = 0; i < SomeThingTrans.childCount; i++)
+        {
+            SomeThingTrans.GetChild(i).gameObject.SetActive(false);
+        }
+        switch (_index)
+        {
+            // 골드
+            case 0:
+                /// 팝업 켜주고
+                SomeThingTrans.GetChild(0).gameObject.SetActive(true);
+                break;
+
+            // 열쇠
+            case 1:
+                /// 팝업 켜주고
+                SomeThingTrans.GetChild(1).gameObject.SetActive(true);
+                break;
+
+            // 골드 2배
+            case 2:
+                /// 팝업 켜주고
+                SomeThingTrans.GetChild(2).gameObject.SetActive(true);
+                break;
+
+            // 공격 2배
+            case 3:
+                /// 팝업 켜주고
+                SomeThingTrans.GetChild(3).gameObject.SetActive(true);
+                break;
+
+            // 국밥
+            case 4:
+                /// 팝업 켜주고
+                SomeThingTrans.GetChild(4).gameObject.SetActive(true);
+                break;
+
+            // 쌀밥
+            case 8:
+                /// 팝업 켜주고
+                SomeThingTrans.GetChild(5).gameObject.SetActive(true);
+                break;
+
+            // pvp 입장권
+            case 9:
+                /// 팝업 켜주고
+                SomeThingTrans.GetChild(6).gameObject.SetActive(true);
+                break;
+        }
+
+        SomeThingPop.SetActive(true);
+        // 애니메 재생
+        SomeThingPop.GetComponent<Animation>()["Roll_Incre"].speed = 1;
+        SomeThingPop.GetComponent<Animation>().Play("Roll_Incre");
     }
 
     /// <summary>
