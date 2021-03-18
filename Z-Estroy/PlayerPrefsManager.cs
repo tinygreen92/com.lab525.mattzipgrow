@@ -1041,7 +1041,7 @@ public class PlayerPrefsManager : MonoBehaviour
             /// MattzipStat 국밥으로 강화하면 증가
             /// MattzipArtif 유물 뽑기 하면 증가
 
-            var value = Mat_Mattzip_Hit + MattzipStat;
+            var value = Mat_Mattzip_Hit;
             double tmppp = value + (value * MattzipArtif * 0.01f);
             
             return tmppp.ToString("f0");
@@ -1109,22 +1109,7 @@ public class PlayerPrefsManager : MonoBehaviour
         }
     }
 
-    /// (float)맷집 스탯 (국밥 강화로만 증가)                        MattzipStat
-    public float MattzipStat
-    {
-        get
-        {
-            if (!PlayerPrefs.HasKey("MattzipStat")) return 0;
-            var tmp = PlayerPrefs.GetFloat("MattzipStat");
-            return tmp;
-        }
 
-        set
-        {
-            PlayerPrefs.SetFloat("MattzipStat", value);
-            PlayerPrefs.Save();
-        }
-    }
 
     /// (float)맷집 유물 (유물 강화로만 증가)                       MattzipArtif
     public float MattzipArtif
@@ -1215,6 +1200,25 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetInt("Gold_RECOV_UP_Lv", value);
+            PlayerPrefs.Save();
+        }
+    }
+
+    /// <summary>
+    /// 안쓰는 float
+    /// </summary>
+    public float MattzipStat
+    {
+        get
+        {
+            if (!PlayerPrefs.HasKey("MattzipStat")) return 0;
+            var tmp = PlayerPrefs.GetFloat("MattzipStat");
+            return tmp;
+        }
+
+        set
+        {
+            PlayerPrefs.SetFloat("MattzipStat", value);
             PlayerPrefs.Save();
         }
     }
@@ -2018,7 +2022,7 @@ public class PlayerPrefsManager : MonoBehaviour
         }
     }
 
-    /// 4번 깃발 버프 - 맷집 레벨
+    /// 4번 깃발 버프 - 방어력 레벨
     public int is4Mattzip
     {
         get

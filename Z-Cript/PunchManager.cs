@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -19,7 +17,7 @@ public class PunchManager : MonoBehaviour
     public TapToSpawnLimit tapToSpawnLimit;
 
     [Header("-훈련장비 부모 그리드")]
-    public Transform PunchGrid;
+    //public Transform PunchGrid;
 
     // 무기 배열로 만들어서 관리 혀라
     //Text[] POWER_UP_LV;                 // 해당 무기 레벨 
@@ -81,7 +79,7 @@ public class PunchManager : MonoBehaviour
         string[] tmpDiaBuyWeapArray = DiaBuyWeaponListLoad();
 
         /// 총 펀치 갯수 현재 100 개
-        int ccnt = PunchGrid.childCount;
+        int ccnt = PlayerPrefsManager.GetInstance().weaponInfo.Count;
         /// 다이아로 펀치 해금 초기화.
         PlayerPrefsManager.GetInstance().Mattzip_Dia_Weap = 0;
         //POWER_UP_LV = new Text[ccnt];
@@ -90,8 +88,8 @@ public class PunchManager : MonoBehaviour
 
         for (int i = 0; i < ccnt; i++)
         {
-            // 모든 장착 가능 회색 커버 꺼줌.
-            PunchGrid.GetChild(i).GetChild(4).GetChild(0).GetChild(1).gameObject.SetActive(false);
+            /// 모든 장착 가능 회색 커버 꺼줌.
+            //PunchGrid.GetChild(i).GetChild(4).GetChild(0).GetChild(1).gameObject.SetActive(false);
             // 리스트 긁기
             GetThisWeaponInfo(i);
             // 리스트 긁은걸로 각 항목 수정
@@ -107,18 +105,18 @@ public class PunchManager : MonoBehaviour
                 {
                     /// 능력치 총합 더 해주고.
                     ///TODO : 만렙 처리 회색 커버
-                    PunchGrid.GetChild(i).GetChild(4).GetChild(1).GetChild(1).gameObject.SetActive(true); // Cover_Btn
-                    PunchGrid.GetChild(i).GetChild(4).GetChild(1).GetChild(2).GetChild(0).GetChild(0).GetComponent<Image>().sprite = DiaImg;
-                    PunchGrid.GetChild(i).GetChild(4).GetChild(1).GetComponentInChildren<Text>().text = "MAX";
+                    //PunchGrid.GetChild(i).GetChild(4).GetChild(1).GetChild(1).gameObject.SetActive(true); // Cover_Btn
+                    //PunchGrid.GetChild(i).GetChild(4).GetChild(1).GetChild(2).GetChild(0).GetChild(0).GetComponent<Image>().sprite = DiaImg;
+                    //PunchGrid.GetChild(i).GetChild(4).GetChild(1).GetComponentInChildren<Text>().text = "MAX";
                     // 구매 완료
                     PlayerPrefsManager.GetInstance().Mattzip_Dia_Weap += 10f * (i + 1);
                     tmpDiaBuyWeap += "1*";
                 }
                 else  /// 아직 만렙만 찍은 상태 - 다이아몬드 구입창 보여줘라.
                 {
-                    PunchGrid.GetChild(i).GetChild(4).GetChild(1).GetChild(1).gameObject.SetActive(false); // Cover_Btn
-                    PunchGrid.GetChild(i).GetChild(4).GetChild(1).GetChild(2).GetChild(0).GetChild(0).GetComponent<Image>().sprite = DiaImg;
-                    PunchGrid.GetChild(i).GetChild(4).GetChild(1).GetComponentInChildren<Text>().text = ((i +1) * 100).ToString();
+                    //PunchGrid.GetChild(i).GetChild(4).GetChild(1).GetChild(1).gameObject.SetActive(false); // Cover_Btn
+                    //PunchGrid.GetChild(i).GetChild(4).GetChild(1).GetChild(2).GetChild(0).GetChild(0).GetComponent<Image>().sprite = DiaImg;
+                    //PunchGrid.GetChild(i).GetChild(4).GetChild(1).GetComponentInChildren<Text>().text = ((i + 1) * 100).ToString();
 
                     // 미구매
                     tmpDiaBuyWeap += "0*";
@@ -136,7 +134,7 @@ public class PunchManager : MonoBehaviour
 
 
         // 현재 장착 회색 커버 활성화.
-        PunchGrid.GetChild(PlayerPrefsManager.GetInstance().PunchIndex).GetChild(4).GetChild(0).GetChild(1).gameObject.SetActive(true);
+        //PunchGrid.GetChild(PlayerPrefsManager.GetInstance().PunchIndex).GetChild(4).GetChild(0).GetChild(1).gameObject.SetActive(true);
 
         /// 수치 변화 저장
         PlayerPrefsManager.GetInstance().SaveWeaponInfo();
@@ -155,14 +153,14 @@ public class PunchManager : MonoBehaviour
     void SetPunchLv(int _index, int _contents)
     {
         string result = "Lv. " + _contents;
-        PunchGrid.GetChild(_index).GetChild(2).GetComponent<Text>().text = result;
+        //PunchGrid.GetChild(_index).GetChild(2).GetComponent<Text>().text = result;
         PlayerPrefsManager.GetInstance().weaponInfo[_index].weaponLevel = _contents;
     }
 
     void SetPunchText(int _index, float _contents)
     {
         string result = "공격력 " + _contents.ToString("f1") + "% 증가";
-        PunchGrid.GetChild(_index).GetChild(3).GetComponent<Text>().text = result;
+        //PunchGrid.GetChild(_index).GetChild(3).GetComponent<Text>().text = result;
         PlayerPrefsManager.GetInstance().weaponInfo[_index].weaponEffect = _contents;
     }
 
@@ -173,7 +171,7 @@ public class PunchManager : MonoBehaviour
 
         //Debug.LogWarning("SeetheNatural" + result);
 
-        PunchGrid.GetChild(_index).GetChild(4).GetChild(1).GetComponentInChildren<Text>().text = result;
+        //PunchGrid.GetChild(_index).GetChild(4).GetChild(1).GetComponentInChildren<Text>().text = result;
         PlayerPrefsManager.GetInstance().weaponInfo[_index].weaponCost = _contents;
     }
 
@@ -188,14 +186,15 @@ public class PunchManager : MonoBehaviour
         if (isUnlock)
         {
             // 가리개 제거
-            PunchGrid.GetChild(_index).GetChild(5).gameObject.SetActive(false);
+            //PunchGrid.GetChild(_index).GetChild(5).gameObject.SetActive(false);
             // 펀치 이름 넣어줌.
             string result = PunchNames[_index];
-            PunchGrid.GetChild(_index).GetChild(1).GetComponent<Text>().text = result;
+            //PunchGrid.GetChild(_index).GetChild(1).GetComponent<Text>().text = result;
             // 우유 갯수 충분하면 버튼 회색커버 꺼줌
-            if (GupbapPass(thisWeaponCost) && thisWeaponLevel != 100) PunchGrid.GetChild(_index).GetChild(4).GetChild(1).GetChild(1).gameObject.SetActive(false);
+            //if (GupbapPass(thisWeaponCost) && thisWeaponLevel != 100) PunchGrid.GetChild(_index).GetChild(4).GetChild(1).GetChild(1).gameObject.SetActive(false);
+
             // 아이콘 색상 
-            PunchGrid.GetChild(_index).GetChild(0).GetChild(0).GetComponent<Image>().color = Color.white;
+            //PunchGrid.GetChild(_index).GetChild(0).GetChild(0).GetComponent<Image>().color = Color.white;
         }
     }
 
@@ -203,12 +202,12 @@ public class PunchManager : MonoBehaviour
     /// 버티기 성공하면 다음 펀치 해금 됨.
     /// </summary>
     public void UnlockNextPunch()
-    { 
+    {
         int p_among = PlayerPrefsManager.GetInstance().punchAmont;
 
         int _index = 0;
         // 최근 펀치 어디까지 해금 됐니? 탐색
-        for (int i = 0; i< p_among; i++)
+        for (int i = 0; i < p_among; i++)
         {
             if (!PlayerPrefsManager.GetInstance().weaponInfo[i].isUnlock)
             {
@@ -254,22 +253,22 @@ public class PunchManager : MonoBehaviour
                     // 우유 갯수 충분하면 버튼 회색커버 꺼줌(만렙 아니어야함)
                     if (GupbapPass(thisWeaponCost))
                     {
-                        PunchGrid.GetChild(i).GetChild(4).GetChild(1).GetChild(1).gameObject.SetActive(false);
+                        //PunchGrid.GetChild(i).GetChild(4).GetChild(1).GetChild(1).gameObject.SetActive(false);
 
                         if (thisWeaponLevel == 100)
                         {
-                            PunchGrid.GetChild(i).GetChild(4).GetChild(1).GetChild(1).gameObject.SetActive(true);
+                            //PunchGrid.GetChild(i).GetChild(4).GetChild(1).GetChild(1).gameObject.SetActive(true);
 
                             Debug.LogWarning(i + " 펀치 " + thisWeaponLevel + " 렙.");
                         }
                     }
                     else
                     {
-                        PunchGrid.GetChild(i).GetChild(4).GetChild(1).GetChild(1).gameObject.SetActive(true);
+                        //PunchGrid.GetChild(i).GetChild(4).GetChild(1).GetChild(1).gameObject.SetActive(true);
                     }
 
                     // 아이콘 색상 
-                    PunchGrid.GetChild(i).GetChild(0).GetChild(0).GetComponent<Image>().color = Color.white;
+                    //PunchGrid.GetChild(i).GetChild(0).GetChild(0).GetComponent<Image>().color = Color.white;
                 }
             }
         }
@@ -289,7 +288,7 @@ public class PunchManager : MonoBehaviour
 
         GetThisWeaponInfo(p_index);
         // 0 렙이면 장착하지말고 리턴
-        if (thisWeaponLevel == 0 && p_index !=0)
+        if (thisWeaponLevel == 0 && p_index != 0)
         {
             PopUpObjectManager.GetInstance().ShowWarnnigProcess("레벨이 0인 장비는 장착할 수 없습니다.");
             return;
@@ -299,9 +298,9 @@ public class PunchManager : MonoBehaviour
 
 
         // 이전 장착 회색 커버 비활성화
-        PunchGrid.GetChild(PlayerPrefsManager.GetInstance().PunchIndex).GetChild(4).GetChild(0).GetChild(1).gameObject.SetActive(false);
+        //PunchGrid.GetChild(PlayerPrefsManager.GetInstance().PunchIndex).GetChild(4).GetChild(0).GetChild(1).gameObject.SetActive(false);
         // 현재 장착 회색 커버 활성화.
-        PunchGrid.GetChild(p_index).GetChild(4).GetChild(0).GetChild(1).gameObject.SetActive(true);
+        //PunchGrid.GetChild(p_index).GetChild(4).GetChild(0).GetChild(1).gameObject.SetActive(true);
 
         ChangePunch(p_index);
 
@@ -318,7 +317,7 @@ public class PunchManager : MonoBehaviour
         // 클릭한 지점 이름 얻어오기
         string nameIndex = EventSystem.current.currentSelectedGameObject.transform.parent.parent.name;
         string strTmp = Regex.Replace(nameIndex, @"\D", "");
-        int p_index = int.Parse(strTmp) -1;
+        int p_index = int.Parse(strTmp) - 1;
         // 밑으로 분리.
         ClickedPunchUPgra(p_index);
 
@@ -335,10 +334,10 @@ public class PunchManager : MonoBehaviour
         /// 저장된 해당 펀치 리스트 가져와서 뿌려주고
         GetThisWeaponInfo(p_index);
         /// 해당 펀치 회색 Cover Img로 덮여 있으면 리턴 -> 업그레이드 재화 소모없음 / 레벨 증가 없음.
-        if (PunchGrid.GetChild(p_index).GetChild(4).GetChild(1).GetChild(1).gameObject.activeSelf)
-        {
-            return;
-        }
+        //if (PunchGrid.GetChild(p_index).GetChild(4).GetChild(1).GetChild(1).gameObject.activeSelf)
+        //{
+        //    return;
+        //}
 
         /// 다이아 구매 || 국밥 구매 판별
         if (thisWeaponLevel >= 100 && thisDiaBuyWeapArray[p_index] == "0")
@@ -348,7 +347,7 @@ public class PunchManager : MonoBehaviour
         }
 
         // 해당 코스트 넣어서 통과 못하면 리턴
-        if (!GupbapPass(thisWeaponCost)) 
+        if (!GupbapPass(thisWeaponCost))
             return;
 
         // 정상적 국밥 소모
@@ -368,15 +367,15 @@ public class PunchManager : MonoBehaviour
 
         /// 첫번재 무기라면 예외처리
         if (p_index == 0)
-            {
-                tmpPrice = (thisWeaponLevel + 10).ToString();
-            }
-            else
-            {
-                tmpPrice = (((thisWeaponLevel + 1) * (5 * p_index)) + (10 + (5 * p_index))).ToString();
-            }
+        {
+            tmpPrice = (thisWeaponLevel + 10).ToString();
+        }
+        else
+        {
+            tmpPrice = (((thisWeaponLevel + 1) * (5 * p_index)) + (10 + (5 * p_index))).ToString();
+        }
 
-        
+
         Debug.LogWarning("tmpPrice : " + tmpPrice);
 
         string weaponPrice = dts.fDoubleToStringNumber(tmpPrice);
@@ -384,11 +383,11 @@ public class PunchManager : MonoBehaviour
         //
         if (GupbapPass(weaponPrice))
         {
-            PunchGrid.GetChild(p_index).GetChild(4).GetChild(1).GetChild(1).gameObject.SetActive(false);
+            //PunchGrid.GetChild(p_index).GetChild(4).GetChild(1).GetChild(1).gameObject.SetActive(false);
         }
         else
         {
-            PunchGrid.GetChild(p_index).GetChild(4).GetChild(1).GetChild(1).gameObject.SetActive(true);
+            //PunchGrid.GetChild(p_index).GetChild(4).GetChild(1).GetChild(1).gameObject.SetActive(true);
         }
 
         // 각 항목 수정
@@ -398,9 +397,9 @@ public class PunchManager : MonoBehaviour
 
         if (thisWeaponLevel == 100)
         {
-            PunchGrid.GetChild(p_index).GetChild(4).GetChild(1).GetChild(1).gameObject.SetActive(false); // Cover_Btn
-            PunchGrid.GetChild(p_index).GetChild(4).GetChild(1).GetChild(2).GetChild(0).GetChild(0).GetComponent<Image>().sprite = DiaImg;
-            PunchGrid.GetChild(p_index).GetChild(4).GetChild(1).GetComponentInChildren<Text>().text = ((p_index + 1) * 100).ToString();
+            //PunchGrid.GetChild(p_index).GetChild(4).GetChild(1).GetChild(1).gameObject.SetActive(false); // Cover_Btn
+            //PunchGrid.GetChild(p_index).GetChild(4).GetChild(1).GetChild(2).GetChild(0).GetChild(0).GetComponent<Image>().sprite = DiaImg;
+            //PunchGrid.GetChild(p_index).GetChild(4).GetChild(1).GetComponentInChildren<Text>().text = ((p_index + 1) * 100).ToString();
         }
 
 
@@ -461,7 +460,7 @@ public class PunchManager : MonoBehaviour
 
         /// 무기 데이터 다이아몬드 구매 여부 저장
         string tmpDiaBuyWeap = "";
-        for (int i = 0; i < PunchGrid.childCount; i++)
+        for (int i = 0; i < PlayerPrefsManager.GetInstance().weaponInfo.Count; i++)
         {
             if (i == SD_PunchIndex || thisDiaBuyWeapArray[i] == "1")
             {
@@ -476,9 +475,9 @@ public class PunchManager : MonoBehaviour
         thisDiaBuyWeapArray = DiaBuyWeaponListLoad();
 
         ///다이아로 구매했으면 만렙 처리 회색 커버
-        PunchGrid.GetChild(SD_PunchIndex).GetChild(4).GetChild(1).GetChild(1).gameObject.SetActive(true); // Cover_Btn
-        PunchGrid.GetChild(SD_PunchIndex).GetChild(4).GetChild(1).GetChild(2).GetChild(0).GetChild(0).GetComponent<Image>().sprite = DiaImg;
-        PunchGrid.GetChild(SD_PunchIndex).GetChild(4).GetChild(1).GetComponentInChildren<Text>().text = "MAX";
+        //PunchGrid.GetChild(SD_PunchIndex).GetChild(4).GetChild(1).GetChild(1).gameObject.SetActive(true); // Cover_Btn
+        //PunchGrid.GetChild(SD_PunchIndex).GetChild(4).GetChild(1).GetChild(2).GetChild(0).GetChild(0).GetComponent<Image>().sprite = DiaImg;
+        //PunchGrid.GetChild(SD_PunchIndex).GetChild(4).GetChild(1).GetComponentInChildren<Text>().text = "MAX";
 
         /// 다이아로 구매했으면 맷집 증가 효과 더해줌 -> 한번만 적용됨
         var dfsd = PlayerPrefsManager.GetInstance().weaponInfo[SD_PunchIndex].weaponEffect;
@@ -490,7 +489,7 @@ public class PunchManager : MonoBehaviour
     /// </summary>
     /// <param name="p_index"></param>
     void GetThisWeaponInfo(int p_index)
-    {         
+    {
         // 저장된 해당 펀치 리스트 가져와서 뿌려주고
         var tmpList = PlayerPrefsManager.GetInstance().weaponInfo[p_index];
 
@@ -522,9 +521,9 @@ public class PunchManager : MonoBehaviour
         }
 
     }
-        
+
     // 펀치 목록
-    string[] PunchNames = 
+    string[] PunchNames =
     { "맨주먹",
 "물주먹",
 "돌주먹",

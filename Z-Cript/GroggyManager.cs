@@ -1446,7 +1446,6 @@ public class GroggyManager : MonoBehaviour
         tmpATK = currentRec;
         tmptmpATK = nextRec;
 
-        PlayerPrefsManager.GetInstance().MattzipStat = float.Parse(tmpATK);
         Mat_HP_UP_TEXT.text = "방어력 " + UserWallet.GetInstance().SeetheNatural(double.Parse(tmpATK)) + " > " + UserWallet.GetInstance().SeetheNatural(double.Parse(tmptmpATK));
         /// 소비 국밥 표기
         currentRec = GetNormalUpPrice(3, Defend_Lv);

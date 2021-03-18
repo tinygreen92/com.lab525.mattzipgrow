@@ -15,6 +15,7 @@ public class GameStart : MonoBehaviour
     public GameObject[] AllObject;
 
     [Header("-외부 API 초기화")]
+    public InfiniteScroll InfinityContent;
     public CharacterManager charactherMang;
     public GroggyManager groggyManager;
     public TutorialManager tutorialManager;
@@ -47,6 +48,12 @@ public class GameStart : MonoBehaviour
         Application.targetFrameRate = 60;
         // 오디오 매니저 세팅
         audioManager.AudioInit();
+
+        // 렉걸리는 것들 켰다가 꺼줌.
+        for (int i = 0; i < AllObject.Length; i++)
+        {
+            AllObject[i].SetActive(true);
+        }
         /// 
         if (isDebugMode)
         {
@@ -79,11 +86,6 @@ public class GameStart : MonoBehaviour
         //튜토리얼 안했어?? 데이터 올 리셋
         //if (!PlayerPrefsManager.GetInstance().isFristGameStart) PlayerPrefs.DeleteAll();
 
-        // 렉걸리는 것들 켰다가 꺼줌.
-        for (int i = 0; i < AllObject.Length; i++)
-        {
-            AllObject[i].SetActive(true);
-        }
         for (int i = 0; i < AllObject.Length; i++)
         {
             AllObject[i].SetActive(false);
@@ -491,6 +493,8 @@ public class GameStart : MonoBehaviour
         groggyManager.HP_barInit();
         // 유니폼 초기화
         charactherMang.UniformInit();
+        /// 인피니티 스크롤 호출 
+        InfinityContent.ListStart();
     }
 
     IEnumerator MissionChechecak()

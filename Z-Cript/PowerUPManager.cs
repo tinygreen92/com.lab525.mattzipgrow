@@ -50,42 +50,41 @@ public class PowerUPManager : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// 처음 실행시펀치 갯수만큼 초기화.
+    /// </summary>
     public void Init()
     {
+        if (isInitFinish) return;
+
         // 디폴트 펀치 갯수
         int p_among = PlayerPrefsManager.GetInstance().punchAmont;
 
         punchSet = new Text[p_among];
 
-        /// TODO : getcomp 쓰는 거 전부 여기로 몰아 넣기
-        thisSCRect = GetComponentInChildren<ScrollRect>();
-
-        if (isInitFinish || gameObject.name != "POWERUP_POP") return;
-
         //펀치 50개 정의
-        for (int i = 0; i < p_among; i++)
-        {
-            punchSet[i] = power_Rect.GetChild(i).GetChild(4).GetComponentInChildren<Text>();
-        }
-        // 훈련강화 페이지면 
-        if (name == "POWERUP_POP")
-        {
-            // 회색버튼 판별.
-            groggyManager.PowerUP_Init();
-        }
-
+        //for (int i = 0; i < p_among; i++)
+        //{
+        //    punchSet[i] = power_Rect.GetChild(i).GetChild(4).GetComponentInChildren<Text>();
+        //}
+        /// 한번만 실행하라.
+        Debug.LogError("펀치 초기화 한번만 실행하라.");
         isInitFinish = true;
     }
 
     /// <summary>
-    /// 버튼 클릭시 이 메소드로 호출
+    /// 장비 버튼 클릭시 이 메소드로 호출
     /// </summary>
     public void OpenPopUP()
     {
-        Init();
+        if(gameObject.name == "POWERUP_POP")
+        {
+            Init();
+        }
+        /// TODO : getcomp 쓰는 거 전부 여기로 몰아 넣기
+        thisSCRect = GetComponentInChildren<ScrollRect>();
 
         /// TODO : 에니메이션 효과
-
         if (gameObject.activeSelf) return;
         gameObject.SetActive(true);
         thisSCRect.horizontalNormalizedPosition = 0f; // 모든 스크롤뷰 왼쪽 정렬 시켜
@@ -142,6 +141,7 @@ public class PowerUPManager : MonoBehaviour
                 // 훈련강화 페이지 새로 고침
                 if (name == "POWERUP_POP")
                 {
+                    Debug.LogError("POWERUP_POP 에서 훈련장비 탭 클릭");
                     groggyManager.PowerUP_Init();
                 }
 
@@ -299,7 +299,7 @@ public class PowerUPManager : MonoBehaviour
     /// <summary>
     /// 파워업 누를때
     /// </summary>
-        void InitPowerUP()
+    void InitPowerUP()
     {
         // 컨텐츠 오브젝트 활성화
         power_View.gameObject.SetActive(true);
