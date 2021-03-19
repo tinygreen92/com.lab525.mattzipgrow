@@ -93,7 +93,7 @@ public class ButtonSoundListner : MonoBehaviour, IPointerUpHandler, IPointerDown
     {
         if (isBtnDown)
         {
-            punchManager.ClickedPunchUPgra(p_index);
+            //punchManager.ClickedPunchUPgra(p_index);
         }
 
         if (isBtnDownQuest)

@@ -7,7 +7,10 @@ public class PunchManager : MonoBehaviour
 {
     DoubleToStringNum dts = new DoubleToStringNum();
 
-    [Header("다이아 영구 해제 팝업 오브젝트")]
+    public Transform InfinityContent;
+    [Header("-펀치 이미지 100개")]
+    public Sprite[] punchImgs;
+    [Header("-다이아 영구 해제 팝업 오브젝트")]
     public GameObject SomeThingPop;
     [Header("-만렙 찍으면 다이아로 산다 스프라이트")]
     public Sprite DiaImg;
@@ -29,7 +32,7 @@ public class PunchManager : MonoBehaviour
     string thisWeaponCost;
     float thisWeaponEffect;
     bool isUnlock;
-    string[] thisDiaBuyWeapArray;
+    public string[] thisDiaBuyWeapArray;
 
 
 
@@ -91,12 +94,7 @@ public class PunchManager : MonoBehaviour
             /// 모든 장착 가능 회색 커버 꺼줌.
             //PunchGrid.GetChild(i).GetChild(4).GetChild(0).GetChild(1).gameObject.SetActive(false);
             // 리스트 긁기
-            GetThisWeaponInfo(i);
-            // 리스트 긁은걸로 각 항목 수정
-            SetPunchLv(i, thisWeaponLevel);
-            SetPunchText(i, thisWeaponEffect);
-            SetPunchPrice(i, thisWeaponCost);
-
+            //GetThisWeaponInfo(i);
 
             if (thisWeaponLevel == 100)
             {
@@ -146,34 +144,17 @@ public class PunchManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 펀치 정보 수정하려면
+    /// 모든 장착 버튼 회색으로 바꾸기
     /// </summary>
-    /// <param name="_index"></param>
-    /// <param name="_contents"></param>
-    void SetPunchLv(int _index, int _contents)
+    internal void SetBeforeEuipGrayBtn()
     {
-        string result = "Lv. " + _contents;
-        //PunchGrid.GetChild(_index).GetChild(2).GetComponent<Text>().text = result;
-        PlayerPrefsManager.GetInstance().weaponInfo[_index].weaponLevel = _contents;
+        for (int i = 1; i < InfinityContent.childCount; i++)
+        {
+            InfinityContent.GetChild(i).GetComponent<PunchItem>()
+                .SetAllEpuipBtnToGray(false);
+        }
     }
 
-    void SetPunchText(int _index, float _contents)
-    {
-        string result = "공격력 " + _contents.ToString("f1") + "% 증가";
-        //PunchGrid.GetChild(_index).GetChild(3).GetComponent<Text>().text = result;
-        PlayerPrefsManager.GetInstance().weaponInfo[_index].weaponEffect = _contents;
-    }
-
-    void SetPunchPrice(int _index, string _contents)
-    {
-        var value = dts.PanByulGi(_contents);
-        string result = UserWallet.GetInstance().SeetheNatural(value);
-
-        //Debug.LogWarning("SeetheNatural" + result);
-
-        //PunchGrid.GetChild(_index).GetChild(4).GetChild(1).GetComponentInChildren<Text>().text = result;
-        PlayerPrefsManager.GetInstance().weaponInfo[_index].weaponCost = _contents;
-    }
 
     /// <summary>
     /// 초기화 할 때만 호출 
@@ -225,7 +206,7 @@ public class PunchManager : MonoBehaviour
     /// <summary>
     /// 펀치 장착 바꿔줌
     /// </summary>
-    void ChangePunch(int _index)
+    public void ChangePunch(int _index)
     {
         // ppm 으로 저장도 하고
         PlayerPrefsManager.GetInstance().PunchIndex = _index;
@@ -239,39 +220,39 @@ public class PunchManager : MonoBehaviour
     /// </summary>
     public void PunchTapClicked()
     {
-        int p_among = PlayerPrefsManager.GetInstance().punchAmont;
-        // 최근 펀치 어디까지 해금 됐니? 탐색
-        for (int i = 0; i < p_among; i++)
-        {
-            if (PlayerPrefsManager.GetInstance().weaponInfo[i].isUnlock)
-            {
-                if (PlayerPrefsManager.GetInstance().weaponInfo[i].weaponLevel != 100)
-                {
-                    // 저장된 해당 펀치 리스트 가져와서 뿌려주고
-                    /// thislevel 넣어줌
-                    GetThisWeaponInfo(i);
-                    // 우유 갯수 충분하면 버튼 회색커버 꺼줌(만렙 아니어야함)
-                    if (GupbapPass(thisWeaponCost))
-                    {
-                        //PunchGrid.GetChild(i).GetChild(4).GetChild(1).GetChild(1).gameObject.SetActive(false);
+        //int p_among = PlayerPrefsManager.GetInstance().punchAmont;
+        //// 최근 펀치 어디까지 해금 됐니? 탐색
+        //for (int i = 0; i < p_among; i++)
+        //{
+        //    if (PlayerPrefsManager.GetInstance().weaponInfo[i].isUnlock)
+        //    {
+        //        if (PlayerPrefsManager.GetInstance().weaponInfo[i].weaponLevel != 100)
+        //        {
+        //            // 저장된 해당 펀치 리스트 가져와서 뿌려주고
+        //            /// thislevel 넣어줌
+        //            GetThisWeaponInfo(i);
+        //            // 우유 갯수 충분하면 버튼 회색커버 꺼줌(만렙 아니어야함)
+        //            if (GupbapPass(thisWeaponCost))
+        //            {
+        //                //PunchGrid.GetChild(i).GetChild(4).GetChild(1).GetChild(1).gameObject.SetActive(false);
 
-                        if (thisWeaponLevel == 100)
-                        {
-                            //PunchGrid.GetChild(i).GetChild(4).GetChild(1).GetChild(1).gameObject.SetActive(true);
+        //                if (thisWeaponLevel == 100)
+        //                {
+        //                    //PunchGrid.GetChild(i).GetChild(4).GetChild(1).GetChild(1).gameObject.SetActive(true);
 
-                            Debug.LogWarning(i + " 펀치 " + thisWeaponLevel + " 렙.");
-                        }
-                    }
-                    else
-                    {
-                        //PunchGrid.GetChild(i).GetChild(4).GetChild(1).GetChild(1).gameObject.SetActive(true);
-                    }
+        //                    Debug.LogWarning(i + " 펀치 " + thisWeaponLevel + " 렙.");
+        //                }
+        //            }
+        //            else
+        //            {
+        //                //PunchGrid.GetChild(i).GetChild(4).GetChild(1).GetChild(1).gameObject.SetActive(true);
+        //            }
 
-                    // 아이콘 색상 
-                    //PunchGrid.GetChild(i).GetChild(0).GetChild(0).GetComponent<Image>().color = Color.white;
-                }
-            }
-        }
+        //            // 아이콘 색상 
+        //            //PunchGrid.GetChild(i).GetChild(0).GetChild(0).GetComponent<Image>().color = Color.white;
+        //        }
+        //    }
+        //}
     }
 
     /// <summary>
@@ -286,7 +267,7 @@ public class PunchManager : MonoBehaviour
         string strTmp = Regex.Replace(nameIndex, @"\D", "");
         int p_index = int.Parse(strTmp) - 1;
 
-        GetThisWeaponInfo(p_index);
+        //GetThisWeaponInfo(p_index);
         // 0 렙이면 장착하지말고 리턴
         if (thisWeaponLevel == 0 && p_index != 0)
         {
@@ -314,12 +295,12 @@ public class PunchManager : MonoBehaviour
     /// </summary>
     public void PunchUpgrade()
     {
-        // 클릭한 지점 이름 얻어오기
-        string nameIndex = EventSystem.current.currentSelectedGameObject.transform.parent.parent.name;
-        string strTmp = Regex.Replace(nameIndex, @"\D", "");
-        int p_index = int.Parse(strTmp) - 1;
-        // 밑으로 분리.
-        ClickedPunchUPgra(p_index);
+        //// 클릭한 지점 이름 얻어오기
+        //string nameIndex = EventSystem.current.currentSelectedGameObject.transform.parent.parent.name;
+        //string strTmp = Regex.Replace(nameIndex, @"\D", "");
+        //int p_index = int.Parse(strTmp) - 1;
+        //// 밑으로 분리.
+        //ClickedPunchUPgra(p_index);
 
     }
 
@@ -332,7 +313,7 @@ public class PunchManager : MonoBehaviour
     public void ClickedPunchUPgra(int p_index)
     {
         /// 저장된 해당 펀치 리스트 가져와서 뿌려주고
-        GetThisWeaponInfo(p_index);
+        //GetThisWeaponInfo(p_index);
         /// 해당 펀치 회색 Cover Img로 덮여 있으면 리턴 -> 업그레이드 재화 소모없음 / 레벨 증가 없음.
         //if (PunchGrid.GetChild(p_index).GetChild(4).GetChild(1).GetChild(1).gameObject.activeSelf)
         //{
@@ -391,9 +372,6 @@ public class PunchManager : MonoBehaviour
         }
 
         // 각 항목 수정
-        SetPunchLv(p_index, thisWeaponLevel);
-        SetPunchText(p_index, weaponATK);
-        SetPunchPrice(p_index, tmpPrice);
 
         if (thisWeaponLevel == 100)
         {
@@ -426,7 +404,7 @@ public class PunchManager : MonoBehaviour
     /// <summary>
     /// 펀치 레벨 100일때 팝업 띄워줌
     /// </summary>
-    private void ShowDiaPunchOkay(int p_index)
+    public void ShowDiaPunchOkay(int p_index)
     {
         SD_PunchIndex = p_index;
         // 애니메 재생
@@ -488,17 +466,16 @@ public class PunchManager : MonoBehaviour
     /// 강화 페이지 열때 같이 초기화 해줌. 디스레벨/디스코스트/디스이펙트
     /// </summary>
     /// <param name="p_index"></param>
-    void GetThisWeaponInfo(int p_index)
-    {
-        // 저장된 해당 펀치 리스트 가져와서 뿌려주고
-        var tmpList = PlayerPrefsManager.GetInstance().weaponInfo[p_index];
+    //void GetThisWeaponInfo(int p_index)
+    //{
+    //    // 저장된 해당 펀치 리스트 가져와서 뿌려주고
+    //    var tmpList = PlayerPrefsManager.GetInstance().weaponInfo[p_index];
 
-        thisWeaponLevel = tmpList.weaponLevel;
-        thisWeaponCost = tmpList.weaponCost;
-        thisWeaponEffect = tmpList.weaponEffect;
-        //
-        isUnlock = tmpList.isUnlock;
-    }
+    //    thisWeaponLevel = tmpList.weaponLevel;
+    //    thisWeaponCost = tmpList.weaponCost;
+    //    thisWeaponEffect = tmpList.weaponEffect;
+    //    isUnlock = tmpList.isUnlock;
+    //}
 
     string result;
 
@@ -519,11 +496,10 @@ public class PunchManager : MonoBehaviour
         {
             return false;
         }
-
     }
 
     // 펀치 목록
-    string[] PunchNames =
+    public string[] PunchNames =
     { "맨주먹",
 "물주먹",
 "돌주먹",
