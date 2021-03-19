@@ -20,7 +20,7 @@ public class RouletteInit : MonoBehaviour
     /// </summary>
     public void RollStart()
     {
-        if (isSpinning || PlayerPrefsManager.GetInstance().DailySpinReword == 1) return;
+        if (isSpinning || PlayerPrefsManager.GetInstance().DailySpinReword == 1 || bspin.SpinText.text != "Spin Now") return;
 
         //3시간 카운터 돌려줌.
         bspin.TEST_Btn();

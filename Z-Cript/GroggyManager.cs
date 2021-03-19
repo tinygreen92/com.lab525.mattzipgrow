@@ -1375,13 +1375,10 @@ public class GroggyManager : MonoBehaviour
         POWER_UP_TEXT.text = "공격력 " + UserWallet.GetInstance().SeetheNatural(double.Parse(tmpATK)) + " > " + UserWallet.GetInstance().SeetheNatural(double.Parse(tmptmpATK));
         /// 소비 골드 표기
         currentAtk = GetNormalUpPrice(0, PowerLv);
-        Debug.LogError(" currentAtk : " + currentAtk);
 
         /// 골드 업그레이드 비용 감소.
         double doublePrice = double.Parse(currentAtk);
         doublePrice = (doublePrice * (1.0d - PlayerPrefsManager.GetInstance().Arti_GoldUpgrade * 0.001d));
-
-        Debug.LogError(" doublePrice : " + doublePrice);
 
         POWER_UP_Price.text = UserWallet.GetInstance().SeetheNatural(doublePrice);
 

@@ -41,7 +41,6 @@ public class GameStart : MonoBehaviour
             PlayerPrefs.DeleteAll();
             PlayerPrefs.SetInt("isFristGameStart", 1);
             PlayerPrefs.SetInt("isSignFirst", 1);
-            PlayerPrefs.SetInt("isDataSaved", 1);
             PlayerPrefs.Save();
         }
         // 프레임레이트 고정
@@ -49,11 +48,11 @@ public class GameStart : MonoBehaviour
         // 오디오 매니저 세팅
         audioManager.AudioInit();
 
-        // 렉걸리는 것들 켰다가 꺼줌.
-        for (int i = 0; i < AllObject.Length; i++)
-        {
-            AllObject[i].SetActive(true);
-        }
+        //// 렉걸리는 것들 켰다가 꺼줌.
+        //for (int i = 0; i < AllObject.Length; i++)
+        //{
+        //    AllObject[i].SetActive(true);
+        //}
         /// 
         if (isDebugMode)
         {
@@ -86,10 +85,10 @@ public class GameStart : MonoBehaviour
         //튜토리얼 안했어?? 데이터 올 리셋
         //if (!PlayerPrefsManager.GetInstance().isFristGameStart) PlayerPrefs.DeleteAll();
 
-        for (int i = 0; i < AllObject.Length; i++)
-        {
-            AllObject[i].SetActive(false);
-        }
+        //for (int i = 0; i < AllObject.Length; i++)
+        //{
+        //    AllObject[i].SetActive(false);
+        //}
         // GPSS 긁어오기
         GetComponent<GPGS_Linker>().Init();
         // 오디오 매니저 세팅

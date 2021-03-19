@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class Booster_Spin : MonoBehaviour
 {
+    public GameObject dailyPopup;
     [Header("출석 버튼에 달린 카운터")]
     public Text cheackCountText;
     [Header("스핀 텍스트")]
@@ -24,38 +25,50 @@ public class Booster_Spin : MonoBehaviour
         // 값 없으면 다음날 0시 시간. / 저장된 값
         unbiasedTimerEndTimestamp = LoadDateTime().Date;
         //Debug.LogError("앞 : " + currentTime  +" / 뒤 : " + unbiasedTimerEndTimestamp);
+        /// 최신값이 바뀌었다 = 날짜가 바뀌었다 = 아직 출첵 안했다.
         if (currentTime > unbiasedTimerEndTimestamp)
         {
-            /// 최신값이 바뀌었다 = 날짜가 바뀌었다 = 스핀 조건 충족
-            // 데이터값 최신화 시켜주고 스핀 돌리기.
+            Debug.LogError("!!!!! 최신값이 바뀌었다 ResetDailyQuest !!!!!");
+
             ResetDailyQuest();
-            // 티켓 초기화
+            // 티켓이 모자라면 초기화
             if (PlayerPrefs.GetInt("ticket", 5) < 5)
             {
                 PlayerPrefs.SetInt("ticket", 5);
             }
         }
-        else /// 그렇지 않다 = 같은 날이다 = 아직 0시 안 지났다. = 스핀 못함.
+        /// 최신값 안 바뀜 = 같은 날이다 = 아직 0시 안 지났다. = 스핀 못함.
+        else
         {
-            /// 같은 날이지만 출석을 체크 안했을때 -> 퀘스트 초기화 시키지 마
-            isSameDayReCheck = true;
+            /// 같은 날이지만 출석을 체크 안했을때 라는 경우는 없다.
+            // isSameDayReCheck = true;
         }
 
-        if (unbiasedRemaining.TotalSeconds > 0 && PlayerPrefsManager.GetInstance().NewDailyCount == 1)
-        {
-            // 출첵 안되게.
-            ReverseReset();
+        ///// 이미 출석체크를 했다?
+        //if (currentTime > dailyEndTimestamp && PlayerPrefsManager.GetInstance().NewDailyCount == 1)
+        //{
+        //    // 출첵 안되게.
+        //    ReverseReset();
+        //    cheackCountText.text = string.Format("{0:00}:{1:00}:{2:00}", unbiasedRemaining.Hours, unbiasedRemaining.Minutes, unbiasedRemaining.Seconds);
+        //}
+        ///// 출석 체크 안했다?
+        //else
+        //{
+        //    Debug.LogError("!!!!! 출석 체크 안했다? !!!!!");
 
-            cheackCountText.text = string.Format("{0:00}:{1:00}:{2:00}", unbiasedRemaining.Hours, unbiasedRemaining.Minutes, unbiasedRemaining.Seconds);
-        }
+        //    if (isReset) return;
+        //    // 날짜 바뀌면 체크.
+        //    isSameDayReCheck = true;
+        //    Debug.LogError("!!!!! 출석 체크 안했다? ResetDailyQuest !!!!!");
+        //    ResetDailyQuest();
+        //}
 
     }
 
     void FixedUpdate()
     {
-        unbiasedRemaining = unbiasedTimerEndTimestamp - UnbiasedTime.Instance.Now();
-
         dailydRemaining = dailyEndTimestamp - UnbiasedTime.Instance.Now();
+        unbiasedRemaining = unbiasedTimerEndTimestamp - UnbiasedTime.Instance.Now();
 
         ///  3시간 스핀 타이머가 돌아가는중?
         if (dailydRemaining.TotalSeconds > 0)
@@ -89,10 +102,13 @@ public class Booster_Spin : MonoBehaviour
             cheackCountText.text = string.Format("{0:00}:{1:00}:{2:00}", unbiasedRemaining.Hours, unbiasedRemaining.Minutes, unbiasedRemaining.Seconds);
 
         }
-        else // 카운트 0미만 이면 하루 지났다 / 아님 출석 안했다.
+        else // 카운트 0미만 이면 하루 지났다 / 아님 출석 안했다. / 출석 체크 안하고 같은 날에 껏다가 켰다.
         {
+            /// 같은 날이면 일퀘 갱신 시도 저지
+            if (isSameDayReCheck) return;
             // 날짜 바뀌면 체크.
             ResetDailyQuest();
+            isSameDayReCheck = true;
 
         }
     }
@@ -101,7 +117,7 @@ public class Booster_Spin : MonoBehaviour
     bool isReset;
 
     /// <summary>
-    ///  같은 날에 접속 했니?
+    ///  같은 날에 접속 했니? 퀘스트 리셋 하지마
     /// </summary>
     bool isSameDayReCheck;
 
@@ -110,13 +126,16 @@ public class Booster_Spin : MonoBehaviour
     /// </summary>
     void ResetDailyQuest()
     {
-        // 중복 방지. = 계쏙 리셋 되는거 방지.
-        if (!isReset && PlayerPrefsManager.GetInstance().isReadyWeapon)
+        /// questInfo[0] 로딩 될때까지 루프
+        if (!PlayerPrefsManager.GetInstance().isReadyWeapon)
         {
-            /// 같은 날이면 일퀘 갱신 시도 저지
-            if (isSameDayReCheck)
-                return;
+            Invoke(nameof(ResetDailyQuest), 0.6f);
+            return;
+        }
 
+        // 중복 방지. = 계쏙 리셋 되는거 방지.
+        if (!isReset)
+        {
             Debug.LogError("!!!!! Quest Reset !!!!!");
 
             isReset = true;
@@ -140,9 +159,15 @@ public class Booster_Spin : MonoBehaviour
             PlayerPrefsManager.GetInstance().questInfo[0].daily_LMITABS = 0;
 
             /// 출석체크 판 초기화.
-            if (PlayerPrefsManager.GetInstance().DailyCount_Cheak >= 25) drc.ResetDailyBoard();
+            if (PlayerPrefsManager.GetInstance().DailyCount_Cheak >= 25) 
+                drc.ResetDailyBoard();
 
             PlayerPrefs.Save();
+            /// 출석창 호출
+            dailyPopup.SetActive(true);
+            dailyPopup.GetComponent<Animation>()["Roll_Incre"].speed = 1;
+            dailyPopup.GetComponent<Animation>().Play("Roll_Incre");
+
         }
     }
 
@@ -152,8 +177,9 @@ public class Booster_Spin : MonoBehaviour
     /// </summary>
     void ReverseReset()
     {
-        if (!isReset) return;
-
+        if (!isReset) 
+            return;
+        isSameDayReCheck = false;
         isReset = false;
     }
 
@@ -185,7 +211,10 @@ public class Booster_Spin : MonoBehaviour
 
 
 
-
+    /// <summary>
+    /// 이름은 스핀이지만 사실은 출석체크 시간을 저장한다. 조심해.
+    /// </summary>
+    /// <param name="dateTime"></param>
     void SaveDateTime(DateTime dateTime)
     {
         string tmp = dateTime.ToString("yyyyMMddHHmmss");

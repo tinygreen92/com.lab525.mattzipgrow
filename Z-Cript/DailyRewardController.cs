@@ -7,6 +7,8 @@ public class DailyRewardController : MonoBehaviour
 
     private DoubleToStringNum dts = new DoubleToStringNum();
 
+    public GameObject go7Popup;
+    [Header("획득 아이템 팝업")]
     public GameObject getItemPop;
     public GameObject[] getItemPopImg;
     public Text getItemPopText;
@@ -34,7 +36,8 @@ public class DailyRewardController : MonoBehaviour
             // 시작할때 회색 버튼 활성화.
             grayCheackBtn.SetActive(true);
             // 
-        }else if (PlayerPrefsManager.GetInstance().DailyCount_Cheak >= 25) // 마지막 출석한지 하루 지나면?
+        }
+        else if (PlayerPrefsManager.GetInstance().DailyCount_Cheak >= 25) // 마지막 출석한지 하루 지나면?
         {
             PlayerPrefsManager.GetInstance().DailyCount_Cheak = 0;
         }
@@ -53,7 +56,7 @@ public class DailyRewardController : MonoBehaviour
     }
 
     /// <summary>
-    /// 자정 넘어가면 Spin 코드에서 호출
+    /// 25일 출석 다하면 출석판 초기화.
     /// </summary>
     public void ResetDailyBoard()
     {
@@ -66,8 +69,28 @@ public class DailyRewardController : MonoBehaviour
     }
 
 
+    public void GrebThisDaily()
+    {
+        /// 출석창 호출
+        go7Popup.SetActive(true);
+        go7Popup.GetComponent<Animation>()["Roll_Incre"].speed = 1;
+        go7Popup.GetComponent<Animation>().Play("Roll_Incre");
+    }
+
+    public void GrabCancelBtn()
+    {
+        if (PlayerPrefsManager.GetInstance().NewDailyCount == 1)
+        {
+            go7Popup.SetActive(false);
+        }
+        else
+        {
+            GrabDailyReward();
+        }
+    }
+
     /// <summary>
-    /// 이 메서드 쓰면 보상 획득 // 버튼 클릭시
+    /// 출석 해당 버튼 클릭시 보상 획득 
     /// </summary>
     public void GrabDailyReward()
     {

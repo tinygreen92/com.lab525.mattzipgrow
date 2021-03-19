@@ -260,8 +260,9 @@ public class PlayerPrefsManager : MonoBehaviour
         set { PlayerPrefs.SetInt("DailyCount", value); }
     }
 
-
-    // 24시간 출석 체크용.
+    /// <summary>
+    /// 24시간 출석 체크용.
+    /// </summary>
     public int NewDailyCount
     {
         get
@@ -1174,7 +1175,8 @@ public class PlayerPrefsManager : MonoBehaviour
     {
         
         // 스탯 방어력  = ( * 깃발 방어력 %)
-        string result = (Defence_Lv * Stat_is4Mattzip).ToString("F0");
+        string result = ((Defence_Lv + PlayerPrefs.GetFloat("Chara_Defence_UP", 0)) 
+            * Stat_is4Mattzip).ToString("F0");
         // 스탯 방어력 + 방패 방어력 
         result = dts.AddStringDouble(result, Defence_Shiled);
         // 스탯 방어력 + 방패 방어력  + 보유 방패 방어력
@@ -4064,6 +4066,17 @@ public class PlayerPrefsManager : MonoBehaviour
         //0727 Gold_Matto
         PlayerPrefs.SetInt("Pet_BuyData_Cape", listGPGS[0].cloudTmpForGPGS_175);
         PlayerPrefs.SetInt("Pet_PVP_Matt_Lv", listGPGS[0].cloudTmpForGPGS_176);
+        /// 삭제 해줄 것들 광고 쿨타임 등등
+        PlayerPrefs.DeleteKey("Bosster_Daily");
+        PlayerPrefs.DeleteKey("Booster_AUTO");
+        PlayerPrefs.DeleteKey("Booster_Body");
+        PlayerPrefs.DeleteKey("Booster_KEY");
+        PlayerPrefs.DeleteKey("Booster_Power");
+        PlayerPrefs.DeleteKey("DenfenceMode");
+        
+        
+        
+        
         /// 로드한다 트리거
         isDataLoaded = true;
         PlayerPrefs.Save();

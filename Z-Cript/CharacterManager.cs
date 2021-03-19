@@ -59,6 +59,7 @@ public class CharacterManager : MonoBehaviour
     string Chara_Attack_UP;
     string Chara_HP_UP;
     string Chara_Recov_UP;
+    string Chara_Defence_UP;
 
 
     [Header("-패시브 스킬 배열")]
@@ -2004,7 +2005,8 @@ public class CharacterManager : MonoBehaviour
         POWER_UP_LV.text = "Lv. " + CharaLv;
 
         /// 골드 업그레이드 비용 감소.
-        doublePrice = CharaLv * (CharaLv + 1) * 100d;
+        //doublePrice = CharaLv * (CharaLv + 1) * 100d;
+        doublePrice = CharaLv > 1 ? 100d * Mathf.Pow(1.07f, CharaLv) : 100d;
         doublePrice = (doublePrice * (1.0d - PlayerPrefsManager.GetInstance().Arti_GoldUpgrade * 0.001d));
 
         POWER_UP_Price.text = UserWallet.GetInstance().SeetheNatural(doublePrice);
@@ -2016,13 +2018,20 @@ public class CharacterManager : MonoBehaviour
 
         if(CharaLv > 1)
         {
-            Chara_Attack_UP = Mathf.Round((CharaLv - 1) * 2.5f).ToString("f0");
-            Chara_HP_UP = Mathf.Round((CharaLv - 1) * 25f).ToString("f0");
-            Chara_Recov_UP = Mathf.Round((CharaLv - 1) * 12.5f).ToString("f0");
+            Chara_Attack_UP = ((CharaLv - 1) * 5f).ToString("f0");
+            Chara_HP_UP = ((CharaLv - 1) * 50f).ToString("f0");
+            Chara_Recov_UP = ((CharaLv - 1) * 25f).ToString("f0");
+            //
+            Chara_Defence_UP = ((CharaLv - 1) * 10f).ToString("f0");
+
+
             /// 캐릭터 레벨 올리면 세개가 올라감
             PlayerPrefs.SetString("Chara_Attack_UP", Chara_Attack_UP);
             PlayerPrefs.SetString("Chara_HP_UP", Chara_HP_UP);
             PlayerPrefs.SetString("Chara_Recov_UP", Chara_Recov_UP);
+            //
+            PlayerPrefs.SetFloat("Chara_Defence_UP", (CharaLv - 1) * 10f);
+
             PlayerPrefs.Save();
         }
 
