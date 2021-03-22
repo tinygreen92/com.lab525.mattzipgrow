@@ -144,38 +144,39 @@ public class PunchManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 모든 장착 버튼 회색으로 바꾸기
+    /// 모든 장착 버튼 노란색으로 바꾸기
+    /// </summary>
+    internal void BoxInfoUpdate()
+    {
+        for (int i = 1; i < InfinityContent.childCount; i++)
+        {
+            InfinityContent.GetChild(i).
+                GetComponent<PunchItem>().BoxInfoUpdate
+                (int.Parse(InfinityContent.GetChild(i).name));
+        }
+    }
+
+    /// <summary>
+    /// 모든 장착 버튼 노란색으로 바꾸기
     /// </summary>
     internal void SetBeforeEuipGrayBtn()
     {
         for (int i = 1; i < InfinityContent.childCount; i++)
         {
-            InfinityContent.GetChild(i).GetComponent<PunchItem>()
-                .SetAllEpuipBtnToGray(false);
+            InfinityContent.GetChild(i).GetComponent<PunchItem>().SetAllEpuipBtnToGray(false);
         }
     }
-
 
     /// <summary>
     /// 초기화 할 때만 호출 
     /// 1. 펀치 이름 보이게
     /// 2. 펀치 덮고있던 이미지 제거
     /// </summary>
-    void UnlockNewPunch(int _index)
+    internal void UnlockNewPunch(int _index)
     {
-        // 리스트 언락 트리거 On이면
-        if (isUnlock)
+        for (int i = 1; i < InfinityContent.childCount; i++)
         {
-            // 가리개 제거
-            //PunchGrid.GetChild(_index).GetChild(5).gameObject.SetActive(false);
-            // 펀치 이름 넣어줌.
-            string result = PunchNames[_index];
-            //PunchGrid.GetChild(_index).GetChild(1).GetComponent<Text>().text = result;
-            // 우유 갯수 충분하면 버튼 회색커버 꺼줌
-            //if (GupbapPass(thisWeaponCost) && thisWeaponLevel != 100) PunchGrid.GetChild(_index).GetChild(4).GetChild(1).GetChild(1).gameObject.SetActive(false);
-
-            // 아이콘 색상 
-            //PunchGrid.GetChild(_index).GetChild(0).GetChild(0).GetComponent<Image>().color = Color.white;
+            InfinityContent.GetChild(i).GetComponent<PunchItem>().SetAllGrayCover(_index);
         }
     }
 

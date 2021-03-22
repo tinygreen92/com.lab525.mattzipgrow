@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class PowerUPManager : MonoBehaviour
 {
+    public PunchManager pm;
     public GameObject helpme;
     [Space]
     public RectTransform rt;
@@ -143,6 +144,7 @@ public class PowerUPManager : MonoBehaviour
                 {
                     Debug.LogError("POWERUP_POP 에서 훈련장비 탭 클릭");
                     groggyManager.PowerUP_Init();
+                    pm.BoxInfoUpdate();
                 }
 
                 InitPowerUP();
