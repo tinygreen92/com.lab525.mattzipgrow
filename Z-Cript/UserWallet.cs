@@ -34,8 +34,56 @@ public class UserWallet : MonoBehaviour
     {
         PlayerPrefs.DeleteAll();
         PlayerPrefs.Save();
-        SceneManager.LoadScene("SampleScene");
+        /// 리스타트
+        RestartAppForAOS();
     }
+
+    public void Ex_MattHitMax()
+    {
+        PlayerPrefsManager.GetInstance().Mat_Mattzip_Hit += 3E+35f;
+    }
+
+
+    public void AllMoneyTest()
+    {
+        PlayerPrefsManager.GetInstance().gold = dts.AddStringDouble(PlayerPrefsManager.GetInstance().gold, "3.33E+302");
+        PlayerPrefsManager.GetInstance().gupbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().gupbap, "3.33E+302");
+        PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().ssalbap, "3.33E+302");
+        PlayerPrefsManager.GetInstance().key += 1000;
+        PlayerPrefsManager.GetInstance().ticket += 1000;
+        PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 100000000000000f);
+
+        ShowAllMoney();
+    }
+
+    public void All_IN_ONE()
+    {
+        PlayerPrefsManager.GetInstance().VIP = 625;
+    }
+
+
+    /// <summary>
+    /// 안드로이드 네이티브 코드
+    /// </summary>
+    void RestartAppForAOS()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false; //play모드를 false로.
+#else
+        AndroidJavaObject AOSUnityActivity = new AndroidJavaClass("com.unity3d.player.UnityPlayer").GetStatic<AndroidJavaObject>("currentActivity");
+        AndroidJavaObject baseContext = AOSUnityActivity.Call<AndroidJavaObject>("getBaseContext");
+        AndroidJavaObject intentObj = baseContext.Call<AndroidJavaObject>("getPackageManager").Call<AndroidJavaObject>("getLaunchIntentForPackage", baseContext.Call<string>("getPackageName"));
+        AndroidJavaObject componentName = intentObj.Call<AndroidJavaObject>("getComponent");
+        AndroidJavaObject mainIntent = intentObj.CallStatic<AndroidJavaObject>("makeMainActivity", componentName);
+        AndroidJavaClass intentClass = new AndroidJavaClass("android.content.Intent");
+        mainIntent = mainIntent.Call<AndroidJavaObject>("addFlags", intentClass.GetStatic<int>("FLAG_ACTIVITY_NEW_TASK"));
+        mainIntent = mainIntent.Call<AndroidJavaObject>("addFlags", intentClass.GetStatic<int>("FLAG_ACTIVITY_CLEAR_TASK"));
+        baseContext.Call("startActivity", mainIntent);
+        AndroidJavaClass JavaSystemClass = new AndroidJavaClass("java.lang.System");
+        JavaSystemClass.CallStatic("exit", 0);
+#endif
+    }
+
 
     public static UserWallet GetInstance()
     {

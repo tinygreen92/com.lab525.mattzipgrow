@@ -484,47 +484,47 @@ public class QuestManager : MonoBehaviour
 
 
 
-        var all = PlayerPrefsManager.GetInstance().questInfo[0];
-        var all2 = PlayerPrefsManager.GetInstance().questInfo2[0];
-        var all3 = PlayerPrefsManager.GetInstance().questInfo3[0];
-        var all4 = PlayerPrefsManager.GetInstance().questInfo4[0];
+//        var all = PlayerPrefsManager.GetInstance().questInfo[0];
+//        var all2 = PlayerPrefsManager.GetInstance().questInfo2[0];
+//        var all3 = PlayerPrefsManager.GetInstance().questInfo3[0];
+//        var all4 = PlayerPrefsManager.GetInstance().questInfo4[0];
 
-        long[] all_M = new long[]
-{
-            all.All_Mattzip,
-            all.All_Atk,
-            all.All_HP,
-            all.All_Punch,
-            all.All_MiniGame,
-            all.All_Gatcha,
-            all.All_Abs,
-            all2.All_Mugan,
-            all3.All_MiniGame,
-            //
-            all4.All_Per_Atk,
-            all4.All_Per_HP,
-            all4.All_Dia_Atk,
-            all4.All_Dia_HP
-};
+//        long[] all_M = new long[]
+//{
+//            all.All_Mattzip,
+//            all.All_Atk,
+//            all.All_HP,
+//            all.All_Punch,
+//            all.All_MiniGame,
+//            all.All_Gatcha,
+//            all.All_Abs,
+//            all2.All_Mugan,
+//            all3.All_MiniGame,
+//            //
+//            all4.All_Per_Atk,
+//            all4.All_Per_HP,
+//            all4.All_Dia_Atk,
+//            all4.All_Dia_HP
+//};
 
-        long[] all_UP = new long[]
-        {
-            all.All_Mattzip_Cnt+1,
-            all.All_Atk_Cnt+1,
-            all.All_HP_Cnt+1,
-            all.All_Punch_Cnt+1,
-            all.All_MiniGame_Cnt+1,
-            all.All_Gatcha_Cnt+1,
-            all.All_Abs_Cnt+1,
-            all2.All_Mugan_Cnt+1,
-            all3.All_MiniGame_Cnt+1,
-                        //
-            all4.All_Per_Atk_Cnt+1,
-            all4.All_Per_HP_Cnt+1,
-            all4.All_Dia_Atk_Cnt+1,
-            all4.All_Dia_HP_Cnt+1
+//        long[] all_UP = new long[]
+//        {
+//            all.All_Mattzip_Cnt+1,
+//            all.All_Atk_Cnt+1,
+//            all.All_HP_Cnt+1,
+//            all.All_Punch_Cnt+1,
+//            all.All_MiniGame_Cnt+1,
+//            all.All_Gatcha_Cnt+1,
+//            all.All_Abs_Cnt+1,
+//            all2.All_Mugan_Cnt+1,
+//            all3.All_MiniGame_Cnt+1,
+//                        //
+//            all4.All_Per_Atk_Cnt+1,
+//            all4.All_Per_HP_Cnt+1,
+//            all4.All_Dia_Atk_Cnt+1,
+//            all4.All_Dia_HP_Cnt+1
 
-        };
+//        };
 
 
         //보상 획득

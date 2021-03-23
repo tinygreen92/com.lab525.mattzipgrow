@@ -2524,7 +2524,7 @@ public class GroggyManager : MonoBehaviour
 
     string MattzipgupbapPass;
     /// <summary>
-    /// 방어방어력 강화로 대체
+    /// 방어력 강화로 대체
     /// 50 * ( 1 + 0.07 ) ^ Lv    
     /// /// </summary>
     public void TEST_Mattzip_up()

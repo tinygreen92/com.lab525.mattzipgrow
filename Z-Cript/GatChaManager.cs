@@ -73,6 +73,34 @@ public class GatChaManager : MonoBehaviour
     private readonly int I_Arti_MiniReword          = 1000;
     private readonly int I_Arti_MiniGameTime        = 300;
 
+
+    /// <summary>
+    /// 갓 모드에서 사용
+    /// </summary>
+    public void AllArtifactWow()
+    {
+        var ppm = PlayerPrefsManager.GetInstance();
+
+        ppm.Arti_PunchTouch = I_Arti_PunchTouch;
+        ppm.Arti_Mattzip = I_Arti_Mattzip;
+        ppm.Arti_HP = I_Arti_HP;
+        ppm.Arti_GroggyTouch = I_Arti_GroggyTouch;
+        ppm.Arti_GAL = I_Arti_GAL;
+        ppm.Arti_DefenceTime = I_Arti_DefenceTime;
+        ppm.Arti_GoldBox = I_Arti_GoldBox;
+        ppm.Arti_OffGold = I_Arti_OffGold;
+        ppm.Arti_MuganTime = I_Arti_MuganTime;
+        ppm.Arti_AttackPower = I_Arti_AttackPower;
+        ppm.Arti_GoldPer = I_Arti_GoldPer;
+        ppm.Arti_LuckyBoxPer = I_Arti_LuckyBoxPer;
+        ppm.Arti_DefencePer = I_Arti_DefencePer;
+        ppm.Arti_GoldUpgrade = I_Arti_GoldUpgrade;
+        ppm.Arti_InfiReword = I_Arti_InfiReword;
+        ppm.Arti_MiniReword = I_Arti_MiniReword;
+        ppm.Arti_MiniGameTime = I_Arti_MiniGameTime;
+        RefreshItem();
+    }
+
     /// <summary>
     /// Start 에서도 한 번 불러준다.
     /// </summary>

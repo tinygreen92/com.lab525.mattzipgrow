@@ -51,10 +51,7 @@ public class ButtonSoundListner : MonoBehaviour, IPointerUpHandler, IPointerDown
     void InvoDown()
     {
         // 클릭한 지점 이름 얻어오기
-        string nameIndex = EventSystem.current.currentSelectedGameObject.transform.parent.parent.name;
-        string strTmp = Regex.Replace(nameIndex, @"\D", "");
-        p_index = int.Parse(strTmp) - 1;
-
+        p_index = int.Parse(transform.parent.parent.name);
         isBtnDown = true;
     }
 
@@ -93,7 +90,7 @@ public class ButtonSoundListner : MonoBehaviour, IPointerUpHandler, IPointerDown
     {
         if (isBtnDown)
         {
-            //punchManager.ClickedPunchUPgra(p_index);
+            punchManager.LongClicedUpgradeBtn(p_index);
         }
 
         if (isBtnDownQuest)

@@ -114,63 +114,82 @@ public class PlayerPrefsManager : MonoBehaviour
 
 
     // 버티기 모드 시작했니? 트리거
+    [HideInInspector]
     public bool isInfinity;
     // 버티기 모드 난이도
+    [HideInInspector]
     public decimal Infi_Index;
     // 얻을 국밥
+    [HideInInspector]
     public int getGupBap;
     // 버티기 모드 끝났냐
+    [HideInInspector]
     public bool isInfinityEnd;
     // 무한의 탑 모드 포기했냐
+    [HideInInspector]
     public bool isMuGanTopEnd;
     // 더블 체크
+    [HideInInspector]
     public bool isEndGame;
     /// <summary>
     /// 체력감소 한턴에 하나만.
     /// </summary>
+    [HideInInspector]
     public bool isHPsubing;
     /// <summary>
     /// 무한 버티기 모드 dps
     /// </summary>
+    [HideInInspector]
     public double InfiPunchDPS;
     /// <summary>
     /// (b)그로기 상태 돈벌기 무시 상태.                 isGroggy;      
     /// </summary>
+    [HideInInspector]
     public bool isGroggy;
     /// <summary>
     /// (b)오토 공격 동영상 한번 보고 On 상태. 
     /// </summary>
+    [HideInInspector]
     public bool isAutoAbsOn;
     /// <summary>
     /// 튜토리얼에 쓰는 따라해보세요 횟수.
     /// </summary>
+    [HideInInspector]
     public int TurtorialCount;
     /// <summary>
     /// 튜토리얼에 쓰는 튜토리얼 버티기 게임이오
     /// </summary>
+    [HideInInspector]
     public bool isTuToInfi;
     /// <summary>
     /// 스택 열번 쌓으면 골드 최소값 증가하오.
     /// </summary>
+    [HideInInspector]
     public int GoldStack;
     /// <summary>
     /// 무한의 탑 보스 체력
     /// </summary>
+    [HideInInspector]
     public string bossHP;
+    [HideInInspector]
     public string MAX_boss_HP;
     /// <summary>
     /// 무한 탑 이어하기는 한번만 하는 불린 값
     /// </summary>
+    [HideInInspector]
     public bool isSecondChan;
     /// <summary>
     /// 자동 공격 ON = true / off = false
     /// </summary>
+    [HideInInspector]
     public bool isAutoAtk;
     /// <summary>
     /// 국밥 공속 업 ON = true / off = false
     /// </summary>
+    [HideInInspector]
     public bool isGupSpeed;
     // 피비피 스타트 스위치
+    [HideInInspector]
     public bool isPVPtoEnd;
 
 
@@ -463,8 +482,12 @@ public class PlayerPrefsManager : MonoBehaviour
 
         set
         {
-            //allMoneyInfo[0].dGold = double.Parse(value);
-            PlayerPrefs.SetString("gold", value);
+            var result = dts.SubStringDouble(value , "9.99E+302"); // double.Tosting 값
+            if (result == "-1")
+                PlayerPrefs.SetString("gold", value);
+            else
+                PlayerPrefs.SetString("gold", "9.99E+302");
+
             PlayerPrefs.Save();
         }
     }
@@ -505,8 +528,12 @@ public class PlayerPrefsManager : MonoBehaviour
 
         set
         {
-            //allMoneyInfo[0].dGupbap = double.Parse(value);
-            PlayerPrefs.SetString("gupbap", value);
+            var result = dts.SubStringDouble(value, "9.99E+302"); // double.Tosting 값
+            if (result == "-1")
+                PlayerPrefs.SetString("gupbap", value);
+            else
+                PlayerPrefs.SetString("gupbap", "9.99E+302");
+
             PlayerPrefs.Save();
         }
     }
@@ -527,8 +554,11 @@ public class PlayerPrefsManager : MonoBehaviour
 
         set
         {
-            //allMoneyInfo[0].dSSalbap = double.Parse(value);
-            PlayerPrefs.SetString("ssalbap", value);
+            var result = dts.SubStringDouble(value, "9.99E+302"); // double.Tosting 값
+            if (result == "-1")
+                PlayerPrefs.SetString("ssalbap", value);
+            else
+                PlayerPrefs.SetString("ssalbap", "9.99E+302");
             PlayerPrefs.Save();
         }
     }
@@ -1044,7 +1074,9 @@ public class PlayerPrefsManager : MonoBehaviour
 
             var value = Mat_Mattzip_Hit;
             double tmppp = value + (value * MattzipArtif * 0.01f);
-            
+            ///	1.7976931348623158 E + 308
+            if (value >= 9.99E+302)
+                tmppp = 9.99E+302;
             return tmppp.ToString("f0");
         }
 
@@ -1105,7 +1137,11 @@ public class PlayerPrefsManager : MonoBehaviour
 
         set
         {
-            PlayerPrefs.SetFloat("Mat_Mattzip_Hit", value);
+            ///3.402823466 E + 38
+            float kkey = value;
+            if (value >= 9E+35f) 
+                kkey = 9E+35f;
+            PlayerPrefs.SetFloat("Mat_Mattzip_Hit", kkey);
             PlayerPrefs.Save();
         }
     }
@@ -1176,7 +1212,7 @@ public class PlayerPrefsManager : MonoBehaviour
         
         // 스탯 방어력  = ( * 깃발 방어력 %)
         string result = ((Defence_Lv + PlayerPrefs.GetFloat("Chara_Defence_UP", 0)) 
-            * Stat_is4Mattzip).ToString("F0");
+            * (1.0f + Stat_is4Mattzip)).ToString("F0");
         // 스탯 방어력 + 방패 방어력 
         result = dts.AddStringDouble(result, Defence_Shiled);
         // 스탯 방어력 + 방패 방어력  + 보유 방패 방어력
@@ -2102,7 +2138,7 @@ public class PlayerPrefsManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 깃발 버프 <맷집>
+    /// 깃발 버프 <방어력>
     /// </summary>
     public float Stat_is4Mattzip
     {
@@ -2467,6 +2503,7 @@ public class PlayerPrefsManager : MonoBehaviour
         //SaveWeaponInfo();
     }
 
+    [HideInInspector]
     public bool isReadyWeapon;
 
     public void SaveWeaponInfo()
@@ -2787,6 +2824,7 @@ public class PlayerPrefsManager : MonoBehaviour
         SavequestInfo();
     }
 
+    [HideInInspector]
     public bool isReadyQuest;
 
     public void SavequestInfo()
@@ -2940,6 +2978,7 @@ public class PlayerPrefsManager : MonoBehaviour
         SavequestInfo2();
     }
 
+    [HideInInspector]
     public bool isReadyQuest2;
 
     public void SavequestInfo2()
@@ -3052,6 +3091,7 @@ public class PlayerPrefsManager : MonoBehaviour
         SavequestInfo3();
     }
 
+    [HideInInspector]
     public bool isReadyQuest3;
 
     public void SavequestInfo3()
@@ -3176,6 +3216,7 @@ public class PlayerPrefsManager : MonoBehaviour
         SavequestInfo4();
     }
 
+    [HideInInspector]
     public bool isReadyQuest4;
 
     public void SavequestInfo4()
@@ -3286,6 +3327,7 @@ public class PlayerPrefsManager : MonoBehaviour
         SavequestInfo5();
     }
 
+    [HideInInspector]
     public bool isReadyQuest5;
 
     public void SavequestInfo5()
@@ -3355,6 +3397,7 @@ public class PlayerPrefsManager : MonoBehaviour
         SavequestInfo6();
     }
 
+    [HideInInspector]
     public bool isReadyQuest6;
 
     public void SavequestInfo6()
@@ -3939,8 +3982,8 @@ public class PlayerPrefsManager : MonoBehaviour
         //서순
         PlayerPrefs.SetInt("isFristGameStart", listGPGS[0].cloudTmpForGPGS_001);
         PlayerPrefs.SetInt("DailyCount", listGPGS[0].cloudTmpForGPGS_002);
-        //PlayerPrefs.SetInt("PunchIndex", listGPGS[0].cloudTmpForGPGS_003);
-        PlayerPrefs.SetInt("PunchIndex", 0);
+        PlayerPrefs.SetInt("PunchIndex", listGPGS[0].cloudTmpForGPGS_003);
+        //PlayerPrefs.SetInt("PunchIndex", 0);
         PlayerPrefs.SetInt("DefendTrigger", listGPGS[0].cloudTmpForGPGS_004);
         PlayerPrefs.SetInt("key", listGPGS[0].cloudTmpForGPGS_005);
         PlayerPrefs.SetInt("VIP", listGPGS[0].cloudTmpForGPGS_006);
