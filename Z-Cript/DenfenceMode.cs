@@ -207,6 +207,7 @@ public class DenfenceMode : MonoBehaviour
         PopUpObjectManager.GetInstance().ShowNewPunch(PlayerPrefsManager.GetInstance().PunchIndex);
         // 다음 레벨 무기 해제 시켜줌.
         punchManager.UnlockNextPunch();
+
         //
         CoolDownStart(300);
         groggyManager.HP_AutoRecoForDef(false);

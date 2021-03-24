@@ -99,9 +99,9 @@ public class ButtonSoundListner : MonoBehaviour, IPointerUpHandler, IPointerDown
             {
                 questManager.DailyMission(q_index);
             }
-            else if (transform.parent.parent.name == "GRID_QUEST_2")
+            else if (transform.parent.parent.name == "InfinityQuest")
             {
-                questManager.GetRewordSpecialMission(q_index);
+                questManager.GetRewordSpecialMission(int.Parse(transform.parent.name));
             }
             else if (transform.parent.parent.name == "GRID_QUEST_3")
             {

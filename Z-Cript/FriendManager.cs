@@ -13,7 +13,7 @@ public class FriendManager : MonoBehaviour
 
     private void Start()
     {
-        TestText.text = "동료1_LV." + PlayerPrefsManager.GetInstance().Friend_01_MattzipPer_Lv + "/ 동료2_LV." + PlayerPrefsManager.GetInstance().Friend_02_OffTimeUp_Lv;
+        //TestText.text = "동료1_LV." + PlayerPrefsManager.GetInstance().Friend_01_MattzipPer_Lv + "/ 동료2_LV." + PlayerPrefsManager.GetInstance().Friend_02_OffTimeUp_Lv;
     }
 
     /// <summary>

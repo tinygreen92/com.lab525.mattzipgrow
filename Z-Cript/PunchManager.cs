@@ -155,6 +155,7 @@ public class PunchManager : MonoBehaviour
                 PlayerPrefsManager.GetInstance().SaveWeaponInfo();
                 /// 회색 덮개 해제
                 UnlockNewPunch(_index);
+
                 return;
             }
         }

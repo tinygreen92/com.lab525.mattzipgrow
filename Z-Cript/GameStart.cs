@@ -16,6 +16,7 @@ public class GameStart : MonoBehaviour
 
     [Header("-외부 API 초기화")]
     public InfiniteScroll InfinityContent;
+    public InfiniteScroll InfinityQuest;
     public CharacterManager charactherMang;
     public GroggyManager groggyManager;
     public TutorialManager tutorialManager;
@@ -478,8 +479,6 @@ public class GameStart : MonoBehaviour
         offlineManager.OfflineInit();
         // 미션 이미지 초기화.
         questManager.SpecialMissonImgInit();
-        // 미션 달성 뭐있나 계속 초기화.
-        StartCoroutine(MissionChechecak());
         // 펀치 초기화
         punchManager.PunchInit();
         // 무기 인덱스 저장된거 불러오기
@@ -494,18 +493,7 @@ public class GameStart : MonoBehaviour
         charactherMang.UniformInit();
         /// 인피니티 스크롤 호출 
         InfinityContent.ListStart();
-    }
-
-    IEnumerator MissionChechecak()
-    {
-        yield return null;
-
-        while (true)
-        {
-            yield return new WaitForSeconds(0.5f);
-            // 미션 달성한거 뭐있나 초기화.
-            questManager.MissionInit();
-        }
+        InfinityQuest.ListStart();
     }
 
 
