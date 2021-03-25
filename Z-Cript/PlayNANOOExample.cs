@@ -43,6 +43,24 @@ public class PlayNANOOExample : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// 로그 작성
+    /// 클라이언트에서 다양하게 발생 되는 이벤트 정보들을 기록할 수 있습니다.
+    /// </summary>
+    /// <param name="sValue"></param>
+    public void WriteChikenCoupon(string type, string sValue)
+    {
+        var messages = new PlayNANOO.Monitor.LogMessages();
+        messages.Add(Configure.PN_LOG_INFO, $"PN_LOG_INFO {sValue}");
+
+        plugin.LogWrite(new PlayNANOO.Monitor.LogWrite()
+        {
+            EventCode = type,
+            EventMessages = messages
+        });
+    }
+
+
     ///// <summary>
     ///// Open Forum Banner
     ///// </summary>
@@ -572,9 +590,9 @@ public class PlayNANOOExample : MonoBehaviour
     }
 
     /// <summary>
-    /// 앱 종료할때 자동 저장
+    /// 패키지 구매하면 서버 자동 저장
     /// </summary>
-    public void StorageSaveForBuy()
+    public void StorageSaveForBuy(string productName)
     {
         plugin.StorageSave(GPGSManager.GetLocalUserId() + "_S2", playerPrefsManager.SaveAllPrefsData(), true, (state, message, rawData, dictionary) =>
         {
@@ -592,6 +610,8 @@ public class PlayNANOOExample : MonoBehaviour
             if (state.Equals(Configure.PN_API_STATE_SUCCESS))
             {
                 Debug.LogWarning("StorageSave Success ::");
+
+                WriteChikenCoupon("Purchase_Completed", productName);
             }
             else
             {
@@ -947,11 +967,15 @@ public class PlayNANOOExample : MonoBehaviour
     /// </summary>
     public void RankingRecordMattzip()
     {
+
         string tmp = PlayerPrefsManager.GetInstance().Mat_Mattzip;
-        long mattzip = long.Parse(UserWallet.GetInstance().GetMattzipForCul(tmp));
+        /// 치킨 시켜라.
+        WriteChikenCoupon("RECORD_Mat_Mattzip", tmp);
+        double mattzip = double.Parse(UserWallet.GetInstance().GetMattzipForCul(tmp));
+        /// 최대값 절삭해줌
+        if (mattzip > 9007199254740990) mattzip = 9007199254740990;
 
-
-        plugin.RankingRecord(NEW_RANKING, mattzip, "0", (state, message, rawData, dictionary) => {
+        plugin.RankingRecord(NEW_RANKING, (long)mattzip, "0", (state, message, rawData, dictionary) => {
             if (state.Equals(Configure.PN_API_STATE_SUCCESS))
             {
                 Debug.LogError("mattzip-RANK-F81A740E-61075C7F NEW_RANKING 저장 Success");

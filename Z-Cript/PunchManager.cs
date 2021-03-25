@@ -7,6 +7,7 @@ public class PunchManager : MonoBehaviour
 {
     DoubleToStringNum dts = new DoubleToStringNum();
 
+    public GameObject POWERUP_POP;
     public Transform InfinityContent;
     [Header("-펀치 이미지 100개")]
     public Sprite[] punchImgs;
@@ -102,6 +103,23 @@ public class PunchManager : MonoBehaviour
         tapToSpawnLimit.PunchIndexUpdate(PlayerPrefsManager.GetInstance().PunchIndex);
         RefreshEuipGrayBtn();
     }
+
+    /// <summary>
+    /// 국밥 수량 변하면 새로 고침.
+    /// </summary>
+    public void MilkUpdateCup()
+    {
+        /// 훈련도구 업글 페이지 아니면 리턴
+        if (!POWERUP_POP.activeSelf) return;
+
+        for (int i = 1; i < InfinityContent.childCount; i++)
+        {
+            InfinityContent.GetChild(i).
+                GetComponent<PunchItem>().SetUpdateInfo();
+        }
+        
+    }
+
 
     /// <summary>
     /// 모든 장착 버튼 노란색으로 바꾸기

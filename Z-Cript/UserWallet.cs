@@ -7,6 +7,8 @@ public class UserWallet : MonoBehaviour
 {
     private static UserWallet instance;
 
+
+    public PunchManager pm;
     [Header("-캐릭터 정보창")]
     public Text HP_Text;
     public Text ATK_Text;
@@ -110,14 +112,6 @@ public class UserWallet : MonoBehaviour
         ShowUserATK();
         ShowUserSSalbap();
         ShowUserCritical_2_();
-        /// 정보 갱신
-        PlayerPrefsManager.GetInstance().SavequestInfo();
-        PlayerPrefsManager.GetInstance().SavequestInfo2();
-        PlayerPrefsManager.GetInstance().SavequestInfo3();
-        PlayerPrefsManager.GetInstance().SavequestInfo4();
-        PlayerPrefsManager.GetInstance().SavequestInfo5();
-        PlayerPrefsManager.GetInstance().SavequestInfo6();
-
     }
 
 
@@ -128,6 +122,8 @@ public class UserWallet : MonoBehaviour
         string value = PlayerPrefsManager.GetInstance().gold;
         GoldText.text = dts.fDoubleToGoldOutPut(value);
         PlayerPrefs.Save();
+
+
     }
 
     /// 다이아
@@ -137,6 +133,13 @@ public class UserWallet : MonoBehaviour
         //
         DiaText.text = SeetheNatural(dDiamond);
         PlayerPrefs.Save();
+        /// 정보 갱신
+        PlayerPrefsManager.GetInstance().SavequestInfo();
+        PlayerPrefsManager.GetInstance().SavequestInfo2();
+        PlayerPrefsManager.GetInstance().SavequestInfo3();
+        PlayerPrefsManager.GetInstance().SavequestInfo4();
+        PlayerPrefsManager.GetInstance().SavequestInfo5();
+        PlayerPrefsManager.GetInstance().SavequestInfo6();
 
     }
 
@@ -146,6 +149,8 @@ public class UserWallet : MonoBehaviour
         string value = PlayerPrefsManager.GetInstance().gupbap;
         MilkText.text = SeetheNatural(double.Parse(value));
         PlayerPrefs.Save();
+        /// 국밥에 따라 업글 버튼 새로 고침
+        pm.MilkUpdateCup();
     }
 
     /// 쌀밥
@@ -164,6 +169,30 @@ public class UserWallet : MonoBehaviour
     //    KeyText.text = value + "/20";
     //    PlayerPrefs.Save();
     //}
+
+    /// 우측 하단 맷집 표시기랑 개인 스탯
+    public void ShowUserMatZip()
+    {
+        /// 계산 완료 뽑아먹기
+        string value = PlayerPrefsManager.GetInstance().Mat_Mattzip;
+
+        ///// 맷집 별로 방어 게이지 곱 연산
+        //int mattmp = Mathf.FloorToInt(float.Parse(value) * 0.0001f);
+        //if (mattmp != PlayerPrefs.GetFloat("VUVUBA", 0))
+        //{
+        //    PlayerPrefsManager.GetInstance().Cilcked_Cnt_MattZip = 1.0f + (mattmp * 0.25f);
+        //    PlayerPrefs.SetFloat("VUVUBA", mattmp);
+        //}
+
+        //Debug.Log("인트 ; " + mattmp);
+        //Debug.Log(PlayerPrefsManager.GetInstance().Cilcked_Cnt_MattZip);
+
+        MattText.text = SeetheTruth(double.Parse(SeetheTruth(value)));
+        MattzipText.text = SeetheTruth(double.Parse(SeetheTruth(value)));
+        DefendMattzip_text.text = SeetheTruth(double.Parse(SeetheTruth(value)));
+        PlayerPrefs.Save();
+
+    }
 
     /// 캐릭터 정보 체력
     public void ShowUserHP()
@@ -201,29 +230,7 @@ public class UserWallet : MonoBehaviour
 
 
 
-    /// 우측 하단 맷집 표시기랑 개인 스탯
-    public void ShowUserMatZip()
-    {
-        /// 계산 완료 뽑아먹기
-        string value = PlayerPrefsManager.GetInstance().Mat_Mattzip;
 
-        ///// 맷집 별로 방어 게이지 곱 연산
-        //int mattmp = Mathf.FloorToInt(float.Parse(value) * 0.0001f);
-        //if (mattmp != PlayerPrefs.GetFloat("VUVUBA", 0))
-        //{
-        //    PlayerPrefsManager.GetInstance().Cilcked_Cnt_MattZip = 1.0f + (mattmp * 0.25f);
-        //    PlayerPrefs.SetFloat("VUVUBA", mattmp);
-        //}
-
-        //Debug.Log("인트 ; " + mattmp);
-        //Debug.Log(PlayerPrefsManager.GetInstance().Cilcked_Cnt_MattZip);
-
-        MattText.text = SeetheTruth(double.Parse(SeetheTruth(value)));
-        MattzipText.text = SeetheTruth(double.Parse(SeetheTruth(value)));
-        DefendMattzip_text.text = SeetheTruth(double.Parse(SeetheTruth(value)));
-        PlayerPrefs.Save();
-
-    }
 
     /// <summary>
     /// 소수점 자리 날려버려

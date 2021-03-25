@@ -150,7 +150,7 @@ public class OfflineManager : MonoBehaviour
                 timeBae = MaxFriendTime;
 
             gettingMatt = (timeBae * ((PlayerPrefsManager.GetInstance().Friend_01_MattzipPer_Lv * 0.1f) + 1.0f)); /// 분당 0.1 맷집게이지;
-            mattText.text = UserWallet.GetInstance().SeetheNatural(gettingMatt);
+            mattText.text = $"+ {UserWallet.GetInstance().SeetheNatural(gettingMatt)}";
 
             /// start ---------------- 골드 / 국밥 / 쌀밥  ------------------
 
@@ -171,9 +171,9 @@ public class OfflineManager : MonoBehaviour
 
 
             //획득 골드 만큼 복제해서 팝업 텍스트에 표기
-            rewordText.text =  UserWallet.GetInstance().SeetheNatural(double.Parse(gettingGold));
-            GupBapText.text = UserWallet.GetInstance().SeetheNatural(gettingGupBap);
-            SSalText.text = UserWallet.GetInstance().SeetheNatural(gettingSSal);
+            rewordText.text = $"x {UserWallet.GetInstance().SeetheNatural(double.Parse(gettingGold))}";
+            GupBapText.text = $"x {UserWallet.GetInstance().SeetheNatural(gettingGupBap)}";
+            SSalText.text = $"x {UserWallet.GetInstance().SeetheNatural(gettingSSal)}";
 
             // 오프라인 보상창 열어준다.
             rewordPOPup.SetActive(true);

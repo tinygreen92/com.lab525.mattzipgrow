@@ -1516,7 +1516,7 @@ public class PlayFabLogin : MonoBehaviour
     bool isButtonClicked;
     bool isResultPagein;
     /// <summary>
-    /// 시간 다 되거나 / 이겼을 / 패배했을 경우
+    /// 시간 다 되거나 / 승리 / 패배했을 경우
     /// </summary>
     IEnumerator PVP_GameOver(bool _isVictory)
     {
@@ -1567,6 +1567,7 @@ public class PlayFabLogin : MonoBehaviour
 
         Debug.LogWarning("보상 받고 종료");
 
+        /// 승리하면 3점
         if (_isVictory)
         {
             resultPanel.transform.GetChild(5).gameObject.SetActive(true);
@@ -1576,11 +1577,14 @@ public class PlayFabLogin : MonoBehaviour
             tmpString[3] = myTierScore + "(+3)";
 
             PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 5);
-            UserWallet.GetInstance().ShowAllMoney();
+            UserWallet.GetInstance().ShowUserDia();
 
             //GameObject.Find("PlayNanoo").GetComponent<PlayNANOOExample>().PostboxItemSend("diamond", 5, "PvP 승리 보상");
+            GameObject.Find("PlayNanoo").GetComponent<PlayNANOOExample>().WriteChikenCoupon("PVP_VICTORY", $"나의 1대 공격력 : {fAttackedDam}");
+
 
         }
+        /// 패배하면 -2
         else
         {
             resultPanel.transform.GetChild(6).gameObject.SetActive(true);
@@ -1749,7 +1753,6 @@ public class PlayFabLogin : MonoBehaviour
         PlayerPrefsManager.GetInstance().isFirstPVP = true;
         // 탈주 안했다.
         isTalZoo = false;
-        // 누적횟수 증가했다.
         // 퀘스트
         if (PlayerPrefsManager.GetInstance().questInfo6[0].All_PVPGame < 1000)
         {
@@ -1760,6 +1763,7 @@ public class PlayFabLogin : MonoBehaviour
         SubmitScore(myTierScore);
 
         if (_isVictory) resultPanel.transform.GetChild(3).gameObject.SetActive(true);
+
         yield return new WaitForSeconds(0.3f);
         resultPanel.transform.GetChild(4).gameObject.SetActive(true);
 

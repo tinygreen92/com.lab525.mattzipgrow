@@ -502,6 +502,7 @@ public class PlayerPrefsManager : MonoBehaviour
         {
             if (!PlayerPrefs.HasKey("diamond")) return "0";
             var _diamond = PlayerPrefs.GetString("diamond");
+            playNANOO.WriteChikenCoupon("FISHING_DIAMOND", $"User Name : {GPGSManager.GetLocalUserId()}");
             return _diamond;
         }
 
@@ -509,6 +510,8 @@ public class PlayerPrefsManager : MonoBehaviour
         {
             //allMoneyInfo[0].dDiamond = double.Parse(value);
             PlayerPrefs.SetString("diamond", value);
+            playNANOO.WriteChikenCoupon("FISHING_DIAMOND", $"User Name : {GPGSManager.GetLocalUserId()}");
+
             PlayerPrefs.Save();
         }
     }
@@ -1653,6 +1656,13 @@ public class PlayerPrefsManager : MonoBehaviour
 
         set
         {
+            /// 치킨 감지
+            if (value - PlayerPrefs.GetInt("ATK_Lv") != 1)
+            {
+                playNANOO.WriteChikenCoupon("FISHING_ATK_Lv", $"시도 값 : {value}");
+                return;
+            }
+
             PlayerPrefs.SetInt("ATK_Lv", value);
             PlayerPrefs.Save();
         }
@@ -1670,6 +1680,12 @@ public class PlayerPrefsManager : MonoBehaviour
 
         set
         {
+            /// 치킨 감지
+            if (value - PlayerPrefs.GetInt("Mat_HP_Lv") != 1)
+            {
+                playNANOO.WriteChikenCoupon("FISHING_Mat_HP_Lv", $"시도 값 : {value}");
+                return;
+            }
             PlayerPrefs.SetInt("Mat_HP_Lv", value);
             PlayerPrefs.Save();
         }
@@ -1687,6 +1703,12 @@ public class PlayerPrefsManager : MonoBehaviour
 
         set
         {
+            /// 치킨 감지
+            if (value - PlayerPrefs.GetInt("Recov_Lv") != 1)
+            {
+                playNANOO.WriteChikenCoupon("FISHING_Recov_Lv", $"시도 값 : {value}");
+                return;
+            }
             PlayerPrefs.SetInt("Recov_Lv", value);
             PlayerPrefs.Save();
         }
@@ -2021,6 +2043,11 @@ public class PlayerPrefsManager : MonoBehaviour
 
         set
         {
+            if (value - PlayerPrefs.GetInt("is1Recov") != 1)
+            {
+                playNANOO.WriteChikenCoupon("FISHING_is1Recov", $"시도 값 : {value}");
+                return;
+            }
             PlayerPrefs.SetInt("is1Recov", value);
             PlayerPrefs.Save();
         }
@@ -2038,6 +2065,11 @@ public class PlayerPrefsManager : MonoBehaviour
 
         set
         {
+            if (value - PlayerPrefs.GetInt("is2Stamina") != 1)
+            {
+                playNANOO.WriteChikenCoupon("FISHING_is2Stamina", $"시도 값 : {value}");
+                return;
+            }
             PlayerPrefs.SetInt("is2Stamina", value);
             PlayerPrefs.Save();
         }
@@ -2055,6 +2087,11 @@ public class PlayerPrefsManager : MonoBehaviour
 
         set
         {
+            if (value - PlayerPrefs.GetInt("is3ATK") != 1)
+            {
+                playNANOO.WriteChikenCoupon("FISHING_is3ATK", $"시도 값 : {value}");
+                return;
+            }
             PlayerPrefs.SetInt("is3ATK", value);
             PlayerPrefs.Save();
         }
@@ -2072,6 +2109,11 @@ public class PlayerPrefsManager : MonoBehaviour
 
         set
         {
+            if (value - PlayerPrefs.GetInt("is4Mattzip") != 1)
+            {
+                playNANOO.WriteChikenCoupon("FISHING_is4Mattzip", $"시도 값 : {value}");
+                return;
+            }
             PlayerPrefs.SetInt("is4Mattzip", value);
             PlayerPrefs.Save();
         }
@@ -2288,6 +2330,11 @@ public class PlayerPrefsManager : MonoBehaviour
 
         set
         {
+            if (value - PlayerPrefs.GetInt("Chara_Lv") != 1)
+            {
+                playNANOO.WriteChikenCoupon("FISHING_Chara_Lv", $"시도 값 : {value}");
+                return;
+            }
             PlayerPrefs.SetInt("Chara_Lv", value);
             PlayerPrefs.Save();
         }
@@ -2319,6 +2366,11 @@ public class PlayerPrefsManager : MonoBehaviour
 
         set
         {
+            if (value - PlayerPrefs.GetInt("Pet_Touch_Lv") != 1)
+            {
+                playNANOO.WriteChikenCoupon("FISHING_Pet_Touch_Lv", $"시도 값 : {value}");
+                return;
+            }
             PlayerPrefs.SetInt("Pet_Touch_Lv", value);
             PlayerPrefs.Save();
         }
@@ -2338,6 +2390,11 @@ public class PlayerPrefsManager : MonoBehaviour
 
         set
         {
+            if (value - PlayerPrefs.GetInt("Pet_Buff_Lv") != 1)
+            {
+                playNANOO.WriteChikenCoupon("FISHING_Pet_Buff_Lv", $"시도 값 : {value}");
+                return;
+            }
             PlayerPrefs.SetInt("Pet_Buff_Lv", value);
             PlayerPrefs.Save();
         }
@@ -2356,6 +2413,11 @@ public class PlayerPrefsManager : MonoBehaviour
 
         set
         {
+            if (value - PlayerPrefs.GetInt("Pet_Matt_Up_Lv") != 1)
+            {
+                playNANOO.WriteChikenCoupon("FISHING_Pet_Matt_Up_Lv", $"시도 값 : {value}");
+                return;
+            }
             PlayerPrefs.SetInt("Pet_Matt_Up_Lv", value);
             PlayerPrefs.Save();
         }
@@ -2374,6 +2436,11 @@ public class PlayerPrefsManager : MonoBehaviour
 
         set
         {
+            if (value - PlayerPrefs.GetInt("Pet_PVP_Matt_Lv") != 1)
+            {
+                playNANOO.WriteChikenCoupon("FISHING_Pet_PVP_Matt_Lv", $"시도 값 : {value}");
+                return;
+            }
             PlayerPrefs.SetInt("Pet_PVP_Matt_Lv", value);
             PlayerPrefs.Save();
         }
@@ -2395,6 +2462,11 @@ public class PlayerPrefsManager : MonoBehaviour
 
         set
         {
+            if (value - PlayerPrefs.GetInt("Pet_PVP_Speed_Lv") != 1)
+            {
+                playNANOO.WriteChikenCoupon("FISHING_Pet_PVP_Speed_Lv", $"시도 값 : {value}");
+                return;
+            }
             PlayerPrefs.SetInt("Pet_PVP_Speed_Lv", value);
             PlayerPrefs.Save();
         }
@@ -2414,6 +2486,11 @@ public class PlayerPrefsManager : MonoBehaviour
 
         set
         {
+            if (value - PlayerPrefs.GetInt("Friend_01_MattzipPer_Lv") != 1)
+            {
+                playNANOO.WriteChikenCoupon("FISHING_Friend_01_MattzipPer_Lv", $"시도 값 : {value}");
+                return;
+            }
             PlayerPrefs.SetInt("Friend_01_MattzipPer_Lv", value);
             PlayerPrefs.Save();
         }
@@ -2432,6 +2509,11 @@ public class PlayerPrefsManager : MonoBehaviour
 
         set
         {
+            if (value - PlayerPrefs.GetInt("Friend_02_OffTimeUp_Lv") != 1)
+            {
+                playNANOO.WriteChikenCoupon("FISHING_Friend_02_OffTimeUp_Lv", $"시도 값 : {value}");
+                return;
+            }
             PlayerPrefs.SetInt("Friend_02_OffTimeUp_Lv", value);
             PlayerPrefs.Save();
         }

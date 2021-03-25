@@ -681,7 +681,7 @@ public class IAPManager : MonoBehaviour
         GameObject.Find("CharacterManager").GetComponent<CharacterManager>().UniformInit();
         // 자동 강제 서버 세이브
         PlayerPrefs.Save();
-        playNANOO.StorageSaveForBuy();
+        playNANOO.StorageSaveForBuy(product.Name);
     }
 
     // Failed purchase handler

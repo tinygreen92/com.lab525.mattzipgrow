@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class GroggyManager : MonoBehaviour
 {
+    public GameObject LvUPObjt;
     [Header("- 우편함 갱신시간")]
     public float PostCheckDelay;
     [Header("- 오토 공격 어케댐")]
@@ -809,8 +810,6 @@ public class GroggyManager : MonoBehaviour
     //public GameObject Gold_Recov_Per_UP_Gray;
     public GameObject Dia_Recov_Per_UP_Gray;
 
-
-
     [Header("-맥스 버튼 덮기")]
     public GameObject POWER_UP_Max;
     public GameObject HP_UP_Max;
@@ -1590,16 +1589,6 @@ public class GroggyManager : MonoBehaviour
 
         CRD_UP_Price.text = UserWallet.GetInstance().SeetheNatural(doublePrice);
 
-
-
-
-
-
-
-
-
-
-
         //-----------------------------------------------------------------------------------------------------
         ///  0615
         // 다이아 크확
@@ -1692,6 +1681,42 @@ public class GroggyManager : MonoBehaviour
 
         ////////////////////////////////////////////
 
+        if (coru == null) 
+            coru = StartCoroutine(GoldChechecak());
+
+        All_GoldCheak();
+
+        PlayerPrefs.Save();
+    }
+
+    Coroutine coru;
+
+    /// <summary>
+    /// 회색으로 덮기 판단 0.5초 마다
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator GoldChechecak()
+    {
+        yield return null;
+
+        while (true)
+        {
+            yield return new WaitForSeconds(0.5f);
+            // 미션 달성한거 뭐있나 초기화.
+            All_GoldCheak();
+        }
+    }
+
+
+    /// <summary>
+    /// 모든 골드
+    /// </summary>
+    void All_GoldCheak()
+    {
+        if (!LvUPObjt.activeSelf) return;
+
+        Debug.LogError("0.5초 맞냐");
+
         Power_UP_Cheak();
         HP_UP_Cheak();
         Recov_UP_Cheak();
@@ -1699,24 +1724,20 @@ public class GroggyManager : MonoBehaviour
 
         //ATK_PER_UP_Cheak();
         //HP_PER_UP_Cheak();
-
         Dia_ATK_PER_UP_Cheak();
         Dia_HP_PER_UP_Cheak();
 
         // 0615
-
         CRC_UP_Cheak();
         CRD_UP_Cheak();
         Dia_CRC_Cheak();
         Dia_CRD_Cheak();
 
         // 0709
-
         //Gold_RECOV_Cheak();
         DIA_RECOV_UP_Cheak();
-
-        PlayerPrefs.Save();
     }
+
 
 
     string ATK_PER_UPgoldPass;
