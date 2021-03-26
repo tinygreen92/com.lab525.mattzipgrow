@@ -13,6 +13,7 @@ public class PunchManager : MonoBehaviour
     public Sprite[] punchImgs;
     [Header("-다이아 영구 해제 팝업 오브젝트")]
     public GameObject SomeThingPop;
+    public Image SomeThingIcon;
     [Header("-만렙 찍으면 다이아로 산다 스프라이트")]
     public Sprite DiaImg;
     public Sprite GookBapImg;
@@ -395,7 +396,9 @@ public class PunchManager : MonoBehaviour
     public void ShowDiaPunchOkay(int p_index)
     {
         SD_PunchIndex = p_index;
-        // 애니메 재생
+        /// 아이콘 교체
+        SomeThingIcon.sprite = punchImgs[p_index];
+        /// 애니메 재생
         SomeThingPop.SetActive(true);
         SomeThingPop.GetComponent<Animation>()["Roll_Incre"].speed = 1;
         SomeThingPop.GetComponent<Animation>().Play("Roll_Incre");

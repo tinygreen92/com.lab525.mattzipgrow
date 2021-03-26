@@ -10,8 +10,8 @@ public class UserWallet : MonoBehaviour
 
     public PunchManager pm;
     [Header("-캐릭터 정보창")]
-    public Text HP_Text;
     public Text ATK_Text;
+    public Text HP_Text;
     public Text CRC_Text;
     public Text CRD_Text;
 
@@ -108,8 +108,8 @@ public class UserWallet : MonoBehaviour
         //ShowUserKey();
         PlayerPrefsManager.GetInstance().key += 0;
         ShowUserMatZip();
-        ShowUserHP();
         ShowUserATK();
+        ShowUserHP();
         ShowUserSSalbap();
         ShowUserCritical_2_();
     }
@@ -214,7 +214,9 @@ public class UserWallet : MonoBehaviour
 
     }
 
+    /// <summary>
     /// 캐릭터 정보 크확 크댐
+    /// </summary>
     public void ShowUserCritical_2_()
     {
         string tmp = PlayerPrefsManager.GetInstance().CriticalDPS;

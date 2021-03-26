@@ -1,7 +1,6 @@
 ﻿using EasyMobile;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -35,10 +34,9 @@ public class GroggyManager : MonoBehaviour
     public GameObject GameObject07;
     public GameObject GameObject08;
     public GameObject PANEL;
+    readonly int breadCnt; // 빵 30번 클릭할 것
 
-    int breadCnt; // 빵 30번 클릭할 것
-
-    string _Mattzip;
+    readonly string _Mattzip;
     string _PlayerDPS;
 
 
@@ -176,6 +174,11 @@ public class GroggyManager : MonoBehaviour
     }
 
 
+    string Auto_currentHP;
+    string Auto_maxHP;
+    string Auto_tmp;
+    double Auto_recov;
+
     /// <summary>
     ///  무한 모드일때 회복 중지.
     /// </summary>
@@ -194,39 +197,37 @@ public class GroggyManager : MonoBehaviour
 
             if (!PlayerPrefsManager.GetInstance().isFristGameStart || MuGanCavas.activeSelf) goto HELL;
 
-            var currentHP = PlayerPrefsManager.GetInstance().Mat_currentHP;
-            var maxHP = PlayerPrefsManager.GetInstance().Mat_MaxHP;
-            //
-            var tmp = dts.SubStringDouble(currentHP, maxHP);
-            //
-            var recov = dts.DevideStringDouble(PlayerPrefsManager.GetInstance().Mat_Recov, "10");
+            Auto_currentHP = PlayerPrefsManager.GetInstance().Mat_currentHP;
+            Auto_maxHP        = PlayerPrefsManager.GetInstance().Mat_MaxHP;
+            Auto_tmp      = dts.SubStringDouble(Auto_currentHP, Auto_maxHP);
+            Auto_recov        = dts.DevideStringDouble(PlayerPrefsManager.GetInstance().Mat_Recov, "10");
 
-            if (recov < 1.1d) recov = 1.0d;
+            if (Auto_recov < 1.1d) Auto_recov = 1.0d;
 
-            if (currentHP == "-1") goto HELL;
+            if (Auto_currentHP == "-1") goto HELL;
 
 
             // 그로기 상태가 아니면 지속 회복
-            if (!PlayerPrefsManager.GetInstance().isGroggy && tmp == "-1" || tmp == "0")
+            if (!PlayerPrefsManager.GetInstance().isGroggy && Auto_tmp == "-1" || Auto_tmp == "0")
             {
-                var tmpHP = dts.AddStringDouble(currentHP, recov.ToString("f0"));
-                var tmpResult = dts.SubStringDouble(tmpHP, maxHP);
+                var tmpHP = dts.AddStringDouble(Auto_currentHP, Auto_recov.ToString("f0"));
+                var tmpResult = dts.SubStringDouble(tmpHP, Auto_maxHP);
 
                 if (tmpResult != "-1")
                 {
-                    PlayerPrefsManager.GetInstance().Mat_currentHP = maxHP;
+                    PlayerPrefsManager.GetInstance().Mat_currentHP = Auto_maxHP;
                 }
                 else
                 {
-                    PlayerPrefsManager.GetInstance().Mat_currentHP = dts.AddStringDouble(currentHP, recov.ToString("f0"));
+                    PlayerPrefsManager.GetInstance().Mat_currentHP = dts.AddStringDouble(Auto_currentHP, Auto_recov.ToString("f0"));
                 }
 
-                HP_Bar.fillAmount = (float)dts.DevideStringDouble(currentHP, maxHP);
-                var dCurrentHP = dts.PanByulGi(currentHP);
-                HP_Bar.GetComponentInChildren<Text>().text = UserWallet.GetInstance().SeetheNatural(dCurrentHP) + "/" + UserWallet.GetInstance().SeetheNatural(double.Parse(maxHP));
+                HP_Bar.fillAmount = (float)dts.DevideStringDouble(Auto_currentHP, Auto_maxHP);
+                var dCurrentHP = dts.PanByulGi(Auto_currentHP);
+                HP_Bar.GetComponentInChildren<Text>().text = UserWallet.GetInstance().SeetheNatural(dCurrentHP) + "/" + UserWallet.GetInstance().SeetheNatural(double.Parse(Auto_maxHP));
             }
 
-            HELL:
+        HELL:
             yield return new WaitForSeconds(0.05f);
 
         }
@@ -317,7 +318,7 @@ public class GroggyManager : MonoBehaviour
         //{
         //    //국밥 버튼 포커싱 켜주고
         //    GameObject.Find("TUTORIALManager").GetComponent<TutorialManager>().MainObject[7].SetActive(true);
-            
+
         //    breadCnt++;
         //    TutorialGauge.fillAmount = breadCnt / 10f;
 
@@ -386,7 +387,7 @@ public class GroggyManager : MonoBehaviour
     public void HeallingOff()
     {
         // 코루틴 실행중이면 멈추고 시작.
-        if(isCRrunning) StopCoroutine(speedUPSkill);
+        if (isCRrunning) StopCoroutine(speedUPSkill);
 
         AudioManager.instance.Btn_healing();
 
@@ -405,7 +406,7 @@ public class GroggyManager : MonoBehaviour
         isCRrunning = true;
         // 국밥 버프 속도 증가 유물
         float result = PlayerPrefsManager.GetInstance().Arti_GAL * 0.01f;
-        float speedTime = 3.0f + result; 
+        float speedTime = 3.0f + result;
         yield return new WaitForSeconds(1.5f);
 
         PlayerPrefsManager.GetInstance().isGupSpeed = true;
@@ -649,7 +650,7 @@ public class GroggyManager : MonoBehaviour
 
 
 
-    DoubleToStringNum dts = new DoubleToStringNum();
+    readonly DoubleToStringNum dts = new DoubleToStringNum();
     /// <summary>
     /// 그로기 상태 회복할때 회복한다
     /// </summary>
@@ -701,8 +702,8 @@ public class GroggyManager : MonoBehaviour
         // 그로기 풀어준다.
         PlayerPrefsManager.GetInstance().isGroggy = false;
         GroggyModeImageLock(false);
-        
-        if(!PlayerPrefsManager.GetInstance().isFristGameStart) PlayerPrefsManager.GetInstance().TurtorialCount = 52525;
+
+        if (!PlayerPrefsManager.GetInstance().isFristGameStart) PlayerPrefsManager.GetInstance().TurtorialCount = 52525;
     }
 
 
@@ -787,7 +788,7 @@ public class GroggyManager : MonoBehaviour
     public Text Dia_Recov_Per_UP_LV;
 
 
-    [Header("-버튼 회색으로 덮기")] 
+    [Header("-버튼 회색으로 덮기")]
     public GameObject POWER_UP_Gray;
     public GameObject HP_UP_Gray;
     public GameObject Recov_UP_Gray;
@@ -1362,12 +1363,12 @@ public class GroggyManager : MonoBehaviour
 
         currentAtk = PowerLv.ToString();
         nextAtk = (PowerLv + 1).ToString();
-        
-        if(PowerLv == 0) currentAtk = "1";
+
+        if (PowerLv == 0) currentAtk = "1";
 
         string tmpATK = dts.fDoubleToStringNumber(currentAtk);
         string tmptmpATK = dts.fDoubleToStringNumber(nextAtk);
-
+        /// 스탯 공격력
         PlayerPrefsManager.GetInstance().RawAttackDamage = tmpATK;
         ChraterInfo[0].GetComponent<Text>().text = UserWallet.GetInstance().SeetheTruth(PlayerPrefsManager.GetInstance().PlayerDPS);
 
@@ -1681,7 +1682,7 @@ public class GroggyManager : MonoBehaviour
 
         ////////////////////////////////////////////
 
-        if (coru == null) 
+        if (coru == null)
             coru = StartCoroutine(GoldChechecak());
 
         All_GoldCheak();
@@ -1715,8 +1716,6 @@ public class GroggyManager : MonoBehaviour
     {
         if (!LvUPObjt.activeSelf) return;
 
-        Debug.LogError("0.5초 맞냐");
-
         Power_UP_Cheak();
         HP_UP_Cheak();
         Recov_UP_Cheak();
@@ -1738,9 +1737,7 @@ public class GroggyManager : MonoBehaviour
         DIA_RECOV_UP_Cheak();
     }
 
-
-
-    string ATK_PER_UPgoldPass;
+    readonly string ATK_PER_UPgoldPass;
 
     ///// <summary>
     ///// 돈이 안되면 회색으로.
@@ -1777,7 +1774,7 @@ public class GroggyManager : MonoBehaviour
     //}
 
 
-    string HP_PER_UP_goldPass;
+    readonly string HP_PER_UP_goldPass;
 
     /// <summary>
     /// 돈이 안되면 회색으로.
@@ -2286,7 +2283,7 @@ public class GroggyManager : MonoBehaviour
         }
 
         // 다음 레벨의 가격 불러오고.
-        string nextPrice = (75 * (PowerLv +1)).ToString();
+        string nextPrice = (75 * (PowerLv + 1)).ToString();
 
         if (PlayerPrefs.GetFloat("dDiamond") - float.Parse(nextPrice) < 0)
         {
@@ -2389,7 +2386,7 @@ public class GroggyManager : MonoBehaviour
         // 퀘스트
         PlayerPrefsManager.GetInstance().questInfo[0].daily_Atk++;
 
-        if(PlayerPrefsManager.GetInstance().questInfo[0].All_Atk < 1000)
+        if (PlayerPrefsManager.GetInstance().questInfo[0].All_Atk < 1000)
         {
             PlayerPrefsManager.GetInstance().questInfo[0].All_Atk++;
         }
@@ -2435,6 +2432,9 @@ public class GroggyManager : MonoBehaviour
 
     string HP_UPgoldPass;
 
+    /// <summary>
+    /// [훈련강화]에서 [체력 강화]
+    /// </summary>
     public void TEST_HP_UP()
     {
         if (!HP_UP_Cheak()) return;
@@ -2558,7 +2558,7 @@ public class GroggyManager : MonoBehaviour
         // 맷집 레벨 상승
         PlayerPrefsManager.GetInstance().Defence_Lv++;
         // 퀘스트
-        if(PlayerPrefsManager.GetInstance().questInfo[0].All_Mattzip < 1000)
+        if (PlayerPrefsManager.GetInstance().questInfo[0].All_Mattzip < 1000)
         {
             PlayerPrefsManager.GetInstance().questInfo[0].All_Mattzip++;
         }

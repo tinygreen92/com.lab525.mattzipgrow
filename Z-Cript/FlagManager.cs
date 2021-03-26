@@ -151,7 +151,7 @@ public class FlagManager : MonoBehaviour
 
         tmpATK = (ppm.is4Mattzip * 0.1f);
         // 플로트 파서
-        PlayerPrefsManager.GetInstance().Stat_is4Mattzip = tmpATK;
+        PlayerPrefsManager.GetInstance().Stat_is4Deffence = tmpATK;
         is4Mattzip_Desc.text = "방어력 " + string.Format("{0:F2}", tmpATK) + "% 증가";
         /// 소비 골드 표기
         currentAtk = GetPerUpPrice(2, ppm.is4Mattzip);

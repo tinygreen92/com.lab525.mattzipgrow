@@ -826,7 +826,6 @@ public class PlayerPrefsManager : MonoBehaviour
         }
     }
 
-    string _CriticalDPS;
     double criDPS;
 
     /// <summary>
@@ -837,11 +836,8 @@ public class PlayerPrefsManager : MonoBehaviour
         /// 크리티컬 = 공격력 x 크리티컬대미지
         get
         {
-            criDPS = _PlayerDPSfloat + (_PlayerDPSfloat * (float.Parse(CRD_UP) + float.Parse(Dia_CRD_UP)) * 0.01d);
-
-            _CriticalDPS = criDPS.ToString("f0");
-
-            return _CriticalDPS;
+            criDPS = _PlayerDPSfloat * (float.Parse(CRD_UP) + float.Parse(Dia_CRD_UP) * 0.01d);
+            return (_PlayerDPSfloat + criDPS).ToString("f0");
         }
 
         set
@@ -859,7 +855,7 @@ public class PlayerPrefsManager : MonoBehaviour
     {
         get
         {
-            _Critical_Per = (float.Parse(CRC_UP) + float.Parse(Dia_CRC_UP)).ToString("f3");
+            _Critical_Per = (float.Parse(CRC_UP) * float.Parse(Dia_CRC_UP)).ToString("f3");
             return _Critical_Per;
         }
 
@@ -872,7 +868,6 @@ public class PlayerPrefsManager : MonoBehaviour
 
 
     string _PlayerDPS;
-    string AtkPercent;
     string CharaDps;
 
     string tmp1;
@@ -881,24 +876,29 @@ public class PlayerPrefsManager : MonoBehaviour
     double _PlayerDPSfloat;
     /// <summary>
     /// (string)주먹 최종 공격력            PlayerDPS    
+    /// [ ( 스탯 공격력 + 레벨 공격력 ) * ( 특별강화 % + 스킬 % + 장비 % + 구매 % + 깃발 % + 유물 % ) ] * 버프 100%
     /// </summary>
     public string PlayerDPS
     {
         get
         {
             _PlayerDPS = "0";
-            /// 캐릭터 레벨 올리면 증가하는 공격력 스탯 값
+            /// [레벨 공격력] - 캐릭터 레벨 올리면 증가
             CharaDps = PlayerPrefs.GetString("Chara_Attack_UP", "0");
-            /// (캐릭터 렙업 공격력 + 스탯 공격력 ) * 유물 공격력 % 증가
-            //AtkPercent = (AttackPunch + float.Parse(CharaDps)).ToString("f0");
-            AtkPercent = dts.AddStringDouble(CharaDps, RawAttackDamage);
-            ///
-            tmp1 = dts.multipleStringDouble(AtkPercent, AttackPunch);
 
-            tmp2 = 1.0d 
-                + (0.01d * (Stat_is3ATK + double.Parse(Dia_ATK_PER_UP) 
-                + weaponInfo[PunchIndex].weaponEffect + Mattzip_Dia_Weap 
-                + (uniformInfo[0].Skill_LV *1f)));
+            /// ( 스탯 공격력 + 레벨 공격력 ) 
+            tmp1 = dts.AddStringDouble(CharaDps, RawAttackDamage);
+
+            /// ( 특별강화 % + 스킬 % + 장비 % + 구매 % + 깃발 % + 유물 % )
+            tmp2 = 0.01d 
+                * ( double.Parse(Dia_ATK_PER_UP) // 특별강화 %
+                + uniformInfo[0].Skill_LV // 스킬 %
+                + weaponInfo[PunchIndex].weaponEffect // 장비 %
+                + Mattzip_Dia_Weap // 영구구매 %
+                + Stat_is3ATK  // 깃발 %
+                + AttackPunch ); // 유물 %
+            /// 기본 배율 보정
+            tmp2 += 1.0d;
 
             /// 맷집3배 버프 삭제후 -> 공격력 2배 버프로 변경됨
             if(isBoosterMattzip)
@@ -922,7 +922,7 @@ public class PlayerPrefsManager : MonoBehaviour
 
 
     /// <summary>
-    /// (string)골드로 강화하는 주먹            RawAttackDamage    
+    /// (string)[스탯 공격력]            RawAttackDamage    
     /// </summary>
     public string RawAttackDamage
     {
@@ -941,7 +941,7 @@ public class PlayerPrefsManager : MonoBehaviour
     }
 
     /// <summary>
-    /// (float) 주먹 공격력 유물 강화             AttackPunch
+    /// (float) 공격력 유물 %            AttackPunch
     /// </summary>
     public float AttackPunch
     {
@@ -961,32 +961,32 @@ public class PlayerPrefsManager : MonoBehaviour
         }
     }
 
-    /// (string)최대 체력                        Mat_HP
+    double MaxHPtmp1;
+    double MaxHPtmp2;
+
+    /// <summary>
+    /// (string)플레이어 체력                        Mat_HP
+    /// ( 스탯 체력 + 레벨 체력 ) * ( 특별강화 % + 스킬 % + 깃발 % + 유물 % )
+    /// </summary>
     public string Mat_MaxHP
     {
         get
         {
-            if (!PlayerPrefs.HasKey("Mat_MaxHP")) return "100";
+            /// ( 스탯 체력 + 레벨 체력 )
+            MaxHPtmp1 = double.Parse(Stat_MaxHP) + double.Parse(PlayerPrefs.GetString("Chara_HP_UP", "0"));
 
-            double tmp = double.Parse(PlayerPrefs.GetString("Mat_MaxHP"));
-
-            //Debug.LogWarning(Stat_is2Stamina);
-            //var tmp2 = 1.0f + (0.01f * (Stat_is3ATK + float.Parse(ATK_PER_UP) + float.Parse(Dia_ATK_PER_UP)));
-
-            double tmptmp = 1.0d+ (0.01d * 
-                
-                (double.Parse(Dia_HP_PER_UP) +
-                Stat_is2Stamina + 
-                (uniformInfo[1].Skill_LV * 1d) +
-                double.Parse(PlayerPrefs.GetString("Chara_HP_UP", "0")))
-                
+            /// ( 특별강화 % + 스킬 % + 깃발 % + 유물 % )
+            MaxHPtmp2 = 0.01d 
+                * (double.Parse(Dia_HP_PER_UP) // 특별강화 %
+                + Stat_is2Stamina // 깃발 %
+                + uniformInfo[1].Skill_LV // 스킬 %
+                + double.Parse(Arti_MaxHP) // 유물 %
                 );
+                
+            /// 기본 배율 보정
+            MaxHPtmp2 += 1.0d;
 
-            string ttmpmp = (tmp * tmptmp).ToString("f0");
-
-            //_PlayerDPS = (float.Parse(tmp1) * tmp2).ToString("f0");
-
-
+            string ttmpmp = (MaxHPtmp1 * MaxHPtmp2).ToString("f0");
             return ttmpmp;
         }
 
@@ -997,7 +997,9 @@ public class PlayerPrefsManager : MonoBehaviour
         }
     }
 
-    /// (string)스탯 체력                        Stat_MaxHP
+    /// <summary>
+    /// (string)스탯 체력 10 단위                        Stat_MaxHP
+    /// </summary>
     public string Stat_MaxHP
     {
         get
@@ -1012,19 +1014,21 @@ public class PlayerPrefsManager : MonoBehaviour
             PlayerPrefs.SetString("Stat_MaxHP", value);
             PlayerPrefs.Save();
 
-            if (Arti_MaxHP != "0")
-            {
-                var result = double.Parse(Arti_MaxHP);
-                Mat_MaxHP = dts.multipleStringDouble(value, result);
-            }
-            else
-            {
-                Mat_MaxHP = value;
-            }
+            //if (Arti_MaxHP != "0")
+            //{
+            //    var result = double.Parse(Arti_MaxHP);
+            //    Mat_MaxHP = dts.multipleStringDouble(value, result);
+            //}
+            //else
+            //{
+            //    Mat_MaxHP = value;
+            //}
         }
     }
 
+    /// <summary>
     /// (string)유물 체력                        Arti_MaxHP
+    /// </summary>
     public string Arti_MaxHP
     {
         get
@@ -1039,17 +1043,19 @@ public class PlayerPrefsManager : MonoBehaviour
             PlayerPrefs.SetString("Arti_MaxHP", value);
             PlayerPrefs.Save();
 
-            if (value != "0")
-            {
-                double dresult = double.Parse(value);
-                Mat_MaxHP = dts.multipleStringDouble(Stat_MaxHP, dresult);
-            }
-            else
-                Mat_MaxHP = Stat_MaxHP;
+            //if (value != "0")
+            //{
+            //    double dresult = double.Parse(value);
+            //    Mat_MaxHP = dts.multipleStringDouble(Stat_MaxHP, dresult);
+            //}
+            //else
+            //    Mat_MaxHP = Stat_MaxHP;
         }
     }
 
+    /// <summary>
     /// (string)최근 체력                        Mat_currentHP
+    /// </summary>
     public string Mat_currentHP
     {
         get
@@ -1169,23 +1175,29 @@ public class PlayerPrefsManager : MonoBehaviour
     }
 
 
-    float tmp = 0;
-    float ttmp = 0;
-    float ttmmpp = 0;
+    float tmp;
+    float ttmmpp;
 
-    //PlayerPrefs.GetString("Stat_Recov");
+    /// <summary>
     /// (string)체력 회복량                       Mat_Recov
+    /// ( 스탯 체력회복력 + 레벨 체력회복력 ) * ( 특별강화 % + 스킬 % + 깃발 % + 유물 % )
+    /// </summary>
     public string Mat_Recov
     {
         get
         {
-            if (!PlayerPrefs.HasKey("Mat_Recov")) return "1";
-            tmp = float.Parse(PlayerPrefs.GetString("Stat_Recov"));
-            ttmp = float.Parse(PlayerPrefs.GetString("Chara_Recov_UP", "0"));
-            ttmmpp = (tmp + ttmp + (uniformInfo[3].Skill_LV *1f)) * Stat_is1Recov * 0.01f;
+            /// ( 스탯 체력회복력 + 레벨 체력회복력 )
+            tmp = float.Parse(PlayerPrefs.GetString("Stat_Recov", "1")) + float.Parse(PlayerPrefs.GetString("Chara_Recov_UP", "0"));
+            /// ( 특별강화 % + 스킬 % + 깃발 % + 유물 % )
+            ttmmpp = 0.01f
+                * ( Dia_RECOV_UP_Lv   // 특별강화 %
+                + uniformInfo[3].Skill_LV // 스킬 %
+                + Stat_is1Recov // 깃발 %
+                + ArtiRecov
+                ); 
 
 
-            return ((tmp + ttmmpp) * ( 1.0f + Dia_RECOV_UP_Lv * 0.1f)).ToString("f0");
+            return (tmp + ttmmpp).ToString("f0");
         }
 
         set
@@ -1196,37 +1208,55 @@ public class PlayerPrefsManager : MonoBehaviour
     }
 
     /// <summary>
+    /// 체력 회복 유물
+    /// </summary>
+    public float ArtiRecov
+    {
+        get
+        {
+            return PlayerPrefs.GetFloat("ArtiRecov", 0);
+        }
+
+        set
+        {
+            PlayerPrefs.SetFloat("ArtiRecov", value);
+            PlayerPrefs.Save();
+        }
+    }
+
+
+
+    /// <summary>
     /// pvp 방어력은 상대방의 공격력 - ( 맷집 + 방어력 ) 만큼 체력이 깎임
     /// </summary>
     /// <returns></returns>
     public string GetPvpMattDefence()
     {
-        string result = dts.AddStringDouble(Mat_Mattzip, GetPlayerDefence());
-        return result;
+        return dts.AddStringDouble(Mat_Mattzip, GetPlayerDefence());
     }
 
 
+
+    float Def_result1;
+    float Def_result2;
     /// <summary>
-    /// 총 방어력 계산 값  ( 스탯 방어력 + 방패 방어력 + 보유 방패 방어력 ) * 유물 방어력
+    /// (스탯 방어력 + 레벨 방어력 ) * ( 방패 착용 방어력 % + 방패 보유 방어력 % + 깃발 % + 유물 % )  
     /// </summary>
     /// <returns></returns>
     public string GetPlayerDefence()
     {
-        
-        // 스탯 방어력  = ( * 깃발 방어력 %)
-        string result = ((Defence_Lv + PlayerPrefs.GetFloat("Chara_Defence_UP", 0)) 
-            * (1.0f + Stat_is4Mattzip)).ToString("F0");
-        // 스탯 방어력 + 방패 방어력 
-        result = dts.AddStringDouble(result, Defence_Shiled);
-        // 스탯 방어력 + 방패 방어력  + 보유 방패 방어력
-        result = dts.AddStringDouble(result, Defence_Dia_Shiled);
-        // ( 스탯 방어력 + 방패 방어력 + 보유 방패 방어력 ) * 유물 방어력
-        float artiDefence = 1.0f + (Defence_Artifact_Lv * 1.0f);
-        /// 총 방어력
-        if (result != "0")
-            return dts.multipleStringDouble(result, artiDefence);
-        else
-            return "0";
+        /// (스탯 방어력 + 레벨 방어력 )
+        Def_result1 = Defence_Lv + PlayerPrefs.GetFloat("Chara_Defence_UP", 0);
+        /// ( 방패 착용 방어력 % + 방패 보유 방어력 % + 깃발 % + 유물 % )  
+        Def_result2 = 0.01f
+            * ( float.Parse(Defence_Shiled) // 방패 착용 방어력 %
+            + float.Parse(Defence_Dia_Shiled)   // 방패 보유 방어력 %
+            + Stat_is4Deffence  // 깃발 %
+            + Defence_Artifact_Lv   // 유물 %
+            );
+        /// 기본 배율 보정
+        Def_result2 += 1.0f;
+        return (Def_result1 * Def_result2).ToString();
     }
 
     /// (int) 아직 안 쓰는거
@@ -1303,7 +1333,9 @@ public class PlayerPrefsManager : MonoBehaviour
         }
     }
 
+    /// <summary>
     /// (string)[보유 방패 방어력]
+    /// </summary>
     public string Defence_Dia_Shiled
     {
         get
@@ -1320,7 +1352,9 @@ public class PlayerPrefsManager : MonoBehaviour
         }
     }
 
-    /// (string)[방어력 유물] 레벨
+    /// <summary>
+    /// [방어력 유물] 레벨
+    /// </summary>
     public int Defence_Artifact_Lv
     {
         get
@@ -1503,7 +1537,9 @@ public class PlayerPrefsManager : MonoBehaviour
         }
     }
 
-    /// (string)다이아 크리확률 % 증가량                       Dia_CRC_UP
+    /// <summary>
+    /// (string)특별강화 치명타 % 증가량                       Dia_CRC_UP
+    /// </summary>
     public string Dia_CRC_UP
     {
         get
@@ -1537,7 +1573,9 @@ public class PlayerPrefsManager : MonoBehaviour
         }
     }
 
-    /// (string)크리확률 % 증가량                       CRC_UP
+    /// <summary>
+    /// (string)스탯 치명타 확률 % 증가량                       CRC_UP
+    /// </summary>
     public string CRC_UP
     {
         get
@@ -1770,7 +1808,9 @@ public class PlayerPrefsManager : MonoBehaviour
         }
     }
 
-    /// (int)줄넘기- 체력증가                     Arti_HP
+    /// <summary>
+    /// (int)줄넘기- 체력 증가 레벨                     Arti_HP
+    /// </summary>
     public int Arti_HP
     {
         get
@@ -2182,7 +2222,7 @@ public class PlayerPrefsManager : MonoBehaviour
     /// <summary>
     /// 깃발 버프 <방어력>
     /// </summary>
-    public float Stat_is4Mattzip
+    public float Stat_is4Deffence
     {
         get
         {
@@ -2330,7 +2370,7 @@ public class PlayerPrefsManager : MonoBehaviour
 
         set
         {
-            if (value - PlayerPrefs.GetInt("Chara_Lv") != 1)
+            if (value - PlayerPrefs.GetInt("Chara_Lv", 1) != 1)
             {
                 playNANOO.WriteChikenCoupon("FISHING_Chara_Lv", $"시도 값 : {value}");
                 return;
@@ -2518,6 +2558,7 @@ public class PlayerPrefsManager : MonoBehaviour
             PlayerPrefs.Save();
         }
     }
+
 
 
 

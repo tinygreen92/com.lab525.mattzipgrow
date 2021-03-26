@@ -51,7 +51,7 @@ public class PlayNANOOExample : MonoBehaviour
     public void WriteChikenCoupon(string type, string sValue)
     {
         var messages = new PlayNANOO.Monitor.LogMessages();
-        messages.Add(Configure.PN_LOG_INFO, $"PN_LOG_INFO {sValue}");
+        messages.Add(Configure.PN_LOG_INFO, "PN_LOG_INFO " + sValue);
 
         plugin.LogWrite(new PlayNANOO.Monitor.LogWrite()
         {

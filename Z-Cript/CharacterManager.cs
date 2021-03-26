@@ -1996,8 +1996,6 @@ public class CharacterManager : MonoBehaviour
     /// </summary>
     public void Characther_UP_Update()
     {
-        if (PlayerPrefsManager.GetInstance().Chara_Lv == 0) PlayerPrefsManager.GetInstance().Chara_Lv++;
-
         CharaLv = PlayerPrefsManager.GetInstance().Chara_Lv;
 
         if (CharaLv >= 10000) CharaLv = 10000;

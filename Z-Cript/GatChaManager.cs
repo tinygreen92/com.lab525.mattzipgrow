@@ -202,9 +202,9 @@ public class GatChaManager : MonoBehaviour
         /// -----------------------------------------
 
         ppm.MattzipArtif = ppm.Arti_Mattzip * 0.1f;
-        ppm.Arti_MaxHP = ppm.Arti_HP < 1? "0" : (1.0d + (ppm.Arti_HP * 0.001f)).ToString();
+        ppm.Arti_MaxHP = ppm.Arti_HP < 1? "0" : (ppm.Arti_HP * 0.1f).ToString("f3");
         ppm.GroggyTouch = (5.0f - (ppm.Arti_GroggyTouch * 0.1f));
-        ppm.AttackPunch = 1.0f +(ppm.Arti_AttackPower * 0.1f);
+        ppm.AttackPunch = (ppm.Arti_AttackPower * 0.1f);
         
         ///
         //ppm.LuckyProb = (ppm.Arti_GoldBox * 0.1f);
