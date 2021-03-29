@@ -1193,7 +1193,7 @@ public class PlayerPrefsManager : MonoBehaviour
                 * ( Dia_RECOV_UP_Lv   // 특별강화 %
                 + uniformInfo[3].Skill_LV // 스킬 %
                 + Stat_is1Recov // 깃발 %
-                + ArtiRecov
+                + ArtiRecov // 유물 %
                 ); 
 
 
@@ -1240,7 +1240,7 @@ public class PlayerPrefsManager : MonoBehaviour
     float Def_result1;
     float Def_result2;
     /// <summary>
-    /// (스탯 방어력 + 레벨 방어력 ) * ( 방패 착용 방어력 % + 방패 보유 방어력 % + 깃발 % + 유물 % )  
+    /// (스탯 방어력 + 레벨 방어력 ) * ( 방패 착용 방어력 % + 방패 보유 방어력 % + 깃발 % + 유물 % + 특별강화 %)  
     /// </summary>
     /// <returns></returns>
     public string GetPlayerDefence()
@@ -1253,6 +1253,7 @@ public class PlayerPrefsManager : MonoBehaviour
             + float.Parse(Defence_Dia_Shiled)   // 방패 보유 방어력 %
             + Stat_is4Deffence  // 깃발 %
             + Defence_Artifact_Lv   // 유물 %
+            + (Dia_Defence_Lv * 5f)   // 특별강화 % 1렙당 5% 증가
             );
         /// 기본 배율 보정
         Def_result2 += 1.0f;
@@ -1359,9 +1360,7 @@ public class PlayerPrefsManager : MonoBehaviour
     {
         get
         {
-            if (!PlayerPrefs.HasKey("ATK_PER_UP_Lv")) return 0;
-            var tmp = PlayerPrefs.GetInt("ATK_PER_UP_Lv");
-            return tmp;
+            return PlayerPrefs.GetInt("ATK_PER_UP_Lv", 0);
         }
 
         set
@@ -1371,14 +1370,14 @@ public class PlayerPrefsManager : MonoBehaviour
         }
     }
 
-    /// (string)체력 % 증가량 레벨                        HP_PER_UP_Lv
-    public int HP_PER_UP_Lv
+    /// <summary>
+    /// (int)방어력 특별 강화 레벨
+    /// </summary>
+    public int Dia_Defence_Lv
     {
         get
         {
-            if (!PlayerPrefs.HasKey("HP_PER_UP_Lv")) return 0;
-            var tmp = PlayerPrefs.GetInt("HP_PER_UP_Lv");
-            return tmp;
+            return PlayerPrefs.GetInt("HP_PER_UP_Lv", 0);
         }
 
         set
@@ -2035,7 +2034,10 @@ public class PlayerPrefsManager : MonoBehaviour
         }
     }
 
-    /// (int)       -미니게임 보상 강화      쌀밥        
+    /// <summary>
+    /// (int)       -미니게임 보상 강화      쌀밥     
+    /// Max = 1000
+    /// </summary>
     public int Arti_MiniReword
     {
         get

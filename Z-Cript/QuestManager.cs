@@ -452,26 +452,56 @@ public class QuestManager : MonoBehaviour
             //
             txtTop = AllMiss.GetChild(i).GetChild(1).GetComponent<Text>();
             txt = AllMiss.GetChild(i).GetChild(2).GetComponent<Text>();
-            // 달성해서 다이아 받은 지점에서 50 곱해서 맥스값
-            txtTop.text = tmpString + (all_UP[i] * 50) + tmpStringTail; //"회 강화";
-            txt.text = "횟수 : ( " + all_M[i] + " / " + (all_UP[i] * 50) + " )";
-            // 달성했다면 커버 이미지 제거
-            if (all_M[i] >= (all_UP[i] * 50))
+            /// pvp 횟수만 10회 하는 걸로
+            if (i == 13)
             {
-                /// 1,000회 제한.
-                if (all_UP[i] >= 20)
+                txtTop.text = tmpString + (all_UP[i] * 10) + tmpStringTail; //"회 강화";
+                txt.text = "횟수 : ( " + all_M[i] + " / " + (all_UP[i] * 10) + " )";
+
+                // 달성했다면 커버 이미지 제거
+                if (all_M[i] >= (all_UP[i] * 10))
                 {
-                    allBtn[i].GetChild(3).gameObject.SetActive(true);
-                    txt.text = "횟수 : ( 1000 / 1000 )";
-                    continue;
+                    /// 1,000회 제한.
+                    if (all_UP[i] >= 20)
+                    {
+                        allBtn[i].GetChild(3).gameObject.SetActive(true);
+                        txt.text = "횟수 : ( 200 / 200 )";
+                        continue;
+                    }
+                    allBtn[i].GetChild(1).gameObject.SetActive(false);
+                    isAllRed = true;
                 }
-                allBtn[i].GetChild(1).gameObject.SetActive(false);
-                isAllRed = true;
+                else
+                {
+                    allBtn[i].GetChild(1).gameObject.SetActive(true);
+                }
             }
+            // 달성해서 다이아 받은 지점에서 50 곱해서 맥스값
             else
             {
-                allBtn[i].GetChild(1).gameObject.SetActive(true);
+                txtTop.text = tmpString + (all_UP[i] * 50) + tmpStringTail; //"회 강화";
+                txt.text = "횟수 : ( " + all_M[i] + " / " + (all_UP[i] * 50) + " )";
+
+                // 달성했다면 커버 이미지 제거
+                if (all_M[i] >= (all_UP[i] * 50))
+                {
+                    /// 1,000회 제한.
+                    if (all_UP[i] >= 20)
+                    {
+                        allBtn[i].GetChild(3).gameObject.SetActive(true);
+                        txt.text = "횟수 : ( 1000 / 1000 )";
+                        continue;
+                    }
+                    allBtn[i].GetChild(1).gameObject.SetActive(false);
+                    isAllRed = true;
+                }
+                else
+                {
+                    allBtn[i].GetChild(1).gameObject.SetActive(true);
+                }
             }
+
+
         }
 
 
@@ -567,6 +597,7 @@ public class QuestManager : MonoBehaviour
             case 10: PlayerPrefsManager.GetInstance().questInfo4[0].All_Per_HP_Cnt++; break;
             case 11: PlayerPrefsManager.GetInstance().questInfo4[0].All_Dia_Atk_Cnt++; break;
             case 12: PlayerPrefsManager.GetInstance().questInfo4[0].All_Dia_HP_Cnt++; break;
+            case 13: PlayerPrefsManager.GetInstance().questInfo6[0].All_PVPGame_Cnt++; break;
         }
         // 보상 더 있나 새로고침
         AllMissionUpdate();

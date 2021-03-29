@@ -361,8 +361,7 @@ public class BulletManager : MonoBehaviour
             StopCoroutine(spinning);
 
             //코인말고 국밥  생성
-            tmp = PlayerPrefsManager.GetInstance().BapOB;
-            coin = Lean.Pool.LeanPool.Spawn(tmp, transform.position, transform.rotation);
+            coin = Lean.Pool.LeanPool.Spawn(PlayerPrefsManager.GetInstance().BapOB, transform.position, transform.rotation);
             coin.GetComponent<CoinManager>().BAPInit();
 
             other.GetComponentInChildren<SpriteRenderer>().color = new Color(1, 1, 1, 0);
@@ -469,8 +468,6 @@ public class BulletManager : MonoBehaviour
 
 
 
-    GameObject tmp;
-    GameObject tmp2;
     GameObject coin;
     GameObject LucBox;
 
@@ -482,8 +479,7 @@ public class BulletManager : MonoBehaviour
     IEnumerator WitheMan(Collider tmpC, bool _isCritic)
     {
         ///코인 프리팹
-        tmp = PlayerPrefsManager.GetInstance().CoinOB;
-        coin = Lean.Pool.LeanPool.Spawn(tmp, transform.position, transform.rotation);
+        coin = Lean.Pool.LeanPool.Spawn(PlayerPrefsManager.GetInstance().CoinOB, transform.position, transform.rotation);
         coin.GetComponent<CoinManager>().CoinInit(_isCritic);
 
         /// 체력 게이지 DOWN / 피버 게이지 UP // 주사위 굴림 - 선물상자 드랍
@@ -672,8 +668,7 @@ public class BulletManager : MonoBehaviour
         if (dropTable < PlayerPrefsManager.GetInstance().LuckyProb)
         {
             /// TODO : 박스 프리팹으로 교체좀
-            tmp2 = PlayerPrefsManager.GetInstance().LucBox;
-            LucBox = Lean.Pool.LeanPool.Spawn(tmp2, coin.transform.position, Quaternion.Euler(0, 0, 0));
+            LucBox = Lean.Pool.LeanPool.Spawn(PlayerPrefsManager.GetInstance().LucBox, transform.position, transform.rotation);
             LucBox.GetComponent<CoinManager>().CoinInit(false);
         }
 

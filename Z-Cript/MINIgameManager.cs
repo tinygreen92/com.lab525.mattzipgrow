@@ -333,14 +333,14 @@ public class MINIgameManager : MonoBehaviour
         PlayerPrefsManager.GetInstance().questInfo3[0].daily_MiniGameCombo = Combo;
         PlayerPrefsManager.GetInstance().MaxGet_MiniGame = Combo;
 
-        /// 쌀밥 획득량 % 증가
-        float getSSalAmount = (Combo * (1.0f + PlayerPrefsManager.GetInstance().Arti_MiniReword * 0.01f));
+        /// 쌀밥 유물 획득량 % 증가
+        float getSSalAmount = (Combo * (1.0f + PlayerPrefsManager.GetInstance().Arti_MiniReword * 0.005f));
+        /// 
         getSSalAmount = getSSalAmount * (1.0f + 
             (
             (PlayerPrefsManager.GetInstance().uniformInfo[5].Uniform_LV + 
             PlayerPrefsManager.GetInstance().uniformInfo[6].Uniform_LV + 
             (PlayerPrefsManager.GetInstance().uniformInfo[6].Skill_LV * 0.5f)) 
-
             * 0.01f)
             );
 

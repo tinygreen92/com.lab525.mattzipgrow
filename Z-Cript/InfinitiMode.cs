@@ -143,6 +143,8 @@ public class InfinitiMode : MonoBehaviour
 
         // 입장소탕 팝업 출력
         EnterPop.SetActive(true);
+        EnterPop.GetComponent<Animation>()["Roll_Incre"].speed = 1;
+        EnterPop.GetComponent<Animation>().Play("Roll_Incre");
     }
 
     /// <summary>
