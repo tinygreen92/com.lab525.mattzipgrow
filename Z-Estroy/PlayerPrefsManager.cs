@@ -104,6 +104,7 @@ public class PlayerPrefsManager : MonoBehaviour
     [HideInInspector]
     public bool isUIAinmPlay;   // UI 애니메이션 재생중?
     [Header("- 코인 프리팹")]
+    public GameObject kimchiCoin;
     public GameObject CoinOB;
     public GameObject BapOB;
     public Transform CoinPos;
@@ -493,16 +494,14 @@ public class PlayerPrefsManager : MonoBehaviour
     }
 
     /// <summary>
-    /// (s)다이아몬드        diamond
-    /// 쓰이지 않음 
+    /// 추가 재화 김치
     /// </summary>
-    public string diamond
+    public string Kimchi
     {
         get
         {
             if (!PlayerPrefs.HasKey("diamond")) return "0";
             var _diamond = PlayerPrefs.GetString("diamond");
-            playNANOO.WriteChikenCoupon("FISHING_DIAMOND", $"User Name : {GPGSManager.GetLocalUserId()}");
             return _diamond;
         }
 
@@ -510,8 +509,6 @@ public class PlayerPrefsManager : MonoBehaviour
         {
             //allMoneyInfo[0].dDiamond = double.Parse(value);
             PlayerPrefs.SetString("diamond", value);
-            playNANOO.WriteChikenCoupon("FISHING_DIAMOND", $"User Name : {GPGSManager.GetLocalUserId()}");
-
             PlayerPrefs.Save();
         }
     }
@@ -1072,7 +1069,12 @@ public class PlayerPrefsManager : MonoBehaviour
         }
     }
 
-    /// (string)맷집                        Mat_Mattzip
+
+
+
+    /// <summary>
+    /// (string)맷집                        tmppp.ToString("f0");
+    /// </summary>
     public string Mat_Mattzip
     {
         get
@@ -1261,7 +1263,7 @@ public class PlayerPrefsManager : MonoBehaviour
     }
 
     /// (int) 아직 안 쓰는거
-    public int Gold_RECOV_UP_Lv
+    public int asdsafsafsafsa
     {
         get
         {
@@ -1272,6 +1274,23 @@ public class PlayerPrefsManager : MonoBehaviour
         set
         {
             PlayerPrefs.SetInt("Gold_RECOV_UP_Lv", value);
+            PlayerPrefs.Save();
+        }
+    }
+
+    /// <summary>
+    /// (int)방어력 특별 강화 레벨
+    /// </summary>
+    public int Dia_Defence_Lv
+    {
+        get
+        {
+            return PlayerPrefs.GetInt("HP_PER_UP_Lv", 0);
+        }
+
+        set
+        {
+            PlayerPrefs.SetInt("HP_PER_UP_Lv", value);
             PlayerPrefs.Save();
         }
     }
@@ -1370,22 +1389,7 @@ public class PlayerPrefsManager : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// (int)방어력 특별 강화 레벨
-    /// </summary>
-    public int Dia_Defence_Lv
-    {
-        get
-        {
-            return PlayerPrefs.GetInt("HP_PER_UP_Lv", 0);
-        }
 
-        set
-        {
-            PlayerPrefs.SetInt("HP_PER_UP_Lv", value);
-            PlayerPrefs.Save();
-        }
-    }
 
 
 
@@ -2516,30 +2520,30 @@ public class PlayerPrefsManager : MonoBehaviour
 
 
     /// <summary>
-    /// 1번 동료 - 특수능력 - 오프라인 맷집게이지 증가율   Friend_01_MattzipPer_Lv 
+    /// 1번 동료 - 오프라인 공격력 증가
     /// </summary>
-    public int Friend_01_MattzipPer_Lv
+    public int Friend_01_OfflineAtk_Lv
     {
         get
         {
-            var tmp = PlayerPrefs.GetInt("Friend_01_MattzipPer_Lv", 0);
+            var tmp = PlayerPrefs.GetInt("Friend_01_OfflineAtk_Lv", 0);
             return tmp;
         }
 
         set
         {
-            if (value - PlayerPrefs.GetInt("Friend_01_MattzipPer_Lv") != 1)
+            if (value - PlayerPrefs.GetInt("Friend_01_OfflineAtk_Lv") != 1)
             {
-                playNANOO.WriteChikenCoupon("FISHING_Friend_01_MattzipPer_Lv", $"시도 값 : {value}");
+                playNANOO.WriteChikenCoupon("FISHING_Friend_01_OfflineAtk_Lv", $"시도 값 : {value}");
                 return;
             }
-            PlayerPrefs.SetInt("Friend_01_MattzipPer_Lv", value);
+            PlayerPrefs.SetInt("Friend_01_OfflineAtk_Lv", value);
             PlayerPrefs.Save();
         }
     }
 
     /// <summary>
-    /// 2번 동료 - 특수능력 - 오프라인 맷집 게이지 저장시간 증가   Friend_02_OffTimeUp_Lv 
+    /// 2번 동료 - 오프라인 시간 증가
     /// </summary>
     public int Friend_02_OffTimeUp_Lv
     {
@@ -2561,7 +2565,51 @@ public class PlayerPrefsManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 오프라인 공격속도 증가
+    /// </summary>
+    public int Friend_03_OffSpped_Lv
+    {
+        get
+        {
+            var tmp = PlayerPrefs.GetInt("Friend_03_OffSpped_Lv", 0);
+            return tmp;
+        }
 
+        set
+        {
+            if (value - PlayerPrefs.GetInt("Friend_03_OffSpped_Lv") != 1)
+            {
+                playNANOO.WriteChikenCoupon("FISHING_Friend_03_OffSpped_Lv", $"시도 값 : {value}");
+                return;
+            }
+            PlayerPrefs.SetInt("Friend_03_OffSpped_Lv", value);
+            PlayerPrefs.Save();
+        }
+    }
+
+    /// <summary>
+    /// 오프라인 맷집 증가율 증가
+    /// </summary>
+    public int Friend_04_MattzipPer_Lv
+    {
+        get
+        {
+            var tmp = PlayerPrefs.GetInt("Friend_04_MattzipPer_Lv", 0);
+            return tmp;
+        }
+
+        set
+        {
+            if (value - PlayerPrefs.GetInt("Friend_04_MattzipPer_Lv") != 1)
+            {
+                playNANOO.WriteChikenCoupon("FISHING_Friend_04_MattzipPer_Lv", $"시도 값 : {value}");
+                return;
+            }
+            PlayerPrefs.SetInt("Friend_04_MattzipPer_Lv", value);
+            PlayerPrefs.Save();
+        }
+    }
 
 
 

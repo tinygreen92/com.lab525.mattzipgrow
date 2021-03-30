@@ -19,8 +19,8 @@ public class GroggyManager : MonoBehaviour
     [Header("-HP 바")]
     public Image HP_Bar;
     public Image HP_Ba_Def;
-    [Header("-캐릭터 정보 바")]
-    public Transform[] ChraterInfo;
+    //[Header("-캐릭터 정보 바")]
+    //public Transform[] ChraterInfo;
     [Header("-하단 게이지 바")]
     public Image Mattzip100;
     public Image Skill300;
@@ -37,7 +37,6 @@ public class GroggyManager : MonoBehaviour
     readonly int breadCnt; // 빵 30번 클릭할 것
 
     readonly string _Mattzip;
-    string _PlayerDPS;
 
 
     /// <summary>
@@ -73,8 +72,6 @@ public class GroggyManager : MonoBehaviour
 
         HP_Bar.fillAmount = 1;
         HP_Bar.GetComponentInChildren<Text>().text = resultMax + "/" + resultMax;
-
-        _PlayerDPS = PlayerPrefsManager.GetInstance().PlayerDPS;
 
         /// 껏다 키면 맷집 증가 게이지 복구
         Mat_100_Count();
@@ -198,9 +195,9 @@ public class GroggyManager : MonoBehaviour
             if (!PlayerPrefsManager.GetInstance().isFristGameStart || MuGanCavas.activeSelf) goto HELL;
 
             Auto_currentHP = PlayerPrefsManager.GetInstance().Mat_currentHP;
-            Auto_maxHP        = PlayerPrefsManager.GetInstance().Mat_MaxHP;
-            Auto_tmp      = dts.SubStringDouble(Auto_currentHP, Auto_maxHP);
-            Auto_recov        = dts.DevideStringDouble(PlayerPrefsManager.GetInstance().Mat_Recov, "10");
+            Auto_maxHP = PlayerPrefsManager.GetInstance().Mat_MaxHP;
+            Auto_tmp = dts.SubStringDouble(Auto_currentHP, Auto_maxHP);
+            Auto_recov = dts.DevideStringDouble(PlayerPrefsManager.GetInstance().Mat_Recov, "10");
 
             if (Auto_recov < 1.1d) Auto_recov = 1.0d;
 
@@ -779,9 +776,7 @@ public class GroggyManager : MonoBehaviour
 
     //0709
 
-    //public Text Gold_Recov_Per_UP_TEXT;
-    //public Text Gold_Recov_Per_UP_Price;
-    //public Text Gold_Recov_Per_UP_LV;
+
 
     public Text Dia_Recov_Per_UP_TEXT;
     public Text Dia_Recov_Per_UP_Price;
@@ -808,7 +803,6 @@ public class GroggyManager : MonoBehaviour
     public GameObject Dia_CRC_UP_Gray;
     public GameObject Dia_CRD_UP_Gray;
 
-    //public GameObject Gold_Recov_Per_UP_Gray;
     public GameObject Dia_Recov_Per_UP_Gray;
 
     [Header("-맥스 버튼 덮기")]
@@ -831,12 +825,14 @@ public class GroggyManager : MonoBehaviour
     public GameObject Dia_CRC_UP_Max;
     public GameObject Dia_CRD_UP_Max;
 
-    //
-
-    //public GameObject Gold_Recov_Per_UP_Max;
     public GameObject Dia_Recov_Per_UP_Max;
 
-
+    [Header("- 방어력 특별 강화")]
+    public Text Dia_Deffence_Per_UP_TEXT;
+    public Text Dia_Deffence_Per_UP_Price;
+    public Text Dia_Deffence_Per_UP_LV;
+    public GameObject Dia_Deffence_Per_UP_Gray;
+    public GameObject Dia_Deffence_Per_UP_Max;
 
     string currentAtk;
     string nextAtk;
@@ -1158,9 +1154,11 @@ public class GroggyManager : MonoBehaviour
         if (isBtnDown11) DIA_CRC_UP();
         if (isBtnDown12) DIA_CRD_UP();
 
-        // 0709
-        //if (isBtnDown13) Gold_RECOV_UP();
+
         if (isBtnDown14) DIA_RECOV_UP();
+
+        /// 방어력 특별 강화
+        if (isBtnDown13) Dia_Deffence_UP();
 
     }
 
@@ -1181,7 +1179,7 @@ public class GroggyManager : MonoBehaviour
     int Dia_CRC_Lv;
     int Dia_CRD_Lv;
 
-    int Gold_HPPER_Lv;
+    int Dia_Deffence_Lv;
     int Dia_HPPER_Lv;
 
 
@@ -1303,7 +1301,7 @@ public class GroggyManager : MonoBehaviour
 
         //0709
 
-        //Gold_HPPER_Lv = PlayerPrefsManager.GetInstance().Gold_RECOV_UP_Lv;
+        Dia_Deffence_Lv = PlayerPrefsManager.GetInstance().Dia_Defence_Lv;
         Dia_HPPER_Lv = PlayerPrefsManager.GetInstance().Dia_RECOV_UP_Lv;
 
 
@@ -1328,7 +1326,7 @@ public class GroggyManager : MonoBehaviour
         if (Dia_CRD_Lv >= 500) Dia_CRD_Lv = 500;
 
         //
-        if (Gold_HPPER_Lv >= 9999) Gold_HPPER_Lv = 9999;
+        if (Dia_Deffence_Lv >= 9999) Dia_Deffence_Lv = 9999;
         if (Dia_HPPER_Lv >= 9999) Dia_HPPER_Lv = 9999;
 
 
@@ -1354,7 +1352,7 @@ public class GroggyManager : MonoBehaviour
 
         // 0709
 
-        //Gold_Recov_Per_UP_LV.text = "Lv. " + Gold_HPPER_Lv;
+        Dia_Deffence_Per_UP_LV.text = "Lv. " + Dia_Deffence_Lv;
         Dia_Recov_Per_UP_LV.text = "Lv. " + Dia_HPPER_Lv;
 
 
@@ -1370,7 +1368,8 @@ public class GroggyManager : MonoBehaviour
         string tmptmpATK = dts.fDoubleToStringNumber(nextAtk);
         /// 스탯 공격력
         PlayerPrefsManager.GetInstance().RawAttackDamage = tmpATK;
-        ChraterInfo[0].GetComponent<Text>().text = UserWallet.GetInstance().SeetheTruth(PlayerPrefsManager.GetInstance().PlayerDPS);
+        //ChraterInfo[0].GetComponent<Text>().text = UserWallet.GetInstance().SeetheTruth(PlayerPrefsManager.GetInstance().PlayerDPS);
+        UserWallet.GetInstance().ShowUserATK();
 
         POWER_UP_TEXT.text = "공격력 " + UserWallet.GetInstance().SeetheNatural(double.Parse(tmpATK)) + " > " + UserWallet.GetInstance().SeetheNatural(double.Parse(tmptmpATK));
         /// 소비 골드 표기
@@ -1396,7 +1395,8 @@ public class GroggyManager : MonoBehaviour
         tmptmpATK = dts.AddStringDouble(tmptmpATK, "100");
 
         PlayerPrefsManager.GetInstance().Stat_MaxHP = tmpATK;
-        ChraterInfo[1].GetComponent<Text>().text = UserWallet.GetInstance().SeetheTruth(PlayerPrefsManager.GetInstance().Mat_MaxHP);
+        //ChraterInfo[1].GetComponent<Text>().text = UserWallet.GetInstance().SeetheTruth(PlayerPrefsManager.GetInstance().Mat_MaxHP);
+        UserWallet.GetInstance().ShowUserHP();
 
         HP_UP_TEXT.text = "체력 " + UserWallet.GetInstance().SeetheNatural(double.Parse(tmpATK)) + " > " + UserWallet.GetInstance().SeetheNatural(double.Parse(tmptmpATK));
         /// 소비 골드 표기
@@ -1421,7 +1421,8 @@ public class GroggyManager : MonoBehaviour
 
         //PlayerPrefsManager.GetInstance().Mat_Recov = tmpATK;
         PlayerPrefs.SetString("Stat_Recov", tmpATK);
-        ChraterInfo[2].GetComponent<Text>().text = UserWallet.GetInstance().SeetheNatural(double.Parse(PlayerPrefsManager.GetInstance().Mat_Recov)) + " /s";
+        //ChraterInfo[2].GetComponent<Text>().text = UserWallet.GetInstance().SeetheNatural(double.Parse(PlayerPrefsManager.GetInstance().Mat_Recov)) + " /s";
+        UserWallet.GetInstance().ShowUserHP_Recov();
 
         Recov_UP_TEXT.text = "체력 회복력 " + UserWallet.GetInstance().SeetheNatural(double.Parse(tmpATK)) + " > " + UserWallet.GetInstance().SeetheNatural(double.Parse(tmptmpATK));
         /// 소비 골드 표기
@@ -1443,6 +1444,7 @@ public class GroggyManager : MonoBehaviour
         tmpATK = currentRec;
         tmptmpATK = nextRec;
 
+        UserWallet.GetInstance().ShowUserDeffence();
         Mat_HP_UP_TEXT.text = "방어력 " + UserWallet.GetInstance().SeetheNatural(double.Parse(tmpATK)) + " > " + UserWallet.GetInstance().SeetheNatural(double.Parse(tmptmpATK));
         /// 소비 국밥 표기
         currentRec = GetNormalUpPrice(3, Defend_Lv);
@@ -1629,9 +1631,25 @@ public class GroggyManager : MonoBehaviour
         Dia_CRD_UP_Price.text = UserWallet.GetInstance().SeetheNatural(double.Parse(tmpATK));
 
 
-
-
+        ///
         //////////////////////////////////////////////////////////
+        /// 다이아 방어력 특별 강화
+        ///  
+        currentAtk = (5 * Dia_Deffence_Lv).ToString();
+        nextAtk = (5 * (Dia_Deffence_Lv + 1)).ToString();
+
+        tmpATK = (currentAtk);
+        tmptmpATK = (nextAtk);
+
+        Dia_Deffence_Per_UP_TEXT.text = "방어력 " + tmpATK + "% > " + tmptmpATK + "%";
+        /// 
+        tmpATK = Dia_Deffence_Lv < 1 ? "100" : (50 * (Dia_Deffence_Lv + 2)).ToString();
+
+        Dia_Deffence_Per_UP_Price.text = UserWallet.GetInstance().SeetheNatural(double.Parse(tmpATK));
+
+
+
+
 
 
         /////  0709
@@ -1733,7 +1751,7 @@ public class GroggyManager : MonoBehaviour
         Dia_CRD_Cheak();
 
         // 0709
-        //Gold_RECOV_Cheak();
+        Dia_Deffence_Cheak();
         DIA_RECOV_UP_Cheak();
     }
 
@@ -2212,56 +2230,63 @@ public class GroggyManager : MonoBehaviour
 
 
 
+    /// <summary>
+    /// 방어력 다이아몬드 가능?
+    /// </summary>
+    string Dia_Deffence_Dia_Pass;
+    /// <summary>
+    /// 돈이 안되면 회색으로.
+    /// </summary>
+    bool Dia_Deffence_Cheak()
+    {
+        // 현재 다이아 방어력 체크
+        int PowerLv = PlayerPrefsManager.GetInstance().Dia_Defence_Lv;
 
-    //string Gold_RECOV_UPgoldPass;
-    ///// <summary>
-    ///// 돈이 안되면 회색으로.
-    ///// </summary>
-    //bool Gold_RECOV_Cheak()
-    //{
-    //    // 현재 골드 체력 회복 체크
-    //    int PowerLv = PlayerPrefsManager.GetInstance().Gold_RECOV_UP_Lv;
+        if (PowerLv >= 9999)
+        {
+            Dia_Deffence_Per_UP_Max.SetActive(true);
+            return false;
+        }
 
-    //    if (PowerLv >= 9999)
-    //    {
-    //        Gold_Recov_Per_UP_Max.SetActive(true);
-    //        return false;
-    //    }
+        // 다음 레벨의 가격 불러오고.
+        string nextPrice = (50 * (PowerLv + 2)).ToString();
 
-    //    // 다음 레벨의 가격 불러오고.
-    //    double doublePrice = GetPerUpPrice(8, PowerLv);
+        if (PlayerPrefs.GetFloat("dDiamond") - float.Parse(nextPrice) < 0)
+            Dia_Deffence_Dia_Pass = "-1";
+        else
+            Dia_Deffence_Dia_Pass = (PlayerPrefs.GetFloat("dDiamond") - float.Parse(nextPrice)).ToString();
 
-    //    /// 골드 업그레이드 비용 감소.
-    //    doublePrice = (doublePrice * (1.0d - PlayerPrefsManager.GetInstance().Arti_GoldUpgrade * 0.001d));
 
-    //    Gold_RECOV_UPgoldPass = dts.SubStringDouble(PlayerPrefsManager.GetInstance().gold, doublePrice);
+        // 골드 없으면 false
+        if (Dia_Deffence_Dia_Pass == "-1")
+        {
+            Dia_Deffence_Per_UP_Gray.SetActive(true);
+            return false;
+        }
+        else // 구매 가능하면 트루
+        {
+            Dia_Deffence_Per_UP_Gray.SetActive(false);
+            return true;
+        }
 
-    //    // 골드 없으면 false
-    //    if (Gold_RECOV_UPgoldPass == "-1")
-    //    {
-    //        Gold_Recov_Per_UP_Gray.SetActive(true);
-    //        return false;
-    //    }
-    //    else // 구매 가능하면 트루
-    //    {
-    //        Gold_Recov_Per_UP_Gray.SetActive(false);
-    //        return true;
-    //    }
+    }
 
-    //}
 
-    //public void Gold_RECOV_UP()
-    //{
-    //    if (!Gold_RECOV_Cheak()) return;
+    /// <summary>
+    /// 외부에서도 단타 치면 작동
+    /// </summary>
+    public void Dia_Deffence_UP()
+    {
+        if (!Dia_Deffence_Cheak()) return;
 
-    //    //골드 감소 처리
-    //    PlayerPrefsManager.GetInstance().gold = Gold_RECOV_UPgoldPass;
-    //    UserWallet.GetInstance().ShowUserGold();
-    //    // 공격력 레벨 상승
-    //    PlayerPrefsManager.GetInstance().Gold_RECOV_UP_Lv++;
+        ///다이아 감소 처리
+        PlayerPrefs.SetFloat("dDiamond", float.Parse(Dia_Deffence_Dia_Pass));
+        UserWallet.GetInstance().ShowUserDia();
+        // 공격력 레벨 상승
+        PlayerPrefsManager.GetInstance().Dia_Defence_Lv++;
 
-    //    PowerUP_Init();
-    //}
+        PowerUP_Init();
+    }
 
 
 

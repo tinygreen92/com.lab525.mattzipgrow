@@ -469,6 +469,7 @@ public class BulletManager : MonoBehaviour
 
 
     GameObject coin;
+    GameObject kimchi;
     GameObject LucBox;
 
     /// <summary>
@@ -480,7 +481,10 @@ public class BulletManager : MonoBehaviour
     {
         ///코인 프리팹
         coin = Lean.Pool.LeanPool.Spawn(PlayerPrefsManager.GetInstance().CoinOB, transform.position, transform.rotation);
-        coin.GetComponent<CoinManager>().CoinInit(_isCritic);
+        coin.GetComponent<CoinManager>().CoinInit();
+        /// 김치 프리팹
+        kimchi = Lean.Pool.LeanPool.Spawn(PlayerPrefsManager.GetInstance().kimchiCoin, transform.position, transform.rotation);
+        kimchi.GetComponent<CoinManager>().KimchiInit();
 
         /// 체력 게이지 DOWN / 피버 게이지 UP // 주사위 굴림 - 선물상자 드랍
         HP_Calculate(tmpC, _isCritic);
@@ -669,7 +673,7 @@ public class BulletManager : MonoBehaviour
         {
             /// TODO : 박스 프리팹으로 교체좀
             LucBox = Lean.Pool.LeanPool.Spawn(PlayerPrefsManager.GetInstance().LucBox, transform.position, transform.rotation);
-            LucBox.GetComponent<CoinManager>().CoinInit(false);
+            LucBox.GetComponent<CoinManager>().CoinInit();
         }
 
     }
@@ -743,9 +747,9 @@ public class BulletManager : MonoBehaviour
 
         PlayerPrefsManager.GetInstance().isHPsubing = true;
         /// 방패 방어력 계산
-         
+
         /// 방어력 
-        string vallu = PlayerPrefsManager.GetInstance().GetPlayerDefence();
+        double vallu = double.Parse(PlayerPrefsManager.GetInstance().GetPlayerDefence());
 
         /// 공격력 - 방어력
         string PunchDPS = dts.SubStringDouble(PlayerPrefsManager.GetInstance().PlayerDPS, vallu);
@@ -1027,8 +1031,6 @@ public class BulletManager : MonoBehaviour
 
         string vallu = UserWallet.GetInstance().GetMattzipForCul(PlayerPrefsManager.GetInstance().Mat_Mattzip);
         string PunchDPS = dts.SubStringDouble(doublePrice.ToString("f0"), vallu);
-
-        UserWallet.GetInstance().PunchDPS = PunchDPS;
 
         if (PunchDPS == "-1") PunchDPS = "0";
 

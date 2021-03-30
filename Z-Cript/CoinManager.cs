@@ -1,11 +1,10 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CoinManager : MonoBehaviour
 {
     bool isBanjun;
-    public void CoinInit(bool _isCritic)
+    public void CoinInit()
     {
         // 로테이션 각도
         float RanRotat = Random.Range(-3.5f, 3.5f);
@@ -36,10 +35,10 @@ public class CoinManager : MonoBehaviour
         }
         else
         {
-            DestroyCoin(_isCritic);
+            DestroyCoin();
         }
 
-        
+
     }
 
     public void BAPInit()
@@ -61,7 +60,7 @@ public class CoinManager : MonoBehaviour
             GetComponent<Rigidbody>().AddForce(new Vector3(-RanRotat, 20, 0), ForceMode.Impulse);
             isBanjun = !isBanjun;
         }
-        Invoke("DestroyBAP", 1.5f);
+        Invoke(nameof(DestroyBAP), 1.5f);
     }
 
     void DestroyBAP()
@@ -72,6 +71,96 @@ public class CoinManager : MonoBehaviour
         GetComponent<Rigidbody>().useGravity = false;
 
         Lean.Pool.LeanPool.Despawn(gameObject);
+    }
+
+
+    public void KimchiInit()
+    {
+        // 로테이션 각도
+        float RanRotat = Random.Range(-3.5f, 3.5f);
+        // 힘 초기화.
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
+        GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+        GetComponent<Rigidbody>().useGravity = true;
+
+        if (isBanjun)
+        {
+            GetComponent<Rigidbody>().AddForce(new Vector3(RanRotat, 20, 0), ForceMode.Impulse);
+            isBanjun = !isBanjun;
+        }
+        else
+        {
+            GetComponent<Rigidbody>().AddForce(new Vector3(-RanRotat, 20, 0), ForceMode.Impulse);
+            isBanjun = !isBanjun;
+        }
+
+        Transform CoinTf = PlayerPrefsManager.GetInstance().CoinPos;
+        /// 스크린 좌표를 월드 좌표로 변화 한다.
+        CoinPos = Camera.main.ScreenToWorldPoint(CoinTf.position);
+        moveRoutine = StartCoroutine(KimchiProgress());
+    }
+
+
+    /// <summary>
+    /// 코인 흡수 메소드
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator KimchiProgress()
+    {
+        float rate = 1f;
+        float progress = 0.0f;
+        float RanRotat = Random.Range(-2f, -3f);
+
+        if (transform.childCount == 1)
+        {
+            RanRotat = Random.Range(-1f, -2f);
+        }
+
+        while (transform.position.y > RanRotat)
+        {
+            yield return null;
+        }
+
+        // 힘 초기화.
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
+        GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+        GetComponent<Rigidbody>().useGravity = false;
+
+        yield return new WaitForSeconds(1);
+        /// 김치 재화 획득
+
+        var tmpGold = PlayerPrefsManager.GetInstance().Kimchi;
+        ///
+        /// 1d 대신 김치 유물 추가 할 것
+        ///
+        var result = dts.multipleStringDouble(PlayerPrefsManager.GetInstance().PlayerDPS, 1d);
+        PlayerPrefsManager.GetInstance().Kimchi = dts.AddStringDouble(double.Parse(tmpGold), double.Parse(result));
+
+        UserWallet.GetInstance().ShowUserKimchi();
+
+        while (progress <= 1f)
+        {
+            yield return new WaitForFixedUpdate();
+
+            var movingy = Mathf.Lerp(transform.position.y, CoinPos.y, progress);
+            var movingx = Mathf.Lerp(transform.position.x, CoinPos.x, progress);
+
+
+            transform.position = new Vector3(movingx, movingy, 7);
+
+            progress += rate * Time.deltaTime;
+        }
+
+
+        if (moveRoutine != null)
+        {
+            StopCoroutine(moveRoutine);
+            moveRoutine = null;
+
+
+            Lean.Pool.LeanPool.Despawn(gameObject);
+        }
+
     }
 
 
@@ -122,22 +211,22 @@ public class CoinManager : MonoBehaviour
     Coroutine moveRoutine;
     Vector3 CoinPos;
 
-    void DestroyCoin(bool _isCritic)
+    void DestroyCoin()
     {
         Transform CoinTf = PlayerPrefsManager.GetInstance().CoinPos;
         /// 스크린 좌표를 월드 좌표로 변화 한다.
         CoinPos = Camera.main.ScreenToWorldPoint(CoinTf.position);
 
-        moveRoutine = StartCoroutine(Progress(_isCritic));
+        moveRoutine = StartCoroutine(Progress());
     }
 
-    DoubleToStringNum dts = new DoubleToStringNum();
+    readonly DoubleToStringNum dts = new DoubleToStringNum();
 
     /// <summary>
     /// 코인 흡수 메소드
     /// </summary>
     /// <returns></returns>
-    private IEnumerator Progress(bool _isCritic)
+    private IEnumerator Progress()
     {
         float rate = 1f;
         float progress = 0.0f;
@@ -170,7 +259,7 @@ public class CoinManager : MonoBehaviour
             // 골드 증가 유물
             PlayerPrefsManager.GetInstance().Arti_GoldPer +
             //유니폼 골드증가
-            PlayerPrefsManager.GetInstance().uniformInfo[1].Uniform_LV  +
+            PlayerPrefsManager.GetInstance().uniformInfo[1].Uniform_LV +
             PlayerPrefsManager.GetInstance().uniformInfo[2].Uniform_LV +
             // 캐릭터 스킬 골드 증가
             PlayerPrefsManager.GetInstance().uniformInfo[3].Skill_LV);
@@ -184,14 +273,14 @@ public class CoinManager : MonoBehaviour
         {
             ///골드 획득  계산식 수정 > 골드 획득량 = 맷집 X (유니폼 + 스킬 + 유물 + 훈련장)
             //result = dts.multipleStringDouble(tmpDps, 10d *  2d * (goldPer + (artiGoldPer * 0.01d)));
-            result = dts.multipleStringDouble(tmpDps, 5d *  (goldPer + (artiGoldPer * 0.01d)));
+            result = dts.multipleStringDouble(tmpDps, 5d * (goldPer + (artiGoldPer * 0.01d)));
         }
         else
         {
             /// 동영상 보고 [코인 3배 버프] 적용 받으면? -> 2배로 수정
             if (PlayerPrefsManager.GetInstance().isGoldTriple)
             {
-                result = dts.multipleStringDouble(tmpDps,  2d * (goldPer + (artiGoldPer * 0.01d)));
+                result = dts.multipleStringDouble(tmpDps, 2d * (goldPer + (artiGoldPer * 0.01d)));
                 //Debug.Log("동영상 세배: " + result);
             }
             else // 아무 버프 없을 때.
@@ -200,61 +289,6 @@ public class CoinManager : MonoBehaviour
                 //Debug.Log("아무 버프 없 : "+result);
             }
         }
-
-
-        ///// 보험용 골드 증가. 스택 500번 쌓으면 증가.
-        //string SameSame = dts.AddStringDouble(double.Parse(tmpGold), double.Parse(result));
-        //string stackGold = PlayerPrefsManager.GetInstance().gold;
-
-        //if (SameSame == stackGold)
-        //{
-        //    PlayerPrefsManager.GetInstance().GoldStack++;
-
-        //    //Debug.LogWarning(" 골드 스택 : " + PlayerPrefsManager.GetInstance().GoldStack);
-
-        //    if (PlayerPrefsManager.GetInstance().GoldStack > 5000)
-        //    {
-        //        PlayerPrefsManager.GetInstance().GoldStack = 0;
-
-        //        // 실제 골드 창에 표기 되는거.
-        //        string panda = dts.fDoubleToGoldOutPut(stackGold);
-        //        string[] sNumberList = panda.Split('.');
-        //        // sNumberList[0] 길이에 따라.
-        //        int pandaZzang = sNumberList[0].Length;
-        //        double rawGold = 1;
-        //        if (pandaZzang == 1)
-        //        {
-        //            // 골드값 더블로 받음
-        //            rawGold = (double.Parse(stackGold) * 0.001d);
-        //        }
-        //        else if (pandaZzang == 2)
-        //        {
-        //            // 골드값 더블로 받음
-        //            rawGold = (double.Parse(stackGold) * 0.0001d);
-        //        }
-        //        else
-        //        {
-        //            // 골드값 더블로 받음
-        //            rawGold = (double.Parse(stackGold) * 0.00001d);
-        //        }
-
-        //        //Debug.LogWarning(" 골드 rawGold : " + rawGold);
-
-        //        result = rawGold.ToString("f0");
-        //        var dak = stackGold.Substring(0,1);
-
-        //        //Debug.LogWarning(" 골드 dak : " + dak);
-
-        //        rawGold = rawGold / double.Parse(dak);
-        //        result = rawGold.ToString("f0");
-
-        //        //Debug.LogWarning(" rawGold rawGold : " + rawGold);
-
-
-        //        //Debug.LogWarning("rawGold : " + rawGold);
-        //        //
-        //    }
-        //}
 
         //Debug.LogWarning("result " + result);
         PlayerPrefsManager.GetInstance().gold = dts.AddStringDouble(double.Parse(tmpGold), double.Parse(result));

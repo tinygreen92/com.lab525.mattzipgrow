@@ -557,7 +557,7 @@ public class DoubleToStringNum
 
 
     /// <summary>
-    /// E + 스트링 ->  double -> Tostring
+    /// E + 스트링 ->  double -> Tostring ["f3"으로 표기]
     /// </summary>
     /// <param name="dNumber">E + 가 포함된 스트링을 입력해서 변환 </param>
     /// <returns>E + 가 포함된 스트링을 입력해서 변환</returns>

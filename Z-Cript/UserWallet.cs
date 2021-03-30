@@ -1,6 +1,5 @@
 ﻿using EasyMobile;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UserWallet : MonoBehaviour
@@ -12,10 +11,13 @@ public class UserWallet : MonoBehaviour
     [Header("-캐릭터 정보창")]
     public Text ATK_Text;
     public Text HP_Text;
+    public Text HP_Recov_Text;
+    public Text Deffence_Text;
     public Text CRC_Text;
     public Text CRD_Text;
 
     [Header("-탑 패널 표기 시")]
+    public Text KimchiText;
     public Text GoldText;
     public Text DiaText;
     public Text MilkText;
@@ -25,12 +27,12 @@ public class UserWallet : MonoBehaviour
 
     [Header("-맷집 게이지는 하단에")]
     public Text MattText;
-    public Text MattzipText;
+    //public Text MattzipText;
     public Text DefendMattzip_text;
-    [Header("- 맷집 증가량 테스트 Text")]
-    public Text Matt_Test;
-    public Text DefenceText;
-    public string PunchDPS = "20";
+    //[Header("- 맷집 증가량 테스트 Text")]
+    //public Text Matt_Test;
+    //public Text DefenceText;
+    //public string PunchDPS = "20";
 
     public void RestartGame()
     {
@@ -61,6 +63,8 @@ public class UserWallet : MonoBehaviour
     public void All_IN_ONE()
     {
         PlayerPrefsManager.GetInstance().VIP = 625;
+        // VIP 승급에 따라 구매버튼 잠그기.
+        VIPManager.GetInstance().VIPINIT();
     }
 
 
@@ -102,6 +106,7 @@ public class UserWallet : MonoBehaviour
     /// </summary>
     public void ShowAllMoney()
     {
+        ShowUserKimchi();
         ShowUserGold();
         ShowUserDia();
         ShowUserMilk();
@@ -110,10 +115,20 @@ public class UserWallet : MonoBehaviour
         ShowUserMatZip();
         ShowUserATK();
         ShowUserHP();
+        ShowUserDeffence();
         ShowUserSSalbap();
         ShowUserCritical_2_();
     }
 
+
+    /// <summary>
+    /// 깍두기 최종 획득량 = playerDPS * 유물 깍두기 획득 증가 %
+    /// </summary>
+    public void ShowUserKimchi()
+    {
+        string value = PlayerPrefsManager.GetInstance().Kimchi;
+        KimchiText.text = dts.fDoubleToGoldOutPut(value);
+    }
 
 
     /// 골드
@@ -121,9 +136,6 @@ public class UserWallet : MonoBehaviour
     {
         string value = PlayerPrefsManager.GetInstance().gold;
         GoldText.text = dts.fDoubleToGoldOutPut(value);
-        PlayerPrefs.Save();
-
-
     }
 
     /// 다이아
@@ -132,7 +144,6 @@ public class UserWallet : MonoBehaviour
         double dDiamond = PlayerPrefs.GetFloat("dDiamond", 0);
         //
         DiaText.text = SeetheNatural(dDiamond);
-        PlayerPrefs.Save();
         /// 정보 갱신
         PlayerPrefsManager.GetInstance().SavequestInfo();
         PlayerPrefsManager.GetInstance().SavequestInfo2();
@@ -148,7 +159,6 @@ public class UserWallet : MonoBehaviour
     {
         string value = PlayerPrefsManager.GetInstance().gupbap;
         MilkText.text = SeetheNatural(double.Parse(value));
-        PlayerPrefs.Save();
         /// 국밥에 따라 업글 버튼 새로 고침
         pm.MilkUpdateCup();
     }
@@ -158,8 +168,6 @@ public class UserWallet : MonoBehaviour
     {
         string value = PlayerPrefsManager.GetInstance().ssalbap;
         SSalText.text = SeetheNatural(double.Parse(value));
-        PlayerPrefs.Save();
-
     }
 
     /// 열쇠
@@ -174,7 +182,7 @@ public class UserWallet : MonoBehaviour
     public void ShowUserMatZip()
     {
         /// 계산 완료 뽑아먹기
-        string value = PlayerPrefsManager.GetInstance().Mat_Mattzip;
+        string value = SeetheTruth(double.Parse(SeetheTruth(PlayerPrefsManager.GetInstance().Mat_Mattzip)));
 
         ///// 맷집 별로 방어 게이지 곱 연산
         //int mattmp = Mathf.FloorToInt(float.Parse(value) * 0.0001f);
@@ -187,46 +195,56 @@ public class UserWallet : MonoBehaviour
         //Debug.Log("인트 ; " + mattmp);
         //Debug.Log(PlayerPrefsManager.GetInstance().Cilcked_Cnt_MattZip);
 
-        MattText.text = SeetheTruth(double.Parse(SeetheTruth(value)));
-        MattzipText.text = SeetheTruth(double.Parse(SeetheTruth(value)));
-        DefendMattzip_text.text = SeetheTruth(double.Parse(SeetheTruth(value)));
-        PlayerPrefs.Save();
-
+        MattText.text = value;
+        //MattzipText.text = value;
+        DefendMattzip_text.text = value;
     }
 
     /// 캐릭터 정보 체력
     public void ShowUserHP()
     {
-        string tmp = PlayerPrefsManager.GetInstance().Mat_MaxHP;
-        string value = SeetheTruth(double.Parse(tmp));
+        string value = SeetheTruth(double.Parse(PlayerPrefsManager.GetInstance().Mat_MaxHP));
         HP_Text.text = value;
-        PlayerPrefs.Save();
+
+    }
+
+    public void ShowUserHP_Recov()
+    {
+        string value = SeetheTruth(double.Parse(PlayerPrefsManager.GetInstance().Mat_Recov));
+        HP_Recov_Text.text = value + " /s";
+
+    }
+
+
+    public void ShowUserDeffence()
+    {
+        string value = SeetheTruth(double.Parse(PlayerPrefsManager.GetInstance().GetPlayerDefence()));
+        Deffence_Text.text = value;
 
     }
 
     /// 캐릭터 정보 공격력
     public void ShowUserATK()
     {
-        string tmp = PlayerPrefsManager.GetInstance().PlayerDPS;
-        string value = SeetheTruth(double.Parse(SeetheTruth(tmp)));
+        string value = SeetheTruth(double.Parse(SeetheTruth(PlayerPrefsManager.GetInstance().PlayerDPS)));
         ATK_Text.text = value;
-        PlayerPrefs.Save();
-
     }
+
+
+
+
+
 
     /// <summary>
     /// 캐릭터 정보 크확 크댐
     /// </summary>
     public void ShowUserCritical_2_()
     {
-        string tmp = PlayerPrefsManager.GetInstance().CriticalDPS;
-        string value = SeetheTruth(double.Parse(SeetheTruth(tmp)));
-
+        string value = SeetheTruth(double.Parse(SeetheTruth(PlayerPrefsManager.GetInstance().CriticalDPS)));
         // 크리티컬 대미지
         CRD_Text.text = value;
         // 크리티컬 확률
         CRC_Text.text = PlayerPrefsManager.GetInstance().Critical_Per + "%";
-        PlayerPrefs.Save();
     }
 
 
@@ -266,7 +284,7 @@ public class UserWallet : MonoBehaviour
     /// <param name="tmpStr"></param>
     public string SeetheTruth(string tmpStr)
     {
-        string sResult = string.Empty;
+        string sResult;
 
         if (tmpStr.Contains(".")) // 네자리수 이상? 1.000A
         {
@@ -295,22 +313,20 @@ public class UserWallet : MonoBehaviour
     {
         string tmpStr = dts.fDoubleToStringNumber(tmpDouble);
 
-        string sResult = string.Empty;
-
-        if (tmpStr.Contains(".")) // 네자리수 이상? 1.000A
+        if (tmpStr.Contains(".") && tmpDouble >= 1000d) // 네자리수 이상? 1.000A
         {
             string[] sNumberList = tmpStr.Split('.');
             string tmps = sNumberList[1].Substring(0, 2); // 000K 에서 00만 남기기
             string spmt = sNumberList[1].Substring(3); // 000K 에서 K만 남기기
 
-            sResult = sNumberList[0] + "." + tmps + spmt;
+            tmpStr = sNumberList[0] + "." + tmps + spmt;
         }
         else // 999 이하.
         {
-            sResult = tmpStr + ".00";
+            tmpStr = tmpDouble.ToString("f2");
         }
 
-        return sResult;
+        return tmpStr;
     }
 
     ///// <summary>
@@ -367,8 +383,7 @@ public class UserWallet : MonoBehaviour
 
     }
 
-
-    DoubleToStringNum dts = new DoubleToStringNum();
+    readonly DoubleToStringNum dts = new DoubleToStringNum();
     [Header("-타격 상자 텍스트")]
     public Text Desc_Text; // "뫄뫄를 획득했다!" 
     public Text Gold_5_Text; // 수치를 표기

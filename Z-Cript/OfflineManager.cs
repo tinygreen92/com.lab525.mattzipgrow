@@ -142,20 +142,24 @@ public class OfflineManager : MonoBehaviour
 
             if (timeBae == 0) return;
 
-            /// start ---------------- 동료로 맷집 올려주는 텍스트 출력  ------------------
-            /// 
-            int MaxFriendTime = (60 + (1 * PlayerPrefsManager.GetInstance().Friend_02_OffTimeUp_Lv));
+            /// 동료 시간 증가 기본 오프라인 시간 4 
+            int MaxFriendTime = (240 + (240 * PlayerPrefsManager.GetInstance().Friend_02_OffTimeUp_Lv));
 
             if (timeBae > MaxFriendTime)
                 timeBae = MaxFriendTime;
 
-            gettingMatt = (timeBae * ((PlayerPrefsManager.GetInstance().Friend_01_MattzipPer_Lv * 0.1f) + 1.0f)); /// 분당 0.1 맷집게이지;
+            
+            /// start ---------------- 동료로 맷집 올려주는 텍스트 출력  ------------------
+            
+            gettingMatt = (timeBae * ((PlayerPrefsManager.GetInstance().Friend_04_MattzipPer_Lv * 0.1f) + 1.0f)); /// 분당 0.1 맷집게이지;
             mattText.text = $"+ {UserWallet.GetInstance().SeetheNatural(gettingMatt)}";
+
+
+
+
 
             /// start ---------------- 골드 / 국밥 / 쌀밥  ------------------
 
-            // 최대 6시간 고정
-            if (timeBae > 360) timeBae = 360;
             // 최근 획득 골드 공식 시작
             gettingGold = PlayerPrefsManager.GetInstance().Mat_Mattzip;
 
