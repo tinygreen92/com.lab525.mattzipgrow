@@ -7,10 +7,6 @@ using UnityEngine.UI;
 
 public class OfflineManager : MonoBehaviour
 {
-    [Header("- 동료")]
-    public GameObject FriendObj;
-    public Text mattText;
-
     [Header("- 돈/국/밥")]
     public Text rewordText;
     public Text GupBapText;
@@ -140,23 +136,12 @@ public class OfflineManager : MonoBehaviour
 
             Debug.LogWarning("오프라인 몇 분? : " + timeBae);
 
-            if (timeBae == 0) return;
-
-            /// 동료 시간 증가 기본 오프라인 시간 4 
-            int MaxFriendTime = (240 + (240 * PlayerPrefsManager.GetInstance().Friend_02_OffTimeUp_Lv));
-
-            if (timeBae > MaxFriendTime)
-                timeBae = MaxFriendTime;
-
-            
-            /// start ---------------- 동료로 맷집 올려주는 텍스트 출력  ------------------
-            
-            gettingMatt = (timeBae * ((PlayerPrefsManager.GetInstance().Friend_04_MattzipPer_Lv * 0.1f) + 1.0f)); /// 분당 0.1 맷집게이지;
-            mattText.text = $"+ {UserWallet.GetInstance().SeetheNatural(gettingMatt)}";
-
-
-
-
+            /// 1분 이하라면 리턴
+            if (timeBae == 0) 
+                return;
+            /// 최대 오프라인 시간은 6시간
+            else if (timeBae >= 360)
+                timeBae = 360;
 
             /// start ---------------- 골드 / 국밥 / 쌀밥  ------------------
 
@@ -170,8 +155,6 @@ public class OfflineManager : MonoBehaviour
             gettingGold = dts.multipleStringDouble(gettingGold, (timeBae * ArtiGold * 20f)); // 분당 10대. 100 = 1000 ;
             gettingGupBap = timeBae * ArtiGold * 2f; // 분당 2개;
             gettingSSal = timeBae  * ArtiGold * 1f; // 분당 1개;
-
-
 
 
             //획득 골드 만큼 복제해서 팝업 텍스트에 표기

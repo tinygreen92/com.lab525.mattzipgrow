@@ -1182,7 +1182,8 @@ public class TutorialManager : MonoBehaviour
     /// </summary>
     public void TutoSkip()
     {
-        PopUpObjectManager.GetInstance().TutorialSkip.SetActive(true);
+        StartCoroutine(TutoClear());
+        //PopUpObjectManager.GetInstance().TutorialSkip.SetActive(true);
     }
 
     public PlayNANOOExample playNANOO;

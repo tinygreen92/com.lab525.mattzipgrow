@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class PunchManager : MonoBehaviour
 {
-    DoubleToStringNum dts = new DoubleToStringNum();
-
     public GameObject POWERUP_POP;
     public Transform InfinityContent;
     [Header("-펀치 이미지 100개")]

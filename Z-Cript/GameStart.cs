@@ -15,8 +15,10 @@ public class GameStart : MonoBehaviour
     public GameObject[] AllObject;
 
     [Header("-외부 API 초기화")]
+    public ShieldManager shieldManager;
     public InfiniteScroll InfinityContent;
     public InfiniteScroll InfinityQuest;
+    public InfiniteScroll InfinityShield;
     public CharacterManager charactherMang;
     public GroggyManager groggyManager;
     public TutorialManager tutorialManager;
@@ -70,7 +72,7 @@ public class GameStart : MonoBehaviour
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
     }
 
-    DoubleToStringNum dts = new DoubleToStringNum();
+    readonly DoubleToStringNum dts = new DoubleToStringNum();
 
     private void Start()
     {
@@ -142,9 +144,21 @@ public class GameStart : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
 
-        string tmpPrice = "";
-        string weaponPrice = "";
-        bool isUnlock = false;
+
+
+        /// 방패 리스트 추가
+        /// 방패 리스트 추가
+
+        shieldManager.InitShieldInfo();
+
+
+        /// 방패 리스트 추가
+        /// 방패 리스트 추가
+        
+
+        string tmpPrice;
+        string weaponPrice;
+        bool isUnlock;
 
         // 무기 리스트와 퀘스트 리스트가 비어 있다면?
         if (PlayerPrefsManager.GetInstance().weaponInfo.Count == 0)
@@ -275,12 +289,12 @@ public class GameStart : MonoBehaviour
 
         if (errorHp.Contains(".")) // 네자리수 이상?
         {
-            string[] sNumberList = errorHp.Split('.'); 
+            string[] sNumberList = errorHp.Split('.');
 
             /// 00A 인가 000A 인가 판별
-            if(sNumberList[1].Length == 3)
+            if (sNumberList[1].Length == 3)
             {
-                string alpa = sNumberList[1].Substring(0,2); // 00K 에서 00만 남기기.
+                string alpa = sNumberList[1].Substring(0, 2); // 00K 에서 00만 남기기.
                 string beta = sNumberList[1].Substring(2); // 00K 에서 K만 남기기.
                 string sResult = sNumberList[0] + "." + alpa + "0" + beta;
                 // 고쳐줌.
@@ -317,16 +331,17 @@ public class GameStart : MonoBehaviour
         PlayerPrefs.SetString("Dia_CRD_UP", "1");
 
         //0601
-        if (PlayerPrefs.GetString("diaBuyWeaponList") == "" || !PlayerPrefs.HasKey("diaBuyWeaponList")) 
+        if (PlayerPrefs.GetString("diaBuyWeaponList") == "" || !PlayerPrefs.HasKey("diaBuyWeaponList"))
             PlayerPrefs.SetString("diaBuyWeaponList", "525*");
 
         //0622
-        if (PlayerPrefs.GetString("InfiPersonalRecord") == "0" || !PlayerPrefs.HasKey("InfiPersonalRecord")) 
+        if (PlayerPrefs.GetString("InfiPersonalRecord") == "0" || !PlayerPrefs.HasKey("InfiPersonalRecord"))
             PlayerPrefs.SetString("InfiPersonalRecord", "0*0*0*0*0*0*0*0*0*0*");
 
-        if (PlayerPrefs.GetInt("MaxGet_MuganTop2") == 0 || !PlayerPrefs.HasKey("MaxGet_MuganTop2")) 
+        if (PlayerPrefs.GetInt("MaxGet_MuganTop2") == 0 || !PlayerPrefs.HasKey("MaxGet_MuganTop2"))
             PlayerPrefs.SetInt("MaxGet_MuganTop2", 1);
 
+        PlayerPrefs.Save();
 
         //// 골드 알파벳
         //string oldValue = PlayerPrefs.GetString("gold", "0");
@@ -494,6 +509,9 @@ public class GameStart : MonoBehaviour
         /// 인피니티 스크롤 호출 
         InfinityContent.ListStart();
         InfinityQuest.ListStart();
+
+        /// 방패도 동일하게 될련지
+        InfinityShield.ListStartShield();
     }
 
 

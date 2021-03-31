@@ -323,7 +323,9 @@ public class PlayerPrefsManager : MonoBehaviour
         }
     }
 
+    /// <summary>
     /// (i)현재 장착한 펀치 인덱스           PunchIndex
+    /// </summary>
     public int PunchIndex
     {
         get
@@ -1262,8 +1264,10 @@ public class PlayerPrefsManager : MonoBehaviour
         return (Def_result1 * Def_result2).ToString();
     }
 
-    /// (int) 아직 안 쓰는거
-    public int asdsafsafsafsa
+    /// <summary>
+    /// 현재 장착한 쉴드 인덱스
+    /// </summary>
+    public int ShieldIndex
     {
         get
         {
@@ -2672,8 +2676,6 @@ public class PlayerPrefsManager : MonoBehaviour
             weaponEffect = we,
             isUnlock = unlock
         });
-
-        //SaveWeaponInfo();
     }
 
     [HideInInspector]
@@ -2707,20 +2709,100 @@ public class PlayerPrefsManager : MonoBehaviour
             // 가져온 데이터를 바이트 배열로 변환 -> 리스트로 캐스팅
             weaponInfo = (List<WeaponEntry>)binaryFormatter.Deserialize(memoryStream);
 
-            /// 맷집 적용 수치를 변경함 값으로 바꿔줌.
+            /// 공격력 적용 수치를 변경함 값으로 바꿔줌.
             for (int i = 0; i < weaponInfo.Count; i++)
             {
                 weaponInfo[i].weaponEffect = (weaponInfo[i].weaponLevel * (0.1f * (i + 1)));
             }
         }
 
-        isReadyWeapon = true;
+        /// 방패 리스팅도 같이 해줘라.
+        LoadShieldInfo();
 
+        isReadyWeapon = true;
     }
 
 
     #endregion
 
+
+    #region 방패 관리 정보
+
+
+    /// <summary>
+    /// 무기 관리
+    /// </summary>
+    [Serializable]
+    public class ShieldEntry
+    {
+        public int shieldLevel;         // 맥스레벨은 100
+        public bool isUnlock;           // 최초 획득했는지?
+        //                                      [0] 등급 abc
+        public float equipedEffect;         // [1] 장착 %    
+        public float ownedEffect;           // [2] 보유 %
+        public float powerUpper;            // [3] 강화 성공률
+        public float powerMinusPer;         // [4] 성공 차감율
+        public float upperEfect;            // [5] 레벨당 방어력 증가치 %
+        public string shieldCost;           // [6] 레벨업시 소모 깍두기
+    }
+
+    // 만든 클래스를 리스트에 담아서 테이블처럼 사용
+    public List<ShieldEntry> shieldInfo = new List<ShieldEntry>();
+
+    /// <summary>
+    /// 실드 총 갯수만큼 반복
+    /// </summary>
+    public void AddShieldData(float row_1, float row_2, float row_3, float row_4, float row_5, string row_6)
+    {
+        shieldInfo.Add(new ShieldEntry
+        {
+            shieldLevel = 0,
+            isUnlock = false,
+            //
+            equipedEffect = row_1,
+            ownedEffect = row_2,
+            powerUpper = row_3,
+            powerMinusPer = row_4,
+            upperEfect = row_5,
+            shieldCost = row_6,
+        });
+    }
+
+
+
+    /// <summary>
+    /// 실드 현재 정보 저장
+    /// </summary>
+    public void SaveShieldInfo()
+    {
+        BinaryFormatter binaryFormatter = new BinaryFormatter();
+        MemoryStream memoryStream = new MemoryStream();
+
+        // Info를 바이트 배열로 변환해서 저장
+        binaryFormatter.Serialize(memoryStream, shieldInfo);
+
+        // 그것을 다시 한번 문자열 값으로 변환해서 
+        // 스트링 키값으로 PlayerPrefs에 저장
+        PlayerPrefs.SetString("shieldInfo", Convert.ToBase64String(memoryStream.GetBuffer()));
+        PlayerPrefs.Save();
+    }
+
+    public void LoadShieldInfo()
+    {
+        string data = PlayerPrefs.GetString("shieldInfo");
+
+        if (!string.IsNullOrEmpty(data))
+        {
+            BinaryFormatter binaryFormatter = new BinaryFormatter();
+            MemoryStream memoryStream = new MemoryStream(Convert.FromBase64String(data));
+
+            // 가져온 데이터를 바이트 배열로 변환 -> 리스트로 캐스팅
+            shieldInfo = (List<ShieldEntry>)binaryFormatter.Deserialize(memoryStream);
+        }
+    }
+
+
+    #endregion
 
 
 
@@ -3983,7 +4065,7 @@ public class PlayerPrefsManager : MonoBehaviour
                 //0518
                 cloudTmpForGPGS_109 = PlayerPrefs.GetInt("isAllmute", 0),
                 cloudTmpForGPGS_110 = PlayerPrefs.GetInt("is0515shock", 0),
-                cloudTmpForGPGS_111 = PlayerPrefs.GetString("AllMoneyData"),
+                cloudTmpForGPGS_111 = PlayerPrefs.GetString("shieldInfo"),
 
 
                 cloudTmpForGPGS_112 = PlayerPrefs.GetInt("is1Recov", 0),
@@ -4138,7 +4220,7 @@ public class PlayerPrefsManager : MonoBehaviour
         PlayerPrefs.SetString("questInfo5", listGPGS[0].cloudTmpForGPGS_159);
 
         //
-        PlayerPrefs.SetString("AllMoneyData", listGPGS[0].cloudTmpForGPGS_111);
+        PlayerPrefs.SetString("shieldInfo", listGPGS[0].cloudTmpForGPGS_111);
         PlayerPrefs.SetString("uniformInfo", listGPGS[0].cloudTmpForGPGS_161);
 
         //

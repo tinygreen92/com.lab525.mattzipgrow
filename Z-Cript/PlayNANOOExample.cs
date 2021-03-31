@@ -1,14 +1,14 @@
-﻿using System.Collections;
+﻿using PlayNANOO;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using PlayNANOO;
 using UnityEngine.UI;
 
 
 public class PlayNANOOExample : MonoBehaviour
 {
     Plugin plugin;
-    DoubleToStringNum dts = new DoubleToStringNum();
+    readonly DoubleToStringNum dts = new DoubleToStringNum();
 
     [Header("- 입력 텍스트")]
     public Text InputText;
@@ -109,7 +109,8 @@ public class PlayNANOOExample : MonoBehaviour
     /// </summary>
     public void ForumThread()
     {
-        plugin.ForumThread(Configure.PN_FORUM_THREAD, 10, (state, message, rawData, dictionary) => {
+        plugin.ForumThread(Configure.PN_FORUM_THREAD, 10, (state, message, rawData, dictionary) =>
+        {
             Debug.Log(message);
             if (state.Equals(Configure.PN_API_STATE_SUCCESS))
             {
@@ -141,7 +142,8 @@ public class PlayNANOOExample : MonoBehaviour
     /// </summary>
     public void ServerTime()
     {
-        plugin.ServerTime((state, message, rawData, dictionary) => {
+        plugin.ServerTime((state, message, rawData, dictionary) =>
+        {
             if (state.Equals(Configure.PN_API_STATE_SUCCESS))
             {
                 Debug.Log(dictionary["timezone"]);
@@ -162,7 +164,8 @@ public class PlayNANOOExample : MonoBehaviour
     public void AccessEvent()
     {
         // 실행
-        plugin.AccessEvent((state, message, rawData, dictionary) => {
+        plugin.AccessEvent((state, message, rawData, dictionary) =>
+        {
             if (state.Equals(Configure.PN_API_STATE_SUCCESS))
             {
                 // 서버 시간
@@ -208,7 +211,8 @@ public class PlayNANOOExample : MonoBehaviour
     {
         string inputTmp = InputText.text;
 
-        plugin.Coupon(inputTmp, (state, message, rawData, dictionary) => {
+        plugin.Coupon(inputTmp, (state, message, rawData, dictionary) =>
+        {
             if (state.Equals(Configure.PN_API_STATE_SUCCESS))
             {
                 //Debug.Log(dictionary["code"]);
@@ -237,10 +241,7 @@ public class PlayNANOOExample : MonoBehaviour
         });
     }
 
-
-
-
-    string[,] tmpUID = new string[100, 4];
+    readonly string[,] tmpUID = new string[100, 4];
 
 
     /// <summary>
@@ -254,7 +255,8 @@ public class PlayNANOOExample : MonoBehaviour
         string item_code = string.Empty;
         string item_count = string.Empty;
         //
-        plugin.PostboxItem((state, message, rawData, dictionary) => {
+        plugin.PostboxItem((state, message, rawData, dictionary) =>
+        {
             if (state.Equals(Configure.PN_API_STATE_SUCCESS))
             {
                 ///
@@ -299,7 +301,8 @@ public class PlayNANOOExample : MonoBehaviour
         string item_count = string.Empty;
         string _message = string.Empty;
         //
-        plugin.PostboxItem((state, message, rawData, dictionary) => {
+        plugin.PostboxItem((state, message, rawData, dictionary) =>
+        {
             if (state.Equals(Configure.PN_API_STATE_SUCCESS))
             {
                 ArrayList items = (ArrayList)dictionary["item"];
@@ -378,7 +381,8 @@ public class PlayNANOOExample : MonoBehaviour
     /// </summary>
     public void PostboxItemSend(string _code, int _amount, string _msg)
     {
-        plugin.PostboxItemSend(_code, _amount, 365, _msg, (state, message, rawData, dictionary) => {
+        plugin.PostboxItemSend(_code, _amount, 365, _msg, (state, message, rawData, dictionary) =>
+        {
             if (state.Equals(Configure.PN_API_STATE_SUCCESS))
             {
                 PostboxCheck();
@@ -397,7 +401,8 @@ public class PlayNANOOExample : MonoBehaviour
     /// </summary>
     public void PostboxItemUse(string _UID)
     {
-        plugin.PostboxItemUse(_UID, (state, message, rawData, dictionary) => {
+        plugin.PostboxItemUse(_UID, (state, message, rawData, dictionary) =>
+        {
             if (state.Equals(Configure.PN_API_STATE_SUCCESS))
             {
                 string item_code = dictionary["item_code"].ToString();
@@ -479,7 +484,8 @@ public class PlayNANOOExample : MonoBehaviour
     /// </summary>
     public void PostboxClear()
     {
-        plugin.PostboxClear((state, message, rawData, dictionary) => {
+        plugin.PostboxClear((state, message, rawData, dictionary) =>
+        {
             if (state.Equals(Configure.PN_API_STATE_SUCCESS))
             {
                 Debug.Log("Success");
@@ -496,7 +502,8 @@ public class PlayNANOOExample : MonoBehaviour
     /// </summary>
     public void PostboxSubscriptionRegister()
     {
-        plugin.PostboxSubscriptionRegister("PRODUCT_CODE", (state, message, rawData, dictionary) => {
+        plugin.PostboxSubscriptionRegister("PRODUCT_CODE", (state, message, rawData, dictionary) =>
+        {
             if (state.Equals(Configure.PN_API_STATE_SUCCESS))
             {
                 Debug.Log("Success");
@@ -513,7 +520,8 @@ public class PlayNANOOExample : MonoBehaviour
     /// </summary>
     public void PostboxSubscriptionCancel()
     {
-        plugin.PostboxSubscriptionCancel("PRODUCT_CODE", (state, message, rawData, dictionary) => {
+        plugin.PostboxSubscriptionCancel("PRODUCT_CODE", (state, message, rawData, dictionary) =>
+        {
             if (state.Equals(Configure.PN_API_STATE_SUCCESS))
             {
                 Debug.Log("Success");
@@ -526,45 +534,6 @@ public class PlayNANOOExample : MonoBehaviour
     }
 
 
-
-
-    public Text userID;
-    public Text userName;
-
-    public string userid;
-
-    /// <summary>
-    /// 실행 버튼 누르면 
-    /// </summary>
-    public void DATACHAGE()
-    {
-        plugin.SetUUID(userID.text);
-        plugin.SetNickname(userName.text);
-
-        GPGSManager.SetUserDatata(userID.text, userName.text);
-
-        userid = userID.text;
-
-        Debug.LogError(userID.text);
-        Debug.LogError(userName.text);
-
-        plugin.StorageSave(userID.text, "AAA", true, (state, message, rawData, dictionary) =>
-        {
-            if (state.Equals(Configure.PN_API_STATE_SUCCESS))
-            {
-                Debug.LogWarning("StorageSave Success ::");
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("데이터가 정상적으로 저장되었습니다.");
-
-            }
-            else
-            {
-                Debug.Log("StorageSave Fail");
-            }
-        });
-
-    }
-
-
     /// <summary>
     /// Data Save in Cloud Data
     /// </summary>
@@ -573,7 +542,8 @@ public class PlayNANOOExample : MonoBehaviour
         PlayerPrefsManager.GetInstance().IN_APP.SetActive(true);
         PlayerPrefs.Save();
         //
-        plugin.StorageSave(GPGSManager.GetLocalUserId() + "_S2", playerPrefsManager.SaveAllPrefsData(), true, (state, message, rawData, dictionary) => {
+        plugin.StorageSave(GPGSManager.GetLocalUserId() + "_S2", playerPrefsManager.SaveAllPrefsData(), true, (state, message, rawData, dictionary) =>
+        {
             if (state.Equals(Configure.PN_API_STATE_SUCCESS))
             {
                 Debug.LogWarning("StorageSave Success");
@@ -606,7 +576,8 @@ public class PlayNANOOExample : MonoBehaviour
             }
         });
 
-        plugin.StorageSave(GPGSManager.GetLocalUserId() + "_Check_S2", playerPrefsManager.ZZoGGoMiDataSave(), true, (state, message, rawData, dictionary) => {
+        plugin.StorageSave(GPGSManager.GetLocalUserId() + "_Check_S2", playerPrefsManager.ZZoGGoMiDataSave(), true, (state, message, rawData, dictionary) =>
+        {
             if (state.Equals(Configure.PN_API_STATE_SUCCESS))
             {
                 Debug.LogWarning("StorageSave Success ::");
@@ -623,7 +594,8 @@ public class PlayNANOOExample : MonoBehaviour
     public void StorageSaveForCheack()
     {
         PlayerPrefs.Save();
-        plugin.StorageSave(GPGSManager.GetLocalUserId() + "_Check_S2", playerPrefsManager.ZZoGGoMiDataSave(), true, (state, message, rawData, dictionary) => {
+        plugin.StorageSave(GPGSManager.GetLocalUserId() + "_Check_S2", playerPrefsManager.ZZoGGoMiDataSave(), true, (state, message, rawData, dictionary) =>
+        {
             if (state.Equals(Configure.PN_API_STATE_SUCCESS))
             {
                 Debug.LogWarning("StorageSave Success ::" + playerPrefsManager.ZZoGGoMiDataSave());
@@ -633,7 +605,7 @@ public class PlayNANOOExample : MonoBehaviour
                 PlayerPrefs.SetInt("isDataSaved", 1);
                 PlayerPrefs.Save();
                 //
-                Invoke(nameof(RestartAppForAOS),1f );
+                Invoke(nameof(RestartAppForAOS), 1f);
             }
             else
             {
@@ -690,7 +662,8 @@ public class PlayNANOOExample : MonoBehaviour
     {
         PlayerPrefsManager.GetInstance().IN_APP.SetActive(true);
 
-        plugin.StorageLoad(GPGSManager.GetLocalUserId() + "_Check_S2", (state, message, rawData, dictionary) => {
+        plugin.StorageLoad(GPGSManager.GetLocalUserId() + "_Check_S2", (state, message, rawData, dictionary) =>
+        {
             if (state.Equals(Configure.PN_API_STATE_SUCCESS))
             {
                 PlayerPrefsManager.GetInstance().IN_APP.SetActive(false);
@@ -722,7 +695,8 @@ public class PlayNANOOExample : MonoBehaviour
     {
         PlayerPrefsManager.GetInstance().IN_APP.SetActive(true);
 
-        plugin.StorageLoad(GPGSManager.GetLocalUserId() + "_S2", (state, message, rawData, dictionary) => {
+        plugin.StorageLoad(GPGSManager.GetLocalUserId() + "_S2", (state, message, rawData, dictionary) =>
+        {
             if (state.Equals(Configure.PN_API_STATE_SUCCESS))
             {
 
@@ -752,7 +726,8 @@ public class PlayNANOOExample : MonoBehaviour
     /// </summary>
     public void BeforeRankingMatt()
     {
-        plugin.RankingPersonal("mattzip-RANK-F81A740E-61075C7F", (state, message, rawData, dictionary) => {
+        plugin.RankingPersonal("mattzip-RANK-F81A740E-61075C7F", (state, message, rawData, dictionary) =>
+        {
             if (state.Equals(Configure.PN_API_STATE_SUCCESS))
             {
                 if (dictionary["ranking"] == null)
@@ -787,7 +762,8 @@ public class PlayNANOOExample : MonoBehaviour
     {
         PlayerPrefsManager.GetInstance().IN_APP.SetActive(true);
 
-        plugin.Ranking(NEW_RANKING, 50, (state, message, rawData, dictionary) => {
+        plugin.Ranking(NEW_RANKING, 50, (state, message, rawData, dictionary) =>
+        {
             if (state.Equals(Configure.PN_API_STATE_SUCCESS))
             {
                 ArrayList list = (ArrayList)dictionary["list"];
@@ -859,7 +835,8 @@ public class PlayNANOOExample : MonoBehaviour
     {
         PlayerPrefsManager.GetInstance().IN_APP.SetActive(true);
 
-        plugin.Ranking(INFI_TOWER, 50, (state, message, rawData, dictionary) => {
+        plugin.Ranking(INFI_TOWER, 50, (state, message, rawData, dictionary) =>
+        {
             if (state.Equals(Configure.PN_API_STATE_SUCCESS))
             {
                 ArrayList list = (ArrayList)dictionary["list"];
@@ -908,7 +885,8 @@ public class PlayNANOOExample : MonoBehaviour
     {
         int tmp = PlayerPrefsManager.GetInstance().MaxGet_MiniGame;
 
-        plugin.RankingRecord(MINI_GAME, tmp, "Mini", (state, message, rawData, dictionary) => {
+        plugin.RankingRecord(MINI_GAME, tmp, "Mini", (state, message, rawData, dictionary) =>
+        {
             if (state.Equals(Configure.PN_API_STATE_SUCCESS))
             {
                 Debug.LogError("Success MiniGame" + tmp);
@@ -930,7 +908,8 @@ public class PlayNANOOExample : MonoBehaviour
         /// TODO : 무한의 탑 층수 등록해야한다.
         int tmp = PlayerPrefsManager.GetInstance().MaxGet_MuganTop - 1;
 
-        plugin.RankingRecord(INFI_TOWER, tmp, "2", (state, message, rawData, dictionary) => {
+        plugin.RankingRecord(INFI_TOWER, tmp, "2", (state, message, rawData, dictionary) =>
+        {
             if (state.Equals(Configure.PN_API_STATE_SUCCESS))
             {
                 Debug.Log("Success");
@@ -975,7 +954,10 @@ public class PlayNANOOExample : MonoBehaviour
         /// 최대값 절삭해줌
         if (mattzip > 9007199254740990) mattzip = 9007199254740990;
 
-        plugin.RankingRecord(NEW_RANKING, (long)mattzip, "0", (state, message, rawData, dictionary) => {
+        Debug.LogError("mattzip : " + mattzip);
+
+        plugin.RankingRecord(NEW_RANKING, (long)mattzip, "0", (state, message, rawData, dictionary) =>
+        {
             if (state.Equals(Configure.PN_API_STATE_SUCCESS))
             {
                 Debug.LogError("mattzip-RANK-F81A740E-61075C7F NEW_RANKING 저장 Success");
@@ -994,7 +976,8 @@ public class PlayNANOOExample : MonoBehaviour
     /// </summary>
     public void RankingPersonal()
     {
-        plugin.RankingPersonal(INFI_TOWER, (state, message, rawData, dictionary) => {
+        plugin.RankingPersonal(INFI_TOWER, (state, message, rawData, dictionary) =>
+        {
             if (state.Equals(Configure.PN_API_STATE_SUCCESS))
             {
                 Debug.Log(dictionary["ranking"]);
@@ -1013,7 +996,8 @@ public class PlayNANOOExample : MonoBehaviour
     /// </summary>
     public void RankingSeason()
     {
-        plugin.RankingSeasonInfo("RANKING_CODE", (state, message, rawData, dictionary) => {
+        plugin.RankingSeasonInfo("RANKING_CODE", (state, message, rawData, dictionary) =>
+        {
             if (state.Equals(Configure.PN_API_STATE_SUCCESS))
             {
                 Debug.Log(dictionary["season"]);
@@ -1053,7 +1037,8 @@ public class PlayNANOOExample : MonoBehaviour
     /// </summary>
     public void IapReceiptionAndroid(string _PRODUCT_ID, string _RECEIPT, string _SIGNATURE, string _CURRENCY, double _Price)
     {
-        plugin.ReceiptVerificationAOS(_PRODUCT_ID, _RECEIPT, _SIGNATURE, _CURRENCY, _Price, (state, message, rawData, dictionary) => {
+        plugin.ReceiptVerificationAOS(_PRODUCT_ID, _RECEIPT, _SIGNATURE, _CURRENCY, _Price, (state, message, rawData, dictionary) =>
+        {
             if (state.Equals(Configure.PN_API_STATE_SUCCESS))
             {
                 Debug.LogWarning(dictionary["package"]);
@@ -1099,7 +1084,8 @@ public class PlayNANOOExample : MonoBehaviour
     /// </summary>
     public void IapReceiptioniOS()
     {
-        plugin.ReceiptVerificationIOS("PRODUCT_ID", "RECEIPT", "CURRENCY", 100, (state, message, rawData, dictionary) => {
+        plugin.ReceiptVerificationIOS("PRODUCT_ID", "RECEIPT", "CURRENCY", 100, (state, message, rawData, dictionary) =>
+        {
             if (state.Equals(Configure.PN_API_STATE_SUCCESS))
             {
                 Debug.Log(dictionary["package"]);
@@ -1116,7 +1102,8 @@ public class PlayNANOOExample : MonoBehaviour
 
     public void IapReceiptionOneStoreKR()
     {
-        plugin.ReceiptVerificationOneStoreKR("PRODUCT_ID", "PURCHASE_ID", "RECEIPT", "CURRENCY", 100, true, (state, message, rawData, dictionary) => {
+        plugin.ReceiptVerificationOneStoreKR("PRODUCT_ID", "PURCHASE_ID", "RECEIPT", "CURRENCY", 100, true, (state, message, rawData, dictionary) =>
+        {
             if (state.Equals(Configure.PN_API_STATE_SUCCESS))
             {
                 Debug.Log(dictionary["package"]);
@@ -1133,7 +1120,8 @@ public class PlayNANOOExample : MonoBehaviour
 
     public void Invite(string inviteCode)
     {
-        plugin.Invite(inviteCode, (state, message, rawData, dictionary) => {
+        plugin.Invite(inviteCode, (state, message, rawData, dictionary) =>
+        {
             if (state.Equals(Configure.PN_API_STATE_SUCCESS))
             {
                 string url = dictionary["url"].ToString();
@@ -1151,7 +1139,7 @@ public class PlayNANOOExample : MonoBehaviour
     {
         if (plugin != null && focus)
         {
-            if(GPGSManager.GPGS_Progress())
+            if (GPGSManager.GPGS_Progress())
                 AccessEvent();
         }
         //Debug.Log("Focus");
