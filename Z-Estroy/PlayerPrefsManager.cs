@@ -3990,7 +3990,11 @@ public class PlayerPrefsManager : MonoBehaviour
         //0727
         public int cloudTmpForGPGS_175;
         public int cloudTmpForGPGS_176;
-
+        //0331
+        public int cloudTmpForGPGS_177;
+        public int cloudTmpForGPGS_178;
+        public int cloudTmpForGPGS_179;
+        public int cloudTmpForGPGS_180;
 
     }
 
@@ -4157,13 +4161,15 @@ public class PlayerPrefsManager : MonoBehaviour
 
                 // 0717
                 cloudTmpForGPGS_175 = PlayerPrefs.GetInt("Pet_BuyData_Cape", 0),
-                cloudTmpForGPGS_176 = PlayerPrefs.GetInt("Pet_PVP_Matt_Lv", 0)
+                cloudTmpForGPGS_176 = PlayerPrefs.GetInt("Pet_PVP_Matt_Lv", 0),
 
                 // 0803
                 //cloudTmpForGPGS_177 = PlayerPrefs.GetInt("Pet_BuyData_Something", 0),
-                //cloudTmpForGPGS_178 = PlayerPrefs.GetInt("Pet_PVP_Speed_Lv", 0)
-                //cloudTmpForGPGS_179 = PlayerPrefs.GetInt("Friend_01_MattzipPer_Lv", 0)
-                //cloudTmpForGPGS_180 = PlayerPrefs.GetInt("Friend_02_OffTimeUp_Lv", 0)
+                //cloudTmpForGPGS_178 = PlayerPrefs.GetInt("Pet_PVP_Speed_Lv", 0),
+                cloudTmpForGPGS_177 = PlayerPrefs.GetInt("Friend_01_OfflineAtk_Lv", 0),
+                cloudTmpForGPGS_178 = PlayerPrefs.GetInt("Friend_02_OffTimeUp_Lv", 0),
+                cloudTmpForGPGS_179 = PlayerPrefs.GetInt("Friend_03_OffSpped_Lv", 0),
+                cloudTmpForGPGS_180 = PlayerPrefs.GetInt("Friend_04_MattzipPer_Lv", 0),
             }
         };
 
@@ -4364,6 +4370,17 @@ public class PlayerPrefsManager : MonoBehaviour
         //0727 Gold_Matto
         PlayerPrefs.SetInt("Pet_BuyData_Cape", listGPGS[0].cloudTmpForGPGS_175);
         PlayerPrefs.SetInt("Pet_PVP_Matt_Lv", listGPGS[0].cloudTmpForGPGS_176);
+
+
+        /// ----------------
+
+        PlayerPrefs.SetInt("Friend_01_OfflineAtk_Lv", listGPGS[0].cloudTmpForGPGS_177);
+        PlayerPrefs.SetInt("Friend_02_OffTimeUp_Lv", listGPGS[0].cloudTmpForGPGS_178);
+        PlayerPrefs.SetInt("Friend_03_OffSpped_Lv", listGPGS[0].cloudTmpForGPGS_179);
+        PlayerPrefs.SetInt("Friend_04_MattzipPer_Lv", listGPGS[0].cloudTmpForGPGS_180);
+
+
+
         /// 삭제 해줄 것들 광고 쿨타임 등등
         PlayerPrefs.DeleteKey("Bosster_Daily");
         PlayerPrefs.DeleteKey("Booster_AUTO");

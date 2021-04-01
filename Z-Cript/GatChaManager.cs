@@ -3,7 +3,15 @@ using UnityEngine.UI;
 
 public class GatChaManager : MonoBehaviour
 {
-    DoubleToStringNum dts = new DoubleToStringNum();
+    [Header("- 더미 홈")]
+    public ScrollRect sb;
+    public Transform gridPos;           // 실제 유저 뷰
+    [Space]
+    public Transform dummyHome;         // 17개 유물 parent 위에 덮은 오브젝트다 
+    public GameObject[] emptyDumm4;     // 디폴트 더미 4개 
+
+
+
     [Header("- 팝업 내용 매니저")]
     public ArtifactPopManager artifactPopManager;
 
@@ -18,7 +26,6 @@ public class GatChaManager : MonoBehaviour
     public Text Arti08_Lv;
     public Text Arti09_Lv;
     public Text Arti10_Lv;
-    //
     public Text Arti11_Lv;
     public Text Arti12_Lv;
     public Text Arti13_Lv;
@@ -26,9 +33,7 @@ public class GatChaManager : MonoBehaviour
     public Text Arti15_Lv;
     public Text Arti16_Lv;
     public Text Arti17_Lv;
-
-
-
+    [Space]
     public Text Arti01_Effect;
     public Text Arti02_Effect;
     public Text Arti03_Effect;
@@ -101,8 +106,91 @@ public class GatChaManager : MonoBehaviour
         RefreshItem();
     }
 
+
+
+
     /// <summary>
-    /// Start 에서도 한 번 불러준다.
+    /// 새로 얻은 아이템이면 그리드에 추가
+    /// </summary>
+    /// <param name="_index"></param>
+    void SetNewItem(int _index)
+    {
+        /// 이미 그리드에 추가됐다면 리턴
+        if (dummyHome.GetChild(_index).childCount == 0) return;
+
+        /// 그리드에 추가
+        var tmpTraf = dummyHome.GetChild(_index).GetChild(0);
+        tmpTraf.SetParent(gridPos);
+        tmpTraf.gameObject.SetActive(true);
+
+        // 세로 스크롤 뷰 = 유물 재정렬
+        sb.verticalNormalizedPosition = 1f;
+
+        /// 더미 처리
+        if (gridPos.childCount > 8)
+        {
+            if (emptyDumm4[0].activeSelf)
+            {
+                sb.vertical = true;
+
+                for (int i = 0; i < emptyDumm4.Length; i++)
+                {
+                    emptyDumm4[i].SetActive(false);
+                }
+            }
+        }
+        else
+        {
+            for (int i = 0; i < emptyDumm4.Length; i++)
+            {
+                emptyDumm4[i].transform.SetAsLastSibling();
+            }
+
+            sb.vertical = false;
+        }
+        
+        /// 나의 유물 데이터 계산
+        CalMyArtifect(_index);
+    }
+
+    [SerializeField]
+    string[] artiDataList;
+
+    /// <summary>
+    /// 내가 해금한 유물들 순서대로 계산
+    /// </summary>
+    void CalMyArtifect(int _setNum)
+    {
+        /// 저장된 아티 쪼개서 가져옴
+        artiDataList = LoadMyArtifect();
+        /// 최초각인
+        artiDataList[artiDataList.Length - 2] = $"{_setNum}*";
+
+        string tmpStr = string.Empty;
+        /// 길이 하나 추가
+        for (int i = 0; i < artiDataList.Length-1; i++)
+        {
+            tmpStr += $"{artiDataList[i]}*";
+        }
+        PlayerPrefs.SetString("MyArtiList", tmpStr);
+        PlayerPrefs.Save();
+    }
+
+    /// <summary>
+    /// 배열 최대 크기는 (dummyHome.childCount - 1)
+    /// </summary>
+    /// <returns></returns>
+    string[] LoadMyArtifect()
+    {
+        string _Data = PlayerPrefs.GetString("MyArtiList", "525*");
+
+        return (_Data).Split('*');
+    }
+
+
+
+    /// <summary>
+    /// 아이템 효과 적용.
     /// </summary>
     public void RefreshItem()
     {
@@ -129,6 +217,37 @@ public class GatChaManager : MonoBehaviour
         if (ppm.Arti_InfiReword >= 1000) ppm.Arti_InfiReword = 1000;
         if (ppm.Arti_MiniReword >= 1000) ppm.Arti_MiniReword = 1000;
         if (ppm.Arti_MiniGameTime >= 300) ppm.Arti_MiniGameTime = 300;
+
+
+
+        /// -----------------------------------------
+
+        if (ppm.Arti_PunchTouch > 0) SetNewItem(0);
+        if (ppm.Arti_Mattzip > 0) SetNewItem(1);
+        if (ppm.Arti_HP > 0) SetNewItem(2);
+        if (ppm.Arti_GroggyTouch > 0) SetNewItem(3);
+        if (ppm.Arti_GAL > 0) SetNewItem(4);
+
+        if (ppm.Arti_DefenceTime > 0) SetNewItem(5);
+        if (ppm.Arti_GoldBox > 0) SetNewItem(6);
+        if (ppm.Arti_OffGold > 0) SetNewItem(7);
+
+        if (ppm.Arti_MuganTime > 0) SetNewItem(8);
+        if (ppm.Arti_AttackPower > 0) SetNewItem(9);
+
+        if (ppm.Arti_GoldPer > 0) SetNewItem(10);
+        if (ppm.Arti_LuckyBoxPer > 0) SetNewItem(11);
+        if (ppm.Arti_DefencePer > 0) SetNewItem(12);
+        if (ppm.Arti_GoldUpgrade > 0) SetNewItem(13);
+        if (ppm.Arti_InfiReword > 0) SetNewItem(14);
+        if (ppm.Arti_MiniReword > 0) SetNewItem(15);
+        if (ppm.Arti_MiniGameTime > 0) SetNewItem(16);
+
+
+
+        /// -----------------------------------------
+
+
 
         Arti01_Lv.text = "Lv."+ ppm.Arti_PunchTouch + "  ( Max Lv. 10 )";
         Arti02_Lv.text = "Lv."+ ppm.Arti_Mattzip + "  ( Max Lv. 1000 )";
@@ -165,10 +284,6 @@ public class GatChaManager : MonoBehaviour
         result = ppm.Arti_MuganTime * 0.1f;
         Arti09_Effect.text = "무한의 탑 시간 " + result + "초 증가 ( 레벨당 0.1초 증가 )";
         Arti10_Effect.text = "공격력 " + string.Format("{0:F1}", ppm.Arti_AttackPower * 0.1f) + "% 증가 ( 레벨당 0.1% 증가 )";
-
-
-        /// -----------------------------------------
-        /// 
 
         /// --------------------------------------------------------------- 신규 추가 0608
 
@@ -240,8 +355,11 @@ public class GatChaManager : MonoBehaviour
         UserWallet.GetInstance().ShowAllMoney();
     }
 
-    // 탭 볼 때마다 새로고침 회색 <-> 주황.
-    public void GatchaUpdate()
+
+    /// <summary>
+    /// 탭 볼 때마다 새로고침 회색 <-> 주황.
+    /// </summary>
+    public void BtnColorUpdate()
     {
         if (!DiaPass("100"))
         {
@@ -310,7 +428,8 @@ public class GatChaManager : MonoBehaviour
 
             GoGoGatCha(0);
             ranArtiPopManager.SetTextAll(index, name, 0);
-
+            // 아이템 효과 적용 바로.
+            RefreshItem();
             return false;
         }
 
@@ -372,7 +491,7 @@ public class GatChaManager : MonoBehaviour
         }
 
         //
-        GatchaUpdate();
+        BtnColorUpdate();
     }
 
     /// <summary>
@@ -449,7 +568,7 @@ public class GatChaManager : MonoBehaviour
         }
 
         //
-        GatchaUpdate();
+        BtnColorUpdate();
 
     }
 
@@ -471,8 +590,6 @@ public class GatChaManager : MonoBehaviour
         // 팝업에 전달해줄 값.
         name[seed] = "";
         index[seed] = 0;
-
-        string targetDia = string.Empty;
 
         float artiGatcha = Random.Range(0f, 100f);
 
@@ -722,9 +839,6 @@ public class GatChaManager : MonoBehaviour
             index[seed] = 16;
 
         }
-
-        // 아이템 효과 적용 바로.
-        RefreshItem();
     }
 
 
