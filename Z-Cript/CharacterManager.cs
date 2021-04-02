@@ -59,7 +59,6 @@ public class CharacterManager : MonoBehaviour
     string Chara_Attack_UP;
     string Chara_HP_UP;
     string Chara_Recov_UP;
-    string Chara_Defence_UP;
 
 
     [Header("-패시브 스킬 배열")]
@@ -504,8 +503,8 @@ public class CharacterManager : MonoBehaviour
         Pet_diaCheack();
 
         int index = PlayerPrefs.GetInt("Pet_BuyData", 000);
-        int index_Cape = PlayerPrefs.GetInt("Pet_BuyData_Cape", 0);
-        int index_Something = PlayerPrefs.GetInt("Pet_BuyData_Something", 0);
+        //int index_Cape = PlayerPrefs.GetInt("Pet_BuyData_Cape", 0);
+        //int index_Something = PlayerPrefs.GetInt("Pet_BuyData_Something", 0);
 
         // 구매 여부 판단
         if (PlayerPrefs.GetInt("Pet_BuyData_Cape", 0) == 1)
@@ -2020,16 +2019,13 @@ public class CharacterManager : MonoBehaviour
             Chara_HP_UP = ((CharaLv - 1) * 50f).ToString("f0");
             Chara_Recov_UP = ((CharaLv - 1) * 25f).ToString("f0");
             //
-            Chara_Defence_UP = ((CharaLv - 1) * 10f).ToString("f0");
-
 
             /// 캐릭터 레벨 올리면 세개가 올라감
             PlayerPrefs.SetString("Chara_Attack_UP", Chara_Attack_UP);
             PlayerPrefs.SetString("Chara_HP_UP", Chara_HP_UP);
             PlayerPrefs.SetString("Chara_Recov_UP", Chara_Recov_UP);
-            //
+            /// 캐릭터 방어력 스탯 값
             PlayerPrefs.SetFloat("Chara_Defence_UP", (CharaLv - 1) * 10f);
-
             PlayerPrefs.Save();
         }
 

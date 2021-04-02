@@ -118,6 +118,7 @@ public class UserWallet : MonoBehaviour
         ShowUserDeffence();
         ShowUserSSalbap();
         ShowUserCritical_2_();
+        ShowUserHP_Recov();
     }
 
 

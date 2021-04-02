@@ -60,23 +60,23 @@ public class GatChaManager : MonoBehaviour
     public GameObject Gat_11;
 
 
-    private readonly int I_Arti_PunchTouch              = 10;
-    private readonly int I_Arti_Mattzip                      = 1000;
-    private readonly int I_Arti_HP                              = 1000;
-    private readonly int I_Arti_GroggyTouch             = 49;
-    private readonly int I_Arti_GAL                              = 100;
-    private readonly int I_Arti_DefenceTime             = 100;
-    private readonly int I_Arti_GoldBox                  = 300;
-    private readonly int I_Arti_OffGold                  = 500;
-    private readonly int I_Arti_MuganTime               = 300;
-    private readonly int I_Arti_AttackPower          = 999;
-    private readonly int I_Arti_GoldPer                      = 1000;
-    private readonly int I_Arti_LuckyBoxPer             = 1000;
-    private readonly int I_Arti_DefencePer          = 500;
-    private readonly int I_Arti_GoldUpgrade             = 500;
-    private readonly int I_Arti_InfiReword          = 1000;
-    private readonly int I_Arti_MiniReword          = 1000;
-    private readonly int I_Arti_MiniGameTime        = 300;
+    private readonly int I_Arti_PunchTouch = 10;
+    private readonly int I_Arti_Mattzip = 1000;
+    private readonly int I_Arti_HP = 1000;
+    private readonly int I_Arti_GroggyTouch = 49;
+    private readonly int I_Arti_GAL = 100;
+    private readonly int I_Arti_DefenceTime = 100;
+    private readonly int I_Arti_GoldBox = 300;
+    private readonly int I_Arti_OffGold = 500;
+    private readonly int I_Arti_MuganTime = 300;
+    private readonly int I_Arti_AttackPower = 999;
+    private readonly int I_Arti_GoldPer = 1000;
+    private readonly int I_Arti_LuckyBoxPer = 1000;
+    private readonly int I_Arti_DefencePer = 500;
+    private readonly int I_Arti_GoldUpgrade = 500;
+    private readonly int I_Arti_InfiReword = 1000;
+    private readonly int I_Arti_MiniReword = 1000;
+    private readonly int I_Arti_MiniGameTime = 300;
 
 
     /// <summary>
@@ -107,7 +107,86 @@ public class GatChaManager : MonoBehaviour
     }
 
 
+    bool isFristInit;
+    /// <summary>
+    /// TODO: 처음 실행시 pp 긁어서 순서대로 해금
+    /// </summary>
+    void InitDummyArti(string[] strTmps)
+    {
 
+        var _strTmps = strTmps;
+        /// 유물 뽑은 적 없으면 리턴
+        if (_strTmps[0] == "525" || isFristInit)
+        {
+            isFristInit = true;
+            return;
+        }
+
+        int MAX_FOR = _strTmps.Length - 2;
+        /// 뇌 리셋
+        PlayerPrefs.DeleteKey("MyArtiList");
+        /// 순서 대로 해금
+        for (int i = 0; i < MAX_FOR; i++)
+        {
+            Debug.LogError("artiDataList[i] : " + _strTmps[i]);
+            SetNewItem(int.Parse(_strTmps[i].Replace("*", "")));
+        }
+
+        isFristInit = true;
+    }
+
+    /// <summary>
+    /// 1레벨 이상이면 그리드에 추가
+    /// </summary>
+    void AddNewItemToGrid()
+    {
+        var ppm = PlayerPrefsManager.GetInstance();
+
+        if (ppm.Arti_PunchTouch >= 10) ppm.Arti_PunchTouch = 10;
+        if (ppm.Arti_Mattzip >= 1000) ppm.Arti_Mattzip = 1000;
+        if (ppm.Arti_HP >= 1000) ppm.Arti_HP = 1000;
+        if (ppm.Arti_GroggyTouch >= 49) ppm.Arti_GroggyTouch = 49;
+        if (ppm.Arti_GAL >= 100) ppm.Arti_GAL = 100;
+        /// --------------------------------------------------------------- 신규 추가
+        if (ppm.Arti_DefenceTime >= 100) ppm.Arti_DefenceTime = 100;
+        if (ppm.Arti_GoldBox >= 300) ppm.Arti_GoldBox = 300;
+        if (ppm.Arti_OffGold >= 500) ppm.Arti_OffGold = 500;
+
+        if (ppm.Arti_MuganTime >= 300) ppm.Arti_MuganTime = 300;
+        if (ppm.Arti_AttackPower >= 999) ppm.Arti_AttackPower = 999;
+
+        /// --------------------------------------------------------------- 신규 추가 0608
+        if (ppm.Arti_GoldPer >= 1000) ppm.Arti_GoldPer = 1000;
+        if (ppm.Arti_LuckyBoxPer >= 1000) ppm.Arti_LuckyBoxPer = 1000;
+        if (ppm.Arti_DefencePer >= 500) ppm.Arti_DefencePer = 500;
+        if (ppm.Arti_GoldUpgrade >= 500) ppm.Arti_GoldUpgrade = 500;
+        if (ppm.Arti_InfiReword >= 1000) ppm.Arti_InfiReword = 1000;
+        if (ppm.Arti_MiniReword >= 1000) ppm.Arti_MiniReword = 1000;
+        if (ppm.Arti_MiniGameTime >= 300) ppm.Arti_MiniGameTime = 300;
+
+        /// ------------------------------------------------------------------------
+
+        if (ppm.Arti_PunchTouch > 0) SetNewItem(0);
+        if (ppm.Arti_Mattzip > 0) SetNewItem(1);
+        if (ppm.Arti_HP > 0) SetNewItem(2);
+        if (ppm.Arti_GroggyTouch > 0) SetNewItem(3);
+        if (ppm.Arti_GAL > 0) SetNewItem(4);
+
+        if (ppm.Arti_DefenceTime > 0) SetNewItem(5);
+        if (ppm.Arti_GoldBox > 0) SetNewItem(6);
+        if (ppm.Arti_OffGold > 0) SetNewItem(7);
+
+        if (ppm.Arti_MuganTime > 0) SetNewItem(8);
+        if (ppm.Arti_AttackPower > 0) SetNewItem(9);
+
+        if (ppm.Arti_GoldPer > 0) SetNewItem(10);
+        if (ppm.Arti_LuckyBoxPer > 0) SetNewItem(11);
+        if (ppm.Arti_DefencePer > 0) SetNewItem(12);
+        if (ppm.Arti_GoldUpgrade > 0) SetNewItem(13);
+        if (ppm.Arti_InfiReword > 0) SetNewItem(14);
+        if (ppm.Arti_MiniReword > 0) SetNewItem(15);
+        if (ppm.Arti_MiniGameTime > 0) SetNewItem(16);
+    }
 
     /// <summary>
     /// 새로 얻은 아이템이면 그리드에 추가
@@ -161,7 +240,6 @@ public class GatChaManager : MonoBehaviour
     /// </summary>
     void CalMyArtifect(int _setNum)
     {
-        /// 저장된 아티 쪼개서 가져옴
         artiDataList = LoadMyArtifect();
         /// 최초각인
         artiDataList[artiDataList.Length - 2] = $"{_setNum}*";
@@ -183,7 +261,6 @@ public class GatChaManager : MonoBehaviour
     string[] LoadMyArtifect()
     {
         string _Data = PlayerPrefs.GetString("MyArtiList", "525*");
-
         return (_Data).Split('*');
     }
 
@@ -196,58 +273,14 @@ public class GatChaManager : MonoBehaviour
     {
         var ppm = PlayerPrefsManager.GetInstance();
 
-        if (ppm.Arti_PunchTouch >= 10) ppm.Arti_PunchTouch = 10;
-        if (ppm.Arti_Mattzip >= 1000) ppm.Arti_Mattzip = 1000;
-        if (ppm.Arti_HP >= 1000) ppm.Arti_HP = 1000;
-        if (ppm.Arti_GroggyTouch >= 49) ppm.Arti_GroggyTouch = 49;
-        if (ppm.Arti_GAL >= 100) ppm.Arti_GAL = 100;
-        /// --------------------------------------------------------------- 신규 추가
-        if (ppm.Arti_DefenceTime >= 100) ppm.Arti_DefenceTime = 100;
-        if (ppm.Arti_GoldBox >= 300) ppm.Arti_GoldBox = 300;
-        if (ppm.Arti_OffGold >= 500) ppm.Arti_OffGold = 500;
-
-        if (ppm.Arti_MuganTime >= 300) ppm.Arti_MuganTime = 300;
-        if (ppm.Arti_AttackPower >= 999) ppm.Arti_AttackPower = 999;
-
-        /// --------------------------------------------------------------- 신규 추가 0608
-        if (ppm.Arti_GoldPer >= 1000) ppm.Arti_GoldPer = 1000;
-        if (ppm.Arti_LuckyBoxPer >= 1000) ppm.Arti_LuckyBoxPer = 1000;
-        if (ppm.Arti_DefencePer >= 500) ppm.Arti_DefencePer = 500;
-        if (ppm.Arti_GoldUpgrade >= 500) ppm.Arti_GoldUpgrade = 500;
-        if (ppm.Arti_InfiReword >= 1000) ppm.Arti_InfiReword = 1000;
-        if (ppm.Arti_MiniReword >= 1000) ppm.Arti_MiniReword = 1000;
-        if (ppm.Arti_MiniGameTime >= 300) ppm.Arti_MiniGameTime = 300;
-
-
+        /// 저장된 아티 쪼개서 가져옴
+        artiDataList = LoadMyArtifect();
+        /// 처음 시작시만 적용
+        InitDummyArti(artiDataList);
+        /// 새아이템 적용
+        AddNewItemToGrid();
 
         /// -----------------------------------------
-
-        if (ppm.Arti_PunchTouch > 0) SetNewItem(0);
-        if (ppm.Arti_Mattzip > 0) SetNewItem(1);
-        if (ppm.Arti_HP > 0) SetNewItem(2);
-        if (ppm.Arti_GroggyTouch > 0) SetNewItem(3);
-        if (ppm.Arti_GAL > 0) SetNewItem(4);
-
-        if (ppm.Arti_DefenceTime > 0) SetNewItem(5);
-        if (ppm.Arti_GoldBox > 0) SetNewItem(6);
-        if (ppm.Arti_OffGold > 0) SetNewItem(7);
-
-        if (ppm.Arti_MuganTime > 0) SetNewItem(8);
-        if (ppm.Arti_AttackPower > 0) SetNewItem(9);
-
-        if (ppm.Arti_GoldPer > 0) SetNewItem(10);
-        if (ppm.Arti_LuckyBoxPer > 0) SetNewItem(11);
-        if (ppm.Arti_DefencePer > 0) SetNewItem(12);
-        if (ppm.Arti_GoldUpgrade > 0) SetNewItem(13);
-        if (ppm.Arti_InfiReword > 0) SetNewItem(14);
-        if (ppm.Arti_MiniReword > 0) SetNewItem(15);
-        if (ppm.Arti_MiniGameTime > 0) SetNewItem(16);
-
-
-
-        /// -----------------------------------------
-
-
 
         Arti01_Lv.text = "Lv."+ ppm.Arti_PunchTouch + "  ( Max Lv. 10 )";
         Arti02_Lv.text = "Lv."+ ppm.Arti_Mattzip + "  ( Max Lv. 1000 )";
@@ -549,6 +582,7 @@ public class GatChaManager : MonoBehaviour
         for (int i = 1; i < 12; i++)
         {
             GoGoGatCha(i);
+            AddNewItemToGrid();
         }
 
         // 팝업 텍스트 채워주기. 11번.

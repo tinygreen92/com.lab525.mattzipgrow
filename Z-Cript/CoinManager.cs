@@ -94,7 +94,7 @@ public class CoinManager : MonoBehaviour
             isBanjun = !isBanjun;
         }
 
-        Transform CoinTf = PlayerPrefsManager.GetInstance().CoinPos;
+        Transform CoinTf = PlayerPrefsManager.GetInstance().KimchiPos;
         /// 스크린 좌표를 월드 좌표로 변화 한다.
         CoinPos = Camera.main.ScreenToWorldPoint(CoinTf.position);
         moveRoutine = StartCoroutine(KimchiProgress());

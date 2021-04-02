@@ -108,6 +108,7 @@ public class PlayerPrefsManager : MonoBehaviour
     public GameObject CoinOB;
     public GameObject BapOB;
     public Transform CoinPos;
+    public Transform KimchiPos;
     [Header("- 박스 프리팹")]
     public GameObject LucBox;
     [Header("- 인앱 결제 대기창")]
@@ -893,7 +894,7 @@ public class PlayerPrefsManager : MonoBehaviour
                 * ( double.Parse(Dia_ATK_PER_UP) // 특별강화 %
                 + uniformInfo[0].Skill_LV // 스킬 %
                 + weaponInfo[PunchIndex].weaponEffect // 장비 %
-                + Mattzip_Dia_Weap // 영구구매 %
+                + Punch_Dia_Weap // 영구구매 %
                 + Stat_is3ATK  // 깃발 %
                 + AttackPunch ); // 유물 %
             /// 기본 배율 보정
@@ -1082,7 +1083,6 @@ public class PlayerPrefsManager : MonoBehaviour
         get
         {
             /// Mat_Mattzip_Hit 맞으면 증가
-            /// MattzipStat 국밥으로 강화하면 증가
             /// MattzipArtif 유물 뽑기 하면 증가
 
             var value = Mat_Mattzip_Hit;
@@ -2352,9 +2352,9 @@ public class PlayerPrefsManager : MonoBehaviour
 
 
     /// <summary>
-    /// 훈련장비 다이아 구매시 맷집 증가 → 공격력 증가로 수정
+    /// 훈련장비 다이아 구매시 → 공격력 증가로 수정
     /// </summary>
-    public float Mattzip_Dia_Weap
+    public float Punch_Dia_Weap
     {
         get
         {
@@ -3996,6 +3996,8 @@ public class PlayerPrefsManager : MonoBehaviour
         public int cloudTmpForGPGS_179;
         public int cloudTmpForGPGS_180;
 
+        public string cloudTmpForGPGS_181;
+
     }
 
     //public List<GPGSsavedPrefList> listGPGS = new List<GPGSsavedPrefList>();
@@ -4170,7 +4172,9 @@ public class PlayerPrefsManager : MonoBehaviour
                 cloudTmpForGPGS_178 = PlayerPrefs.GetInt("Friend_02_OffTimeUp_Lv", 0),
                 cloudTmpForGPGS_179 = PlayerPrefs.GetInt("Friend_03_OffSpped_Lv", 0),
                 cloudTmpForGPGS_180 = PlayerPrefs.GetInt("Friend_04_MattzipPer_Lv", 0),
-            }
+
+                cloudTmpForGPGS_181 = PlayerPrefs.GetString("MyArtiList", "525*"),
+    }
         };
 
         BinaryFormatter binaryFormatter = new BinaryFormatter();
@@ -4379,6 +4383,7 @@ public class PlayerPrefsManager : MonoBehaviour
         PlayerPrefs.SetInt("Friend_03_OffSpped_Lv", listGPGS[0].cloudTmpForGPGS_179);
         PlayerPrefs.SetInt("Friend_04_MattzipPer_Lv", listGPGS[0].cloudTmpForGPGS_180);
 
+        PlayerPrefs.SetString("MyArtiList", listGPGS[0].cloudTmpForGPGS_181);
 
 
         /// 삭제 해줄 것들 광고 쿨타임 등등

@@ -61,7 +61,7 @@ public class PunchManager : MonoBehaviour
         /// 총 펀치 갯수 현재 100 개
         int ccnt = PlayerPrefsManager.GetInstance().punchAmont;
         /// 다이아로 펀치 해금 초기화.
-        PlayerPrefsManager.GetInstance().Mattzip_Dia_Weap = 0;
+        PlayerPrefsManager.GetInstance().Punch_Dia_Weap = 0;
 
         for (int i = 0; i < ccnt; i++)
         {
@@ -72,7 +72,7 @@ public class PunchManager : MonoBehaviour
                 {
                     /// 능력치 총합 더 해주고.
                     // 구매 완료
-                    PlayerPrefsManager.GetInstance().Mattzip_Dia_Weap += 10f * (i + 1);
+                    PlayerPrefsManager.GetInstance().Punch_Dia_Weap += 10f * (i + 1);
                     tmpDiaBuyWeap += "1*";
                 }
                 else  /// 아직 만렙만 찍은 상태 - 다이아몬드 구입창 보여줘라.
@@ -443,7 +443,7 @@ public class PunchManager : MonoBehaviour
 
         /// 다이아로 구매했으면 맷집 증가 효과 더해줌 -> 한번만 적용됨
         var thisWeaponEff = PlayerPrefsManager.GetInstance().weaponInfo[SD_PunchIndex].weaponEffect;
-        PlayerPrefsManager.GetInstance().Mattzip_Dia_Weap += thisWeaponEff;
+        PlayerPrefsManager.GetInstance().Punch_Dia_Weap += thisWeaponEff;
 
         /// 업글 완료시 창 닫아줌
         SomeThingPop.SetActive(false);
