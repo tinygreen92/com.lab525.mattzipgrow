@@ -64,7 +64,7 @@ public class PlayerPrefsManager : MonoBehaviour
         instance = this;
         magaDamageData = CSVReader.Read("MainGameDam"); // 방어전 대미지
         // 초기값 필요해?
-        megaDamColl = new string[100];
+        megaDamColl = new string[punchAmont];
     }
 
 
@@ -1265,14 +1265,14 @@ public class PlayerPrefsManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 현재 장착한 쉴드 인덱스
+    /// 현재 장착한 쉴드 [인덱스 -1]
     /// </summary>
     public int ShieldIndex
     {
         get
         {
             var tmp = PlayerPrefs.GetInt("Gold_RECOV_UP_Lv", 0);
-            return tmp;
+            return tmp-1;
         }
 
         set
@@ -2744,6 +2744,8 @@ public class PlayerPrefsManager : MonoBehaviour
         public float powerMinusPer;         // [4] 성공 차감율
         public float upperEfect;            // [5] 레벨당 방어력 증가치 %
         public string shieldCost;           // [6] 레벨업시 소모 깍두기
+        //
+        public int amount;
     }
 
     // 만든 클래스를 리스트에 담아서 테이블처럼 사용
@@ -2752,21 +2754,22 @@ public class PlayerPrefsManager : MonoBehaviour
     /// <summary>
     /// 실드 총 갯수만큼 반복
     /// </summary>
-    public void AddShieldData(float row_1, float row_2, float row_3, float row_4, float row_5, string row_6)
-    {
-        shieldInfo.Add(new ShieldEntry
-        {
-            shieldLevel = 0,
-            isUnlock = false,
-            //
-            equipedEffect = row_1,
-            ownedEffect = row_2,
-            powerUpper = row_3,
-            powerMinusPer = row_4,
-            upperEfect = row_5,
-            shieldCost = row_6,
-        });
-    }
+    //public void AddShieldData(float row_1, float row_2, float row_3, float row_4, float row_5, string row_6)
+    //{
+    //    shieldInfo.Add(new ShieldEntry
+    //    {
+    //        shieldLevel = 0,
+    //        isUnlock = false,
+    //        //
+    //        equipedEffect = row_1,
+    //        ownedEffect = row_2,
+    //        powerUpper = row_3,
+    //        powerMinusPer = row_4,
+    //        upperEfect = row_5,
+    //        shieldCost = row_6,
+    //        amount = 0
+    //    });
+    //}
 
 
 

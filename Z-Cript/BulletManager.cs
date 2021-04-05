@@ -480,10 +480,10 @@ public class BulletManager : MonoBehaviour
     IEnumerator WitheMan(Collider tmpC, bool _isCritic)
     {
         ///코인 프리팹
-        coin = Lean.Pool.LeanPool.Spawn(PlayerPrefsManager.GetInstance().CoinOB, transform.position, transform.rotation);
+        coin = Lean.Pool.LeanPool.Spawn(PlayerPrefsManager.GetInstance().CoinOB, transform.position, Quaternion.identity);
         coin.GetComponent<CoinManager>().CoinInit();
         /// 김치 프리팹
-        kimchi = Lean.Pool.LeanPool.Spawn(PlayerPrefsManager.GetInstance().kimchiCoin, transform.position, transform.rotation);
+        kimchi = Lean.Pool.LeanPool.Spawn(PlayerPrefsManager.GetInstance().kimchiCoin, transform.position, Quaternion.identity);
         kimchi.GetComponent<CoinManager>().KimchiInit();
 
         /// 체력 게이지 DOWN / 피버 게이지 UP // 주사위 굴림 - 선물상자 드랍

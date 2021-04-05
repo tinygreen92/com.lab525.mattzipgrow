@@ -1709,6 +1709,7 @@ public class GroggyManager : MonoBehaviour
     }
 
     Coroutine coru;
+    WaitForSeconds GC_05_SEC = new WaitForSeconds(0.5f);
 
     /// <summary>
     /// 회색으로 덮기 판단 0.5초 마다
@@ -1720,7 +1721,7 @@ public class GroggyManager : MonoBehaviour
 
         while (true)
         {
-            yield return new WaitForSeconds(0.5f);
+            yield return GC_05_SEC;
             // 미션 달성한거 뭐있나 초기화.
             All_GoldCheak();
         }

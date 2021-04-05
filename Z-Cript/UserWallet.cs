@@ -160,7 +160,7 @@ public class UserWallet : MonoBehaviour
     {
         string value = PlayerPrefsManager.GetInstance().gupbap;
         MilkText.text = SeetheNatural(double.Parse(value));
-        /// 국밥에 따라 업글 버튼 새로 고침
+        /// [훈련 도구 업글 버튼] 새로 고침
         pm.MilkUpdateCup();
     }
 
@@ -169,6 +169,8 @@ public class UserWallet : MonoBehaviour
     {
         string value = PlayerPrefsManager.GetInstance().ssalbap;
         SSalText.text = SeetheNatural(double.Parse(value));
+        /// 
+
     }
 
     /// 열쇠
