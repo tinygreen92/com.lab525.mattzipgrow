@@ -1300,20 +1300,26 @@ public class PlayerPrefsManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 안쓰는 float
+    /// int 로 바꿀것
     /// </summary>
-    public float MattzipStat
+    public int ShiledTicket
     {
         get
         {
             if (!PlayerPrefs.HasKey("MattzipStat")) return 0;
-            var tmp = PlayerPrefs.GetFloat("MattzipStat");
-            return tmp;
+            var _key = PlayerPrefs.GetInt("MattzipStat");
+            return _key;
         }
 
         set
         {
-            PlayerPrefs.SetFloat("MattzipStat", value);
+            int kkey = value;
+            // 최대 열쇠 범위 20억
+            if (value >= 2000000000) kkey = 2000000000;
+            //
+            UserWallet.GetInstance().ShiledTiketText.text = kkey.ToString("N0");
+            //
+            PlayerPrefs.SetInt("MattzipStat", kkey);
             PlayerPrefs.Save();
         }
     }
@@ -3892,7 +3898,7 @@ public class PlayerPrefsManager : MonoBehaviour
         public string cloudTmpForGPGS_029;
         public string cloudTmpForGPGS_030;
         public float cloudTmpForGPGS_031;
-        public float cloudTmpForGPGS_032;
+        public int cloudTmpForGPGS_032;
         public float cloudTmpForGPGS_033;
         public float cloudTmpForGPGS_034;
         public float cloudTmpForGPGS_035;
@@ -4055,7 +4061,7 @@ public class PlayerPrefsManager : MonoBehaviour
                 cloudTmpForGPGS_029 = PlayerPrefs.GetString("weaponInfo"),
                 cloudTmpForGPGS_030 = PlayerPrefs.GetString("questInfo"),
                 cloudTmpForGPGS_031 = PlayerPrefs.GetFloat("Mat_Mattzip_Hit", 0),
-                cloudTmpForGPGS_032 = PlayerPrefs.GetFloat("MattzipStat", 0),
+                cloudTmpForGPGS_032 = PlayerPrefs.GetInt("MattzipStat", 0),
                 cloudTmpForGPGS_033 = PlayerPrefs.GetFloat("MattzipArtif", 0),
                 cloudTmpForGPGS_034 = PlayerPrefs.GetFloat("AttackPerPunch", 0),
                 cloudTmpForGPGS_035 = PlayerPrefs.GetFloat("GroggyTouch", 0),
@@ -4278,7 +4284,7 @@ public class PlayerPrefsManager : MonoBehaviour
         PlayerPrefs.SetString("Mat_currentHP", listGPGS[0].cloudTmpForGPGS_027);
         PlayerPrefs.SetString("Mat_Recov", listGPGS[0].cloudTmpForGPGS_028);
         PlayerPrefs.SetFloat("Mat_Mattzip_Hit", listGPGS[0].cloudTmpForGPGS_031);
-        PlayerPrefs.SetFloat("MattzipStat", listGPGS[0].cloudTmpForGPGS_032);
+        PlayerPrefs.SetInt("MattzipStat", listGPGS[0].cloudTmpForGPGS_032);
         PlayerPrefs.SetFloat("MattzipArtif", listGPGS[0].cloudTmpForGPGS_033);
         PlayerPrefs.SetFloat("AttackPerPunch", listGPGS[0].cloudTmpForGPGS_034);
         PlayerPrefs.SetFloat("GroggyTouch", listGPGS[0].cloudTmpForGPGS_035);

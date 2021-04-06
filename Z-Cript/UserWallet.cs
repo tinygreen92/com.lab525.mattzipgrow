@@ -17,6 +17,7 @@ public class UserWallet : MonoBehaviour
     public Text CRD_Text;
 
     [Header("-탑 패널 표기 시")]
+    public Text ShiledTiketText;
     public Text KimchiText;
     public Text GoldText;
     public Text DiaText;
@@ -53,9 +54,11 @@ public class UserWallet : MonoBehaviour
         PlayerPrefsManager.GetInstance().gold = dts.AddStringDouble(PlayerPrefsManager.GetInstance().gold, "3.33E+302");
         PlayerPrefsManager.GetInstance().gupbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().gupbap, "3.33E+302");
         PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().ssalbap, "3.33E+302");
-        PlayerPrefsManager.GetInstance().key += 1000;
-        PlayerPrefsManager.GetInstance().ticket += 1000;
-        PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 100000000000000f);
+        PlayerPrefsManager.GetInstance().Kimchi = dts.AddStringDouble(PlayerPrefsManager.GetInstance().Kimchi, "3.33E+302");
+        PlayerPrefsManager.GetInstance().key += 366;
+        PlayerPrefsManager.GetInstance().ticket += 366;
+        PlayerPrefsManager.GetInstance().ShiledTicket += 366;
+        PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 330000000000000f);
 
         ShowAllMoney();
     }
@@ -111,6 +114,7 @@ public class UserWallet : MonoBehaviour
         ShowUserDia();
         ShowUserMilk();
         //ShowUserKey();
+        PlayerPrefsManager.GetInstance().ShiledTicket += 0;
         PlayerPrefsManager.GetInstance().key += 0;
         ShowUserMatZip();
         ShowUserATK();
@@ -123,13 +127,23 @@ public class UserWallet : MonoBehaviour
 
 
     /// <summary>
-    /// 깍두기 최종 획득량 = playerDPS * 유물 깍두기 획득 증가 %
+    /// 깍두기 최종 획득량 = playerDPS * 유물 깍두기 획득 증가 % ShiledTiketText
     /// </summary>
     public void ShowUserKimchi()
     {
         string value = PlayerPrefsManager.GetInstance().Kimchi;
         KimchiText.text = dts.fDoubleToGoldOutPut(value);
     }
+
+    /// <summary>
+    /// ShiledTiketText
+    /// </summary>
+    public void ShowUserShiledTiket()
+    {
+        string value = PlayerPrefsManager.GetInstance().Kimchi;
+        ShiledTiketText.text = dts.fDoubleToGoldOutPut(value);
+    }
+
 
 
     /// 골드

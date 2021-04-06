@@ -37,12 +37,12 @@ public class Booster_Spin : MonoBehaviour
                 PlayerPrefs.SetInt("ticket", 5);
             }
         }
-        /// 최신값 안 바뀜 = 같은 날이다 = 아직 0시 안 지났다. = 스핀 못함.
-        else
-        {
-            /// 같은 날이지만 출석을 체크 안했을때 라는 경우는 없다.
-            // isSameDayReCheck = true;
-        }
+        ///// 최신값 안 바뀜 = 같은 날이다 = 아직 0시 안 지났다. = 스핀 못함.
+        //else
+        //{
+        //    /// 같은 날이지만 출석을 체크 안했을때 라는 경우는 없다.
+        //    // isSameDayReCheck = true;
+        //}
 
         ///// 이미 출석체크를 했다?
         //if (currentTime > dailyEndTimestamp && PlayerPrefsManager.GetInstance().NewDailyCount == 1)

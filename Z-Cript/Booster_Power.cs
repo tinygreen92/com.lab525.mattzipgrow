@@ -145,14 +145,6 @@ public class Booster_Power : MonoBehaviour
 
     public void BuffAds()
     {
-        int vvip = PlayerPrefsManager.GetInstance().VIP;
-        //PlayerPrefsManager.GetInstance().IN_APP.SetActive(true);
-        //if (vvip == 526 || vvip == 725)
-        //{
-        //    BuffAdsInvo();
-        //    return;
-        //}
-
 
         if (Advertising.IsRewardedAdReady(RewardedAdNetwork.AdMob, AdPlacement.Default))
         {
