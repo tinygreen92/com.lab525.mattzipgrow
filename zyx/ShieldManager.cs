@@ -235,6 +235,25 @@ public class ShieldManager : MonoBehaviour
     #endregion
 
 
+    /// <summary>
+    /// 롱 클릭하면 쉴드 업그레이드 해줌
+    /// </summary>
+    /// <param name="p_index"></param>
+    internal void LongClicedUpgradeBtn(int p_index)
+    {
+        for (int i = 1; i < InfinityContent.childCount; i++)
+        {
+            if (int.Parse(InfinityContent.GetChild(i).name) == p_index)
+            {
+                InfinityContent.GetChild(i).GetComponent<ShieldItem>().ClickedUpgradeBtn();
+                return;
+            }
+
+        }
+
+    }
+
+
 
     /// <summary>
     /// 재화 충분하면 뽑기 연출 호출 

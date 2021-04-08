@@ -532,7 +532,7 @@ public class ShopManager : MonoBehaviour
                         diaRan += Random.Range(600, 901);
                     }
 
-                    PlayerPrefsManager.GetInstance().gupbap = dts.AddStringDouble(gupbap, diaRan.ToString());
+                    PlayerPrefsManager.GetInstance().gupbap = dts.AddStringDouble(gupbap, diaRan.ToString("f0"));
 
                     rdopen.RandoBoxInit(2, diaRan);
 
@@ -581,7 +581,7 @@ public class ShopManager : MonoBehaviour
                         diaRan += Random.Range(300, 451);
                     }
 
-                    PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(Salbap, diaRan.ToString());
+                    PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(Salbap, diaRan.ToString("f0"));
 
                     rdopen.RandoBoxInit(3, diaRan);
 
@@ -646,7 +646,7 @@ public class ShopManager : MonoBehaviour
                         diaRan += Random.Range(2000, 2901);
                     }
 
-                    PlayerPrefsManager.GetInstance().gupbap = dts.AddStringDouble(gupbap, diaRan.ToString());
+                    PlayerPrefsManager.GetInstance().gupbap = dts.AddStringDouble(gupbap, diaRan.ToString("f0"));
 
                     rdopen.RandoBoxInit(2, diaRan);
 
@@ -694,7 +694,7 @@ public class ShopManager : MonoBehaviour
                         diaRan += Random.Range(1000, 1451);
                     }
 
-                    PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(Salbap, diaRan.ToString());
+                    PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(Salbap, diaRan.ToString("f0"));
 
                     rdopen.RandoBoxInit(3, diaRan);
 
@@ -758,7 +758,7 @@ public class ShopManager : MonoBehaviour
                         diaRan += Random.Range(3000, 4901);
                     }
 
-                    PlayerPrefsManager.GetInstance().gupbap = dts.AddStringDouble(gupbap, diaRan.ToString());
+                    PlayerPrefsManager.GetInstance().gupbap = dts.AddStringDouble(gupbap, diaRan.ToString("f0"));
 
                     rdopen.RandoBoxInit(2, diaRan);
 
@@ -807,7 +807,7 @@ public class ShopManager : MonoBehaviour
                         diaRan += Random.Range(1450, 2451);
                     }
 
-                    PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(Salbap, diaRan.ToString());
+                    PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(Salbap, diaRan.ToString("f0"));
 
                     rdopen.RandoBoxInit(3, diaRan);
 

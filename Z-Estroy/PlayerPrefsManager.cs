@@ -264,24 +264,6 @@ public class PlayerPrefsManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 안쓴다
-    /// </summary>
-    public int DailyCount
-    {
-        get
-        {
-            // 출석일 0일 초기값.
-            if (!PlayerPrefs.HasKey("DailyCount")) return 0;
-            // 값 존재 안하면 0값.
-            var _daily = PlayerPrefs.GetInt("DailyCount");
-
-            return _daily;
-        }
-
-        set { PlayerPrefs.SetInt("DailyCount", value); }
-    }
-
-    /// <summary>
     /// 24시간 출석 체크용.
     /// </summary>
     public int NewDailyCount
@@ -503,15 +485,20 @@ public class PlayerPrefsManager : MonoBehaviour
     {
         get
         {
-            if (!PlayerPrefs.HasKey("diamond")) return "0";
-            var _diamond = PlayerPrefs.GetString("diamond");
-            return _diamond;
+            var _gold = PlayerPrefs.GetString("diamond", "0"); // 1E + 308 값
+            var result = double.Parse(_gold).ToString("f0"); // double.Tosting 값
+
+            return result;
         }
 
         set
         {
-            //allMoneyInfo[0].dDiamond = double.Parse(value);
-            PlayerPrefs.SetString("diamond", value);
+            var result = dts.SubStringDouble(value, "9.99E+302"); // double.Tosting 값
+            if (result == "-1")
+                PlayerPrefs.SetString("diamond", value);
+            else
+                PlayerPrefs.SetString("diamond", "9.99E+302");
+
             PlayerPrefs.Save();
         }
     }
@@ -1236,7 +1223,7 @@ public class PlayerPrefsManager : MonoBehaviour
     /// <returns></returns>
     public string GetPvpMattDefence()
     {
-        return dts.AddStringDouble(Mat_Mattzip, GetPlayerDefence());
+        return dts.AddStringDouble(Mat_Mattzip, GetPlayerDefence().ToString("f0"));
     }
 
 
@@ -1247,7 +1234,7 @@ public class PlayerPrefsManager : MonoBehaviour
     /// (스탯 방어력 + 레벨 방어력 ) * ( 방패 착용 방어력 % + 방패 보유 방어력 % + 깃발 % + 유물 % + 특별강화 %)  
     /// </summary>
     /// <returns></returns>
-    public string GetPlayerDefence()
+    public double GetPlayerDefence()
     {
         /// (스탯 방어력 + 레벨 방어력 )
         Def_result1 = Defence_Lv + PlayerPrefs.GetFloat("Chara_Defence_UP", 0);
@@ -1261,7 +1248,7 @@ public class PlayerPrefsManager : MonoBehaviour
             );
         /// 기본 배율 보정
         Def_result2 += 1.0f;
-        return (Def_result1 * Def_result2).ToString();
+        return (Def_result1 * Def_result2);
     }
 
     /// <summary>
@@ -1403,7 +1390,15 @@ public class PlayerPrefsManager : MonoBehaviour
 
 
 
+    //PlayerPrefs.SetInt("is0508shock", listGPGS[0].cloudTmpForGPGS_105);
+    //PlayerPrefs.SetInt("is0515shock", listGPGS[0].cloudTmpForGPGS_106);
 
+
+
+
+
+    //PlayerPrefs.SetInt("is0508shock", listGPGS[0].cloudTmpForGPGS_105);
+    //PlayerPrefs.SetInt("is0515shock", listGPGS[0].cloudTmpForGPGS_106);
 
 
 
@@ -3868,7 +3863,7 @@ public class PlayerPrefsManager : MonoBehaviour
     public class GPGSsavedPrefList
     {
         public int cloudTmpForGPGS_001;
-        public int cloudTmpForGPGS_002;
+        public string cloudTmpForGPGS_002;
         public int cloudTmpForGPGS_003;
         public int cloudTmpForGPGS_004;
         public int cloudTmpForGPGS_005;
@@ -4031,7 +4026,7 @@ public class PlayerPrefsManager : MonoBehaviour
             new GPGSsavedPrefList
             {
                 cloudTmpForGPGS_001 = PlayerPrefs.GetInt("isFristGameStart", 1),
-                cloudTmpForGPGS_002 = PlayerPrefs.GetInt("DailyCount", 0),
+                cloudTmpForGPGS_002 = PlayerPrefs.GetString("Shield_Time", "0"),
                 cloudTmpForGPGS_003 = PlayerPrefs.GetInt("PunchIndex", 0),
                 cloudTmpForGPGS_004 = PlayerPrefs.GetInt("DefendTrigger", 0),
                 cloudTmpForGPGS_005 = PlayerPrefs.GetInt("key", 20),
@@ -4079,7 +4074,7 @@ public class PlayerPrefsManager : MonoBehaviour
                 cloudTmpForGPGS_108 = PlayerPrefs.GetFloat("dDiamond", 0),
                 //0518
                 cloudTmpForGPGS_109 = PlayerPrefs.GetInt("isAllmute", 0),
-                cloudTmpForGPGS_110 = PlayerPrefs.GetInt("is0515shock", 0),
+                cloudTmpForGPGS_110 = PlayerPrefs.GetInt("Shield10AdsCnt", 0),  /// is0517shock
                 cloudTmpForGPGS_111 = PlayerPrefs.GetString("shieldInfo"),
 
 
@@ -4255,7 +4250,7 @@ public class PlayerPrefsManager : MonoBehaviour
         LoaduniformData();
         //서순
         PlayerPrefs.SetInt("isFristGameStart", listGPGS[0].cloudTmpForGPGS_001);
-        PlayerPrefs.SetInt("DailyCount", listGPGS[0].cloudTmpForGPGS_002);
+        PlayerPrefs.SetString("Shield_Time", listGPGS[0].cloudTmpForGPGS_002);
         PlayerPrefs.SetInt("PunchIndex", listGPGS[0].cloudTmpForGPGS_003);
         //PlayerPrefs.SetInt("PunchIndex", 0);
         PlayerPrefs.SetInt("DefendTrigger", listGPGS[0].cloudTmpForGPGS_004);
@@ -4298,10 +4293,10 @@ public class PlayerPrefsManager : MonoBehaviour
         PlayerPrefs.SetInt("MaxGet_MuganTop", listGPGS[0].cloudTmpForGPGS_104);
         PlayerPrefs.SetInt("is0508shock", listGPGS[0].cloudTmpForGPGS_105);
         PlayerPrefs.SetInt("is0515shock", listGPGS[0].cloudTmpForGPGS_106);
+        PlayerPrefs.SetInt("Shield10AdsCnt", listGPGS[0].cloudTmpForGPGS_110);  /// is0517shock
         PlayerPrefs.SetFloat("dDiamond", listGPGS[0].cloudTmpForGPGS_108);
         //0517
         PlayerPrefs.SetInt("isAllmute", listGPGS[0].cloudTmpForGPGS_109);
-        PlayerPrefs.SetInt("is0517shock", listGPGS[0].cloudTmpForGPGS_110);
         //
         PlayerPrefs.SetInt("is1Recov", listGPGS[0].cloudTmpForGPGS_112);
         PlayerPrefs.SetInt("is2Stamina", listGPGS[0].cloudTmpForGPGS_113);

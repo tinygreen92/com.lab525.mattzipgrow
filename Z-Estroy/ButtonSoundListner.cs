@@ -8,11 +8,13 @@ public class ButtonSoundListner : MonoBehaviour, IPointerUpHandler, IPointerDown
 {
     PunchManager punchManager;
     QuestManager questManager;
+    ShieldManager shieldManager;
 
     private void Awake()
     {
         punchManager = GameObject.Find("PunchManager").GetComponent<PunchManager>();
         questManager = GameObject.Find("QuestManager").GetComponent<QuestManager>();
+        shieldManager = GameObject.Find("ShieldManager").GetComponent<ShieldManager>();
     }
 
 
@@ -21,18 +23,27 @@ public class ButtonSoundListner : MonoBehaviour, IPointerUpHandler, IPointerDown
     int p_index = 0;
     public void OnPointerDown(PointerEventData eventData)
     {
+
+
+        /// 퀘스트 롱 클릭
         if(transform.parent.parent.tag == "GRID_QUEST")
         {
-            Invoke("InvoDownQuset", 0.3f);
+            Invoke(nameof(InvoDownQuset), 0.3f);
         }
 
         if (transform.parent == null) return;
         else if (transform.parent.parent == null) return;
         else if (transform.parent.parent.parent == null) return;
-
-        if (transform.parent.parent.parent.transform.tag == "UPGRADE" && transform.GetSiblingIndex() == 1)
+        
+        /// 훈련도구 업글 롱 클릭
+        if (transform.parent.parent.parent.tag == "UPGRADE" && transform.GetSiblingIndex() == 1)
         {
-            Invoke("InvoDown", 0.3f);
+            Invoke(nameof(InvoDown), 0.3f);
+        }
+        /// 방패 업글 롱 클릭
+        else if (transform.parent.tag == "Shield" && transform.GetSiblingIndex() == 1)
+        {
+            Invoke(nameof(InvoDown), 0.3f);
         }
     }
 
@@ -69,7 +80,7 @@ public class ButtonSoundListner : MonoBehaviour, IPointerUpHandler, IPointerDown
 
         if (transform.parent.parent.tag == "GRID_QUEST")
         {
-            CancelInvoke("InvoDownQuset");
+            CancelInvoke(nameof(InvoDownQuset));
             isBtnDownQuest = false;
         }
 
@@ -77,9 +88,9 @@ public class ButtonSoundListner : MonoBehaviour, IPointerUpHandler, IPointerDown
         else if (transform.parent.parent == null) return;
         else if (transform.parent.parent.parent == null) return;
 
-        if (transform.parent.parent.parent.transform.tag == "UPGRADE")
+        if (transform.parent.parent.parent.transform.tag == "UPGRADE" || transform.parent.tag == "Shield")
         {
-            CancelInvoke("InvoDown");
+            CancelInvoke(nameof(InvoDown));
             isBtnDown = false;
         }
 
@@ -90,7 +101,11 @@ public class ButtonSoundListner : MonoBehaviour, IPointerUpHandler, IPointerDown
     {
         if (isBtnDown)
         {
-            punchManager.LongClicedUpgradeBtn(p_index);
+            if (transform.parent.tag == "Shield")
+                shieldManager.LongClicedUpgradeBtn(p_index);
+            else
+                punchManager.LongClicedUpgradeBtn(p_index);
+
         }
 
         if (isBtnDownQuest)

@@ -22,35 +22,39 @@ public class PostCart : MonoBehaviour
                 case "diamond":
                     tmpHead = "다이아몬드 ";
                     tmpTail = " 개.";
-
                     break;
                 case "gold":
                     tmpHead = "";
                     tmpTail = " 골드.";
-
                     break;
                 case "key":
                     tmpHead = "열쇠 ";
                     tmpTail = " 개.";
-
                     break;
                 case "gupbap":
                     tmpHead = "국밥 ";
                     tmpTail = " 개.";
-
                     break;
-
                 case "ssal":
                     tmpHead = "쌀밥 ";
                     tmpTail = " 개.";
-
                     break;
-
                 case "ticket":
                     tmpHead = "입장권 ";
                     tmpTail = " 장.";
-
                     break;
+
+                //
+
+                case "kimchi":
+                    tmpHead = "깍두기 ";
+                    tmpTail = " 개.";
+                    break;
+                case "shield":
+                    tmpHead = "방패 뽑기권 ";
+                    tmpTail = " 장.";
+                    break;
+
             }
 
             transform.GetChild(1).GetComponent<Text>().text = tmpHead + _amount + tmpTail;

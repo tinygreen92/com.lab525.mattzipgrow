@@ -31,38 +31,7 @@ public class Booster_Spin : MonoBehaviour
             Debug.LogError("!!!!! 최신값이 바뀌었다 ResetDailyQuest !!!!!");
 
             ResetDailyQuest();
-            // 티켓이 모자라면 초기화
-            if (PlayerPrefs.GetInt("ticket", 5) < 5)
-            {
-                PlayerPrefs.SetInt("ticket", 5);
-            }
         }
-        ///// 최신값 안 바뀜 = 같은 날이다 = 아직 0시 안 지났다. = 스핀 못함.
-        //else
-        //{
-        //    /// 같은 날이지만 출석을 체크 안했을때 라는 경우는 없다.
-        //    // isSameDayReCheck = true;
-        //}
-
-        ///// 이미 출석체크를 했다?
-        //if (currentTime > dailyEndTimestamp && PlayerPrefsManager.GetInstance().NewDailyCount == 1)
-        //{
-        //    // 출첵 안되게.
-        //    ReverseReset();
-        //    cheackCountText.text = string.Format("{0:00}:{1:00}:{2:00}", unbiasedRemaining.Hours, unbiasedRemaining.Minutes, unbiasedRemaining.Seconds);
-        //}
-        ///// 출석 체크 안했다?
-        //else
-        //{
-        //    Debug.LogError("!!!!! 출석 체크 안했다? !!!!!");
-
-        //    if (isReset) return;
-        //    // 날짜 바뀌면 체크.
-        //    isSameDayReCheck = true;
-        //    Debug.LogError("!!!!! 출석 체크 안했다? ResetDailyQuest !!!!!");
-        //    ResetDailyQuest();
-        //}
-
     }
 
     void FixedUpdate()
@@ -145,10 +114,12 @@ public class Booster_Spin : MonoBehaviour
             unbiasedTimerEndTimestamp = currentTime;
             // 최신값 세이브
             SaveDateTime(currentTime);
-
             // 출석 초기화.
-            PlayerPrefsManager.GetInstance().NewDailyCount = 0;
+            PlayerPrefs.SetInt("NewDailyCount", 0);
             cheackCountText.transform.parent.gameObject.SetActive(false);
+            /// 출석체크 판 초기화.
+            if (PlayerPrefsManager.GetInstance().DailyCount_Cheak >= 25) drc.ResetDailyBoard();
+
             // 일퀘 초기화.
             PlayerPrefsManager.GetInstance().questInfo[0].daily_Abs = 0;
             PlayerPrefsManager.GetInstance().questInfo[0].daily_Atk = 0;
@@ -158,11 +129,14 @@ public class Booster_Spin : MonoBehaviour
             PlayerPrefsManager.GetInstance().questInfo[0].daily_ArtiGatcha = 0;
             PlayerPrefsManager.GetInstance().questInfo[0].daily_LMITABS = 0;
 
-            /// 출석체크 판 초기화.
-            if (PlayerPrefsManager.GetInstance().DailyCount_Cheak >= 25) 
-                drc.ResetDailyBoard();
+            // 광고 리미트 초기화.
+            PlayerPrefs.SetInt("Shield10AdsCnt", 0);
+
+            // 티켓이 모자라면 충전
+            if (PlayerPrefs.GetInt("ticket", 5) < 5) PlayerPrefs.SetInt("ticket", 5);
 
             PlayerPrefs.Save();
+
             /// 출석창 호출
             dailyPopup.SetActive(true);
             dailyPopup.GetComponent<Animation>()["Roll_Incre"].speed = 1;
@@ -212,7 +186,7 @@ public class Booster_Spin : MonoBehaviour
 
 
     /// <summary>
-    /// 이름은 스핀이지만 사실은 출석체크 시간을 저장한다. 조심해.
+    /// 출석체크 시간을 저장한다. 조심해.
     /// </summary>
     /// <param name="dateTime"></param>
     void SaveDateTime(DateTime dateTime)

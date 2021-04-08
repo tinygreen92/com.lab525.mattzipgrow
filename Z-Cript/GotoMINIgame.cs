@@ -423,7 +423,7 @@ public class GotoMINIgame : MonoBehaviour
     public void EnterThePVP_WarGame()
     {
         // 초대장 체크체크
-        if (PlayerPrefsManager.GetInstance().ticket == 0)
+        if (PlayerPrefsManager.GetInstance().ticket < 1)
         {
             PopUpObjectManager.GetInstance().ShowWarnnigProcess("입장권이 부족하여 입장할 수 없습니다.");
             return;

@@ -229,7 +229,7 @@ public class MuganMode : MonoBehaviour
             getGupbap++;
             // 국밥 획득.
             string gupbap = PlayerPrefsManager.GetInstance().gupbap;
-            PlayerPrefsManager.GetInstance().gupbap = dts.AddStringDouble(gupbap, (500 * getGupbap).ToString());
+            PlayerPrefsManager.GetInstance().gupbap = dts.AddStringDouble(gupbap, (500 * getGupbap).ToString("f0"));
             PopUpObjectManager.GetInstance().ShowMuganRewordpop(2, (500 * getGupbap));
         }
         /// 쌀밥 지급
@@ -239,7 +239,7 @@ public class MuganMode : MonoBehaviour
             getSSSal++;
             // 국밥 획득.
             string gupbap = PlayerPrefsManager.GetInstance().gupbap;
-            PlayerPrefsManager.GetInstance().gupbap = dts.AddStringDouble(gupbap, (250 * getSSSal).ToString());
+            PlayerPrefsManager.GetInstance().gupbap = dts.AddStringDouble(gupbap, (250 * getSSSal).ToString("f0"));
             PopUpObjectManager.GetInstance().ShowMuganRewordpop(3, (250 * getSSSal));
         }
         /// 그 외는 열쇠 획득.

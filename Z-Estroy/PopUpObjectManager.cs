@@ -1128,7 +1128,7 @@ public class PopUpObjectManager : MonoBehaviour
     public void ShowSSalPopUPSkip(int _amount)
     {
         MiniGamerewordSkip.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = "쌀밥 " + _amount + " 그릇을 얻었다!";
-        PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().ssalbap, _amount.ToString());
+        PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().ssalbap, _amount.ToString("f0"));
         UserWallet.GetInstance().ShowUserSSalbap();
         PlayerPrefs.Save();
         //전체 켜줌
@@ -1152,7 +1152,7 @@ public class PopUpObjectManager : MonoBehaviour
         MiniGamereword.transform.GetChild(1).GetChild(4).gameObject.SetActive(false);
 
         MiniGamereword.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = "쌀밥 " + _amount + " 그릇을 얻었다!";
-        PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().ssalbap, _amount.ToString());
+        PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().ssalbap, _amount.ToString("f0"));
         UserWallet.GetInstance().ShowUserSSalbap();
         PlayerPrefs.Save();
         //전체 켜줌
@@ -1173,7 +1173,7 @@ public class PopUpObjectManager : MonoBehaviour
 
 
         MiniGamereword.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = "쌀밥 " + (SSalBapAmount * 2) + " 그릇을 얻었다!";
-        PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().ssalbap, SSalBapAmount.ToString());
+        PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().ssalbap, SSalBapAmount.ToString("f0"));
         UserWallet.GetInstance().ShowUserSSalbap();
         PlayerPrefs.Save();
         //전체 켜줌

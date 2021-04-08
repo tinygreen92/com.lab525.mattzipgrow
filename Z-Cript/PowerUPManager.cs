@@ -100,6 +100,7 @@ public class PowerUPManager : MonoBehaviour
         if (gameObject.name == "STATUS_POP")
         {
             Tap_Click_First(1);
+            groggyManager.PowerUP_Init();
         }
         else if (gameObject.name == "Artifect_POP")
         {
@@ -142,7 +143,6 @@ public class PowerUPManager : MonoBehaviour
                 // 훈련강화 페이지 새로 고침
                 if (name == "POWERUP_POP")
                 {
-                    Debug.LogError("POWERUP_POP 에서 훈련장비 탭 클릭");
                     groggyManager.PowerUP_Init();
                     pm.BoxInfoUpdate();
                 }

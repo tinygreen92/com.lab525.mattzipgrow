@@ -237,7 +237,7 @@ public class PlayFabLogin : MonoBehaviour
         // 텅 빈 화면 
         pvppoup.SetActive(true);
         // 티켓 갯수
-        pvpTicket.text = PlayerPrefsManager.GetInstance().ticket.ToString();
+        pvpTicket.text = PlayerPrefsManager.GetInstance().ticket.ToString("N0");
         /// 랭킹 갱신
         Tap_Click(0);
     }

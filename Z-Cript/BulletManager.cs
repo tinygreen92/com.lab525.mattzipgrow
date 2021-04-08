@@ -749,7 +749,7 @@ public class BulletManager : MonoBehaviour
         /// 방패 방어력 계산
 
         /// 방어력 
-        double vallu = double.Parse(PlayerPrefsManager.GetInstance().GetPlayerDefence());
+        double vallu = PlayerPrefsManager.GetInstance().GetPlayerDefence();
 
         /// 공격력 - 방어력
         string PunchDPS = dts.SubStringDouble(PlayerPrefsManager.GetInstance().PlayerDPS, vallu);

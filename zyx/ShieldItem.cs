@@ -37,7 +37,7 @@ public class ShieldItem : MonoBehaviour
     int thisShieldLevel;
     string thisShieldCost;
     float thisShieldEffect;
-    float thisOwnedEffect;
+    float thisDIAEffect;
 
     float thisSuccedFussion;
 
@@ -98,12 +98,13 @@ public class ShieldItem : MonoBehaviour
         thisShieldLevel = tmpList.shieldLevel;
         thisShieldEffect = thisShieldLevel < 1 ? 0 : tmpList.equipedEffect + (tmpList.upperEfect * thisShieldLevel);
         thisShieldCost = dts.multipleStringDouble(tmpList.shieldCost, (1 + 0.3f * thisShieldLevel));
-        thisOwnedEffect = thisShieldLevel < 1 ? 0 : tmpList.ownedEffect;
         thisSuccedFussion = tmpList.powerUpper - (tmpList.powerMinusPer * thisShieldLevel);
+        thisDIAEffect = tmpList.ownedEffect;
+
 
         LevelBox.text = "Lv. " + thisShieldLevel;
         DescBox.text = "장착 방어력 " + thisShieldEffect.ToString("f1") + "% 증가";
-        ownedBox.text = "보유 방어력 " + thisOwnedEffect.ToString("f1") + "% 증가";
+        ownedBox.text = "보유 방어력 " + thisDIAEffect.ToString("f1") + "% 증가";
         /// 합성 확률
         fussionBox.text = "강화 성공 확률 " + thisSuccedFussion.ToString("f1") + "%";
         /// 버튼 갱신
@@ -152,6 +153,8 @@ public class ShieldItem : MonoBehaviour
     /// </summary>
     internal void BuyBtnBye(string _MyKimchi)
     {
+        if (thisShieldLevel >= 100) return;
+
         var _somo = dts.fDoubleToStringNumber(dts.multipleStringDouble(thisShieldCost, (1 + 0.3f * thisShieldLevel)));
         
         if (dts.SubStringDouble(_MyKimchi, _somo) != "-1")
@@ -167,7 +170,7 @@ public class ShieldItem : MonoBehaviour
 
 
     /// <summary>
-    /// 다이아로 구매 완료하면 버튼 회색 MAX 글자 처리.
+    /// 버튼 회색 MAX 글자 처리.
     /// </summary>
     /// <param name="p_index"></param>
     public void SetMaxPunch(int p_index)
@@ -201,8 +204,13 @@ public class ShieldItem : MonoBehaviour
         }
 
         /// TODO : 장착 누르면 방어력 적용
-        PlayerPrefsManager.GetInstance().ShieldIndex = thisIndex + 1;
+        // 방패 장착 이미지 인덱스
+        PlayerPrefsManager.GetInstance().ShieldIndex = (thisIndex + 1);    
+        // 장착 방어력 적용
         PlayerPrefsManager.GetInstance().Defence_Shiled = thisShieldEffect.ToString("f1");
+        // 보유 방어력 적용
+        PlayerPrefsManager.GetInstance().Defence_Dia_Shiled = thisDIAEffect.ToString("f1");
+
 
         /// 이전 [장착 버튼] 새로고침
         pm.RefreshEuipGrayBtn();
@@ -220,16 +228,18 @@ public class ShieldItem : MonoBehaviour
         /// 회색버튼이면 리턴
         if (MaxButton.activeSelf) return;
 
-        /// 정상적 깍두기 소모
-        PlayerPrefsManager.GetInstance().Kimchi = posibleKimchi;
-        UserWallet.GetInstance().ShowUserMilk();
         //레벨업
         thisShieldLevel++;
         // 근데 만렙이다?
-        if (thisShieldLevel >= 100)
+        if (thisShieldLevel > 100)
         {
             thisShieldLevel = 100;
+            return;
         }
+
+        /// 정상적 깍두기 소모
+        PlayerPrefsManager.GetInstance().Kimchi = posibleKimchi;
+        UserWallet.GetInstance().ShowUserMilk();
 
         tmpPrice = PlayerPrefsManager.GetInstance().shieldInfo[thisIndex].shieldCost;
         /// 0렙은 기본 값으로

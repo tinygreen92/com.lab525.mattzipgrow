@@ -235,7 +235,7 @@ public class UserWallet : MonoBehaviour
 
     public void ShowUserDeffence()
     {
-        string value = SeetheTruth(double.Parse(PlayerPrefsManager.GetInstance().GetPlayerDefence()));
+        string value = SeetheTruth(PlayerPrefsManager.GetInstance().GetPlayerDefence());
         Deffence_Text.text = value;
 
     }
