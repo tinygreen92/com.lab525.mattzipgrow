@@ -19,7 +19,7 @@ public class Booster_Spin : MonoBehaviour
     TimeSpan dailydRemaining;
     private void Start()
     {
-        dailyEndTimestamp = ReadTimestamp("Bosster_Daily", UnbiasedTime.Instance.Now());
+        dailyEndTimestamp = ReadTimestamp("Bosster_Spin", UnbiasedTime.Instance.Now());
         // 다음날 0시 시간. /  최신값
         DateTime currentTime = UnbiasedTime.Instance.Now().Date.AddDays(1);
         // 값 없으면 다음날 0시 시간. / 저장된 값
@@ -172,7 +172,7 @@ public class Booster_Spin : MonoBehaviour
         else // 부스터 버튼 꺼져있으면 초기화 하고 시간 추가.
         {
             dailyEndTimestamp = UnbiasedTime.Instance.Now().AddSeconds(10800 - 1);
-            this.WriteTimestamp("Bosster_Daily", dailyEndTimestamp);
+            this.WriteTimestamp("Bosster_Spin", dailyEndTimestamp);
 
             // 3시간 카운트 시작했으면 1
             PlayerPrefsManager.GetInstance().DailySpinReword = 1;
@@ -192,17 +192,18 @@ public class Booster_Spin : MonoBehaviour
     void SaveDateTime(DateTime dateTime)
     {
         string tmp = dateTime.ToString("yyyyMMddHHmmss");
-        PlayerPrefs.SetString("Booster_SPIN", tmp);
+        PlayerPrefs.SetString("Daily_Timer", tmp);
         PlayerPrefs.Save();
     }
 
     DateTime LoadDateTime()
     {
-        if (!PlayerPrefs.HasKey("Booster_SPIN")) return UnbiasedTime.Instance.Now().Date.AddDays(1); //내일 0시 반환.
-        string data = PlayerPrefs.GetString("Booster_SPIN");
-        var saveDateTime = DateTime.ParseExact(data, "yyyyMMddHHmmss", System.Globalization.CultureInfo.InvariantCulture);
+        if (!PlayerPrefs.HasKey("Daily_Timer")) 
+            return UnbiasedTime.Instance.Now().Date.AddDays(1); //내일 0시 반환.
 
-        return saveDateTime;
+        string data = PlayerPrefs.GetString("Daily_Timer");
+
+        return DateTime.ParseExact(data, "yyyyMMddHHmmss", System.Globalization.CultureInfo.InvariantCulture);
     }
 
 

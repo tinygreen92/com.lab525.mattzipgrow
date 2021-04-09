@@ -228,8 +228,27 @@ public class ShieldItem : MonoBehaviour
         /// 회색버튼이면 리턴
         if (MaxButton.activeSelf) return;
 
-        //레벨업
-        thisShieldLevel++;
+        /// 정상적 깍두기 소모
+        PlayerPrefsManager.GetInstance().Kimchi = posibleKimchi;
+        UserWallet.GetInstance().ShowUserMilk();
+
+        /// 강화 성공/실패 계산
+        float temp = Time.time * 525f;
+        Random.InitState((int)temp);
+        float random = Random.Range(0, 100f);
+
+        /// TODO : 강화성공확률 적용
+        if (random < thisSuccedFussion)
+        {
+            thisShieldLevel++;
+            Debug.LogError(thisSuccedFussion + " 강화 성공 : " + random);
+        }
+        else
+        {
+            Debug.LogError(thisSuccedFussion + " 강화 실패 : " + random);
+            return;
+        }
+
         // 근데 만렙이다?
         if (thisShieldLevel > 100)
         {
@@ -237,9 +256,7 @@ public class ShieldItem : MonoBehaviour
             return;
         }
 
-        /// 정상적 깍두기 소모
-        PlayerPrefsManager.GetInstance().Kimchi = posibleKimchi;
-        UserWallet.GetInstance().ShowUserMilk();
+
 
         tmpPrice = PlayerPrefsManager.GetInstance().shieldInfo[thisIndex].shieldCost;
         /// 0렙은 기본 값으로

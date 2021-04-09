@@ -2079,6 +2079,88 @@ public class PlayerPrefsManager : MonoBehaviour
     }
 
 
+             
+
+
+
+    public int Arti_DEF_UP
+    {
+        get
+        {
+            var tmp = PlayerPrefs.GetInt("Arti_DEF_UP", 0);
+            return tmp;
+        }
+
+        set
+        {
+            PlayerPrefs.SetInt("Arti_DEF_UP", value);
+            PlayerPrefs.Save();
+        }
+    }
+    public int Arti_SHILED_UP
+    {
+        get
+        {
+            var tmp = PlayerPrefs.GetInt("Arti_SHILED_UP", 0);
+            return tmp;
+        }
+
+        set
+        {
+            PlayerPrefs.SetInt("Arti_SHILED_UP", value);
+            PlayerPrefs.Save();
+        }
+    }
+    public int Arti_HEALLING_UP
+    {
+        get
+        {
+            var tmp = PlayerPrefs.GetInt("Arti_HEALLING_UP", 0);
+            return tmp;
+        }
+
+        set
+        {
+            PlayerPrefs.SetInt("Arti_HEALLING_UP", value);
+            PlayerPrefs.Save();
+        }
+    }
+    public int Arti_KIMCHI_UP
+    {
+        get
+        {
+            var tmp = PlayerPrefs.GetInt("Arti_KIMCHI_UP", 0);
+            return tmp;
+        }
+
+        set
+        {
+            PlayerPrefs.SetInt("Arti_KIMCHI_UP", value);
+            PlayerPrefs.Save();
+        }
+    }
+    public int Arti_MattGrow_UP
+    {
+        get
+        {
+            var tmp = PlayerPrefs.GetInt("Arti_MattGrow_UP", 0);
+            return tmp;
+        }
+
+        set
+        {
+            PlayerPrefs.SetInt("Arti_MattGrow_UP", value);
+            PlayerPrefs.Save();
+        }
+    }
+
+
+
+
+
+
+
+
 
 
 
@@ -3930,7 +4012,7 @@ public class PlayerPrefsManager : MonoBehaviour
         public int cloudTmpForGPGS_125;
         public string cloudTmpForGPGS_126;
         //
-        //public string cloudTmpForGPGS_127;
+        public string cloudTmpForGPGS_127;
         public string cloudTmpForGPGS_128;
         public string cloudTmpForGPGS_129;
         public float cloudTmpForGPGS_130;
@@ -4001,6 +4083,12 @@ public class PlayerPrefsManager : MonoBehaviour
         public int cloudTmpForGPGS_180;
 
         public string cloudTmpForGPGS_181;
+
+        public int cloudTmpForGPGS_182;
+        public int cloudTmpForGPGS_183;
+        public int cloudTmpForGPGS_184;
+        public int cloudTmpForGPGS_185;
+        public int cloudTmpForGPGS_186;
 
     }
 
@@ -4100,7 +4188,7 @@ public class PlayerPrefsManager : MonoBehaviour
                 cloudTmpForGPGS_126 = PlayerPrefs.GetString("ssalbap", "0"),
 
                 //
-                //cloudTmpForGPGS_127 = PlayerPrefs.GetString("Bosster_Daily", "0"),
+                cloudTmpForGPGS_127 = PlayerPrefs.GetString("Daily_Timer", "0"),
                 cloudTmpForGPGS_128 = PlayerPrefs.GetString("BG_Data", "0+0+0+0+0"),
                 cloudTmpForGPGS_129 = PlayerPrefs.GetString("questInfo4"),
 
@@ -4178,7 +4266,16 @@ public class PlayerPrefsManager : MonoBehaviour
                 cloudTmpForGPGS_180 = PlayerPrefs.GetInt("Friend_04_MattzipPer_Lv", 0),
 
                 cloudTmpForGPGS_181 = PlayerPrefs.GetString("MyArtiList", "525*"),
-    }
+
+                cloudTmpForGPGS_182 = PlayerPrefs.GetInt("Arti_DEF_UP", 0),
+                cloudTmpForGPGS_183 = PlayerPrefs.GetInt("Arti_SHILED_UP", 0),
+                cloudTmpForGPGS_184 = PlayerPrefs.GetInt("Arti_HEALLING_UP", 0),
+                cloudTmpForGPGS_185 = PlayerPrefs.GetInt("Arti_KIMCHI_UP", 0),
+                cloudTmpForGPGS_186 = PlayerPrefs.GetInt("Arti_MattGrow_UP", 0),
+
+
+
+            }
         };
 
         BinaryFormatter binaryFormatter = new BinaryFormatter();
@@ -4313,7 +4410,7 @@ public class PlayerPrefsManager : MonoBehaviour
         PlayerPrefs.SetInt("MaxGet_MiniGame", listGPGS[0].cloudTmpForGPGS_125);
         PlayerPrefs.SetString("ssalbap", listGPGS[0].cloudTmpForGPGS_126);
         //0529
-        //PlayerPrefs.SetString("Bosster_Daily", listGPGS[0].cloudTmpForGPGS_127);
+        PlayerPrefs.SetString("Daily_Timer", listGPGS[0].cloudTmpForGPGS_127);
         PlayerPrefs.SetString("BG_Data", listGPGS[0].cloudTmpForGPGS_128);
         PlayerPrefs.SetFloat("BG_CoinStat", listGPGS[0].cloudTmpForGPGS_130);
         PlayerPrefs.SetInt("DailySpinReword", listGPGS[0].cloudTmpForGPGS_131);
@@ -4389,9 +4486,17 @@ public class PlayerPrefsManager : MonoBehaviour
 
         PlayerPrefs.SetString("MyArtiList", listGPGS[0].cloudTmpForGPGS_181);
 
+        PlayerPrefs.SetInt("Arti_DEF_UP", listGPGS[0].cloudTmpForGPGS_182);
+        PlayerPrefs.SetInt("Arti_SHILED_UP", listGPGS[0].cloudTmpForGPGS_183);
+        PlayerPrefs.SetInt("Arti_HEALLING_UP", listGPGS[0].cloudTmpForGPGS_184);
+        PlayerPrefs.SetInt("Arti_KIMCHI_UP", listGPGS[0].cloudTmpForGPGS_185);
+        PlayerPrefs.SetInt("Arti_MattGrow_UP", listGPGS[0].cloudTmpForGPGS_186);
+
+
+
 
         /// 삭제 해줄 것들 광고 쿨타임 등등
-        PlayerPrefs.DeleteKey("Bosster_Daily");
+        PlayerPrefs.DeleteKey("Bosster_Spin");
         PlayerPrefs.DeleteKey("Booster_AUTO");
         PlayerPrefs.DeleteKey("Booster_Body");
         PlayerPrefs.DeleteKey("Booster_KEY");

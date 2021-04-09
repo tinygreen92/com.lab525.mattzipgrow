@@ -3,6 +3,10 @@ using UnityEngine.UI;
 
 public class GatChaManager : MonoBehaviour
 {
+
+
+    [Header("- 유물 도움말")]
+    public GameObject HelpmePop;
     [Header("- 더미 홈")]
     public ScrollRect sb;
     public Transform gridPos;           // 실제 유저 뷰
@@ -34,6 +38,12 @@ public class GatChaManager : MonoBehaviour
     public Text Arti16_Lv;
     public Text Arti17_Lv;
     [Space]
+    public Text new18_Lv;
+    public Text new19_Lv;
+    public Text new20_Lv;
+    public Text new21_Lv;
+    public Text new22_Lv;
+    [Space]
     public Text Arti01_Effect;
     public Text Arti02_Effect;
     public Text Arti03_Effect;
@@ -44,7 +54,6 @@ public class GatChaManager : MonoBehaviour
     public Text Arti08_Effect;
     public Text Arti09_Effect;
     public Text Arti10_Effect;
-    //
     public Text Arti11_Effect;
     public Text Arti12_Effect;
     public Text Arti13_Effect;
@@ -52,6 +61,12 @@ public class GatChaManager : MonoBehaviour
     public Text Arti15_Effect;
     public Text Arti16_Effect;
     public Text Arti17_Effect;
+    [Space]
+    public Text new18_Effect;
+    public Text new19_Effect;
+    public Text new20_Effect;
+    public Text new21_Effect;
+    public Text new22_Effect;
 
 
 
@@ -69,7 +84,7 @@ public class GatChaManager : MonoBehaviour
     private readonly int I_Arti_GoldBox = 300;
     private readonly int I_Arti_OffGold = 500;
     private readonly int I_Arti_MuganTime = 300;
-    private readonly int I_Arti_AttackPower = 999;
+    private readonly int I_Arti_AttackPower = 1000;
     private readonly int I_Arti_GoldPer = 1000;
     private readonly int I_Arti_LuckyBoxPer = 1000;
     private readonly int I_Arti_DefencePer = 500;
@@ -77,6 +92,24 @@ public class GatChaManager : MonoBehaviour
     private readonly int I_Arti_InfiReword = 1000;
     private readonly int I_Arti_MiniReword = 1000;
     private readonly int I_Arti_MiniGameTime = 300;
+    // 추가 유물
+    private readonly int I_Arti_DEF_UP = 1000;
+    private readonly int I_Arti_SHILED_UP = 1000;
+    private readonly int I_Arti_HEALLING_UP = 1000;
+    private readonly int I_Arti_KIMCHI_UP = 1000;
+    private readonly int I_Arti_MattGrow_UP = 1000;
+
+
+
+    /// <summary>
+    /// 유물 도움말 팝업
+    /// </summary>
+    public void HelpmeDora()
+    {
+        HelpmePop.SetActive(true);
+        HelpmePop.GetComponent<Animation>()["Roll_Incre"].speed = 1;
+        HelpmePop.GetComponent<Animation>().Play("Roll_Incre");
+    }
 
 
     /// <summary>
@@ -103,6 +136,15 @@ public class GatChaManager : MonoBehaviour
         ppm.Arti_InfiReword = I_Arti_InfiReword;
         ppm.Arti_MiniReword = I_Arti_MiniReword;
         ppm.Arti_MiniGameTime = I_Arti_MiniGameTime;
+        //
+        ppm.Arti_DEF_UP = I_Arti_DEF_UP;
+        ppm.Arti_SHILED_UP = I_Arti_SHILED_UP;
+        ppm.Arti_HEALLING_UP = I_Arti_HEALLING_UP;
+        ppm.Arti_KIMCHI_UP = I_Arti_KIMCHI_UP;
+        ppm.Arti_MattGrow_UP = I_Arti_MattGrow_UP;
+
+
+
         RefreshItem();
     }
 
@@ -153,7 +195,7 @@ public class GatChaManager : MonoBehaviour
         if (ppm.Arti_OffGold >= 500) ppm.Arti_OffGold = 500;
 
         if (ppm.Arti_MuganTime >= 300) ppm.Arti_MuganTime = 300;
-        if (ppm.Arti_AttackPower >= 999) ppm.Arti_AttackPower = 999;
+        if (ppm.Arti_AttackPower >= 1000) ppm.Arti_AttackPower = 1000;
 
         /// --------------------------------------------------------------- 신규 추가 0608
         if (ppm.Arti_GoldPer >= 1000) ppm.Arti_GoldPer = 1000;
@@ -163,6 +205,19 @@ public class GatChaManager : MonoBehaviour
         if (ppm.Arti_InfiReword >= 1000) ppm.Arti_InfiReword = 1000;
         if (ppm.Arti_MiniReword >= 1000) ppm.Arti_MiniReword = 1000;
         if (ppm.Arti_MiniGameTime >= 300) ppm.Arti_MiniGameTime = 300;
+
+        /// ------------------------------------------------------------------------
+
+        if (ppm.Arti_DEF_UP >= 1000) ppm.Arti_DEF_UP = 1000;
+        if (ppm.Arti_SHILED_UP >= 1000) ppm.Arti_SHILED_UP = 1000;
+        if (ppm.Arti_HEALLING_UP >= 1000) ppm.Arti_HEALLING_UP = 1000;
+        if (ppm.Arti_KIMCHI_UP >= 1000) ppm.Arti_KIMCHI_UP = 1000;
+        if (ppm.Arti_MattGrow_UP >= 1000) ppm.Arti_MattGrow_UP = 1000;
+
+
+
+
+
 
         /// ------------------------------------------------------------------------
 
@@ -186,6 +241,16 @@ public class GatChaManager : MonoBehaviour
         if (ppm.Arti_InfiReword > 0) SetNewItem(14);
         if (ppm.Arti_MiniReword > 0) SetNewItem(15);
         if (ppm.Arti_MiniGameTime > 0) SetNewItem(16);
+
+        /// --- New Item
+
+        if (ppm.Arti_DEF_UP > 0) SetNewItem(17);
+        if (ppm.Arti_SHILED_UP > 0) SetNewItem(18);
+        if (ppm.Arti_HEALLING_UP > 0) SetNewItem(19);
+        if (ppm.Arti_KIMCHI_UP > 0) SetNewItem(20);
+        if (ppm.Arti_MattGrow_UP > 0) SetNewItem(21);
+
+
     }
 
     /// <summary>
@@ -227,7 +292,7 @@ public class GatChaManager : MonoBehaviour
 
             sb.vertical = false;
         }
-        
+
         /// 나의 유물 데이터 계산
         CalMyArtifect(_index);
     }
@@ -246,7 +311,7 @@ public class GatChaManager : MonoBehaviour
 
         string tmpStr = string.Empty;
         /// 길이 하나 추가
-        for (int i = 0; i < artiDataList.Length-1; i++)
+        for (int i = 0; i < artiDataList.Length - 1; i++)
         {
             tmpStr += $"{artiDataList[i]}*";
         }
@@ -265,6 +330,7 @@ public class GatChaManager : MonoBehaviour
     }
 
 
+    float result;
 
     /// <summary>
     /// 아이템 효과 적용.
@@ -282,78 +348,116 @@ public class GatChaManager : MonoBehaviour
 
         /// -----------------------------------------
 
-        Arti01_Lv.text = "Lv."+ ppm.Arti_PunchTouch + "  ( Max Lv. 10 )";
-        Arti02_Lv.text = "Lv."+ ppm.Arti_Mattzip + "  ( Max Lv. 1000 )";
-        Arti03_Lv.text = "Lv."+ ppm.Arti_HP + "  ( Max Lv. 1000 )";
-        Arti04_Lv.text = "Lv."+ ppm.Arti_GroggyTouch + "  ( Max Lv. 49 )";
+        Arti01_Lv.text = $"Lv.{ppm.Arti_PunchTouch}  ( Max Lv. 10 )";
+        Arti01_Effect.text = $"초당 터치횟수 {ppm.Arti_PunchTouch}회 증가 ( 레벨당 1회 증가 )";
 
-        Arti05_Lv.text = "Lv."+ ppm.Arti_GAL + "  ( Max Lv. 100 )";
+        Arti02_Lv.text = $"Lv.{ppm.Arti_Mattzip}  ( Max Lv. 1000 )";
+        result = ppm.Arti_Mattzip * 0.5f;
+        Arti02_Effect.text = $"맷집 {result:F1}% 증가 ( 레벨당 0.5% 증가 )";
+        
+        Arti03_Lv.text = $"Lv.{ppm.Arti_HP}  ( Max Lv. 1000 )";
+        result = ppm.Arti_HP * 0.5f;
+        Arti03_Effect.text = $"체력 {result:F1}% 증가 ( 레벨당 0.5% 증가 )";
 
-        Arti01_Effect.text = "초당 터치횟수 "+ ppm.Arti_PunchTouch + "회 증가 ( 레벨당 1회 증가 )";
-        Arti02_Effect.text = "맷집 "+string.Format("{0:F1}", ppm.Arti_Mattzip * 0.1f) + "% 증가 ( 레벨당 0.1% 증가 )";
-        Arti03_Effect.text = "체력 "+ string.Format("{0:F1}", ppm.Arti_HP * 0.1f) + "% 증가 ( 레벨당 0.1% 증가 )";
-
-        float result = ppm.Arti_GroggyTouch * 0.1f;
-        Arti04_Effect.text = "그로기 상태 "+ string.Format("{0:F1}", result) + "초 짧아짐 ( 레벨당 0.1초 감소 )";
-        //
+        Arti04_Lv.text = $"Lv.{ppm.Arti_GroggyTouch}  ( Max Lv. 49 )";
+        result = ppm.Arti_GroggyTouch * 0.1f;
+        Arti04_Effect.text = $"그로기 상태 {result:F1}초 감소 ( 레벨당 0.1초 감소 )";
+        
+        Arti05_Lv.text = $"Lv.{ppm.Arti_GAL}  ( Max Lv. 100 )";
         result = ppm.Arti_GAL * 0.1f;
-        Arti05_Effect.text = "국밥 버프 시간 "+ string.Format("{0:F1}", result) + "초 증가 ( 레벨당 0.1초 증가 )";
+        Arti05_Effect.text = $"국밥 버프 시간 {result:F1}초 증가 ( 레벨당 0.1초 증가 )";
+
 
         /// --------------------------------------------------------------- 신규 추가
-        Arti06_Lv.text = "Lv." + ppm.Arti_DefenceTime + "  ( Max Lv. 100 )";
-        Arti07_Lv.text = "Lv." + ppm.Arti_GoldBox + "  ( Max Lv. 300 )";
-        Arti08_Lv.text = "Lv." + ppm.Arti_OffGold + "  ( Max Lv. 500 )";
-
-        Arti09_Lv.text = "Lv." + ppm.Arti_MuganTime + "  ( Max Lv. 300 )";
-        Arti10_Lv.text = "Lv." + ppm.Arti_AttackPower + "  ( Max Lv. 999 )";
 
 
+        Arti06_Lv.text = $"Lv.{ppm.Arti_DefenceTime}  ( Max Lv. 100 )";
         result = ppm.Arti_DefenceTime * 0.1f;
-        Arti06_Effect.text = "방어전 시간 " + result + "초 감소 ( 레벨당 0.1초 감소 )";
-        result = ppm.Arti_GoldBox * 0.1f;
-        Arti07_Effect.text = "선물 상자 등장 확률 " + string.Format("{0:F1}", result) + "% 증가 ( 레벨당 0.1% 증가 )";
-        Arti08_Effect.text = "방치 재화 획득량 " + ppm.Arti_OffGold + "% 증가 ( 레벨당 1% 증가 )";
+        Arti06_Effect.text = $"방어전 시간 {result:F1}초 감소 ( 레벨당 0.1초 감소 )";
 
+        Arti07_Lv.text = $"Lv.{ppm.Arti_GoldBox}  ( Max Lv. 300 )";
+        result = ppm.Arti_GoldBox * 0.1f;
+        Arti07_Effect.text = $"선물 상자 등장 확률 {result:F1}% 증가 ( 레벨당 0.1% 증가 )";
+
+        Arti08_Lv.text = $"Lv.{ppm.Arti_OffGold}  ( Max Lv. 500 )";
+        Arti08_Effect.text = $"방치 재화 획득량 {ppm.Arti_OffGold}% 증가 ( 레벨당 1% 증가 )";
+
+        Arti09_Lv.text = $"Lv.{ppm.Arti_MuganTime}  ( Max Lv. 300 )";
         result = ppm.Arti_MuganTime * 0.1f;
-        Arti09_Effect.text = "무한의 탑 시간 " + result + "초 증가 ( 레벨당 0.1초 증가 )";
-        Arti10_Effect.text = "공격력 " + string.Format("{0:F1}", ppm.Arti_AttackPower * 0.1f) + "% 증가 ( 레벨당 0.1% 증가 )";
+        Arti09_Effect.text = $"무한의 탑 시간 {result:F1}초 증가 ( 레벨당 0.1초 증가 )";
+
+        Arti10_Lv.text = $"Lv.{ppm.Arti_AttackPower}  ( Max Lv. 1000 )";
+        result = ppm.Arti_AttackPower * 0.5f;
+        Arti10_Effect.text = $"공격력 {result:F1}% 증가 ( 레벨당 0.5% 증가 )";
+
 
         /// --------------------------------------------------------------- 신규 추가 0608
 
-        Arti11_Lv.text = "Lv." + ppm.Arti_GoldPer + "  ( Max Lv. 1000 )";
-        Arti12_Lv.text = "Lv." + ppm.Arti_LuckyBoxPer + "  ( Max Lv. 1000 )";
-        Arti13_Lv.text = "Lv." + ppm.Arti_DefencePer + "  ( Max Lv. 500 )";
-        Arti14_Lv.text = "Lv." + ppm.Arti_GoldUpgrade + "  ( Max Lv. 500 )";
-        Arti15_Lv.text = "Lv." + ppm.Arti_InfiReword + "  ( Max Lv. 1000 )";
-        Arti16_Lv.text = "Lv." + ppm.Arti_MiniReword + "  ( Max Lv. 1000 )";
-        Arti17_Lv.text = "Lv." + ppm.Arti_MiniGameTime + "  ( Max Lv. 300 )";
 
+        Arti11_Lv.text = $"Lv.{ppm.Arti_GoldPer}  ( Max Lv. 1000 )";
         result = ppm.Arti_GoldPer * 0.5f;
-        Arti11_Effect.text = "골드 획득량 " + string.Format("{0:F1}", result) + "% 증가 ( 레벨당 0.5% 증가 )";
+        Arti11_Effect.text = $"골드 획득량 {result:F1}% 증가 ( 레벨당 0.5% 증가 )";
+
+        Arti12_Lv.text = $"Lv.{ppm.Arti_LuckyBoxPer}  ( Max Lv. 1000 )";
         result = ppm.Arti_GoldPer * 0.5f;
-        Arti12_Effect.text = "선물상자 보상 획득량 " + string.Format("{0:F1}", result) + "% 증가 ( 레벨당 0.5% 증가 )";
+        Arti12_Effect.text = $"선물상자 보상 획득량 {result:F1}% 증가 ( 레벨당 0.5% 증가 )";
+
+        Arti13_Lv.text = $"Lv.{ppm.Arti_DefencePer}  ( Max Lv. 500 )";
         result = ppm.Arti_DefencePer * 0.1f;
-        Arti13_Effect.text = "방어전 대미지 " + string.Format("{0:F1}", result) + "% 감소 ( 레벨당 0.1% 감소 )";
-        result = ppm.Arti_GoldUpgrade * 0.1f;
-        Arti14_Effect.text = "골드 업그레이드 비용 " + string.Format("{0:F1}", result) + "% 감소 ( 레벨당 0.1% 감소 )";
-        result = ppm.Arti_InfiReword * 0.5f;
-        Arti15_Effect.text = "무한 버티기 국밥 획득량 " + string.Format("{0:F1}", result) + "% 증가 ( 레벨당 0.5% 증가 )";
-        result = ppm.Arti_MiniReword * 0.5f;
-        Arti16_Effect.text = "미니게임 쌀밥 획득량 " + string.Format("{0:F1}", result) + "% 증가 ( 레벨당 0.5% 증가 )";
-        result = ppm.Arti_MiniGameTime * 0.1f;
-        Arti17_Effect.text = "미니게임 시간 " + string.Format("{0:F1}", result) + "초 증가 ( 레벨당 0.1초 증가 )";
+        Arti13_Effect.text = $"방어전 대미지 {result:F1}% 감소 ( 레벨당 0.1% 감소 )";
 
-        // 증가된 값 = 기본값 + (기본값 X (증가된 확률 (100%) X 0.01))
-        // 예) 체력 100 일때 100% 증가하면? 100 + (100 * (100 * 0.01)) = 200 (100% 증가 = 2배 증가)
-        // 예) 체력 100 일때 1000% 증가하면? 100 + (100 * (1000 * 0.01)) = 1100 (1000% 증가 = 11배 증가)
+        Arti14_Lv.text = $"Lv.{ppm.Arti_GoldUpgrade}  ( Max Lv. 500 )";
+        result = ppm.Arti_GoldUpgrade * 0.1f;
+        Arti14_Effect.text = $"골드 업그레이드 비용 {result:F1}% 감소 ( 레벨당 0.1% 감소 )";
+
+        Arti15_Lv.text = $"Lv.{ppm.Arti_InfiReword}  ( Max Lv. 1000 )";
+        result = ppm.Arti_InfiReword * 0.5f;
+        Arti15_Effect.text = $"무한버티기 국밥 획득량 {result:F1}% 증가 ( 레벨당 0.5% 증가 )";
+
+        Arti16_Lv.text = $"Lv.{ppm.Arti_MiniReword}  ( Max Lv. 1000 )";
+        result = ppm.Arti_MiniReword * 0.5f;
+        Arti16_Effect.text = $"미니게임 쌀밥 획득량 {result:F1}% 증가 ( 레벨당 0.5% 증가 )";
+
+        Arti17_Lv.text = $"Lv.{ppm.Arti_MiniGameTime}  ( Max Lv. 300 )";
+        result = ppm.Arti_MiniGameTime * 0.1f;
+        Arti17_Effect.text = $"미니게임 시간 {result:F1}초 증가 ( 레벨당 0.1초 증가 )";
+
+
+        /// -------------------------------
+        /// 
+        new18_Lv.text = $"Lv.{ppm.Arti_DEF_UP}  ( Max Lv. 1000 )";
+        result = ppm.Arti_DEF_UP * 0.5f;
+        new18_Effect.text = $"방어력 {result:F1}% 증가 ( 레벨당 0.5% 증가 )";
+
+        new19_Lv.text = $"Lv.{ppm.Arti_SHILED_UP}  ( Max Lv. 1000 )";
+        result = ppm.Arti_SHILED_UP * 0.1f;
+        new19_Effect.text = $"방패 방어력 {result:F1}% 증가 ( 레벨당 0.1% 증가 )";
+
+        new20_Lv.text = $"Lv.{ppm.Arti_HEALLING_UP}  ( Max Lv. 1000 )";
+        result = ppm.Arti_HEALLING_UP * 0.5f;
+        new20_Effect.text = $"체력회복력 {result:F1}% 증가 ( 레벨당 0.5% 증가 )";
+
+        new21_Lv.text = $"Lv.{ppm.Arti_KIMCHI_UP}  ( Max Lv. 1000 )";
+        result = ppm.Arti_KIMCHI_UP * 0.1f;
+        new21_Effect.text = $"깍두기 {result:F1}% 증가 ( 레벨당 0.1% 증가 )";
+
+        new22_Lv.text = $"Lv.{ppm.Arti_MattGrow_UP}  ( Max Lv. 1000 )";
+        result = ppm.Arti_MattGrow_UP * 0.1f;
+        new22_Effect.text = $"맷집 증가량 {result:F1}% 증가 ( 레벨당 0.1% 증가 )";
+
+
+
+        /// 증가된 값 = 기본값 + (기본값 X (증가된 확률 (100%) X 0.01))
+        /// 예) 체력 100 일때 100% 증가하면? 100 + (100 * (100 * 0.01)) = 200 (100% 증가 = 2배 증가)
+        /// 예) 체력 100 일때 1000% 증가하면? 100 + (100 * (1000 * 0.01)) = 1100 (1000% 증가 = 11배 증가)
 
         /// -----------------------------------------
 
-        ppm.MattzipArtif = ppm.Arti_Mattzip * 0.1f;
-        ppm.Arti_MaxHP = ppm.Arti_HP < 1? "0" : (ppm.Arti_HP * 0.1f).ToString("f3");
+        ppm.MattzipArtif = ppm.Arti_Mattzip * 0.5f;
+        ppm.Arti_MaxHP = ppm.Arti_HP < 1 ? "0" : (ppm.Arti_HP * 0.5f).ToString("f3");
         ppm.GroggyTouch = (5.0f - (ppm.Arti_GroggyTouch * 0.1f));
-        ppm.AttackPunch = (ppm.Arti_AttackPower * 0.1f);
-        
+        ppm.AttackPunch = (ppm.Arti_AttackPower * 0.5f);
+
         ///
         //ppm.LuckyProb = (ppm.Arti_GoldBox * 0.1f);
         PlayerPrefs.SetFloat("LuckyProb", (1.0f + (ppm.Arti_GoldBox * 0.1f)));
@@ -377,7 +481,13 @@ public class GatChaManager : MonoBehaviour
             ppm.Arti_GoldUpgrade >= I_Arti_GoldUpgrade &&
             ppm.Arti_InfiReword >= I_Arti_InfiReword &&
             ppm.Arti_MiniReword >= I_Arti_MiniReword &&
-            ppm.Arti_MiniGameTime >= I_Arti_MiniGameTime
+            ppm.Arti_MiniGameTime >= I_Arti_MiniGameTime &&
+            //
+            ppm.Arti_DEF_UP >= I_Arti_DEF_UP &&
+            ppm.Arti_SHILED_UP >= I_Arti_SHILED_UP &&
+            ppm.Arti_HEALLING_UP >= I_Arti_HEALLING_UP &&
+            ppm.Arti_KIMCHI_UP >= I_Arti_KIMCHI_UP &&
+            ppm.Arti_MattGrow_UP >= I_Arti_MattGrow_UP
             )
         {
             // 뽑기 버튼 막기
@@ -445,7 +555,13 @@ public class GatChaManager : MonoBehaviour
             ppm.Arti_GoldUpgrade >= I_Arti_GoldUpgrade &&
             ppm.Arti_InfiReword >= I_Arti_InfiReword &&
             ppm.Arti_MiniReword >= I_Arti_MiniReword &&
-            ppm.Arti_MiniGameTime >= I_Arti_MiniGameTime
+            ppm.Arti_MiniGameTime >= I_Arti_MiniGameTime &&
+            //
+            ppm.Arti_DEF_UP >= I_Arti_DEF_UP &&
+            ppm.Arti_SHILED_UP >= I_Arti_SHILED_UP &&
+            ppm.Arti_HEALLING_UP >= I_Arti_HEALLING_UP &&
+            ppm.Arti_KIMCHI_UP >= I_Arti_KIMCHI_UP &&
+            ppm.Arti_MattGrow_UP >= I_Arti_MattGrow_UP
             )
 
         {
@@ -495,7 +611,13 @@ public class GatChaManager : MonoBehaviour
             ppm.Arti_GoldUpgrade >= I_Arti_GoldUpgrade &&
             ppm.Arti_InfiReword >= I_Arti_InfiReword &&
             ppm.Arti_MiniReword >= I_Arti_MiniReword &&
-            ppm.Arti_MiniGameTime >= I_Arti_MiniGameTime
+            ppm.Arti_MiniGameTime >= I_Arti_MiniGameTime &&
+            //
+            ppm.Arti_DEF_UP >= I_Arti_DEF_UP &&
+            ppm.Arti_SHILED_UP >= I_Arti_SHILED_UP &&
+            ppm.Arti_HEALLING_UP >= I_Arti_HEALLING_UP &&
+            ppm.Arti_KIMCHI_UP >= I_Arti_KIMCHI_UP &&
+            ppm.Arti_MattGrow_UP >= I_Arti_MattGrow_UP
             )
 
         {
@@ -554,7 +676,13 @@ public class GatChaManager : MonoBehaviour
             ppm.Arti_GoldUpgrade >= I_Arti_GoldUpgrade &&
             ppm.Arti_InfiReword >= I_Arti_InfiReword &&
             ppm.Arti_MiniReword >= I_Arti_MiniReword &&
-            ppm.Arti_MiniGameTime >= I_Arti_MiniGameTime
+            ppm.Arti_MiniGameTime >= I_Arti_MiniGameTime &&
+            //
+            ppm.Arti_DEF_UP >= I_Arti_DEF_UP &&
+            ppm.Arti_SHILED_UP >= I_Arti_SHILED_UP &&
+            ppm.Arti_HEALLING_UP >= I_Arti_HEALLING_UP &&
+            ppm.Arti_KIMCHI_UP >= I_Arti_KIMCHI_UP &&
+            ppm.Arti_MattGrow_UP >= I_Arti_MattGrow_UP
             )
 
         {
@@ -609,8 +737,8 @@ public class GatChaManager : MonoBehaviour
     [Header("-뽑기버튼 MAX")]
     public GameObject[] getGatChaImg;
 
-    new string[] name = new string[12];
-    int[] index = new int[12];
+    new readonly string[] name = new string[12];
+    readonly int[] index = new int[12];
     /// <summary>
     /// 유물 효과 적용로직
     /// </summary>
@@ -619,7 +747,7 @@ public class GatChaManager : MonoBehaviour
     {
         var ppm = PlayerPrefsManager.GetInstance();
 
-        HELL:
+    HELL:
 
         // 팝업에 전달해줄 값.
         name[seed] = "";
@@ -636,13 +764,13 @@ public class GatChaManager : MonoBehaviour
             {
                 ppm.Arti_PunchTouch = I_Arti_PunchTouch;
                 goto HELL;
-            } 
+            }
 
             name[seed] = "\'런닝화\'를 ";
             index[seed] = 0;
 
         }
-        else if (artiGatcha < 15f)
+        else if (artiGatcha < 8f)
         {
             /// (int)헤드기어- 맷집증가                   Arti_Mattzip
             ppm.Arti_Mattzip++;
@@ -656,7 +784,7 @@ public class GatChaManager : MonoBehaviour
             index[seed] = 1;
 
         }
-        else if (artiGatcha < 29f)
+        else if (artiGatcha < 15f)
         {
             /// (int)줄넘기- 체력증가                     Arti_HP
             ppm.Arti_HP++;
@@ -671,7 +799,7 @@ public class GatChaManager : MonoBehaviour
 
 
         }
-        else if (artiGatcha < 34f)
+        else if (artiGatcha < 20f)
         {
             /// (int)물총- 그로기 상태 짧아짐             Arti_GroggyTouch
             ppm.Arti_GroggyTouch++;
@@ -686,7 +814,7 @@ public class GatChaManager : MonoBehaviour
 
 
         }
-        else if (artiGatcha < 37f)
+        else if (artiGatcha < 23f)
         {
             /// (int)국밥- 스킬회복량 증가                Arti_GAL
             ppm.Arti_GAL++;
@@ -700,7 +828,7 @@ public class GatChaManager : MonoBehaviour
             index[seed] = 4;
 
         }
-        else if (artiGatcha < 42f)
+        else if (artiGatcha < 28f)
         {
             /// (int)모래시계- 방어전 시간 감소                Arti_DefenceTime
             ppm.Arti_DefenceTime++;
@@ -714,7 +842,7 @@ public class GatChaManager : MonoBehaviour
             index[seed] = 5;
 
         }
-        else if (artiGatcha < 47f)
+        else if (artiGatcha < 33f)
         {
             /// (int)선물상자- 선물 상자 등장확률 증가                Arti_GoldBox
             ppm.Arti_GoldBox++;
@@ -728,7 +856,7 @@ public class GatChaManager : MonoBehaviour
             index[seed] = 6;
 
         }
-        else if (artiGatcha <= 50f)
+        else if (artiGatcha <= 36f)
         {
             /// (int)머니건- 방치 골드 획득량 증가                Arti_OffGold
             ppm.Arti_OffGold++;
@@ -742,7 +870,7 @@ public class GatChaManager : MonoBehaviour
             index[seed] = 7;
 
         }
-        else if (artiGatcha <= 53f)
+        else if (artiGatcha <= 39f)
         {
             /// (int)땡땡 종 - 무한의 탑 시간 증가                Arti_MuganTime
             ppm.Arti_MuganTime++;
@@ -756,7 +884,7 @@ public class GatChaManager : MonoBehaviour
             index[seed] = 8;
 
         }
-        else if (artiGatcha <= 67f)
+        else if (artiGatcha <= 46f)
         {
             /// (int)샌드백 - 공격력 증가                Arti_AttackPower
             ppm.Arti_AttackPower++;
@@ -775,7 +903,7 @@ public class GatChaManager : MonoBehaviour
         ///                 신규 유물 추가 0608
         ///
         ///
-        else if (artiGatcha <= 72f)
+        else if (artiGatcha <= 51f)
         {
             /// (int)     -골드 획득 증가                
             ppm.Arti_GoldPer++;
@@ -789,7 +917,7 @@ public class GatChaManager : MonoBehaviour
             index[seed] = 10;
 
         }
-        else if (artiGatcha <= 77f)
+        else if (artiGatcha <= 56f)
         {
             /// (int)       -타격 선물상자 획득량 증가      
             ppm.Arti_LuckyBoxPer++;
@@ -803,7 +931,7 @@ public class GatChaManager : MonoBehaviour
             index[seed] = 11;
 
         }
-        else if (artiGatcha <= 80f)
+        else if (artiGatcha <= 61f)
         {
             /// (int)       -방어전 대미지 % 감소 
             ppm.Arti_DefencePer++;
@@ -817,7 +945,7 @@ public class GatChaManager : MonoBehaviour
             index[seed] = 12;
 
         }
-        else if (artiGatcha <= 87f)
+        else if (artiGatcha <= 64f)
         {
             /// (int)       -골드 강화 비용 감소  
             ppm.Arti_GoldUpgrade++;
@@ -831,7 +959,7 @@ public class GatChaManager : MonoBehaviour
             index[seed] = 13;
 
         }
-        else if (artiGatcha <= 92f)
+        else if (artiGatcha <= 69f)
         {
             /// (int)       -버티기 보상 강화       
             ppm.Arti_InfiReword++;
@@ -845,7 +973,7 @@ public class GatChaManager : MonoBehaviour
             index[seed] = 14;
 
         }
-        else if (artiGatcha <= 97f)
+        else if (artiGatcha <= 74f)
         {
             /// (int)       -미니게임 보상 강화  
             ppm.Arti_MiniReword++;
@@ -859,7 +987,7 @@ public class GatChaManager : MonoBehaviour
             index[seed] = 15;
 
         }
-        else if (artiGatcha <= 100.0f)
+        else if (artiGatcha <= 77f)
         {
             /// (int)       -미니게임 시간 증가       
             ppm.Arti_MiniGameTime++;
@@ -873,6 +1001,86 @@ public class GatChaManager : MonoBehaviour
             index[seed] = 16;
 
         }
+
+        /// 
+        ///
+        ///
+
+
+        else if (artiGatcha <= 84f)
+        {
+            /// (int)       -미니게임 시간 증가       
+            ppm.Arti_DEF_UP++;
+            // 맥스레벨이면 다시 돌려
+            if (ppm.Arti_DEF_UP > I_Arti_DEF_UP)
+            {
+                ppm.Arti_DEF_UP = I_Arti_DEF_UP;
+                goto HELL;
+            }
+            name[seed] = "\'???(1)\'를 ";
+            index[seed] = 17;
+
+        }
+        else if (artiGatcha <= 86f)
+        {
+            /// (int)       -미니게임 시간 증가       
+            ppm.Arti_SHILED_UP++;
+            // 맥스레벨이면 다시 돌려
+            if (ppm.Arti_SHILED_UP > I_Arti_SHILED_UP)
+            {
+                ppm.Arti_SHILED_UP = I_Arti_SHILED_UP;
+                goto HELL;
+            }
+            name[seed] = "\'강철망치\'를 ";
+            index[seed] = 18;
+
+        }
+        else if (artiGatcha <= 93f)
+        {
+            /// (int)       -미니게임 시간 증가       
+            ppm.Arti_HEALLING_UP++;
+            // 맥스레벨이면 다시 돌려
+            if (ppm.Arti_HEALLING_UP > I_Arti_HEALLING_UP)
+            {
+                ppm.Arti_HEALLING_UP = I_Arti_HEALLING_UP;
+                goto HELL;
+            }
+            name[seed] = "\'???(2)\'를 ";
+            index[seed] = 19;
+
+        }
+        else if (artiGatcha <= 98f)
+        {
+            /// (int)       -미니게임 시간 증가       
+            ppm.Arti_KIMCHI_UP++;
+            // 맥스레벨이면 다시 돌려
+            if (ppm.Arti_KIMCHI_UP > I_Arti_KIMCHI_UP)
+            {
+                ppm.Arti_KIMCHI_UP = I_Arti_KIMCHI_UP;
+                goto HELL;
+            }
+            name[seed] = "\'무\'를 ";
+            index[seed] = 20;
+
+        }
+        else if (artiGatcha <= 100f)
+        {
+            /// (int)       -미니게임 시간 증가       
+            ppm.Arti_MattGrow_UP++;
+            // 맥스레벨이면 다시 돌려
+            if (ppm.Arti_MattGrow_UP > I_Arti_MattGrow_UP)
+            {
+                ppm.Arti_MattGrow_UP = I_Arti_MattGrow_UP;
+                goto HELL;
+            }
+            name[seed] = "\'방탄조끼\'를 ";
+            index[seed] = 21;
+
+        }
+
+
+
+
     }
 
 
