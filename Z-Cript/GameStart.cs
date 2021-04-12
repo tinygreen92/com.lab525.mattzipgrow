@@ -15,6 +15,7 @@ public class GameStart : MonoBehaviour
     public GameObject[] AllObject;
 
     [Header("-외부 API 초기화")]
+    public TutorialMissionManager tutorialMissionManager;
     public ShieldManager shieldManager;
     public InfiniteScroll InfinityContent;
     public InfiniteScroll InfinityQuest;
@@ -150,11 +151,11 @@ public class GameStart : MonoBehaviour
         /// 방패 리스트 추가
 
         shieldManager.InitShieldInfo();
-
+        tutorialMissionManager.InitMissionInfo();
 
         /// 방패 리스트 추가
         /// 방패 리스트 추가
-        
+
 
         string tmpPrice;
         string weaponPrice;

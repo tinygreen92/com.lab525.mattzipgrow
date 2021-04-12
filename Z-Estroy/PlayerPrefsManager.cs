@@ -2837,23 +2837,22 @@ public class PlayerPrefsManager : MonoBehaviour
     /// <summary>
     /// 실드 총 갯수만큼 반복
     /// </summary>
-    //public void AddShieldData(float row_1, float row_2, float row_3, float row_4, float row_5, string row_6)
-    //{
-    //    shieldInfo.Add(new ShieldEntry
-    //    {
-    //        shieldLevel = 0,
-    //        isUnlock = false,
-    //        //
-    //        equipedEffect = row_1,
-    //        ownedEffect = row_2,
-    //        powerUpper = row_3,
-    //        powerMinusPer = row_4,
-    //        upperEfect = row_5,
-    //        shieldCost = row_6,
-    //        amount = 0
-    //    });
-    //}
-
+    public void AddShieldData(float row_1, float row_2, float row_3, float row_4, float row_5, string row_6)
+    {
+        shieldInfo.Add(new ShieldEntry
+        {
+            shieldLevel = 0,
+            isUnlock = false,
+            //
+            equipedEffect = row_1,
+            ownedEffect = row_2,
+            powerUpper = row_3,
+            powerMinusPer = row_4,
+            upperEfect = row_5,
+            shieldCost = row_6,
+            amount = 0
+        });
+    }
 
 
     /// <summary>
@@ -2888,7 +2887,12 @@ public class PlayerPrefsManager : MonoBehaviour
     }
 
 
+
     #endregion
+
+
+
+
 
 
 

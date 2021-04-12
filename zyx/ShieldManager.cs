@@ -785,26 +785,26 @@ public class ShieldManager : MonoBehaviour
 
 
 
-    //public void SParser()
-    //{
-    //    string[] line = ta.text.Substring(0, ta.text.Length).Split('\n');
-    //    for (int i = 0; i < line.Length; i++)
-    //    {
-    //        string[] row = line[i].Split('\t');
+    public void sparser()
+    {
+        string[] line = ta.text.Substring(0, ta.text.Length).Split('\n');
+        for (int i = 0; i < line.Length; i++)
+        {
+            string[] row = line[i].Split('\t');
 
-    //        PlayerPrefsManager.GetInstance().AddShieldData(
-    //            //row[0],      // 등급 
-    //            float.Parse(row[1]),      // 장착 %    
-    //            float.Parse(row[2]),      // 보유 %
-    //            float.Parse(row[3]),      // 강화 성공률
-    //            float.Parse(row[4]),      // 성공 차감율
-    //            float.Parse(row[5]),      // 레벨당 방어력 증가치 %
-    //            row[6]       // 레벨당 비용 시작값
-    //            );
-    //    }
+            PlayerPrefsManager.GetInstance().AddShieldData(
+                //row[0],      // 등급 
+                float.Parse(row[1]),      // 장착 %    
+                float.Parse(row[2]),      // 보유 %
+                float.Parse(row[3]),      // 강화 성공률
+                float.Parse(row[4]),      // 성공 차감율
+                float.Parse(row[5]),      // 레벨당 방어력 증가치 %
+                row[6]       // 레벨당 비용 시작값
+                );
+        }
 
-    //    PlayerPrefsManager.GetInstance().SaveShieldInfo();
-    //}
+        PlayerPrefsManager.GetInstance().SaveShieldInfo();
+    }
 
 
 
