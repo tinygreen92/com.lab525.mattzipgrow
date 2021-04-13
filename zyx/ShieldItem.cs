@@ -241,6 +241,7 @@ public class ShieldItem : MonoBehaviour
         if (random < thisSuccedFussion)
         {
             thisShieldLevel++;
+            pm.tmm.ExUpdateMission(8); /// 미션 업데이트
             Debug.LogError(thisSuccedFussion + " 강화 성공 : " + random);
         }
         else

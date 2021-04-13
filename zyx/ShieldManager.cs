@@ -9,7 +9,7 @@ public enum MySDgatcha { ads_3, diamond_50, diamond_490, diamond_1390, ticket_1,
 
 public class ShieldManager : MonoBehaviour
 {
-
+    public TutorialMissionManager tmm;
     public Text timeText;
     [Header("-뽑기 팝업창")]
     public GameObject leftShieldPop;
@@ -679,6 +679,8 @@ public class ShieldManager : MonoBehaviour
                 tmps = Gods[1];
                 break;
         }
+
+        tmm.ExUpdateMission(7); /// 미션 업데이트
 
         /// 횟수만큼 랜덤 돌려
         for (int i = 0; i < cnt; i++)

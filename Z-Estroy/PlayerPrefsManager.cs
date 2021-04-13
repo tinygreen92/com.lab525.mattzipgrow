@@ -15,6 +15,8 @@ using CodeStage.AntiCheat.ObscuredTypes;
 
 public class PlayerPrefsManager : MonoBehaviour
 {
+
+    public TutorialMissionManager tmm;
     static PlayerPrefsManager instance;
     
     public PlayNANOOExample playNANOO;
@@ -569,10 +571,11 @@ public class PlayerPrefsManager : MonoBehaviour
             // 최대 열쇠 범위 20억
             if (value >= 2000000000) kkey = 2000000000;
             //
-            UserWallet.GetInstance().KeyText.text = kkey + "/20";
-            //
             PlayerPrefs.SetInt("key", kkey);
             PlayerPrefs.Save();
+            //
+            UserWallet.GetInstance().SetKeyAmount(kkey);
+
         }
     }
 
@@ -1061,6 +1064,8 @@ public class PlayerPrefsManager : MonoBehaviour
 
 
 
+    [HideInInspector]
+    public double dMattZip;
 
     /// <summary>
     /// (string)맷집                        tmppp.ToString("f0");
@@ -1071,17 +1076,18 @@ public class PlayerPrefsManager : MonoBehaviour
         {
             /// Mat_Mattzip_Hit 맞으면 증가
             /// MattzipArtif 유물 뽑기 하면 증가
+            dMattZip = Mat_Mattzip_Hit + (Mat_Mattzip_Hit * MattzipArtif * 0.01f);
 
-            var value = Mat_Mattzip_Hit;
-            double tmppp = value + (value * MattzipArtif * 0.01f);
             ///	1.7976931348623158 E + 308
-            if (value >= 9.99E+302)
-                tmppp = 9.99E+302;
-            return tmppp.ToString("f0");
+            if (dMattZip >= 9.99E+302)
+                dMattZip = 9.99E+302;
+
+            return dMattZip.ToString("f0");
         }
 
         set
         {
+
             PlayerPrefs.SetString("Mat_Mattzip", value);
             PlayerPrefs.Save();
         }
@@ -1141,11 +1147,17 @@ public class PlayerPrefsManager : MonoBehaviour
             float kkey = value;
             if (value >= 9E+35f) 
                 kkey = 9E+35f;
+
             PlayerPrefs.SetFloat("Mat_Mattzip_Hit", kkey);
             PlayerPrefs.Save();
+
+            Invoke(nameof(myInvoExMission), 1.0f);
         }
     }
-
+    void myInvoExMission()
+    {
+        tmm.ExUpdateMission(1, dMattZip); /// 미션 업데이트
+    }
 
 
     /// (float)맷집 유물 (유물 강화로만 증가)                       MattzipArtif
@@ -1304,10 +1316,10 @@ public class PlayerPrefsManager : MonoBehaviour
             // 최대 열쇠 범위 20억
             if (value >= 2000000000) kkey = 2000000000;
             //
-            UserWallet.GetInstance().ShiledTiketText.text = kkey.ToString("N0");
-            //
             PlayerPrefs.SetInt("MattzipStat", kkey);
             PlayerPrefs.Save();
+            //
+            UserWallet.GetInstance().SetSD_TikAmount(kkey);
         }
     }
 
@@ -1390,14 +1402,14 @@ public class PlayerPrefsManager : MonoBehaviour
 
 
 
-    //PlayerPrefs.SetInt("is0508shock", listGPGS[0].cloudTmpForGPGS_105);
+    //PlayerPrefs.SetInt("isTutoAllClear", listGPGS[0].cloudTmpForGPGS_105);
     //PlayerPrefs.SetInt("is0515shock", listGPGS[0].cloudTmpForGPGS_106);
 
 
 
 
 
-    //PlayerPrefs.SetInt("is0508shock", listGPGS[0].cloudTmpForGPGS_105);
+    //PlayerPrefs.SetInt("isTutoAllClear", listGPGS[0].cloudTmpForGPGS_105);
     //PlayerPrefs.SetInt("is0515shock", listGPGS[0].cloudTmpForGPGS_106);
 
 
@@ -4160,7 +4172,7 @@ public class PlayerPrefsManager : MonoBehaviour
                 cloudTmpForGPGS_102 = PlayerPrefs.GetInt("Arti_GoldBox", 0),
                 cloudTmpForGPGS_103 = PlayerPrefs.GetInt("Arti_OffGold", 0),
                 cloudTmpForGPGS_104 = PlayerPrefs.GetInt("MaxGet_MuganTop", 1),
-                cloudTmpForGPGS_105 = PlayerPrefs.GetInt("is0508shock", 0),
+                cloudTmpForGPGS_105 = PlayerPrefs.GetInt("isTutoAllClear", 0),
                 cloudTmpForGPGS_106 = PlayerPrefs.GetInt("is0515shock", 0),
                 cloudTmpForGPGS_107 = PlayerPrefs.GetString("questInfo2"),
                 cloudTmpForGPGS_108 = PlayerPrefs.GetFloat("dDiamond", 0),
@@ -4392,7 +4404,7 @@ public class PlayerPrefsManager : MonoBehaviour
         PlayerPrefs.SetInt("Arti_GoldBox", listGPGS[0].cloudTmpForGPGS_102);
         PlayerPrefs.SetInt("Arti_OffGold", listGPGS[0].cloudTmpForGPGS_103);
         PlayerPrefs.SetInt("MaxGet_MuganTop", listGPGS[0].cloudTmpForGPGS_104);
-        PlayerPrefs.SetInt("is0508shock", listGPGS[0].cloudTmpForGPGS_105);
+        PlayerPrefs.SetInt("isTutoAllClear", listGPGS[0].cloudTmpForGPGS_105);
         PlayerPrefs.SetInt("is0515shock", listGPGS[0].cloudTmpForGPGS_106);
         PlayerPrefs.SetInt("Shield10AdsCnt", listGPGS[0].cloudTmpForGPGS_110);  /// is0517shock
         PlayerPrefs.SetFloat("dDiamond", listGPGS[0].cloudTmpForGPGS_108);

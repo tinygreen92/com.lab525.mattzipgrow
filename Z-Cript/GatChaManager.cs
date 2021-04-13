@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class GatChaManager : MonoBehaviour
 {
 
-
+    public TutorialMissionManager tmm;
     [Header("- 유물 도움말")]
     public GameObject HelpmePop;
     [Header("- 더미 홈")]
@@ -745,6 +745,9 @@ public class GatChaManager : MonoBehaviour
     /// <param name="seed">몇번 뽑을지?</param>
     public void GoGoGatCha(int seed)
     {
+        tmm.ExUpdateMission(4); /// 미션 업데이트
+
+
         var ppm = PlayerPrefsManager.GetInstance();
 
     HELL:
@@ -774,6 +777,8 @@ public class GatChaManager : MonoBehaviour
         {
             /// (int)헤드기어- 맷집증가                   Arti_Mattzip
             ppm.Arti_Mattzip++;
+            Invoke(nameof(myInvoExMission), 1.0f);
+
             // 맥스레벨이면 다시 돌려
             if (ppm.Arti_Mattzip > I_Arti_Mattzip)
             {
@@ -1081,6 +1086,15 @@ public class GatChaManager : MonoBehaviour
 
 
 
+    }
+
+
+    /// <summary>
+    /// 갱신까지 1초
+    /// </summary>
+    void myInvoExMission()
+    {
+        tmm.ExUpdateMission(1, PlayerPrefsManager.GetInstance().dMattZip); /// 미션 업데이트
     }
 
 

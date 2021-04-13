@@ -100,7 +100,9 @@ public class GameStart : MonoBehaviour
         // CSV 시트 긁기
         PlayerPrefsManager.GetInstance().InitMegaDamData();
         //PlayerPrefsManager.GetInstance().InitMuganData();
-        //
+        
+
+
         PlayerPrefsManager.GetInstance().LoadWeaponInfo();
         PlayerPrefsManager.GetInstance().LoadquestInfo();
         PlayerPrefsManager.GetInstance().LoaduniformData();
@@ -115,6 +117,13 @@ public class GameStart : MonoBehaviour
         ///
         ///     추가된 퀘스트 
         ///
+
+        tutorialMissionManager.LoadMissionInfo();       /// 튜토리얼 미션 불러오기
+
+        while (!tutorialMissionManager.isLoadMission)
+        {
+            yield return new WaitForFixedUpdate();
+        }
         // 로딩 다 될때까지 무한 대기
         while (!PlayerPrefsManager.GetInstance().isReadyQuest)
         {
@@ -149,9 +158,10 @@ public class GameStart : MonoBehaviour
 
         /// 방패 리스트 추가
         /// 방패 리스트 추가
+        
+        shieldManager.InitShieldInfo(); // LoadWeaponInfo() 에서 추가 안됐다면
 
-        shieldManager.InitShieldInfo();
-        tutorialMissionManager.InitMissionInfo();
+        tutorialMissionManager.InitMissionInfo();  // LoadMissionInfo() 에서 추가 안됐다면
 
         /// 방패 리스트 추가
         /// 방패 리스트 추가

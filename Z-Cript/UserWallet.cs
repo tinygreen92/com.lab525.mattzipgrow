@@ -35,6 +35,19 @@ public class UserWallet : MonoBehaviour
     //public Text DefenceText;
     //public string PunchDPS = "20";
 
+
+    public void SetKeyAmount(int kkey)
+    {
+        if (isNoShow) return;
+        KeyText.text = kkey + "/20";
+    }
+
+    public void SetSD_TikAmount(int kkey)
+    {
+        ShiledTiketText.text = kkey.ToString("N0");
+    }
+
+
     public void RestartGame()
     {
         PlayerPrefs.DeleteAll();
@@ -104,6 +117,12 @@ public class UserWallet : MonoBehaviour
         instance = this;
     }
 
+
+    /// <summary>
+    /// true 일때 재화창 갱신 안함.
+    /// </summary>
+    public bool isNoShow;
+
     /// <summary>
     /// 모든 재화 갱신.
     /// </summary>
@@ -131,24 +150,16 @@ public class UserWallet : MonoBehaviour
     /// </summary>
     public void ShowUserKimchi()
     {
+        if (isNoShow) return;
         string value = PlayerPrefsManager.GetInstance().Kimchi;
         KimchiText.text = dts.fDoubleToGoldOutPut(value);
     }
-
-    /// <summary>
-    /// ShiledTiketText
-    /// </summary>
-    public void ShowUserShiledTiket()
-    {
-        string value = PlayerPrefsManager.GetInstance().Kimchi;
-        ShiledTiketText.text = dts.fDoubleToGoldOutPut(value);
-    }
-
 
 
     /// 골드
     public void ShowUserGold()
     {
+        if (isNoShow) return;
         string value = PlayerPrefsManager.GetInstance().gold;
         GoldText.text = dts.fDoubleToGoldOutPut(value);
     }
@@ -156,6 +167,7 @@ public class UserWallet : MonoBehaviour
     /// 다이아
     public void ShowUserDia()
     {
+        if (isNoShow) return;
         double dDiamond = PlayerPrefs.GetFloat("dDiamond", 0);
         //
         DiaText.text = SeetheNatural(dDiamond);
@@ -172,6 +184,7 @@ public class UserWallet : MonoBehaviour
     /// 국밥
     public void ShowUserMilk()
     {
+        if (isNoShow) return;
         string value = PlayerPrefsManager.GetInstance().gupbap;
         MilkText.text = SeetheNatural(double.Parse(value));
         /// [훈련 도구 업글 버튼] 새로 고침
@@ -181,6 +194,7 @@ public class UserWallet : MonoBehaviour
     /// 쌀밥
     public void ShowUserSSalbap()
     {
+        if (isNoShow) return;
         string value = PlayerPrefsManager.GetInstance().ssalbap;
         SSalText.text = SeetheNatural(double.Parse(value));
         /// 

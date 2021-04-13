@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class GroggyManager : MonoBehaviour
 {
+    public TutorialMissionManager tmm;
     public GameObject LvUPObjt;
     [Header("- 우편함 갱신시간")]
     public float PostCheckDelay;
@@ -2409,6 +2410,9 @@ public class GroggyManager : MonoBehaviour
         UserWallet.GetInstance().ShowUserGold();
         // 공격력 레벨 상승
         PlayerPrefsManager.GetInstance().ATK_Lv++;
+        tmm.ExUpdateMission(3); /// 미션 업데이트
+
+
         // 퀘스트
         PlayerPrefsManager.GetInstance().questInfo[0].daily_Atk++;
 
@@ -2583,6 +2587,8 @@ public class GroggyManager : MonoBehaviour
         UserWallet.GetInstance().ShowUserGold();
         // 맷집 레벨 상승
         PlayerPrefsManager.GetInstance().Defence_Lv++;
+        tmm.ExUpdateMission(5); /// 미션 업데이트
+
         // 퀘스트
         if (PlayerPrefsManager.GetInstance().questInfo[0].All_Mattzip < 1000)
         {

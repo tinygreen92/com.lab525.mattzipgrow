@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class PlayNANOOExample : MonoBehaviour
 {
+    public TutorialMissionManager tmm;
+
     Plugin plugin;
     readonly DoubleToStringNum dts = new DoubleToStringNum();
 
@@ -211,6 +213,18 @@ public class PlayNANOOExample : MonoBehaviour
     {
         string inputTmp = InputText.text;
 
+        /// TODO : season2 쿠폰 
+        if (inputTmp == "season2")
+        {
+            PostboxItemSend("kimchi", 525, "시즌 2 추카추카");
+            InputText.transform.parent.GetComponent<InputField>().text = "";
+            InputText.transform.parent.parent.parent.gameObject.SetActive(false);
+            PopUpObjectManager.GetInstance().ShowWarnnigProcess("쿠폰이 사용되었습니다 우편함을 확인해주세요.");
+            tmm.ExUpdateMission(2);
+            return;
+        } 
+       
+
         plugin.Coupon(inputTmp, (state, message, rawData, dictionary) =>
         {
             if (state.Equals(Configure.PN_API_STATE_SUCCESS))
@@ -230,8 +244,6 @@ public class PlayNANOOExample : MonoBehaviour
                 InputText.transform.parent.GetComponent<InputField>().text = "";
                 InputText.transform.parent.parent.parent.gameObject.SetActive(false);
                 PopUpObjectManager.GetInstance().ShowWarnnigProcess("쿠폰이 사용되었습니다 우편함을 확인해주세요.");
-
-                PostboxCheck();
             }
             else
             {
@@ -390,6 +402,7 @@ public class PlayNANOOExample : MonoBehaviour
             }
             else
             {
+                PostboxCheck();
                 Debug.Log("PostboxItemSend Fail");
             }
         });
@@ -462,7 +475,7 @@ public class PlayNANOOExample : MonoBehaviour
                 break;
 
             case "kimchi":
-                PlayerPrefsManager.GetInstance().Kimchi += int.Parse(_count);
+                PlayerPrefsManager.GetInstance().Kimchi += dts.AddStringDouble(PlayerPrefsManager.GetInstance().Kimchi, _count);
                 UserWallet.GetInstance().ShowUserKimchi();
                 PopUpObjectManager.GetInstance().ShowWarnnigProcess("깍두기 " + _count + " 개 획득.");
                 break;

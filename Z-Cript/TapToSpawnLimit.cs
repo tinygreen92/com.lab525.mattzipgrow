@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class TapToSpawnLimit : MonoBehaviour
 {
+    public TutorialMissionManager tmm;
     private const int MAX_SPEC_CNT = 20000;
     [Header("+PunchObjectPools")]
     public Transform[] OP;
@@ -29,6 +30,8 @@ public class TapToSpawnLimit : MonoBehaviour
 
         ClickedSomeThing();
         ComputeNextAction();
+        
+        tmm.ExUpdateMission(0); /// 미션 업데이트
     }
     void ComputeNextAction()
     {

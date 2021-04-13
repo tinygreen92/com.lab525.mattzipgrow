@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class CharacterManager : MonoBehaviour
 {
+    public TutorialMissionManager tmm;
     public GroggyManager groggyManager;
     DoubleToStringNum dts = new DoubleToStringNum();
     [Header("- 캐릭터 창에 보일 이미지")]
@@ -2077,6 +2078,8 @@ public class CharacterManager : MonoBehaviour
         UserWallet.GetInstance().ShowUserGold();
         // 레벨 상승
         PlayerPrefsManager.GetInstance().Chara_Lv++;
+        tmm.ExUpdateMission(6); /// 미션 업데이트
+
         // 새로고침
         Characther_UP_Update();
 
