@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class InfinitiMode : MonoBehaviour
 {
+    public TutorialMissionManager tmm;
     public TapToSpawnLimit tapToSpawnLimit;
     public GotoMINIgame gotoMINIgame;
     public Booster_KEY booster_KEY;
@@ -159,7 +160,18 @@ public class InfinitiMode : MonoBehaviour
         }
 
         PlayerPrefsManager.GetInstance().key--;
-        //UserWallet.GetInstance().ShowUserKey();
+        tmm.ExUpdateMission(12); /// 미션 업데이트
+        tmm.ExUpdateMission(37); /// 미션 업데이트
+        tmm.ExUpdateMission(52); /// 미션 업데이트
+        tmm.ExUpdateMission(79); /// 미션 업데이트
+        Debug.LogError("EnterIndex : " + EnterIndex);
+        // 2단계 버티기
+        if (EnterIndex == "1050")
+        {
+            tmm.ExUpdateMission(66); /// 미션 업데이트
+        }
+
+
         // 팝업 꺼주기
         PopUpObjectManager.GetInstance().NewInfinityPopUp.SetActive(false);
         EnterPop.SetActive(false);

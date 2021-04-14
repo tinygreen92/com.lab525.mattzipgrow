@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class PopUpObjectManager : MonoBehaviour
 {
+    public TutorialMissionManager tmm;
+
     private static PopUpObjectManager instance;
 
     public static PopUpObjectManager GetInstance()
@@ -466,8 +468,10 @@ public class PopUpObjectManager : MonoBehaviour
 
         if (LuckyBoxPopUP.GetComponent<Animation>().isPlaying) return;
 
-        LuckyBoxPopUP.SetActive(true);
+        tmm.ExUpdateMission(23); /// 미션 업데이트
 
+
+        LuckyBoxPopUP.SetActive(true);
         LuckyBoxPopUP.GetComponent<Animation>()["Roll_Incre"].speed = 1;
         LuckyBoxPopUP.GetComponent<Animation>().Play("Roll_Incre");
     }

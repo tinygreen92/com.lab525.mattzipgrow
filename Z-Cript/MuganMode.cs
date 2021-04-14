@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class MuganMode : MonoBehaviour
 {
+    public TutorialMissionManager tmm;
+
     public Booster_KEY booster_KEY;
     public TapToSpawnLimit tapToSpawnLimit;
     public GotoMINIgame gotoMINIgame;
@@ -95,7 +97,14 @@ public class MuganMode : MonoBehaviour
         PlayerPrefsManager.GetInstance().bossHP = PlayerPrefsManager.GetInstance().MAX_boss_HP;
         // 입장 완료되면 키 하나 소모
         PlayerPrefsManager.GetInstance().key--;
-        //UserWallet.GetInstance().ShowUserKey();
+
+        tmm.ExUpdateMission(26); /// 미션 업데이트
+        tmm.ExUpdateMission(39); /// 미션 업데이트
+        tmm.ExUpdateMission(47); /// 미션 업데이트
+        tmm.ExUpdateMission(57); /// 미션 업데이트
+        tmm.ExUpdateMission(86); /// 미션 업데이트
+
+
         // 키회복 코루틴 스타트
         booster_KEY.KeyTimerStart();
 

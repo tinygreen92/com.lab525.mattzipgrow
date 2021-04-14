@@ -453,6 +453,13 @@ public class TutorialMissionManager : MonoBehaviour
 
         mMissionInfo[_Index].missionPassOrNot++;
         UpdateMission(_Index);
+
+        /// TODO : 쿠폰 미션 처리
+        if (_Index == 2)
+        {
+            SaveMissionInfo();
+        }
+
     }
     public void ExUpdateMission(int _Index, double _Amount)
     {

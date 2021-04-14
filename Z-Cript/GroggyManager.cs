@@ -1962,6 +1962,7 @@ public class GroggyManager : MonoBehaviour
         UserWallet.GetInstance().ShowUserGold();
         // 맷집 레벨 상승
         PlayerPrefsManager.GetInstance().CRC_UP_Lv++;
+        tmm.ExUpdateMission(33); /// 미션 업데이트
 
         PowerUP_Init();
     }
@@ -2011,6 +2012,8 @@ public class GroggyManager : MonoBehaviour
         UserWallet.GetInstance().ShowUserGold();
         // 맷집 레벨 상승
         PlayerPrefsManager.GetInstance().CRD_UP_Lv++;
+        tmm.ExUpdateMission(38); /// 미션 업데이트
+
 
         PowerUP_Init();
     }
@@ -2531,6 +2534,7 @@ public class GroggyManager : MonoBehaviour
         UserWallet.GetInstance().ShowUserGold();
         // 체력 회복력 레벨 상승
         PlayerPrefsManager.GetInstance().Recov_Lv++;
+        tmm.ExUpdateMission(15); /// 미션 업데이트
 
         PowerUP_Init();
     }

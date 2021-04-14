@@ -4,8 +4,6 @@ using UnityEngine.UI;
 
 public class QuestItem : MonoBehaviour
 {
-    readonly DoubleToStringNum dts = new DoubleToStringNum();
-
     public QuestManager pm;
     [Header("- 회색 커버 오브젝트")]
     public GameObject GrayImage;

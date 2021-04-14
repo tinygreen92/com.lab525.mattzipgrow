@@ -681,6 +681,8 @@ public class ShieldManager : MonoBehaviour
         }
 
         tmm.ExUpdateMission(7); /// 미션 업데이트
+        tmm.ExUpdateMission(63); /// 미션 업데이트
+        tmm.ExUpdateMission(73); /// 미션 업데이트
 
         /// 횟수만큼 랜덤 돌려
         for (int i = 0; i < cnt; i++)

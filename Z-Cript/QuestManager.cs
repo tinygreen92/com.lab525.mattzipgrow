@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class QuestManager : MonoBehaviour
 {
+    public TutorialMissionManager tmm;
     public Transform InfinityContent;
 
     [Header("-특별 미션 아이콘 이미지")]
@@ -272,8 +273,9 @@ public class QuestManager : MonoBehaviour
             case 6:
                 day2.daily_MiniGameCombo = 52525;
                 break;
-
         }
+
+        tmm.ExUpdateMission(13); /// 미션 업데이트
 
 
     }
@@ -599,6 +601,10 @@ public class QuestManager : MonoBehaviour
             case 12: PlayerPrefsManager.GetInstance().questInfo4[0].All_Dia_HP_Cnt++; break;
             case 13: PlayerPrefsManager.GetInstance().questInfo6[0].All_PVPGame_Cnt++; break;
         }
+
+        tmm.ExUpdateMission(44); /// 미션 업데이트
+
+
         // 보상 더 있나 새로고침
         AllMissionUpdate();
         //
@@ -915,6 +921,7 @@ public class QuestManager : MonoBehaviour
             if (int.Parse(InfinityContent.GetChild(i).name) == _index)
             {
                 InfinityContent.GetChild(i).GetComponent<QuestItem>().ClickedGetDiaBtn();
+                tmm.ExUpdateMission(32); /// 미션 업데이트
                 return;
             }
         }

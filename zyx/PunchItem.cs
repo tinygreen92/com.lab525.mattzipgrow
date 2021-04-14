@@ -213,15 +213,9 @@ public class PunchItem : MonoBehaviour
         {
             thisWeaponLevel = 100;
         }
-        /// 첫번재 무기라면 예외처리
-        if (thisIndex == 0)
-        {
-            tmpPrice = (thisWeaponLevel + 10).ToString();
-        }
-        else
-        {
-            tmpPrice = (((thisWeaponLevel + 1) * (5 * thisIndex)) + (10 + (5 * thisIndex))).ToString();
-        }
+
+        //tmpPrice = (((thisWeaponLevel + 1) * (5 * thisIndex)) + (10 + (5 * thisIndex))).ToString();
+        tmpPrice = (((thisIndex + 1) * 100) * (1 + 0.07f * (thisWeaponLevel + 1)) ).ToString();
 
         /// 수치 변화 저장
         PlayerPrefsManager.GetInstance().weaponInfo[thisIndex].weaponLevel = thisWeaponLevel;

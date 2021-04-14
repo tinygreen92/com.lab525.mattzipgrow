@@ -1156,7 +1156,24 @@ public class PlayerPrefsManager : MonoBehaviour
     }
     void myInvoExMission()
     {
-        tmm.ExUpdateMission(1, dMattZip); /// 미션 업데이트
+        tmm.ExUpdateMission(1,  dMattZip); /// 미션 업데이트
+        tmm.ExUpdateMission(10, dMattZip); /// 미션 업데이트
+        tmm.ExUpdateMission(20, dMattZip); /// 미션 업데이트
+        tmm.ExUpdateMission(31, dMattZip); /// 미션 업데이트
+        tmm.ExUpdateMission(40, dMattZip); /// 미션 업데이트
+        tmm.ExUpdateMission(50, dMattZip); /// 미션 업데이트
+        tmm.ExUpdateMission(60, dMattZip); /// 미션 업데이트
+        tmm.ExUpdateMission(70, dMattZip); /// 미션 업데이트
+        tmm.ExUpdateMission(80, dMattZip); /// 미션 업데이트
+        tmm.ExUpdateMission(91, dMattZip); /// 미션 업데이트
+        tmm.ExUpdateMission(92, dMattZip); /// 미션 업데이트
+        tmm.ExUpdateMission(93, dMattZip); /// 미션 업데이트
+        tmm.ExUpdateMission(94, dMattZip); /// 미션 업데이트
+        tmm.ExUpdateMission(95, dMattZip); /// 미션 업데이트
+        tmm.ExUpdateMission(96, dMattZip); /// 미션 업데이트
+        tmm.ExUpdateMission(97, dMattZip); /// 미션 업데이트
+        tmm.ExUpdateMission(98, dMattZip); /// 미션 업데이트
+        tmm.ExUpdateMission(99, dMattZip); /// 미션 업데이트
     }
 
 

@@ -8,6 +8,7 @@ using UnityEngine.UI;
 
 public class PlayFabLogin : MonoBehaviour
 {
+    public TutorialMissionManager tmm;
     public TutorialManager tm;
     [Header("- 닉네임 설정")]
     public InputField nickInputText;
@@ -1566,6 +1567,13 @@ public class PlayFabLogin : MonoBehaviour
         tmpString[6] = "최종 대미지       " + UserWallet.GetInstance().SeetheNatural((eBlockedDam * Enemy_PunchCnt) + (eAttackedDam * Enemy_PunchCnt));
 
         Debug.LogWarning("보상 받고 종료");
+
+        tmm.ExUpdateMission(33); /// 미션 업데이트
+        tmm.ExUpdateMission(54); /// 미션 업데이트
+        tmm.ExUpdateMission(69); /// 미션 업데이트
+        tmm.ExUpdateMission(78); /// 미션 업데이트
+        tmm.ExUpdateMission(88); /// 미션 업데이트
+
 
         /// 승리하면 3점
         if (_isVictory)

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class MINIgameManager : MonoBehaviour
 {
+    public TutorialMissionManager tmm;
     public GameObject Btn_Exit;
     [Space]
     public Booster_KEY booster_KEY;
@@ -224,7 +225,9 @@ public class MINIgameManager : MonoBehaviour
         isLeftBtnClicked = false;
 
         PlayerPrefsManager.GetInstance().key--;
-        //UserWallet.GetInstance().ShowUserKey();
+        tmm.ExUpdateMission(75);
+
+
         booster_KEY.KeyTimerStart();
 
         FlashEnd();
@@ -333,6 +336,27 @@ public class MINIgameManager : MonoBehaviour
         PlayerPrefsManager.GetInstance().questInfo3[0].daily_MiniGameCombo = Combo;
         PlayerPrefsManager.GetInstance().MaxGet_MiniGame = Combo;
 
+        if (Combo >= 30)
+        {
+            tmm.ExUpdateMission(28);
+        }
+        else if (Combo >= 50)
+        {
+            tmm.ExUpdateMission(34);
+        }
+        else if (Combo >= 100)
+        {
+            tmm.ExUpdateMission(51);
+        }
+        else if (Combo >= 150)
+        {
+            tmm.ExUpdateMission(65);
+        }
+        else if (Combo >= 200)
+        {
+            tmm.ExUpdateMission(84);
+        }
+
         /// 쌀밥 유물 획득량 % 증가
         float getSSalAmount = (Combo * (1.0f + PlayerPrefsManager.GetInstance().Arti_MiniReword * 0.005f));
         /// 
@@ -362,7 +386,7 @@ public class MINIgameManager : MonoBehaviour
         int Combo = PlayerPrefsManager.GetInstance().MaxGet_MiniGame;
 
         /// 쌀밥 획득량 % 증가
-        float getSSalAmount = (Combo * (1.0f + PlayerPrefsManager.GetInstance().Arti_MiniReword * 0.01f));
+        float getSSalAmount = (Combo * (1.0f + PlayerPrefsManager.GetInstance().Arti_MiniReword * 0.005f));
 
         // 팝업 띄워죠라.
         PopUpObjectManager.GetInstance().ShowSSalPopUPSkip(Mathf.RoundToInt(getSSalAmount));

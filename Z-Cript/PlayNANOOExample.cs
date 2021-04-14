@@ -216,7 +216,12 @@ public class PlayNANOOExample : MonoBehaviour
         /// TODO : season2 쿠폰 
         if (inputTmp == "season2")
         {
-            PostboxItemSend("kimchi", 525, "시즌 2 추카추카");
+            if (tmm.mMissionInfo[2].missionPassOrNot != 0)
+            {
+                return;
+            }
+
+            PostboxItemSend("diamond", 525, null);
             InputText.transform.parent.GetComponent<InputField>().text = "";
             InputText.transform.parent.parent.parent.gameObject.SetActive(false);
             PopUpObjectManager.GetInstance().ShowWarnnigProcess("쿠폰이 사용되었습니다 우편함을 확인해주세요.");
@@ -240,7 +245,7 @@ public class PlayNANOOExample : MonoBehaviour
 
                 //CouponCheak(item_code, item_count);
                 /// plugin.PostboxItemSend
-                PostboxItemSend(item_code, int.Parse(item_count), "");
+                PostboxItemSend(item_code, int.Parse(item_count), null);
                 InputText.transform.parent.GetComponent<InputField>().text = "";
                 InputText.transform.parent.parent.parent.gameObject.SetActive(false);
                 PopUpObjectManager.GetInstance().ShowWarnnigProcess("쿠폰이 사용되었습니다 우편함을 확인해주세요.");

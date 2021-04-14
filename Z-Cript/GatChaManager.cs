@@ -746,6 +746,17 @@ public class GatChaManager : MonoBehaviour
     public void GoGoGatCha(int seed)
     {
         tmm.ExUpdateMission(4); /// 미션 업데이트
+        tmm.ExUpdateMission(11); /// 미션 업데이트
+        tmm.ExUpdateMission(17); /// 미션 업데이트
+        tmm.ExUpdateMission(27); /// 미션 업데이트
+        tmm.ExUpdateMission(35); /// 미션 업데이트
+        tmm.ExUpdateMission(45); /// 미션 업데이트
+        tmm.ExUpdateMission(53); /// 미션 업데이트
+        tmm.ExUpdateMission(59); /// 미션 업데이트
+        tmm.ExUpdateMission(68); /// 미션 업데이트
+        tmm.ExUpdateMission(76); /// 미션 업데이트
+        tmm.ExUpdateMission(81); /// 미션 업데이트
+        tmm.ExUpdateMission(87); /// 미션 업데이트
 
 
         var ppm = PlayerPrefsManager.GetInstance();
@@ -1090,11 +1101,28 @@ public class GatChaManager : MonoBehaviour
 
 
     /// <summary>
-    /// 갱신까지 1초
+    ///  맷집 달성 갱신까지 1초
     /// </summary>
     void myInvoExMission()
     {
         tmm.ExUpdateMission(1, PlayerPrefsManager.GetInstance().dMattZip); /// 미션 업데이트
+        tmm.ExUpdateMission(10, PlayerPrefsManager.GetInstance().dMattZip); /// 미션 업데이트
+        tmm.ExUpdateMission(20, PlayerPrefsManager.GetInstance().dMattZip); /// 미션 업데이트
+        tmm.ExUpdateMission(31, PlayerPrefsManager.GetInstance().dMattZip); /// 미션 업데이트
+        tmm.ExUpdateMission(40, PlayerPrefsManager.GetInstance().dMattZip); /// 미션 업데이트
+        tmm.ExUpdateMission(50, PlayerPrefsManager.GetInstance().dMattZip); /// 미션 업데이트
+        tmm.ExUpdateMission(60, PlayerPrefsManager.GetInstance().dMattZip); /// 미션 업데이트
+        tmm.ExUpdateMission(70, PlayerPrefsManager.GetInstance().dMattZip); /// 미션 업데이트
+        tmm.ExUpdateMission(80, PlayerPrefsManager.GetInstance().dMattZip); /// 미션 업데이트
+        tmm.ExUpdateMission(91, PlayerPrefsManager.GetInstance().dMattZip); /// 미션 업데이트
+        tmm.ExUpdateMission(92, PlayerPrefsManager.GetInstance().dMattZip); /// 미션 업데이트
+        tmm.ExUpdateMission(93, PlayerPrefsManager.GetInstance().dMattZip); /// 미션 업데이트
+        tmm.ExUpdateMission(94, PlayerPrefsManager.GetInstance().dMattZip); /// 미션 업데이트
+        tmm.ExUpdateMission(95, PlayerPrefsManager.GetInstance().dMattZip); /// 미션 업데이트
+        tmm.ExUpdateMission(96, PlayerPrefsManager.GetInstance().dMattZip); /// 미션 업데이트
+        tmm.ExUpdateMission(97, PlayerPrefsManager.GetInstance().dMattZip); /// 미션 업데이트
+        tmm.ExUpdateMission(98, PlayerPrefsManager.GetInstance().dMattZip); /// 미션 업데이트
+        tmm.ExUpdateMission(99, PlayerPrefsManager.GetInstance().dMattZip); /// 미션 업데이트
     }
 
 

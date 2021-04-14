@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class FlagManager : MonoBehaviour
 {
+    public TutorialMissionManager tmm;
+
     /// <summary>
     /// BuffFlags[0] = 체력 회복력    is1Recov
     /// BuffFlags[0] = 체력           is2Stamina
@@ -125,11 +127,6 @@ public class FlagManager : MonoBehaviour
         if (ppm.is2Stamina >= 9999) ppm.is2Stamina = 9999;
         if (ppm.is3ATK >= 9999) ppm.is3ATK = 9999;
         if (ppm.is4Mattzip >= 9999) ppm.is4Mattzip = 9999;
-
-        //ppm.is1Recov = 9998;
-        //ppm.is2Stamina = 9998;
-        //ppm.is3ATK = 9998;
-        //ppm.is4Mattzip = 9998;
 
         is3ATK_Lv.text = "Lv. " + ppm.is3ATK;
         is4Mattzip_Lv.text = "Lv. " + ppm.is4Mattzip;
@@ -263,6 +260,9 @@ public class FlagManager : MonoBehaviour
         // 레벨 상승
         PlayerPrefsManager.GetInstance().is2Stamina++;
 
+        tmm.ExUpdateMission(18); /// 미션 업데이트
+        tmm.ExUpdateMission(19); /// 미션 업데이트
+
         InitFlags();
     }
 
@@ -314,6 +314,9 @@ public class FlagManager : MonoBehaviour
 
         // 레벨 상승
         PlayerPrefsManager.GetInstance().is3ATK++;
+
+        tmm.ExUpdateMission(18); /// 미션 업데이트
+        tmm.ExUpdateMission(19); /// 미션 업데이트
 
         InitFlags();
     }
@@ -368,6 +371,9 @@ public class FlagManager : MonoBehaviour
         // 레벨 상승
         PlayerPrefsManager.GetInstance().is4Mattzip++;
 
+        tmm.ExUpdateMission(18); /// 미션 업데이트
+        tmm.ExUpdateMission(19); /// 미션 업데이트
+
         InitFlags();
     }
 
@@ -421,6 +427,9 @@ public class FlagManager : MonoBehaviour
 
         // 레벨 상승
         PlayerPrefsManager.GetInstance().is1Recov++;
+
+        tmm.ExUpdateMission(18); /// 미션 업데이트
+        tmm.ExUpdateMission(19); /// 미션 업데이트
 
         InitFlags();
     }

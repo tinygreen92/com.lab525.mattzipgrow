@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class DenfenceMode : MonoBehaviour
 {
+    public TutorialMissionManager tmm;
+
     public SpriteRenderer HitBody;
     public Image FilledHp;
     public Image Timer;
@@ -207,6 +209,15 @@ public class DenfenceMode : MonoBehaviour
         PopUpObjectManager.GetInstance().ShowNewPunch(PlayerPrefsManager.GetInstance().PunchIndex);
         // 다음 레벨 무기 해제 시켜줌.
         punchManager.UnlockNextPunch();
+        tmm.ExUpdateMission(21); /// 미션 업데이트
+        tmm.ExUpdateMission(29); /// 미션 업데이트
+        tmm.ExUpdateMission(41); /// 미션 업데이트
+        tmm.ExUpdateMission(48); /// 미션 업데이트
+        tmm.ExUpdateMission(55); /// 미션 업데이트
+        tmm.ExUpdateMission(61); /// 미션 업데이트
+        tmm.ExUpdateMission(71); /// 미션 업데이트
+        tmm.ExUpdateMission(82); /// 미션 업데이트
+        tmm.ExUpdateMission(89); /// 미션 업데이트
 
         //
         CoolDownStart(300);

@@ -236,12 +236,15 @@ public class ShieldItem : MonoBehaviour
         float temp = Time.time * 525f;
         Random.InitState((int)temp);
         float random = Random.Range(0, 100f);
+        
+        pm.tmm.ExUpdateMission(8); /// 미션 업데이트
+        pm.tmm.ExUpdateMission(64); /// 미션 업데이트
+        pm.tmm.ExUpdateMission(74); /// 미션 업데이트
 
         /// TODO : 강화성공확률 적용
         if (random < thisSuccedFussion)
         {
             thisShieldLevel++;
-            pm.tmm.ExUpdateMission(8); /// 미션 업데이트
             Debug.LogError(thisSuccedFussion + " 강화 성공 : " + random);
         }
         else

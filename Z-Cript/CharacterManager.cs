@@ -1481,6 +1481,9 @@ public class CharacterManager : MonoBehaviour
 
         //레벨업
         PlayerPrefsManager.GetInstance().uniformInfo[_index].Skill_LV++;
+        tmm.ExUpdateMission(14); /// 미션 업데이트
+        tmm.ExUpdateMission(16); /// 미션 업데이트
+
         Uniform_SSalCheak(_index);
         // 스탯 상승
         SkillSetUniform_LV(_index, thisLv + 1);
@@ -2026,7 +2029,7 @@ public class CharacterManager : MonoBehaviour
             PlayerPrefs.SetString("Chara_HP_UP", Chara_HP_UP);
             PlayerPrefs.SetString("Chara_Recov_UP", Chara_Recov_UP);
             /// 캐릭터 방어력 스탯 값
-            PlayerPrefs.SetFloat("Chara_Defence_UP", (CharaLv - 1) * 10f);
+            PlayerPrefs.SetFloat("Chara_Defence_UP", (CharaLv - 1) * 5f);
             PlayerPrefs.Save();
         }
 
@@ -2079,6 +2082,14 @@ public class CharacterManager : MonoBehaviour
         // 레벨 상승
         PlayerPrefsManager.GetInstance().Chara_Lv++;
         tmm.ExUpdateMission(6); /// 미션 업데이트
+        tmm.ExUpdateMission(9); /// 미션 업데이트
+        tmm.ExUpdateMission(25); /// 미션 업데이트
+        tmm.ExUpdateMission(36); /// 미션 업데이트
+        tmm.ExUpdateMission(46); /// 미션 업데이트
+        tmm.ExUpdateMission(58); /// 미션 업데이트
+        tmm.ExUpdateMission(67); /// 미션 업데이트
+        tmm.ExUpdateMission(77); /// 미션 업데이트
+        tmm.ExUpdateMission(85); /// 미션 업데이트
 
         // 새로고침
         Characther_UP_Update();

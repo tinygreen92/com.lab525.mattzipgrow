@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class PunchManager : MonoBehaviour
 {
+    public TutorialMissionManager tmm;
+
     public GameObject POWERUP_POP;
     public Transform InfinityContent;
     [Header("-펀치 이미지 100개")]
@@ -184,6 +186,43 @@ public class PunchManager : MonoBehaviour
     /// </summary>
     internal void ChangePunch(int _index)
     {
+        if (_index == 1) // 물주먹
+        {
+            tmm.ExUpdateMission(22); /// 미션 업데이트
+        }
+        else if (_index == 2) // 돌주먹
+        {
+            tmm.ExUpdateMission(30); /// 미션 업데이트
+        }
+        else if (_index == 3) // 불주먹
+        {
+            tmm.ExUpdateMission(42); /// 미션 업데이트
+        }
+        else if (_index == 4) // 막대사탕
+        {
+            tmm.ExUpdateMission(49); /// 미션 업데이트
+        }
+        else if (_index == 5) // 당근
+        {
+            tmm.ExUpdateMission(56); /// 미션 업데이트
+        }
+        else if (_index == 6) // 양송이
+        {
+            tmm.ExUpdateMission(62); /// 미션 업데이트
+        }
+        else if (_index == 7) // 수박바
+        {
+            tmm.ExUpdateMission(72); /// 미션 업데이트
+        }
+        else if (_index == 8) // 소시지
+        {
+            tmm.ExUpdateMission(83); /// 미션 업데이트
+        }
+        else if (_index == 9) // 소시지
+        {
+            tmm.ExUpdateMission(90); /// 미션 업데이트
+        }
+
         // ppm 으로 저장도 하고
         PlayerPrefsManager.GetInstance().PunchIndex = _index;
         // 불렛 종류 바꾸고

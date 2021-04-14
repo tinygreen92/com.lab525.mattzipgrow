@@ -177,8 +177,7 @@ public class GameStart : MonoBehaviour
             // 무기 50개까지 레벨 0 초기화.
             for (int i = 0; i < 50; i++)
             {
-                //string tmpPrice = PlayerPrefsManager.GetInstance().shopColl[i, 0];
-                tmpPrice = ((i + 1) * 10).ToString();
+                tmpPrice = ((i + 1) * 100).ToString();
                 weaponPrice = dts.fDoubleToStringNumber(tmpPrice);
                 isUnlock = false;
 
@@ -194,7 +193,7 @@ public class GameStart : MonoBehaviour
             // 무기 50개 이후 레벨 0 초기화.
             for (int i = 50; i < 70; i++)
             {
-                tmpPrice = ((i + 1) * 10).ToString();
+                tmpPrice = ((i + 1) * 100).ToString();
                 weaponPrice = dts.fDoubleToStringNumber(tmpPrice);
                 isUnlock = false;
 
@@ -208,7 +207,7 @@ public class GameStart : MonoBehaviour
             // 무기 50개 이후 레벨 0 초기화.
             for (int i = 70; i < 80; i++)
             {
-                tmpPrice = ((i + 1) * 10).ToString();
+                tmpPrice = ((i + 1) * 100).ToString();
                 weaponPrice = dts.fDoubleToStringNumber(tmpPrice);
                 isUnlock = false;
 
@@ -223,7 +222,7 @@ public class GameStart : MonoBehaviour
             // 무기 50개 이후 레벨 0 초기화.
             for (int i = 80; i < 90; i++)
             {
-                tmpPrice = ((i + 1) * 10).ToString();
+                tmpPrice = ((i + 1) * 100).ToString();
                 weaponPrice = dts.fDoubleToStringNumber(tmpPrice);
                 isUnlock = false;
 
@@ -237,7 +236,7 @@ public class GameStart : MonoBehaviour
             // 무기 50개 이후 레벨 0 초기화.
             for (int i = 90; i < 100; i++)
             {
-                tmpPrice = ((i + 1) * 10).ToString();
+                tmpPrice = ((i + 1) * 100).ToString();
                 weaponPrice = dts.fDoubleToStringNumber(tmpPrice);
                 isUnlock = false;
 
