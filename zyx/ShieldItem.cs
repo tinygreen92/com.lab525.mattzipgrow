@@ -96,7 +96,11 @@ public class ShieldItem : MonoBehaviour
         var tmpList = PlayerPrefsManager.GetInstance().shieldInfo[thisIndex];
 
         thisShieldLevel = tmpList.shieldLevel;
-        thisShieldEffect = thisShieldLevel < 1 ? 0 : tmpList.equipedEffect + (tmpList.upperEfect * thisShieldLevel);
+        if (thisShieldLevel < 1)
+        {
+            PlayerPrefsManager.GetInstance().shieldInfo[thisIndex].shieldLevel = ++thisShieldLevel;
+        }
+        thisShieldEffect = tmpList.equipedEffect + (tmpList.upperEfect * thisShieldLevel);
         thisShieldCost = dts.multipleStringDouble(tmpList.shieldCost, (1 + 0.3f * thisShieldLevel));
         thisSuccedFussion = tmpList.powerUpper - (tmpList.powerMinusPer * thisShieldLevel);
         thisDIAEffect = tmpList.ownedEffect;

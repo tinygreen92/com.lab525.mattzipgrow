@@ -2592,6 +2592,7 @@ public class GroggyManager : MonoBehaviour
         // 맷집 레벨 상승
         PlayerPrefsManager.GetInstance().Defence_Lv++;
         tmm.ExUpdateMission(5); /// 미션 업데이트
+        tmm.ExUpdateMission(24); /// 미션 업데이트
 
         // 퀘스트
         if (PlayerPrefsManager.GetInstance().questInfo[0].All_Mattzip < 1000)

@@ -216,15 +216,17 @@ public class PlayNANOOExample : MonoBehaviour
         /// TODO : season2 쿠폰 
         if (inputTmp == "season2")
         {
-            if (tmm.mMissionInfo[2].missionPassOrNot != 0)
+            if (tmm.mMissionInfo[2].missionPassOrNot != 0 || PlayerPrefs.GetInt("isTutoAllClear") != 2)
             {
+                PopUpObjectManager.GetInstance().ShowWarnnigProcess("이미 사용하였거나 잘못된 쿠폰 번호입니다.");
                 return;
             }
 
-            PostboxItemSend("diamond", 525, null);
+            PostboxItemSend("diamond", 525, "");
             InputText.transform.parent.GetComponent<InputField>().text = "";
             InputText.transform.parent.parent.parent.gameObject.SetActive(false);
             PopUpObjectManager.GetInstance().ShowWarnnigProcess("쿠폰이 사용되었습니다 우편함을 확인해주세요.");
+            WriteChikenCoupon("USING_season2", $"미션 2 쿠폰");
             tmm.ExUpdateMission(2);
             return;
         } 
@@ -245,7 +247,7 @@ public class PlayNANOOExample : MonoBehaviour
 
                 //CouponCheak(item_code, item_count);
                 /// plugin.PostboxItemSend
-                PostboxItemSend(item_code, int.Parse(item_count), null);
+                PostboxItemSend(item_code, int.Parse(item_count), "");
                 InputText.transform.parent.GetComponent<InputField>().text = "";
                 InputText.transform.parent.parent.parent.gameObject.SetActive(false);
                 PopUpObjectManager.GetInstance().ShowWarnnigProcess("쿠폰이 사용되었습니다 우편함을 확인해주세요.");
@@ -362,6 +364,27 @@ public class PlayNANOOExample : MonoBehaviour
 
 
     }
+
+
+    /// <summary>
+    /// 세이브 할때 우편함 날리기
+    /// </summary>
+    public void PostboxDelete()
+    {
+        plugin.PostboxClear((state, message, rawData, dictionary) => {
+            if (state.Equals(Configure.PN_API_STATE_SUCCESS))
+            {
+                Debug.Log("Success");
+                PostboxCheck();
+            }
+            else
+            {
+                Debug.Log("Fail");
+            }
+        });
+    }
+
+
 
     /// <summary>
     /// 우편함에 추가하기.
@@ -617,6 +640,8 @@ public class PlayNANOOExample : MonoBehaviour
                 /// 데이터 세이브 플러그 세워주고 종료
                 PlayerPrefs.SetInt("isDataSaved", 1);
                 PlayerPrefs.Save();
+                /// 우편함 날리기
+                PostboxDelete();
                 //
                 Invoke(nameof(RestartAppForAOS), 1f);
             }

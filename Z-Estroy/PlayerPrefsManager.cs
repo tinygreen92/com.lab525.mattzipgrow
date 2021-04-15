@@ -911,24 +911,12 @@ public class PlayerPrefsManager : MonoBehaviour
     }
 
 
+    private string rawAttackDamage = "1";
     /// <summary>
     /// (string)[스탯 공격력]            RawAttackDamage    
     /// </summary>
-    public string RawAttackDamage
-    {
-        get
-        {
-            if (!PlayerPrefs.HasKey("RawAttackDamage")) return "1";
-            var tmp = PlayerPrefs.GetString("RawAttackDamage", "1");
-            return tmp;
-        }
+    public string RawAttackDamage = "1";
 
-        set
-        {
-            PlayerPrefs.SetString("RawAttackDamage", value);
-            PlayerPrefs.Save();
-        }
-    }
 
     /// <summary>
     /// (float) 공격력 유물 %            AttackPunch
@@ -1704,6 +1692,8 @@ public class PlayerPrefsManager : MonoBehaviour
         }
     }
 
+    public bool isEmptyLuckBox;
+
     /// (float)아이템 획득확률<럭키박스>                 LuckyProb
     public float LuckyProb
     {
@@ -1713,10 +1703,6 @@ public class PlayerPrefsManager : MonoBehaviour
             var tmp = PlayerPrefs.GetFloat("LuckyProb");
             return tmp;
         }
-        //set
-        //{
-        //    PlayerPrefs.Save();
-        //}
     }
 
     /// (int)공격력 레벨                          ATK_Lv
@@ -4165,7 +4151,7 @@ public class PlayerPrefsManager : MonoBehaviour
                 cloudTmpForGPGS_017 = PlayerPrefs.GetInt("Arti_GroggyTouch", 0),
                 cloudTmpForGPGS_018 = PlayerPrefs.GetInt("Arti_GAL", 0),
                 cloudTmpForGPGS_019 = PlayerPrefs.GetInt("isBoosterMattzip", 0),
-                cloudTmpForGPGS_020 = PlayerPrefs.GetString("RawAttackDamage", "1"),
+                cloudTmpForGPGS_020 = PlayerPrefs.GetString("missionInfo"),
                 cloudTmpForGPGS_021 = PlayerPrefs.GetString("gold", "0"),
                 cloudTmpForGPGS_022 = PlayerPrefs.GetString("diamond", "0"),
                 cloudTmpForGPGS_023 = PlayerPrefs.GetString("gupbap", "0"),
@@ -4357,15 +4343,17 @@ public class PlayerPrefsManager : MonoBehaviour
     void InitAllGameData(List<GPGSsavedPrefList> listGPGS)
     {
         PlayerPrefs.SetString("weaponInfo", listGPGS[0].cloudTmpForGPGS_029);
+
         PlayerPrefs.SetString("questInfo", listGPGS[0].cloudTmpForGPGS_030);
         PlayerPrefs.SetString("questInfo2", listGPGS[0].cloudTmpForGPGS_107);
         PlayerPrefs.SetString("questInfo3", listGPGS[0].cloudTmpForGPGS_116);
         PlayerPrefs.SetString("questInfo4", listGPGS[0].cloudTmpForGPGS_129);
         PlayerPrefs.SetString("questInfo5", listGPGS[0].cloudTmpForGPGS_159);
-
         //
         PlayerPrefs.SetString("shieldInfo", listGPGS[0].cloudTmpForGPGS_111);
         PlayerPrefs.SetString("uniformInfo", listGPGS[0].cloudTmpForGPGS_161);
+
+        PlayerPrefs.SetString("missionInfo", listGPGS[0].cloudTmpForGPGS_020);
 
         //
         LoadWeaponInfo();
@@ -4378,6 +4366,11 @@ public class PlayerPrefsManager : MonoBehaviour
         //
         //LoadAllMoneyData();
         LoaduniformData();
+
+        /// 미션 로드
+        PlayerPrefs.SetInt("isTutoAllClear", listGPGS[0].cloudTmpForGPGS_105);
+        tmm.LoadMissionInfo();
+
         //서순
         PlayerPrefs.SetInt("isFristGameStart", listGPGS[0].cloudTmpForGPGS_001);
         PlayerPrefs.SetString("Shield_Time", listGPGS[0].cloudTmpForGPGS_002);
@@ -4399,7 +4392,6 @@ public class PlayerPrefsManager : MonoBehaviour
         PlayerPrefs.SetInt("Arti_GroggyTouch", listGPGS[0].cloudTmpForGPGS_017);
         PlayerPrefs.SetInt("Arti_GAL", listGPGS[0].cloudTmpForGPGS_018);
         PlayerPrefs.SetInt("isBoosterMattzip", listGPGS[0].cloudTmpForGPGS_019);
-        PlayerPrefs.SetString("RawAttackDamage", listGPGS[0].cloudTmpForGPGS_020);
         PlayerPrefs.SetString("gold", listGPGS[0].cloudTmpForGPGS_021);
         PlayerPrefs.SetString("diamond", listGPGS[0].cloudTmpForGPGS_022);
         PlayerPrefs.SetString("gupbap", listGPGS[0].cloudTmpForGPGS_023);
@@ -4421,7 +4413,6 @@ public class PlayerPrefsManager : MonoBehaviour
         PlayerPrefs.SetInt("Arti_GoldBox", listGPGS[0].cloudTmpForGPGS_102);
         PlayerPrefs.SetInt("Arti_OffGold", listGPGS[0].cloudTmpForGPGS_103);
         PlayerPrefs.SetInt("MaxGet_MuganTop", listGPGS[0].cloudTmpForGPGS_104);
-        PlayerPrefs.SetInt("isTutoAllClear", listGPGS[0].cloudTmpForGPGS_105);
         PlayerPrefs.SetInt("is0515shock", listGPGS[0].cloudTmpForGPGS_106);
         PlayerPrefs.SetInt("Shield10AdsCnt", listGPGS[0].cloudTmpForGPGS_110);  /// is0517shock
         PlayerPrefs.SetFloat("dDiamond", listGPGS[0].cloudTmpForGPGS_108);

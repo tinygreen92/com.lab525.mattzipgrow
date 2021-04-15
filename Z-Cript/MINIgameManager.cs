@@ -329,7 +329,7 @@ public class MINIgameManager : MonoBehaviour
         PlayerPrefsManager.GetInstance().questInfo3[0].All_MiniGame++;
         isStart = false;
 
-        Invoke("InvoClear", 1.0f);
+        Invoke(nameof(InvoClear), 1.0f);
     }
     void InvoClear()
     {

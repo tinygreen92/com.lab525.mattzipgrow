@@ -43,8 +43,10 @@ public class GameStart : MonoBehaviour
         {
             Debug.LogError("데이터 세이브가 일어났다면 있던 데이터 지워줌");
             PlayerPrefs.DeleteAll();
+
             PlayerPrefs.SetInt("isFristGameStart", 1);
             PlayerPrefs.SetInt("isSignFirst", 1);
+            PlayerPrefs.SetInt("isDataSaved", 1);
             PlayerPrefs.Save();
         }
         // 프레임레이트 고정

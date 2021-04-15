@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class CharacterManager : MonoBehaviour
 {
+    public GameObject charCancas;
+    [Space]
     public TutorialMissionManager tmm;
     public GroggyManager groggyManager;
     DoubleToStringNum dts = new DoubleToStringNum();
@@ -2040,8 +2042,32 @@ public class CharacterManager : MonoBehaviour
 
         Power_UP_Cheak();
         groggyManager.PowerUP_Init();
+
+        if (coru == null)
+            coru = StartCoroutine(Tsukuyomi());
     }
 
+    Coroutine coru;
+    WaitForSeconds GC_05_SEC = new WaitForSeconds(0.5f);
+
+    /// <summary>
+    /// 회색으로 덮기 판단 0.5초 마다
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator Tsukuyomi()
+    {
+        yield return null;
+
+        while (true)
+        {
+            yield return GC_05_SEC;
+
+            if (charCancas.activeSelf)
+            {
+                Power_UP_Cheak();
+            }
+        }
+    }
 
     string Power_UPgoldPass;
     /// <summary>

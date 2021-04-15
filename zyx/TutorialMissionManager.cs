@@ -54,6 +54,30 @@ public class TutorialMissionManager : MonoBehaviour
         SaveMissionInfo();
     }
 
+
+
+
+
+
+    public void TEST_SkipTuto()
+    {
+        mMissionInfo[currentMissionIndex++].missionPassOrNot = -1;
+        /// 미션 내용 갱신
+        missionText.text = mTitles[currentMissionIndex];
+        /// 이미 달성한 경우에 오픈해주기
+        UpdateMission(currentMissionIndex);
+    }
+
+
+
+
+
+
+
+
+
+
+
     public void SaveMissionInfo()
     {
         BinaryFormatter binaryFormatter = new BinaryFormatter();
@@ -78,7 +102,7 @@ public class TutorialMissionManager : MonoBehaviour
     public void LoadMissionInfo()
     {
         /// 만약 미션 올 클리어라면 버튼 숨겨줌
-        if (PlayerPrefs.GetInt("isTutoAllClear", 0) != 0)
+        if (PlayerPrefs.GetInt("isTutoAllClear", 0) == 525)
         {
             mainBtnObjt.SetActive(false);
             return;
@@ -217,7 +241,11 @@ public class TutorialMissionManager : MonoBehaviour
                 break;
             case 21: clearCnt = 1; break;
             case 22: clearCnt = 1; break;
-            case 23: clearCnt = 1; break;
+            case 23: 
+                clearCnt = 1;
+                /// TODO : 골드 획득 확률 정상화.
+                PlayerPrefsManager.GetInstance().isEmptyLuckBox = false;
+                break;
             case 24: clearCnt = 1; break;
             case 25: clearCnt = 20;
                 if (dts.SubStringDouble("20", PlayerPrefsManager.GetInstance().Chara_Lv) == "-1" ||
@@ -228,7 +256,7 @@ public class TutorialMissionManager : MonoBehaviour
                 break;
             case 26: clearCnt = 1; break;
             case 27: clearCnt = 1; break;
-            case 28: clearCnt = 30; break;
+            case 28: clearCnt = 1; break;
             case 29: clearCnt = 1; break;
             case 30: clearCnt = 1; break;
             case 31: clearCnt = 150;
@@ -240,7 +268,7 @@ public class TutorialMissionManager : MonoBehaviour
                 break;
             case 32: clearCnt = 1; break;
             case 33: clearCnt = 1; break;
-            case 34: clearCnt = 50; break;
+            case 34: clearCnt = 1; break;
             case 35: clearCnt = 1; break;
             case 36: clearCnt = 50;
                 if (dts.SubStringDouble("50", PlayerPrefsManager.GetInstance().Chara_Lv) == "-1" ||
@@ -281,7 +309,7 @@ public class TutorialMissionManager : MonoBehaviour
                     mMissionInfo[_index].missionPassOrNot = clearCnt;
                 }
                 break;
-            case 51: clearCnt = 100; break;
+            case 51: clearCnt = 1; break;
             case 52: clearCnt = 1; break;
             case 53: clearCnt = 1; break;
             case 54: clearCnt = 1; break;
@@ -307,7 +335,7 @@ public class TutorialMissionManager : MonoBehaviour
             case 62: clearCnt = 1; break;
             case 63: clearCnt = 1; break;
             case 64: clearCnt = 1; break;
-            case 65: clearCnt = 150; break;
+            case 65: clearCnt = 1; break;
             case 66: clearCnt = 1; break;
             case 67: clearCnt = 200;
                 if (dts.SubStringDouble("200", PlayerPrefsManager.GetInstance().Chara_Lv) == "-1" ||
@@ -350,7 +378,7 @@ public class TutorialMissionManager : MonoBehaviour
             case 81: clearCnt = 1; break;
             case 82: clearCnt = 1; break;
             case 83: clearCnt = 1; break;
-            case 84: clearCnt = 200; break;
+            case 84: clearCnt = 1; break;
             case 85: clearCnt = 300;
                 if (dts.SubStringDouble("300", PlayerPrefsManager.GetInstance().Chara_Lv) == "-1" ||
                     dts.SubStringDouble("300", PlayerPrefsManager.GetInstance().Chara_Lv) == "0")
@@ -449,21 +477,16 @@ public class TutorialMissionManager : MonoBehaviour
     /// <param name="_Index"></param>
     public void ExUpdateMission(int _Index)
     {
-        if (mMissionInfo[_Index].missionPassOrNot == -1) return;
+        if (mMissionInfo[_Index].missionPassOrNot == -1
+            || currentMissionIndex != _Index) return;
 
         mMissionInfo[_Index].missionPassOrNot++;
         UpdateMission(_Index);
-
-        /// TODO : 쿠폰 미션 처리
-        if (_Index == 2)
-        {
-            SaveMissionInfo();
-        }
-
     }
     public void ExUpdateMission(int _Index, double _Amount)
     {
-        if (mMissionInfo[_Index].missionPassOrNot == -1) return;
+        if (mMissionInfo[_Index].missionPassOrNot == -1
+            || currentMissionIndex != _Index) return;
 
         mMissionInfo[_Index].missionPassOrNot = (int)_Amount;
         UpdateMission(_Index);
@@ -486,10 +509,21 @@ public class TutorialMissionManager : MonoBehaviour
 
         /// 완료 팝업
         GetMissionReword(mMissionInfo[currentMissionIndex++]);
+        PlayerPrefs.SetInt("isTutoAllClear", currentMissionIndex);
+        PlayerPrefs.Save();
 
+        /// 골드박스 확률 일시 증가
+        if (currentMissionIndex == 23)
+        {
+            PlayerPrefsManager.GetInstance().isEmptyLuckBox = true;
+        }
+
+
+        /// 100번째 미션 깨면 끝
         if (currentMissionIndex >= 100)
         {
             PlayerPrefs.SetInt("isTutoAllClear", 525);
+            PlayerPrefs.Save();
             SaveMissionInfo();
             mainBtnObjt.SetActive(false);
             return;

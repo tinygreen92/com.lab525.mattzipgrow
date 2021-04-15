@@ -668,12 +668,23 @@ public class BulletManager : MonoBehaviour
     {
         // min 값 = 나올 확률
         float dropTable = Random.Range(0f, 100.0f);
+        /// 황금 상자 확률 업
+        if(PlayerPrefsManager.GetInstance().isEmptyLuckBox)
+        {
+            dropTable *= 0.1f;
+        }
         //
         if (dropTable < PlayerPrefsManager.GetInstance().LuckyProb)
         {
             /// TODO : 박스 프리팹으로 교체좀
             LucBox = Lean.Pool.LeanPool.Spawn(PlayerPrefsManager.GetInstance().LucBox, transform.position, transform.rotation);
             LucBox.GetComponent<CoinManager>().CoinInit();
+            /// 오토켰을 때?
+            if (PlayerPrefsManager.GetInstance().isAutoAtk)
+            {
+                PlayerPrefsManager.GetInstance().tmm.ExUpdateMission(23); /// 미션 업데이트
+            }
+
         }
 
     }
