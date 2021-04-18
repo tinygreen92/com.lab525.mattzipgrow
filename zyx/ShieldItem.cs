@@ -45,6 +45,7 @@ public class ShieldItem : MonoBehaviour
 
     public void BoxInfoUpdate(int cnt)
     {
+        MaxButton.SetActive(true);
         /// 인덱스 설정 -> 이 스크립트 전체
         thisIndex = cnt;
         // 서순 1
@@ -112,7 +113,7 @@ public class ShieldItem : MonoBehaviour
         /// 합성 확률
         fussionBox.text = "강화 성공 확률 " + thisSuccedFussion.ToString("f1") + "%";
         /// 버튼 갱신
-        SetGoobapBtn(dts.fDoubleToStringNumber(thisShieldCost));
+        SetGoobapBtn(thisShieldCost);
     }
 
     /// <summary>
@@ -159,9 +160,8 @@ public class ShieldItem : MonoBehaviour
     {
         if (thisShieldLevel >= 100) return;
 
-        var _somo = dts.fDoubleToStringNumber(dts.multipleStringDouble(thisShieldCost, (1 + 0.3f * thisShieldLevel)));
-        
-        if (dts.SubStringDouble(_MyKimchi, _somo) != "-1")
+
+        if (dts.SubStringDouble(_MyKimchi, thisShieldCost) != "-1")
         {
             MaxButton.SetActive(false);
         }
@@ -197,8 +197,7 @@ public class ShieldItem : MonoBehaviour
     public void ClickedEquipBtn()
     {
         /// 회색 이미지 활성화라면 = (이미 장착상태다) 리턴
-        if (EquipButton.activeSelf) 
-            return;
+        if (EquipButton.activeSelf) return;
 
         /// 0 렙이면 장착하지말고 리턴 (이런 경우는 없지만)
         if (thisShieldLevel == 0 && thisIndex != 0)
@@ -225,12 +224,12 @@ public class ShieldItem : MonoBehaviour
 
 
     /// <summary>
-    /// 외부에서 클릭하는 훈련도구 강화 버튼
+    /// 외부에서 클릭하는 강화 버튼
     /// </summary>
     public void ClickedUpgradeBtn()
     {
         /// 회색버튼이면 리턴
-        if (MaxButton.activeSelf) return;
+        if (MaxButton.activeSelf || posibleKimchi == "-1") return;
 
         /// 정상적 깍두기 소모
         PlayerPrefsManager.GetInstance().Kimchi = posibleKimchi;

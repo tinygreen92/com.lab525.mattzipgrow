@@ -921,7 +921,6 @@ public class QuestManager : MonoBehaviour
             if (int.Parse(InfinityContent.GetChild(i).name) == _index)
             {
                 InfinityContent.GetChild(i).GetComponent<QuestItem>().ClickedGetDiaBtn();
-                tmm.ExUpdateMission(32); /// 미션 업데이트
                 return;
             }
         }

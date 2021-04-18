@@ -195,6 +195,7 @@ public class PunchItem : MonoBehaviour
     {
         /// 회색버튼이면 리턴
         if (MaxButton.activeSelf) return;
+
         /// 다이아 구매 || 국밥 구매 판별
         if (thisWeaponLevel >= 100 && pm.thisDiaBuyWeapArray[thisIndex] == "0")
         {

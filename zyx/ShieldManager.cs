@@ -9,6 +9,7 @@ public enum MySDgatcha { ads_3, diamond_50, diamond_490, diamond_1390, ticket_1,
 
 public class ShieldManager : MonoBehaviour
 {
+    public GameObject InfiShiledObj;
     public TutorialMissionManager tmm;
     public Text timeText;
     [Header("-뽑기 팝업창")]
@@ -24,6 +25,9 @@ public class ShieldManager : MonoBehaviour
     [Header("-뽑기 성공후 연출 팝업")]
     public GameObject godChaNewShiled;
     public Button invibtn;
+    /// <summary>
+    /// 1 / 3 / 11 / 33
+    /// </summary>
     public Transform[] Gods;
     [Header("-뽑기 방패 아이콘")]
     public Sprite[] shiledSprs;
@@ -258,18 +262,11 @@ public class ShieldManager : MonoBehaviour
     /// <summary>
     /// 재화 충분하면 뽑기 연출 호출 
     /// </summary>
-    /// <param name="_kindofamount">몇 회 뽑을 건데? 1 3 11 33</param>
     public void OpenrealGodChaPop()
     {
 
         switch (_kindofamount)
         {
-            ///// 광고 보고 뽑기.
-            //case 3:
-
-            //    StartCoroutine(WhiteFlesh(Gods[1]));
-            //    break;
-
             /// 다이아로 결제
 
             case 1:
@@ -597,11 +594,16 @@ public class ShieldManager : MonoBehaviour
         while (true)
         {
             yield return GC_05_SEC;
-            // 미션 달성한거 뭐있나 초기화.
-            myKimchi = PlayerPrefsManager.GetInstance().Kimchi;
-            for (int i = 1; i < InfinityContent.childCount; i++)
+
+            if (InfiShiledObj.activeSelf)
             {
-                InfinityContent.GetChild(i).GetComponent<ShieldItem>().BuyBtnBye(myKimchi);
+                Debug.LogError("룰룰");
+                myKimchi = PlayerPrefsManager.GetInstance().Kimchi;
+
+                for (int i = 1; i < InfinityContent.childCount; i++)
+                {
+                    InfinityContent.GetChild(i).GetComponent<ShieldItem>().BuyBtnBye(myKimchi);
+                }
             }
         }
     }
@@ -652,7 +654,6 @@ public class ShieldManager : MonoBehaviour
             case MySDgatcha.diamond_50:
                 cnt = 1;
                 tmps = Gods[0];
-                tmps.GetChild(0).GetComponent<Image>().sprite = RandomPick(++startIndex);
                 break;
             case MySDgatcha.diamond_490:
                 cnt = 11;

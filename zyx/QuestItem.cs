@@ -117,6 +117,8 @@ public class QuestItem : MonoBehaviour
         PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 10);
         UserWallet.GetInstance().ShowUserDia();
         PopUpObjectManager.GetInstance().ShowWarnnigProcess("보상으로 10 다이아를 받았습니다.");
+        pm.tmm.ExUpdateMission(32); /// 미션 업데이트
+
         /// 다이아 얻으면 회색 커버 씌우기.
         GrayButton.SetActive(true);
         // 십의 자리 하나 올려주기
