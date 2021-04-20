@@ -38,6 +38,11 @@ public class PowerUPManager : MonoBehaviour
     public RectTransform Conent_5;
     public RectTransform Viewport_5;
 
+    [Header("- 방패 합성 전용")]
+    public GameObject Fussion_TAP;          // 클릭된 이미지
+    public RectTransform Conent_6;
+    public RectTransform Viewport_6;
+
     Text[] punchSet;
     bool isInitFinish;
     ScrollRect thisSCRect;
@@ -140,6 +145,7 @@ public class PowerUPManager : MonoBehaviour
 
                 if (Flag_TAP != null) Flag_TAP.SetActive(false);
                 if (Special_TAP != null) Special_TAP.SetActive(false);
+                if (Fussion_TAP != null) Fussion_TAP.SetActive(false);
                 // 훈련강화 페이지 새로 고침
                 if (name == "POWERUP_POP")
                 {
@@ -159,6 +165,7 @@ public class PowerUPManager : MonoBehaviour
 
                 if (Flag_TAP != null) Flag_TAP.SetActive(false);
                 if (Special_TAP != null) Special_TAP.SetActive(false);
+                if (Fussion_TAP != null) Fussion_TAP.SetActive(false);
 
 
                 InitTrain();
@@ -173,6 +180,7 @@ public class PowerUPManager : MonoBehaviour
 
                 if (Flag_TAP != null) Flag_TAP.SetActive(false);
                 if (Special_TAP != null) Special_TAP.SetActive(false);
+                if (Fussion_TAP != null) Fussion_TAP.SetActive(false);
 
 
                 InitArti();
@@ -189,6 +197,7 @@ public class PowerUPManager : MonoBehaviour
 
                 if (Flag_TAP != null) Flag_TAP.SetActive(false);
                 if (Special_TAP != null) Special_TAP.SetActive(false);
+                if (Fussion_TAP != null) Fussion_TAP.SetActive(false);
 
 
 
@@ -208,6 +217,7 @@ public class PowerUPManager : MonoBehaviour
                     Conent_4.gameObject.SetActive(true);
                 }
                 if (Special_TAP != null) Special_TAP.SetActive(false);
+                if (Fussion_TAP != null) Fussion_TAP.SetActive(false);
 
                 InitFlagPage();
                 break;
@@ -220,6 +230,7 @@ public class PowerUPManager : MonoBehaviour
                 artf_Rect.gameObject.SetActive(false);
 
                 if (Flag_TAP != null) Flag_TAP.SetActive(false);
+                if (Fussion_TAP != null) Fussion_TAP.SetActive(false);
 
                 if (Special_TAP != null)
                 {
@@ -228,6 +239,24 @@ public class PowerUPManager : MonoBehaviour
                 }
 
                 InitSpecialPage();
+                break;
+
+            case 7:
+                powerUP_TAP.SetActive(false);
+                trainnig_TAP.SetActive(false);
+                artfact_TAP.SetActive(false);
+                artf_Rect.gameObject.SetActive(false);
+
+                if (Flag_TAP != null) Flag_TAP.SetActive(false);
+                if (Special_TAP != null) Special_TAP.SetActive(false);
+
+                if (Fussion_TAP != null)
+                {
+                    Fussion_TAP.SetActive(true);
+                    Conent_6.gameObject.SetActive(true);
+                }
+
+                InitFussionPage();
                 break;
 
 
@@ -309,6 +338,7 @@ public class PowerUPManager : MonoBehaviour
         arti_View.gameObject.SetActive(false);
         if (Viewport_4 != null) Viewport_4.gameObject.SetActive(false);
         if (Viewport_5 != null) Viewport_5.gameObject.SetActive(false);
+        if (Viewport_6 != null) Viewport_6.gameObject.SetActive(false);
 
         //스크롤 뷰 교체
         thisSCRect.content = power_Rect;
@@ -328,6 +358,7 @@ public class PowerUPManager : MonoBehaviour
         arti_View.gameObject.SetActive(false);
         if (Viewport_4 != null) Viewport_4.gameObject.SetActive(false);
         if (Viewport_5 != null) Viewport_5.gameObject.SetActive(false);
+        if (Viewport_6 != null) Viewport_6.gameObject.SetActive(false);
 
         //스크롤 뷰 교체
         thisSCRect.content = train_Rect;
@@ -342,6 +373,7 @@ public class PowerUPManager : MonoBehaviour
         arti_View.gameObject.SetActive(true);
         if (Viewport_4 != null) Viewport_4.gameObject.SetActive(false);
         if (Viewport_5 != null) Viewport_5.gameObject.SetActive(false);
+        if (Viewport_6 != null) Viewport_6.gameObject.SetActive(false);
 
         //스크롤 뷰 교체
         thisSCRect.content = train_Rect; /// train_Rect 가 맞음.
@@ -356,6 +388,7 @@ public class PowerUPManager : MonoBehaviour
         arti_View.gameObject.SetActive(true);
         if (Viewport_4 != null) Viewport_4.gameObject.SetActive(false);
         if (Viewport_5 != null) Viewport_5.gameObject.SetActive(false);
+        if (Viewport_6 != null) Viewport_6.gameObject.SetActive(false);
 
         //스크롤 뷰 교체
         thisSCRect.content = artf_Rect; /// 미션페이지에서 씀
@@ -371,9 +404,10 @@ public class PowerUPManager : MonoBehaviour
 
         if(Viewport_4 != null) Viewport_4.gameObject.SetActive(true);
         if (Viewport_5 != null) Viewport_5.gameObject.SetActive(false);
+        if (Viewport_6 != null) Viewport_6.gameObject.SetActive(false);
 
         //스크롤 뷰 교체
-        thisSCRect.content = Conent_4; /// 미션페이지에서 씀
+        thisSCRect.content = Conent_4;
         thisSCRect.viewport = Viewport_4;
         thisSCRect.horizontalNormalizedPosition = 0f; // 모든 스크롤뷰 왼쪽 정렬 시켜
     }
@@ -386,12 +420,27 @@ public class PowerUPManager : MonoBehaviour
 
         if (Viewport_4 != null) Viewport_4.gameObject.SetActive(false);
         if (Viewport_5 != null) Viewport_5.gameObject.SetActive(true);
+        if (Viewport_6 != null) Viewport_6.gameObject.SetActive(false);
         //스크롤 뷰 교체
-        thisSCRect.content = Conent_5; /// 미션페이지에서 씀
+        thisSCRect.content = Conent_5;
         thisSCRect.viewport = Viewport_5;
         thisSCRect.horizontalNormalizedPosition = 0f; // 모든 스크롤뷰 왼쪽 정렬 시켜
     }
+    void InitFussionPage()
+    {
+        // 컨텐츠 오브젝트 활성화
+        power_View.gameObject.SetActive(false);
+        train_View.gameObject.SetActive(false);
+        arti_View.gameObject.SetActive(false);
 
+        if (Viewport_4 != null) Viewport_4.gameObject.SetActive(false);
+        if (Viewport_5 != null) Viewport_5.gameObject.SetActive(false);
+        if (Viewport_6 != null) Viewport_6.gameObject.SetActive(true);
+        //스크롤 뷰 교체
+        thisSCRect.content = Conent_6;
+        thisSCRect.viewport = Viewport_6;
+        thisSCRect.horizontalNormalizedPosition = 0f; // 모든 스크롤뷰 왼쪽 정렬 시켜
+    }
 
     public void SetThisPunchPrice(int _Index)
     {

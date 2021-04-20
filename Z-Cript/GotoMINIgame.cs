@@ -34,6 +34,7 @@ public class GotoMINIgame : MonoBehaviour
     public GameObject InfiEndBtn;
     public GameObject PVP_btn;
     public GameObject Invite_btn;
+    public GameObject Event_btn;
     [Header("-리지드 바디 부모객체")]
     public SpriteRenderer MainBody; // 히트 바디
     public SpriteRenderer DefendBody; // 히트 바디
@@ -91,6 +92,7 @@ public class GotoMINIgame : MonoBehaviour
         CHat_Btn.SetActive(false);
         PakageBtn.SetActive(false);
         Invite_btn.SetActive(false);
+        Event_btn.SetActive(false);
 
         DefendMode.SetActive(false);
         // 그만두기 버튼 활성화
@@ -129,6 +131,7 @@ public class GotoMINIgame : MonoBehaviour
         CHat_Btn.SetActive(true);
         PakageBtn.SetActive(true);
         Invite_btn.SetActive(true);
+        Event_btn.SetActive(true);
 
         DefendMode.SetActive(true);
         // 그만두기 버튼 비활성화
@@ -203,6 +206,7 @@ public class GotoMINIgame : MonoBehaviour
         CHat_Btn.SetActive(false);
         PakageBtn.SetActive(false);
         Invite_btn.SetActive(false);
+        Event_btn.SetActive(false);
 
 
         GroggyReset();
@@ -231,6 +235,7 @@ public class GotoMINIgame : MonoBehaviour
         CHat_Btn.SetActive(true);
         PakageBtn.SetActive(true);
         Invite_btn.SetActive(true);
+        Event_btn.SetActive(true);
 
         GroggyReset();
 
@@ -263,6 +268,7 @@ public class GotoMINIgame : MonoBehaviour
         CHat_Btn.SetActive(false);
         PakageBtn.SetActive(false);
         Invite_btn.SetActive(false);
+        Event_btn.SetActive(false);
 
 
 
@@ -302,6 +308,7 @@ public class GotoMINIgame : MonoBehaviour
         PakageBtn.SetActive(true);
         PVP_btn.SetActive(true);
         Invite_btn.SetActive(true);
+        Event_btn.SetActive(true);
 
         // 
         AudioManager.instance.PlayMainBGM();
@@ -341,6 +348,7 @@ public class GotoMINIgame : MonoBehaviour
         CHat_Btn.SetActive(false);
         PakageBtn.SetActive(false);
         Invite_btn.SetActive(false);
+        Event_btn.SetActive(false);
 
         DefendMode.SetActive(false);
         //
@@ -400,6 +408,7 @@ public class GotoMINIgame : MonoBehaviour
         PakageBtn.SetActive(true);
         PVP_btn.SetActive(true);
         Invite_btn.SetActive(true);
+        Event_btn.SetActive(true);
 
         DefendMode.SetActive(true);
         // 
@@ -442,6 +451,7 @@ public class GotoMINIgame : MonoBehaviour
         PakageBtn.SetActive(false);
         PVP_btn.SetActive(false);
         Invite_btn.SetActive(false);
+        Event_btn.SetActive(false);
 
         DefendMode.SetActive(false);
         //

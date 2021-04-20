@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum MySDgatcha { ads_3, diamond_50, diamond_490, diamond_1390, ticket_1, ticket_10, ticket_30 }
+public enum MySDgatcha { ads_3, diamond_50, diamond_490, diamond_1390, ticket_1, ticket_10, ticket_30, diamond_2190, ticket_50 }
 
 public class ShieldManager : MonoBehaviour
 {
@@ -136,6 +136,10 @@ public class ShieldManager : MonoBehaviour
                 if (Mathf.FloorToInt(PlayerPrefs.GetFloat("dDiamond")) - 1390 >= 0)
                 {
                     GrayBtns[2].SetActive(false);
+                    if (Mathf.FloorToInt(PlayerPrefs.GetFloat("dDiamond")) - 2190 >= 0)
+                    {
+                        GrayBtns[7].SetActive(false);
+                    }
                 }
             }
         }
@@ -149,6 +153,10 @@ public class ShieldManager : MonoBehaviour
                 if (PlayerPrefsManager.GetInstance().ShiledTicket - 30 >= 0)
                 {
                     GrayBtns[5].SetActive(false);
+                    if (PlayerPrefsManager.GetInstance().ShiledTicket - 50 >= 0)
+                    {
+                        GrayBtns[8].SetActive(false);
+                    }
                 }
             }
         }
@@ -296,6 +304,15 @@ public class ShieldManager : MonoBehaviour
                 StartCoroutine(WhiteFlesh(Gods[3]));
                 break;
 
+            case 55:
+                if (Mathf.FloorToInt(PlayerPrefs.GetFloat("dDiamond")) - 2190 >= 0)
+                    PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") - 2190);
+                else
+                    return;
+                UnlockNewShield(MySDgatcha.diamond_2190);
+                StartCoroutine(WhiteFlesh(Gods[4]));
+                break;
+
 
             /// 0 붙은건 티켓으로 결제
 
@@ -324,6 +341,15 @@ public class ShieldManager : MonoBehaviour
                     return;
                 UnlockNewShield(MySDgatcha.ticket_30);
                 StartCoroutine(WhiteFlesh(Gods[3]));
+                break;
+
+            case 550:
+                if (PlayerPrefsManager.GetInstance().ShiledTicket - 50 >= 0)
+                    PlayerPrefsManager.GetInstance().ShiledTicket -= 50;
+                else
+                    return;
+                UnlockNewShield(MySDgatcha.ticket_50);
+                StartCoroutine(WhiteFlesh(Gods[4]));
                 break;
 
             default:
@@ -379,6 +405,14 @@ public class ShieldManager : MonoBehaviour
 
                 break;
 
+            case 55:
+                if (GrayBtns[7].activeSelf) return;
+                moneyIcons[0].SetActive(true);
+                moneyText.text = "x2190";
+                cardIcon.sprite = cardSprs[3];
+
+                break;
+
 
             /// 0 붙은건 티켓으로 결제
 
@@ -403,6 +437,14 @@ public class ShieldManager : MonoBehaviour
                 moneyIcons[1].SetActive(true);
                 moneyText.text = "x30";
                 cardIcon.sprite = cardSprs[2];
+
+                break;
+
+            case 550:
+                if (GrayBtns[8].activeSelf) return;
+                moneyIcons[1].SetActive(true);
+                moneyText.text = "x50";
+                cardIcon.sprite = cardSprs[3];
 
                 break;
 
@@ -496,6 +538,24 @@ public class ShieldManager : MonoBehaviour
                     Gods[3].GetChild(i).gameObject.SetActive(true);
                     yield return JJumO;
                     Gods[3].GetChild(i).GetChild(0).gameObject.SetActive(false);
+                }
+                break;
+
+            case 55:
+                for (int i = 0; i < godLenth; i++)
+                {
+                    Gods[4].GetChild(i).gameObject.SetActive(false);
+                    Gods[4].GetChild(i).GetChild(0).gameObject.SetActive(true);
+                }
+
+                Gods[4].gameObject.SetActive(true);
+                yield return JJumO;
+
+                for (int i = 0; i < godLenth; i++)
+                {
+                    Gods[4].GetChild(i).gameObject.SetActive(true);
+                    yield return JJumO;
+                    Gods[4].GetChild(i).GetChild(0).gameObject.SetActive(false);
                 }
                 break;
 
@@ -675,6 +735,19 @@ public class ShieldManager : MonoBehaviour
                 cnt = 33;
                 tmps = Gods[3];
                 break;
+            case MySDgatcha.diamond_2190:
+                cnt = 55;
+                tmps = Gods[4];
+                break;
+            case MySDgatcha.ticket_50:
+                cnt = 55;
+                tmps = Gods[4];
+                break;
+
+
+
+
+
             default:
                 cnt = 0;
                 tmps = Gods[1];

@@ -66,11 +66,11 @@ public class ArtifactPopManager : MonoBehaviour
             case 15: IconSet.GetChild(15).gameObject.SetActive(true); break;
             case 16: IconSet.GetChild(16).gameObject.SetActive(true); break;
                 /// 신규 유물 0408
-            case 17: IconSet.GetChild(16).gameObject.SetActive(true); break;
-            case 18: IconSet.GetChild(16).gameObject.SetActive(true); break;
-            case 19: IconSet.GetChild(16).gameObject.SetActive(true); break;
-            case 20: IconSet.GetChild(16).gameObject.SetActive(true); break;
-            case 21: IconSet.GetChild(16).gameObject.SetActive(true); break;
+            case 17: IconSet.GetChild(17).gameObject.SetActive(true); break;
+            case 18: IconSet.GetChild(18).gameObject.SetActive(true); break;
+            case 19: IconSet.GetChild(19).gameObject.SetActive(true); break;
+            case 20: IconSet.GetChild(20).gameObject.SetActive(true); break;
+            case 21: IconSet.GetChild(21).gameObject.SetActive(true); break;
 
 
         }

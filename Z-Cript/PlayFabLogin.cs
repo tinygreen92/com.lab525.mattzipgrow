@@ -475,6 +475,8 @@ public class PlayFabLogin : MonoBehaviour
                                 (error) => Debug.LogError(" GetAccountInfo error"));
     }
 
+    int tmpVIP;
+
     private void GetAccountSuccess(GetAccountInfoResult obj)
     {
         myDisplayName = obj.AccountInfo.TitleInfo.DisplayName;
@@ -482,13 +484,9 @@ public class PlayFabLogin : MonoBehaviour
         if (myDisplayName == null || myDisplayName == myPlayFabId)          
         {
             /// 유료 결제 내역 복구
-            var tmp = PlayerPrefs.GetInt("VIP", 0);
+            tmpVIP = PlayerPrefs.GetInt("VIP", 0);
             /// 모든 데이터 삭제
             PlayerPrefs.DeleteAll();
-            PlayerPrefs.SetInt("isFristGameStart", 1);
-            PlayerPrefs.SetInt("isSignFirst", 1);
-            PlayerPrefs.SetInt("isDataSaved", 1);
-            PlayerPrefs.SetInt("VIP", tmp);
             PlayerPrefs.Save();
             //
             /// TODO : 닉네임 설정 팝업창. 표기
@@ -537,6 +535,13 @@ public class PlayFabLogin : MonoBehaviour
     /// <param name="_dpName">방금 입력한 닉네임</param>
     void UpdateUserName(string _dpName)
     {
+        PlayerPrefs.SetInt("isFristGameStart", 1);
+        PlayerPrefs.SetInt("isSignFirst", 1);
+        PlayerPrefs.SetInt("isDataSaved", 1);
+        PlayerPrefs.SetInt("VIP", tmpVIP);
+        PlayerPrefs.Save();
+
+
         /// 유저 디스플레이 네임 세팅
         PlayFabClientAPI.UpdateUserTitleDisplayName(new UpdateUserTitleDisplayNameRequest { DisplayName = _dpName },
         (result) =>

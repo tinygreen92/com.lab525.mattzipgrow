@@ -1061,7 +1061,7 @@ public class GatChaManager : MonoBehaviour
                 ppm.Arti_HEALLING_UP = I_Arti_HEALLING_UP;
                 goto HELL;
             }
-            name[seed] = "\'???(2)\'를 ";
+            name[seed] = "\'에너지드링크\'를 ";
             index[seed] = 19;
 
         }

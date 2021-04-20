@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,6 +8,9 @@ public class ShieldItem : MonoBehaviour
 {
     readonly DoubleToStringNum dts = new DoubleToStringNum();
 
+
+    [Header("- 강화시 버튼 반짝")]
+    public Image[] passOrFail;
     public ShieldManager pm;
     [Header("- 회색 커버 오브젝트")]
     public GameObject GrayImage;
@@ -160,8 +164,8 @@ public class ShieldItem : MonoBehaviour
     {
         if (thisShieldLevel >= 100) return;
 
-
-        if (dts.SubStringDouble(_MyKimchi, thisShieldCost) != "-1")
+        posibleKimchi = dts.SubStringDouble(_MyKimchi, thisShieldCost);
+        if (posibleKimchi != "-1")
         {
             MaxButton.SetActive(false);
         }
@@ -249,10 +253,14 @@ public class ShieldItem : MonoBehaviour
         {
             thisShieldLevel++;
             Debug.LogError(thisSuccedFussion + " 강화 성공 : " + random);
+            EnchantPassOrFail(true);
+
         }
         else
         {
             Debug.LogError(thisSuccedFussion + " 강화 실패 : " + random);
+            EnchantPassOrFail(false);
+
             return;
         }
 
@@ -289,9 +297,31 @@ public class ShieldItem : MonoBehaviour
         SetUpdateInfo();
     }
 
+    void EnchantPassOrFail(bool _ispass)
+    {
+        if (_ispass)
+        {
+            passOrFail[1].DOFade(0, 0);
+            passOrFail[1].gameObject.SetActive(true);
+            passOrFail[1].DOFade(0.7f, 0.3f).SetEase(Ease.OutElastic);
+            passOrFail[2].gameObject.SetActive(true);
+            passOrFail[2].DOFade(0, 0);
+            passOrFail[2].DOFade(1, 0.3f).SetEase(Ease.OutBack).OnComplete(ShutUPEnchant);
+        }
+        else
+        {
+            passOrFail[0].DOFade(0, 0);
+            passOrFail[0].gameObject.SetActive(true);
+            passOrFail[0].DOFade(0.7f, 0.3f).SetEase(Ease.OutElastic).OnComplete(ShutUPEnchant);
+        }
+    }
 
-
-
+    private void ShutUPEnchant()
+    {
+        passOrFail[0].gameObject.SetActive(false);
+        passOrFail[1].gameObject.SetActive(false);
+        passOrFail[2].gameObject.SetActive(false);
+    }
 
 
     /// <summary>
