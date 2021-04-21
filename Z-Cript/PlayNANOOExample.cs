@@ -503,7 +503,7 @@ public class PlayNANOOExample : MonoBehaviour
                 break;
 
             case "kimchi":
-                PlayerPrefsManager.GetInstance().Kimchi += dts.AddStringDouble(PlayerPrefsManager.GetInstance().Kimchi, _count);
+                PlayerPrefsManager.GetInstance().Kimchi = dts.AddStringDouble(PlayerPrefsManager.GetInstance().Kimchi, _count);
                 UserWallet.GetInstance().ShowUserKimchi();
                 PopUpObjectManager.GetInstance().ShowWarnnigProcess("깍두기 " + _count + " 개 획득.");
                 break;

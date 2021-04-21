@@ -1,26 +1,166 @@
 ﻿using EasyMobile;
+using Lean.Localization;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Purchasing;
 using UnityEngine.Purchasing.Security;
+using UnityEngine.UI;
 
 public class IAPManager : MonoBehaviour
 {
+    [Header("-패키지 상점 데이터")]
+    public TextAsset ta;
+    [Space(3f)]
     public PlayNANOOExample playNANOO;
     [Header("-구매성공시 팝업 종료")]
     public GameObject shoppopup;
+    [Header("-신규 패키지 상점 팝업")]
+    public GameObject SomeThingPop;
+    public Transform SomeThingTrans;
+    public Transform BuyButton;
+
+
+
+    //public void TextParser()
+    //{
+    //    string[] line = ta.text.Substring(0, ta.text.Length).Split('\n');
+    //    for (int i = 0; i < line.Length; i++)
+    //    {
+    //        string[] row = line[i].Split('\t');
+
+    //        AddShieldData(
+    //            row[0],                 
+    //            int.Parse(row[1]),
+    //            int.Parse(row[2]),
+    //            int.Parse(row[3]),
+    //            int.Parse(row[4]),
+    //            int.Parse(row[5]),    
+    //            int.Parse(row[6]),    
+    //            int.Parse(row[7]),    
+    //            int.Parse(row[8])
+    //            );
+    //    }
+
+    //    //PlayerPrefsManager.GetInstance().CybermanInfo(ta.text);
+    //}
+    //
+    //void AddShieldData(string row_0, int row_1, int row_2, int row_3, int row_4, int row_5, int row_6, int row_7, int row_8)
+    //{
+    //    pakageInfo.Add(new PakageEntry
+    //    {
+    //        pakaName = row_0,
+    //        pakaPrice = row_1,
+
+    //        getDia = row_2,
+    //        getShiled = row_3,
+    //        getGuapbap = row_4,
+    //        getSsalbap = row_5,
+    //        getKimchi = row_6,
+    //        getKey = row_7,
+    //        getTicket = row_8,
+    //    });
+    //}
+
+    /// <summary>
+    /// 무기 관리
+    /// </summary>
+    [Serializable]
+    public class PakageEntry
+    {
+        public string pakaName;        
+        public int pakaPrice;
+
+        public int getDia;
+        public int getShiled;
+        public int getGuapbap;
+        public int getSsalbap;
+        public int getKimchi;
+        public int getKey;
+        public int getTicket;
+
+    }
+    // 만든 클래스를 리스트에 담아서 테이블처럼 사용
+    List<PakageEntry> pakageInfo = new List<PakageEntry>();
+
+
+
+    private void Start()
+    {
+        pakageInfo = PlayerPrefsManager.GetInstance().CybermanInfo(ta.text);
+    }
+
+
+    /// <summary>
+    /// 구입하면 아이템 넣어주기
+    /// </summary>
+    /// <param name="_index"></param>
+    void GetMyMoneyItem(int _index)
+    {
+        PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + pakageInfo[_index].getDia);
+
+        PlayerPrefsManager.GetInstance().ShiledTicket += pakageInfo[_index].getShiled;
+
+        PlayerPrefsManager.GetInstance().gupbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().gupbap, (pakageInfo[_index].getGuapbap).ToString("F0"));
+        PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().ssalbap, (pakageInfo[_index].getSsalbap).ToString("F0"));
+        PlayerPrefsManager.GetInstance().Kimchi = dts.AddStringDouble(PlayerPrefsManager.GetInstance().Kimchi, (pakageInfo[_index].getKimchi).ToString("F0"));
+
+        PlayerPrefsManager.GetInstance().key += pakageInfo[_index].getKey;
+        PlayerPrefsManager.GetInstance().ticket += pakageInfo[_index].getTicket;
+    }
+
+
+
+    /// <summary>
+    /// 5개 탭에서 본 팝업 출력
+    /// </summary>
+    /// <param name="_index"></param>
+    public void BuySomeThing(int _index)
+    {
+        /// 본 팝업 아이콘/가격표 세팅 해주고
+        for (int i = 0; i < SomeThingTrans.childCount; i++)
+        {
+            SomeThingTrans.GetChild(i).gameObject.SetActive(false);
+            BuyButton.GetChild(i).gameObject.SetActive(false);
+        }
+
+        /// 아이콘/가격표 켜주고
+        SomeThingTrans.GetChild(_index).gameObject.SetActive(true);
+        SomeThingTrans.GetChild(_index).GetChild(0).GetComponent<Text>().text = pakageInfo[_index].pakaName;
+        BuyButton.GetChild(_index).gameObject.SetActive(true);
+
+        /// 원화 / 달러 세팅
+        if (LeanLocalization.CurrentLanguage == "Korean")
+        {
+            System.Globalization.NumberFormatInfo numberFormat = new System.Globalization.CultureInfo("ko-KR", false).NumberFormat;
+            BuyButton.GetChild(_index).GetChild(1).GetComponent<Text>().text = pakageInfo[_index].pakaPrice.ToString("C", numberFormat);
+        }
+        else
+        {
+            System.Globalization.NumberFormatInfo numberFormat = new System.Globalization.CultureInfo("en-US", false).NumberFormat;
+            BuyButton.GetChild(_index).GetChild(1).GetComponent<Text>().text = pakageInfo[_index].pakaPrice.ToString("C", numberFormat);
+        }
+
+        /// 본 팝업 켜줘
+        SomeThingPop.SetActive(true);
+        // 애니메 재생
+        SomeThingPop.GetComponent<Animation>()["Roll_Incre"].speed = 1;
+        SomeThingPop.GetComponent<Animation>().Play("Roll_Incre");
+    }
+
+
+
 
     public void GetProductsList()
     {
-        IAPProduct[] products = InAppPurchasing.GetAllIAPProducts();
+        //IAPProduct[] products = InAppPurchasing.GetAllIAPProducts();
 
-        // Print all product names
-        foreach (IAPProduct prod in products)
-        {
-            Debug.Log("Product name: " + prod.Name);
-        }
-
+        //// Print all product names
+        //foreach (IAPProduct prod in products)
+        //{
+        //    Debug.Log("Product name: " + prod.Name);
+        //}
     }
 
     DoubleToStringNum dts = new DoubleToStringNum();
@@ -125,9 +265,7 @@ public class IAPManager : MonoBehaviour
 
 
 
-            ///
-            ///
-            ///
+            /// -------------------------------------------------------------------
 
 
             case EM_IAPConstants.Product_auto:
@@ -290,7 +428,7 @@ public class IAPManager : MonoBehaviour
                 }
 
                 PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 1000);
-                PlayerPrefsManager.GetInstance().gupbap = dts.AddStringDouble(PlayerPrefs.GetString("gupbap"), "10000");
+                PlayerPrefsManager.GetInstance().gupbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().gupbap, "10000");
                 PlayerPrefsManager.GetInstance().key += 50;
 
                 InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
@@ -329,7 +467,7 @@ public class IAPManager : MonoBehaviour
                 }
 
                 PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 1000);
-                PlayerPrefsManager.GetInstance().gupbap = dts.AddStringDouble(PlayerPrefs.GetString("gupbap"), "10000");
+                PlayerPrefsManager.GetInstance().gupbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().gupbap, "10000");
                 PlayerPrefsManager.GetInstance().key += 50;
 
 
@@ -371,7 +509,7 @@ public class IAPManager : MonoBehaviour
 
 
                 PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 1000);
-                PlayerPrefsManager.GetInstance().gupbap = dts.AddStringDouble(PlayerPrefs.GetString("gupbap"), "10000");
+                PlayerPrefsManager.GetInstance().gupbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().gupbap, "10000");
                 PlayerPrefsManager.GetInstance().key += 50;
 
                 InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
@@ -402,7 +540,7 @@ public class IAPManager : MonoBehaviour
                 PlayerPrefs.SetInt("Pet_BuyData", 111);
 
                 PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 3000);
-                PlayerPrefsManager.GetInstance().gupbap = dts.AddStringDouble(PlayerPrefs.GetString("gupbap"), "30000");
+                PlayerPrefsManager.GetInstance().gupbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().gupbap, "30000");
                 PlayerPrefsManager.GetInstance().key += 200;
 
                 InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
@@ -443,7 +581,7 @@ public class IAPManager : MonoBehaviour
                 }
 
                 PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 300);
-                PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(PlayerPrefs.GetString("ssalbap"), "3000");
+                PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().ssalbap, "3000");
                 PlayerPrefsManager.GetInstance().key += 10;
 
                 InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
@@ -486,7 +624,7 @@ public class IAPManager : MonoBehaviour
                 }
 
                 PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 300);
-                PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(PlayerPrefs.GetString("ssalbap"), "3000");
+                PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().ssalbap, "3000");
                 PlayerPrefsManager.GetInstance().key += 10;
 
                 InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
@@ -530,7 +668,7 @@ public class IAPManager : MonoBehaviour
                 }
 
                 PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 300);
-                PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(PlayerPrefs.GetString("ssalbap"), "3000");
+                PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().ssalbap, "3000");
                 PlayerPrefsManager.GetInstance().key += 10;
 
                 InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
@@ -573,7 +711,7 @@ public class IAPManager : MonoBehaviour
                 }
 
                 PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 600);
-                PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(PlayerPrefs.GetString("ssalbap"), "6000");
+                PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().ssalbap, "6000");
                 PlayerPrefsManager.GetInstance().key += 30;
 
                 InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
@@ -616,7 +754,7 @@ public class IAPManager : MonoBehaviour
                 }
 
                 PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 600);
-                PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(PlayerPrefs.GetString("ssalbap"), "6000");
+                PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().ssalbap, "6000");
                 PlayerPrefsManager.GetInstance().key += 30;
 
                 InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
@@ -659,7 +797,7 @@ public class IAPManager : MonoBehaviour
                 }
 
                 PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 1000);
-                PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(PlayerPrefs.GetString("ssalbap"), "10000");
+                PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().ssalbap, "10000");
                 PlayerPrefsManager.GetInstance().key += 50;
 
                 InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
@@ -667,6 +805,92 @@ public class IAPManager : MonoBehaviour
 
                 shoppopup.SetActive(false);
                 break;
+
+
+
+            /// ---------------------- <새로_추가한_패키지_상점> -------------------------
+            /// 
+
+            case EM_IAPConstants.Product_package_01:
+
+                PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
+                GetMyMoneyItem(0);
+
+                InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+
+                shoppopup.SetActive(false);
+                break;
+
+            case EM_IAPConstants.Product_package_02:
+
+                PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
+                GetMyMoneyItem(1);
+
+                InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+
+                shoppopup.SetActive(false);
+                break;
+
+            case EM_IAPConstants.Product_package_03:
+
+                PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
+                GetMyMoneyItem(2);
+
+                InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+
+                shoppopup.SetActive(false);
+                break;
+
+            case EM_IAPConstants.Product_package_04:
+
+                PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
+                GetMyMoneyItem(3);
+
+                InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+
+                shoppopup.SetActive(false);
+                break;
+
+            case EM_IAPConstants.Product_package_05:
+
+                PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
+                GetMyMoneyItem(4);
+
+                InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+
+                shoppopup.SetActive(false);
+                break;
+
+            case EM_IAPConstants.Product_package_06:
+
+                PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
+                GetMyMoneyItem(5);
+
+                InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+
+                shoppopup.SetActive(false);
+                break;
+
+            case EM_IAPConstants.Product_package_07:
+
+                PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
+                GetMyMoneyItem(6);
+
+                InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+
+                shoppopup.SetActive(false);
+                break;
+
+
+
+
 
 
 
@@ -687,12 +911,13 @@ public class IAPManager : MonoBehaviour
     // Failed purchase handler
     void PurchaseFailedHandler(IAPProduct product, string failureReason)
     {
-        Debug.LogError("The purchase of product " + product.Name + " has failed : " + failureReason);
+        //Debug.LogError("The purchase of product " + product.Name + " has failed : " + failureReason);
+        PopUpObjectManager.GetInstance().ShowWarnnigProcess("결제 취소");
+
         // 구매실패시 핸들러 떼주고.
         InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
         InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
     }
-
 
 
     public void Purchase_Product_dia100()
@@ -759,7 +984,6 @@ public class IAPManager : MonoBehaviour
 
 
 
-
     /// ---------------------- 신규 생성 목록 ------------
     /// 
 
@@ -778,7 +1002,6 @@ public class IAPManager : MonoBehaviour
         InAppPurchasing.PurchaseCompleted += PurchaseCompletedHandler;
         InAppPurchasing.PurchaseFailed += PurchaseFailedHandler;
     }
-
 
     public void Purchase_Product_mattzipbuff()
     {
@@ -955,19 +1178,224 @@ public class IAPManager : MonoBehaviour
 
 
 
+    /// ----------------- 새로 추가된 패키지 210420 -------------------
+    /// 
+
+    public void Purchase_Product_package_01()
+    {
+        InAppPurchasing.Purchase(EM_IAPConstants.Product_package_01);
+        // 핸들러 등록
+        InAppPurchasing.PurchaseCompleted += PurchaseCompletedHandler;
+        InAppPurchasing.PurchaseFailed += PurchaseFailedHandler;
+    }
+
+    public void Purchase_Product_package_02()
+    {
+        InAppPurchasing.Purchase(EM_IAPConstants.Product_package_02);
+        // 핸들러 등록
+        InAppPurchasing.PurchaseCompleted += PurchaseCompletedHandler;
+        InAppPurchasing.PurchaseFailed += PurchaseFailedHandler;
+    }
+
+    public void Purchase_Product_package_03()
+    {
+        InAppPurchasing.Purchase(EM_IAPConstants.Product_package_03);
+        // 핸들러 등록
+        InAppPurchasing.PurchaseCompleted += PurchaseCompletedHandler;
+        InAppPurchasing.PurchaseFailed += PurchaseFailedHandler;
+    }
+
+    public void Purchase_Product_package_04()
+    {
+        InAppPurchasing.Purchase(EM_IAPConstants.Product_package_04);
+        // 핸들러 등록
+        InAppPurchasing.PurchaseCompleted += PurchaseCompletedHandler;
+        InAppPurchasing.PurchaseFailed += PurchaseFailedHandler;
+    }
+
+    public void Purchase_Product_package_05()
+    {
+        InAppPurchasing.Purchase(EM_IAPConstants.Product_package_05);
+        // 핸들러 등록
+        InAppPurchasing.PurchaseCompleted += PurchaseCompletedHandler;
+        InAppPurchasing.PurchaseFailed += PurchaseFailedHandler;
+    }
+
+    public void Purchase_Product_package_06()
+    {
+        InAppPurchasing.Purchase(EM_IAPConstants.Product_package_06);
+        // 핸들러 등록
+        InAppPurchasing.PurchaseCompleted += PurchaseCompletedHandler;
+        InAppPurchasing.PurchaseFailed += PurchaseFailedHandler;
+    }
+
+    public void Purchase_Product_package_07()
+    {
+        InAppPurchasing.Purchase(EM_IAPConstants.Product_package_07);
+        // 핸들러 등록
+        InAppPurchasing.PurchaseCompleted += PurchaseCompletedHandler;
+        InAppPurchasing.PurchaseFailed += PurchaseFailedHandler;
+    }
+
+
+
+
+
+    /// ----------------------------------------------------------------------
 
 
 
 
 
 
+    public void Purchase_Product_limited_01()
+    {
+        InAppPurchasing.Purchase(EM_IAPConstants.Product_limited_01);
+        // 핸들러 등록
+        InAppPurchasing.PurchaseCompleted += PurchaseCompletedHandler;
+        InAppPurchasing.PurchaseFailed += PurchaseFailedHandler;
+    }
+
+    public void Purchase_Product_limited_02()
+    {
+        InAppPurchasing.Purchase(EM_IAPConstants.Product_limited_02);
+        // 핸들러 등록
+        InAppPurchasing.PurchaseCompleted += PurchaseCompletedHandler;
+        InAppPurchasing.PurchaseFailed += PurchaseFailedHandler;
+    }
+
+    public void Purchase_Product_limited_03()
+    {
+        InAppPurchasing.Purchase(EM_IAPConstants.Product_limited_03);
+        // 핸들러 등록
+        InAppPurchasing.PurchaseCompleted += PurchaseCompletedHandler;
+        InAppPurchasing.PurchaseFailed += PurchaseFailedHandler;
+    }
+
+    public void Purchase_Product_limited_04()
+    {
+        InAppPurchasing.Purchase(EM_IAPConstants.Product_limited_04);
+        // 핸들러 등록
+        InAppPurchasing.PurchaseCompleted += PurchaseCompletedHandler;
+        InAppPurchasing.PurchaseFailed += PurchaseFailedHandler;
+    }
+
+    public void Purchase_Product_limited_05()
+    {
+        InAppPurchasing.Purchase(EM_IAPConstants.Product_limited_05);
+        // 핸들러 등록
+        InAppPurchasing.PurchaseCompleted += PurchaseCompletedHandler;
+        InAppPurchasing.PurchaseFailed += PurchaseFailedHandler;
+    }
+
+    public void Purchase_Product_limited_06()
+    {
+        InAppPurchasing.Purchase(EM_IAPConstants.Product_limited_06);
+        // 핸들러 등록
+        InAppPurchasing.PurchaseCompleted += PurchaseCompletedHandler;
+        InAppPurchasing.PurchaseFailed += PurchaseFailedHandler;
+    }
+
+    public void Purchase_Product_limited_07()
+    {
+        InAppPurchasing.Purchase(EM_IAPConstants.Product_limited_07);
+        // 핸들러 등록
+        InAppPurchasing.PurchaseCompleted += PurchaseCompletedHandler;
+        InAppPurchasing.PurchaseFailed += PurchaseFailedHandler;
+    }
 
 
 
+    /// ----------------------------------------
+    /// 
+
+    public void Purchase_Product_day_01(int _index)
+    {
+        switch (_index)
+        {
+            case 0:
+                InAppPurchasing.Purchase(EM_IAPConstants.Product_day_01);
+                // 핸들러 등록
+                InAppPurchasing.PurchaseCompleted += PurchaseCompletedHandler;
+                InAppPurchasing.PurchaseFailed += PurchaseFailedHandler;
+                break;
+
+            case 1:
+                break;
+
+            case 2:
+                break;
+
+            case 3:
+                break;
+
+            case 4:
+                break;
+
+            default:
+                break;
+        }
+
+    }
+
+    public void Purchase_Product_week_01(int _index)
+    {
+        switch (_index)
+        {
+            case 0:
+                InAppPurchasing.Purchase(EM_IAPConstants.Product_week_01);
+                // 핸들러 등록
+                InAppPurchasing.PurchaseCompleted += PurchaseCompletedHandler;
+                InAppPurchasing.PurchaseFailed += PurchaseFailedHandler;
+                break;
+
+            case 1:
+                break;
+
+            case 2:
+                break;
+
+            case 3:
+                break;
+
+            case 4:
+                break;
+
+            default:
+                break;
+        }
+
+    }
 
 
+    public void Purchase_Product_month_01(int _index)
+    {
+        switch (_index)
+        {
+            case 0:
+                InAppPurchasing.Purchase(EM_IAPConstants.Product_month_01);
+                // 핸들러 등록
+                InAppPurchasing.PurchaseCompleted += PurchaseCompletedHandler;
+                InAppPurchasing.PurchaseFailed += PurchaseFailedHandler;
+                break;
 
+            case 1:
+                break;
 
+            case 2:
+                break;
+
+            case 3:
+                break;
+
+            case 4:
+                break;
+
+            default:
+                break;
+        }
+
+    }
 
 
 }

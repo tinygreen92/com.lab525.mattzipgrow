@@ -106,7 +106,10 @@ public class ShieldItem : MonoBehaviour
             PlayerPrefsManager.GetInstance().shieldInfo[thisIndex].shieldLevel = ++thisShieldLevel;
         }
         thisShieldEffect = tmpList.equipedEffect + (tmpList.upperEfect * thisShieldLevel);
-        thisShieldCost = dts.multipleStringDouble(tmpList.shieldCost, (1 + 0.3f * thisShieldLevel));
+        /// ( 1 + 0.07 ) ^ Lv
+        double tmpCost = Mathf.Pow(1.07f, thisShieldLevel);
+        /// 시작값 * ( 1 + 0.07 ) ^ Lv
+        thisShieldCost = dts.multipleStringDouble(tmpList.shieldCost, tmpCost);
         thisSuccedFussion = tmpList.powerUpper - (tmpList.powerMinusPer * thisShieldLevel);
         thisDIAEffect = tmpList.ownedEffect;
 

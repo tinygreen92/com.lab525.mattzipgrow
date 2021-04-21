@@ -2870,6 +2870,26 @@ public class PlayerPrefsManager : MonoBehaviour
     }
 
 
+
+
+    public List<IAPManager.PakageEntry> CybermanInfo(string data)
+    {
+        if (!string.IsNullOrEmpty(data))
+        {
+            BinaryFormatter binaryFormatter = new BinaryFormatter();
+            MemoryStream memoryStream = new MemoryStream(Convert.FromBase64String(data));
+
+            // 가져온 데이터를 바이트 배열로 변환 -> 리스트로 캐스팅
+            return (List<IAPManager.PakageEntry>)binaryFormatter.Deserialize(memoryStream);
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+
+
     /// <summary>
     /// 실드 현재 정보 저장
     /// </summary>
