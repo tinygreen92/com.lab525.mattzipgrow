@@ -77,7 +77,6 @@ public class TutorialMissionManager : MonoBehaviour
 
 
 
-
     public void SaveMissionInfo()
     {
         BinaryFormatter binaryFormatter = new BinaryFormatter();
@@ -99,11 +98,24 @@ public class TutorialMissionManager : MonoBehaviour
     /// </summary>
     private int currentMissionIndex;
 
+
+    /// <summary>
+    /// 조건이 되면 캔버스 다시 살려줌.
+    /// </summary>
+    internal void ShowTutoCancas()
+    {
+        if (PlayerPrefs.GetInt("isTutoAllClear", 0) != 525)
+        {
+            mainBtnObjt.SetActive(true);
+        }
+    }
+
     public void LoadMissionInfo()
     {
         /// 만약 미션 올 클리어라면 버튼 숨겨줌
         if (PlayerPrefs.GetInt("isTutoAllClear", 0) == 525)
         {
+            isLoadMission = true;
             mainBtnObjt.SetActive(false);
             return;
         }
@@ -477,14 +489,18 @@ public class TutorialMissionManager : MonoBehaviour
     /// <param name="_Index"></param>
     public void ExUpdateMission(int _Index)
     {
+        if (PlayerPrefs.GetInt("isTutoAllClear") == 525) return;
+
         if (mMissionInfo[_Index].missionPassOrNot == -1
-            || currentMissionIndex != _Index) return;
+            || currentMissionIndex != _Index ) return;
 
         mMissionInfo[_Index].missionPassOrNot++;
         UpdateMission(_Index);
     }
     public void ExUpdateMission(int _Index, double _Amount)
     {
+        if (PlayerPrefs.GetInt("isTutoAllClear") == 525) return;
+
         if (mMissionInfo[_Index].missionPassOrNot == -1
             || currentMissionIndex != _Index) return;
 

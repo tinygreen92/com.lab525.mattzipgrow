@@ -7,10 +7,17 @@ using UnityEngine.UI;
 
 public class OfflineManager : MonoBehaviour
 {
+    public GameObject newPackPopup;
+    [Space]
+    [Header("-하단 맷집 바")]
+    public Image Mattzip100;
+
     [Header("- 돈/국/밥")]
     public Text rewordText;
     public Text GupBapText;
     public Text SSalText;
+    public Text MattText;
+
     public GameObject rewordPOPup;
 
     [Header("- 일반게임 히트 바디")]
@@ -21,6 +28,70 @@ public class OfflineManager : MonoBehaviour
     // 조작 불가 타이머 스탬프
     private DateTime unbiasedTimerEndTimestamp;
     DateTime unbiasedRemaining;
+
+
+    public void TEST_Offline(int _Index)
+    {
+        switch (_Index)
+        {
+            case 1:
+                timeBae = 60;
+                break;
+
+            case 360:
+                timeBae = 360;
+                break;
+        }
+
+        Debug.LogWarning("오프라인 몇 분? : " + timeBae);
+
+        /// 1분 이하라면 리턴
+        if (timeBae == 0)
+            return;
+        /// 최대 오프라인 시간은 6시간
+        else if (timeBae >= 360)
+            timeBae = 360;
+
+        /// start ---------------- 골드 / 국밥 / 쌀밥  ------------------
+
+        // 최근 획득 골드 공식 시작
+        gettingGold = PlayerPrefsManager.GetInstance().Mat_Mattzip;
+
+        float ArtiGold = 1.0f
+            + (PlayerPrefsManager.GetInstance().Arti_OffGold * 0.5f) // 오프라인 보상 유물
+            + (PlayerPrefsManager.GetInstance().uniformInfo[4].Skill_LV * 0.005f); // 오프라인 보상 강화
+                                                                                   //골드 를 곱해 준다.
+        gettingGold = dts.multipleStringDouble(gettingGold, (timeBae * ArtiGold * 20f)); // 분당 10대. 100 = 1000 ;
+        gettingGupBap = timeBae * ArtiGold * 2f; // 분당 2개;
+        gettingSSal = timeBae * ArtiGold * 1f; // 분당 1개;
+
+
+        /// ------------------- 맷집 증가량 계산 
+        gettingMatt = timeBae * PlayerPrefsManager.GetInstance().GetDPS_Bae(0.0001d, 1);
+        MattText.text = $"+ {UserWallet.GetInstance().SeetheNatural(gettingMatt)}";
+
+
+        //획득 골드 만큼 복제해서 팝업 텍스트에 표기
+        rewordText.text = $"x {UserWallet.GetInstance().SeetheNatural(double.Parse(gettingGold))}";
+        GupBapText.text = $"x {UserWallet.GetInstance().SeetheNatural(gettingGupBap)}";
+        SSalText.text = $"x {UserWallet.GetInstance().SeetheNatural(gettingSSal)}";
+
+        // 오프라인 보상창 열어준다.
+        rewordPOPup.SetActive(true);
+
+    }
+
+
+
+    public void A_ConfigOpenPop()
+    {
+        newPackPopup.SetActive(true);
+        newPackPopup.GetComponent<Animation>()["Roll_Incre"].speed = 1;
+        newPackPopup.GetComponent<Animation>().Play("Roll_Incre");
+    }
+
+
+
 
     private bool isPaused = false; // 앱 일시정지
 
@@ -87,7 +158,7 @@ public class OfflineManager : MonoBehaviour
     string gettingGold;
     double gettingGupBap;
     double gettingSSal;
-    float gettingMatt;
+    double gettingMatt;
     int timeBae = 0;
     DateTime dateTime;
 
@@ -157,6 +228,11 @@ public class OfflineManager : MonoBehaviour
             gettingSSal = timeBae  * ArtiGold * 1f; // 분당 1개;
 
 
+            /// ------------------- 맷집 증가량 계산 
+            gettingMatt = timeBae * PlayerPrefsManager.GetInstance().GetDPS_Bae(0.0001d, 1);
+            MattText.text = $"+ {UserWallet.GetInstance().SeetheNatural(gettingMatt)}";
+
+
             //획득 골드 만큼 복제해서 팝업 텍스트에 표기
             rewordText.text = $"x {UserWallet.GetInstance().SeetheNatural(double.Parse(gettingGold))}";
             GupBapText.text = $"x {UserWallet.GetInstance().SeetheNatural(gettingGupBap)}";
@@ -174,11 +250,48 @@ public class OfflineManager : MonoBehaviour
     /// 실제로 맷집 게이지 올려주기 광고 안봄 = 1f / 광고 봄 = 2f
     /// </summary>
     /// <param name="_Bae">1f 혹은 5f</param>
-    void RewordFriendBae(float _Bae)
+    void RewordFriendBae(double _Bae)
     {
-        PlayerPrefsManager.GetInstance().Mat_100 += Mathf.CeilToInt(gettingMatt * _Bae);
+        float needGaugeMat = PlayerPrefsManager.GetInstance().Cilcked_Cnt_MattZip;
+        PlayerPrefsManager.GetInstance().Mat_100 += (float)Math.Truncate(gettingMatt * _Bae);
+        /// 반복 상승 시작
+        StartCoroutine(MattZippGrow(float.Parse(PlayerPrefsManager.GetInstance().PlayerDPS), needGaugeMat));
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator MattZippGrow(float playerDPS, float needGaugeMat)
+    {
+        yield return null;
+
+        while (true)
+        {
+            yield return null;
+
+            if (PlayerPrefsManager.GetInstance().Mat_100 >= needGaugeMat)
+            {
+                PlayerPrefsManager.GetInstance().Mat_Mattzip_Hit += 1f + (playerDPS * 0.0001f);
+                var mattLv = PlayerPrefsManager.GetInstance().Mat_Mattzip_Hit;
+
+                ///맷집 증가에 필요한 대미지 증가 계산식
+                PlayerPrefsManager.GetInstance().Cilcked_Cnt_MattZip = (0.5f * mattLv * mattLv) + mattLv * 0.5f + 4.5f;
+                UserWallet.GetInstance().ShowUserMatZip();
+                yield return null;
+
+                /// 초기화
+                PlayerPrefsManager.GetInstance().Mat_100 -= needGaugeMat;
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        /// 이미지 바꿔줌
+        Mattzip100.fillAmount = PlayerPrefsManager.GetInstance().Mat_100 / needGaugeMat;
+    }
 
 
 

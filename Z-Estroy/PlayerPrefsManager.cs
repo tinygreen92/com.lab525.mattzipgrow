@@ -910,6 +910,26 @@ public class PlayerPrefsManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 공격력에 double 배를 하고 int 를 더한다.
+    /// </summary>
+    /// <param name="_Bae"></param>
+    /// <param name="_plus"></param>
+    /// <returns></returns>
+    public double GetDPS_Bae(double _Bae, int _plus)
+    {
+        var tmp = _PlayerDPSfloat * _Bae;
+
+        if (tmp > double.MaxValue)
+        {
+            return double.MaxValue;
+        }
+        else
+        {
+            return (_PlayerDPSfloat * _Bae) + _plus;
+        }
+    }
+
 
     private string rawAttackDamage = "1";
     /// <summary>
@@ -1404,18 +1424,6 @@ public class PlayerPrefsManager : MonoBehaviour
     }
 
 
-
-
-
-    //PlayerPrefs.SetInt("isTutoAllClear", listGPGS[0].cloudTmpForGPGS_105);
-    //PlayerPrefs.SetInt("is0515shock", listGPGS[0].cloudTmpForGPGS_106);
-
-
-
-
-
-    //PlayerPrefs.SetInt("isTutoAllClear", listGPGS[0].cloudTmpForGPGS_105);
-    //PlayerPrefs.SetInt("is0515shock", listGPGS[0].cloudTmpForGPGS_106);
 
 
 
@@ -3890,6 +3898,101 @@ public class PlayerPrefsManager : MonoBehaviour
 
 
 
+    /// <summary>
+    /// 유니폼 데이터 관리 06-22
+    /// </summary>
+    [Serializable]
+    public class LimitData
+    {
+        public int dia_Day_01;
+        public int dia_Day_02;
+        public int dia_Day_03;
+        public int dia_Day_04;
+        public int dia_Day_05;
+
+        public int dia_Week_01;
+        public int dia_Week_02;
+        public int dia_Week_03;
+        public int dia_Week_04;
+        public int dia_Week_05;
+
+        public int dia_Mouth_01;
+        public int dia_Mouth_02;
+        public int dia_Mouth_03;
+        public int dia_Mouth_04;
+        public int dia_Mouth_05;
+
+        /// 주간/월간 패키지 체크 날짜
+        public int weekend_Day;
+        public int mouth_Day;
+    }
+
+    /// <summary>
+    /// 유니폼은 유니폼 레벨 스킬은 스킬 레벨 공용으로 사용중
+    /// </summary>
+    public List<LimitData> dayLimitData = new List<LimitData>();
+
+    [HideInInspector]
+    public bool isReadyDayLimit;
+
+    public void SaveDayLimitData()
+    {
+        BinaryFormatter binaryFormatter = new BinaryFormatter();
+        MemoryStream memoryStream = new MemoryStream();
+
+        // Info를 바이트 배열로 변환해서 저장
+        binaryFormatter.Serialize(memoryStream, dayLimitData);
+
+        // 그것을 다시 한번 문자열 값으로 변환해서 
+        // 스트링 키값으로 PlayerPrefs에 저장
+        PlayerPrefs.SetString("LimitData", Convert.ToBase64String(memoryStream.GetBuffer()));
+        PlayerPrefs.Save();
+        isReadyDayLimit = true;
+    }
+
+    public void LoadDayLimitData()
+    {
+        string data = PlayerPrefs.GetString("LimitData");
+
+        if (!string.IsNullOrEmpty(data))
+        {
+            BinaryFormatter binaryFormatter = new BinaryFormatter();
+            MemoryStream memoryStream = new MemoryStream(Convert.FromBase64String(data));
+
+            // 가져온 데이터를 바이트 배열로 변환 -> 리스트로 캐스팅
+            dayLimitData = (List<LimitData>)binaryFormatter.Deserialize(memoryStream);
+        }
+        else
+        {
+            Debug.LogError(" 로드 월주월 데이타");
+            dayLimitData.Add(new LimitData 
+            {
+                dia_Day_01 = 0,
+                dia_Day_02 = 0,
+                dia_Day_03 = 0,
+                dia_Day_04 = 0,
+                dia_Day_05 = 0,
+
+                dia_Week_01 = 0,
+                dia_Week_02 = 0,
+                dia_Week_03 = 0,
+                dia_Week_04 = 0,
+                dia_Week_05 = 0,
+
+                dia_Mouth_01 = 0,
+                dia_Mouth_02  = 0,
+                dia_Mouth_03  = 0,
+                dia_Mouth_04  = 0,
+                dia_Mouth_05  = 0,
+
+                weekend_Day = 0,
+                mouth_Day = 0,
+            });
+        }
+
+        isReadyDayLimit = true;
+    }
+
 
 
     //#region 재화 관리 정보
@@ -4027,7 +4130,7 @@ public class PlayerPrefsManager : MonoBehaviour
         public int cloudTmpForGPGS_103;
         public int cloudTmpForGPGS_104;
         public int cloudTmpForGPGS_105;
-        public int cloudTmpForGPGS_106;
+        public string cloudTmpForGPGS_106;
         public string cloudTmpForGPGS_107;
         public float cloudTmpForGPGS_108;
         //
@@ -4196,7 +4299,7 @@ public class PlayerPrefsManager : MonoBehaviour
                 cloudTmpForGPGS_103 = PlayerPrefs.GetInt("Arti_OffGold", 0),
                 cloudTmpForGPGS_104 = PlayerPrefs.GetInt("MaxGet_MuganTop", 1),
                 cloudTmpForGPGS_105 = PlayerPrefs.GetInt("isTutoAllClear", 0),
-                cloudTmpForGPGS_106 = PlayerPrefs.GetInt("is0515shock", 0),
+                cloudTmpForGPGS_106 = PlayerPrefs.GetString("LimitData"),
                 cloudTmpForGPGS_107 = PlayerPrefs.GetString("questInfo2"),
                 cloudTmpForGPGS_108 = PlayerPrefs.GetFloat("dDiamond", 0),
                 //0518
@@ -4374,7 +4477,9 @@ public class PlayerPrefsManager : MonoBehaviour
         PlayerPrefs.SetString("uniformInfo", listGPGS[0].cloudTmpForGPGS_161);
 
         PlayerPrefs.SetString("missionInfo", listGPGS[0].cloudTmpForGPGS_020);
+        PlayerPrefs.SetString("LimitData", listGPGS[0].cloudTmpForGPGS_106);
 
+        LoadDayLimitData();
         //
         LoadWeaponInfo();
         LoadquestInfo();
@@ -4433,7 +4538,6 @@ public class PlayerPrefsManager : MonoBehaviour
         PlayerPrefs.SetInt("Arti_GoldBox", listGPGS[0].cloudTmpForGPGS_102);
         PlayerPrefs.SetInt("Arti_OffGold", listGPGS[0].cloudTmpForGPGS_103);
         PlayerPrefs.SetInt("MaxGet_MuganTop", listGPGS[0].cloudTmpForGPGS_104);
-        PlayerPrefs.SetInt("is0515shock", listGPGS[0].cloudTmpForGPGS_106);
         PlayerPrefs.SetInt("Shield10AdsCnt", listGPGS[0].cloudTmpForGPGS_110);  /// is0517shock
         PlayerPrefs.SetFloat("dDiamond", listGPGS[0].cloudTmpForGPGS_108);
         //0517

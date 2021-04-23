@@ -216,7 +216,7 @@ public class PlayNANOOExample : MonoBehaviour
         /// TODO : season2 쿠폰 
         if (inputTmp == "season2")
         {
-            if (tmm.mMissionInfo[2].missionPassOrNot != 0 || PlayerPrefs.GetInt("isTutoAllClear") != 2)
+            if (tmm.mMissionInfo[2].missionPassOrNot != 0 || PlayerPrefs.GetInt("isTutoAllClear") == 525)
             {
                 PopUpObjectManager.GetInstance().ShowWarnnigProcess("이미 사용하였거나 잘못된 쿠폰 번호입니다.");
                 return;

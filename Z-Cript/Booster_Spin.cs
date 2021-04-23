@@ -129,19 +129,84 @@ public class Booster_Spin : MonoBehaviour
             PlayerPrefsManager.GetInstance().questInfo[0].daily_ArtiGatcha = 0;
             PlayerPrefsManager.GetInstance().questInfo[0].daily_LMITABS = 0;
 
+            /// 일일 / 주간 / 월간 무료 갱신
+            PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Day_01 = 0;
+            PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Day_02 = 0;
+            PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Day_03 = 0;
+            PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Day_04 = 0;
+            PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Day_05 = 0;
+            //RedDotManager.instance.RedDot[9].SetActive(true);
+            //RedDotManager.instance.RedDot[10].SetActive(true);
+
+            /// 주간 갱신 
+            ResetMonday(PlayerPrefsManager.GetInstance().dayLimitData[0].weekend_Day);
+
+            /// 월간 갱신 1일
+            if (UnbiasedTime.Instance.Now().Day == 1 ||
+                UnbiasedTime.Instance.Now().Day < PlayerPrefsManager.GetInstance().dayLimitData[0].mouth_Day)
+            {
+                PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Mouth_01 = 0;
+                PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Mouth_02 = 0;
+                PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Mouth_03 = 0;
+                PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Mouth_04 = 0;
+                PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Mouth_05 = 0;
+                PlayerPrefsManager.GetInstance().dayLimitData[0].mouth_Day = 0;
+                //RedDotManager.instance.RedDot[13].SetActive(true);
+                //RedDotManager.instance.RedDot[14].SetActive(true);
+            }
+
+
             // 광고 리미트 초기화.
             PlayerPrefs.SetInt("Shield10AdsCnt", 0);
 
             // 티켓이 모자라면 충전
             if (PlayerPrefs.GetInt("ticket", 5) < 5) PlayerPrefs.SetInt("ticket", 5);
-
             PlayerPrefs.Save();
+            
+            /// 일/주/월 저장
+            PlayerPrefsManager.GetInstance().SaveDayLimitData();
+
 
             /// 출석창 호출
             dailyPopup.SetActive(true);
             dailyPopup.GetComponent<Animation>()["Roll_Incre"].speed = 1;
             dailyPopup.GetComponent<Animation>().Play("Roll_Incre");
 
+        }
+    }
+
+
+
+    /// <summary>
+    /// 무슨 요일에 보상을 받았니?
+    /// </summary>
+    /// <param name="_weekDay"></param>
+    void ResetMonday(int _weekDay)
+    {
+        /// 만약 _weekDay = 5이면 금요일에 패키지 받고 
+        /// 월요일 접속 안하고
+        /// 다음주 수요일에 접속하는 경우
+        /// UnbiasedTime.Instance.Now().DayOfWeek =Wednesday 3
+        int dayWeek = (int)UnbiasedTime.Instance.Now().DayOfWeek;
+        /// 0 = 일요일은 예외 처리하고 7일 이내에 들어올 경우 초기화
+        if (dayWeek != 0 && dayWeek < _weekDay)
+        {
+            PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Week_01 = 0;
+            PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Week_02 = 0;
+            PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Week_03 = 0;
+            PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Week_04 = 0;
+            //RedDotManager.instance.RedDot[11].SetActive(true);
+            //RedDotManager.instance.RedDot[12].SetActive(true);
+        }
+        /// 일요일은 지났는데 일요일에 초기화 했으면
+        else if (dayWeek != 0 && _weekDay == 0)
+        {
+            PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Week_01 = 0;
+            PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Week_02 = 0;
+            PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Week_03 = 0;
+            PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Week_04 = 0;
+            //RedDotManager.instance.RedDot[11].SetActive(true);
+            //RedDotManager.instance.RedDot[12].SetActive(true);
         }
     }
 

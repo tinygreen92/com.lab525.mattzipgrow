@@ -9,6 +9,8 @@ public enum MySDgatcha { ads_3, diamond_50, diamond_490, diamond_1390, ticket_1,
 
 public class ShieldManager : MonoBehaviour
 {
+    public Transform playerShiledPos;
+    [Header("-재화 자동 갱신")]
     public GameObject InfiShiledObj;
     public TutorialMissionManager tmm;
     public Text timeText;
@@ -92,6 +94,8 @@ public class ShieldManager : MonoBehaviour
     private void Start()
     {
         unbiasedTimerEndTimestamp = ReadTimestamp("Shield_Time", UnbiasedTime.Instance.Now());
+        /// 스프라이트 적용
+        EquipSpriteShiled(PlayerPrefsManager.GetInstance().ShieldIndex);
     }
 
     void FixedUpdate()
@@ -116,6 +120,24 @@ public class ShieldManager : MonoBehaviour
             timeText.text = "00:00:00";
         }
     }
+
+    /// <summary>
+    /// 플레이어 스프라이트에 방패 씌워줌
+    /// </summary>
+    /// <param name="thisIndex"></param>
+    public void EquipSpriteShiled(int thisIndex)
+    {
+        int tLenth = playerShiledPos.childCount;
+
+        for (int i = 0; i < tLenth; i++)
+        {
+            playerShiledPos.GetChild(i).gameObject.SetActive(false);
+        }
+
+        if(thisIndex != 0) playerShiledPos.GetChild(thisIndex).gameObject.SetActive(true);
+    }
+
+
 
 
     public void OpenLeftPop()
@@ -643,6 +665,8 @@ public class ShieldManager : MonoBehaviour
     Coroutine coru;
     WaitForSeconds GC_05_SEC = new WaitForSeconds(0.5f);
     string myKimchi;
+
+
     /// <summary>
     /// 회색으로 덮기 판단 0.5초 마다
     /// </summary>
@@ -657,7 +681,6 @@ public class ShieldManager : MonoBehaviour
 
             if (InfiShiledObj.activeSelf)
             {
-                Debug.LogError("룰룰");
                 myKimchi = PlayerPrefsManager.GetInstance().Kimchi;
 
                 for (int i = 1; i < InfinityContent.childCount; i++)
@@ -821,7 +844,7 @@ public class ShieldManager : MonoBehaviour
             PlayerPrefsManager.GetInstance().shieldInfo[_index].isUnlock = true;
         }
         /// 갯수 증가.
-        if (PlayerPrefsManager.GetInstance().shieldInfo[_index].amount < 255)
+        if (PlayerPrefsManager.GetInstance().shieldInfo[_index].amount < int.MaxValue -1)
         {
             PlayerPrefsManager.GetInstance().shieldInfo[_index].amount++;
         }

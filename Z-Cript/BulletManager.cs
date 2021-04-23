@@ -583,9 +583,10 @@ public class BulletManager : MonoBehaviour
             Mugan_HP.transform.GetChild(0).GetComponent<Text>().text =
                 UserWallet.GetInstance().SeetheNatural(double.Parse(Mat_currentHP)) + "/" +
                 UserWallet.GetInstance().SeetheNatural(double.Parse(Mat_MaxHP));
-            Mugan_HP.fillAmount = (float)dts.DevideStringDouble(Mat_currentHP, Mat_MaxHP);
             /// 최근 체력 갱신
             PlayerPrefsManager.GetInstance().Mat_currentHP = Mat_currentHP;
+            /// 이미지 깔아줌
+            Mugan_HP.fillAmount = (float)dts.DevideStringDouble(Mat_currentHP, Mat_MaxHP);
             goto HELL;
         }
 
@@ -1054,7 +1055,7 @@ public class BulletManager : MonoBehaviour
             string tmps = PlayerPrefsManager.GetInstance().Mat_MaxHP;
             PlayerPrefsManager.GetInstance().Mat_currentHP = "0";
 
-            DefHP_Bar.GetComponentInChildren<Text>().text = "0/" + UserWallet.GetInstance().SeetheNatural(double.Parse(tmps));
+            if(DefHP_Bar != null) DefHP_Bar.GetComponentInChildren<Text>().text = "0/" + UserWallet.GetInstance().SeetheNatural(double.Parse(tmps));
 
             // 그로기 상태 돌입
             tmpC.GetComponentInChildren<SpriteRenderer>().color = new Color(1, 1, 1, 0);
@@ -1074,10 +1075,10 @@ public class BulletManager : MonoBehaviour
             string tmp2 = PlayerPrefsManager.GetInstance().Mat_MaxHP;
 
 
-            DefHP_Bar.GetComponentInChildren<Text>().text = UserWallet.GetInstance().SeetheNatural(double.Parse(tmp1)) + "/" + UserWallet.GetInstance().SeetheNatural(double.Parse(tmp2));
+            if (DefHP_Bar != null) DefHP_Bar.GetComponentInChildren<Text>().text = UserWallet.GetInstance().SeetheNatural(double.Parse(tmp1)) + "/" + UserWallet.GetInstance().SeetheNatural(double.Parse(tmp2));
         }
         //
-        DefHP_Bar.fillAmount = (float)dts.DevideStringDouble(PlayerPrefsManager.GetInstance().Mat_currentHP, PlayerPrefsManager.GetInstance().Mat_MaxHP);
+        if (DefHP_Bar != null) DefHP_Bar.fillAmount = (float)dts.DevideStringDouble(PlayerPrefsManager.GetInstance().Mat_currentHP, PlayerPrefsManager.GetInstance().Mat_MaxHP);
 
     }
 
@@ -1110,9 +1111,10 @@ public class BulletManager : MonoBehaviour
             Mugan_HP.transform.GetChild(0).GetComponent<Text>().text =
                 UserWallet.GetInstance().SeetheNatural(double.Parse(playerCurrentHP)) + "/" +
                 UserWallet.GetInstance().SeetheNatural(double.Parse(playerMaxHP));
+            PlayerPrefsManager.GetInstance().Mat_currentHP = playerCurrentHP;
+            //
             Mugan_HP.fillAmount = (float)dts.DevideStringDouble(playerCurrentHP, playerMaxHP);
             /// 최근 체력 갱신
-            PlayerPrefsManager.GetInstance().Mat_currentHP = playerCurrentHP;
             return;
         }
 
@@ -1201,7 +1203,7 @@ public class BulletManager : MonoBehaviour
             PlayerPrefsManager.GetInstance().Cilcked_Cnt_MattZip = (0.5f * mattLv * mattLv) + mattLv * 0.5f + 4.5f;
             UserWallet.GetInstance().ShowUserMatZip();
             /// 초기화
-            PlayerPrefsManager.GetInstance().Mat_100 = 0;
+            PlayerPrefsManager.GetInstance().Mat_100 -= needGaugeMat;
             MattzipGauge.fillAmount = 0;
         }
 

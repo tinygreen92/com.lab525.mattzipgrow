@@ -475,7 +475,30 @@ public class PlayFabLogin : MonoBehaviour
                                 (error) => Debug.LogError(" GetAccountInfo error"));
     }
 
-    int tmpVIP;
+
+    /// <summary>
+    /// 안드로이드 네이티브 코드
+    /// </summary>
+    void RestartAppForAOS()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false; //play모드를 false로.
+#else
+        AndroidJavaObject AOSUnityActivity = new AndroidJavaClass("com.unity3d.player.UnityPlayer").GetStatic<AndroidJavaObject>("currentActivity");
+        AndroidJavaObject baseContext = AOSUnityActivity.Call<AndroidJavaObject>("getBaseContext");
+        AndroidJavaObject intentObj = baseContext.Call<AndroidJavaObject>("getPackageManager").Call<AndroidJavaObject>("getLaunchIntentForPackage", baseContext.Call<string>("getPackageName"));
+        AndroidJavaObject componentName = intentObj.Call<AndroidJavaObject>("getComponent");
+        AndroidJavaObject mainIntent = intentObj.CallStatic<AndroidJavaObject>("makeMainActivity", componentName);
+        AndroidJavaClass intentClass = new AndroidJavaClass("android.content.Intent");
+        mainIntent = mainIntent.Call<AndroidJavaObject>("addFlags", intentClass.GetStatic<int>("FLAG_ACTIVITY_NEW_TASK"));
+        mainIntent = mainIntent.Call<AndroidJavaObject>("addFlags", intentClass.GetStatic<int>("FLAG_ACTIVITY_CLEAR_TASK"));
+        baseContext.Call("startActivity", mainIntent);
+        AndroidJavaClass JavaSystemClass = new AndroidJavaClass("java.lang.System");
+        JavaSystemClass.CallStatic("exit", 0);
+#endif
+
+    }
+
 
     private void GetAccountSuccess(GetAccountInfoResult obj)
     {
@@ -483,14 +506,19 @@ public class PlayFabLogin : MonoBehaviour
         /// 닉네임 설정이 안되었다 ||  혹은 도중에 취소했다 (임시로 구글 아이디로 저장)
         if (myDisplayName == null || myDisplayName == myPlayFabId)          
         {
-            /// 유료 결제 내역 복구
-            tmpVIP = PlayerPrefs.GetInt("VIP", 0);
-            /// 모든 데이터 삭제
-            PlayerPrefs.DeleteAll();
-            PlayerPrefs.Save();
-            //
-            /// TODO : 닉네임 설정 팝업창. 표기
-            nickParentsObject.SetActive(true);
+            if (PlayerPrefs.GetInt("isBeginingS2", 0) == 0)
+            {
+                PlayerPrefs.SetInt("isDataSaved", 1);
+                PlayerPrefs.SetInt("isBeginingS2", 525);
+                PlayerPrefs.Save();
+
+                RestartAppForAOS();
+            }
+            else
+            {
+                /// TODO : 닉네임 설정 팝업창. 표기
+                nickParentsObject.SetActive(true);
+            }
         }
         else
         {
@@ -535,13 +563,6 @@ public class PlayFabLogin : MonoBehaviour
     /// <param name="_dpName">방금 입력한 닉네임</param>
     void UpdateUserName(string _dpName)
     {
-        PlayerPrefs.SetInt("isFristGameStart", 1);
-        PlayerPrefs.SetInt("isSignFirst", 1);
-        PlayerPrefs.SetInt("isDataSaved", 1);
-        PlayerPrefs.SetInt("VIP", tmpVIP);
-        PlayerPrefs.Save();
-
-
         /// 유저 디스플레이 네임 세팅
         PlayFabClientAPI.UpdateUserTitleDisplayName(new UpdateUserTitleDisplayNameRequest { DisplayName = _dpName },
         (result) =>
@@ -1573,7 +1594,7 @@ public class PlayFabLogin : MonoBehaviour
 
         Debug.LogWarning("보상 받고 종료");
 
-        tmm.ExUpdateMission(33); /// 미션 업데이트
+        tmm.ExUpdateMission(43); /// 미션 업데이트
         tmm.ExUpdateMission(54); /// 미션 업데이트
         tmm.ExUpdateMission(69); /// 미션 업데이트
         tmm.ExUpdateMission(78); /// 미션 업데이트

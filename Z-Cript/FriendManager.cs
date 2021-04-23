@@ -51,10 +51,9 @@ public class FriendManager : MonoBehaviour
     }
 
 
-    string mDefaltATK;
+    string mDefaltATK = string.Empty;
     readonly float mDefaltTime = 14400.0f;
     readonly float mDefaltSpeed = 1.0f;
-    string mDefaltMatt;
 
     int[] thisLevels;
 
@@ -99,8 +98,10 @@ public class FriendManager : MonoBehaviour
 
             case MyFriend.MATT:
                 /// → 기본 오프라인 맷집 증가율은 최종 공격력의 0.01% + 1.0 
-                mDefaltMatt = dts.multipleStringDouble(ppm.Mat_Mattzip, 0.0001d);
-                mDefaltMatt = dts.AddStringDouble(mDefaltMatt, "1");
+                //mDefaltMatt = dts.multipleStringDouble(ppm.Mat_Mattzip, 0.0001d);
+                //mDefaltMatt = dts.AddStringDouble(mDefaltMatt, "1");
+                /// 최종 공격력의 0.01% + 1.0 
+                mDefaltMatt = ppm.GetDPS_Bae(0.0001d, 1);
 
                 thisLevels[3] = ppm.Friend_04_MattzipPer_Lv;
                 LevelBox[3].text = "LV. " + thisLevels[3];
@@ -261,7 +262,10 @@ public class FriendManager : MonoBehaviour
 
     }
 
-
+    /// <summary>
+    /// 맷집 증가율 증가
+    /// </summary>
+    double mDefaltMatt;
 
     /// <summary>
     /// 캐릭터 정보창으로 가져오는 각 동료 스탯 수치
@@ -297,7 +301,7 @@ public class FriendManager : MonoBehaviour
 
             case MyFriend.MATT:
 
-                return mDefaltMatt;
+                return UserWallet.GetInstance().SeetheNatural(mDefaltMatt);
 
             default:
                 return null;

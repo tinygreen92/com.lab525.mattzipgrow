@@ -343,6 +343,7 @@ public class PowerUPManager : MonoBehaviour
         //스크롤 뷰 교체
         thisSCRect.content = power_Rect;
         thisSCRect.viewport = power_View;
+        thisSCRect.horizontalNormalizedPosition = 0f; // 모든 스크롤뷰 왼쪽 정렬 시켜
 
         if (name == "POWERUP_POP")
         {

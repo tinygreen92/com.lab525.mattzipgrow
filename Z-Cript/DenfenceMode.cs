@@ -28,9 +28,14 @@ public class DenfenceMode : MonoBehaviour
             isCoolOn = true;
             CoolTimeText.gameObject.SetActive(true);
             CoolTimeCover.gameObject.SetActive(true);
+            popUpTime2.gameObject.SetActive(true);
+        }
+        else
+        {
+            popUpTime2.gameObject.SetActive(false);
         }
 
-        
+
     }
 
     /// <summary>
@@ -110,6 +115,8 @@ public class DenfenceMode : MonoBehaviour
             // 시간 남아있으면 타이머 온 해준다.
             isCoolOn = true;
             CoolTimeText.gameObject.SetActive(true);
+            popUpTime2.gameObject.SetActive(true);
+
         }
 
         BodyRecovering();
@@ -328,6 +335,7 @@ public class DenfenceMode : MonoBehaviour
                 Debug.LogWarning("CoolTimeCover 쿨타임 끝");
                 CoolTimeCover.gameObject.SetActive(false);
                 CoolTimeText.gameObject.SetActive(false);
+                popUpTime2.gameObject.SetActive(false);
                 isCoolOn = false;
             }
         }
@@ -390,6 +398,8 @@ public class DenfenceMode : MonoBehaviour
         //
         CoolTimeCover.gameObject.SetActive(false);
         CoolTimeText.gameObject.SetActive(false);
+        popUpTime2.gameObject.SetActive(false);
+
         isCoolOn = false;
         unbiasedRemaining = unbiasedTimerEndTimestamp - unbiasedTimerEndTimestamp;
 
@@ -447,6 +457,10 @@ public class DenfenceMode : MonoBehaviour
 
     }
 
+
+    /// <summary>
+    /// 다이아 받고 방어전 쿨타임 초기화
+    /// </summary>
     public void Test_Reset_CoolTime()
     {
         if (DiaPass())
@@ -467,6 +481,8 @@ public class DenfenceMode : MonoBehaviour
 
         CoolTimeCover.gameObject.SetActive(false);
         CoolTimeText.gameObject.SetActive(false);
+        popUpTime2.gameObject.SetActive(false);
+
         isCoolOn = false;
         unbiasedRemaining = unbiasedTimerEndTimestamp - unbiasedTimerEndTimestamp;
         //
@@ -488,6 +504,8 @@ public class DenfenceMode : MonoBehaviour
     {
         isCoolOn = true;
         CoolTimeText.gameObject.SetActive(true);
+        popUpTime2.gameObject.SetActive(true);
+
         //
         unbiasedTimerEndTimestamp = UnbiasedTime.Instance.Now().AddSeconds(_addTime);
         WriteTimestamp("DenfenceMode", unbiasedTimerEndTimestamp);

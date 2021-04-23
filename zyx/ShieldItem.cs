@@ -24,8 +24,8 @@ public class ShieldItem : MonoBehaviour
     public Text DescBox; // 장착 방어력
     public Text ownedBox; // 보유 방어력
     public Text fussionBox; // 합성 확률 텍스트 박스 강화 성공 확률 99.5%
-    //[Space]
-    //public Text rankUpBox;  // 합성 ?
+    [Space]
+    public Text shiledCont; // 방패 보유 갯수
 
     [Header("- 버튼 부분")]
     public GameObject EquipButton;
@@ -42,6 +42,7 @@ public class ShieldItem : MonoBehaviour
     string thisShieldCost;
     float thisShieldEffect;
     float thisDIAEffect;
+    int thisShiledCont;
 
     float thisSuccedFussion;
 
@@ -113,12 +114,16 @@ public class ShieldItem : MonoBehaviour
         thisSuccedFussion = tmpList.powerUpper - (tmpList.powerMinusPer * thisShieldLevel);
         thisDIAEffect = tmpList.ownedEffect;
 
+        thisShiledCont = tmpList.amount;
 
-        LevelBox.text = "Lv. " + thisShieldLevel;
-        DescBox.text = "장착 방어력 " + thisShieldEffect.ToString("f1") + "% 증가";
-        ownedBox.text = "보유 방어력 " + thisDIAEffect.ToString("f1") + "% 증가";
+
+        LevelBox.text = $"Lv. {thisShieldLevel}";
+        DescBox.text = $"장착 방어력 {thisShieldEffect:F1}% 증가";
+        ownedBox.text = $"보유 방어력 {thisDIAEffect:F1}% 증가";
         /// 합성 확률
-        fussionBox.text = "강화 성공 확률 " + thisSuccedFussion.ToString("f1") + "%";
+        fussionBox.text = $"강화 성공 확률 {thisSuccedFussion:F1}%";
+        /// 보유 갯수
+        shiledCont.text = $"보유 수량 : {thisShiledCont:N0}";
         /// 버튼 갱신
         SetGoobapBtn(thisShieldCost);
     }
@@ -220,7 +225,8 @@ public class ShieldItem : MonoBehaviour
         PlayerPrefsManager.GetInstance().Defence_Shiled = thisShieldEffect.ToString("f1");
         // 보유 방어력 적용
         PlayerPrefsManager.GetInstance().Defence_Dia_Shiled = thisDIAEffect.ToString("f1");
-
+        /// 방패 이미지 출력
+        pm.EquipSpriteShiled(thisIndex);
 
         /// 이전 [장착 버튼] 새로고침
         pm.RefreshEuipGrayBtn();

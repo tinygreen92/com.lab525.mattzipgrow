@@ -32,21 +32,34 @@ public class GameStart : MonoBehaviour
     public FlagManager flagManager;
 
 
-
     [Header("-비워두는게 정상")]
     public ConfigManager configManager;
+
+    int tmpVIP;
+    int tmpS2;
 
     private void Awake()
     {
         /// 데이터 세이브가 일어났다면 있던 데이터 지워줌
         if (PlayerPrefs.GetInt("isDataSaved", 0) == 1)
         {
+            /// 닉네임 설정 준비중이면?
+            tmpS2 = PlayerPrefs.GetInt("isBeginingS2", 0);
+            /// 유료 결제 내역 복구
+            tmpVIP = PlayerPrefs.GetInt("VIP", 0);
+            
             Debug.LogError("데이터 세이브가 일어났다면 있던 데이터 지워줌");
+
             PlayerPrefs.DeleteAll();
+            PlayerPrefs.Save();
 
             PlayerPrefs.SetInt("isFristGameStart", 1);
             PlayerPrefs.SetInt("isSignFirst", 1);
             PlayerPrefs.SetInt("isDataSaved", 1);
+
+            PlayerPrefs.SetInt("isBeginingS2", tmpS2);
+            PlayerPrefs.SetInt("VIP", tmpVIP);
+
             PlayerPrefs.Save();
         }
         // 프레임레이트 고정
@@ -157,10 +170,18 @@ public class GameStart : MonoBehaviour
         }
 
 
+        PlayerPrefsManager.GetInstance().LoadDayLimitData(); /// 일간 주간 월간 데이터 로드
+
+        // 로딩 다 될때까지 무한 대기
+        while (!PlayerPrefsManager.GetInstance().isReadyDayLimit)
+        {
+            yield return new WaitForFixedUpdate();
+        }
+
 
         /// 방패 리스트 추가
         /// 방패 리스트 추가
-        
+
         shieldManager.InitShieldInfo(); // LoadWeaponInfo() 에서 추가 안됐다면
 
         tutorialMissionManager.InitMissionInfo();  // LoadMissionInfo() 에서 추가 안됐다면
@@ -513,6 +534,7 @@ public class GameStart : MonoBehaviour
         // VIP 계급 초기화.
         vipManager.VIPINIT();
         //지갑 표시
+        Debug.LogError(" 띠용? ");
         UserWallet.GetInstance().ShowAllMoney();
         // 초기 HP/공격력/맷집  표기
         groggyManager.HP_barInit();

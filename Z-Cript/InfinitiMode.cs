@@ -149,7 +149,7 @@ public class InfinitiMode : MonoBehaviour
     }
 
     /// <summary>
-    /// 입장 버튼 누를 때.
+    /// 무한버티기 입장 버튼 누를 때.
     /// </summary>
     public void RealInfiEnter()
     {
@@ -175,6 +175,9 @@ public class InfinitiMode : MonoBehaviour
         // 팝업 꺼주기
         PopUpObjectManager.GetInstance().NewInfinityPopUp.SetActive(false);
         EnterPop.SetActive(false);
+
+        /// 
+        tmm.mainBtnObjt.SetActive(false);
         //
         gotoMINIgame.ChangeCamToMiniView();
         booster_KEY.KeyTimerStart();
@@ -350,6 +353,11 @@ public class InfinitiMode : MonoBehaviour
             //
             PlayerPrefsManager.GetInstance().isInfinity = false;
             PlayerPrefsManager.GetInstance().isEndGame = false;
+
+
+            /// 튜토리얼 버튼 등장 
+            tmm.ShowTutoCancas();
+
             gotoMINIgame.ChangeCamToHomePage();
 
         }

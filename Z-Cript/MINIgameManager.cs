@@ -336,26 +336,11 @@ public class MINIgameManager : MonoBehaviour
         PlayerPrefsManager.GetInstance().questInfo3[0].daily_MiniGameCombo = Combo;
         PlayerPrefsManager.GetInstance().MaxGet_MiniGame = Combo;
 
-        if (Combo >= 30)
-        {
-            tmm.ExUpdateMission(28);
-        }
-        else if (Combo >= 50)
-        {
-            tmm.ExUpdateMission(34);
-        }
-        else if (Combo >= 100)
-        {
-            tmm.ExUpdateMission(51);
-        }
-        else if (Combo >= 150)
-        {
-            tmm.ExUpdateMission(65);
-        }
-        else if (Combo >= 200)
-        {
-            tmm.ExUpdateMission(84);
-        }
+        if (Combo >= 30) tmm.ExUpdateMission(28);
+        if (Combo >= 50) tmm.ExUpdateMission(34);
+        if (Combo >= 100) tmm.ExUpdateMission(51);
+        if (Combo >= 150) tmm.ExUpdateMission(65);
+        if (Combo >= 200) tmm.ExUpdateMission(84);
 
         /// 쌀밥 유물 획득량 % 증가
         float getSSalAmount = (Combo * (1.0f + PlayerPrefsManager.GetInstance().Arti_MiniReword * 0.005f));

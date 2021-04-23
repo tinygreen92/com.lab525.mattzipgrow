@@ -71,8 +71,8 @@ public class QuestItem : MonoBehaviour
     public void SetUpdateInfo(long mText, long upText)
     {
         /// 텍스트 세팅
-        NameBox.text = mText + "대 훈련";
-        DescBox.text = "횟수 : ( " + mText + " / " + (upText * 1000) + " )";
+        NameBox.text = $"{upText * 1000}대 훈련";
+        DescBox.text = $"횟수 : ( {mText} / {upText * 1000} )";
         /// 달성했다면 커버 이미지 제거
         /// ///TODO : [노랑/회색] 버튼 갱신
         if (mText >= upText * 1000)

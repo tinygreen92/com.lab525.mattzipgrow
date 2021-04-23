@@ -532,7 +532,6 @@ public class TapToSpawnLimit : MonoBehaviour
             bullet_Right.GetComponent<BulletManager>().BulletInit0();
             bullet_Right.GetComponent<BulletManager>().SetDefenceBar(DefenceHP);
             isPunchSwitch = !isPunchSwitch;
-
         }
     }
 

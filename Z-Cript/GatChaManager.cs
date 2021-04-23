@@ -439,7 +439,7 @@ public class GatChaManager : MonoBehaviour
 
         new21_Lv.text = $"Lv.{ppm.Arti_KIMCHI_UP}  ( Max Lv. 1000 )";
         result = ppm.Arti_KIMCHI_UP * 0.1f;
-        new21_Effect.text = $"깍두기 {result:F1}% 증가 ( 레벨당 0.1% 증가 )";
+        new21_Effect.text = $"깍두기 획득량 {result:F1}% 증가 ( 레벨당 0.1% 증가 )";
 
         new22_Lv.text = $"Lv.{ppm.Arti_MattGrow_UP}  ( Max Lv. 1000 )";
         result = ppm.Arti_MattGrow_UP * 0.1f;
@@ -527,8 +527,8 @@ public class GatChaManager : MonoBehaviour
         RefreshItem();
     }
 
-    [Header(" - 랜덤박스 에서 호출 유물")]
-    public ArtifactPopManager ranArtiPopManager;
+    //[Header(" - 랜덤박스 에서 호출 유물")]
+    //public ArtifactPopManager ranArtiPopManager;
 
     /// <summary>
     /// 골드 랜덤 박스에서 호출해준다.
@@ -576,7 +576,8 @@ public class GatChaManager : MonoBehaviour
         {
 
             GoGoGatCha(0);
-            ranArtiPopManager.SetTextAll(index, name, 0);
+            artifactPopManager.SetTextAll(index, name, 0);
+            //ranArtiPopManager.SetTextAll(index, name, 0);
             // 아이템 효과 적용 바로.
             RefreshItem();
             return false;
@@ -1025,7 +1026,6 @@ public class GatChaManager : MonoBehaviour
 
         else if (artiGatcha <= 84f)
         {
-            /// (int)       -미니게임 시간 증가       
             ppm.Arti_DEF_UP++;
             // 맥스레벨이면 다시 돌려
             if (ppm.Arti_DEF_UP > I_Arti_DEF_UP)
@@ -1033,13 +1033,12 @@ public class GatChaManager : MonoBehaviour
                 ppm.Arti_DEF_UP = I_Arti_DEF_UP;
                 goto HELL;
             }
-            name[seed] = "\'???(1)\'를 ";
+            name[seed] = "\'비브라늄\'을 ";
             index[seed] = 17;
 
         }
         else if (artiGatcha <= 86f)
         {
-            /// (int)       -미니게임 시간 증가       
             ppm.Arti_SHILED_UP++;
             // 맥스레벨이면 다시 돌려
             if (ppm.Arti_SHILED_UP > I_Arti_SHILED_UP)
@@ -1053,7 +1052,6 @@ public class GatChaManager : MonoBehaviour
         }
         else if (artiGatcha <= 93f)
         {
-            /// (int)       -미니게임 시간 증가       
             ppm.Arti_HEALLING_UP++;
             // 맥스레벨이면 다시 돌려
             if (ppm.Arti_HEALLING_UP > I_Arti_HEALLING_UP)
@@ -1067,7 +1065,6 @@ public class GatChaManager : MonoBehaviour
         }
         else if (artiGatcha <= 98f)
         {
-            /// (int)       -미니게임 시간 증가       
             ppm.Arti_KIMCHI_UP++;
             // 맥스레벨이면 다시 돌려
             if (ppm.Arti_KIMCHI_UP > I_Arti_KIMCHI_UP)
@@ -1081,7 +1078,6 @@ public class GatChaManager : MonoBehaviour
         }
         else if (artiGatcha <= 100f)
         {
-            /// (int)       -미니게임 시간 증가       
             ppm.Arti_MattGrow_UP++;
             // 맥스레벨이면 다시 돌려
             if (ppm.Arti_MattGrow_UP > I_Arti_MattGrow_UP)
