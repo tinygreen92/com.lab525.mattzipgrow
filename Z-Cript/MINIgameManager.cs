@@ -374,7 +374,7 @@ public class MINIgameManager : MonoBehaviour
         float getSSalAmount = (Combo * (1.0f + PlayerPrefsManager.GetInstance().Arti_MiniReword * 0.005f));
 
         // 팝업 띄워죠라.
-        PopUpObjectManager.GetInstance().ShowSSalPopUPSkip(Mathf.RoundToInt(getSSalAmount));
+        PopUpObjectManager.GetInstance().ShowSSalPopUPSkip(getSSalAmount);
     }
 
 

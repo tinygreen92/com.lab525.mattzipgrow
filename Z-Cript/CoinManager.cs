@@ -107,6 +107,7 @@ public class CoinManager : MonoBehaviour
     /// <returns></returns>
     private IEnumerator KimchiProgress()
     {
+        var ppm = PlayerPrefsManager.GetInstance();
         float rate = 1f;
         float progress = 0.0f;
         float RanRotat = Random.Range(-2f, -3f);
@@ -129,12 +130,18 @@ public class CoinManager : MonoBehaviour
         yield return new WaitForSeconds(1);
         /// 김치 재화 획득
 
-        var tmpGold = PlayerPrefsManager.GetInstance().Kimchi;
-        ///
-        /// 1d 대신 김치 유물 추가 할 것
-        ///
-        var result = dts.multipleStringDouble(PlayerPrefsManager.GetInstance().PlayerDPS, 1d);
-        PlayerPrefsManager.GetInstance().Kimchi = dts.AddStringDouble(double.Parse(tmpGold), double.Parse(result));
+        var tmpGold = ppm.Kimchi;
+        /// 깍두기 획득량 
+        var result = ppm.PlayerDPS;
+
+        if (ppm.isDPS10Kimchi)
+        {
+            result = dts.multipleStringDouble(ppm.PlayerDPS, 1f + (ppm.Arti_KIMCHI_UP * 0.1f));
+        }
+
+
+
+        ppm.Kimchi = dts.AddStringDouble(double.Parse(tmpGold), double.Parse(result));
 
         UserWallet.GetInstance().ShowUserKimchi();
 

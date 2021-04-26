@@ -1528,6 +1528,7 @@ public class IAPManager : MonoBehaviour
                 diaPass = PlayerPrefs.GetFloat("dDiamond", 0) - pakageInfo[14].pakaPrice;
                 if (diaPass < 0)
                 {
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("다이아몬드 부족");
                     return;
                 }
                 PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Day_01 = 46;
@@ -1540,6 +1541,7 @@ public class IAPManager : MonoBehaviour
                 diaPass = PlayerPrefs.GetFloat("dDiamond", 0) - pakageInfo[15].pakaPrice;
                 if (diaPass < 0)
                 {
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("다이아몬드 부족");
                     return;
                 }
                 PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Day_02 = 85;
@@ -1552,6 +1554,7 @@ public class IAPManager : MonoBehaviour
                 diaPass = PlayerPrefs.GetFloat("dDiamond", 0) - pakageInfo[16].pakaPrice;
                 if (diaPass < 0)
                 {
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("다이아몬드 부족");
                     return;
                 }
                 PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Day_03 = 74;
@@ -1564,6 +1567,7 @@ public class IAPManager : MonoBehaviour
                 diaPass = PlayerPrefs.GetFloat("dDiamond", 0) - pakageInfo[17].pakaPrice;
                 if (diaPass < 0)
                 {
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("다이아몬드 부족");
                     return;
                 }
                 PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Day_04 = 47;
@@ -1600,6 +1604,7 @@ public class IAPManager : MonoBehaviour
                 diaPass = PlayerPrefs.GetFloat("dDiamond", 0) - pakageInfo[19].pakaPrice;
                 if (diaPass < 0)
                 {
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("다이아몬드 부족");
                     return;
                 }
 
@@ -1617,6 +1622,7 @@ public class IAPManager : MonoBehaviour
                 diaPass = PlayerPrefs.GetFloat("dDiamond", 0) - pakageInfo[20].pakaPrice;
                 if (diaPass < 0)
                 {
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("다이아몬드 부족");
                     return;
                 }
 
@@ -1634,6 +1640,7 @@ public class IAPManager : MonoBehaviour
                 diaPass = PlayerPrefs.GetFloat("dDiamond", 0) - pakageInfo[21].pakaPrice;
                 if (diaPass < 0)
                 {
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("다이아몬드 부족");
                     return;
                 }
 
@@ -1651,6 +1658,7 @@ public class IAPManager : MonoBehaviour
                 diaPass = PlayerPrefs.GetFloat("dDiamond", 0) - pakageInfo[22].pakaPrice;
                 if (diaPass < 0)
                 {
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("다이아몬드 부족");
                     return;
                 }
 
@@ -1691,6 +1699,7 @@ public class IAPManager : MonoBehaviour
                 diaPass = PlayerPrefs.GetFloat("dDiamond", 0) - pakageInfo[24].pakaPrice;
                 if (diaPass < 0)
                 {
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("다이아몬드 부족");
                     return;
                 }
 
@@ -1708,6 +1717,7 @@ public class IAPManager : MonoBehaviour
                 diaPass = PlayerPrefs.GetFloat("dDiamond", 0) - pakageInfo[25].pakaPrice;
                 if (diaPass < 0)
                 {
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("다이아몬드 부족");
                     return;
                 }
 
@@ -1725,6 +1735,7 @@ public class IAPManager : MonoBehaviour
                 diaPass = PlayerPrefs.GetFloat("dDiamond", 0) - pakageInfo[26].pakaPrice;
                 if (diaPass < 0)
                 {
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("다이아몬드 부족");
                     return;
                 }
 
@@ -1742,6 +1753,7 @@ public class IAPManager : MonoBehaviour
                 diaPass = PlayerPrefs.GetFloat("dDiamond", 0) - pakageInfo[27].pakaPrice;
                 if (diaPass < 0)
                 {
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("다이아몬드 부족");
                     return;
                 }
 

@@ -856,6 +856,10 @@ public class PlayerPrefsManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 공격력 10 이상이면 true
+    /// </summary>
+    public bool isDPS10Kimchi;
 
     string _PlayerDPS;
     string CharaDps;
@@ -896,6 +900,8 @@ public class PlayerPrefsManager : MonoBehaviour
             else
                 _PlayerDPSfloat = (double.Parse(tmp1) * tmp2); //플로트 최종 공격  -> 외부에 저장되어서 크리티컬 공격력에 계산
 
+            /// 깍두기 10 이상일때 절반으로 줄여.
+            if (_PlayerDPSfloat >= 10) isDPS10Kimchi = true;
 
             ///스트링 최종 공격
             _PlayerDPS = _PlayerDPSfloat.ToString("f0");
@@ -1221,7 +1227,7 @@ public class PlayerPrefsManager : MonoBehaviour
                 * ( Dia_RECOV_UP_Lv   // 특별강화 %
                 + uniformInfo[3].Skill_LV // 스킬 %
                 + Stat_is1Recov // 깃발 %
-                + ArtiRecov // 유물 %
+                + (Arti_HEALLING_UP * 0.5f) // 유물 %
                 ); 
 
 
@@ -1236,7 +1242,7 @@ public class PlayerPrefsManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 체력 회복 유물
+    /// 미사용
     /// </summary>
     public float ArtiRecov
     {
@@ -1266,8 +1272,9 @@ public class PlayerPrefsManager : MonoBehaviour
 
 
     float Def_result1;
-    float Def_result2;
+    double Def_result2;
     /// <summary>
+    /// 유저 방어력 double 배출
     /// (스탯 방어력 + 레벨 방어력 ) * ( 방패 착용 방어력 % + 방패 보유 방어력 % + 깃발 % + 유물 % + 특별강화 %)  
     /// </summary>
     /// <returns></returns>
@@ -1275,12 +1282,13 @@ public class PlayerPrefsManager : MonoBehaviour
     {
         /// (스탯 방어력 + 레벨 방어력 )
         Def_result1 = Defence_Lv + PlayerPrefs.GetFloat("Chara_Defence_UP", 0);
-        /// ( 방패 착용 방어력 % + 방패 보유 방어력 % + 깃발 % + 유물 % )  
+        /// ( 방패 착용 방어력 % + 방패 보유 방어력 % + 깃발 % + 유물 % + 특별강화 % )  
         Def_result2 = 0.01f
-            * ( float.Parse(Defence_Shiled) // 방패 착용 방어력 %
+            * (
+              dts.PanByulGi(Defence_Shiled) // 방패 착용 방어력 %
             + float.Parse(Defence_Dia_Shiled)   // 방패 보유 방어력 %
             + Stat_is4Deffence  // 깃발 %
-            + Defence_Artifact_Lv   // 유물 %
+            + (Arti_DEF_UP * 0.5f)  // 유물 % 1렙당 0.5% 증가
             + (Dia_Defence_Lv * 5f)   // 특별강화 % 1렙당 5% 증가
             );
         /// 기본 배율 보정
@@ -1369,14 +1377,17 @@ public class PlayerPrefsManager : MonoBehaviour
     }
 
     /// <summary>
-    /// (string) [착용 방패 방어력]
+    /// (string) [착용 방패 방어력 * 방패 증가유물]
     /// </summary>
     public string Defence_Shiled
     {
         get
         {
-            if (!PlayerPrefs.HasKey("ATK_PER_UP")) return "0";
-            var tmp = PlayerPrefs.GetString("ATK_PER_UP");
+            var tmp = PlayerPrefs.GetString("ATK_PER_UP", "0");
+
+            /// 장착 방패 방어력 증가 유물 적용
+            tmp = dts.multipleStringDouble(tmp, 1f + (Arti_SHILED_UP * 0.1f));
+
             return tmp;
         }
 
@@ -1407,9 +1418,9 @@ public class PlayerPrefsManager : MonoBehaviour
     }
 
     /// <summary>
-    /// [방어력 유물] 레벨
+    /// 미사용
     /// </summary>
-    public int Defence_Artifact_Lv
+    public int ATK_PER_UP_Lv
     {
         get
         {
@@ -2105,7 +2116,9 @@ public class PlayerPrefsManager : MonoBehaviour
              
 
 
-
+    /// <summary>
+    /// 비브라늄 - 방어력 증가 유물
+    /// </summary>
     public int Arti_DEF_UP
     {
         get
@@ -2120,6 +2133,9 @@ public class PlayerPrefsManager : MonoBehaviour
             PlayerPrefs.Save();
         }
     }
+    /// <summary>
+    /// 강철망치 - 방패 방어력 증가 유물
+    /// </summary>
     public int Arti_SHILED_UP
     {
         get
@@ -2134,6 +2150,9 @@ public class PlayerPrefsManager : MonoBehaviour
             PlayerPrefs.Save();
         }
     }
+    /// <summary>
+    /// 에너지드링크 - 체력회복력 증가 유물
+    /// </summary>
     public int Arti_HEALLING_UP
     {
         get
@@ -2148,6 +2167,9 @@ public class PlayerPrefsManager : MonoBehaviour
             PlayerPrefs.Save();
         }
     }
+    /// <summary>
+    /// 무 - 깍두기 획득량 증가
+    /// </summary>
     public int Arti_KIMCHI_UP
     {
         get
@@ -2162,6 +2184,9 @@ public class PlayerPrefsManager : MonoBehaviour
             PlayerPrefs.Save();
         }
     }
+    /// <summary>
+    /// 방탄조끼 - 맷집 증가량 증가
+    /// </summary>
     public int Arti_MattGrow_UP
     {
         get

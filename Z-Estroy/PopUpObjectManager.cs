@@ -1129,9 +1129,9 @@ public class PopUpObjectManager : MonoBehaviour
     /// 미니게임 보수 지급.
     /// </summary>
     /// <param name="_index"></param>
-    public void ShowSSalPopUPSkip(int _amount)
+    public void ShowSSalPopUPSkip(float _amount)
     {
-        MiniGamerewordSkip.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = "쌀밥 " + _amount + " 그릇을 얻었다!";
+        MiniGamerewordSkip.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = "쌀밥 " + _amount.ToString("f0") + " 그릇을 얻었다!";
         PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().ssalbap, _amount.ToString("f0"));
         UserWallet.GetInstance().ShowUserSSalbap();
         PlayerPrefs.Save();

@@ -239,48 +239,48 @@ public class InfinitiMode : MonoBehaviour
         string infiPR = PlayerPrefsManager.GetInstance().InfiPersonalRecord;
         string[] sDataList = (infiPR).Split('*');
 
-        int gettingGoop = 0;
+        float gettingGoop = 0;
 
         switch (EnterIndex)
         {
             case "100":
-                gettingGoop = int.Parse(sDataList[0]) * 5;
+                gettingGoop = int.Parse(sDataList[0]) * 5f;
                 break;
 
             case "1050":
-                gettingGoop = int.Parse(sDataList[1]) * 11;
+                gettingGoop = int.Parse(sDataList[1]) * 11f;
                 break;
 
             case "11025":
-                gettingGoop = int.Parse(sDataList[2]) * 24;
+                gettingGoop = int.Parse(sDataList[2]) * 24f;
                 break;
 
             case "115763":
-                gettingGoop = int.Parse(sDataList[3]) * 54;
+                gettingGoop = int.Parse(sDataList[3]) * 54f;
                 break;
 
             case "1215506":
-                gettingGoop = int.Parse(sDataList[4]) * 106;
+                gettingGoop = int.Parse(sDataList[4]) * 106f;
                 break;
 
             case "12762816":
-                gettingGoop = int.Parse(sDataList[5]) * 217;
+                gettingGoop = int.Parse(sDataList[5]) * 217f;
                 break;
 
             case "134009564":
-                gettingGoop = int.Parse(sDataList[6]) * 440;
+                gettingGoop = int.Parse(sDataList[6]) * 440f;
                 break;
 
             case "1407100423":
-                gettingGoop = int.Parse(sDataList[7]) * 887;
+                gettingGoop = int.Parse(sDataList[7]) * 887f;
                 break;
 
             case "14774554438":
-                gettingGoop = int.Parse(sDataList[8]) * 1782;
+                gettingGoop = int.Parse(sDataList[8]) * 1782f;
                 break;
 
             case "155132821598":
-                gettingGoop = int.Parse(sDataList[9]) * 3573;
+                gettingGoop = int.Parse(sDataList[9]) * 3573f;
                 break;
 
         }
@@ -288,15 +288,14 @@ public class InfinitiMode : MonoBehaviour
         /// 국밥 증가
         /// 
         /// 국밥 획득량 % 증가
-        double getSSalAmount = ((gettingGoop * 1d) * (1.0d + PlayerPrefsManager.GetInstance().Arti_InfiReword * 0.01d));
+        float getSSalAmount = ((gettingGoop * 1f) * (1.0f + PlayerPrefsManager.GetInstance().Arti_InfiReword * 0.01f));
 
         getSSalAmount = getSSalAmount *
-            (1.0d + ((PlayerPrefsManager.GetInstance().uniformInfo[3].Uniform_LV +
-            (PlayerPrefsManager.GetInstance().uniformInfo[4].Uniform_LV * 0.05d) +
-            (PlayerPrefsManager.GetInstance().uniformInfo[5].Skill_LV * 0.5d))
-
-
-            * 0.01d));
+            (1.0f + 
+            ((PlayerPrefsManager.GetInstance().uniformInfo[3].Uniform_LV +
+            (PlayerPrefsManager.GetInstance().uniformInfo[4].Uniform_LV * 0.05f) +
+            (PlayerPrefsManager.GetInstance().uniformInfo[5].Skill_LV * 0.5f))
+            * 0.01f));
 
         Debug.LogError("스킵 국밥 : " + getSSalAmount);
 

@@ -482,9 +482,15 @@ public class BulletManager : MonoBehaviour
         ///코인 프리팹
         coin = Lean.Pool.LeanPool.Spawn(PlayerPrefsManager.GetInstance().CoinOB, transform.position, Quaternion.identity);
         coin.GetComponent<CoinManager>().CoinInit();
-        /// 김치 프리팹
-        kimchi = Lean.Pool.LeanPool.Spawn(PlayerPrefsManager.GetInstance().kimchiCoin, transform.position, Quaternion.identity);
-        kimchi.GetComponent<CoinManager>().KimchiInit();
+        /// 김치 프리팹 깍두기 획득 확률 70%
+        float dropTable = Random.Range(0f, 100.0f);
+
+        if (dropTable <= 70f)
+        {
+            kimchi = Lean.Pool.LeanPool.Spawn(PlayerPrefsManager.GetInstance().kimchiCoin, transform.position, Quaternion.identity);
+            kimchi.GetComponent<CoinManager>().KimchiInit();
+        }
+
 
         /// 체력 게이지 DOWN / 피버 게이지 UP // 주사위 굴림 - 선물상자 드랍
         HP_Calculate(tmpC, _isCritic);
@@ -1195,8 +1201,8 @@ public class BulletManager : MonoBehaviour
         /// 게이지 100% 채웠으면?
         if (PlayerPrefsManager.GetInstance().Mat_100 >= needGaugeMat)
         {
-            /// 최종 공격력 0.1% + 1 증가
-            PlayerPrefsManager.GetInstance().Mat_Mattzip_Hit += 1f + (playerDPS * 0.0001f);
+            /// 최종 공격력 1% + 1 증가
+            PlayerPrefsManager.GetInstance().Mat_Mattzip_Hit += 1f + (playerDPS * 0.001f);
             var mattLv = PlayerPrefsManager.GetInstance().Mat_Mattzip_Hit;
             ///맷집 증가에 필요한 대미지 증가 계산식 = 시작값 5, 시작값 * ( 1 + 0.03 ) ^ Lv
             //PlayerPrefsManager.GetInstance().Cilcked_Cnt_MattZip = (float)(5f * System.Math.Pow(1.03f, PlayerPrefsManager.GetInstance().Mat_Mattzip_Hit));
