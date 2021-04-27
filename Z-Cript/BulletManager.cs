@@ -715,6 +715,7 @@ public class BulletManager : MonoBehaviour
 
         // 서있는 스프라이트 안보이게 꺼줌
         hitBody.GetComponent<SpriteRenderer>().enabled = false;
+        hitBody.GetChild(0).GetChild(1).gameObject.SetActive(false);
         // 그로기 애니메이션 재생
         hitBody.GetComponent<Animation>().Play("Groggy");
 
@@ -1235,6 +1236,7 @@ public class BulletManager : MonoBehaviour
             transform.GetChild(1).gameObject.SetActive(false);
             if (transform.childCount == 3) transform.GetChild(2).gameObject.SetActive(false);
             hitBody.GetComponent<SpriteRenderer>().enabled = false;
+            hitBody.GetChild(0).GetChild(1).gameObject.SetActive(false);
             hitBody.GetComponent<Animation>()["Healling"].speed = 1;
             hitBody.GetComponent<Animation>().Play("Healling");
 

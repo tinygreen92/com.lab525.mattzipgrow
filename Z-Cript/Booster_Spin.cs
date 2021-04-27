@@ -82,6 +82,18 @@ public class Booster_Spin : MonoBehaviour
         }
     }
 
+
+
+    /// <summary>
+    /// 외부버튼 테스트용
+    /// </summary>
+    public void A_TestNextDay()
+    {
+        isReset = false;
+        ResetDailyQuest();
+    }
+
+
     public DailyRewardController drc;
     bool isReset;
 
@@ -125,8 +137,11 @@ public class Booster_Spin : MonoBehaviour
             PlayerPrefsManager.GetInstance().questInfo[0].daily_Atk = 0;
             PlayerPrefsManager.GetInstance().questInfo[0].daily_HP = 0;
             PlayerPrefsManager.GetInstance().questInfo[0].daily_Punch = 0;
-            PlayerPrefsManager.GetInstance().questInfo[0].daily_MiniCombo = 0;
+            PlayerPrefsManager.GetInstance().questInfo[0].daily_MiniCombo = 0;   /// 무한 버티기 5회 하기
             PlayerPrefsManager.GetInstance().questInfo[0].daily_ArtiGatcha = 0;
+            /// 미니게임 콤보 30회 하기
+            PlayerPrefsManager.GetInstance().questInfo3[0].daily_MiniGameCombo = 0;
+            /// 광고보기 횟수 하루 10제한
             PlayerPrefsManager.GetInstance().questInfo[0].daily_LMITABS = 0;
 
             /// 일일 / 주간 / 월간 무료 갱신
@@ -165,6 +180,10 @@ public class Booster_Spin : MonoBehaviour
             
             /// 일/주/월 저장
             PlayerPrefsManager.GetInstance().SaveDayLimitData();
+
+            /// 퀘스트 정보 갱신
+            PlayerPrefsManager.GetInstance().SavequestInfo();
+            PlayerPrefsManager.GetInstance().SavequestInfo3();
 
 
             /// 출석창 호출

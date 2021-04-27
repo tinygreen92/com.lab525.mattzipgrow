@@ -405,6 +405,8 @@ public class GroggyManager : MonoBehaviour
         // 국밥 버프 속도 증가 유물
         float result = PlayerPrefsManager.GetInstance().Arti_GAL * 0.01f;
         float speedTime = 3.0f + result;
+
+        /// 애니메이션 재생 1.5초
         yield return new WaitForSeconds(1.5f);
 
         PlayerPrefsManager.GetInstance().isGupSpeed = true;
@@ -498,7 +500,6 @@ public class GroggyManager : MonoBehaviour
     IEnumerator grogro()
     {
 
-        // 그로기 회복 버튼 터치부분
         float cnt = PlayerPrefsManager.GetInstance().GroggyTouch;
         float Maxcnt = cnt;
 
@@ -691,6 +692,7 @@ public class GroggyManager : MonoBehaviour
     public void BodyRecovering()
     {
         Body.enabled = true;
+        Body.transform.GetChild(0).GetChild(1).gameObject.SetActive(true);
         Body.GetComponent<Animation>().Stop();
         Body.GetComponent<Animation>()["Healling"].speed = 0;
         //
@@ -711,6 +713,7 @@ public class GroggyManager : MonoBehaviour
     public void BodyRecoveringforHealing()
     {
         Body.enabled = true;
+        Body.transform.GetChild(0).GetChild(1).gameObject.SetActive(true);
         Body.GetComponent<Animation>().Stop();
         Body.GetComponent<Animation>()["Healling"].speed = 0;
         //

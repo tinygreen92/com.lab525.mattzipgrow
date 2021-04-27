@@ -171,14 +171,6 @@ public class UserWallet : MonoBehaviour
         double dDiamond = PlayerPrefs.GetFloat("dDiamond", 0);
         //
         DiaText.text = SeetheNatural(dDiamond);
-        /// 정보 갱신
-        PlayerPrefsManager.GetInstance().SavequestInfo();
-        PlayerPrefsManager.GetInstance().SavequestInfo2();
-        PlayerPrefsManager.GetInstance().SavequestInfo3();
-        PlayerPrefsManager.GetInstance().SavequestInfo4();
-        PlayerPrefsManager.GetInstance().SavequestInfo5();
-        PlayerPrefsManager.GetInstance().SavequestInfo6();
-
     }
 
     /// 국밥

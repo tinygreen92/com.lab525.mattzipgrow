@@ -134,7 +134,11 @@ public class ShieldManager : MonoBehaviour
             playerShiledPos.GetChild(i).gameObject.SetActive(false);
         }
 
-        if(thisIndex != 0) playerShiledPos.GetChild(thisIndex).gameObject.SetActive(true);
+        /// 인덱스 -1은 아님
+        if(thisIndex >= 0)
+        {
+            playerShiledPos.GetChild(thisIndex).gameObject.SetActive(true);
+        }
     }
 
 

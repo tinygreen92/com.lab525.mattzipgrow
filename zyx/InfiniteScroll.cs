@@ -30,6 +30,9 @@ public class InfiniteScroll : MonoBehaviour
 
     // cache component
     public RectTransform m_Content;
+    /// <summary>
+    /// 100개 짜리 컨텐츠 가로 사이즈
+    /// </summary>
     private float SOY_CHIKEN = 20631.25f;
 
     private float AnchoredPosition
@@ -37,7 +40,7 @@ public class InfiniteScroll : MonoBehaviour
         get
         {
             return (direction == Direction.Vertical) ?
-                -m_Content.anchoredPosition.y :
+                -m_Content.anchoredPosition.y:
                 m_Content.anchoredPosition.x - SOY_CHIKEN;
         }
     }
@@ -87,7 +90,7 @@ public class InfiniteScroll : MonoBehaviour
         else
         {
             m_Content.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, (ItemScale + gap) * listData + gap);
-            m_Content.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, m_itemHeight + gap * 2);
+            m_Content.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, (m_itemHeight + gap * 2) - 25f);
             //m_Content.sizeDelta = new Vector2(0, (ItemScale + gap) * (listData) + gap);
         }
 
@@ -151,7 +154,7 @@ public class InfiniteScroll : MonoBehaviour
         else
         {
             m_Content.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, (ItemScale + gap) * listData + gap);
-            m_Content.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, m_itemHeight + gap * 2);
+            m_Content.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, (m_itemHeight + gap * 2) - 25f);
             //m_Content.sizeDelta = new Vector2(0, (ItemScale + gap) * (listData) + gap);
         }
 

@@ -47,7 +47,7 @@ public class QuestManager : MonoBehaviour
 
         //}
     }
-
+    int MissionChechecakCnt;
     IEnumerator MissionChechecak()
     {
         yield return null;
@@ -57,6 +57,7 @@ public class QuestManager : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
             // 미션 달성한거 뭐있나 초기화.
             MissionInit();
+            MissionChechecakCnt++;
         }
     }
 
@@ -69,6 +70,18 @@ public class QuestManager : MonoBehaviour
         DailyMissionUpdate();
         SpecMissionUpdate();
         AllMissionUpdate();
+
+        if (MissionChechecakCnt > 9)
+        {
+            /// 퀘스트 정보 갱신
+            PlayerPrefsManager.GetInstance().SavequestInfo();
+            PlayerPrefsManager.GetInstance().SavequestInfo2();
+            PlayerPrefsManager.GetInstance().SavequestInfo3();
+            PlayerPrefsManager.GetInstance().SavequestInfo4();
+            PlayerPrefsManager.GetInstance().SavequestInfo5();
+            PlayerPrefsManager.GetInstance().SavequestInfo6();
+            MissionChechecakCnt = 0;
+        }
     }
 
 
@@ -102,7 +115,12 @@ public class QuestManager : MonoBehaviour
             }
 
         }
-        else DailyMiss.GetChild(0).GetChild(2).GetComponent<Text>().text = "횟수 : ( " + day.daily_Abs + " / 1 )";
+        else
+        {
+            dailyBtn[0].GetChild(1).gameObject.SetActive(true);
+                dailyBtn[0].GetChild(3).gameObject.SetActive(false);
+            DailyMiss.GetChild(0).GetChild(2).GetComponent<Text>().text = "횟수 : ( " + day.daily_Abs + " / 1 )";
+        }
 
         if (day.daily_Atk >= 5)
         {
@@ -119,7 +137,12 @@ public class QuestManager : MonoBehaviour
             }
 
         }
-        else DailyMiss.GetChild(1).GetChild(2).GetComponent<Text>().text = "횟수 : ( " + day.daily_Atk + " / 5 )";
+        else
+        {
+            dailyBtn[1].GetChild(1).gameObject.SetActive(true);
+                dailyBtn[1].GetChild(3).gameObject.SetActive(false);
+            DailyMiss.GetChild(1).GetChild(2).GetComponent<Text>().text = "횟수 : ( " + day.daily_Atk + " / 5 )";
+        }
 
         if (day.daily_HP >= 5)
         {
@@ -136,7 +159,12 @@ public class QuestManager : MonoBehaviour
             }
 
         }
-        else DailyMiss.GetChild(2).GetChild(2).GetComponent<Text>().text = "횟수 : ( " + day.daily_HP + " / 5 )";
+        else
+        {
+            dailyBtn[2].GetChild(1).gameObject.SetActive(true);
+                dailyBtn[2].GetChild(3).gameObject.SetActive(false);
+            DailyMiss.GetChild(2).GetChild(2).GetComponent<Text>().text = "횟수 : ( " + day.daily_HP + " / 5 )";
+        }
 
 
         if (day.daily_Punch >= 5)
@@ -154,7 +182,12 @@ public class QuestManager : MonoBehaviour
             }
 
         }
-        else DailyMiss.GetChild(3).GetChild(2).GetComponent<Text>().text = "횟수 : ( " + day.daily_Punch + " / 5 )";
+        else
+        {
+            dailyBtn[3].GetChild(1).gameObject.SetActive(true);
+                dailyBtn[3].GetChild(3).gameObject.SetActive(false);
+            DailyMiss.GetChild(3).GetChild(2).GetComponent<Text>().text = "횟수 : ( " + day.daily_Punch + " / 5 )";
+        }
 
 
         if (day.daily_MiniCombo >= 5)
@@ -172,7 +205,12 @@ public class QuestManager : MonoBehaviour
             }
 
         }
-        else DailyMiss.GetChild(4).GetChild(2).GetComponent<Text>().text = "횟수 : ( " + day.daily_MiniCombo + " / 5 )";
+        else
+        {
+            dailyBtn[4].GetChild(1).gameObject.SetActive(true);
+                dailyBtn[4].GetChild(3).gameObject.SetActive(false);
+            DailyMiss.GetChild(4).GetChild(2).GetComponent<Text>().text = "횟수 : ( " + day.daily_MiniCombo + " / 5 )";
+        }
 
 
         if (day.daily_ArtiGatcha >= 1)
@@ -190,7 +228,12 @@ public class QuestManager : MonoBehaviour
             }
 
         }
-        else DailyMiss.GetChild(5).GetChild(2).GetComponent<Text>().text = "횟수 : ( " + day.daily_ArtiGatcha + " / 1 )";
+        else
+        {
+            dailyBtn[5].GetChild(1).gameObject.SetActive(true);
+                dailyBtn[5].GetChild(3).gameObject.SetActive(false);
+            DailyMiss.GetChild(5).GetChild(2).GetComponent<Text>().text = "횟수 : ( " + day.daily_ArtiGatcha + " / 1 )";
+        }
 
 
 
@@ -209,18 +252,12 @@ public class QuestManager : MonoBehaviour
             }
 
         }
-        else DailyMiss.GetChild(6).GetChild(2).GetComponent<Text>().text = "횟수 : ( " + day3.daily_MiniGameCombo + " / 30 )";
-
-
-        UserWallet.GetInstance().ShowAllMoney();
-
-        //PlayerPrefsManager.GetInstance().SavequestInfo();
-        //PlayerPrefsManager.GetInstance().SavequestInfo2();
-        //PlayerPrefsManager.GetInstance().SavequestInfo3();
-        //PlayerPrefsManager.GetInstance().SavequestInfo4();
-        //PlayerPrefsManager.GetInstance().SavequestInfo5();
-        //PlayerPrefsManager.GetInstance().SavequestInfo6();
-
+        else
+        {
+            dailyBtn[6].GetChild(1).gameObject.SetActive(true);
+                dailyBtn[6].GetChild(3).gameObject.SetActive(false);
+            DailyMiss.GetChild(6).GetChild(2).GetComponent<Text>().text = "횟수 : ( " + day3.daily_MiniGameCombo + " / 30 )";
+        }
     }
 
     /// <summary>
@@ -277,6 +314,13 @@ public class QuestManager : MonoBehaviour
 
         tmm.ExUpdateMission(13); /// 미션 업데이트
 
+        /// 퀘스트 정보 갱신
+        PlayerPrefsManager.GetInstance().SavequestInfo();
+        PlayerPrefsManager.GetInstance().SavequestInfo2();
+        PlayerPrefsManager.GetInstance().SavequestInfo3();
+        PlayerPrefsManager.GetInstance().SavequestInfo4();
+        PlayerPrefsManager.GetInstance().SavequestInfo5();
+        PlayerPrefsManager.GetInstance().SavequestInfo6();
 
     }
 
@@ -604,6 +648,13 @@ public class QuestManager : MonoBehaviour
 
         tmm.ExUpdateMission(44); /// 미션 업데이트
 
+                                 /// 퀘스트 정보 갱신
+        PlayerPrefsManager.GetInstance().SavequestInfo();
+        PlayerPrefsManager.GetInstance().SavequestInfo2();
+        PlayerPrefsManager.GetInstance().SavequestInfo3();
+        PlayerPrefsManager.GetInstance().SavequestInfo4();
+        PlayerPrefsManager.GetInstance().SavequestInfo5();
+        PlayerPrefsManager.GetInstance().SavequestInfo6();
 
         // 보상 더 있나 새로고침
         AllMissionUpdate();

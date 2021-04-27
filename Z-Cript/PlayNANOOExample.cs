@@ -1,4 +1,5 @@
-﻿using PlayNANOO;
+﻿using EasyMobile;
+using PlayNANOO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -39,9 +40,8 @@ public class PlayNANOOExample : MonoBehaviour
         plugin.SetLanguage(Configure.PN_LANG_KO);
         /// 우편함 체크
         PostboxCheck();
-        /// 배너 출력
-        OpenBanner();
-        //
+        /// 오픈 배너 출력
+        Invoke(nameof(OpenBanner), 1.5f);
     }
 
 
@@ -68,7 +68,7 @@ public class PlayNANOOExample : MonoBehaviour
     /// </summary>
     public void OpenForumView()
     {
-        plugin.OpenForumView("https://help.playnanoo.com/mattzip/faq/view/1");
+        plugin.OpenForumView("https://help.playnanoo.com/mattzip/faq/view/9");
     }
 
     /// <summary>
@@ -570,10 +570,46 @@ public class PlayNANOOExample : MonoBehaviour
     }
 
 
+
+
     /// <summary>
     /// Data Save in Cloud Data
     /// </summary>
     public void StorageSave()
+    {
+        // Show a three button alert and handle its OnComplete event
+        NativeUI.AlertPopup alert = NativeUI.ShowTwoButtonAlert(
+            "데이터 저장",
+            "데이터 충돌 방지를 위해 앱 데이터 삭제 후 재시작합니다.\n재실행시 데이터 불러오기를 진행해주세요.",
+            "취소",
+            "확인"
+            );
+
+        // Subscribe to the event
+        if (alert != null)
+        {
+            alert.OnComplete += OnAlertCompleteHandler;
+        }
+
+    }
+
+    // The event handler
+    void OnAlertCompleteHandler(int buttonIndex)
+    {
+        switch (buttonIndex)
+        {
+            case 1:
+                RealStorageSave();
+                break;
+            case 0:
+                PlayerPrefsManager.GetInstance().IN_APP.SetActive(false);
+                break;
+            default:
+                break;
+        }
+    }
+
+    void RealStorageSave()
     {
         PlayerPrefsManager.GetInstance().IN_APP.SetActive(true);
         PlayerPrefs.Save();
@@ -731,6 +767,41 @@ public class PlayNANOOExample : MonoBehaviour
     /// </summary>
     public void StorageLoad()
     {
+        // Show a three button alert and handle its OnComplete event
+        NativeUI.AlertPopup alert = NativeUI.ShowTwoButtonAlert(
+            "데이터 불러오기",
+            "서버에 저장된 데이터를 불러오기 위해 앱을 재시작합니다.",
+            "취소",
+            "확인"
+            );
+
+        // Subscribe to the event
+        if (alert != null)
+        {
+            alert.OnComplete += OnAlertLoadHandler;
+        }
+    }
+
+    void OnAlertLoadHandler(int buttonIndex)
+    {
+        switch (buttonIndex)
+        {
+            case 1:
+                RealStorageLoad();
+                break;
+            case 0:
+                PlayerPrefsManager.GetInstance().IN_APP.SetActive(false);
+                break;
+            default:
+                break;
+        }
+    }
+
+    /// <summary>
+    /// Data Save in Cloud Data
+    /// </summary>
+    void RealStorageLoad()
+    {
         PlayerPrefsManager.GetInstance().IN_APP.SetActive(true);
 
         plugin.StorageLoad(GPGSManager.GetLocalUserId() + "_S2", (state, message, rawData, dictionary) =>
@@ -757,6 +828,8 @@ public class PlayNANOOExample : MonoBehaviour
             }
         });
     }
+
+
 
 
     /// <summary>

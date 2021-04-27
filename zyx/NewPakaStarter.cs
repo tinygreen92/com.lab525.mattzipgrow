@@ -7,20 +7,8 @@ public class NewPakaStarter : MonoBehaviour
 {
     public NewPakageItem[] npi;
 
-    private void Start()
+    public void StartBongbong()
     {
-        StartCoroutine(bongbong());
-    }
-
-    IEnumerator bongbong()
-    {
-        yield return null;
-        // 로딩 다 될때까지 무한 대기
-        while (!PlayerPrefsManager.GetInstance().isReadyDayLimit)
-        {
-            yield return new WaitForFixedUpdate();
-        }
-
         for (int i = 0; i < npi.Length; i++)
         {
             npi[i].FxxkThisWay();

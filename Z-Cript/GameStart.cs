@@ -11,6 +11,10 @@ public class GameStart : MonoBehaviour
 {
     public bool isDebugMode = false;
 
+    [Header("-뉴 패키지 상점 내용물 세팅")]
+    public NewPakaStarter[] news;
+    public GameObject newsObject;
+
     [Header("-게임시작시 켰다가 꺼줌.")]
     public GameObject[] AllObject;
 
@@ -178,6 +182,19 @@ public class GameStart : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
 
+        /// 뉴 패키지 상점 내용물 추가
+        /// 뉴 패키지 상점 내용물 추가
+        newsObject.SetActive(true);
+        for (int i = 0; i < news.Length; i++)
+        {
+            news[i].StartBongbong();
+            yield return new WaitForFixedUpdate();
+        }
+
+        /// 뉴 패키지 상점 내용물 추가
+        /// 뉴 패키지 상점 내용물 추가
+
+
 
         /// 방패 리스트 추가
         /// 방패 리스트 추가
@@ -340,6 +357,9 @@ public class GameStart : MonoBehaviour
         {
             configManager = GameObject.Find("ConfigManager").GetComponent<ConfigManager>();
         }
+        
+        /// 뉴 패키지 상점 화면 끔
+        newsObject.SetActive(false);
 
         // 튜토리얼 창 활성화.
         tutorialManager.gameObject.SetActive(true);
@@ -546,6 +566,7 @@ public class GameStart : MonoBehaviour
 
         /// 방패도 동일하게 될련지
         InfinityShield.ListStartShield();
+
     }
 
 

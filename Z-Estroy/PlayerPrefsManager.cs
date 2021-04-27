@@ -2977,6 +2977,9 @@ public class PlayerPrefsManager : MonoBehaviour
         public int daily_Atk;
         public int daily_HP;
         public int daily_Punch;
+        /// <summary>
+        /// 무한 버티기 5회 하기
+        /// </summary>
         public int daily_MiniCombo;
         public int daily_ArtiGatcha;
         public int daily_LMITABS;

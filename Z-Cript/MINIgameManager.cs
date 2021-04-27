@@ -327,6 +327,8 @@ public class MINIgameManager : MonoBehaviour
         PopUpObjectManager.GetInstance().ShowWarnnigProcess("미니게임 종료.");
         //퀘스트
         PlayerPrefsManager.GetInstance().questInfo3[0].All_MiniGame++;
+        PlayerPrefsManager.GetInstance().SavequestInfo3();
+
         isStart = false;
 
         Invoke(nameof(InvoClear), 1.0f);
@@ -335,6 +337,8 @@ public class MINIgameManager : MonoBehaviour
     {
         PlayerPrefsManager.GetInstance().questInfo3[0].daily_MiniGameCombo = Combo;
         PlayerPrefsManager.GetInstance().MaxGet_MiniGame = Combo;
+
+        PlayerPrefsManager.GetInstance().SavequestInfo3();
 
         if (Combo >= 30) tmm.ExUpdateMission(28);
         if (Combo >= 50) tmm.ExUpdateMission(34);
