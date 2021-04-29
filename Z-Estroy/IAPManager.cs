@@ -469,415 +469,415 @@ public class IAPManager : MonoBehaviour
 
 
 
-            //
-            //
-            //
-            case EM_IAPConstants.Product_goldmitt:
-
-                int sDataList = PlayerPrefs.GetInt("Pet_BuyData", 000);
-
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
-
-                if (sDataList == 000)
-                {
-                    PlayerPrefs.SetInt("Pet_BuyData", 100);
-                }
-                else if (sDataList == 010)
-                {
-                    PlayerPrefs.SetInt("Pet_BuyData", 110);
-                }
-                else if (sDataList == 001)
-                {
-                    PlayerPrefs.SetInt("Pet_BuyData", 101);
-                }
-                else if (sDataList == 011)
-                {
-                    PlayerPrefs.SetInt("Pet_BuyData", 111);
-                }
-                else
-                {
-                    // 중복이면 다이아 더 돌려줘.
-                    PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 3000);
-                }
-
-                PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 1000);
-                PlayerPrefsManager.GetInstance().gupbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().gupbap, "10000");
-                PlayerPrefsManager.GetInstance().key += 50;
-
-                InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
-                InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
-
-                shoppopup.SetActive(false);
-                break;
-
-
-            case EM_IAPConstants.Product_goldboots:
-
-                sDataList = PlayerPrefs.GetInt("Pet_BuyData", 000);
-
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
-
-                if (sDataList == 000)
-                {
-                    PlayerPrefs.SetInt("Pet_BuyData", 010);
-                }
-                else if (sDataList == 100)
-                {
-                    PlayerPrefs.SetInt("Pet_BuyData", 110);
-                }
-                else if (sDataList == 001)
-                {
-                    PlayerPrefs.SetInt("Pet_BuyData", 011);
-                }
-                else if (sDataList == 101)
-                {
-                    PlayerPrefs.SetInt("Pet_BuyData", 111);
-                }
-                else
-                {
-                    // 중복이면 다이아 더 돌려줘.
-                    PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 3000);
-                }
-
-                PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 1000);
-                PlayerPrefsManager.GetInstance().gupbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().gupbap, "10000");
-                PlayerPrefsManager.GetInstance().key += 50;
-
-
-                InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
-                InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
-
-
-                shoppopup.SetActive(false);
-                break;
-
-
-            case EM_IAPConstants.Product_golddduk:
-
-                sDataList = PlayerPrefs.GetInt("Pet_BuyData", 000);
-
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
-
-                if (sDataList == 000)
-                {
-                    PlayerPrefs.SetInt("Pet_BuyData", 001);
-                }
-                else if (sDataList == 100)
-                {
-                    PlayerPrefs.SetInt("Pet_BuyData", 101);
-                }
-                else if (sDataList == 010)
-                {
-                    PlayerPrefs.SetInt("Pet_BuyData", 011);
-                }
-                else if (sDataList == 110)
-                {
-                    PlayerPrefs.SetInt("Pet_BuyData", 111);
-                }
-                else
-                {
-                    // 중복이면 다이아 더 돌려줘.
-                    PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 3000);
-                }
+            ////
+            ////
+            ////
+            //case EM_IAPConstants.Product_goldmitt:
+
+            //    int sDataList = PlayerPrefs.GetInt("Pet_BuyData", 000);
+
+            //    PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
+
+            //    if (sDataList == 000)
+            //    {
+            //        PlayerPrefs.SetInt("Pet_BuyData", 100);
+            //    }
+            //    else if (sDataList == 010)
+            //    {
+            //        PlayerPrefs.SetInt("Pet_BuyData", 110);
+            //    }
+            //    else if (sDataList == 001)
+            //    {
+            //        PlayerPrefs.SetInt("Pet_BuyData", 101);
+            //    }
+            //    else if (sDataList == 011)
+            //    {
+            //        PlayerPrefs.SetInt("Pet_BuyData", 111);
+            //    }
+            //    else
+            //    {
+            //        // 중복이면 다이아 더 돌려줘.
+            //        PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 3000);
+            //    }
+
+            //    PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 1000);
+            //    PlayerPrefsManager.GetInstance().gupbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().gupbap, "10000");
+            //    PlayerPrefsManager.GetInstance().key += 50;
+
+            //    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+            //    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+
+            //    shoppopup.SetActive(false);
+            //    break;
+
+
+            //case EM_IAPConstants.Product_goldboots:
+
+            //    sDataList = PlayerPrefs.GetInt("Pet_BuyData", 000);
+
+            //    PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
+
+            //    if (sDataList == 000)
+            //    {
+            //        PlayerPrefs.SetInt("Pet_BuyData", 010);
+            //    }
+            //    else if (sDataList == 100)
+            //    {
+            //        PlayerPrefs.SetInt("Pet_BuyData", 110);
+            //    }
+            //    else if (sDataList == 001)
+            //    {
+            //        PlayerPrefs.SetInt("Pet_BuyData", 011);
+            //    }
+            //    else if (sDataList == 101)
+            //    {
+            //        PlayerPrefs.SetInt("Pet_BuyData", 111);
+            //    }
+            //    else
+            //    {
+            //        // 중복이면 다이아 더 돌려줘.
+            //        PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 3000);
+            //    }
+
+            //    PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 1000);
+            //    PlayerPrefsManager.GetInstance().gupbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().gupbap, "10000");
+            //    PlayerPrefsManager.GetInstance().key += 50;
+
+
+            //    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+            //    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+
+
+            //    shoppopup.SetActive(false);
+            //    break;
+
+
+            //case EM_IAPConstants.Product_golddduk:
+
+            //    sDataList = PlayerPrefs.GetInt("Pet_BuyData", 000);
+
+            //    PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
+
+            //    if (sDataList == 000)
+            //    {
+            //        PlayerPrefs.SetInt("Pet_BuyData", 001);
+            //    }
+            //    else if (sDataList == 100)
+            //    {
+            //        PlayerPrefs.SetInt("Pet_BuyData", 101);
+            //    }
+            //    else if (sDataList == 010)
+            //    {
+            //        PlayerPrefs.SetInt("Pet_BuyData", 011);
+            //    }
+            //    else if (sDataList == 110)
+            //    {
+            //        PlayerPrefs.SetInt("Pet_BuyData", 111);
+            //    }
+            //    else
+            //    {
+            //        // 중복이면 다이아 더 돌려줘.
+            //        PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 3000);
+            //    }
 
 
-                PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 1000);
-                PlayerPrefsManager.GetInstance().gupbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().gupbap, "10000");
-                PlayerPrefsManager.GetInstance().key += 50;
+            //    PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 1000);
+            //    PlayerPrefsManager.GetInstance().gupbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().gupbap, "10000");
+            //    PlayerPrefsManager.GetInstance().key += 50;
 
-                InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
-                InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+            //    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+            //    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
 
-                shoppopup.SetActive(false);
-                break;
+            //    shoppopup.SetActive(false);
+            //    break;
 
-            case EM_IAPConstants.Product_goldset:
+            //case EM_IAPConstants.Product_goldset:
 
-                sDataList = PlayerPrefs.GetInt("Pet_BuyData", 000);
+            //    sDataList = PlayerPrefs.GetInt("Pet_BuyData", 000);
 
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
+            //    PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
 
-                if (sDataList == 000)
-                {
-                    PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 9000);
-                }
-                else if (sDataList == 100 || sDataList == 010 || sDataList == 001)
-                {
-                    PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 6000);
-                }
-                else if (sDataList == 110 || sDataList == 011 || sDataList == 101)
-                {
-                    PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 3000);
-                }
+            //    if (sDataList == 000)
+            //    {
+            //        PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 9000);
+            //    }
+            //    else if (sDataList == 100 || sDataList == 010 || sDataList == 001)
+            //    {
+            //        PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 6000);
+            //    }
+            //    else if (sDataList == 110 || sDataList == 011 || sDataList == 101)
+            //    {
+            //        PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 3000);
+            //    }
 
-                PlayerPrefs.SetInt("Pet_BuyData", 111);
+            //    PlayerPrefs.SetInt("Pet_BuyData", 111);
 
-                PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 3000);
-                PlayerPrefsManager.GetInstance().gupbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().gupbap, "30000");
-                PlayerPrefsManager.GetInstance().key += 200;
+            //    PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 3000);
+            //    PlayerPrefsManager.GetInstance().gupbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().gupbap, "30000");
+            //    PlayerPrefsManager.GetInstance().key += 200;
 
-                InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
-                InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+            //    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+            //    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
 
-                shoppopup.SetActive(false);
-                break;
+            //    shoppopup.SetActive(false);
+            //    break;
 
 
-            case EM_IAPConstants.Product_uniform01:
+            //case EM_IAPConstants.Product_uniform01:
 
-                // 구매 여부 데이터 배열
-                string[] uniform_sDataList = (PlayerPrefsManager.GetInstance().Uniform_Data).Split('+');
+            //    // 구매 여부 데이터 배열
+            //    string[] uniform_sDataList = (PlayerPrefsManager.GetInstance().Uniform_Data).Split('+');
 
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
+            //    PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
 
-                if (uniform_sDataList[1] != "1")
-                {
-                    // 데이터에 구매 완료 표기
-                    uniform_sDataList[1] = "1";
+            //    if (uniform_sDataList[1] != "1")
+            //    {
+            //        // 데이터에 구매 완료 표기
+            //        uniform_sDataList[1] = "1";
 
-                    // 데이터 새로고침
-                    string result = "";
+            //        // 데이터 새로고침
+            //        string result = "";
 
-                    result += uniform_sDataList[0] + "+";
-                    result += uniform_sDataList[1] + "+";
-                    result += uniform_sDataList[2] + "+";
-                    result += uniform_sDataList[3] + "+";
-                    result += uniform_sDataList[4] + "+";
-                    result += uniform_sDataList[5] + "+";
-                    result += uniform_sDataList[6];
+            //        result += uniform_sDataList[0] + "+";
+            //        result += uniform_sDataList[1] + "+";
+            //        result += uniform_sDataList[2] + "+";
+            //        result += uniform_sDataList[3] + "+";
+            //        result += uniform_sDataList[4] + "+";
+            //        result += uniform_sDataList[5] + "+";
+            //        result += uniform_sDataList[6];
 
-                    PlayerPrefsManager.GetInstance().Uniform_Data = result;
-                }
-                else
-                {
-                    PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 1000);
-                }
+            //        PlayerPrefsManager.GetInstance().Uniform_Data = result;
+            //    }
+            //    else
+            //    {
+            //        PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 1000);
+            //    }
 
-                PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 300);
-                PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().ssalbap, "3000");
-                PlayerPrefsManager.GetInstance().key += 10;
+            //    PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 300);
+            //    PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().ssalbap, "3000");
+            //    PlayerPrefsManager.GetInstance().key += 10;
 
-                InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
-                InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+            //    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+            //    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
 
-                shoppopup.SetActive(false);
-                break;
+            //    shoppopup.SetActive(false);
+            //    break;
 
 
 
 
-            case EM_IAPConstants.Product_uniform02:
+            //case EM_IAPConstants.Product_uniform02:
 
-                // 구매 여부 데이터 배열
-                uniform_sDataList = (PlayerPrefsManager.GetInstance().Uniform_Data).Split('+');
+            //    // 구매 여부 데이터 배열
+            //    uniform_sDataList = (PlayerPrefsManager.GetInstance().Uniform_Data).Split('+');
 
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
+            //    PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
 
-                if (uniform_sDataList[2] != "1")
-                {
-                    // 데이터에 구매 완료 표기
-                    uniform_sDataList[2] = "1";
+            //    if (uniform_sDataList[2] != "1")
+            //    {
+            //        // 데이터에 구매 완료 표기
+            //        uniform_sDataList[2] = "1";
 
-                    // 데이터 새로고침
-                    string result = "";
+            //        // 데이터 새로고침
+            //        string result = "";
 
-                    result += uniform_sDataList[0] + "+";
-                    result += uniform_sDataList[1] + "+";
-                    result += uniform_sDataList[2] + "+";
-                    result += uniform_sDataList[3] + "+";
-                    result += uniform_sDataList[4] + "+";
-                    result += uniform_sDataList[5] + "+";
-                    result += uniform_sDataList[6];
+            //        result += uniform_sDataList[0] + "+";
+            //        result += uniform_sDataList[1] + "+";
+            //        result += uniform_sDataList[2] + "+";
+            //        result += uniform_sDataList[3] + "+";
+            //        result += uniform_sDataList[4] + "+";
+            //        result += uniform_sDataList[5] + "+";
+            //        result += uniform_sDataList[6];
 
-                    PlayerPrefsManager.GetInstance().Uniform_Data = result;
-                }
-                else
-                {
-                    PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 1000);
-                }
+            //        PlayerPrefsManager.GetInstance().Uniform_Data = result;
+            //    }
+            //    else
+            //    {
+            //        PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 1000);
+            //    }
 
-                PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 300);
-                PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().ssalbap, "3000");
-                PlayerPrefsManager.GetInstance().key += 10;
+            //    PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 300);
+            //    PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().ssalbap, "3000");
+            //    PlayerPrefsManager.GetInstance().key += 10;
 
-                InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
-                InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+            //    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+            //    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
 
-                shoppopup.SetActive(false);
-                break;
+            //    shoppopup.SetActive(false);
+            //    break;
 
 
 
 
 
-            case EM_IAPConstants.Product_uniform03:
+            //case EM_IAPConstants.Product_uniform03:
 
-                // 구매 여부 데이터 배열
-                uniform_sDataList = (PlayerPrefsManager.GetInstance().Uniform_Data).Split('+');
+            //    // 구매 여부 데이터 배열
+            //    uniform_sDataList = (PlayerPrefsManager.GetInstance().Uniform_Data).Split('+');
 
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
+            //    PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
 
-                if (uniform_sDataList[3] != "1")
-                {
-                    // 데이터에 구매 완료 표기
-                    uniform_sDataList[3] = "1";
+            //    if (uniform_sDataList[3] != "1")
+            //    {
+            //        // 데이터에 구매 완료 표기
+            //        uniform_sDataList[3] = "1";
 
-                    // 데이터 새로고침
-                    string result = "";
+            //        // 데이터 새로고침
+            //        string result = "";
 
-                    result += uniform_sDataList[0] + "+";
-                    result += uniform_sDataList[1] + "+";
-                    result += uniform_sDataList[2] + "+";
-                    result += uniform_sDataList[3] + "+";
-                    result += uniform_sDataList[4] + "+";
-                    result += uniform_sDataList[5] + "+";
-                    result += uniform_sDataList[6];
+            //        result += uniform_sDataList[0] + "+";
+            //        result += uniform_sDataList[1] + "+";
+            //        result += uniform_sDataList[2] + "+";
+            //        result += uniform_sDataList[3] + "+";
+            //        result += uniform_sDataList[4] + "+";
+            //        result += uniform_sDataList[5] + "+";
+            //        result += uniform_sDataList[6];
 
-                    PlayerPrefsManager.GetInstance().Uniform_Data = result;
-                }
-                else
-                {
-                    PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 1000);
-                }
+            //        PlayerPrefsManager.GetInstance().Uniform_Data = result;
+            //    }
+            //    else
+            //    {
+            //        PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 1000);
+            //    }
 
-                PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 300);
-                PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().ssalbap, "3000");
-                PlayerPrefsManager.GetInstance().key += 10;
+            //    PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 300);
+            //    PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().ssalbap, "3000");
+            //    PlayerPrefsManager.GetInstance().key += 10;
 
-                InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
-                InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+            //    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+            //    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
 
-                shoppopup.SetActive(false);
-                break;
+            //    shoppopup.SetActive(false);
+            //    break;
 
 
 
 
-            case EM_IAPConstants.Product_uniform04:
+            //case EM_IAPConstants.Product_uniform04:
 
-                // 구매 여부 데이터 배열
-                uniform_sDataList = (PlayerPrefsManager.GetInstance().Uniform_Data).Split('+');
+            //    // 구매 여부 데이터 배열
+            //    uniform_sDataList = (PlayerPrefsManager.GetInstance().Uniform_Data).Split('+');
 
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
+            //    PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
 
-                if (uniform_sDataList[4] != "1")
-                {
-                    // 데이터에 구매 완료 표기
-                    uniform_sDataList[4] = "1";
+            //    if (uniform_sDataList[4] != "1")
+            //    {
+            //        // 데이터에 구매 완료 표기
+            //        uniform_sDataList[4] = "1";
 
-                    // 데이터 새로고침
-                    string result = "";
+            //        // 데이터 새로고침
+            //        string result = "";
 
-                    result += uniform_sDataList[0] + "+";
-                    result += uniform_sDataList[1] + "+";
-                    result += uniform_sDataList[2] + "+";
-                    result += uniform_sDataList[3] + "+";
-                    result += uniform_sDataList[4] + "+";
-                    result += uniform_sDataList[5] + "+";
-                    result += uniform_sDataList[6];
+            //        result += uniform_sDataList[0] + "+";
+            //        result += uniform_sDataList[1] + "+";
+            //        result += uniform_sDataList[2] + "+";
+            //        result += uniform_sDataList[3] + "+";
+            //        result += uniform_sDataList[4] + "+";
+            //        result += uniform_sDataList[5] + "+";
+            //        result += uniform_sDataList[6];
 
-                    PlayerPrefsManager.GetInstance().Uniform_Data = result;
-                }
-                else
-                {
-                    PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 2000);
-                }
+            //        PlayerPrefsManager.GetInstance().Uniform_Data = result;
+            //    }
+            //    else
+            //    {
+            //        PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 2000);
+            //    }
 
-                PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 600);
-                PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().ssalbap, "6000");
-                PlayerPrefsManager.GetInstance().key += 30;
+            //    PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 600);
+            //    PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().ssalbap, "6000");
+            //    PlayerPrefsManager.GetInstance().key += 30;
 
-                InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
-                InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+            //    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+            //    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
 
-                shoppopup.SetActive(false);
-                break;
+            //    shoppopup.SetActive(false);
+            //    break;
 
 
 
 
-            case EM_IAPConstants.Product_uniform05:
+            //case EM_IAPConstants.Product_uniform05:
 
-                // 구매 여부 데이터 배열
-                uniform_sDataList = (PlayerPrefsManager.GetInstance().Uniform_Data).Split('+');
+            //    // 구매 여부 데이터 배열
+            //    uniform_sDataList = (PlayerPrefsManager.GetInstance().Uniform_Data).Split('+');
 
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
+            //    PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
 
-                if (uniform_sDataList[5] != "1")
-                {
-                    // 데이터에 구매 완료 표기
-                    uniform_sDataList[5] = "1";
+            //    if (uniform_sDataList[5] != "1")
+            //    {
+            //        // 데이터에 구매 완료 표기
+            //        uniform_sDataList[5] = "1";
 
-                    // 데이터 새로고침
-                    string result = "";
+            //        // 데이터 새로고침
+            //        string result = "";
 
-                    result += uniform_sDataList[0] + "+";
-                    result += uniform_sDataList[1] + "+";
-                    result += uniform_sDataList[2] + "+";
-                    result += uniform_sDataList[3] + "+";
-                    result += uniform_sDataList[4] + "+";
-                    result += uniform_sDataList[5] + "+";
-                    result += uniform_sDataList[6];
+            //        result += uniform_sDataList[0] + "+";
+            //        result += uniform_sDataList[1] + "+";
+            //        result += uniform_sDataList[2] + "+";
+            //        result += uniform_sDataList[3] + "+";
+            //        result += uniform_sDataList[4] + "+";
+            //        result += uniform_sDataList[5] + "+";
+            //        result += uniform_sDataList[6];
 
-                    PlayerPrefsManager.GetInstance().Uniform_Data = result;
-                }
-                else
-                {
-                    PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 2000);
-                }
+            //        PlayerPrefsManager.GetInstance().Uniform_Data = result;
+            //    }
+            //    else
+            //    {
+            //        PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 2000);
+            //    }
 
-                PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 600);
-                PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().ssalbap, "6000");
-                PlayerPrefsManager.GetInstance().key += 30;
+            //    PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 600);
+            //    PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().ssalbap, "6000");
+            //    PlayerPrefsManager.GetInstance().key += 30;
 
-                InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
-                InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+            //    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+            //    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
 
-                shoppopup.SetActive(false);
-                break;
+            //    shoppopup.SetActive(false);
+            //    break;
 
 
 
 
-            case EM_IAPConstants.Product_uniform06:
+            //case EM_IAPConstants.Product_uniform06:
 
-                // 구매 여부 데이터 배열
-                uniform_sDataList = (PlayerPrefsManager.GetInstance().Uniform_Data).Split('+');
+            //    // 구매 여부 데이터 배열
+            //    uniform_sDataList = (PlayerPrefsManager.GetInstance().Uniform_Data).Split('+');
 
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
+            //    PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
 
-                if (uniform_sDataList[6] != "1")
-                {
-                    // 데이터에 구매 완료 표기
-                    uniform_sDataList[6] = "1";
+            //    if (uniform_sDataList[6] != "1")
+            //    {
+            //        // 데이터에 구매 완료 표기
+            //        uniform_sDataList[6] = "1";
 
-                    // 데이터 새로고침
-                    string result = "";
+            //        // 데이터 새로고침
+            //        string result = "";
 
-                    result += uniform_sDataList[0] + "+";
-                    result += uniform_sDataList[1] + "+";
-                    result += uniform_sDataList[2] + "+";
-                    result += uniform_sDataList[3] + "+";
-                    result += uniform_sDataList[4] + "+";
-                    result += uniform_sDataList[5] + "+";
-                    result += uniform_sDataList[6];
+            //        result += uniform_sDataList[0] + "+";
+            //        result += uniform_sDataList[1] + "+";
+            //        result += uniform_sDataList[2] + "+";
+            //        result += uniform_sDataList[3] + "+";
+            //        result += uniform_sDataList[4] + "+";
+            //        result += uniform_sDataList[5] + "+";
+            //        result += uniform_sDataList[6];
 
-                    PlayerPrefsManager.GetInstance().Uniform_Data = result;
-                }
-                else
-                {
-                    PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 3000);
-                }
+            //        PlayerPrefsManager.GetInstance().Uniform_Data = result;
+            //    }
+            //    else
+            //    {
+            //        PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 3000);
+            //    }
 
-                PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 1000);
-                PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().ssalbap, "10000");
-                PlayerPrefsManager.GetInstance().key += 50;
+            //    PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 1000);
+            //    PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().ssalbap, "10000");
+            //    PlayerPrefsManager.GetInstance().key += 50;
 
-                InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
-                InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+            //    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+            //    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
 
-                shoppopup.SetActive(false);
-                break;
+            //    shoppopup.SetActive(false);
+            //    break;
 
 
 
@@ -1299,7 +1299,7 @@ public class IAPManager : MonoBehaviour
 
     public void Purchase_Product_goldmitt()
     {
-        InAppPurchasing.Purchase(EM_IAPConstants.Product_goldmitt);
+        //InAppPurchasing.Purchase(EM_IAPConstants.Product_goldmitt);
         // 핸들러 등록
         InAppPurchasing.PurchaseCompleted += PurchaseCompletedHandler;
         InAppPurchasing.PurchaseFailed += PurchaseFailedHandler;
@@ -1307,7 +1307,7 @@ public class IAPManager : MonoBehaviour
 
     public void Purchase_Product_goldboots()
     {
-        InAppPurchasing.Purchase(EM_IAPConstants.Product_goldboots);
+        //InAppPurchasing.Purchase(EM_IAPConstants.Product_goldboots);
         // 핸들러 등록
         InAppPurchasing.PurchaseCompleted += PurchaseCompletedHandler;
         InAppPurchasing.PurchaseFailed += PurchaseFailedHandler;
@@ -1315,7 +1315,7 @@ public class IAPManager : MonoBehaviour
 
     public void Purchase_Product_golddduk()
     {
-        InAppPurchasing.Purchase(EM_IAPConstants.Product_golddduk);
+        //InAppPurchasing.Purchase(EM_IAPConstants.Product_golddduk);
         // 핸들러 등록
         InAppPurchasing.PurchaseCompleted += PurchaseCompletedHandler;
         InAppPurchasing.PurchaseFailed += PurchaseFailedHandler;
@@ -1323,7 +1323,7 @@ public class IAPManager : MonoBehaviour
 
     public void Purchase_Product_goldset()
     {
-        InAppPurchasing.Purchase(EM_IAPConstants.Product_goldset);
+        //InAppPurchasing.Purchase(EM_IAPConstants.Product_goldset);
         // 핸들러 등록
         InAppPurchasing.PurchaseCompleted += PurchaseCompletedHandler;
         InAppPurchasing.PurchaseFailed += PurchaseFailedHandler;
@@ -1331,7 +1331,7 @@ public class IAPManager : MonoBehaviour
 
     public void Purchase_Product_uniform01()
     {
-        InAppPurchasing.Purchase(EM_IAPConstants.Product_uniform01);
+        //InAppPurchasing.Purchase(EM_IAPConstants.Product_uniform01);
         // 핸들러 등록
         InAppPurchasing.PurchaseCompleted += PurchaseCompletedHandler;
         InAppPurchasing.PurchaseFailed += PurchaseFailedHandler;
@@ -1339,7 +1339,7 @@ public class IAPManager : MonoBehaviour
 
     public void Purchase_Product_uniform02()
     {
-        InAppPurchasing.Purchase(EM_IAPConstants.Product_uniform02);
+        //InAppPurchasing.Purchase(EM_IAPConstants.Product_uniform02);
         // 핸들러 등록
         InAppPurchasing.PurchaseCompleted += PurchaseCompletedHandler;
         InAppPurchasing.PurchaseFailed += PurchaseFailedHandler;
@@ -1347,7 +1347,7 @@ public class IAPManager : MonoBehaviour
 
     public void Purchase_Product_uniform03()
     {
-        InAppPurchasing.Purchase(EM_IAPConstants.Product_uniform03);
+        //InAppPurchasing.Purchase(EM_IAPConstants.Product_uniform03);
         // 핸들러 등록
         InAppPurchasing.PurchaseCompleted += PurchaseCompletedHandler;
         InAppPurchasing.PurchaseFailed += PurchaseFailedHandler;
@@ -1355,7 +1355,7 @@ public class IAPManager : MonoBehaviour
 
     public void Purchase_Product_uniform04()
     {
-        InAppPurchasing.Purchase(EM_IAPConstants.Product_uniform04);
+        //InAppPurchasing.Purchase(EM_IAPConstants.Product_uniform04);
         // 핸들러 등록
         InAppPurchasing.PurchaseCompleted += PurchaseCompletedHandler;
         InAppPurchasing.PurchaseFailed += PurchaseFailedHandler;
@@ -1363,7 +1363,7 @@ public class IAPManager : MonoBehaviour
 
     public void Purchase_Product_uniform05()
     {
-        InAppPurchasing.Purchase(EM_IAPConstants.Product_uniform05);
+        //InAppPurchasing.Purchase(EM_IAPConstants.Product_uniform05);
         // 핸들러 등록
         InAppPurchasing.PurchaseCompleted += PurchaseCompletedHandler;
         InAppPurchasing.PurchaseFailed += PurchaseFailedHandler;
@@ -1371,7 +1371,7 @@ public class IAPManager : MonoBehaviour
 
     public void Purchase_Product_uniform06()
     {
-        InAppPurchasing.Purchase(EM_IAPConstants.Product_uniform06);
+        //InAppPurchasing.Purchase(EM_IAPConstants.Product_uniform06);
         // 핸들러 등록
         InAppPurchasing.PurchaseCompleted += PurchaseCompletedHandler;
         InAppPurchasing.PurchaseFailed += PurchaseFailedHandler;

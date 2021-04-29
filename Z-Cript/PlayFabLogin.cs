@@ -436,8 +436,6 @@ public class PlayFabLogin : MonoBehaviour
     {
         /// 로그인 성공시 내 아이디 기억
         myPlayFabId = obj.PlayFabId;
-        /// 주간 pvp 보상 조회후 지급
-        RewordRC();
         /// 맷집 공통 데이터 조회
         PlayFabClientAPI.GetTitleData(new GetTitleDataRequest(),
                 result =>
@@ -524,6 +522,8 @@ public class PlayFabLogin : MonoBehaviour
         {
             /// 재접속시 닉네임 설정되어 있네? 
             GPGSManager.SetNickName(myDisplayName);
+            /// 주간 pvp 보상 조회후 지급
+            RewordRC();
             /// 나누 접속
             GameObject.Find("PlayNanoo").GetComponent<PlayNANOOExample>().NanooStart();
             /// 포톤 접속
@@ -563,10 +563,13 @@ public class PlayFabLogin : MonoBehaviour
     /// <param name="_dpName">방금 입력한 닉네임</param>
     void UpdateUserName(string _dpName)
     {
+
         /// 유저 디스플레이 네임 세팅
         PlayFabClientAPI.UpdateUserTitleDisplayName(new UpdateUserTitleDisplayNameRequest { DisplayName = _dpName },
         (result) =>
         {
+            //PopUpObjectManager.GetInstance().ShowWarnnigProcess("유저 디스플레이 네임 : " + _dpName);
+
             Debug.LogWarning("유저 디스플레이 네임 : " + _dpName);
             myDisplayName = _dpName;
             /// 팝업 씹고 바로 생성.
@@ -591,8 +594,7 @@ public class PlayFabLogin : MonoBehaviour
     /// </summary>
     public void OkayMyNick()
     {
-        /// 닉 팝업 끄기
-        nickPopObject.SetActive(false);
+        //PopUpObjectManager.GetInstance().ShowWarnnigProcess("TEST - 닉네임을 설정하자");
         /// 닉네임을 설정하자
         GPGSManager.SetNickName(myDisplayName);
         /// 나누 접속
@@ -628,6 +630,8 @@ public class PlayFabLogin : MonoBehaviour
 
     private void OnLoginFailure(PlayFabError error)
     {
+        PopUpObjectManager.GetInstance().ShowWarnnigProcess("서버 접속 실패");
+
         Debug.LogWarning("Something went wrong with your first API call.  :(");
         Debug.LogError("Here's some debug information:");
         /// 차단 계정 메시지는 여기로

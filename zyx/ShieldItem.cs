@@ -112,9 +112,12 @@ public class ShieldItem : MonoBehaviour
         /// 시작값 * ( 1 + 0.07 ) ^ Lv
         thisShieldCost = dts.multipleStringDouble(tmpList.shieldCost, tmpCost);
         thisSuccedFussion = tmpList.powerUpper - (tmpList.powerMinusPer * thisShieldLevel);
-        thisDIAEffect = tmpList.ownedEffect;
 
         thisShiledCont = tmpList.amount;
+
+        /// 보유 방어력 디폴트 값
+        thisDIAEffect = (tmpList.ownedEffect * thisShiledCont);
+
 
 
         LevelBox.text = $"Lv. {thisShieldLevel}";
