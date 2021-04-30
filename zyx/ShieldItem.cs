@@ -62,7 +62,7 @@ public class ShieldItem : MonoBehaviour
     /// <summary>
     /// 아이콘/이름/회색커버 기본 정보 새로고침
     /// </summary>
-    internal void SetDefaltInfo()
+    void SetDefaltInfo()
     {
         spriteBox.sprite = pm.shieldImgs[thisIndex];
         NameBox.text = pm.shieldNames[thisIndex];

@@ -4669,8 +4669,6 @@ public class PlayerPrefsManager : MonoBehaviour
         PlayerPrefs.SetInt("Arti_MattGrow_UP", listGPGS[0].cloudTmpForGPGS_186);
 
 
-
-
         /// 삭제 해줄 것들 광고 쿨타임 등등
         PlayerPrefs.DeleteKey("Bosster_Spin");
         PlayerPrefs.DeleteKey("Booster_AUTO");
@@ -4679,12 +4677,11 @@ public class PlayerPrefsManager : MonoBehaviour
         PlayerPrefs.DeleteKey("Booster_Power");
         PlayerPrefs.DeleteKey("DenfenceMode");
         
-        
-        
-        
         /// 로드한다 트리거
         isDataLoaded = true;
+        PlayerPrefs.SetInt("isDataSaved", 0);
         PlayerPrefs.Save();
+
         /// 씬 갱신
         RestartAppForAOS();
         //UnityEngine.SceneManagement.SceneManager.LoadScene("SampleScene");

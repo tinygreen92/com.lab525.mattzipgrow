@@ -9,12 +9,14 @@ public class ButtonSoundListner : MonoBehaviour, IPointerUpHandler, IPointerDown
     PunchManager punchManager;
     QuestManager questManager;
     ShieldManager shieldManager;
+    FriendManager friendManager;
 
     private void Awake()
     {
         punchManager = GameObject.Find("PunchManager").GetComponent<PunchManager>();
         questManager = GameObject.Find("QuestManager").GetComponent<QuestManager>();
         shieldManager = GameObject.Find("ShieldManager").GetComponent<ShieldManager>();
+        friendManager = GameObject.Find("FriendManager").GetComponent<FriendManager>();
     }
 
 
@@ -23,7 +25,6 @@ public class ButtonSoundListner : MonoBehaviour, IPointerUpHandler, IPointerDown
     int p_index = 0;
     public void OnPointerDown(PointerEventData eventData)
     {
-
 
         /// 퀘스트 롱 클릭
         if(transform.parent.parent.tag == "GRID_QUEST")
@@ -42,6 +43,11 @@ public class ButtonSoundListner : MonoBehaviour, IPointerUpHandler, IPointerDown
         }
         /// 방패 업글 롱 클릭
         else if (transform.parent.tag == "Shield" && transform.GetSiblingIndex() == 1)
+        {
+            Invoke(nameof(InvoDown), 0.3f);
+        }
+        /// 동료 업글 롱 클릭
+        else if (transform.parent.parent.tag == "Friend" && transform.GetSiblingIndex() == 1)
         {
             Invoke(nameof(InvoDown), 0.3f);
         }
@@ -88,7 +94,7 @@ public class ButtonSoundListner : MonoBehaviour, IPointerUpHandler, IPointerDown
         else if (transform.parent.parent == null) return;
         else if (transform.parent.parent.parent == null) return;
 
-        if (transform.parent.parent.parent.transform.tag == "UPGRADE" || transform.parent.tag == "Shield")
+        if (transform.parent.parent.parent.transform.tag == "UPGRADE" || transform.parent.tag == "Shield" || transform.parent.parent.tag == "Friend")
         {
             CancelInvoke(nameof(InvoDown));
             isBtnDown = false;
@@ -103,6 +109,8 @@ public class ButtonSoundListner : MonoBehaviour, IPointerUpHandler, IPointerDown
         {
             if (transform.parent.tag == "Shield")
                 shieldManager.LongClicedUpgradeBtn(p_index);
+            else if(transform.parent.parent.tag == "Friend")
+                friendManager.ClickedUpgradeBtn(p_index);
             else
                 punchManager.LongClicedUpgradeBtn(p_index);
 

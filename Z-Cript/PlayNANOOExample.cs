@@ -831,6 +831,20 @@ public class PlayNANOOExample : MonoBehaviour
 
 
 
+    public void A_TestSaveLoad(bool isSave)
+    {
+        if (isSave)
+        {
+            RealStorageSave();
+
+        }
+        else
+        {
+            RealStorageLoad();
+        }
+    }
+
+
 
     /// <summary>
     /// 최초 접속시 이전 맷집력 랭킹 비례 다이아몬드 지급

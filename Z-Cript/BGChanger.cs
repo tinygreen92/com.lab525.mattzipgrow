@@ -375,8 +375,6 @@ public class BGChanger : MonoBehaviour
                 charaBGmask[5].SetActive(true);
                 //PlayerPrefsManager.GetInstance().BG_CoinStat = 17f;
                 PlayerPrefs.SetFloat("BG_CoinStat", 2.6f);
-
-                Debug.LogWarning("적용 안돼? : " + PlayerPrefsManager.GetInstance().BG_CoinStat);
                 break;
 
         }

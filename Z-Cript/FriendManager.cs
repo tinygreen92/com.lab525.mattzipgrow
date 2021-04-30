@@ -29,6 +29,11 @@ public class FriendManager : MonoBehaviour
     public Sprite SaalIcon;
     public Sprite DiaIcon;
 
+    [Header("- 동료 4개")]
+    public int[] thisLevels;
+
+
+
     /// <summary>
     /// 동료 최대 레벨 고정
     /// </summary>
@@ -40,8 +45,6 @@ public class FriendManager : MonoBehaviour
     /// </summary>
     public void InitFriend()
     {
-        thisLevels = new int[4];
-
         int mLenth = FriendObjects.Length;
 
         for (int i = 0; i < mLenth; i++)
@@ -55,7 +58,7 @@ public class FriendManager : MonoBehaviour
     readonly float mDefaltTime = 14400.0f;
     readonly float mDefaltSpeed = 1.0f;
 
-    int[] thisLevels;
+
 
 
     /// <summary>

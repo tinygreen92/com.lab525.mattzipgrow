@@ -436,6 +436,7 @@ public class PlayFabLogin : MonoBehaviour
     {
         /// 로그인 성공시 내 아이디 기억
         myPlayFabId = obj.PlayFabId;
+
         /// 맷집 공통 데이터 조회
         PlayFabClientAPI.GetTitleData(new GetTitleDataRequest(),
                 result =>
@@ -467,34 +468,11 @@ public class PlayFabLogin : MonoBehaviour
                     Debug.Log("Got error getting titleData:");
                     Debug.Log(error.GenerateErrorReport());
                 });
+
         /// 닉네임 설정 관련
         PlayFabClientAPI.GetAccountInfo(new GetAccountInfoRequest { PlayFabId = myPlayFabId },
                                 GetAccountSuccess,
                                 (error) => Debug.LogError(" GetAccountInfo error"));
-    }
-
-
-    /// <summary>
-    /// 안드로이드 네이티브 코드
-    /// </summary>
-    void RestartAppForAOS()
-    {
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false; //play모드를 false로.
-#else
-        AndroidJavaObject AOSUnityActivity = new AndroidJavaClass("com.unity3d.player.UnityPlayer").GetStatic<AndroidJavaObject>("currentActivity");
-        AndroidJavaObject baseContext = AOSUnityActivity.Call<AndroidJavaObject>("getBaseContext");
-        AndroidJavaObject intentObj = baseContext.Call<AndroidJavaObject>("getPackageManager").Call<AndroidJavaObject>("getLaunchIntentForPackage", baseContext.Call<string>("getPackageName"));
-        AndroidJavaObject componentName = intentObj.Call<AndroidJavaObject>("getComponent");
-        AndroidJavaObject mainIntent = intentObj.CallStatic<AndroidJavaObject>("makeMainActivity", componentName);
-        AndroidJavaClass intentClass = new AndroidJavaClass("android.content.Intent");
-        mainIntent = mainIntent.Call<AndroidJavaObject>("addFlags", intentClass.GetStatic<int>("FLAG_ACTIVITY_NEW_TASK"));
-        mainIntent = mainIntent.Call<AndroidJavaObject>("addFlags", intentClass.GetStatic<int>("FLAG_ACTIVITY_CLEAR_TASK"));
-        baseContext.Call("startActivity", mainIntent);
-        AndroidJavaClass JavaSystemClass = new AndroidJavaClass("java.lang.System");
-        JavaSystemClass.CallStatic("exit", 0);
-#endif
-
     }
 
 
@@ -504,19 +482,12 @@ public class PlayFabLogin : MonoBehaviour
         /// 닉네임 설정이 안되었다 ||  혹은 도중에 취소했다 (임시로 구글 아이디로 저장)
         if (myDisplayName == null || myDisplayName == myPlayFabId)          
         {
-            if (PlayerPrefs.GetInt("isBeginingS2", 0) == 0)
-            {
-                PlayerPrefs.SetInt("isDataSaved", 1);
-                PlayerPrefs.SetInt("isBeginingS2", 525);
-                PlayerPrefs.Save();
+            PlayerPrefs.SetInt("isDataSaved", 1);
+            PlayerPrefs.SetInt("isBeginingS2", 525);
+            PlayerPrefs.Save();
 
-                RestartAppForAOS();
-            }
-            else
-            {
-                /// TODO : 닉네임 설정 팝업창. 표기
-                nickParentsObject.SetActive(true);
-            }
+            /// TODO : 닉네임 설정 팝업창. 표기
+            nickParentsObject.SetActive(true);
         }
         else
         {
@@ -574,7 +545,6 @@ public class PlayFabLogin : MonoBehaviour
             myDisplayName = _dpName;
             /// 팝업 씹고 바로 생성.
             OkayMyNick();
-
             /// 창꺼줌
             nickParentsObject.SetActive(false);
             /// 이걸로 할래? -> 생성하시겠습니까?
@@ -601,17 +571,59 @@ public class PlayFabLogin : MonoBehaviour
         GameObject.Find("PlayNanoo").GetComponent<PlayNANOOExample>().NanooStart();
         /// 포톤 접속
         GameObject.Find("Scripts").GetComponent<NamePickGui>().AutoStartChat();
+        /// 최초 한번 천천히 내부 데이터 진행.
+        PlayerPrefsManager.GetInstance().IN_APP.SetActive(true);
+        Invovovovo();
+    }
+
+    void Invovovovo()
+    {
+        /// 최초 접속시 이전 맷집력 랭킹 비례 다이아몬드 지급
+        GameObject.Find("PlayNanoo").GetComponent<PlayNANOOExample>().BeforeRankingMatt();
+        
+        //PopUpObjectManager.GetInstance().ShowWarnnigProcess("시즌2 시작을 위해 앱을 재실행합니다.");
         /// 최초 한번 랭킹 차등 보상 지급
-        Invoke(nameof(InvoDDD), 2.6f);
-        /// 페이크 로딩창 꺼줌
-        tm.FakeloadingOnOff(false);
+        Invoke(nameof(InvoDDD), 1.6f);
     }
 
     void InvoDDD()
     {
-        /// 최초 접속시 이전 맷집력 랭킹 비례 다이아몬드 지급
-        GameObject.Find("PlayNanoo").GetComponent<PlayNANOOExample>().BeforeRankingMatt();
+        // 재부팅
+        //RestartAppForAOS();
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+
+
+
+        /// 페이크 로딩창 꺼줌
+        /// tm.FakeloadingOnOff(false);
     }
+
+
+    /// <summary>
+    /// 안드로이드 네이티브 코드
+    /// </summary>
+    void RestartAppForAOS()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false; //play모드를 false로.
+#else
+        AndroidJavaObject AOSUnityActivity = new AndroidJavaClass("com.unity3d.player.UnityPlayer").GetStatic<AndroidJavaObject>("currentActivity");
+        AndroidJavaObject baseContext = AOSUnityActivity.Call<AndroidJavaObject>("getBaseContext");
+        AndroidJavaObject intentObj = baseContext.Call<AndroidJavaObject>("getPackageManager").Call<AndroidJavaObject>("getLaunchIntentForPackage", baseContext.Call<string>("getPackageName"));
+        AndroidJavaObject componentName = intentObj.Call<AndroidJavaObject>("getComponent");
+        AndroidJavaObject mainIntent = intentObj.CallStatic<AndroidJavaObject>("makeMainActivity", componentName);
+        AndroidJavaClass intentClass = new AndroidJavaClass("android.content.Intent");
+        mainIntent = mainIntent.Call<AndroidJavaObject>("addFlags", intentClass.GetStatic<int>("FLAG_ACTIVITY_NEW_TASK"));
+        mainIntent = mainIntent.Call<AndroidJavaObject>("addFlags", intentClass.GetStatic<int>("FLAG_ACTIVITY_CLEAR_TASK"));
+        baseContext.Call("startActivity", mainIntent);
+        AndroidJavaClass JavaSystemClass = new AndroidJavaClass("java.lang.System");
+        JavaSystemClass.CallStatic("exit", 0);
+#endif
+
+    }
+
+
+
 
     /// <summary>
     /// 으로 하시겠습니까? -> 취소 누르면 다시 입력 기회 줌

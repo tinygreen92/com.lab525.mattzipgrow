@@ -248,12 +248,6 @@ public class PowerUPManager : MonoBehaviour
                 break;
 
             case 7:
-                /// 방패 합성 오브젝트가 비어있지 않다면 스크롤 X 
-                if (Fussion_TAP != null)
-                {
-                    topSCrect.enabled = false;
-                }
-
                 powerUP_TAP.SetActive(false);
                 trainnig_TAP.SetActive(false);
                 artfact_TAP.SetActive(false);
@@ -452,8 +446,13 @@ public class PowerUPManager : MonoBehaviour
         //스크롤 뷰 교체
         thisSCRect.content = Conent_6;
         thisSCRect.viewport = Viewport_6;
-        thisSCRect.horizontalNormalizedPosition = 0f; // 모든 스크롤뷰 왼쪽 정렬 시켜
+        ///thisSCRect.horizontalNormalizedPosition = 0f; // 모든 스크롤뷰 왼쪽 정렬 시켜
 
+        /// 방패 합성 오브젝트가 비어있지 않다면 스크롤 X 
+        if (Fussion_TAP != null)
+        {
+            topSCrect.enabled = false;
+        }
     }
 
     public void SetThisPunchPrice(int _Index)

@@ -22,9 +22,22 @@ public class TutorialManager : MonoBehaviour
     /// </summary>
     public void TutoStart()
     {
-        transform.parent.gameObject.SetActive(true);
-        Tutorial = StartCoroutine(TextPractice());
-        if (PlayerPrefsManager.GetInstance().ATK_Lv == 0) PlayerPrefsManager.GetInstance().ATK_Lv++;
+        if (PlayerPrefs.GetInt("ATK_Lv", 0) == 0)
+        {
+            PlayerPrefs.SetInt("ATK_Lv", 1);
+            PlayerPrefs.Save();
+        }
+
+        /// 만약 이미 튜토 끝난 사람이면 자동 스킵
+        if (PlayerPrefs.GetInt("isFristGameStart", 0) != 0)
+        {
+            RealSkipBtn();
+        }
+        else
+        {
+            transform.parent.gameObject.SetActive(true);
+            Tutorial = StartCoroutine(TextPractice());
+        }
     }
 
     /// <summary>
@@ -1061,6 +1074,8 @@ public class TutorialManager : MonoBehaviour
 
     IEnumerator TextPractice()
     {
+        yield return null;
+
         yield return StartCoroutine(NormalChat("30XX년 X월," + System.Environment.NewLine + "나는 맷집국에서 태어났다."));
         yield return StartCoroutine(NormalChat("여느아이들과 다를 것 없는" + System.Environment.NewLine + "나날을 보내던 어느날.."));
         yield return StartCoroutine(NormalChat("전설의 무기가 나타났다는" + System.Environment.NewLine + "소문이 돌기 시작했다."));
@@ -1079,7 +1094,7 @@ public class TutorialManager : MonoBehaviour
         yield return StartCoroutine(StroyEnd());
         yield return StartCoroutine(TutoClear());
 
-
+        
         //yield return StartCoroutine(MainChat("아버지의 복수를 위해선 맷집을 키워야만해..",0));
         //yield return StartCoroutine(MainChat("맷집은 많이 맞을 수록 오르지 일단 맞아보자.",0));
         //yield return StartCoroutine(MainChat("화면 아무 곳을 터치해주세요.",1));
@@ -1193,7 +1208,7 @@ public class TutorialManager : MonoBehaviour
     {
         /// 인트로 시청 완료 트리거
         PlayerPrefsManager.GetInstance().isFristGameStart = true;
-        StopCoroutine(Tutorial);
+        if(Tutorial != null) StopCoroutine(Tutorial);
         // 메인 브금 재생
         audioManager.PlayMainBGM();
         /// 스스로 업데이트문 멈추어 줌

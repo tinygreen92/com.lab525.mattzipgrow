@@ -42,30 +42,25 @@ public class GameStart : MonoBehaviour
     int tmpVIP;
     int tmpS2;
 
+    void InvoAwaker()
+    {
+        PlayerPrefs.SetInt("isFristGameStart", 1);
+        PlayerPrefs.SetInt("isSignFirst", 1);
+        PlayerPrefs.SetInt("isDataSaved", 1);
+
+        PlayerPrefs.SetInt("isBeginingS2", tmpS2);
+        PlayerPrefs.SetInt("VIP", tmpVIP);
+        PlayerPrefs.Save();
+        // VIP 계급 초기화.
+        vipManager.VIPINIT();
+        // 튜토리얼 창 활성화.
+        tutorialManager.gameObject.SetActive(true);
+        /// 튜토리얼 스타트하면 ATK_Lv++;
+        tutorialManager.TutoStart();
+    }
+
     private void Awake()
     {
-        /// 데이터 세이브가 일어났다면 있던 데이터 지워줌
-        if (PlayerPrefs.GetInt("isDataSaved", 0) == 1)
-        {
-            /// 닉네임 설정 준비중이면?
-            tmpS2 = PlayerPrefs.GetInt("isBeginingS2", 0);
-            /// 유료 결제 내역 복구
-            tmpVIP = PlayerPrefs.GetInt("VIP", 0);
-            
-            Debug.LogError("데이터 세이브가 일어났다면 있던 데이터 지워줌");
-
-            PlayerPrefs.DeleteAll();
-            PlayerPrefs.Save();
-
-            PlayerPrefs.SetInt("isFristGameStart", 1);
-            PlayerPrefs.SetInt("isSignFirst", 1);
-            PlayerPrefs.SetInt("isDataSaved", 1);
-
-            PlayerPrefs.SetInt("isBeginingS2", tmpS2);
-            PlayerPrefs.SetInt("VIP", tmpVIP);
-
-            PlayerPrefs.Save();
-        }
         // 프레임레이트 고정
         Application.targetFrameRate = 60;
         // 오디오 매니저 세팅
@@ -98,12 +93,38 @@ public class GameStart : MonoBehaviour
     {
         tutorialManager.FakeloadingOnOff(true);
 
+        /// 데이터 세이브가 일어났다면 있던 데이터 지워줌
+        if (PlayerPrefs.GetInt("isDataSaved", 0) == 1)
+        {
+            /// 닉네임 설정 준비중이면?
+            tmpS2 = PlayerPrefs.GetInt("isBeginingS2", 0);
+            /// 유료 결제 내역 복구
+            tmpVIP = PlayerPrefs.GetInt("VIP", 0);
+
+            Debug.LogError("데이터 세이브가 일어났다면 있던 데이터 지워줌");
+
+            PlayerPrefs.DeleteAll();
+            PlayerPrefs.Save();
+            /// 0.6초 뒤에 원래 성능 복구
+            Invoke(nameof(InvoAwaker), 0.3f);
+        }
+        else
+        {
+            // 튜토리얼 창 활성화.
+            tutorialManager.gameObject.SetActive(true);
+            /// 튜토리얼 스타트하면 ATK_Lv++;
+            tutorialManager.TutoStart();
+            // VIP 계급 초기화.
+            vipManager.VIPINIT();
+        }
+
+
         StartCoroutine(SetPart_01());
     }
 
     IEnumerator SetPart_01()
     {
-        yield return null;
+        yield return new WaitForSeconds(0.4f);
 
         //튜토리얼 안했어?? 데이터 올 리셋
         //if (!PlayerPrefsManager.GetInstance().isFristGameStart) PlayerPrefs.DeleteAll();
@@ -361,13 +382,7 @@ public class GameStart : MonoBehaviour
         /// 뉴 패키지 상점 화면 끔
         newsObject.SetActive(false);
 
-        // 튜토리얼 창 활성화.
-        tutorialManager.gameObject.SetActive(true);
-        /// 튜토리얼 스타트하면 ATK_Lv++;
-        tutorialManager.TutoStart();
-        /// 만약 이미 튜토 끝난 사람이면 자동 스킵
-        if (PlayerPrefsManager.GetInstance().isFristGameStart)
-            tutorialManager.RealSkipBtn();
+
 
         ///
         ///
@@ -551,10 +566,8 @@ public class GameStart : MonoBehaviour
         punchManager.PunchInit();
         // 무기 인덱스 저장된거 불러오기
         tapToSpawnLimit.PunchIndexUpdate(PlayerPrefsManager.GetInstance().PunchIndex);
-        // VIP 계급 초기화.
-        vipManager.VIPINIT();
+
         //지갑 표시
-        Debug.LogError(" 띠용? ");
         UserWallet.GetInstance().ShowAllMoney();
         // 초기 HP/공격력/맷집  표기
         groggyManager.HP_barInit();

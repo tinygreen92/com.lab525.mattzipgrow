@@ -94,8 +94,6 @@ public class ShieldManager : MonoBehaviour
     private void Start()
     {
         unbiasedTimerEndTimestamp = ReadTimestamp("Shield_Time", UnbiasedTime.Instance.Now());
-        /// 스프라이트 적용
-        EquipSpriteShiled(PlayerPrefsManager.GetInstance().ShieldIndex);
     }
 
     void FixedUpdate()
@@ -135,10 +133,10 @@ public class ShieldManager : MonoBehaviour
         }
 
         /// 인덱스 -1은 아님
-        if(thisIndex >= 0)
-        {
-            playerShiledPos.GetChild(thisIndex).gameObject.SetActive(true);
-        }
+        if (thisIndex == -1) return;
+
+        playerShiledPos.GetChild(thisIndex).gameObject.SetActive(true);
+
     }
 
 
@@ -656,6 +654,10 @@ public class ShieldManager : MonoBehaviour
         /// 깍두기 체크 0.5 코루틴 시작
         if (coru == null)
             coru = StartCoroutine(KimchChechecak());
+
+        /// 스프라이트 적용
+        EquipSpriteShiled(PlayerPrefsManager.GetInstance().ShieldIndex);
+
         /// 쉴드 정보 있다면 리턴
         if (PlayerPrefsManager.GetInstance().shieldInfo.Count != 0) return;
 
@@ -715,7 +717,7 @@ public class ShieldManager : MonoBehaviour
     {
         for (int i = 1; i < InfinityContent.childCount; i++)
         {
-            InfinityContent.GetChild(i).GetComponent<ShieldItem>().SetDefaltInfo();
+            InfinityContent.GetChild(i).GetComponent<ShieldItem>().BoxInfoUpdate(i);
         }
     }
 
