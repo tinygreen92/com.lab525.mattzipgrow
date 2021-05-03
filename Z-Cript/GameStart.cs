@@ -19,6 +19,7 @@ public class GameStart : MonoBehaviour
     public GameObject[] AllObject;
 
     [Header("-외부 API 초기화")]
+    public FriendManager friendManager;
     public TutorialMissionManager tutorialMissionManager;
     public ShieldManager shieldManager;
     public InfiniteScroll InfinityContent;
@@ -66,6 +67,7 @@ public class GameStart : MonoBehaviour
         // 오디오 매니저 세팅
         audioManager.AudioInit();
 
+
         //// 렉걸리는 것들 켰다가 꺼줌.
         //for (int i = 0; i < AllObject.Length; i++)
         //{
@@ -91,6 +93,9 @@ public class GameStart : MonoBehaviour
 
     private void Start()
     {
+        // 오디오 매니저 세팅
+        audioManager.AudioSetting();
+        /// 튜토리얼 세팅
         tutorialManager.FakeloadingOnOff(true);
 
         /// 데이터 세이브가 일어났다면 있던 데이터 지워줌
@@ -135,8 +140,7 @@ public class GameStart : MonoBehaviour
         //}
         // GPSS 긁어오기
         GetComponent<GPGS_Linker>().Init();
-        // 오디오 매니저 세팅
-        audioManager.AudioSetting();
+
         // CSV 시트 긁기
         PlayerPrefsManager.GetInstance().InitMegaDamData();
         //PlayerPrefsManager.GetInstance().InitMuganData();
@@ -146,6 +150,7 @@ public class GameStart : MonoBehaviour
         PlayerPrefsManager.GetInstance().LoadWeaponInfo();
         PlayerPrefsManager.GetInstance().LoadquestInfo();
         PlayerPrefsManager.GetInstance().LoaduniformData();
+
         ///
         ///     추가된 퀘스트 
         ///
@@ -552,6 +557,8 @@ public class GameStart : MonoBehaviour
 
         // 배경 깃발 초기화.
         flagManager.InitFlags();
+        // 동료 초기화.
+        friendManager.InitFriend();
         // 캐릭터 레벨 초기화
         charactherMang.Characther_UP_Update();
         // 강화 페이지 레벨 초기화.

@@ -1211,6 +1211,7 @@ public class TutorialManager : MonoBehaviour
         if(Tutorial != null) StopCoroutine(Tutorial);
         // 메인 브금 재생
         audioManager.PlayMainBGM();
+        Debug.LogError("대화상자에서 스킵 누르면 호출");
         /// 스스로 업데이트문 멈추어 줌
         gameObject.SetActive(false);
         transform.parent.gameObject.SetActive(false);

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -2009,7 +2010,7 @@ public class CharacterManager : MonoBehaviour
 
         /// 골드 업그레이드 비용 감소.
         //doublePrice = CharaLv * (CharaLv + 1) * 100d;
-        doublePrice = CharaLv > 1 ? 100d * Mathf.Pow(1.07f, CharaLv) : 100d;
+        doublePrice = CharaLv > 1 ? 100d * Math.Pow(1.07d, CharaLv) : 100d;
         doublePrice = (doublePrice * (1.0d - PlayerPrefsManager.GetInstance().Arti_GoldUpgrade * 0.001d));
 
         POWER_UP_Price.text = UserWallet.GetInstance().SeetheNatural(doublePrice);

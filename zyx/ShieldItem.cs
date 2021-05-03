@@ -1,4 +1,5 @@
 ﻿using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -108,7 +109,7 @@ public class ShieldItem : MonoBehaviour
         }
         thisShieldEffect = tmpList.equipedEffect + (tmpList.upperEfect * thisShieldLevel);
         /// ( 1 + 0.07 ) ^ Lv
-        double tmpCost = Mathf.Pow(1.07f, thisShieldLevel);
+        double tmpCost = Math.Pow(1.07d, thisShieldLevel);
         /// 시작값 * ( 1 + 0.07 ) ^ Lv
         thisShieldCost = dts.multipleStringDouble(tmpList.shieldCost, tmpCost);
         thisSuccedFussion = tmpList.powerUpper - (tmpList.powerMinusPer * thisShieldLevel);
@@ -253,8 +254,8 @@ public class ShieldItem : MonoBehaviour
 
         /// 강화 성공/실패 계산
         float temp = Time.time * 525f;
-        Random.InitState((int)temp);
-        float random = Random.Range(0, 100f);
+        UnityEngine.Random.InitState((int)temp);
+        float random = UnityEngine.Random.Range(0, 100f);
         
         pm.tmm.ExUpdateMission(8); /// 미션 업데이트
         pm.tmm.ExUpdateMission(64); /// 미션 업데이트

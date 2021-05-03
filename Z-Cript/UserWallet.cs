@@ -354,6 +354,8 @@ public class UserWallet : MonoBehaviour
     {
         if (tmpDouble == 0) return "0";
 
+
+
         string tmpStr = dts.fDoubleToStringNumber(tmpDouble);
 
         string sResult = string.Empty;

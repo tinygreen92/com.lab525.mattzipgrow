@@ -15,6 +15,7 @@ using UnityEngine;
 
 public class DoubleToStringNum
 {
+    string GAME_MAX_VALUE = "9.99E+302";
     // 더블 받아서 스트링으로 
     /// <summary>
     /// string 값 받아서 A, B 포함인지 판별후 double로 뱉어냄
@@ -350,6 +351,11 @@ public class DoubleToStringNum
     /// <returns></returns>
     public string fDoubleToStringNumber(double dNumber) // 881902114
     {
+        if (dNumber.ToString() == "Infinity")
+        {
+            return GAME_MAX_VALUE;
+        }
+
         string sResult = string.Empty;
         string sNumber = string.Empty;
         string sDigit = string.Empty;

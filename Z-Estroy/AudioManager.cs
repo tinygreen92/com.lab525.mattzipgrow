@@ -105,6 +105,7 @@ public class AudioManager : MonoBehaviour
         else
         {
             AllUnMute();
+            /// 처음에 시작할때 튜토리얼 전에 끝내줌.
             StopBGM();
         }
     }

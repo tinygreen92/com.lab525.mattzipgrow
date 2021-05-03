@@ -9,6 +9,7 @@ public class PunchManager : MonoBehaviour
 
     public GameObject POWERUP_POP;
     public Transform InfinityContent;
+    public Transform InfinityQuest;
     [Header("-펀치 이미지 100개")]
     public Sprite[] punchImgs;
     [Header("-다이아 영구 해제 팝업 오브젝트")]
@@ -155,7 +156,10 @@ public class PunchManager : MonoBehaviour
     {
         for (int i = 1; i < InfinityContent.childCount; i++)
         {
+            /// 펀치 해제
             InfinityContent.GetChild(i).GetComponent<PunchItem>().SetAllGrayCover(_index);
+            /// 퀘스트 아이템
+            InfinityQuest.GetChild(i).GetComponent<QuestItem>().SetAllGrayCover(_index);
         }
     }
 

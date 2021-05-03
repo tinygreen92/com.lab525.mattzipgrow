@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -114,7 +115,10 @@ public class FriendManager : MonoBehaviour
                 break;
         }
 
-
+        if (ppm.Friend_01_OfflineAtk_Lv > 0) FriendObjects[0].SetActive(true);
+        if (ppm.Friend_02_OffTimeUp_Lv > 0) FriendObjects[1].SetActive(true);
+        if (ppm.Friend_03_OffSpped_Lv > 0) FriendObjects[2].SetActive(true);
+        if (ppm.Friend_04_MattzipPer_Lv > 0) FriendObjects[3].SetActive(true);
     }
 
 
@@ -202,7 +206,7 @@ public class FriendManager : MonoBehaviour
         /// 만렙이면 맥스 버튼 활성화 후 리턴
         else if (thisLevels[_index] >= MAX_LEVEL)
         {
-            MaxButton[_index].SetActive(false); // 노란 이미지
+            MaxButton[_index].SetActive(true); // 노란 이미지
         }
         ///
         else
@@ -238,24 +242,25 @@ public class FriendManager : MonoBehaviour
         switch (_index)
         {
             case 0:
-                _result = 100 * Mathf.Pow(1.1f, thisLevels[_index] - 1);
+                _result = 100 * Math.Pow(1.1d, thisLevels[_index] - 1);
                 UpgradeBox[_index].text = UserWallet.GetInstance().SeetheNatural(_result);
                 return dts.SubStringDouble(PlayerPrefsManager.GetInstance().ssalbap, _result);
 
             case 1:
-                _result = 100 * Mathf.Pow(1.15f, thisLevels[_index] - 1);
+                _result = 100 * Math.Pow(1.15d, thisLevels[_index] - 1);
                 UpgradeBox[_index].text = UserWallet.GetInstance().SeetheNatural(_result);
                 return dts.SubStringDouble(PlayerPrefsManager.GetInstance().ssalbap, _result);
 
 
             case 2:
-                _result = 100 * Mathf.Pow(1.2f, thisLevels[_index] - 1);
+                _result = 100 * Math.Pow(1.2d, thisLevels[_index] - 1);
                 UpgradeBox[_index].text = UserWallet.GetInstance().SeetheNatural(_result);
                 return dts.SubStringDouble(PlayerPrefsManager.GetInstance().ssalbap, _result);
 
 
             case 3:
-                _result = 100 * Mathf.Pow(1.3f, thisLevels[_index] - 1);
+                _result = 100 * Math.Pow(1.3d, thisLevels[_index] - 1);
+                
                 UpgradeBox[_index].text = UserWallet.GetInstance().SeetheNatural(_result);
                 return dts.SubStringDouble(PlayerPrefsManager.GetInstance().ssalbap, _result);
 

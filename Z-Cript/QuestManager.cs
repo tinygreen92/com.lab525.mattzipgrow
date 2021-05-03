@@ -977,6 +977,21 @@ public class QuestManager : MonoBehaviour
         }
     }
 
+
+    /// <summary>
+    /// 미션 아이콘 누를때 전채적으로 리프래시
+    /// </summary>
+    public void RefreshAll()
+    {
+        for (int i = 0; i < InfinityContent.childCount; i++)
+        {
+            InfinityContent.GetChild(i).GetComponent<QuestItem>().BoxInfoUpdate(i);
+        }
+    }
+
+
+
+
     /// <summary>
     /// 다이아 지급
     /// </summary>
