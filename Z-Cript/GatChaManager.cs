@@ -692,7 +692,6 @@ public class GatChaManager : MonoBehaviour
             getGatChaImg[0].SetActive(true);
             getGatChaImg[1].SetActive(true);
 
-
             return;
         }
 
@@ -732,7 +731,6 @@ public class GatChaManager : MonoBehaviour
 
         //
         BtnColorUpdate();
-
     }
 
     [Header("-뽑기버튼 MAX")]
@@ -1101,7 +1099,7 @@ public class GatChaManager : MonoBehaviour
     /// </summary>
     void myInvoExMission()
     {
-        tmm.ExUpdateMission(1, PlayerPrefsManager.GetInstance().dMattZip); /// 미션 업데이트
+        tmm.ExUpdateMission(1, PlayerPrefsManager.GetInstance().dMattZip);  /// 미션 업데이트
         tmm.ExUpdateMission(10, PlayerPrefsManager.GetInstance().dMattZip); /// 미션 업데이트
         tmm.ExUpdateMission(20, PlayerPrefsManager.GetInstance().dMattZip); /// 미션 업데이트
         tmm.ExUpdateMission(31, PlayerPrefsManager.GetInstance().dMattZip); /// 미션 업데이트

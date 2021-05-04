@@ -826,8 +826,8 @@ public class PlayerPrefsManager : MonoBehaviour
         /// 크리티컬 = 공격력 x 크리티컬대미지
         get
         {
-            criDPS = _PlayerDPSfloat * (float.Parse(CRD_UP) + float.Parse(Dia_CRD_UP) * 0.01d);
-            return (_PlayerDPSfloat + criDPS).ToString("f0");
+            criDPS = _PlayerDPSdouble * (float.Parse(CRD_UP) + float.Parse(Dia_CRD_UP) * 0.01d);
+            return (_PlayerDPSdouble + criDPS).ToString("f0");
         }
 
         set
@@ -867,7 +867,7 @@ public class PlayerPrefsManager : MonoBehaviour
     string tmp1;
     double tmp2;
 
-    double _PlayerDPSfloat;
+    double _PlayerDPSdouble;
     /// <summary>
     /// (string)주먹 최종 공격력            PlayerDPS    
     /// [ ( 스탯 공격력 + 레벨 공격력 ) * ( 특별강화 % + 스킬 % + 장비 % + 구매 % + 깃발 % + 유물 % ) ] * 버프 100%
@@ -896,15 +896,15 @@ public class PlayerPrefsManager : MonoBehaviour
 
             /// 맷집3배 버프 삭제후 -> 공격력 2배 버프로 변경됨
             if(isBoosterMattzip)
-                _PlayerDPSfloat = (double.Parse(tmp1) * tmp2 * 2d); //플로트 최종 공격  -> 외부에 저장되어서 크리티컬 공격력에 계산
+                _PlayerDPSdouble = (double.Parse(tmp1) * tmp2 * 2d); //플로트 최종 공격  -> 외부에 저장되어서 크리티컬 공격력에 계산
             else
-                _PlayerDPSfloat = (double.Parse(tmp1) * tmp2); //플로트 최종 공격  -> 외부에 저장되어서 크리티컬 공격력에 계산
+                _PlayerDPSdouble = (double.Parse(tmp1) * tmp2); //플로트 최종 공격  -> 외부에 저장되어서 크리티컬 공격력에 계산
 
             /// 깍두기 10 이상일때 절반으로 줄여.
-            if (_PlayerDPSfloat >= 10) isDPS10Kimchi = true;
+            if (_PlayerDPSdouble >= 10) isDPS10Kimchi = true;
 
             ///스트링 최종 공격
-            _PlayerDPS = _PlayerDPSfloat.ToString("f0");
+            _PlayerDPS = _PlayerDPSdouble.ToString("f0");
 
             return _PlayerDPS;
         }
@@ -917,6 +917,15 @@ public class PlayerPrefsManager : MonoBehaviour
     }
 
     /// <summary>
+    /// 플레이어 공격력 더블 가져올 것.
+    /// </summary>
+    /// <returns></returns>
+    public double GetPlayerDouble()
+    {
+        return _PlayerDPSdouble;
+    }
+
+    /// <summary>
     /// 공격력에 double 배를 하고 int 를 더한다.
     /// </summary>
     /// <param name="_Bae"></param>
@@ -924,7 +933,7 @@ public class PlayerPrefsManager : MonoBehaviour
     /// <returns></returns>
     public double GetDPS_Bae(double _Bae, int _plus)
     {
-        var tmp = _PlayerDPSfloat * _Bae;
+        var tmp = _PlayerDPSdouble * _Bae;
 
         if (tmp > double.MaxValue)
         {
@@ -932,7 +941,7 @@ public class PlayerPrefsManager : MonoBehaviour
         }
         else
         {
-            return (_PlayerDPSfloat * _Bae) + _plus;
+            return (_PlayerDPSdouble * _Bae) + _plus;
         }
     }
 

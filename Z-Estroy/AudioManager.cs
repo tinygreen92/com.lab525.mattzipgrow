@@ -49,6 +49,9 @@ public class AudioManager : MonoBehaviour
         seInfo[6].volume = 0;
         seInfo[7].volume = 0;
 
+        seInfo[8].volume = 0;
+        seInfo[9].volume = 0;
+
         PlayerPrefsManager.GetInstance().isAllmute = true;
         StopAllAudio();
     }
@@ -70,6 +73,9 @@ public class AudioManager : MonoBehaviour
         seInfo[5].volume = 0.3f;
         seInfo[6].volume = 0.3f;
         seInfo[7].volume = 0.25f;
+
+        seInfo[8].volume = 0.25f;
+        seInfo[9].volume = 0.25f;
 
         PlayerPrefsManager.GetInstance().isAllmute = false;
 
@@ -173,7 +179,20 @@ public class AudioManager : MonoBehaviour
         PlaySE("popup");
     }
 
-    //
+    public void Btn_Gatcha()
+    {
+        PlaySE("Gatcha");
+    }
+    public void Btn_Mooyaho()
+    {
+        PlaySE("Mooyaho");
+    }
+
+
+
+
+
+
 
 
 

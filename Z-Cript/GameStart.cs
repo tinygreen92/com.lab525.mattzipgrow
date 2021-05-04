@@ -84,7 +84,7 @@ public class GameStart : MonoBehaviour
         /// 여기 아래는 모바일 기기에서만 적용하게끔.
         ///
         // 로그 비활성화
-        //Debug.unityLogger.logEnabled = false;
+        Debug.unityLogger.logEnabled = false;
         // 화면 꺼짐 방지
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
     }

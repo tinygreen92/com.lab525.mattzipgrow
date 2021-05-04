@@ -298,6 +298,7 @@ public class DailyRewardController : MonoBehaviour
 
 
     /// <summary>
+    /// 팝업도 여기에서 띄워준다
     ///getItemPopImg 0 = 국밥 / 1 = 키 / 2 = 다이아 / 3 = 쌀밥
     /// </summary>
     /// <param name="_index">0 = 다이아 , 1 = 토파즈, 2 = 엘릭서</param>
@@ -313,8 +314,10 @@ public class DailyRewardController : MonoBehaviour
         //
         getItemPopText.text = _str;
 
-        //
-        getItemPopText.transform.parent.parent.gameObject.SetActive(true);
+        /// 출석체크 팝업 출력
+        getItemPop.SetActive(true);
+        getItemPop.GetComponent<Animation>()["Roll_Incre"].speed = 1;
+        getItemPop.GetComponent<Animation>().Play("Roll_Incre");
     }
 
 

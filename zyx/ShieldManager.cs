@@ -296,7 +296,6 @@ public class ShieldManager : MonoBehaviour
     /// </summary>
     public void OpenrealGodChaPop()
     {
-
         switch (_kindofamount)
         {
             /// 다이아로 결제
@@ -495,6 +494,7 @@ public class ShieldManager : MonoBehaviour
         {
             Gods[i].gameObject.SetActive(false);
         }
+        yield return JJumO;
 
         int godLenth = _God.childCount;
 
@@ -505,9 +505,11 @@ public class ShieldManager : MonoBehaviour
                 Gods[0].GetChild(0).GetChild(0).gameObject.SetActive(true);
                 
                 Gods[0].gameObject.SetActive(true);
+                AudioManager.instance.Btn_Gatcha();
                 yield return JJumO;
                 Gods[0].GetChild(0).gameObject.SetActive(true);
                 yield return JJumO;
+
                 Gods[0].GetChild(0).GetChild(0).gameObject.SetActive(false);
                 break;
 
@@ -524,6 +526,7 @@ public class ShieldManager : MonoBehaviour
                 for (int i = 0; i < godLenth; i++)
                 {
                     Gods[1].GetChild(i).gameObject.SetActive(true);
+                    AudioManager.instance.Btn_Gatcha();
                     yield return JJumO;
                     Gods[1].GetChild(i).GetChild(0).gameObject.SetActive(false);
                 }
@@ -542,6 +545,7 @@ public class ShieldManager : MonoBehaviour
                 for (int i = 0; i < godLenth; i++)
                 {
                     Gods[2].GetChild(i).gameObject.SetActive(true);
+                    AudioManager.instance.Btn_Gatcha();
                     yield return JJumO;
                     Gods[2].GetChild(i).GetChild(0).gameObject.SetActive(false);
                 }
@@ -560,6 +564,7 @@ public class ShieldManager : MonoBehaviour
                 for (int i = 0; i < godLenth; i++)
                 {
                     Gods[3].GetChild(i).gameObject.SetActive(true);
+                    AudioManager.instance.Btn_Gatcha();
                     yield return JJumO;
                     Gods[3].GetChild(i).GetChild(0).gameObject.SetActive(false);
                 }
@@ -578,6 +583,7 @@ public class ShieldManager : MonoBehaviour
                 for (int i = 0; i < godLenth; i++)
                 {
                     Gods[4].GetChild(i).gameObject.SetActive(true);
+                    AudioManager.instance.Btn_Gatcha();
                     yield return JJumO;
                     Gods[4].GetChild(i).GetChild(0).gameObject.SetActive(false);
                 }
@@ -586,6 +592,8 @@ public class ShieldManager : MonoBehaviour
             default:
                 break;
         }
+        yield return new WaitForSeconds(0.3f); ;
+        AudioManager.instance.Btn_Mooyaho();
 
         /// 클릭 가능.
         invibtn.interactable = true;

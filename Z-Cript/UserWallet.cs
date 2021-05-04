@@ -622,6 +622,7 @@ public class UserWallet : MonoBehaviour
             PlayerPrefsManager.GetInstance().questInfo[0].All_Abs++;
         }
 
+        PlayerPrefsManager.GetInstance().questInfo[0].daily_LMITABS++;
         SucessAbsComp();
     }
 
@@ -631,12 +632,11 @@ public class UserWallet : MonoBehaviour
     public Text DailyText;
 
     /// <summary>
-    /// 정상적으로 광고를 시청했다.
+    /// 상점에 광고 제한 텍스트 출력
     /// </summary>
-    void SucessAbsComp()
+    public void SucessAbsComp()
     {
-        PlayerPrefsManager.GetInstance().questInfo[0].daily_LMITABS++;
-        DailyText.text = "일일 제한 10회 ( " + PlayerPrefsManager.GetInstance().questInfo[0].daily_LMITABS + " / 10 )";
+        DailyText.text = $"일일 제한 10회 ( {PlayerPrefsManager.GetInstance().questInfo[0].daily_LMITABS} / 10 )";
     }
 
 

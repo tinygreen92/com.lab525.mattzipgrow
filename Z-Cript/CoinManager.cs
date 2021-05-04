@@ -132,17 +132,19 @@ public class CoinManager : MonoBehaviour
 
         var tmpGold = ppm.Kimchi;
         /// 깍두기 획득량 
-        var result = ppm.PlayerDPS;
+        //var result = ppm.PlayerDPS;
+        double result = 1d;
 
+        /// 공격력 10 이상이면 0.5
         if (ppm.isDPS10Kimchi)
         {
-            result = dts.multipleStringDouble(ppm.PlayerDPS, 1f + (ppm.Arti_KIMCHI_UP * 0.1f));
+            //result = dts.multipleStringDouble(ppm.PlayerDPS, 1f + (ppm.Arti_KIMCHI_UP * 0.1f));
+            result = (ppm.GetPlayerDouble() *0.5d) * (1d + (ppm.Arti_KIMCHI_UP * 0.1d));
         }
 
 
 
-        ppm.Kimchi = dts.AddStringDouble(double.Parse(tmpGold), double.Parse(result));
-
+        ppm.Kimchi = dts.AddStringDouble(double.Parse(tmpGold), result);
         UserWallet.GetInstance().ShowUserKimchi();
 
         while (progress <= 1f)

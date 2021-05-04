@@ -250,7 +250,7 @@ public class ShieldItem : MonoBehaviour
 
         /// 정상적 깍두기 소모
         PlayerPrefsManager.GetInstance().Kimchi = posibleKimchi;
-        UserWallet.GetInstance().ShowUserMilk();
+        UserWallet.GetInstance().ShowUserKimchi();
 
         /// 강화 성공/실패 계산
         float temp = Time.time * 525f;
