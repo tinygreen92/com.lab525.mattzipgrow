@@ -90,7 +90,9 @@ public class InfiniteScroll : MonoBehaviour
         else
         {
             m_Content.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, (ItemScale + gap) * listData + gap);
-            m_Content.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, (m_itemHeight + gap * 2) - 25f);
+            m_Content.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, (m_itemHeight + gap));
+            m_Content.offsetMax = new Vector2(m_Content.offsetMax.x, -20); /// TOP
+            m_Content.offsetMin = new Vector2(m_Content.offsetMin.x, 20);   /// BOT
             //m_Content.sizeDelta = new Vector2(0, (ItemScale + gap) * (listData) + gap);
         }
 
@@ -112,6 +114,8 @@ public class InfiniteScroll : MonoBehaviour
             {
                 item.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, m_itemWidth);
                 item.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, m_itemHeight);
+                item.offsetMax = new Vector2(item.offsetMax.x, 0); /// TOP
+                item.offsetMin = new Vector2(item.offsetMin.x, 0);   /// BOT
             }
 
             item.anchoredPosition =
@@ -154,7 +158,9 @@ public class InfiniteScroll : MonoBehaviour
         else
         {
             m_Content.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, (ItemScale + gap) * listData + gap);
-            m_Content.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, (m_itemHeight + gap * 2) - 25f);
+            m_Content.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, (m_itemHeight + gap * 2));
+            m_Content.offsetMax = new Vector2(m_Content.offsetMax.x, -20); /// TOP
+            m_Content.offsetMin = new Vector2(m_Content.offsetMin.x, 20);   /// BOT
             //m_Content.sizeDelta = new Vector2(0, (ItemScale + gap) * (listData) + gap);
         }
 
@@ -176,6 +182,8 @@ public class InfiniteScroll : MonoBehaviour
             {
                 item.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, m_itemWidth);
                 item.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, m_itemHeight);
+                item.offsetMax = new Vector2(item.offsetMax.x, 0); /// TOP
+                item.offsetMin = new Vector2(item.offsetMin.x, 0);   /// BOT
             }
 
             item.anchoredPosition =
