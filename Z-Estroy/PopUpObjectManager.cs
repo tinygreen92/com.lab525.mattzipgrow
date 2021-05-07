@@ -527,11 +527,11 @@ public class PopUpObjectManager : MonoBehaviour
 
         switch (_Index)
         {
-            case 0:
+            case 0:  /// 자동공격
 
                 if (PlayerPrefsManager.GetInstance().VIP == 525 || PlayerPrefsManager.GetInstance().VIP == 625 || PlayerPrefsManager.GetInstance().VIP == 725 || PlayerPrefsManager.GetInstance().VIP == 825 || PlayerPrefsManager.GetInstance().isAutoAbsOn)
                 {
-                    return;
+                    return; /// VIP 결제 유저라면 600초 없다.
                 }
 
                 BuffDesc.text = "600초동안 자동공격";
@@ -544,7 +544,7 @@ public class PopUpObjectManager : MonoBehaviour
                 MotherBtn.GetChild(2).gameObject.SetActive(false);
                 break;
 
-            case 1:
+            case 1: /// 골드 획득 2배
 
                 if (PlayerPrefsManager.GetInstance().VIP == 528 || PlayerPrefsManager.GetInstance().VIP == 625 || PlayerPrefsManager.GetInstance().VIP == 825 || PlayerPrefsManager.GetInstance().VIP == 925)
                 {
@@ -561,7 +561,7 @@ public class PopUpObjectManager : MonoBehaviour
                 MotherBtn.GetChild(2).gameObject.SetActive(false);
                 break;
 
-            case 2:
+            case 2: /// 공격력 2배
 
                 if (PlayerPrefsManager.GetInstance().VIP == 527 || PlayerPrefsManager.GetInstance().VIP == 625 || PlayerPrefsManager.GetInstance().VIP == 825 || PlayerPrefsManager.GetInstance().VIP == 925)
                 {
@@ -580,7 +580,6 @@ public class PopUpObjectManager : MonoBehaviour
         }
 
         Buff_PopUP.SetActive(true);
-
         Buff_PopUP.GetComponent<Animation>()["Roll_Incre"].speed = 1;
         Buff_PopUP.GetComponent<Animation>().Play("Roll_Incre");
     }

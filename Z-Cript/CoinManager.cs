@@ -33,6 +33,7 @@ public class CoinManager : MonoBehaviour
         {
             DestroyBox();
         }
+        /// 오토모드 켜져있으면 상자도 코인처럼 취급.
         else
         {
             DestroyCoin();
@@ -139,7 +140,7 @@ public class CoinManager : MonoBehaviour
         if (ppm.isDPS10Kimchi)
         {
             //result = dts.multipleStringDouble(ppm.PlayerDPS, 1f + (ppm.Arti_KIMCHI_UP * 0.1f));
-            result = (ppm.GetPlayerDouble() *0.5d) * (1d + (ppm.Arti_KIMCHI_UP * 0.1d));
+            result = (ppm.GetPlayerDouble() * 0.3d) * (1d + (ppm.Arti_KIMCHI_UP * 0.1d));
         }
 
 
@@ -177,7 +178,7 @@ public class CoinManager : MonoBehaviour
     Coroutine boxRoutine;
 
     /// <summary>
-    /// 코인이 아니고 박스 지워짐 처리 시작
+    /// 상자 박스 지워짐 처리 시작
     /// </summary>
     private void DestroyBox()
     {
@@ -214,6 +215,8 @@ public class CoinManager : MonoBehaviour
             boxRoutine = null;
             transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
             Lean.Pool.LeanPool.Despawn(gameObject);
+
+            PlayerPrefsManager.GetInstance().LuckyBoxCount--;
         }
     }
 
@@ -277,6 +280,7 @@ public class CoinManager : MonoBehaviour
         //if (_isCritic) tmpDps = PlayerPrefsManager.GetInstance().CriticalDPS;
 
         var result = "0";
+
         /// VIP 선물 상자라면?
         if (transform.childCount == 1)
         {
@@ -328,6 +332,12 @@ public class CoinManager : MonoBehaviour
             StopCoroutine(moveRoutine);
             moveRoutine = null;
 
+
+            /// VIP 선물 상자라면?
+            if (transform.childCount == 1)
+            {
+                PlayerPrefsManager.GetInstance().LuckyBoxCount--;
+            }
 
             Lean.Pool.LeanPool.Despawn(gameObject);
         }

@@ -76,7 +76,8 @@ public class ArtifactPopManager : MonoBehaviour
         }
 
         DescText.text = mGname[seed] + "획득하였습니다.";
-
+        /// 무야호 사운드
+        AudioManager.instance.Btn_Mooyaho();
         gameObject.SetActive(true);
     }
 

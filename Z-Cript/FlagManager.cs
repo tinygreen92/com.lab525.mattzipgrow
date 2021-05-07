@@ -200,7 +200,6 @@ public class FlagManager : MonoBehaviour
         if (isBtnDown3) TEST_isBtnDown3();
         if (isBtnDown4) TEST_isBtnDown4();
         if (isBtnDown1) TEST_isBtnDown1();
-
     }
 
     /// <summary>

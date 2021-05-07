@@ -47,7 +47,7 @@ public class ButtonSoundListner : MonoBehaviour, IPointerUpHandler, IPointerDown
             Invoke(nameof(InvoDown), 0.3f);
         }
         /// 동료 업글 롱 클릭
-        else if (transform.parent.parent.tag == "Friend" && transform.GetSiblingIndex() == 1)
+        else if (transform.parent.parent.tag == "Friend" && transform.GetSiblingIndex() == 0)
         {
             Invoke(nameof(InvoDown), 0.3f);
         }

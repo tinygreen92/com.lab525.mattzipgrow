@@ -33,8 +33,6 @@ public class FriendManager : MonoBehaviour
     [Header("- 동료 4개")]
     public int[] thisLevels;
 
-
-
     /// <summary>
     /// 동료 최대 레벨 고정
     /// </summary>

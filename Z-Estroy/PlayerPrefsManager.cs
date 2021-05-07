@@ -18,11 +18,11 @@ public class PlayerPrefsManager : MonoBehaviour
 
     public TutorialMissionManager tmm;
     static PlayerPrefsManager instance;
-    
+
     public PlayNANOOExample playNANOO;
 
     DoubleToStringNum dts = new DoubleToStringNum(); // 단위 변환기
-    
+
     //List<Dictionary<string, object>> weaponsData;
     //List<Dictionary<string, object>> shopData;
     //List<Dictionary<string, object>> trainingData;
@@ -280,8 +280,8 @@ public class PlayerPrefsManager : MonoBehaviour
             return _daily;
         }
 
-        set 
-        { 
+        set
+        {
             PlayerPrefs.SetInt("NewDailyCount", value);
             PlayerPrefs.Save();
         }
@@ -300,8 +300,8 @@ public class PlayerPrefsManager : MonoBehaviour
             return _daily;
         }
 
-        set 
-        { 
+        set
+        {
             PlayerPrefs.SetInt("DailySpinReword", value);
             PlayerPrefs.Save();
 
@@ -351,9 +351,9 @@ public class PlayerPrefsManager : MonoBehaviour
 
         set
         {
-            if (value == false) 
+            if (value == false)
                 PlayerPrefs.SetInt("isAllmute", 0);
-            else 
+            else
                 PlayerPrefs.SetInt("isAllmute", 1);
 
             PlayerPrefs.Save();
@@ -373,9 +373,9 @@ public class PlayerPrefsManager : MonoBehaviour
 
         set
         {
-            if (value == false) 
+            if (value == false)
                 PlayerPrefs.SetInt("isGoingGOSO", 0);
-            else 
+            else
                 PlayerPrefs.SetInt("isGoingGOSO", 1);
 
             PlayerPrefs.Save();
@@ -396,9 +396,9 @@ public class PlayerPrefsManager : MonoBehaviour
 
         set
         {
-            if (value == false) 
+            if (value == false)
                 PlayerPrefs.SetInt("isDataLoaded", 0);
-            else 
+            else
                 PlayerPrefs.SetInt("isDataLoaded", 1);
 
             PlayerPrefs.Save();
@@ -470,7 +470,7 @@ public class PlayerPrefsManager : MonoBehaviour
 
         set
         {
-            var result = dts.SubStringDouble(value , "9.99E+302"); // double.Tosting 값
+            var result = dts.SubStringDouble(value, "9.99E+302"); // double.Tosting 값
             if (result == "-1")
                 PlayerPrefs.SetString("gold", value);
             else
@@ -693,7 +693,7 @@ public class PlayerPrefsManager : MonoBehaviour
             PlayerPrefs.Save();
         }
     }
-    
+
 
 
 
@@ -789,7 +789,7 @@ public class PlayerPrefsManager : MonoBehaviour
         {
             if (!PlayerPrefs.HasKey("isGoldTriple")) return false;
 
-            var _intBoosterDPS = PlayerPrefs.GetInt("isGoldTriple",0);
+            var _intBoosterDPS = PlayerPrefs.GetInt("isGoldTriple", 0);
 
             if (_intBoosterDPS == 0)
             {
@@ -884,18 +884,18 @@ public class PlayerPrefsManager : MonoBehaviour
             tmp1 = dts.AddStringDouble(CharaDps, RawAttackDamage);
 
             /// ( 특별강화 % + 스킬 % + 장비 % + 구매 % + 깃발 % + 유물 % )
-            tmp2 = 0.01d 
-                * ( double.Parse(Dia_ATK_PER_UP) // 특별강화 %
+            tmp2 = 0.01d
+                * (double.Parse(Dia_ATK_PER_UP) // 특별강화 %
                 + uniformInfo[0].Skill_LV // 스킬 %
                 + weaponInfo[PunchIndex].weaponEffect // 장비 %
                 + Punch_Dia_Weap // 영구구매 %
                 + Stat_is3ATK  // 깃발 %
-                + AttackPunch ); // 유물 %
+                + AttackPunch); // 유물 %
             /// 기본 배율 보정
             tmp2 += 1.0d;
 
             /// 맷집3배 버프 삭제후 -> 공격력 2배 버프로 변경됨
-            if(isBoosterMattzip)
+            if (isBoosterMattzip)
                 _PlayerDPSdouble = (double.Parse(tmp1) * tmp2 * 2d); //플로트 최종 공격  -> 외부에 저장되어서 크리티컬 공격력에 계산
             else
                 _PlayerDPSdouble = (double.Parse(tmp1) * tmp2); //플로트 최종 공격  -> 외부에 저장되어서 크리티컬 공격력에 계산
@@ -989,13 +989,13 @@ public class PlayerPrefsManager : MonoBehaviour
             MaxHPtmp1 = double.Parse(Stat_MaxHP) + double.Parse(PlayerPrefs.GetString("Chara_HP_UP", "0"));
 
             /// ( 특별강화 % + 스킬 % + 깃발 % + 유물 % )
-            MaxHPtmp2 = 0.01d 
+            MaxHPtmp2 = 0.01d
                 * (double.Parse(Dia_HP_PER_UP) // 특별강화 %
                 + Stat_is2Stamina // 깃발 %
                 + uniformInfo[1].Skill_LV // 스킬 %
                 + double.Parse(Arti_MaxHP) // 유물 %
                 );
-                
+
             /// 기본 배율 보정
             MaxHPtmp2 += 1.0d;
 
@@ -1168,7 +1168,7 @@ public class PlayerPrefsManager : MonoBehaviour
         {
             ///3.402823466 E + 38
             float kkey = value;
-            if (value >= 9E+35f) 
+            if (value >= 9E+35f)
                 kkey = 9E+35f;
 
             PlayerPrefs.SetFloat("Mat_Mattzip_Hit", kkey);
@@ -1179,7 +1179,7 @@ public class PlayerPrefsManager : MonoBehaviour
     }
     void myInvoExMission()
     {
-        tmm.ExUpdateMission(1,  dMattZip); /// 미션 업데이트
+        tmm.ExUpdateMission(1, dMattZip); /// 미션 업데이트
         tmm.ExUpdateMission(10, dMattZip); /// 미션 업데이트
         tmm.ExUpdateMission(20, dMattZip); /// 미션 업데이트
         tmm.ExUpdateMission(31, dMattZip); /// 미션 업데이트
@@ -1233,11 +1233,11 @@ public class PlayerPrefsManager : MonoBehaviour
             tmp = float.Parse(PlayerPrefs.GetString("Stat_Recov", "1")) + float.Parse(PlayerPrefs.GetString("Chara_Recov_UP", "0"));
             /// ( 특별강화 % + 스킬 % + 깃발 % + 유물 % )
             ttmmpp = 0.01f
-                * ( Dia_RECOV_UP_Lv   // 특별강화 %
+                * (Dia_RECOV_UP_Lv   // 특별강화 %
                 + uniformInfo[3].Skill_LV // 스킬 %
                 + Stat_is1Recov // 깃발 %
                 + (Arti_HEALLING_UP * 0.5f) // 유물 %
-                ); 
+                );
 
 
             return (tmp + ttmmpp).ToString("f0");
@@ -1313,7 +1313,7 @@ public class PlayerPrefsManager : MonoBehaviour
         get
         {
             var tmp = PlayerPrefs.GetInt("Gold_RECOV_UP_Lv", 0);
-            return tmp-1;
+            return tmp - 1;
         }
 
         set
@@ -1722,6 +1722,23 @@ public class PlayerPrefsManager : MonoBehaviour
 
     public bool isEmptyLuckBox;
 
+    private int luckyBoxCount;
+
+    public int LuckyBoxCount
+    { 
+        get
+        {
+            if (luckyBoxCount > 3) luckyBoxCount = 3;
+            else if (luckyBoxCount < 0) luckyBoxCount = 0;
+            return luckyBoxCount; 
+        }
+
+        set
+        {
+            luckyBoxCount = value;
+        }
+    }
+
     /// (float)아이템 획득확률<럭키박스>                 LuckyProb
     public float LuckyProb
     {
@@ -2122,7 +2139,7 @@ public class PlayerPrefsManager : MonoBehaviour
     }
 
 
-             
+
 
 
     /// <summary>
@@ -3555,7 +3572,7 @@ public class PlayerPrefsManager : MonoBehaviour
 
 
 
-      #region 업적 관리 정보 업데이트 05-29
+    #region 업적 관리 정보 업데이트 05-29
 
 
     /// <summary>
@@ -4002,7 +4019,7 @@ public class PlayerPrefsManager : MonoBehaviour
         else
         {
             Debug.LogError(" 로드 월주월 데이타");
-            dayLimitData.Add(new LimitData 
+            dayLimitData.Add(new LimitData
             {
                 dia_Day_01 = 0,
                 dia_Day_02 = 0,
@@ -4017,10 +4034,10 @@ public class PlayerPrefsManager : MonoBehaviour
                 dia_Week_05 = 0,
 
                 dia_Mouth_01 = 0,
-                dia_Mouth_02  = 0,
-                dia_Mouth_03  = 0,
-                dia_Mouth_04  = 0,
-                dia_Mouth_05  = 0,
+                dia_Mouth_02 = 0,
+                dia_Mouth_03 = 0,
+                dia_Mouth_04 = 0,
+                dia_Mouth_05 = 0,
 
                 weekend_Day = 0,
                 mouth_Day = 0,
@@ -4468,7 +4485,7 @@ public class PlayerPrefsManager : MonoBehaviour
 
         return Convert.ToBase64String(memoryStream.GetBuffer());
     }
-    
+
     /// <summary>
     /// 불러오기 버튼 누르면 호출
     /// </summary>
@@ -4685,7 +4702,7 @@ public class PlayerPrefsManager : MonoBehaviour
         PlayerPrefs.DeleteKey("Booster_KEY");
         PlayerPrefs.DeleteKey("Booster_Power");
         PlayerPrefs.DeleteKey("DenfenceMode");
-        
+
         /// 로드한다 트리거
         isDataLoaded = true;
         PlayerPrefs.SetInt("isDataSaved", 0);
@@ -4729,7 +4746,7 @@ public class PlayerPrefsManager : MonoBehaviour
     {
         string result = "";
 
-        result += DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") +"*";
+        result += DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + "*";
         result += Mat_Mattzip + "*";
         result += PlayerPrefs.GetFloat("dDiamond", 0) + "*";
         result += gupbap + "*";

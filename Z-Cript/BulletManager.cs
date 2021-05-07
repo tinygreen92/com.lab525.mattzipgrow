@@ -673,6 +673,9 @@ public class BulletManager : MonoBehaviour
     /// </summary>
     private void DropTheLuckyBox()
     {
+        if (PlayerPrefsManager.GetInstance().LuckyBoxCount > 2) return;
+
+
         // min 값 = 나올 확률
         float dropTable = Random.Range(0f, 100.0f);
         /// 황금 상자 확률 업
@@ -683,6 +686,9 @@ public class BulletManager : MonoBehaviour
         //
         if (dropTable < PlayerPrefsManager.GetInstance().LuckyProb)
         {
+            /// 필드에 존재하는 럭키 상자의 수
+            PlayerPrefsManager.GetInstance().LuckyBoxCount++;
+
             /// TODO : 박스 프리팹으로 교체좀
             LucBox = Lean.Pool.LeanPool.Spawn(PlayerPrefsManager.GetInstance().LucBox, transform.position, transform.rotation);
             LucBox.GetComponent<CoinManager>().CoinInit();

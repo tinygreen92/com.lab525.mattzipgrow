@@ -575,43 +575,53 @@ public class TutorialMissionManager : MonoBehaviour
         {
             case "diamond":
                 GetIcons[0].SetActive(true);
-                GetAmount.text = $"다이아 x {_strIndex.missionAmount}";
+                if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean") GetAmount.text = $"다이아 x {_strIndex.missionAmount}";
+                else GetAmount.text = $"다이아 x {_strIndex.missionAmount}";
 
                 PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond", 0) + _strIndex.missionAmount);
                 break;
             case "ticket":
                 GetIcons[1].SetActive(true);
-                GetAmount.text = $"PvP 입장권 x {_strIndex.missionAmount}";
+                if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean") GetAmount.text = $"PvP 입장권 x {_strIndex.missionAmount}";
+                else GetAmount.text = $"PvP 입장권 x {_strIndex.missionAmount}";
+
 
                 ppm.ticket += _strIndex.missionAmount;
                 break;
             case "shield":
                 GetIcons[2].SetActive(true);
-                GetAmount.text = $"방패 뽑기권 x {_strIndex.missionAmount}";
+                if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean") GetAmount.text = $"방패 뽑기권 x {_strIndex.missionAmount}";
+                else GetAmount.text = $"방패 뽑기권 x {_strIndex.missionAmount}";
+
 
                 ppm.ShiledTicket += _strIndex.missionAmount;
                 break;
             case "ssal":
                 GetIcons[3].SetActive(true);
-                GetAmount.text = $"쌀밥 x {_strIndex.missionAmount}";
+                if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean") GetAmount.text = $"쌀밥 x {_strIndex.missionAmount}";
+                else GetAmount.text = $"쌀밥 x {_strIndex.missionAmount}";
 
                 ppm.ssalbap = dts.AddStringDouble(tmpSSal, _strIndex.missionAmount.ToString());
                 break;
             case "gupbap":
                 GetIcons[4].SetActive(true);
-                GetAmount.text = $"국밥 x {_strIndex.missionAmount}";
+                if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean") GetAmount.text = $"국밥 x {_strIndex.missionAmount}";
+                else GetAmount.text = $"국밥 x {_strIndex.missionAmount}";
 
                 ppm.gupbap = dts.AddStringDouble(tmpGupBap, _strIndex.missionAmount.ToString());
                 break;
             case "key":
                 GetIcons[5].SetActive(true);
-                GetAmount.text = $"열쇠 x {_strIndex.missionAmount}";
+                if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean") GetAmount.text = $"열쇠 x {_strIndex.missionAmount}";
+                else GetAmount.text = $"열쇠 x {_strIndex.missionAmount}";
 
                 ppm.key += _strIndex.missionAmount;
                 break;
             case "kimchi":
                 GetIcons[6].SetActive(true);
-                GetAmount.text = $"깍두기 x {_strIndex.missionAmount}";
+                if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean") GetAmount.text = $"깍두기 x {_strIndex.missionAmount}";
+                else GetAmount.text = $"깍두기 x {_strIndex.missionAmount}";
+
 
                 ppm.Kimchi = dts.AddStringDouble(tmpKimchi, _strIndex.missionAmount.ToString());
                 break;

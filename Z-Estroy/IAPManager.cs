@@ -163,7 +163,7 @@ public class IAPManager : MonoBehaviour
     /// <param name="_index"></param>
     public void BuySomeThing()
     {
-        SomeParent = EventSystem.current.currentSelectedGameObject.transform.parent;
+        SomeParent = EventSystem.current.currentSelectedGameObject.transform.parent.parent;
         int _index = int.Parse(SomeParent.name);
 
         /// 회색 버튼이면 클릭 반응없이 리턴 시키기

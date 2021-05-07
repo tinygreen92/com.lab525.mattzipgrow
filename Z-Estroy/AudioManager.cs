@@ -31,6 +31,31 @@ public class AudioManager : MonoBehaviour
     [SerializeField] float defualtVolume = 1f; // 음성 볼륨값
 
 
+    /// <summary>
+    /// 주먹질 효과음 껏다키기
+    /// true - 소리 0
+    /// false - 1. 소리 켜기 2.뮤트라면 안켜기
+    /// </summary>
+    /// <param name="isMute"></param>
+    public void HitVolumeMute(bool isMute)
+    {
+        if (isMute)
+        {
+            isHitMute = true;
+        }
+        else
+        {
+            if (PlayerPrefsManager.GetInstance().isAllmute)
+            {
+                isHitMute = true;
+            }
+            else
+            {
+                isHitMute = false;
+            }
+        }
+    }
+
     public void AllMute()
     {
         bgmInfo[0].volume = 0;
@@ -60,13 +85,13 @@ public class AudioManager : MonoBehaviour
     {
         bgmInfo[0].volume = 0.8f;
         bgmInfo[1].volume = 0.8f;
-        bgmInfo[2].volume = 0.8f;
+        bgmInfo[2].volume = 0.8f; 
         bgmInfo[3].volume = 2.0f;
         bgmInfo[4].volume = 2.5f;
         //
         seInfo[0].volume = 0.3f;
         seInfo[1].volume = 0.3f;
-        seInfo[2].volume = 0.15f;
+        seInfo[2].volume = 0.15f; /// 주먹소리
         seInfo[3].volume = 0.3f;
         seInfo[4].volume = 0.3f;
         //
@@ -148,9 +173,13 @@ public class AudioManager : MonoBehaviour
     {
         PlaySE("healing");
     }
-
+    /// <summary>
+    /// 메뉴 화면 진입하면 소리 안나게.
+    /// </summary>
+    bool isHitMute;
     public void Btn_hit()
     {
+        if (isHitMute) return;
         PlaySE("hit");
     }
 

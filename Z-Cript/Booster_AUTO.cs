@@ -144,7 +144,7 @@ public class Booster_AUTO : MonoBehaviour
     }
 
     /// <summary>
-    /// 오토 공격 구매했으면 on/off 기능 달아줌
+    /// [외부버튼] 오토 공격 구매했으면 on/off 기능 달아줌
     /// </summary>
     public void VIP_BUFF()
     {
