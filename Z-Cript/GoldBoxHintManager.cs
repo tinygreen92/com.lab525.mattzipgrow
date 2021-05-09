@@ -27,43 +27,88 @@ public class GoldBoxHintManager : MonoBehaviour
         iconObj[1].SetActive(false);
         iconObj[2].SetActive(false);
 
-        switch (_index)
+        /// 번역
+        if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
         {
-            case 0:
-                iconObj[0].SetActive(true);
-                iconObj[3].GetComponent<Text>().text = "A 골드박스 포함 상품";
-                iconObj[3].transform.parent.GetComponent<Text>().text = "A 골드박스 포함 상품";
-                TexObj0[0].text = "10~100개"; // 다이아
-                TexObj0[1].text = "1~3개"; // 열쇠
-                TexObj0[2].text = "100~1000개"; // 국밥
-                TexObj0[3].text = "50~500개"; // 쌀밥
+            switch (_index)
+            {
+                case 0:
+                    iconObj[0].SetActive(true);
+                    iconObj[3].GetComponent<Text>().text = "A 골드박스 포함 상품";
+                    iconObj[3].transform.parent.GetComponent<Text>().text = "A 골드박스 포함 상품";
+                    TexObj0[0].text = "10~100개"; // 다이아
+                    TexObj0[1].text = "1~3개"; // 열쇠
+                    TexObj0[2].text = "100~1000개"; // 국밥
+                    TexObj0[3].text = "50~500개"; // 쌀밥
 
-                break;
-
-
-            case 1:
-                iconObj[1].SetActive(true);
-                iconObj[3].GetComponent<Text>().text = "B 골드박스 포함 상품";
-                iconObj[3].transform.parent.GetComponent<Text>().text = "B 골드박스 포함 상품";
-                TexObj0[0].text = "10~300개"; // 다이아
-                TexObj0[1].text = "1~5개"; // 열쇠
-                TexObj0[2].text = "100~3000개"; // 국밥
-                TexObj0[3].text = "50~1500개"; // 쌀밥
-
-                break;
+                    break;
 
 
-            case 2:
-                iconObj[2].SetActive(true);
-                iconObj[3].GetComponent<Text>().text = "C 골드박스 포함 상품";
-                iconObj[3].transform.parent.GetComponent<Text>().text = "C 골드박스 포함 상품";
-                TexObj0[0].text = "10~500개"; // 다이아
-                TexObj0[1].text = "1~10개"; // 열쇠
-                TexObj0[2].text = "100~5000개"; // 국밥
-                TexObj0[3].text = "50~2500개"; // 쌀밥
+                case 1:
+                    iconObj[1].SetActive(true);
+                    iconObj[3].GetComponent<Text>().text = "B 골드박스 포함 상품";
+                    iconObj[3].transform.parent.GetComponent<Text>().text = "B 골드박스 포함 상품";
+                    TexObj0[0].text = "10~300개"; // 다이아
+                    TexObj0[1].text = "1~5개"; // 열쇠
+                    TexObj0[2].text = "100~3000개"; // 국밥
+                    TexObj0[3].text = "50~1500개"; // 쌀밥
 
-                break;
+                    break;
 
+
+                case 2:
+                    iconObj[2].SetActive(true);
+                    iconObj[3].GetComponent<Text>().text = "C 골드박스 포함 상품";
+                    iconObj[3].transform.parent.GetComponent<Text>().text = "C 골드박스 포함 상품";
+                    TexObj0[0].text = "10~500개"; // 다이아
+                    TexObj0[1].text = "1~10개"; // 열쇠
+                    TexObj0[2].text = "100~5000개"; // 국밥
+                    TexObj0[3].text = "50~2500개"; // 쌀밥
+
+                    break;
+
+            }
+        }
+        else
+        {
+            switch (_index)
+            {
+                case 0:
+                    iconObj[0].SetActive(true);
+                    iconObj[3].GetComponent<Text>().text = "번역";
+                    iconObj[3].transform.parent.GetComponent<Text>().text = "번역 A 골드박스 포함 상품";
+                    TexObj0[0].text = "10~100개"; // 다이아
+                    TexObj0[1].text = "1~3개"; // 열쇠
+                    TexObj0[2].text = "100~1000개"; // 국밥
+                    TexObj0[3].text = "50~500개"; // 쌀밥
+
+                    break;
+
+
+                case 1:
+                    iconObj[1].SetActive(true);
+                    iconObj[3].GetComponent<Text>().text = "번역 B 골드박스 포함 상품";
+                    iconObj[3].transform.parent.GetComponent<Text>().text = "B 골드박스 포함 상품";
+                    TexObj0[0].text = "10~300개"; // 다이아
+                    TexObj0[1].text = "1~5개"; // 열쇠
+                    TexObj0[2].text = "100~3000개"; // 국밥
+                    TexObj0[3].text = "50~1500개"; // 쌀밥
+
+                    break;
+
+
+                case 2:
+                    iconObj[2].SetActive(true);
+                    iconObj[3].GetComponent<Text>().text = "번역 C 골드박스 포함 상품";
+                    iconObj[3].transform.parent.GetComponent<Text>().text = "C 골드박스 포함 상품";
+                    TexObj0[0].text = "10~500개"; // 다이아
+                    TexObj0[1].text = "1~10개"; // 열쇠
+                    TexObj0[2].text = "100~5000개"; // 국밥
+                    TexObj0[3].text = "50~2500개"; // 쌀밥
+
+                    break;
+
+            }
         }
 
         //전체 켜줌

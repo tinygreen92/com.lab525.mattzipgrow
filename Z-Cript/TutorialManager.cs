@@ -1076,20 +1076,41 @@ public class TutorialManager : MonoBehaviour
     {
         yield return null;
 
-        yield return StartCoroutine(NormalChat("30XX년 X월," + System.Environment.NewLine + "나는 맷집국에서 태어났다."));
-        yield return StartCoroutine(NormalChat("여느아이들과 다를 것 없는" + System.Environment.NewLine + "나날을 보내던 어느날.."));
-        yield return StartCoroutine(NormalChat("전설의 무기가 나타났다는" + System.Environment.NewLine + "소문이 돌기 시작했다."));
-        yield return StartCoroutine(NormalChat("당시 맷집 챔피언이었던 아버지는" + System.Environment.NewLine + "전설의 무기의 공격을 버티고 오겠노라고" + System.Environment.NewLine + "당당히 길을 나서셨지만,"));
-        yield return StartCoroutine(PageChange());
-        yield return StartCoroutine(NormalChat("그 뒤로 나는 더이상" + System.Environment.NewLine + "아버지를 볼 수 없었다."));
-        yield return StartCoroutine(NormalChat("실의에 빠져 매일 술로" + System.Environment.NewLine + "달래던 어느날.."));
-        yield return StartCoroutine(NormalChat("어디선가 아버지의 목소리가" + System.Environment.NewLine + "들리는 듯 하였다."));
-        yield return StartCoroutine(NormalChat("소리가 나는 곳을 바라보자" + System.Environment.NewLine + "아버지의 상징이었던 헬멧이 눈에 들어왔고"));
-        yield return StartCoroutine(PageChange());
-        yield return StartCoroutine(NormalChat("헬멧을 바라보니 잊고있던" + System.Environment.NewLine + "아버지와의 추억들이 떠올랐다."));
-        yield return StartCoroutine(NormalChat("감정을 주체하지 못한 그 순간,"));
-        yield return StartCoroutine(NormalChat("나는 결심하였다."));
-        yield return StartCoroutine(NormalChat("아버지의 복수를."));
+        /// 번역
+        if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+        {
+            yield return StartCoroutine(NormalChat("30XX년 X월," + System.Environment.NewLine + "나는 맷집국에서 태어났다."));
+            yield return StartCoroutine(NormalChat("여느아이들과 다를 것 없는" + System.Environment.NewLine + "나날을 보내던 어느날.."));
+            yield return StartCoroutine(NormalChat("전설의 무기가 나타났다는" + System.Environment.NewLine + "소문이 돌기 시작했다."));
+            yield return StartCoroutine(NormalChat("당시 맷집 챔피언이었던 아버지는" + System.Environment.NewLine + "전설의 무기의 공격을 버티고 오겠노라고" + System.Environment.NewLine + "당당히 길을 나서셨지만,"));
+            yield return StartCoroutine(PageChange());
+            yield return StartCoroutine(NormalChat("그 뒤로 나는 더이상" + System.Environment.NewLine + "아버지를 볼 수 없었다."));
+            yield return StartCoroutine(NormalChat("실의에 빠져 매일 술로" + System.Environment.NewLine + "달래던 어느날.."));
+            yield return StartCoroutine(NormalChat("어디선가 아버지의 목소리가" + System.Environment.NewLine + "들리는 듯 하였다."));
+            yield return StartCoroutine(NormalChat("소리가 나는 곳을 바라보자" + System.Environment.NewLine + "아버지의 상징이었던 헬멧이 눈에 들어왔고"));
+            yield return StartCoroutine(PageChange());
+            yield return StartCoroutine(NormalChat("헬멧을 바라보니 잊고있던" + System.Environment.NewLine + "아버지와의 추억들이 떠올랐다."));
+            yield return StartCoroutine(NormalChat("감정을 주체하지 못한 그 순간,"));
+            yield return StartCoroutine(NormalChat("나는 결심하였다."));
+            yield return StartCoroutine(NormalChat("아버지의 복수를."));
+        }
+        else
+        {
+            yield return StartCoroutine(NormalChat("번역 X월," + System.Environment.NewLine + "나는 맷집국에서 태어났다."));
+            yield return StartCoroutine(NormalChat("번역 다를 것 없는" + System.Environment.NewLine + "나날을 보내던 어느날.."));
+            yield return StartCoroutine(NormalChat("번역 무기가 나타났다는" + System.Environment.NewLine + "소문이 돌기 시작했다."));
+            yield return StartCoroutine(NormalChat("번역 맷집 챔피언이었던 아버지는" + System.Environment.NewLine + "전설의 무기의 공격을 버티고 오겠노라고" + System.Environment.NewLine + "당당히 길을 나서셨지만,"));
+            yield return StartCoroutine(PageChange());
+            yield return StartCoroutine(NormalChat("번역 뒤로 나는 더이상" + System.Environment.NewLine + "아버지를 볼 수 없었다."));
+            yield return StartCoroutine(NormalChat("번역 빠져 매일 술로" + System.Environment.NewLine + "달래던 어느날.."));
+            yield return StartCoroutine(NormalChat("번역 아버지의 목소리가" + System.Environment.NewLine + "들리는 듯 하였다."));
+            yield return StartCoroutine(NormalChat("번역 나는 곳을 바라보자" + System.Environment.NewLine + "아버지의 상징이었던 헬멧이 눈에 들어왔고"));
+            yield return StartCoroutine(PageChange());
+            yield return StartCoroutine(NormalChat("번역 바라보니 잊고있던" + System.Environment.NewLine + "아버지와의 추억들이 떠올랐다."));
+            yield return StartCoroutine(NormalChat("감번역정을 주체하지 못한 그 순간,"));
+            yield return StartCoroutine(NormalChat("번역 결심하였다."));
+            yield return StartCoroutine(NormalChat("번역 복수를."));
+        }
 
         yield return StartCoroutine(StroyEnd());
         yield return StartCoroutine(TutoClear());

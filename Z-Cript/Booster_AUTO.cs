@@ -75,12 +75,20 @@ public class Booster_AUTO : MonoBehaviour
                 //오토 공격 반복 시작
                 ClickedAuto();
                 PlayerPrefsManager.GetInstance().isAutoAtk = true;
-                transform.GetChild(1).GetComponent<Text>().text = "자동공격 ON";
+                /// 번역
+                if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                    transform.GetChild(1).GetComponent<Text>().text = "자동공격 ON";
+                else
+                    transform.GetChild(1).GetComponent<Text>().text = "Auto ON";
             }
             else
             {
                 PlayerPrefsManager.GetInstance().isAutoAtk = false;
-                transform.GetChild(1).GetComponent<Text>().text = "자동공격 OFF";
+                /// 번역
+                if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                    transform.GetChild(1).GetComponent<Text>().text = "자동공격 OFF";
+                else
+                    transform.GetChild(1).GetComponent<Text>().text = "Atuo OFF";
             }
 
             return;

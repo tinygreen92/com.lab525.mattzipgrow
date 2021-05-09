@@ -141,7 +141,9 @@ public class UserWallet : MonoBehaviour
         DiaText.text = SeetheNatural(dDiamond);
     }
 
-    /// 국밥
+    /// <summary>
+    /// 국밥 지갑 숫자 갱신
+    /// </summary>
     public void ShowUserMilk()
     {
         if (isNoShow) return;
@@ -391,6 +393,10 @@ public class UserWallet : MonoBehaviour
     /// </summary>
     public void Get_5_Gold()
     {
+        /// 번역
+        bool isKorean = false;
+        if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean") isKorean = true;
+
         GoldIcon.SetActive(false);
         GupIcon.SetActive(false);
         SalIcon.SetActive(false);
@@ -416,7 +422,11 @@ public class UserWallet : MonoBehaviour
         if (Gatcha < 80f)
         {
             GoldIcon.SetActive(true);
-            Desc_Text.text = "골드 상자를 획득했다!";
+            /// 번역
+            if (isKorean)
+                Desc_Text.text = "골드 상자를 획득했다!";
+            else
+                Desc_Text.text = "번역 상자를 획득했다!";
             tmpDps = dts.multipleStringDouble(tmpDps, 5d * (goldPer + (artiGoldPer * 0.01d)));
             Gold_5_Text.text = SeetheNatural(double.Parse(tmpDps));
 
@@ -424,7 +434,11 @@ public class UserWallet : MonoBehaviour
         else if (Gatcha < 90f)
         {
             GupIcon.SetActive(true);
-            Desc_Text.text = "국밥 상자를 획득했다!";
+            /// 번역
+            if (isKorean)
+                Desc_Text.text = "국밥 상자를 획득했다!";
+            else
+                Desc_Text.text = "번역 상자를 획득했다!";
 
             target = Random.Range(10, 101);
 
@@ -438,7 +452,11 @@ public class UserWallet : MonoBehaviour
         else if (Gatcha <= 100f)
         {
             SalIcon.SetActive(true);
-            Desc_Text.text = "쌀밥 상자를 획득했다!";
+            /// 번역
+            if (isKorean)
+                Desc_Text.text = "쌀밥 상자를 획득했다!";
+            else
+                Desc_Text.text = "번역 상자를 획득했다!";
 
             target = Random.Range(10, 501);
             /// 획득량 % 증가
@@ -489,7 +507,7 @@ public class UserWallet : MonoBehaviour
             //
             PlayerPrefsManager.GetInstance().gold = dts.AddStringDouble(double.Parse(tmpGold), double.Parse(value));
             PopUpObjectManager.GetInstance().GettingGoldMessage(double.Parse(value));
-            PopUpObjectManager.GetInstance().ShowWarnnigProcess(UserWallet.GetInstance().SeetheNatural(double.Parse(value)) + " 골드를 획득하셨습니다.");
+            PopUpObjectManager.GetInstance().ShowWarnnigProcess(SeetheNatural(double.Parse(value)) + " 골드를 획득하셨습니다.");
 
             Gold_5_Text.text = SeetheNatural(double.Parse(value));
 
@@ -636,7 +654,11 @@ public class UserWallet : MonoBehaviour
     /// </summary>
     public void SucessAbsComp()
     {
-        DailyText.text = $"일일 제한 10회 ( {PlayerPrefsManager.GetInstance().questInfo[0].daily_LMITABS} / 10 )";
+        /// 번역
+        if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+            DailyText.text = $"일일 제한 10회 ( {PlayerPrefsManager.GetInstance().questInfo[0].daily_LMITABS} / 10 )";
+        else
+            DailyText.text = $"번역 제한 10회 ( {PlayerPrefsManager.GetInstance().questInfo[0].daily_LMITABS} / 10 )";
     }
 
 

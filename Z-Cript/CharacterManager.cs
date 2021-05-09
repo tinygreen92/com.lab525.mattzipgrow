@@ -106,7 +106,11 @@ public class CharacterManager : MonoBehaviour
                 buyBtn[i].SetActive(false); // 구매 텍스트 숨겨주고
                 //
                 equipBtn[i].SetActive(true); //  장착가능 노란 [버튼] 활성화.
-                equipBtn[i].GetComponentInChildren<Text>().text = "장착"; // 장착가능 노란 [버튼] 활성화.
+                /// 번역
+                if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                    equipBtn[i].GetComponentInChildren<Text>().text = "장착"; // 장착가능 노란 [버튼] 활성화.
+                else
+                    equipBtn[i].GetComponentInChildren<Text>().text = "Mount"; // 장착가능 노란 [버튼] 활성화.
                 upgradeBtn[i].transform.GetChild(2).gameObject.SetActive(true); // 쌀밥 표기 켜줌
 
             }
@@ -118,7 +122,11 @@ public class CharacterManager : MonoBehaviour
                 unEquipBtn[i].SetActive(false); //  장착가능 노란 [버튼] 활성화.
                 upgradeBtn[i].transform.GetChild(2).gameObject.SetActive(false); // 쌀밥 표기 꺼줌
                 unEquipBtn[i].SetActive(true); // 그 위에 그레이 버튼으로 덮을 것. (미구매 표기용)
-                equipBtn[i].GetComponentInChildren<Text>().text = "미보유"; // 장착가능 노란 [버튼] 활성화.
+                /// 번역
+                if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                    equipBtn[i].GetComponentInChildren<Text>().text = "미보유"; // 장착가능 노란 [버튼] 활성화.
+                else
+                    equipBtn[i].GetComponentInChildren<Text>().text = "None"; // 장착가능 노란 [버튼] 활성화.
             }
 
         }
@@ -236,7 +244,12 @@ public class CharacterManager : MonoBehaviour
         buyBtn[_index].SetActive(false); // 구매 텍스트 숨겨주고
 
         unEquipBtn[_index].SetActive(false); //  장착가능 그레이 버튼 비활성화.
-        equipBtn[_index].GetComponentInChildren<Text>().text = "장착"; //  장착 가능!
+        /// 번역
+        if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+            equipBtn[_index].GetComponentInChildren<Text>().text = "장착"; //  장착 가능!
+        else
+            equipBtn[_index].GetComponentInChildren<Text>().text = "Mount"; //  장착 가능!
+
         upgradeBtn[_index].transform.GetChild(2).gameObject.SetActive(true); // 쌀밥 표기 켜줌
 
         // 데이터 새로고침
@@ -277,12 +290,20 @@ public class CharacterManager : MonoBehaviour
                 if (PlayerPrefs.GetInt("Uniform_Curent", 0) == _index)
                 {
                     unEquipBtn[_index].SetActive(true); //  그레이 버튼 활성화
-                    equipBtn[_index].GetComponentInChildren<Text>().text = "장착중"; // 장착가능 노란 [버튼] 활성화.
+                    /// 번역
+                    if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                        equipBtn[_index].GetComponentInChildren<Text>().text = "장착중"; // 장착가능 노란 [버튼] 활성화.
+                    else
+                        equipBtn[_index].GetComponentInChildren<Text>().text = "Mounting"; // 장착가능 노란 [버튼] 활성화.
                 }
                 else
                 {
                     unEquipBtn[_index].SetActive(false); //  그레이 버튼 비활성화
-                    equipBtn[_index].GetComponentInChildren<Text>().text = "장착"; // 장착가능 노란 [버튼] 활성화.
+                    /// 번역
+                    if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                        equipBtn[_index].GetComponentInChildren<Text>().text = "장착"; // 장착가능 노란 [버튼] 활성화.
+                    else
+                        equipBtn[_index].GetComponentInChildren<Text>().text = "Mount"; // 장착가능 노란 [버튼] 활성화.
                 }
                 upgradeBtn[_index].transform.GetChild(2).gameObject.SetActive(true); // 쌀밥 표기 켜줌
             }
@@ -434,7 +455,11 @@ public class CharacterManager : MonoBehaviour
         Pyt_buyBtn[_index].SetActive(false); // 다이아  텍스트 숨겨주고
 
         Pet_unEquip[_index].SetActive(false); //  장착가능 그레이 버튼 비활성화.
-        Pet_Equip[_index].GetComponentInChildren<Text>().text = "장착"; //  장착가능 그레이 버튼 비활성화.
+        /// 번역
+        if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+            Pet_Equip[_index].GetComponentInChildren<Text>().text = "장착"; //  장착가능 그레이 버튼 비활성화.
+        else
+            Pet_Equip[_index].GetComponentInChildren<Text>().text = "Mount"; //  장착가능 그레이 버튼 비활성화.
         Pyt_upBtn[_index].SetActive(true); // 쌀밥 표기 켜줌
 
         // 새로고침
@@ -459,7 +484,11 @@ public class CharacterManager : MonoBehaviour
         if (Pet_unEquip[_index].activeSelf)
         {
             Pet_unEquip[_index].SetActive(false); // 회색버튼 벗는다.
-            Pet_Equip[_index].GetComponentInChildren<Text>().text = "장착"; // (장창중 표기용)
+            /// 번역
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                Pet_Equip[_index].GetComponentInChildren<Text>().text = "장착"; // (장창중 표기용)
+            else
+                Pet_Equip[_index].GetComponentInChildren<Text>().text = "Mount"; // (장창중 표기용)
 
             // 펫 장착 인덱스 설정 0은 아무것도 안 입은거
             PlayerPrefs.SetInt("Pet_Curent", 0);
@@ -476,13 +505,21 @@ public class CharacterManager : MonoBehaviour
                 // 구입한 항목 장착중 그레이 버튼 초기화.
                 if (!Pyt_buyBtn[i].activeSelf)
                 {
-                    Pet_Equip[i].GetComponentInChildren<Text>().text = "장착"; // (장창중 표기용)
+                    /// 번역
+                    if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                        Pet_Equip[i].GetComponentInChildren<Text>().text = "장착"; // (장창중 표기용)
+                    else
+                        Pet_Equip[i].GetComponentInChildren<Text>().text = "Mount"; // (장창중 표기용)
                     Pet_unEquip[i].SetActive(false);
                 }
             }
 
             Pet_unEquip[_index].SetActive(true); // 해당 위치 그레이 버튼으로 덮을 것. (장창중 표기용)
-            Pet_Equip[_index].GetComponentInChildren<Text>().text = "장착중"; // (장창중 표기용)
+            /// 번역
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                Pet_Equip[_index].GetComponentInChildren<Text>().text = "장착중"; // (장창중 표기용)
+            else
+                Pet_Equip[_index].GetComponentInChildren<Text>().text = "Mounting"; // (장창중 표기용)
 
             // 펫 장착 인덱스 설정
             PlayerPrefs.SetInt("Pet_Curent", _index + 1);
@@ -516,13 +553,21 @@ public class CharacterManager : MonoBehaviour
             // 버튼 처리 해줌.
             Pet_unEquip[3].SetActive(false); // 국밥 표기 켜짐
             Pyt_buyBtn[3].SetActive(false); // 다이아 꺼짐
-            Pet_Equip[3].GetComponentInChildren<Text>().text = "장착";
+            /// 번역
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                Pet_Equip[3].GetComponentInChildren<Text>().text = "장착";
+            else
+                Pet_Equip[3].GetComponentInChildren<Text>().text = "Mount";
             Pyt_upBtn[3].SetActive(true); // 쌀밥 표기 켜줌
         }
         else
         {
             Pet_unEquip[3].SetActive(true); //  장착불가 회색등 활성화
-            Pet_Equip[3].GetComponentInChildren<Text>().text = "미보유";
+            /// 번역
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                Pet_Equip[3].GetComponentInChildren<Text>().text = "미보유";
+            else
+                Pet_Equip[3].GetComponentInChildren<Text>().text = "None";
         }
 
         // 구매 여부 판단
@@ -531,13 +576,21 @@ public class CharacterManager : MonoBehaviour
             // 버튼 처리 해줌.
             Pet_unEquip[4].SetActive(false); // 국밥 표기 켜짐
             Pyt_buyBtn[4].SetActive(false); // 다이아 꺼짐
-            Pet_Equip[4].GetComponentInChildren<Text>().text = "장착";
+            /// 번역
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                Pet_Equip[4].GetComponentInChildren<Text>().text = "장착";
+            else
+                Pet_Equip[4].GetComponentInChildren<Text>().text = "Mount";
             Pyt_upBtn[4].SetActive(true); // 쌀밥 표기 켜줌
         }
         else
         {
             Pet_unEquip[4].SetActive(true); //  장착불가 회색등 활성화
-            Pet_Equip[4].GetComponentInChildren<Text>().text = "미보유";
+            /// 번역
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                Pet_Equip[4].GetComponentInChildren<Text>().text = "미보유";
+            else
+                Pet_Equip[4].GetComponentInChildren<Text>().text = "None";
         }
 
 
@@ -548,14 +601,25 @@ public class CharacterManager : MonoBehaviour
             // 버튼 처리 해줌.
             Pet_unEquip[0].SetActive(false); // 국밥 표기 켜짐
             Pyt_buyBtn[0].SetActive(false); // 다이아 꺼짐
-            Pet_Equip[0].GetComponentInChildren<Text>().text = "장착";
             Pyt_upBtn[0].SetActive(true); // 쌀밥 표기 켜줌
+            Pet_unEquip[1].SetActive(true); //  장착불가 회색등 활성화
+            Pet_unEquip[2].SetActive(true); //  장착불가 회색등 활성화
 
             //
-            Pet_unEquip[1].SetActive(true); //  장착불가 회색등 활성화
-            Pet_Equip[1].GetComponentInChildren<Text>().text = "미보유";
-            Pet_unEquip[2].SetActive(true); //  장착불가 회색등 활성화
-            Pet_Equip[2].GetComponentInChildren<Text>().text = "미보유";
+            /// 번역
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+            {
+                Pet_Equip[0].GetComponentInChildren<Text>().text = "장착";
+                Pet_Equip[1].GetComponentInChildren<Text>().text = "미보유";
+                Pet_Equip[2].GetComponentInChildren<Text>().text = "미보유";
+            }
+            else
+            {
+                Pet_Equip[0].GetComponentInChildren<Text>().text = "Mount";
+                Pet_Equip[1].GetComponentInChildren<Text>().text = "None";
+                Pet_Equip[2].GetComponentInChildren<Text>().text = "None";
+            }
+
 
         }
         else if (index == 010)
@@ -563,44 +627,78 @@ public class CharacterManager : MonoBehaviour
             // 버튼 처리 해줌.
             Pet_unEquip[1].SetActive(false); // 국밥 표기 켜짐
             Pyt_buyBtn[1].SetActive(false); // 다이아 꺼짐
-            Pet_Equip[1].GetComponentInChildren<Text>().text = "장착";
             Pyt_upBtn[1].SetActive(true); // 쌀밥 표기 켜줌
 
-            //
             Pet_unEquip[0].SetActive(true); //  장착불가 회색등 활성화
-            Pet_Equip[0].GetComponentInChildren<Text>().text = "미보유";
             Pet_unEquip[2].SetActive(true); //  장착불가 회색등 활성화
-            Pet_Equip[2].GetComponentInChildren<Text>().text = "미보유";
+                                            //
+            /// 번역
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+            {
+                Pet_Equip[1].GetComponentInChildren<Text>().text = "장착";
+                Pet_Equip[0].GetComponentInChildren<Text>().text = "미보유";
+                Pet_Equip[2].GetComponentInChildren<Text>().text = "미보유";
+            }
+            else
+            {
+                Pet_Equip[1].GetComponentInChildren<Text>().text = "Mount";
+                Pet_Equip[0].GetComponentInChildren<Text>().text = "None";
+                Pet_Equip[2].GetComponentInChildren<Text>().text = "None";
+            }
+
         }
         else if (index == 001)
         {
             // 버튼 처리 해줌.
             Pet_unEquip[2].SetActive(false); // 국밥 표기 켜짐
             Pyt_buyBtn[2].SetActive(false); // 다이아 꺼짐
-            Pet_Equip[2].GetComponentInChildren<Text>().text = "장착";
             Pyt_upBtn[2].SetActive(true); // 쌀밥 표기 켜줌
 
             //
             Pet_unEquip[1].SetActive(true); //  장착불가 회색등 활성화
-            Pet_Equip[1].GetComponentInChildren<Text>().text = "미보유";
             Pet_unEquip[0].SetActive(true); //  장착불가 회색등 활성화
-            Pet_Equip[0].GetComponentInChildren<Text>().text = "미보유";
+
+            /// 번역
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+            {
+                Pet_Equip[1].GetComponentInChildren<Text>().text = "미보유";
+                Pet_Equip[0].GetComponentInChildren<Text>().text = "미보유";
+                Pet_Equip[2].GetComponentInChildren<Text>().text = "장착";
+            }
+            else
+            {
+                Pet_Equip[1].GetComponentInChildren<Text>().text = "None";
+                Pet_Equip[0].GetComponentInChildren<Text>().text = "None";
+                Pet_Equip[2].GetComponentInChildren<Text>().text = "Mount";
+            }
+
         }
         else if (index == 110)
         {
             // 버튼 처리 해줌.
             Pet_unEquip[0].SetActive(false); // 국밥 표기 켜짐
             Pyt_buyBtn[0].SetActive(false); // 다이아 꺼짐
-            Pet_Equip[0].GetComponentInChildren<Text>().text = "장착";
             Pet_unEquip[1].SetActive(false); // 국밥 표기 켜짐
             Pyt_buyBtn[1].SetActive(false); // 다이아 꺼짐
-            Pet_Equip[1].GetComponentInChildren<Text>().text = "장착";
             Pyt_upBtn[0].SetActive(true); // 쌀밥 표기 켜줌
             Pyt_upBtn[1].SetActive(true); // 쌀밥 표기 켜줌
 
             //
             Pet_unEquip[2].SetActive(true); //  장착불가 회색등 활성화
-            Pet_Equip[2].GetComponentInChildren<Text>().text = "미보유";
+            /// 번역
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+            {
+                Pet_Equip[1].GetComponentInChildren<Text>().text = "장착";
+                Pet_Equip[2].GetComponentInChildren<Text>().text = "미보유";
+                Pet_Equip[0].GetComponentInChildren<Text>().text = "장착";
+            }
+            else
+            {
+                Pet_Equip[1].GetComponentInChildren<Text>().text = "Mount";
+                Pet_Equip[2].GetComponentInChildren<Text>().text = "None";
+                Pet_Equip[0].GetComponentInChildren<Text>().text = "Mount";
+            }
+
 
         }
         else if (index == 101)
@@ -608,58 +706,103 @@ public class CharacterManager : MonoBehaviour
             // 버튼 처리 해줌.
             Pet_unEquip[0].SetActive(false); // 국밥 표기 켜짐
             Pyt_buyBtn[0].SetActive(false); // 다이아 꺼짐
-            Pet_Equip[0].GetComponentInChildren<Text>().text = "장착";
             Pet_unEquip[2].SetActive(false); // 국밥 표기 켜짐
             Pyt_buyBtn[2].SetActive(false); // 다이아 꺼짐
-            Pet_Equip[2].GetComponentInChildren<Text>().text = "장착";
             Pyt_upBtn[0].SetActive(true); // 쌀밥 표기 켜줌
             Pyt_upBtn[2].SetActive(true); // 쌀밥 표기 켜줌
 
             //
             Pet_unEquip[1].SetActive(true); //  장착불가 회색등 활성화
-            Pet_Equip[1].GetComponentInChildren<Text>().text = "미보유";
+            /// 번역
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+            {
+                Pet_Equip[2].GetComponentInChildren<Text>().text = "장착";
+                Pet_Equip[0].GetComponentInChildren<Text>().text = "장착";
+                Pet_Equip[1].GetComponentInChildren<Text>().text = "미보유";
+            }
+            else
+            {
+                Pet_Equip[2].GetComponentInChildren<Text>().text = "Mount";
+                Pet_Equip[0].GetComponentInChildren<Text>().text = "Mount";
+                Pet_Equip[1].GetComponentInChildren<Text>().text = "None";
+            }
+
         }
         else if (index == 011)
         {
             // 버튼 처리 해줌.
             Pet_unEquip[1].SetActive(false); // 국밥 표기 켜짐
             Pyt_buyBtn[1].SetActive(false); // 다이아 꺼짐
-            Pet_Equip[1].GetComponentInChildren<Text>().text = "장착";
             Pet_unEquip[2].SetActive(false); // 국밥 표기 켜짐
             Pyt_buyBtn[2].SetActive(false); // 다이아 꺼짐
-            Pet_Equip[2].GetComponentInChildren<Text>().text = "장착";
             Pyt_upBtn[1].SetActive(true); // 쌀밥 표기 켜줌
             Pyt_upBtn[2].SetActive(true); // 쌀밥 표기 켜줌
 
             //
             Pet_unEquip[0].SetActive(true); //  장착불가 회색등 활성화
-            Pet_Equip[0].GetComponentInChildren<Text>().text = "미보유";
+            /// 번역
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+            {
+                Pet_Equip[2].GetComponentInChildren<Text>().text = "장착";
+                Pet_Equip[0].GetComponentInChildren<Text>().text = "미보유";
+                Pet_Equip[1].GetComponentInChildren<Text>().text = "장착";
+            }
+            else
+            {
+                Pet_Equip[2].GetComponentInChildren<Text>().text = "Mount";
+                Pet_Equip[0].GetComponentInChildren<Text>().text = "None";
+                Pet_Equip[1].GetComponentInChildren<Text>().text = "Mount";
+            }
+
         }
         else if (index == 111)
         {
             // 버튼 처리 해줌.
             Pet_unEquip[0].SetActive(false); // 국밥 표기 켜짐
             Pyt_buyBtn[0].SetActive(false); // 다이아 꺼짐
-            Pet_Equip[0].GetComponentInChildren<Text>().text = "장착";
             Pet_unEquip[1].SetActive(false); // 국밥 표기 켜짐
             Pyt_buyBtn[1].SetActive(false); // 다이아 꺼짐
-            Pet_Equip[1].GetComponentInChildren<Text>().text = "장착";
             Pet_unEquip[2].SetActive(false); // 국밥 표기 켜짐
             Pyt_buyBtn[2].SetActive(false); // 다이아 꺼짐
-            Pet_Equip[2].GetComponentInChildren<Text>().text = "장착";
             Pyt_upBtn[0].SetActive(true); // 쌀밥 표기 켜줌
             Pyt_upBtn[1].SetActive(true); // 쌀밥 표기 켜줌
             Pyt_upBtn[2].SetActive(true); // 쌀밥 표기 켜줌
+            /// 번역
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+            {
+                Pet_Equip[1].GetComponentInChildren<Text>().text = "장착";
+                Pet_Equip[2].GetComponentInChildren<Text>().text = "장착";
+                Pet_Equip[0].GetComponentInChildren<Text>().text = "장착";
+            }
+            else
+            {
+                Pet_Equip[1].GetComponentInChildren<Text>().text = "Mount";
+                Pet_Equip[2].GetComponentInChildren<Text>().text = "Mount";
+                Pet_Equip[0].GetComponentInChildren<Text>().text = "Mount";
+            }
+
 
         }
         else
         {
             Pet_unEquip[0].SetActive(true); //  장착불가 회색등 활성화
-            Pet_Equip[0].GetComponentInChildren<Text>().text = "미보유";
             Pet_unEquip[1].SetActive(true); //  장착불가 회색등 활성화
-            Pet_Equip[1].GetComponentInChildren<Text>().text = "미보유";
             Pet_unEquip[2].SetActive(true); //  장착불가 회색등 활성화
-            Pet_Equip[2].GetComponentInChildren<Text>().text = "미보유";
+
+            /// 번역
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+            {
+                Pet_Equip[1].GetComponentInChildren<Text>().text = "미보유";
+                Pet_Equip[0].GetComponentInChildren<Text>().text = "미보유";
+                Pet_Equip[2].GetComponentInChildren<Text>().text = "미보유";
+            }
+            else
+            {
+                Pet_Equip[1].GetComponentInChildren<Text>().text = "None";
+                Pet_Equip[0].GetComponentInChildren<Text>().text = "None";
+                Pet_Equip[2].GetComponentInChildren<Text>().text = "None";
+            }
+
         }
 
         string result = "";
@@ -669,27 +812,47 @@ public class CharacterManager : MonoBehaviour
             switch (i)
             {
                 case 0:
-                    result = "맷집 게이지 " + (0.05f * PlayerPrefsManager.GetInstance().Pet_Touch_Lv).ToString("f2") + "% 감소";
+                    /// 번역
+                    if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                        result = "맷집 게이지 " + (0.05f * PlayerPrefsManager.GetInstance().Pet_Touch_Lv).ToString("f2") + "% 감소";
+                    else
+                        result = "Decrease Mattzip gauge " + (0.05f * PlayerPrefsManager.GetInstance().Pet_Touch_Lv).ToString("f2") + "%";
                     Pet_UP_LV[i].text = "Lv." + PlayerPrefsManager.GetInstance().Pet_Touch_Lv;
                     break;
 
                 case 1:
-                    result = "국밥 버프 요구 터치 횟수 " + PlayerPrefsManager.GetInstance().Pet_Buff_Lv + "회 차감";
+                    /// 번역
+                    if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                        result = "국밥 버프 요구 터치 횟수 " + PlayerPrefsManager.GetInstance().Pet_Buff_Lv + "회 차감";
+                    else
+                        result = "Decrease number of touches required for soup buff " + PlayerPrefsManager.GetInstance().Pet_Buff_Lv;
                     Pet_UP_LV[i].text = "Lv." + PlayerPrefsManager.GetInstance().Pet_Buff_Lv;
                     break;
 
                 case 2:
-                    result = "맷집 증가량 " + (0.005f * PlayerPrefsManager.GetInstance().Pet_Matt_Up_Lv).ToString("f3") + "% 증가";
+                    /// 번역
+                    if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                        result = "맷집 증가량 " + (0.005f * PlayerPrefsManager.GetInstance().Pet_Matt_Up_Lv).ToString("f3") + "% 증가";
+                    else
+                        result = "Increase amount of Mattzip " + (0.005f * PlayerPrefsManager.GetInstance().Pet_Matt_Up_Lv).ToString("f3") + "%";
                     Pet_UP_LV[i].text = "Lv." + PlayerPrefsManager.GetInstance().Pet_Matt_Up_Lv;
                     break;
 
                 case 3:
-                    result = "PVP 맷집 적용 " + (0.04f * PlayerPrefsManager.GetInstance().Pet_PVP_Matt_Lv).ToString("f2") + "% 증가";
+                    /// 번역
+                    if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                        result = "PVP 맷집 적용 " + (0.04f * PlayerPrefsManager.GetInstance().Pet_PVP_Matt_Lv).ToString("f2") + "% 증가";
+                    else
+                        result = "Increase PvP Mattzip application " + (0.04f * PlayerPrefsManager.GetInstance().Pet_PVP_Matt_Lv).ToString("f2") + "%";
                     Pet_UP_LV[i].text = "Lv." + PlayerPrefsManager.GetInstance().Pet_PVP_Matt_Lv;
                     break;
 
                 case 4:
-                    result = "PVP 공격 속도 " + (0.5f * PlayerPrefsManager.GetInstance().Pet_PVP_Speed_Lv).ToString("f1") + "% 증가";
+                    /// 번역
+                    if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                        result = "PVP 공격 속도 " + (0.5f * PlayerPrefsManager.GetInstance().Pet_PVP_Speed_Lv).ToString("f1") + "% 증가";
+                    else
+                        result = "업데이트 전 " + (0.5f * PlayerPrefsManager.GetInstance().Pet_PVP_Speed_Lv).ToString("f1") + "% 증가";
                     Pet_UP_LV[i].text = "Lv." + PlayerPrefsManager.GetInstance().Pet_PVP_Speed_Lv;
                     break;
 
@@ -722,7 +885,11 @@ public class CharacterManager : MonoBehaviour
             if (PlayerPrefs.GetInt("Pet_Curent", 0) != 0)
             {
                 Pet_unEquip[PlayerPrefs.GetInt("Pet_Curent", 0)-1].SetActive(true); // 해당 위치 그레이 버튼으로 덮을 것. (장창중 표기용)
-                Pet_Equip[PlayerPrefs.GetInt("Pet_Curent", 0)-1].GetComponentInChildren<Text>().text = "장착중"; // (장창중 표기용)
+                /// 번역
+                if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                    Pet_Equip[PlayerPrefs.GetInt("Pet_Curent", 0)-1].GetComponentInChildren<Text>().text = "장착중"; // (장창중 표기용)
+                else
+                    Pet_Equip[PlayerPrefs.GetInt("Pet_Curent", 0)-1].GetComponentInChildren<Text>().text = "Mount"; // (장창중 표기용)
             }
 
             Pet_UP_Price[i].text = UserWallet.GetInstance().SeetheNatural(pet_upgrade_price);
@@ -884,7 +1051,11 @@ public class CharacterManager : MonoBehaviour
             if (sDataList[_index] == "1")
             {
                 unEquipBtn[i].SetActive(false);
-                equipBtn[i].GetComponentInChildren<Text>().text = "장착";
+                /// 번역
+                if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                    equipBtn[i].GetComponentInChildren<Text>().text = "장착";
+                else
+                    equipBtn[i].GetComponentInChildren<Text>().text = "Mount";
             }
 
             if (sDataList[i] == "0")
@@ -892,7 +1063,11 @@ public class CharacterManager : MonoBehaviour
                 buyBtn[i].SetActive(true); // 구매 텍스트 활성화.
                 upgradeBtn[i].transform.GetChild(2).gameObject.SetActive(false); // 쌀밥 표기 꺼줌
                 unEquipBtn[i].SetActive(true); // 그 위에 그레이 버튼으로 덮을 것. (미구매 표기용)
-                equipBtn[i].GetComponentInChildren<Text>().text = "미보유";
+                /// 번역
+                if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                    equipBtn[i].GetComponentInChildren<Text>().text = "미보유";
+                else
+                    equipBtn[i].GetComponentInChildren<Text>().text = "None";
             }
         }
 
@@ -924,7 +1099,11 @@ public class CharacterManager : MonoBehaviour
 
         equipBtn[_index].SetActive(true); // 이큅 버튼 활성화.
         unEquipBtn[_index].SetActive(true); // 그 위에 그레이 버튼으로 덮을 것. (장창중 표기용)
-        equipBtn[_index].GetComponentInChildren<Text>().text = "장착중"; // (장창중 표기용)
+        /// 번역
+        if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+            equipBtn[_index].GetComponentInChildren<Text>().text = "장착중"; // (장창중 표기용)
+        else
+            equipBtn[_index].GetComponentInChildren<Text>().text = "Mounting"; // (장창중 표기용)
 
         // 유니폼 실제 이미지 장착해줌
         ChageUniMiniPet(_index, PlayerPrefs.GetInt("Pet_Curent", 0));
@@ -935,7 +1114,11 @@ public class CharacterManager : MonoBehaviour
         if (PlayerPrefs.GetInt("Pet_Curent", 0) != 0)
         {
             Pet_unEquip[PlayerPrefs.GetInt("Pet_Curent", 0) - 1].SetActive(true); // 그 위에 그레이 버튼으로 덮을 것. (장창중 표기용)
-            Pet_Equip[PlayerPrefs.GetInt("Pet_Curent", 0) - 1].GetComponentInChildren<Text>().text = "장착중"; // (장창중 표기용)
+            /// 번역
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                Pet_Equip[PlayerPrefs.GetInt("Pet_Curent", 0) - 1].GetComponentInChildren<Text>().text = "장착중"; // (장창중 표기용)
+            else
+                Pet_Equip[PlayerPrefs.GetInt("Pet_Curent", 0) - 1].GetComponentInChildren<Text>().text = "Mounting"; // (장창중 표기용)
         }
 
 
@@ -969,7 +1152,11 @@ public class CharacterManager : MonoBehaviour
 
             equipBtn[_index].SetActive(true); // 이큅 버튼 활성화.
             unEquipBtn[_index].SetActive(true); // 그 위에 그레이 버튼으로 덮을 것. (장창중 표기용)
-            equipBtn[_index].GetComponentInChildren<Text>().text = "장착중"; // (장창중 표기용)
+            /// 번역
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                equipBtn[_index].GetComponentInChildren<Text>().text = "장착중"; // (장창중 표기용)
+            else
+                equipBtn[_index].GetComponentInChildren<Text>().text = "Mounting"; // (장창중 표기용)
             return;
         }
 
@@ -1053,7 +1240,11 @@ public class CharacterManager : MonoBehaviour
 
         equipBtn[_index].SetActive(true); // 이큅 버튼 활성화.
         unEquipBtn[_index].SetActive(true); // 그 위에 그레이 버튼으로 덮을 것. (장창중 표기용)
-        equipBtn[_index].GetComponentInChildren<Text>().text = "장착중"; // (장창중 표기용)
+        /// 번역
+        if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+            equipBtn[_index].GetComponentInChildren<Text>().text = "장착중"; // (장창중 표기용)
+        else
+            equipBtn[_index].GetComponentInChildren<Text>().text = "Mounting"; // (장창중 표기용)
 
     }
 
@@ -1556,15 +1747,33 @@ public class CharacterManager : MonoBehaviour
 
             _contents = PlayerPrefsManager.GetInstance().uniformInfo[i].Uniform_LV;
 
-            switch (i)
+            /// 번역
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
             {
-                case 1: result = "골드 획득량 " + Mathf.FloorToInt(_contents * 1f) + "% 증가"; break;
-                case 2: result = "골드 획득량 " + Mathf.FloorToInt(_contents * 1f) + "% 증가"; break;
-                case 3: result = "국밥 획득량 " + Mathf.FloorToInt(_contents * 1f) + "% 증가"; break;
-                case 4: result = "국밥 획득량 " + Mathf.FloorToInt(_contents * 1f) + "% 증가"; break;
-                case 5: result = "쌀밥 획득량 " + Mathf.FloorToInt(_contents * 1f) + "% 증가"; break;
-                case 6: result = "쌀밥 획득량 " + Mathf.FloorToInt(_contents * 1f) + "% 증가"; break;
+                switch (i)
+                {
+                    case 1: result = "골드 획득량 " + Mathf.FloorToInt(_contents * 1f) + "% 증가"; break;
+                    case 2: result = "골드 획득량 " + Mathf.FloorToInt(_contents * 1f) + "% 증가"; break;
+                    case 3: result = "국밥 획득량 " + Mathf.FloorToInt(_contents * 1f) + "% 증가"; break;
+                    case 4: result = "국밥 획득량 " + Mathf.FloorToInt(_contents * 1f) + "% 증가"; break;
+                    case 5: result = "쌀밥 획득량 " + Mathf.FloorToInt(_contents * 1f) + "% 증가"; break;
+                    case 6: result = "쌀밥 획득량 " + Mathf.FloorToInt(_contents * 1f) + "% 증가"; break;
+                }
             }
+            else
+            {
+                switch (i)
+                {
+                    case 1: result = "Increase acquisition gold " + Mathf.FloorToInt(_contents * 1f) + "%"; break;
+                    case 2: result = "Increase acquisition gold " + Mathf.FloorToInt(_contents * 1f) + "%"; break;
+                    case 3: result = "Increase acquisition Korean soup " + Mathf.FloorToInt(_contents * 1f) + "%"; break;
+                    case 4: result = "Increase acquisition Korean soup " + Mathf.FloorToInt(_contents * 1f) + "%"; break;
+                    case 5: result = "Increase acquisition rice " + Mathf.FloorToInt(_contents * 1f) + "%"; break;
+                    case 6: result = "Increase acquisition rice " + Mathf.FloorToInt(_contents * 1f) + "%"; break;
+                }
+            }
+
+
 
             Uniform_LV[i].text = "Lv. "+ PlayerPrefsManager.GetInstance().uniformInfo[i].Uniform_LV.ToString();
             Uniform_Price[i].text = UserWallet.GetInstance().SeetheNatural(PlayerPrefsManager.GetInstance().uniformInfo[i].Uniform_Price);
@@ -1579,7 +1788,11 @@ public class CharacterManager : MonoBehaviour
                 buyBtn[i].SetActive(false); // 구매 텍스트 숨겨주고
                 //
                 unEquipBtn[i].SetActive(false); //  장착가능 노란 [버튼] 활성화.
-                equipBtn[i].GetComponentInChildren<Text>().text = "장착"; // 장착가능 노란 [버튼] 활성화.
+                /// 번역
+                if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                    equipBtn[i].GetComponentInChildren<Text>().text = "장착"; // 장착가능 노란 [버튼] 활성화.
+                else
+                    equipBtn[i].GetComponentInChildren<Text>().text = "Mount"; // 장착가능 노란 [버튼] 활성화.
                 upgradeBtn[i].transform.GetChild(2).gameObject.SetActive(true); // 쌀밥 표기 켜줌
 
             }
@@ -1613,17 +1826,37 @@ public class CharacterManager : MonoBehaviour
         {
             _contents = PlayerPrefsManager.GetInstance().uniformInfo[i].Skill_LV;
 
-            switch (i)
+            /// 번역
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
             {
-                case 0: result = "공격력 " + Mathf.FloorToInt(_contents * 1f) + "% 증가"; break;
-                case 1: result = "체력 " + Mathf.FloorToInt(_contents * 1f) + "% 증가"; break;
-                case 2: result = "체력 회복 " + Mathf.FloorToInt(_contents * 1f) + "% 증가"; break;
-                case 3: result = "골드 획득량 " + (_contents * 0.5d).ToString("f1") + "% 증가"; break;
-                case 4: result = "오프라인 보상 " + Mathf.FloorToInt(_contents * 1f) + "% 증가"; break;
-                case 5: result = "국밥 획득량 " + (_contents * 0.5d).ToString("f1") + "% 증가"; break;
-                case 6: result = "쌀밥 획득량 " + (_contents * 0.5d).ToString("f1") + "% 증가"; break;
+                switch (i)
+                {
+                    case 0: result = "공격력 " + Mathf.FloorToInt(_contents * 1f) + "% 증가"; break;
+                    case 1: result = "체력 " + Mathf.FloorToInt(_contents * 1f) + "% 증가"; break;
+                    case 2: result = "체력 회복 " + Mathf.FloorToInt(_contents * 1f) + "% 증가"; break;
+                    case 3: result = "골드 획득량 " + (_contents * 0.5d).ToString("f1") + "% 증가"; break;
+                    case 4: result = "오프라인 보상 " + Mathf.FloorToInt(_contents * 1f) + "% 증가"; break;
+                    case 5: result = "국밥 획득량 " + (_contents * 0.5d).ToString("f1") + "% 증가"; break;
+                    case 6: result = "쌀밥 획득량 " + (_contents * 0.5d).ToString("f1") + "% 증가"; break;
 
+                }
             }
+            else
+            {
+                switch (i)
+                {
+                    case 0: result = "Increase attack power " + Mathf.FloorToInt(_contents * 1f) + "%"; break;
+                    case 1: result = "Increase health " + Mathf.FloorToInt(_contents * 1f) + "%"; break;
+                    case 2: result = "Increase health resilience " + Mathf.FloorToInt(_contents * 1f) + "%"; break;
+                    case 3: result = "Increase acquisition gold " + (_contents * 0.5d).ToString("f1") + "%"; break;
+                    case 4: result = "Increase offline rewards " + Mathf.FloorToInt(_contents * 1f) + "%"; break;
+                    case 5: result = "Increase acquisition Korean soup " + (_contents * 0.5d).ToString("f1") + "%"; break;
+                    case 6: result = "Increase acquisition rice " + (_contents * 0.5d).ToString("f1") + "%"; break;
+
+                }
+            }
+
+
 
             // 쌀밥 체크후 회색 여부 판단
             Skill_SSalCheak(i);

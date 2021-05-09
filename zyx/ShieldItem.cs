@@ -119,15 +119,29 @@ public class ShieldItem : MonoBehaviour
         /// 보유 방어력 디폴트 값
         thisDIAEffect = (tmpList.ownedEffect * thisShiledCont);
 
+        /// 번역
+        if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+        {
+            LevelBox.text = $"Lv. {thisShieldLevel}";
+            DescBox.text = $"장착 방어력 {thisShieldEffect:F1}% 증가";
+            ownedBox.text = $"보유 방어력 {thisDIAEffect:F1}% 증가";
+            /// 합성 확률
+            fussionBox.text = $"강화 성공 확률 {thisSuccedFussion:F1}%";
+            /// 보유 갯수
+            shiledCont.text = $"보유 수량 : {thisShiledCont:N0}";
+        }
+        else
+        {
+            LevelBox.text = $"Lv. {thisShieldLevel}";
+            DescBox.text = $"번역 방어력 {thisShieldEffect:F1}% 증가";
+            ownedBox.text = $"번역 방어력 {thisDIAEffect:F1}% 증가";
+            /// 합성 확률
+            fussionBox.text = $"번역 성공 확률 {thisSuccedFussion:F1}%";
+            /// 보유 갯수
+            shiledCont.text = $"번역 수량 : {thisShiledCont:N0}";
+        }
 
 
-        LevelBox.text = $"Lv. {thisShieldLevel}";
-        DescBox.text = $"장착 방어력 {thisShieldEffect:F1}% 증가";
-        ownedBox.text = $"보유 방어력 {thisDIAEffect:F1}% 증가";
-        /// 합성 확률
-        fussionBox.text = $"강화 성공 확률 {thisSuccedFussion:F1}%";
-        /// 보유 갯수
-        shiledCont.text = $"보유 수량 : {thisShiledCont:N0}";
         /// 버튼 갱신
         SetGoobapBtn(thisShieldCost);
     }

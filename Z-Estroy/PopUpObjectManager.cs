@@ -163,13 +163,32 @@ public class PopUpObjectManager : MonoBehaviour
 
     void InitZZoGGo()
     {
-        DATA_CheackPop.transform.GetChild(0).GetChild(1).GetComponent<Text>().text =
-    "데이터 저장 일시 : " + PlayerPrefs.GetString("Z_Date")  + System.Environment.NewLine +
-    "맷집 : " + UserWallet.GetInstance().SeetheTruth(double.Parse(PlayerPrefs.GetString("Z_Mattzip"))) + System.Environment.NewLine +
-    "다이아몬드 : " + UserWallet.GetInstance().SeetheTruth(double.Parse(PlayerPrefs.GetString("Z_Dia"))) + System.Environment.NewLine +
-    "국밥 : " + UserWallet.GetInstance().SeetheTruth(double.Parse(PlayerPrefs.GetString("Z_Gup"))) + System.Environment.NewLine +
-    "쌀밥 : " + UserWallet.GetInstance().SeetheTruth(double.Parse(PlayerPrefs.GetString("Z_SSal"))) + System.Environment.NewLine +
-    "열쇠 : " + PlayerPrefs.GetString("Z_Key");
+        /// 번역
+        if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+        {
+            DATA_CheackPop.transform.GetChild(0).GetChild(1).GetComponent<Text>().text =
+                "데이터 저장 일시 : " + PlayerPrefs.GetString("Z_Date") + System.Environment.NewLine +
+                "맷집 : " + UserWallet.GetInstance().SeetheTruth(double.Parse(PlayerPrefs.GetString("Z_Mattzip"))) + System.Environment.NewLine +
+                "다이아몬드 : " + UserWallet.GetInstance().SeetheTruth(double.Parse(PlayerPrefs.GetString("Z_Dia"))) + System.Environment.NewLine +
+                "국밥 : " + UserWallet.GetInstance().SeetheTruth(double.Parse(PlayerPrefs.GetString("Z_Gup"))) + System.Environment.NewLine +
+                "쌀밥 : " + UserWallet.GetInstance().SeetheTruth(double.Parse(PlayerPrefs.GetString("Z_SSal"))) + System.Environment.NewLine +
+                "열쇠 : " + PlayerPrefs.GetString("Z_Key");
+        }
+        else
+        {
+            DATA_CheackPop.transform.GetChild(0).GetChild(1).GetComponent<Text>().text =
+                "번역 저장 일시 : " + PlayerPrefs.GetString("Z_Date") + System.Environment.NewLine +
+                "번역 : " + UserWallet.GetInstance().SeetheTruth(double.Parse(PlayerPrefs.GetString("Z_Mattzip"))) + System.Environment.NewLine +
+                "번역 : " + UserWallet.GetInstance().SeetheTruth(double.Parse(PlayerPrefs.GetString("Z_Dia"))) + System.Environment.NewLine +
+                "번역 : " + UserWallet.GetInstance().SeetheTruth(double.Parse(PlayerPrefs.GetString("Z_Gup"))) + System.Environment.NewLine +
+                "번역 : " + UserWallet.GetInstance().SeetheTruth(double.Parse(PlayerPrefs.GetString("Z_SSal"))) + System.Environment.NewLine +
+                "번역 : " + PlayerPrefs.GetString("Z_Key");
+        }
+
+
+
+
+
 
         DATA_CheackPop.SetActive(true);
     }
@@ -250,30 +269,56 @@ public class PopUpObjectManager : MonoBehaviour
         MuganRewordpop.transform.GetChild(1).GetChild(1).GetChild(2).gameObject.SetActive(false);
         MuganRewordpop.transform.GetChild(1).GetChild(1).GetChild(3).gameObject.SetActive(false);
 
-        if (_index == 0)
+        /// 번역
+        if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
         {
-            MuganRewordpop.transform.GetChild(1).GetChild(1).GetChild(_index).gameObject.SetActive(true);
-            MuganRewordpop.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = "열쇠 "+ _Amount + "개 획득하였습니다.";
-
+            if (_index == 0)
+            {
+                MuganRewordpop.transform.GetChild(1).GetChild(1).GetChild(_index).gameObject.SetActive(true);
+                MuganRewordpop.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = "열쇠 " + _Amount + "개 획득하였습니다.";
+            }
+            else if (_index == 1)
+            {
+                MuganRewordpop.transform.GetChild(1).GetChild(1).GetChild(_index).gameObject.SetActive(true);
+                MuganRewordpop.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = _Amount + "다이아를 획득하였습니다.";
+            }
+            else if (_index == 2)
+            {
+                MuganRewordpop.transform.GetChild(1).GetChild(1).GetChild(_index).gameObject.SetActive(true);
+                MuganRewordpop.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = "국밥 " + _Amount + "그릇 획득하였습니다.";
+            }
+            else if (_index == 3)
+            {
+                MuganRewordpop.transform.GetChild(1).GetChild(1).GetChild(_index).gameObject.SetActive(true);
+                MuganRewordpop.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = "쌀밥 " + _Amount + "그릇 획득하였습니다.";
+            }
         }
-        else if(_index == 1)
+        else
         {
-            MuganRewordpop.transform.GetChild(1).GetChild(1).GetChild(_index).gameObject.SetActive(true);
-            MuganRewordpop.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = _Amount + "다이아를 획득하였습니다.";
-
+            if (_index == 0)
+            {
+                MuganRewordpop.transform.GetChild(1).GetChild(1).GetChild(_index).gameObject.SetActive(true);
+                MuganRewordpop.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = "번역 " + _Amount + "개 획득하였습니다.";
+            }
+            else if (_index == 1)
+            {
+                MuganRewordpop.transform.GetChild(1).GetChild(1).GetChild(_index).gameObject.SetActive(true);
+                MuganRewordpop.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = _Amount + "번역 획득하였습니다.";
+            }
+            else if (_index == 2)
+            {
+                MuganRewordpop.transform.GetChild(1).GetChild(1).GetChild(_index).gameObject.SetActive(true);
+                MuganRewordpop.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = "번역 " + _Amount + "그릇 획득하였습니다.";
+            }
+            else if (_index == 3)
+            {
+                MuganRewordpop.transform.GetChild(1).GetChild(1).GetChild(_index).gameObject.SetActive(true);
+                MuganRewordpop.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = "번역 " + _Amount + "그릇 획득하였습니다.";
+            }
         }
-        else if(_index == 2)
-        {
-            MuganRewordpop.transform.GetChild(1).GetChild(1).GetChild(_index).gameObject.SetActive(true);
-            MuganRewordpop.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = "국밥 "+ _Amount + "그릇 획득하였습니다.";
 
-        }
-        else if (_index == 3)
-        {
-            MuganRewordpop.transform.GetChild(1).GetChild(1).GetChild(_index).gameObject.SetActive(true);
-            MuganRewordpop.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = "쌀밥 " + _Amount + "그릇 획득하였습니다.";
 
-        }
+
 
         //전체 켜줌
         MuganRewordpop.SetActive(true);
@@ -520,6 +565,10 @@ public class PopUpObjectManager : MonoBehaviour
     /// </summary>
     public void ShowBuffProcess(int _Index)
     {
+        /// 번역
+        bool isKorean = false;
+        if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean") isKorean = true;
+
         isHideAnim = false;
         BuffKind = _Index;
         if (Buff_PopUP.GetComponent<Animation>().isPlaying) return;
@@ -533,8 +582,12 @@ public class PopUpObjectManager : MonoBehaviour
                 {
                     return; /// VIP 결제 유저라면 600초 없다.
                 }
+                /// 번역
+                if (isKorean)
+                    BuffDesc.text = "600초동안 자동공격";
+                else
+                    BuffDesc.text = "번역 자동공격";
 
-                BuffDesc.text = "600초동안 자동공격";
                 MotherIconPos.GetChild(0).gameObject.SetActive(true);
                 MotherIconPos.GetChild(1).gameObject.SetActive(false);
                 MotherIconPos.GetChild(2).gameObject.SetActive(false);
@@ -551,7 +604,12 @@ public class PopUpObjectManager : MonoBehaviour
                     return;
                 }
 
-                BuffDesc.text = "300초동안 골드 획득 2배";
+                /// 번역
+                if (isKorean)
+                    BuffDesc.text = "300초동안 골드 획득 2배";
+                else
+                    BuffDesc.text = "번역 골드 획득 2배";
+
                 MotherIconPos.GetChild(0).gameObject.SetActive(false);
                 MotherIconPos.GetChild(1).gameObject.SetActive(true);
                 MotherIconPos.GetChild(2).gameObject.SetActive(false);
@@ -567,8 +625,12 @@ public class PopUpObjectManager : MonoBehaviour
                 {
                     return;
                 }
+                /// 번역
+                if (isKorean)
+                    BuffDesc.text = "300초동안 공격력 2배";
+                else
+                    BuffDesc.text = "번역 공격력 2배";
 
-                BuffDesc.text = "300초동안 공격력 2배";
                 MotherIconPos.GetChild(0).gameObject.SetActive(false);
                 MotherIconPos.GetChild(1).gameObject.SetActive(false);
                 MotherIconPos.GetChild(2).gameObject.SetActive(true);
@@ -795,7 +857,12 @@ public class PopUpObjectManager : MonoBehaviour
         isHideAnim = false;
         if (InfinityPopUPSkip.GetComponent<Animation>().isPlaying) return;
 
-        InfinityPopUPSkip.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = "국밥 " + _amount.ToString("f0") + " 그릇을 얻었다!";
+        /// 번역
+        if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+            InfinityPopUPSkip.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = "국밥 " + _amount.ToString("f0") + " 그릇을 얻었다!";
+        else
+            InfinityPopUPSkip.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = "번역 " + _amount.ToString("f0") + " 그릇을 얻었다!";
+        
         PlayerPrefsManager.GetInstance().gupbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().gupbap, _amount.ToString("f0"));
 
         UserWallet.GetInstance().ShowUserMilk();
@@ -824,7 +891,12 @@ public class PopUpObjectManager : MonoBehaviour
         InfinityPopUP.transform.GetChild(1).GetChild(3).gameObject.SetActive(true);
         InfinityPopUP.transform.GetChild(1).GetChild(4).gameObject.SetActive(false);
 
-        InfinityPopUP.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = "국밥 " + GupBapAmount + " 그릇을 얻었다!";
+        /// 번역
+        if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+            InfinityPopUP.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = "국밥 " + GupBapAmount + " 그릇을 얻었다!";
+        else
+            InfinityPopUP.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = "번역 " + GupBapAmount + " 그릇을 얻었다!";
+
         PlayerPrefsManager.GetInstance().gupbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().gupbap, GupBapAmount);
         UserWallet.GetInstance().ShowUserMilk();
         //전체 켜줌
@@ -846,7 +918,12 @@ public class PopUpObjectManager : MonoBehaviour
         InfinityPopUP.transform.GetChild(1).GetChild(3).gameObject.SetActive(false);
         InfinityPopUP.transform.GetChild(1).GetChild(4).gameObject.SetActive(true);
 
-        InfinityPopUP.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = "국밥 " + (_amount * 2).ToString("f0") + " 그릇을 얻었다!";
+        /// 번역
+        if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+            InfinityPopUP.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = "국밥 " + (_amount * 2).ToString("f0") + " 그릇을 얻었다!";
+        else
+            InfinityPopUP.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = "번역 " + (_amount * 2).ToString("f0") + " 그릇을 얻었다!";
+
         PlayerPrefsManager.GetInstance().gupbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().gupbap, _amount.ToString("f0"));
         UserWallet.GetInstance().ShowUserMilk();
         //전체 켜줌
@@ -871,7 +948,12 @@ public class PopUpObjectManager : MonoBehaviour
     /// </summary>
     public void ShowInfiCombo(bool _swich)
     {
-        InfinityPopUp.transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<Text>().text = "남은시간 : 60.0";
+        /// 번역
+        if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+            InfinityPopUp.transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<Text>().text = "남은시간 : 60.0";
+        else
+            InfinityPopUp.transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<Text>().text = "번역 : 60.0";
+
         InfinityPopUp.transform.GetChild(0).GetChild(0).GetComponent<Image>().fillAmount = 1f;
 
         InfinityPopUp.SetActive(_swich);
@@ -884,7 +966,12 @@ public class PopUpObjectManager : MonoBehaviour
     /// </summary>
     public void SetComboText()
     {
-        InfinityPopUp.transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<Text>().text = "남은시간 : " + (60.0f - (ComboCnt * 0.1f)).ToString("f1");
+        /// 번역
+        if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+            InfinityPopUp.transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<Text>().text = "남은시간 : " + (60.0f - (ComboCnt * 0.1f)).ToString("f1");
+        else
+            InfinityPopUp.transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<Text>().text = "번역 : " + (60.0f - (ComboCnt * 0.1f)).ToString("f1");
+
         InfinityPopUp.transform.GetChild(0).GetChild(0).GetComponent<Image>().fillAmount = (600f - (ComboCnt * 1f)) / 600f;
     }
 
@@ -1130,7 +1217,12 @@ public class PopUpObjectManager : MonoBehaviour
     /// <param name="_index"></param>
     public void ShowSSalPopUPSkip(float _amount)
     {
-        MiniGamerewordSkip.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = "쌀밥 " + _amount.ToString("f0") + " 그릇을 얻었다!";
+        /// 번역
+        if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+            MiniGamerewordSkip.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = "쌀밥 " + _amount.ToString("f0") + " 그릇을 얻었다!";
+        else
+            MiniGamerewordSkip.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = "번역 " + _amount.ToString("f0") + " 그릇을 얻었다!";
+
         PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().ssalbap, _amount.ToString("f0"));
         UserWallet.GetInstance().ShowUserSSalbap();
         PlayerPrefs.Save();
@@ -1154,7 +1246,12 @@ public class PopUpObjectManager : MonoBehaviour
         MiniGamereword.transform.GetChild(1).GetChild(3).gameObject.SetActive(true);
         MiniGamereword.transform.GetChild(1).GetChild(4).gameObject.SetActive(false);
 
-        MiniGamereword.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = "쌀밥 " + _amount + " 그릇을 얻었다!";
+        /// 번역
+        if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+            MiniGamereword.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = "쌀밥 " + _amount + " 그릇을 얻었다!";
+        else
+            MiniGamereword.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = "번역 " + _amount + " 그릇을 얻었다!";
+
         PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().ssalbap, _amount.ToString("f0"));
         UserWallet.GetInstance().ShowUserSSalbap();
         PlayerPrefs.Save();
@@ -1174,8 +1271,12 @@ public class PopUpObjectManager : MonoBehaviour
         Debug.LogWarning("_amount X3 " + _amount);
         Debug.LogWarning("SSalBapAmount X3 " + SSalBapAmount);
 
-
-        MiniGamereword.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = "쌀밥 " + (SSalBapAmount * 2) + " 그릇을 얻었다!";
+        /// 번역
+        if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+            MiniGamereword.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = "쌀밥 " + (SSalBapAmount * 2) + " 그릇을 얻었다!";
+        else
+            MiniGamereword.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = "번역 " + (SSalBapAmount * 2) + " 그릇을 얻었다!";
+        
         PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().ssalbap, SSalBapAmount.ToString("f0"));
         UserWallet.GetInstance().ShowUserSSalbap();
         PlayerPrefs.Save();

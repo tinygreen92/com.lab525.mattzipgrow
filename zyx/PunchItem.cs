@@ -51,7 +51,13 @@ public class PunchItem : MonoBehaviour
     void SetDefaltInfo()
     {
         spriteBox.sprite = pm.punchImgs[thisIndex];
-        NameBox.text = pm.PunchNames[thisIndex];
+
+        /// 번역
+        if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+            NameBox.text = pm.PunchNames[thisIndex];
+        else
+            NameBox.text = pm.PunchEngNames[thisIndex];
+
         /// 회색 커버
         SetAllGrayCover(thisIndex);
         /// 장착 여부 버튼
@@ -92,7 +98,11 @@ public class PunchItem : MonoBehaviour
         thisWeaponCost = tmpList.weaponCost;
 
         LevelBox.text = "Lv. " + thisWeaponLevel;
-        DescBox.text = "공격력 " + thisWeaponEffect.ToString("f1") + "% 증가";
+        /// 번역
+        if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+            DescBox.text = "공격력 " + thisWeaponEffect.ToString("f1") + "% 증가";
+        else
+            DescBox.text = "번역 " + thisWeaponEffect.ToString("f1") + "% 증가";
         /// 버튼 갱신
         SetGoobapBtn(thisWeaponCost);
     }

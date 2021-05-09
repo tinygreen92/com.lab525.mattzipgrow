@@ -33,15 +33,33 @@ public class MuganMode : MonoBehaviour
     {
         int Stage = PlayerPrefsManager.GetInstance().MaxGet_MuganTop;
 
-        if (Stage >= 201)
+        /// 번역
+        if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
         {
-            popupMuganName.text = "무한의 탑 클리어!";
-            popupMuganName.transform.parent.GetComponent<Button>().enabled = false;
+            if (Stage >= 201)
+            {
+                popupMuganName.text = "무한의 탑 클리어!";
+                popupMuganName.transform.parent.GetComponent<Button>().enabled = false;
+            }
+            else
+            {
+                popupMuganName.text = Stage + "층 입장 >";
+            }
         }
         else
         {
-            popupMuganName.text = Stage + "층 입장 >";
+            if (Stage >= 201)
+            {
+                popupMuganName.text = "번역 !";
+                popupMuganName.transform.parent.GetComponent<Button>().enabled = false;
+            }
+            else
+            {
+                popupMuganName.text = Stage + "번역 입장 >";
+            }
         }
+
+
 
         popupMugan.SetActive(true);
 
@@ -91,7 +109,11 @@ public class MuganMode : MonoBehaviour
         Left.SetActive(false);
         Right.SetActive(false);
         /// 입장 스테이지 써주고
-        stageName.text = "무한의 탑 " + PlayerPrefsManager.GetInstance().MaxGet_MuganTop + "층";
+        /// /// 번역
+        if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+            stageName.text = "무한의 탑 " + PlayerPrefsManager.GetInstance().MaxGet_MuganTop + "층";
+        else
+            stageName.text = "번역 탑 " + PlayerPrefsManager.GetInstance().MaxGet_MuganTop + "층";
         //보스 체력 설정
         PlayerPrefsManager.GetInstance().MAX_boss_HP = GetBossHp(PlayerPrefsManager.GetInstance().MaxGet_MuganTop);
         PlayerPrefsManager.GetInstance().bossHP = PlayerPrefsManager.GetInstance().MAX_boss_HP;
@@ -166,7 +188,11 @@ public class MuganMode : MonoBehaviour
 
         // 보스 타이머 표시
         boss_Time.fillAmount = 1;
-        boss_time.text = "남은 시간 : " + string.Format("{0:f1}", Maxcnt);
+        /// 번역
+        if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+            boss_time.text = "남은 시간 : " + string.Format("{0:f1}", Maxcnt);
+        else
+            boss_time.text = "번역 시간 : " + string.Format("{0:f1}", Maxcnt);
     }
 
     Coroutine stromking;
@@ -179,20 +205,46 @@ public class MuganMode : MonoBehaviour
         float Maxcnt = 30f + (PlayerPrefsManager.GetInstance().Arti_MuganTime * 0.1f);
         float cnt = Maxcnt;
 
-        while (cnt > 0)
+        /// 번역
+        if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
         {
-            yield return new WaitForSeconds(0.05f);
-
-            /// 무한 모드 끝남 스위치 true 되면 카운트 멈춤.
-            if (!PlayerPrefsManager.GetInstance().isMuGanTopEnd)
+            while (cnt > 0)
             {
-                cnt -= 0.05f;
+                yield return new WaitForSeconds(0.05f);
 
-                boss_Time.fillAmount = cnt / Maxcnt;
-                boss_time.text = "남은 시간 : " + string.Format("{0:f1}", cnt);
+                /// 무한 모드 끝남 스위치 true 되면 카운트 멈춤.
+                if (!PlayerPrefsManager.GetInstance().isMuGanTopEnd)
+                {
+                    cnt -= 0.05f;
+
+                    boss_Time.fillAmount = cnt / Maxcnt;
+                    boss_time.text = "남은 시간 : " + string.Format("{0:f1}", cnt);
+                }
+
             }
-
         }
+        else
+        {
+            while (cnt > 0)
+            {
+                yield return new WaitForSeconds(0.05f);
+
+                /// 무한 모드 끝남 스위치 true 되면 카운트 멈춤.
+                if (!PlayerPrefsManager.GetInstance().isMuGanTopEnd)
+                {
+                    cnt -= 0.05f;
+
+                    boss_Time.fillAmount = cnt / Maxcnt;
+                    boss_time.text = "번역 시간 : " + string.Format("{0:f1}", cnt);
+                }
+
+            }
+        }
+
+
+
+
+
         /// 30초 동안 못이기면 실패.
         StopCoroutine(stromking);
         /// 2번째 기회를 이미 사용했다면 종료

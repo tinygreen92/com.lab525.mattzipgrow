@@ -57,6 +57,10 @@ public class RankingPage : MonoBehaviour
     /// <param name="_buttonIndex">버튼 이벤트에 붙일때 인덱스 지정</param>
     public void Tap_Click(int _buttonIndex)
     {
+        /// 번역
+        bool isKorean = false;
+        if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean") isKorean = true;
+
         switch (_buttonIndex)
         {
             case 1:
@@ -89,7 +93,11 @@ public class RankingPage : MonoBehaviour
                 _index_L = 0;
                 _index_RR = 0;
                 //
-                MaxValuText.text = "최대 맷집";
+                /// 번역
+                if (isKorean)
+                    MaxValuText.text = "최대 맷집";
+                else
+                    MaxValuText.text = "번역 맷집";
 
                 break;
 
@@ -123,7 +131,11 @@ public class RankingPage : MonoBehaviour
                 _index_RR = 0;
 
                 //
-                MaxValuText.text = "최대 층수";
+                /// 번역
+                if (isKorean)
+                    MaxValuText.text = "최대 층수";
+                else
+                    MaxValuText.text = "번역 층수";
 
                 break;
 
@@ -157,7 +169,11 @@ public class RankingPage : MonoBehaviour
                 _index_RR = 0;
 
                 //
-                MaxValuText.text = "최다 콤보";
+                /// 번역
+                if (isKorean)
+                    MaxValuText.text = "최다 콤보";
+                else
+                    MaxValuText.text = "번역 콤보";
 
                 break;
 

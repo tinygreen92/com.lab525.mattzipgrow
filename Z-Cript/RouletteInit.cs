@@ -74,6 +74,10 @@ public class RouletteInit : MonoBehaviour
     /// </summary>
     private void ShowRulletReword()
     {
+        /// 번역
+        bool isKorean = false;
+        if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean") isKorean = true;
+
         // 회색 커버 덮어줌.
         _Cover.SetActive(true);
 
@@ -98,16 +102,39 @@ public class RouletteInit : MonoBehaviour
             PlayerPrefsManager.GetInstance().gupbap = dts.AddStringDouble(pgupbap, "800");
             UserWallet.GetInstance().ShowUserMilk();
             r_Index = 0;
-            r_Content = "국밥 800 그릇을 획득했다!";
-            tmpContent = "국밥 1600 그릇을 획득했다!";
+            /// 번역
+            if (isKorean)
+            {
+                r_Content = "국밥 800 그릇을 획득했다!";
+                tmpContent = "국밥 1600 그릇을 획득했다!";
+            }
+            else
+            {
+                r_Content = "번역 800 그릇을 획득했다!";
+                tmpContent = "번역 1600 그릇을 획득했다!";
+            }
+
+
         }
         else if(36.5 < result && result < 72.5)
         {
             PlayerPrefsManager.GetInstance().key += 5;
             //UserWallet.GetInstance().ShowUserKey();
             r_Index = 1;
-            r_Content = "열쇠 5 개를 획득했다!";
-            tmpContent = "열쇠 10 개를 획득했다!";
+
+            /// 번역
+            if (isKorean)
+            {
+                r_Content = "열쇠 5 개를 획득했다!";
+                tmpContent = "열쇠 10 개를 획득했다!";
+            }
+            else
+            {
+                r_Content = "번역 5 개를 획득했다!";
+                tmpContent = "번역 10 개를 획득했다!";
+            }
+
+
 
         }
         else if (72.5 < result && result < 109.5)
@@ -115,8 +142,20 @@ public class RouletteInit : MonoBehaviour
             PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(pSSalbap, "400");
             UserWallet.GetInstance().ShowUserSSalbap();
             r_Index = 2;
-            r_Content = "쌀밥 400 그릇을 획득했다!";
-            tmpContent = "쌀밥 800 그릇을 획득했다!";
+
+            /// 번역
+            if (isKorean)
+            {
+                r_Content = "쌀밥 400 그릇을 획득했다!";
+                tmpContent = "쌀밥 800 그릇을 획득했다!";
+            }
+            else
+            {
+                r_Content = "번역 400 그릇을 획득했다!";
+                tmpContent = "번역 800 그릇을 획득했다!";
+            }
+
+
 
         }
         else if (109.5 < result && result < 144.5)
@@ -126,8 +165,20 @@ public class RouletteInit : MonoBehaviour
 
             UserWallet.GetInstance().ShowUserDia();
             r_Index = 3;
-            r_Content = "다이아 80 개를 획득했다!";
-            tmpContent = "다이아 160 개를 획득했다!";
+
+            /// 번역
+            if (isKorean)
+            {
+                r_Content = "다이아 80 개를 획득했다!";
+                tmpContent = "다이아 160 개를 획득했다!";
+            }
+            else
+            {
+                r_Content = "번역 80 개를 획득했다!";
+                tmpContent = "번역 160 개를 획득했다!";
+            }
+
+
 
         }
         else if (144.5 < result && result < 180)
@@ -136,40 +187,85 @@ public class RouletteInit : MonoBehaviour
             PlayerPrefsManager.GetInstance().gold = dts.AddStringDouble(pgold, pdps);
             UserWallet.GetInstance().ShowUserGold();
             r_Index = 4;
-            r_Content =  UserWallet.GetInstance().SeetheNatural(double.Parse(pdps)) +" 골드를 획득했다!";
-            pdps = dts.multipleStringDouble(pdps, 2d);
-            tmpContent = UserWallet.GetInstance().SeetheNatural(double.Parse(pdps)) + " 골드를 획득했다!";
+
+            /// 번역
+            if (isKorean)
+            {
+                r_Content = UserWallet.GetInstance().SeetheNatural(double.Parse(pdps)) + " 골드를 획득했다!";
+                pdps = dts.multipleStringDouble(pdps, 2d);
+                tmpContent = UserWallet.GetInstance().SeetheNatural(double.Parse(pdps)) + " 골드를 획득했다!";
+            }
+            else
+            {
+                r_Content = UserWallet.GetInstance().SeetheNatural(double.Parse(pdps)) + " 번역 획득했다!";
+                pdps = dts.multipleStringDouble(pdps, 2d);
+                tmpContent = UserWallet.GetInstance().SeetheNatural(double.Parse(pdps)) + " 번역 획득했다!";
+            }
+
+
 
 
         }
-
-
-
-
-
         else if (180 < result && result < 216.5)
         {
             PlayerPrefsManager.GetInstance().gupbap = dts.AddStringDouble(pgupbap, "1600");
             UserWallet.GetInstance().ShowUserMilk();
             r_Index = 5;
-            r_Content = "국밥 1600 그릇을 획득했다!";
-            tmpContent = "국밥 3200 그릇을 획득했다!";
+
+            /// 번역
+            if (isKorean)
+            {
+                r_Content = "국밥 1600 그릇을 획득했다!";
+                tmpContent = "국밥 3200 그릇을 획득했다!";
+            }
+            else
+            {
+                r_Content = "번역 1600 그릇을 획득했다!";
+                tmpContent = "번역 3200 그릇을 획득했다!";
+            }
+
+
+
         }
         else if (216.5 < result && result < 252.5)
         {
             PlayerPrefsManager.GetInstance().key += 10;
             //UserWallet.GetInstance().ShowUserKey();
             r_Index = 6;
-            r_Content = "열쇠 10 개를 획득했다!";
-            tmpContent = "열쇠 20 개를 획득했다!";
+
+            /// 번역
+            if (isKorean)
+            {
+                r_Content = "열쇠 10 개를 획득했다!";
+                tmpContent = "열쇠 20 개를 획득했다!";
+            }
+            else
+            {
+                r_Content = "번역 10 개를 획득했다!";
+                tmpContent = "번역 20 개를 획득했다!";
+            }
+
+
         }
         else if (252.5 < result && result < 287.5)
         {
             PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(pSSalbap, "800");
             UserWallet.GetInstance().ShowUserSSalbap();
             r_Index = 7;
-            r_Content = "쌀밥 800 그릇을 획득했다!";
-            tmpContent = "쌀밥 1600 그릇을 획득했다!";
+
+            /// 번역
+            if (isKorean)
+            {
+                r_Content = "쌀밥 800 그릇을 획득했다!";
+                tmpContent = "쌀밥 1600 그릇을 획득했다!";
+            }
+            else
+            {
+                r_Content = "번역 800 그릇을 획득했다!";
+                tmpContent = "번역 1600 그릇을 획득했다!";
+            }
+
+
 
         }
         else if (287.5 < result && result < 322.5)
@@ -180,8 +276,20 @@ public class RouletteInit : MonoBehaviour
 
             UserWallet.GetInstance().ShowUserDia();
             r_Index = 8;
-            r_Content = "다이아 160 개를 획득했다!";
-            tmpContent = "다이아 320 개를 획득했다!";
+
+            /// 번역
+            if (isKorean)
+            {
+                r_Content = "다이아 160 개를 획득했다!";
+                tmpContent = "다이아 320 개를 획득했다!";
+            }
+            else
+            {
+                r_Content = "번역 160 개를 획득했다!";
+                tmpContent = "번역 320 개를 획득했다!";
+            }
+
+
 
         }
         else if (322.5 < result && result < 360)
@@ -190,9 +298,22 @@ public class RouletteInit : MonoBehaviour
             PlayerPrefsManager.GetInstance().gold = dts.AddStringDouble(pgold, pdps);
             UserWallet.GetInstance().ShowUserGold();
             r_Index = 9;
-            r_Content = UserWallet.GetInstance().SeetheNatural(double.Parse(pdps)) + " 골드를 획득했다!";
-            pdps = dts.multipleStringDouble(pdps, 2d);
-            tmpContent = UserWallet.GetInstance().SeetheNatural(double.Parse(pdps)) + " 골드를 획득했다!";
+
+            /// 번역
+            if (isKorean)
+            {
+                r_Content = UserWallet.GetInstance().SeetheNatural(double.Parse(pdps)) + " 골드를 획득했다!";
+                pdps = dts.multipleStringDouble(pdps, 2d);
+                tmpContent = UserWallet.GetInstance().SeetheNatural(double.Parse(pdps)) + " 골드를 획득했다!";
+            }
+            else
+            {
+                r_Content = UserWallet.GetInstance().SeetheNatural(double.Parse(pdps)) + " 번역 획득했다!";
+                pdps = dts.multipleStringDouble(pdps, 2d);
+                tmpContent = UserWallet.GetInstance().SeetheNatural(double.Parse(pdps)) + " 번역 획득했다!";
+            }
+
+
 
         }
 

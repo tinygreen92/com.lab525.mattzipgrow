@@ -1,16 +1,15 @@
 ﻿using EasyMobile;
-using Lean.Localization;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Purchasing;
-using UnityEngine.Purchasing.Security;
 using UnityEngine.UI;
 
 public class IAPManager : MonoBehaviour
 {
+    [Header(" - 패키지 영문 이름 스트링스")]
+    public string[] pakageEnglishInfos;
     [Header("-패키지 상점 데이터")]
     public TextAsset ta;
     [Space(3f)]
@@ -68,12 +67,12 @@ public class IAPManager : MonoBehaviour
     //}
 
     /// <summary>
-    /// 무기 관리
+    /// 패키지 상품관리
     /// </summary>
     [Serializable]
     public class PakageEntry
     {
-        public string pakaName;        
+        public string pakaName;
         public int pakaPrice;
 
         public int getDia;
@@ -163,6 +162,10 @@ public class IAPManager : MonoBehaviour
     /// <param name="_index"></param>
     public void BuySomeThing()
     {
+        /// 번역
+        bool isKorean = false;
+        if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean") isKorean = true;
+
         SomeParent = EventSystem.current.currentSelectedGameObject.transform.parent.parent;
         int _index = int.Parse(SomeParent.name);
 
@@ -179,21 +182,32 @@ public class IAPManager : MonoBehaviour
         }
 
         /// 아이콘/가격표 켜주고
+        /// 
+        /// 번역
+        if (isKorean)
+            SomeThingTrans.GetChild(_index).GetChild(0).GetComponent<Text>().text = pakageInfo[_index].pakaName;
+        else
+            SomeThingTrans.GetChild(_index).GetChild(0).GetComponent<Text>().text = pakageEnglishInfos[_index];
+        
+        
         SomeThingTrans.GetChild(_index).gameObject.SetActive(true);
-        SomeThingTrans.GetChild(_index).GetChild(0).GetComponent<Text>().text = pakageInfo[_index].pakaName;
         BuyButton.GetChild(_index).gameObject.SetActive(true);
 
         /// 무료 상품들
         if (pakageInfo[_index].pakaPrice == 0)
         {
-            BuyButton.GetChild(_index).GetChild(1).GetComponent<Text>().text = "구매";
+            /// 번역
+            if (isKorean)
+                BuyButton.GetChild(_index).GetChild(1).GetComponent<Text>().text = "구매";
+            else
+                BuyButton.GetChild(_index).GetChild(1).GetComponent<Text>().text = "번역";
             vatTextObj.SetActive(false);
         }
         /// 현금으로 사는 것들
         else if (_index < 14 || _index == 18 || _index == 23 || _index == 28)
         {
             /// 원화 / 달러 세팅
-            if (LeanLocalization.CurrentLanguage == "Korean")
+            if (isKorean)
             {
                 BuyButton.GetChild(_index).GetChild(1).GetComponent<Text>().text = $"₩ {pakageInfo[_index].pakaPrice:N0}";
             }
@@ -207,7 +221,11 @@ public class IAPManager : MonoBehaviour
         /// 다이아로 사는 것들
         else
         {
-            BuyButton.GetChild(_index).GetChild(1).GetComponent<Text>().text = "구매";
+            /// 번역
+            if (isKorean)
+                BuyButton.GetChild(_index).GetChild(1).GetComponent<Text>().text = "구매";
+            else
+                BuyButton.GetChild(_index).GetChild(1).GetComponent<Text>().text = "번역";
             vatTextObj.SetActive(false);
         }
 

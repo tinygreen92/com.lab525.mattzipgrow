@@ -185,8 +185,13 @@ public class ShieldManager : MonoBehaviour
             }
         }
 
+        /// 번역
+        if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+            countDailyText.text = "일일 제한 (" + PlayerPrefs.GetInt("Shield10AdsCnt", 0).ToString("D2") + " / 10)";
+        else
+            countDailyText.text = "번역 제한 (" + PlayerPrefs.GetInt("Shield10AdsCnt", 0).ToString("D2") + " / 10)";
 
-        countDailyText.text = "일일 제한 (" + PlayerPrefs.GetInt("Shield10AdsCnt", 0).ToString("D2") + " / 10)";
+
         /// 창 열기
         leftShieldPop.SetActive(true);
         leftShieldPop.GetComponent<Animation>()["Roll_Incre"].speed = 1;
@@ -619,7 +624,7 @@ public class ShieldManager : MonoBehaviour
 
 
     /// <summary>
-    /// 방패 이름
+    /// 방패 등급
     /// </summary>
     public string[] shieldNames =
     {   "C",

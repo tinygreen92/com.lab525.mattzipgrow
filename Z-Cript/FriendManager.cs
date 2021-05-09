@@ -75,7 +75,12 @@ public class FriendManager : MonoBehaviour
                 mDefaltATK = dts.multipleStringDouble(ppm.PlayerDPS, 0.1d);
                 thisLevels[0] = ppm.Friend_01_OfflineAtk_Lv;
                 LevelBox[0].text = "LV. " + thisLevels[0];
-                DescBox[0].text = "오프라인 공격력 증가 " + (thisLevels[0] * 0.1f).ToString("f1") + "%";
+                /// 번역
+                if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                    DescBox[0].text = "오프라인 공격력 증가 " + (thisLevels[0] * 0.1f).ToString("f1") + "%";
+                else
+                    DescBox[0].text = "번역 " + (thisLevels[0] * 0.1f).ToString("f1") + "%";
+
                 /// 버튼 갱신
                 SetSSalBtn(0);
                 break;
@@ -84,7 +89,11 @@ public class FriendManager : MonoBehaviour
                 /// → 기본 오프라인 시간은 14,400초 ( 4시간 ) 
                 thisLevels[1] = ppm.Friend_02_OffTimeUp_Lv;
                 LevelBox[1].text = "LV. " + thisLevels[1];
-                DescBox[1].text = "오프라인 시간 증가 " + (thisLevels[1] * 0.1f).ToString("f1") + "%";
+                /// 번역
+                if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                    DescBox[1].text = "오프라인 시간 증가 " + (thisLevels[1] * 0.1f).ToString("f1") + "%";
+                else
+                    DescBox[1].text = "번역 " + (thisLevels[1] * 0.1f).ToString("f1") + "%";
                 /// 버튼 갱신
                 SetSSalBtn(1);
                 break;
@@ -93,7 +102,11 @@ public class FriendManager : MonoBehaviour
                 /// → 기본 오프라인 공격속도는 1대/s
                 thisLevels[2] = ppm.Friend_03_OffSpped_Lv;
                 LevelBox[2].text = "LV. " + thisLevels[2];
-                DescBox[2].text = "오프라인 공격속도 증가 " + (thisLevels[2] * 0.1f).ToString("f1") + "%";
+                /// 번역
+                if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                    DescBox[2].text = "오프라인 공격속도 증가 " + (thisLevels[2] * 0.1f).ToString("f1") + "%";
+                else
+                    DescBox[2].text = "번역 " + (thisLevels[2] * 0.1f).ToString("f1") + "%";
                 /// 버튼 갱신
                 SetSSalBtn(2);
                 break;
@@ -107,7 +120,11 @@ public class FriendManager : MonoBehaviour
 
                 thisLevels[3] = ppm.Friend_04_MattzipPer_Lv;
                 LevelBox[3].text = "LV. " + thisLevels[3];
-                DescBox[3].text = "오프라인 맷집 증가율 증가 " + (thisLevels[3] * 0.1f).ToString("f1") + "%";
+                /// 번역
+                if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                    DescBox[3].text = "오프라인 맷집 증가율 증가 " + (thisLevels[3] * 0.1f).ToString("f1") + "%";
+                else
+                    DescBox[3].text = "번역 " + (thisLevels[3] * 0.1f).ToString("f1") + "%";
                 /// 버튼 갱신
                 SetSSalBtn(3);
                 break;

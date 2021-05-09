@@ -137,153 +137,254 @@ public class DailyRewardController : MonoBehaviour
             /////////////////////////////////
             case 0:
                 ppm.gupbap = dts.AddStringDouble(tmpGupBap, "500");
-                GetRewordImgText(0, "국밥 500그릇을 얻었다!");
+                /// 번역
+                if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                    GetRewordImgText(0, "국밥 500그릇을 얻었다!");
+                else
+                    GetRewordImgText(0, "Got Korean soup 500!");
 
                 break;
 
             case 1:
                 ppm.key += 5;
-                GetRewordImgText(1, "열쇠 5개를 얻었다!");
+                /// 번역
+                if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                    GetRewordImgText(1, "열쇠 5개를 얻었다!");
+                else
+                    GetRewordImgText(1, "Got keys 5!");
 
                 break;
 
             case 2:
                 PlayerPrefs.SetFloat("dDiamond", tmpDia + 50);
-                GetRewordImgText(2, "다이아 50개를 얻었다!");
+                /// 번역
+                if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                    GetRewordImgText(2, "다이아 50개를 얻었다!");
+                /// 번역
+                if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                    GetRewordImgText(2, "Got diamond 50");
 
                 break;
 
             case 3:
                 ppm.ssalbap = dts.AddStringDouble(tmpSSal, "250");
-                GetRewordImgText(3, "쌀밥 250그릇을 얻었다!");
+                /// 번역
+                if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                    GetRewordImgText(3, "쌀밥 250그릇을 얻었다!");
+                else
+                    GetRewordImgText(3, "Got rice 250!");
 
                 break;
 
             case 4:
                 PlayerPrefs.SetFloat("dDiamond", tmpDia + 100);
-                GetRewordImgText(2, "다이아 100개를 얻었다!");
+                /// 번역
+                if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                    GetRewordImgText(2, "다이아 100개를 얻었다!");
+                else
+                    GetRewordImgText(2, "Got diamond 100!");
 
                 break;
 
             case 5:
                 ppm.gupbap = dts.AddStringDouble(tmpGupBap, "1000");
-                GetRewordImgText(0, "국밥 1000그릇을 얻었다!");
+                /// 번역
+                if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                    GetRewordImgText(0, "국밥 1000그릇을 얻었다!");
+                else
+                    GetRewordImgText(0, "Got Korean soup 1000!");
 
                 break;
 
             case 6:
                 ppm.key += 10;
-                GetRewordImgText(1, "열쇠 10개를 얻었다!");
+                /// 번역
+                if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                    GetRewordImgText(1, "열쇠 10개를 얻었다!");
+                else
+                    GetRewordImgText(1, "Got keys 10!");
 
                 break;
 
             case 7:
                 PlayerPrefs.SetFloat("dDiamond", tmpDia + 50);
-                GetRewordImgText(2, "다이아 50개를 얻었다!");
+                /// 번역
+                if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                    GetRewordImgText(2, "다이아 50개를 얻었다!");
+                else
+                    GetRewordImgText(2, "Got diamond 50!");
 
                 break;
 
             case 8:
                 ppm.ssalbap = dts.AddStringDouble(tmpSSal, "500");
-                GetRewordImgText(3, "쌀밥 500개를 얻었다!");
+                /// 번역
+                if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                    GetRewordImgText(3, "쌀밥 500개를 얻었다!");
+                else
+                    GetRewordImgText(3, "Got rice 500!");
 
                 break;
 
             case 9:
                 PlayerPrefs.SetFloat("dDiamond", tmpDia + 150);
-                GetRewordImgText(2, "다이아 150개를 얻었다!");
+                /// 번역
+                if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                    GetRewordImgText(2, "다이아 150개를 얻었다!");
+                else
+                    GetRewordImgText(2, "Got diamond 150!");
 
                 break;
 
 
             case 10:
                 ppm.gupbap = dts.AddStringDouble(tmpGupBap, "1500");
-                GetRewordImgText(0, "국밥 1500그릇을 얻었다!");
+                /// 번역
+                if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                    GetRewordImgText(0, "국밥 1500그릇을 얻었다!");
+                else
+                    GetRewordImgText(0, "Got Korean soup 1500!");
 
                 break;
 
             case 11:
                 ppm.key += 15;
-                GetRewordImgText(1, "열쇠 15개를 얻었다!");
+                /// 번역
+                if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                    GetRewordImgText(1, "열쇠 15개를 얻었다!");
+                else
+                    GetRewordImgText(1, "Got keys 15!");
 
                 break;
 
             case 12:
                 PlayerPrefs.SetFloat("dDiamond", tmpDia + 50);
-                GetRewordImgText(2, "다이아 50개를 얻었다!");
+                /// 번역
+                if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                    GetRewordImgText(2, "다이아 50개를 얻었다!");
+                else
+                    GetRewordImgText(2, "Got diamond 50!");
 
                 break;
 
             case 13:
                 ppm.ssalbap = dts.AddStringDouble(tmpSSal, "750");
-                GetRewordImgText(3, "쌀밥 750개를 얻었다!");
+                /// 번역
+                if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                    GetRewordImgText(3, "쌀밥 750개를 얻었다!");
+                else
+                    GetRewordImgText(3, "Got rice 750!");
 
                 break;
 
             case 14:
                 PlayerPrefs.SetFloat("dDiamond", tmpDia + 200);
-                GetRewordImgText(2, "다이아 200개를 얻었다!");
+                /// 번역
+                if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                    GetRewordImgText(2, "다이아 200개를 얻었다!");
+                else
+                    GetRewordImgText(2, "Got diamond 200!");
 
                 break;
 
 
             case 15:
                 ppm.gupbap = dts.AddStringDouble(tmpGupBap, "2000");
-                GetRewordImgText(0, "국밥 2000개를 얻었다!");
+                /// 번역
+                if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                    GetRewordImgText(0, "국밥 2000개를 얻었다!");
+                else
+                    GetRewordImgText(0, "Got Korean soup 2000!");
 
                 break;
 
             case 16:
                 ppm.key += 20;
-                GetRewordImgText(1, "열쇠 20개를 얻었다!");
+                /// 번역
+                if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                    GetRewordImgText(1, "열쇠 20개를 얻었다!");
+                else
+                    GetRewordImgText(1, "Got keys 20!");
 
                 break;
 
             case 17:
                 PlayerPrefs.SetFloat("dDiamond", tmpDia + 50);
-                GetRewordImgText(2, "다이아 50개를 얻었다!");
+                /// 번역
+                if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                    GetRewordImgText(2, "다이아 50개를 얻었다!");
+                else
+                    GetRewordImgText(2, "Got diamond 50!");
 
                 break;
 
             case 18:
                 ppm.ssalbap = dts.AddStringDouble(tmpSSal, "1000");
-                GetRewordImgText(3, "쌀밥 1000그릇을 얻었다!");
+                /// 번역
+                if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                    GetRewordImgText(3, "쌀밥 1000그릇을 얻었다!");
+                else
+                    GetRewordImgText(3, "Got rice 1000!");
 
                 break;
 
             case 19:
                 PlayerPrefs.SetFloat("dDiamond", tmpDia + 250);
-                GetRewordImgText(2, "다이아 250개를 얻었다!");
+                /// 번역
+                if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                    GetRewordImgText(2, "다이아 250개를 얻었다!");
+                else
+                    GetRewordImgText(2, "Got diamond 250!");
 
                 break;
 
             case 20:
                 ppm.gupbap = dts.AddStringDouble(tmpGupBap, "3000");
-                GetRewordImgText(0, "국밥 3000그릇을 얻었다!");
+                /// 번역
+                if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                    GetRewordImgText(0, "국밥 3000그릇을 얻었다!");
+                else
+                    GetRewordImgText(0, "Got Korean soup 3000!");
 
                 break;
 
             case 21:
                 ppm.key += 30;
-                GetRewordImgText(1, "열쇠 30개를 얻었다!");
+                /// 번역
+                if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                    GetRewordImgText(1, "열쇠 30개를 얻었다!");
+                else
+                    GetRewordImgText(1, "Got keys 30!");
 
                 break;
 
             case 22:
                 PlayerPrefs.SetFloat("dDiamond", tmpDia + 50);
-                GetRewordImgText(2, "다이아 50개를 얻었다!");
+                /// 번역
+                if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                    GetRewordImgText(2, "다이아 50개를 얻었다!");
+                else
+                    GetRewordImgText(2, "Got diamond 50!");
 
                 break;
 
             case 23:
                 ppm.ssalbap = dts.AddStringDouble(tmpSSal, "2000");
-                GetRewordImgText(3, "쌀밥 2000그릇을 얻었다!");
+                /// 번역
+                if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                    GetRewordImgText(3, "쌀밥 2000그릇을 얻었다!");
+                else
+                    GetRewordImgText(3, "Got rice 2000!");
 
                 break;
 
             case 24:
                 PlayerPrefs.SetFloat("dDiamond", tmpDia + 500);
-                GetRewordImgText(2, "다이아 500개를 얻었다!");
+                /// 번역
+                if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                    GetRewordImgText(2, "다이아 500개를 얻었다!");
+                else
+                    GetRewordImgText(2, "Got diamond 500!");
 
                 break;
 

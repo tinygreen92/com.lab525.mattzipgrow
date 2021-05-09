@@ -128,7 +128,12 @@ public class DenfenceMode : MonoBehaviour
         float cnt = 20f;
         cnt -= PlayerPrefsManager.GetInstance().Arti_DefenceTime * 0.1f;
         Timer.fillAmount = 1;
-        Timer.GetComponentInChildren<Text>().text = "남은 시간 : " + string.Format("{0:f1}", cnt);
+        /// 번역
+        if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+            Timer.GetComponentInChildren<Text>().text = "남은 시간 : " + string.Format("{0:f1}", cnt);
+        else
+            Timer.GetComponentInChildren<Text>().text = "Time remaining : " + string.Format("{0:f1}", cnt);
+
 
         // 카운트 다운
         StartCoroutine(CountTimer());
@@ -194,7 +199,11 @@ public class DenfenceMode : MonoBehaviour
             cnt -= 0.05f;
 
             Timer.fillAmount = cnt / cntMax;
-            Timer.GetComponentInChildren<Text>().text = "남은 시간 : " + string.Format("{0:f1}", cnt);
+            /// 번역
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                Timer.GetComponentInChildren<Text>().text = "남은 시간 : " + string.Format("{0:f1}", cnt);
+            else
+                Timer.GetComponentInChildren<Text>().text = "Time remaining : " + string.Format("{0:f1}", cnt);
         }
 
         /// 20초 동안 버티면 성공
@@ -327,12 +336,21 @@ public class DenfenceMode : MonoBehaviour
             {
                 // 온 받은 순간부터 소모 타이머 카운트 다운
                 CoolTimeText.text = string.Format("{0:00}:{1:00}", unbiasedRemaining.Minutes, unbiasedRemaining.Seconds);
-                popUpTime.text = "남은 시간 " +  string.Format("{0:00}:{1:00}", unbiasedRemaining.Minutes, unbiasedRemaining.Seconds);
-                popUpTime2.text = "남은 시간 " +  string.Format("{0:00}:{1:00}", unbiasedRemaining.Minutes, unbiasedRemaining.Seconds);
+                /// 번역
+                if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                {
+                    popUpTime.text = "남은 시간 " + string.Format("{0:00}:{1:00}", unbiasedRemaining.Minutes, unbiasedRemaining.Seconds);
+                    popUpTime2.text = "남은 시간 " + string.Format("{0:00}:{1:00}", unbiasedRemaining.Minutes, unbiasedRemaining.Seconds);
+                }
+                else
+                {
+                    popUpTime.text = "Time remaining " + string.Format("{0:00}:{1:00}", unbiasedRemaining.Minutes, unbiasedRemaining.Seconds);
+                    popUpTime2.text = "Time remaining " + string.Format("{0:00}:{1:00}", unbiasedRemaining.Minutes, unbiasedRemaining.Seconds);
+                }
+
             }
             else // 쿨타임 끝
             {
-                Debug.LogWarning("CoolTimeCover 쿨타임 끝");
                 CoolTimeCover.gameObject.SetActive(false);
                 CoolTimeText.gameObject.SetActive(false);
                 popUpTime2.gameObject.SetActive(false);

@@ -360,9 +360,7 @@ public class OfflineManager : MonoBehaviour
         PlayerPrefsManager.GetInstance().gold = dts.AddStringDouble(gold, gettingGold);
 
 
-        PopUpObjectManager.GetInstance().ShowWarnnigProcess(
-            UserWallet.GetInstance().SeetheNatural(double.Parse(gettingGold)) +
-            " 골드를 획득하셨습니다.");
+        PopUpObjectManager.GetInstance().ShowWarnnigProcess(UserWallet.GetInstance().SeetheNatural(double.Parse(gettingGold)) + " 골드를 획득하셨습니다.");
 
 
 
@@ -413,9 +411,7 @@ public class OfflineManager : MonoBehaviour
         /// 맷집 게이지 1배 올려주기
         RewordFriendBae(1f);
         ///
-        PopUpObjectManager.GetInstance().ShowWarnnigProcess(
-    UserWallet.GetInstance().SeetheNatural(double.Parse(gettingGold)) +
-    " 골드를 획득하셨습니다.");
+        PopUpObjectManager.GetInstance().ShowWarnnigProcess(UserWallet.GetInstance().SeetheNatural(double.Parse(gettingGold)) + " 골드를 획득하셨습니다.");
 
         UserWallet.GetInstance().ShowAllMoney();
     }

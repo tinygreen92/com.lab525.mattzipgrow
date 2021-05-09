@@ -1413,7 +1413,7 @@ public class PlayFabLogin : MonoBehaviour
             }
 
         }
-        Debug.LogWarning("타임 오버");
+        Debug.LogWarning("미니게임 타임 오버");
         StartCoroutine(PVP_GameOver(false));
 
     }

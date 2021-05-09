@@ -412,18 +412,38 @@ public class GroggyManager : MonoBehaviour
         PlayerPrefsManager.GetInstance().isGupSpeed = true;
         BodyRecoveringforHealing();
 
-        GupSkillTimer.text = "남은 시간 : " + string.Format("{0:f1}", speedTime);
-        GupSkillTimer.gameObject.SetActive(true);
-
-        yield return null;
-
-        while (speedTime > 0)
+        /// 번역
+        if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
         {
-            yield return new WaitForSeconds(0.05f);
-
-            speedTime -= 0.05f;
             GupSkillTimer.text = "남은 시간 : " + string.Format("{0:f1}", speedTime);
+            GupSkillTimer.gameObject.SetActive(true);
 
+            yield return null;
+
+            while (speedTime > 0)
+            {
+                yield return new WaitForSeconds(0.05f);
+
+                speedTime -= 0.05f;
+                GupSkillTimer.text = "남은 시간 : " + string.Format("{0:f1}", speedTime);
+
+            }
+        }
+        else
+        {
+            GupSkillTimer.text = "번역 : " + string.Format("{0:f1}", speedTime);
+            GupSkillTimer.gameObject.SetActive(true);
+
+            yield return null;
+
+            while (speedTime > 0)
+            {
+                yield return new WaitForSeconds(0.05f);
+
+                speedTime -= 0.05f;
+                GupSkillTimer.text = "번역 : " + string.Format("{0:f1}", speedTime);
+
+            }
         }
 
         PlayerPrefsManager.GetInstance().isGupSpeed = false;
@@ -494,7 +514,7 @@ public class GroggyManager : MonoBehaviour
 
 
     /// <summary>
-    /// 너고소 타이머
+    /// 그로기 타이머
     /// </summary>
     /// <returns></returns>
     IEnumerator grogro()
@@ -504,21 +524,48 @@ public class GroggyManager : MonoBehaviour
         float Maxcnt = cnt;
 
         timerImg.fillAmount = 1.0f;
-        timerImg.GetComponentInChildren<Text>().text = "남은 시간 : " + string.Format("{0:f1}", cnt);
 
-        yield return null;
-
-        timerImg.transform.parent.gameObject.SetActive(true);
-
-        while (cnt > 0)
+        /// 번역
+        if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
         {
-            yield return new WaitForSeconds(0.05f);
-
-            cnt -= 0.05f;
-            timerImg.fillAmount = cnt / Maxcnt;
             timerImg.GetComponentInChildren<Text>().text = "남은 시간 : " + string.Format("{0:f1}", cnt);
 
+            yield return null;
+
+            timerImg.transform.parent.gameObject.SetActive(true);
+
+            while (cnt > 0)
+            {
+                yield return new WaitForSeconds(0.05f);
+
+                cnt -= 0.05f;
+                timerImg.fillAmount = cnt / Maxcnt;
+                timerImg.GetComponentInChildren<Text>().text = "남은 시간 : " + string.Format("{0:f1}", cnt);
+
+            }
         }
+        else
+        {
+            timerImg.GetComponentInChildren<Text>().text = "번역 시간 : " + string.Format("{0:f1}", cnt);
+
+            yield return null;
+
+            timerImg.transform.parent.gameObject.SetActive(true);
+
+            while (cnt > 0)
+            {
+                yield return new WaitForSeconds(0.05f);
+
+                cnt -= 0.05f;
+                timerImg.fillAmount = cnt / Maxcnt;
+                timerImg.GetComponentInChildren<Text>().text = "번역 시간 : " + string.Format("{0:f1}", cnt);
+
+            }
+        }
+
+
+
+
 
         // 그로기 해제.
         GroggyOff();
@@ -530,6 +577,9 @@ public class GroggyManager : MonoBehaviour
         //GroggyOff();
     }
 
+    /// <summary>
+    /// 삭제된 컨텐츠
+    /// </summary>
     public void YouGOSOforDia()
     {
         //var dia = PlayerPrefsManager.GetInstance().diamond;
@@ -1285,6 +1335,10 @@ public class GroggyManager : MonoBehaviour
     /// </summary>
     public void PowerUP_Init()
     {
+        bool isKorean = false;
+        if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean") isKorean = true;
+
+
         PowerLv = PlayerPrefsManager.GetInstance().ATK_Lv;
         HP_Lv = PlayerPrefsManager.GetInstance().Mat_HP_Lv;
         Rec_Lv = PlayerPrefsManager.GetInstance().Recov_Lv;
@@ -1374,8 +1428,11 @@ public class GroggyManager : MonoBehaviour
         PlayerPrefsManager.GetInstance().RawAttackDamage = tmpATK;
         //ChraterInfo[0].GetComponent<Text>().text = UserWallet.GetInstance().SeetheTruth(PlayerPrefsManager.GetInstance().PlayerDPS);
         UserWallet.GetInstance().ShowUserATK();
-
-        POWER_UP_TEXT.text = "공격력 " + UserWallet.GetInstance().SeetheNatural(double.Parse(tmpATK)) + " > " + UserWallet.GetInstance().SeetheNatural(double.Parse(tmptmpATK));
+        /// 번역
+        if (isKorean)
+            POWER_UP_TEXT.text = "공격력 " + UserWallet.GetInstance().SeetheNatural(double.Parse(tmpATK)) + " > " + UserWallet.GetInstance().SeetheNatural(double.Parse(tmptmpATK));
+        else
+            POWER_UP_TEXT.text = "번역 " + UserWallet.GetInstance().SeetheNatural(double.Parse(tmpATK)) + " > " + UserWallet.GetInstance().SeetheNatural(double.Parse(tmptmpATK));
         /// 소비 골드 표기
         currentAtk = GetNormalUpPrice(0, PowerLv);
 
@@ -1401,8 +1458,11 @@ public class GroggyManager : MonoBehaviour
         PlayerPrefsManager.GetInstance().Stat_MaxHP = tmpATK;
         //ChraterInfo[1].GetComponent<Text>().text = UserWallet.GetInstance().SeetheTruth(PlayerPrefsManager.GetInstance().Mat_MaxHP);
         UserWallet.GetInstance().ShowUserHP();
-
-        HP_UP_TEXT.text = "체력 " + UserWallet.GetInstance().SeetheNatural(double.Parse(tmpATK)) + " > " + UserWallet.GetInstance().SeetheNatural(double.Parse(tmptmpATK));
+        /// 번역
+        if (isKorean)
+            HP_UP_TEXT.text = "체력 " + UserWallet.GetInstance().SeetheNatural(double.Parse(tmpATK)) + " > " + UserWallet.GetInstance().SeetheNatural(double.Parse(tmptmpATK));
+        else
+            HP_UP_TEXT.text = "번역 " + UserWallet.GetInstance().SeetheNatural(double.Parse(tmpATK)) + " > " + UserWallet.GetInstance().SeetheNatural(double.Parse(tmptmpATK));
         /// 소비 골드 표기
         currentHP = GetNormalUpPrice(1, HP_Lv);
 
@@ -1427,8 +1487,11 @@ public class GroggyManager : MonoBehaviour
         PlayerPrefs.SetString("Stat_Recov", tmpATK);
         //ChraterInfo[2].GetComponent<Text>().text = UserWallet.GetInstance().SeetheNatural(double.Parse(PlayerPrefsManager.GetInstance().Mat_Recov)) + " /s";
         UserWallet.GetInstance().ShowUserHP_Recov();
-
-        Recov_UP_TEXT.text = "체력 회복력 " + UserWallet.GetInstance().SeetheNatural(double.Parse(tmpATK)) + " > " + UserWallet.GetInstance().SeetheNatural(double.Parse(tmptmpATK));
+        /// 번역
+        if (isKorean)
+            Recov_UP_TEXT.text = "체력 회복력 " + UserWallet.GetInstance().SeetheNatural(double.Parse(tmpATK)) + " > " + UserWallet.GetInstance().SeetheNatural(double.Parse(tmptmpATK));
+        else
+            Recov_UP_TEXT.text = "번역 회복력 " + UserWallet.GetInstance().SeetheNatural(double.Parse(tmpATK)) + " > " + UserWallet.GetInstance().SeetheNatural(double.Parse(tmptmpATK));
         /// 소비 골드 표기
         currentRec = GetNormalUpPrice(2, Rec_Lv);
 
@@ -1449,7 +1512,11 @@ public class GroggyManager : MonoBehaviour
         tmptmpATK = nextRec;
 
         UserWallet.GetInstance().ShowUserDeffence();
-        Mat_HP_UP_TEXT.text = "방어력 " + UserWallet.GetInstance().SeetheNatural(double.Parse(tmpATK)) + " > " + UserWallet.GetInstance().SeetheNatural(double.Parse(tmptmpATK));
+        /// 번역
+        if (isKorean)
+            Mat_HP_UP_TEXT.text = "방어력 " + UserWallet.GetInstance().SeetheNatural(double.Parse(tmpATK)) + " > " + UserWallet.GetInstance().SeetheNatural(double.Parse(tmptmpATK));
+        else
+            Mat_HP_UP_TEXT.text = "번역 " + UserWallet.GetInstance().SeetheNatural(double.Parse(tmpATK)) + " > " + UserWallet.GetInstance().SeetheNatural(double.Parse(tmptmpATK));
         /// 소비 국밥 표기
         currentRec = GetNormalUpPrice(3, Defend_Lv);
 
@@ -1458,57 +1525,6 @@ public class GroggyManager : MonoBehaviour
         doublePrice = (doublePrice * (1.0d - PlayerPrefsManager.GetInstance().Arti_GoldUpgrade * 0.001d));
 
         Mat_HP_UP_Price.text = UserWallet.GetInstance().SeetheNatural(doublePrice);
-
-        //-------------------------------------------------------------------------------------------------------//
-        //
-
-        //currentAtk = (ATK_PER_UP_Lv * 0.5d).ToString();
-        //nextAtk = ((ATK_PER_UP_Lv + 1) * 0.5d).ToString();
-
-        //tmpATK = (currentAtk);
-        //tmptmpATK = (nextAtk);
-
-        //PlayerPrefsManager.GetInstance().ATK_PER_UP = tmpATK;
-        //ChraterInfo.GetChild(1).GetChild(2).GetComponent<Text>().text = UserWallet.GetInstance().SeetheTruth(PlayerPrefsManager.GetInstance().PlayerDPS);
-
-        //ATK_PER_UP_TEXT.text = "공격력 " + tmpATK + "% > " + tmptmpATK + "%";
-        ///// 소비 골드 표기
-        //doublePrice = GetPerUpPrice(4, ATK_PER_UP_Lv);
-
-        ///// 골드 업그레이드 비용 감소.
-        //doublePrice = (doublePrice * (1.0d - PlayerPrefsManager.GetInstance().Arti_GoldUpgrade * 0.001d));
-
-        //ATK_PER_UP_Price.text = UserWallet.GetInstance().SeetheNatural(doublePrice);
-
-
-
-        //-------------------------------------------------------------------------------------------------------//
-        //
-
-        //currentAtk = (HP_PER_UP_Lv * 0.5d).ToString();
-        //nextAtk = ((HP_PER_UP_Lv + 1) * 0.5d).ToString();
-
-        //tmpATK = (currentAtk);
-        //tmptmpATK = (nextAtk);
-
-        //PlayerPrefsManager.GetInstance().HP_PER_UP = tmpATK;
-        //ChraterInfo.GetChild(1).GetChild(2).GetComponent<Text>().text = UserWallet.GetInstance().SeetheTruth(PlayerPrefsManager.GetInstance().PlayerDPS);
-
-        //HP_PER_UP_TEXT.text = "체력 " + tmpATK + "% > " + tmptmpATK + "%";
-
-
-
-        ///// 소비 골드 표기
-        //doublePrice = GetPerUpPrice(5, HP_PER_UP_Lv);
-
-        ///// 골드 업그레이드 비용 감소.
-        //doublePrice = (doublePrice * (1.0d - PlayerPrefsManager.GetInstance().Arti_GoldUpgrade * 0.001d));
-
-        //HP_PER_UP_Price.text = UserWallet.GetInstance().SeetheNatural(doublePrice);
-
-
-
-
 
         //-------------------------------------------------------------------------------------------------------//
         //
@@ -1522,8 +1538,11 @@ public class GroggyManager : MonoBehaviour
         tmptmpATK = (nextAtk);
 
         PlayerPrefsManager.GetInstance().Dia_ATK_PER_UP = tmpATK;
-
-        Dia_ATK_PER_UP_TEXT.text = "공격력 " + tmpATK + "% > " + tmptmpATK + "%";
+        /// 번역
+        if (isKorean)
+            Dia_ATK_PER_UP_TEXT.text = "공격력 " + tmpATK + "% > " + tmptmpATK + "%";
+        else
+            Dia_ATK_PER_UP_TEXT.text = "번역 " + tmpATK + "% > " + tmptmpATK + "%";
         /// 
         //currentAtk = PlayerPrefsManager.GetInstance().diaStatDataColl[1, Dia_ATK_PER_UP_Lv + 1];
         tmpATK = (50 * (Dia_ATK_PER_UP_Lv + 2)).ToString();
@@ -1543,7 +1562,11 @@ public class GroggyManager : MonoBehaviour
 
         PlayerPrefsManager.GetInstance().Dia_HP_PER_UP = tmpATK;
 
-        Dia_HP_PER_UP_TEXT.text = "체력 " + tmpATK + "% > " + tmptmpATK + "%";
+        /// 번역
+        if (isKorean)
+            Dia_HP_PER_UP_TEXT.text = "체력 " + tmpATK + "% > " + tmptmpATK + "%";
+        else
+            Dia_HP_PER_UP_TEXT.text = "번역 " + tmpATK + "% > " + tmptmpATK + "%";
         /// 
         //currentAtk = PlayerPrefsManager.GetInstance().diaStatDataColl[3, Dia_HP_PER_UP_Lv + 1];
         tmpATK = (100 * (Dia_HP_PER_UP_Lv + 2)).ToString();
@@ -1561,8 +1584,11 @@ public class GroggyManager : MonoBehaviour
         tmptmpATK = (nextAtk);
 
         PlayerPrefsManager.GetInstance().CRC_UP = tmpATK;
-
-        CRC_UP_TEXT.text = "치명타 확률 " + tmpATK + "% > " + tmptmpATK + "%";
+        /// 번역
+        if (isKorean)
+            CRC_UP_TEXT.text = "치명타 확률 " + tmpATK + "% > " + tmptmpATK + "%";
+        else
+            CRC_UP_TEXT.text = "번역 확률 " + tmpATK + "% > " + tmptmpATK + "%";
 
         /// 소비 골드 표기
         doublePrice = GetPerUpPrice(6, CRC_Lv);
@@ -1586,7 +1612,11 @@ public class GroggyManager : MonoBehaviour
 
         PlayerPrefsManager.GetInstance().CRD_UP = tmpATK;
 
-        CRD_UP_TEXT.text = "치명타 대미지 " + tmpATK + "% > " + tmptmpATK + "%";
+        /// 번역
+        if (isKorean)
+            CRD_UP_TEXT.text = "치명타 대미지 " + tmpATK + "% > " + tmptmpATK + "%";
+        else
+            CRD_UP_TEXT.text = "번역 대미지 " + tmpATK + "% > " + tmptmpATK + "%";
 
         /// 소비 골드 표기
         doublePrice = GetPerUpPrice(7, CRD_Lv);
@@ -1608,7 +1638,11 @@ public class GroggyManager : MonoBehaviour
 
         PlayerPrefsManager.GetInstance().Dia_CRC_UP = tmpATK;
 
-        Dia_CRC_UP_TEXT.text = "치명타 확률 " + tmpATK + "% > " + tmptmpATK + "%";
+        /// 번역
+        if (isKorean)
+            Dia_CRC_UP_TEXT.text = "치명타 확률 " + tmpATK + "% > " + tmptmpATK + "%";
+        else
+            Dia_CRC_UP_TEXT.text = "번역 확률 " + tmpATK + "% > " + tmptmpATK + "%";
         /// 
         tmpATK = (100 * (Dia_CRC_Lv + 1)).ToString();
 
@@ -1628,7 +1662,11 @@ public class GroggyManager : MonoBehaviour
 
         PlayerPrefsManager.GetInstance().Dia_CRD_UP = tmpATK;
 
-        Dia_CRD_UP_TEXT.text = "치명타 대미지 " + tmpATK + "% > " + tmptmpATK + "%";
+        /// 번역
+        if (isKorean)
+            Dia_CRD_UP_TEXT.text = "치명타 대미지 " + tmpATK + "% > " + tmptmpATK + "%";
+        else
+            Dia_CRD_UP_TEXT.text = "번역 대미지 " + tmpATK + "% > " + tmptmpATK + "%";
         /// 
         tmpATK = (50 * (Dia_CRD_Lv + 1)).ToString();
 
@@ -1645,33 +1683,15 @@ public class GroggyManager : MonoBehaviour
         tmpATK = (currentAtk);
         tmptmpATK = (nextAtk);
 
-        Dia_Deffence_Per_UP_TEXT.text = "방어력 " + tmpATK + "% > " + tmptmpATK + "%";
+        /// 번역
+        if (isKorean)
+            Dia_Deffence_Per_UP_TEXT.text = "방어력 " + tmpATK + "% > " + tmptmpATK + "%";
+        else
+            Dia_Deffence_Per_UP_TEXT.text = "번역 " + tmpATK + "% > " + tmptmpATK + "%";
         /// 
         tmpATK = Dia_Deffence_Lv < 1 ? "100" : (50 * (Dia_Deffence_Lv + 2)).ToString();
 
         Dia_Deffence_Per_UP_Price.text = UserWallet.GetInstance().SeetheNatural(double.Parse(tmpATK));
-
-
-
-
-
-
-        /////  0709
-        //// 골드 체회퍼
-        /////  
-        //tmpATK = (10 * Gold_HPPER_Lv).ToString();
-        //tmptmpATK = (10 * (Gold_HPPER_Lv + 1)).ToString();
-
-        //Gold_Recov_Per_UP_TEXT.text = "체력 회복력 " + tmpATK + "% > " + tmptmpATK + "%";
-
-        ///// 소비 골드 표기
-        //doublePrice = GetPerUpPrice(8, Gold_HPPER_Lv);
-
-        ///// 골드 업그레이드 비용 감소.
-        //doublePrice = (doublePrice * (1.0d - PlayerPrefsManager.GetInstance().Arti_GoldUpgrade * 0.001d));
-
-        //Gold_Recov_Per_UP_Price.text = UserWallet.GetInstance().SeetheNatural(doublePrice);
-
 
 
 
@@ -1682,7 +1702,11 @@ public class GroggyManager : MonoBehaviour
         tmpATK = (5 * Dia_HPPER_Lv).ToString();
         tmptmpATK = (5 * (Dia_HPPER_Lv + 1)).ToString();
 
-        Dia_Recov_Per_UP_TEXT.text = "체력 회복력 " + tmpATK + "% > " + tmptmpATK + "%";
+        /// 번역
+        if (isKorean)
+            Dia_Recov_Per_UP_TEXT.text = "체력 회복력 " + tmpATK + "% > " + tmptmpATK + "%";
+        else
+            Dia_Recov_Per_UP_TEXT.text = "번역 회복력 " + tmpATK + "% > " + tmptmpATK + "%";
         /// 
         tmpATK = (75 * (Dia_HPPER_Lv + 1)).ToString();
 

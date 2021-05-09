@@ -31,13 +31,23 @@ public class Booster_Power : MonoBehaviour
             // 온/오프 기능
             if (!transform.GetChild(0).gameObject.activeSelf)
             {
-                transform.GetChild(1).GetComponent<Text>().text = "골드버프 ON";
+                /// 번역
+                if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                    transform.GetChild(1).GetComponent<Text>().text = "골드버프 ON";
+                else
+                    transform.GetChild(1).GetComponent<Text>().text = "Gold buff ON";
+
                 PlayerPrefsManager.GetInstance().isGoldTriple = true;
 
             }
             else
             {
-                transform.GetChild(1).GetComponent<Text>().text = "골드버프 OFF";
+                /// 번역
+                if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                    transform.GetChild(1).GetComponent<Text>().text = "골드버프 OFF";
+                else
+                    transform.GetChild(1).GetComponent<Text>().text = "Gold buff OFF";
+
                 PlayerPrefsManager.GetInstance().isGoldTriple = false;
 
             }
