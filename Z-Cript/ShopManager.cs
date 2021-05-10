@@ -66,9 +66,19 @@ public class ShopManager : MonoBehaviour
 
                     GetNormalGold();
 
-                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("성공적으로 구입하셨습니다.");
+                    if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                        PopUpObjectManager.GetInstance().ShowWarnnigProcess("성공적으로 구입하셨습니다.");
+                    else
+                        PopUpObjectManager.GetInstance().ShowWarnnigProcess("Successfully purchased.");
                 }
-                else PopUpObjectManager.GetInstance().ShowWarnnigProcess("보유 다이아가 부족합니다.");
+                else
+                {
+                    if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                        PopUpObjectManager.GetInstance().ShowWarnnigProcess("보유 다이아가 부족합니다.");
+                    else
+                        PopUpObjectManager.GetInstance().ShowWarnnigProcess("Not enough diamonds.");
+
+                }
                 break;
 
             // 열쇠
@@ -81,10 +91,18 @@ public class ShopManager : MonoBehaviour
 
 
                     PlayerPrefsManager.GetInstance().key += 10;
-                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("성공적으로 구입하셨습니다.");
-
+                    if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                        PopUpObjectManager.GetInstance().ShowWarnnigProcess("성공적으로 구입하셨습니다.");
+                    else
+                        PopUpObjectManager.GetInstance().ShowWarnnigProcess("Successfully purchased.");
                 }
-                else PopUpObjectManager.GetInstance().ShowWarnnigProcess("보유 다이아가 부족합니다.");
+                else 
+                {
+                    if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                        PopUpObjectManager.GetInstance().ShowWarnnigProcess("보유 다이아가 부족합니다.");
+                    else
+                        PopUpObjectManager.GetInstance().ShowWarnnigProcess("Not enough diamonds.");
+                }
 
                 break;
 
@@ -97,10 +115,19 @@ public class ShopManager : MonoBehaviour
                     PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") - 100);
 
                     booster_Power.BuyPowerShop();
-                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("성공적으로 구입하셨습니다.");
+                    if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                        PopUpObjectManager.GetInstance().ShowWarnnigProcess("성공적으로 구입하셨습니다.");
+                    else
+                        PopUpObjectManager.GetInstance().ShowWarnnigProcess("Successfully purchased.");
+                }
+                else
+                {
+                    if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                        PopUpObjectManager.GetInstance().ShowWarnnigProcess("보유 다이아가 부족합니다.");
+                    else
+                        PopUpObjectManager.GetInstance().ShowWarnnigProcess("Not enough diamonds.");
 
                 }
-                else PopUpObjectManager.GetInstance().ShowWarnnigProcess("보유 다이아가 부족합니다.");
 
                 break;
 
@@ -113,10 +140,19 @@ public class ShopManager : MonoBehaviour
                     PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") - 100);
 
                     booster_Body.BuyBodyShop();
-                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("성공적으로 구입하셨습니다.");
+                    if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                        PopUpObjectManager.GetInstance().ShowWarnnigProcess("성공적으로 구입하셨습니다.");
+                    else
+                        PopUpObjectManager.GetInstance().ShowWarnnigProcess("Successfully purchased.");
+                }
+                else
+                {
+                    if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                        PopUpObjectManager.GetInstance().ShowWarnnigProcess("보유 다이아가 부족합니다.");
+                    else
+                        PopUpObjectManager.GetInstance().ShowWarnnigProcess("Not enough diamonds.");
 
                 }
-                else PopUpObjectManager.GetInstance().ShowWarnnigProcess("보유 다이아가 부족합니다.");
 
                 break;
 
@@ -131,11 +167,19 @@ public class ShopManager : MonoBehaviour
                     var mlikAmount = PlayerPrefsManager.GetInstance().gupbap;
                     PlayerPrefsManager.GetInstance().gupbap = dts.AddStringDouble(mlikAmount, "1000");
 
-                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("성공적으로 구입하셨습니다.");
+                    if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                        PopUpObjectManager.GetInstance().ShowWarnnigProcess("성공적으로 구입하셨습니다.");
+                    else
+                        PopUpObjectManager.GetInstance().ShowWarnnigProcess("Successfully purchased.");
+                }
+                else
+                {
+                    if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                        PopUpObjectManager.GetInstance().ShowWarnnigProcess("보유 다이아가 부족합니다.");
+                    else
+                        PopUpObjectManager.GetInstance().ShowWarnnigProcess("Not enough diamonds.");
 
                 }
-                else PopUpObjectManager.GetInstance().ShowWarnnigProcess("보유 다이아가 부족합니다.");
-
                 break;
 
             // 쌀밥
@@ -149,11 +193,19 @@ public class ShopManager : MonoBehaviour
                     var mlikAmount = PlayerPrefsManager.GetInstance().ssalbap;
                     PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(mlikAmount, "500");
 
-                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("성공적으로 구입하셨습니다.");
+                    if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                        PopUpObjectManager.GetInstance().ShowWarnnigProcess("성공적으로 구입하셨습니다.");
+                    else
+                        PopUpObjectManager.GetInstance().ShowWarnnigProcess("Successfully purchased.");
+                }
+                else
+                {
+                    if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                        PopUpObjectManager.GetInstance().ShowWarnnigProcess("보유 다이아가 부족합니다.");
+                    else
+                        PopUpObjectManager.GetInstance().ShowWarnnigProcess("Not enough diamonds.");
 
                 }
-                else PopUpObjectManager.GetInstance().ShowWarnnigProcess("보유 다이아가 부족합니다.");
-
                 break;
 
             // pvp 입장권
@@ -166,11 +218,19 @@ public class ShopManager : MonoBehaviour
 
                     PlayerPrefsManager.GetInstance().ticket += 5;
 
-                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("성공적으로 구입하셨습니다.");
+                    if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                        PopUpObjectManager.GetInstance().ShowWarnnigProcess("성공적으로 구입하셨습니다.");
+                    else
+                        PopUpObjectManager.GetInstance().ShowWarnnigProcess("Successfully purchased.");
+                }
+                else
+                {
+                    if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                        PopUpObjectManager.GetInstance().ShowWarnnigProcess("보유 다이아가 부족합니다.");
+                    else
+                        PopUpObjectManager.GetInstance().ShowWarnnigProcess("Not enough diamonds.");
 
                 }
-                else PopUpObjectManager.GetInstance().ShowWarnnigProcess("보유 다이아가 부족합니다.");
-
                 break;
         }
 
@@ -302,8 +362,10 @@ public class ShopManager : MonoBehaviour
 
                     // 구매한적 없다면 다이아 소모
                     PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") - 500);
-                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("성공적으로 구입하셨습니다.");
-
+                    if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                        PopUpObjectManager.GetInstance().ShowWarnnigProcess("성공적으로 구입하셨습니다.");
+                    else
+                        PopUpObjectManager.GetInstance().ShowWarnnigProcess("Successfully purchased.");
                     sDataList[_index] = "1";
                 }
                 else
@@ -311,7 +373,10 @@ public class ShopManager : MonoBehaviour
                     /// 구매내역이 있다?
                     if (sDataList[_index] == "1") break;
 
-                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("보유 다이아가 부족합니다.");
+                    if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                        PopUpObjectManager.GetInstance().ShowWarnnigProcess("보유 다이아가 부족합니다.");
+                    else
+                        PopUpObjectManager.GetInstance().ShowWarnnigProcess("Not enough diamonds.");
                 }
                 break;
 
@@ -323,8 +388,10 @@ public class ShopManager : MonoBehaviour
 
                     // 구매한적 없다면 다이아 소모
                     PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") - 900);
-                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("성공적으로 구입하셨습니다.");
-
+                    if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                        PopUpObjectManager.GetInstance().ShowWarnnigProcess("성공적으로 구입하셨습니다.");
+                    else
+                        PopUpObjectManager.GetInstance().ShowWarnnigProcess("Successfully purchased.");
                     sDataList[_index] = "1";
                 }
                 else
@@ -332,7 +399,10 @@ public class ShopManager : MonoBehaviour
                     /// 구매내역이 있다?
                     if (sDataList[_index] == "1") break;
 
-                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("보유 다이아가 부족합니다.");
+                    if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                        PopUpObjectManager.GetInstance().ShowWarnnigProcess("보유 다이아가 부족합니다.");
+                    else
+                        PopUpObjectManager.GetInstance().ShowWarnnigProcess("Not enough diamonds.");
                 }
                 break;
 
@@ -344,8 +414,10 @@ public class ShopManager : MonoBehaviour
 
                     // 구매한적 없다면 다이아 소모
                     PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") - 1590);
-                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("성공적으로 구입하셨습니다.");
-
+                    if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                        PopUpObjectManager.GetInstance().ShowWarnnigProcess("성공적으로 구입하셨습니다.");
+                    else
+                        PopUpObjectManager.GetInstance().ShowWarnnigProcess("Successfully purchased.");
                     sDataList[_index] = "1";
                 }
                 else
@@ -353,7 +425,10 @@ public class ShopManager : MonoBehaviour
                     /// 구매내역이 있다?
                     if (sDataList[_index] == "1") break;
 
-                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("보유 다이아가 부족합니다.");
+                    if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                        PopUpObjectManager.GetInstance().ShowWarnnigProcess("보유 다이아가 부족합니다.");
+                    else
+                        PopUpObjectManager.GetInstance().ShowWarnnigProcess("Not enough diamonds.");
                 }
                 break;
 
@@ -365,8 +440,10 @@ public class ShopManager : MonoBehaviour
 
                     // 구매한적 없다면 다이아 소모
                     PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") - 2790);
-                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("성공적으로 구입하셨습니다.");
-
+                    if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                        PopUpObjectManager.GetInstance().ShowWarnnigProcess("성공적으로 구입하셨습니다.");
+                    else
+                        PopUpObjectManager.GetInstance().ShowWarnnigProcess("Successfully purchased.");
                     sDataList[_index] = "1";
                 }
                 else
@@ -374,7 +451,10 @@ public class ShopManager : MonoBehaviour
                     /// 구매내역이 있다?
                     if (sDataList[_index] == "1") break;
 
-                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("보유 다이아가 부족합니다.");
+                    if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                        PopUpObjectManager.GetInstance().ShowWarnnigProcess("보유 다이아가 부족합니다.");
+                    else
+                        PopUpObjectManager.GetInstance().ShowWarnnigProcess("Not enough diamonds.");
                 }
                 break;
 
@@ -386,8 +466,10 @@ public class ShopManager : MonoBehaviour
 
                     // 구매한적 없다면 다이아 소모
                     PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") - 4900);
-                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("성공적으로 구입하셨습니다.");
-
+                    if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                        PopUpObjectManager.GetInstance().ShowWarnnigProcess("성공적으로 구입하셨습니다.");
+                    else
+                        PopUpObjectManager.GetInstance().ShowWarnnigProcess("Successfully purchased.");
                     sDataList[_index] = "1";
                 }
                 else
@@ -395,7 +477,10 @@ public class ShopManager : MonoBehaviour
                     /// 구매내역이 있다?
                     if (sDataList[_index] == "1") break;
 
-                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("보유 다이아가 부족합니다.");
+                    if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                        PopUpObjectManager.GetInstance().ShowWarnnigProcess("보유 다이아가 부족합니다.");
+                    else
+                        PopUpObjectManager.GetInstance().ShowWarnnigProcess("Not enough diamonds.");
                 }
                 break;
 

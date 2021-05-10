@@ -651,7 +651,10 @@ public class TutorialMissionManager : MonoBehaviour
     /// </summary>
     public void ClickedSummitBtn()
     {
-        PopUpObjectManager.GetInstance().ShowWarnnigProcess("튜토리얼 미션 보상이 지급되었습니다.");
+        if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+            PopUpObjectManager.GetInstance().ShowWarnnigProcess("튜토리얼 미션 보상이 지급되었습니다.");
+        else
+            PopUpObjectManager.GetInstance().ShowWarnnigProcess("Tutorial mission rewards have been paid.");
 
         GettingPop.SetActive(false);
         UserWallet.GetInstance().isNoShow = false;

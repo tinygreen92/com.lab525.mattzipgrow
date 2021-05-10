@@ -4,13 +4,17 @@
  * @desc   : 로팅 씬 이후에 바로 실행해주는 값 모여라
  *           
  */
+using Lean.Localization;
 using System.Collections;
 using UnityEngine;
 
 public class GameStart : MonoBehaviour
 {
     public bool isDebugMode = false;
-
+    [Space]
+    [Header("-로컬라이징")]
+    public GameObject leanObject;
+    public LeanLocalization leanLocalization;
     [Header("-뉴 패키지 상점 내용물 세팅")]
     public NewPakaStarter[] news;
     public GameObject newsObject;
@@ -93,7 +97,18 @@ public class GameStart : MonoBehaviour
 
     private void Start()
     {
-        // 오디오 매니저 세팅
+        if (PlayerPrefsManager.GetInstance().IsEnglish)
+        {
+            leanObject.SetActive(false);
+            leanLocalization.SetCurrentLanguage("English");
+        }
+        else
+        {
+            leanObject.SetActive(true);
+            leanLocalization.SetCurrentLanguage("Korean");
+        }
+
+        /// 오디오 매니저 세팅
         audioManager.AudioSetting();
         /// 튜토리얼 세팅
         tutorialManager.FakeloadingOnOff(true);

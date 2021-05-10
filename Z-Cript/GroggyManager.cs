@@ -611,7 +611,10 @@ public class GroggyManager : MonoBehaviour
         }
         else
         {
-            PopUpObjectManager.GetInstance().ShowWarnnigProcess("보유 다이아가 부족합니다.");
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                PopUpObjectManager.GetInstance().ShowWarnnigProcess("보유 다이아가 부족합니다.");
+            else
+                PopUpObjectManager.GetInstance().ShowWarnnigProcess("Not enough diamonds.");
         }
     }
 

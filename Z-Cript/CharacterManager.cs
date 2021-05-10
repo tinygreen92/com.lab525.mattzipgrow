@@ -228,13 +228,19 @@ public class CharacterManager : MonoBehaviour
         {
             // 구매한적 없다면 다이아 소모
             PlayerPrefs.SetFloat("dDiamond", float.Parse(dia_pass));
-            PopUpObjectManager.GetInstance().ShowWarnnigProcess("성공적으로 구입하셨습니다.");
-            // 데이터에 구매 완료 표기
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                PopUpObjectManager.GetInstance().ShowWarnnigProcess("성공적으로 구입하셨습니다.");
+            else
+                PopUpObjectManager.GetInstance().ShowWarnnigProcess("Successfully purchased.");            // 데이터에 구매 완료 표기
             sDataList[_index] = "1";
         }
         else // 돈 없으면 꺼져
         {
-            PopUpObjectManager.GetInstance().ShowWarnnigProcess("보유 다이아가 부족합니다.");
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                PopUpObjectManager.GetInstance().ShowWarnnigProcess("보유 다이아가 부족합니다.");
+            else
+                PopUpObjectManager.GetInstance().ShowWarnnigProcess("Not enough diamonds.");
+            
             return;
         }
 
@@ -367,7 +373,11 @@ public class CharacterManager : MonoBehaviour
         // 돈 없으면 꺼져
         if (!Pet_diaCheack())
         {
-            PopUpObjectManager.GetInstance().ShowWarnnigProcess("보유 다이아가 부족합니다.");
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                PopUpObjectManager.GetInstance().ShowWarnnigProcess("보유 다이아가 부족합니다.");
+            else
+                PopUpObjectManager.GetInstance().ShowWarnnigProcess("Not enough diamonds.");
+            
             return;
         }
 
@@ -378,8 +388,10 @@ public class CharacterManager : MonoBehaviour
 
         // 구매한적 없다면 다이아 소모
         PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") - 3000);
-        PopUpObjectManager.GetInstance().ShowWarnnigProcess("성공적으로 구입하셨습니다.");
-
+        if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+            PopUpObjectManager.GetInstance().ShowWarnnigProcess("성공적으로 구입하셨습니다.");
+        else
+            PopUpObjectManager.GetInstance().ShowWarnnigProcess("Successfully purchased.");
         // 데이터에 구매 완료 표기
         if (_index == 0)            /// 글러브
         {

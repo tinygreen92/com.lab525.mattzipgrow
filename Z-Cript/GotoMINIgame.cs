@@ -185,7 +185,10 @@ public class GotoMINIgame : MonoBehaviour
         {
             //Debug.LogWarning("iiiiiii" + nextWeaponIndex);
             //Debug.LogWarning("PlayerPrefsManager.GetInstance().PunchIndex L:: " + PlayerPrefsManager.GetInstance().PunchIndex);
-            PopUpObjectManager.GetInstance().ShowWarnnigProcess("먼저 새로운 훈련 장비를 장착하세요.");
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                PopUpObjectManager.GetInstance().ShowWarnnigProcess("먼저 새로운 훈련 장비를 장착하세요.");
+            else
+                PopUpObjectManager.GetInstance().ShowWarnnigProcess("Equip the new training equpment.");
 
             return;
         }

@@ -126,6 +126,9 @@ public class AudioManager : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// 오디오 버튼 세팅 기능 세팅
+    /// </summary>
     public void AudioSetting()
     {
         if (PlayerPrefsManager.GetInstance().isAllmute)

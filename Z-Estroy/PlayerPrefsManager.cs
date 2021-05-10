@@ -338,7 +338,9 @@ public class PlayerPrefsManager : MonoBehaviour
         set { PlayerPrefs.SetInt("DefendTrigger", value); PlayerPrefs.Save(); }
     }
 
+    /// <summary>
     /// 음소거 설정.
+    /// </summary>
     public bool isAllmute
     {
         get
@@ -1427,18 +1429,25 @@ public class PlayerPrefsManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 미사용
+    /// Korean = 0 / Engilsh = 1
+    /// defalt = 0;
     /// </summary>
-    public int ATK_PER_UP_Lv
+    public bool IsEnglish
     {
         get
         {
-            return PlayerPrefs.GetInt("ATK_PER_UP_Lv", 0);
+            var tmp = PlayerPrefs.GetInt("ATK_PER_UP_Lv", 0);
+            if (tmp == 0) return false;
+            else return true;
         }
 
         set
         {
-            PlayerPrefs.SetInt("ATK_PER_UP_Lv", value);
+            if (value == false)
+                PlayerPrefs.SetInt("ATK_PER_UP_Lv", 0);
+            else
+                PlayerPrefs.SetInt("ATK_PER_UP_Lv", 1);
+
             PlayerPrefs.Save();
         }
     }

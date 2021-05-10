@@ -340,7 +340,10 @@ public class MuganMode : MonoBehaviour
         //다이아 체크
         if (dia < 100)
         {
-            PopUpObjectManager.GetInstance().ShowWarnnigProcess("보유 다이아가 부족합니다.");
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                PopUpObjectManager.GetInstance().ShowWarnnigProcess("보유 다이아가 부족합니다.");
+            else
+                PopUpObjectManager.GetInstance().ShowWarnnigProcess("Not enough diamonds.");
             return;
         }
         // 팝업 닫아줌
