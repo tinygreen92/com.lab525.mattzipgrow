@@ -324,7 +324,10 @@ public class MINIgameManager : MonoBehaviour
         //타이머 초기화.
         StopCoroutine(MiniGameCo);
 
-        PopUpObjectManager.GetInstance().ShowWarnnigProcess("미니게임 종료.");
+        if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+            PopUpObjectManager.GetInstance().ShowWarnnigProcess("게임 종료.");
+        else
+            PopUpObjectManager.GetInstance().ShowWarnnigProcess("finished.");
         //퀘스트
         PlayerPrefsManager.GetInstance().questInfo3[0].All_MiniGame++;
         PlayerPrefsManager.GetInstance().SavequestInfo3();

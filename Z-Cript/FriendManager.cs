@@ -79,7 +79,7 @@ public class FriendManager : MonoBehaviour
                 if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
                     DescBox[0].text = "오프라인 공격력 증가 " + (thisLevels[0] * 0.1f).ToString("f1") + "%";
                 else
-                    DescBox[0].text = "번역 " + (thisLevels[0] * 0.1f).ToString("f1") + "%";
+                    DescBox[0].text = "<color=#aee571>▲</color> offline attack power " + (thisLevels[0] * 0.1f).ToString("f1") + "%";
 
                 /// 버튼 갱신
                 SetSSalBtn(0);
@@ -93,7 +93,7 @@ public class FriendManager : MonoBehaviour
                 if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
                     DescBox[1].text = "오프라인 시간 증가 " + (thisLevels[1] * 0.1f).ToString("f1") + "%";
                 else
-                    DescBox[1].text = "번역 " + (thisLevels[1] * 0.1f).ToString("f1") + "%";
+                    DescBox[1].text = "<color=#aee571>▲</color> offline time " + (thisLevels[1] * 0.1f).ToString("f1") + "%";
                 /// 버튼 갱신
                 SetSSalBtn(1);
                 break;
@@ -106,7 +106,7 @@ public class FriendManager : MonoBehaviour
                 if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
                     DescBox[2].text = "오프라인 공격속도 증가 " + (thisLevels[2] * 0.1f).ToString("f1") + "%";
                 else
-                    DescBox[2].text = "번역 " + (thisLevels[2] * 0.1f).ToString("f1") + "%";
+                    DescBox[2].text = "<color=#aee571>▲</color> offline attack speed " + (thisLevels[2] * 0.1f).ToString("f1") + "%";
                 /// 버튼 갱신
                 SetSSalBtn(2);
                 break;
@@ -124,7 +124,7 @@ public class FriendManager : MonoBehaviour
                 if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
                     DescBox[3].text = "오프라인 맷집 증가율 증가 " + (thisLevels[3] * 0.1f).ToString("f1") + "%";
                 else
-                    DescBox[3].text = "번역 " + (thisLevels[3] * 0.1f).ToString("f1") + "%";
+                    DescBox[3].text = "<color=#aee571>▲</color> offline Mattzip growth rate " + (thisLevels[3] * 0.1f).ToString("f1") + "%";
                 /// 버튼 갱신
                 SetSSalBtn(3);
                 break;

@@ -64,39 +64,39 @@ public class PostCart : MonoBehaviour
                 switch (_code)
                 {
                     case "diamond":
-                        tmpHead = "번역 ";
-                        tmpTail = " 개.";
+                        tmpHead = "Diamonds ";
+                        tmpTail = " .";
                         break;
                     case "gold":
-                        tmpHead = "";
-                        tmpTail = " 골드.";
+                        tmpHead = "Golds";
+                        tmpTail = " .";
                         break;
                     case "key":
-                        tmpHead = "번역 ";
-                        tmpTail = " 개.";
+                        tmpHead = "Keys ";
+                        tmpTail = " .";
                         break;
                     case "gupbap":
-                        tmpHead = "번역 ";
-                        tmpTail = " 개.";
+                        tmpHead = "Korean soups ";
+                        tmpTail = " .";
                         break;
                     case "ssal":
-                        tmpHead = "번역 ";
-                        tmpTail = " 개.";
+                        tmpHead = "Rices ";
+                        tmpTail = " .";
                         break;
                     case "ticket":
-                        tmpHead = "번역 ";
-                        tmpTail = " 장.";
+                        tmpHead = "Tikets ";
+                        tmpTail = " .";
                         break;
 
                     //
 
                     case "kimchi":
-                        tmpHead = "번역 ";
-                        tmpTail = " 개.";
+                        tmpHead = "Radish kimchi ";
+                        tmpTail = " .";
                         break;
                     case "shield":
-                        tmpHead = "번역 뽑기권 ";
-                        tmpTail = " 장.";
+                        tmpHead = "Shield tikets ";
+                        tmpTail = " .";
                         break;
                 }
             }

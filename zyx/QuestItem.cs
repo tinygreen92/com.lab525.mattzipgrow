@@ -80,8 +80,8 @@ public class QuestItem : MonoBehaviour
         }
         else
         {
-            NameBox.text = $"{upText * 1000}대 번역";
-            DescBox.text = $"번역 : ( {mText} / {upText * 1000} )";
+            NameBox.text = $"Training hit {upText * 1000}";
+            DescBox.text = $"Count : ( {mText} / {upText * 1000} )";
         }
 
         /// 달성했다면 커버 이미지 제거
@@ -127,7 +127,12 @@ public class QuestItem : MonoBehaviour
         //보상 획득
         PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 10);
         UserWallet.GetInstance().ShowUserDia();
-        PopUpObjectManager.GetInstance().ShowWarnnigProcess("보상으로 10 다이아를 받았습니다.");
+
+        if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+            PopUpObjectManager.GetInstance().ShowWarnnigProcess("보상으로 10 다이아를 받았습니다.");
+        else
+            PopUpObjectManager.GetInstance().ShowWarnnigProcess("Received 10 diamonds as a reward.");
+
         pm.tmm.ExUpdateMission(32); /// 미션 업데이트
 
         /// 다이아 얻으면 회색 커버 씌우기.

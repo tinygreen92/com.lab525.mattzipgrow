@@ -133,12 +133,12 @@ public class ShieldItem : MonoBehaviour
         else
         {
             LevelBox.text = $"Lv. {thisShieldLevel}";
-            DescBox.text = $"번역 방어력 {thisShieldEffect:F1}% 증가";
-            ownedBox.text = $"번역 방어력 {thisDIAEffect:F1}% 증가";
+            DescBox.text = $"<color=#aee571>▲</color> equipped defense {thisShieldEffect:F1}%";
+            ownedBox.text = $"<color=#aee571>▲</color> holding defense {thisDIAEffect:F1}%";
             /// 합성 확률
-            fussionBox.text = $"번역 성공 확률 {thisSuccedFussion:F1}%";
+            fussionBox.text = $"Success Chance {thisSuccedFussion:F1}%";
             /// 보유 갯수
-            shiledCont.text = $"번역 수량 : {thisShiledCont:N0}";
+            shiledCont.text = $"Holding quantity : {thisShiledCont:N0}";
         }
 
 
@@ -232,7 +232,10 @@ public class ShieldItem : MonoBehaviour
         /// 0 렙이면 장착하지말고 리턴 (이런 경우는 없지만)
         if (thisShieldLevel == 0 && thisIndex != 0)
         {
-            PopUpObjectManager.GetInstance().ShowWarnnigProcess("레벨이 0인 장비는 장착할 수 없습니다.");
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                PopUpObjectManager.GetInstance().ShowWarnnigProcess("레벨이 0인 장비는 장착할 수 없습니다.");
+            else
+                PopUpObjectManager.GetInstance().ShowWarnnigProcess("Equipment that is level 0 cannot be equipped.");
             return;
         }
 

@@ -218,14 +218,22 @@ public class PlayNANOOExample : MonoBehaviour
         {
             if (tmm.mMissionInfo[2].missionPassOrNot != 0 || PlayerPrefs.GetInt("isTutoAllClear") == 525)
             {
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("이미 사용하였거나 잘못된 쿠폰 번호입니다.");
+                if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("이미 사용하였거나 잘못된 쿠폰 번호입니다.");
+                else
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("This coupon already been used or is incorrect.");
                 return;
             }
 
             PostboxItemSend("diamond", 525, "");
             InputText.transform.parent.GetComponent<InputField>().text = "";
             InputText.transform.parent.parent.parent.gameObject.SetActive(false);
-            PopUpObjectManager.GetInstance().ShowWarnnigProcess("쿠폰이 사용되었습니다 우편함을 확인해주세요.");
+
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                PopUpObjectManager.GetInstance().ShowWarnnigProcess("쿠폰이 사용되었습니다 우편함을 확인해주세요.");
+            else
+                PopUpObjectManager.GetInstance().ShowWarnnigProcess("This coupon already been used or is incorrect.");
+
             WriteChikenCoupon("USING_season2", $"미션 2 쿠폰");
             tmm.ExUpdateMission(2);
             return;
@@ -250,12 +258,19 @@ public class PlayNANOOExample : MonoBehaviour
                 PostboxItemSend(item_code, int.Parse(item_count), "");
                 InputText.transform.parent.GetComponent<InputField>().text = "";
                 InputText.transform.parent.parent.parent.gameObject.SetActive(false);
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("쿠폰이 사용되었습니다 우편함을 확인해주세요.");
+
+                if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("쿠폰이 사용되었습니다 우편함을 확인해주세요.");
+                else
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("This coupon already been used or is incorrect.");
             }
             else
             {
                 Debug.Log("Coupon Fail");
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("이미 사용하였거나 잘못된 쿠폰 번호입니다.");
+                if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("이미 사용하였거나 잘못된 쿠폰 번호입니다.");
+                else
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("This coupon already been used or is incorrect.");
             }
         });
     }
@@ -471,48 +486,99 @@ public class PlayNANOOExample : MonoBehaviour
     /// <param name="_count"></param>
     void CouponCheak(string _code, string _count)
     {
-        switch (_code)
+        if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
         {
-            case "key":
-                PlayerPrefsManager.GetInstance().key += int.Parse(_count);
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("열쇠 " + _count + " 개 획득.");
-                break;
-            case "diamond":
-                PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + float.Parse(_count));
-                UserWallet.GetInstance().ShowUserDia();
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("다이아 " + _count + " 개 획득.");
-                break;
-            case "gold":
-                PlayerPrefsManager.GetInstance().gold = dts.AddStringDouble(PlayerPrefsManager.GetInstance().gold, _count);
-                UserWallet.GetInstance().ShowUserGold();
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("골드 " + _count + " 획득.");
-                break;
-            case "gupbap":
-                PlayerPrefsManager.GetInstance().gupbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().gupbap, _count);
-                UserWallet.GetInstance().ShowUserMilk();
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("국밥 " + _count + " 그릇 획득.");
-                break;
-            case "ssal":
-                PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().ssalbap, _count);
-                UserWallet.GetInstance().ShowUserSSalbap();
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("쌀밥 " + _count + " 그릇 획득.");
-                break;
-            case "ticket":
-                PlayerPrefsManager.GetInstance().ticket += int.Parse(_count);
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("입장권 " + _count + " 장 획득.");
-                break;
+            switch (_code)
+            {
+                case "key":
+                    PlayerPrefsManager.GetInstance().key += int.Parse(_count);
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("열쇠 " + _count + " 개 획득.");
+                    break;
+                case "diamond":
+                    PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + float.Parse(_count));
+                    UserWallet.GetInstance().ShowUserDia();
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("다이아 " + _count + " 개 획득.");
+                    break;
+                case "gold":
+                    PlayerPrefsManager.GetInstance().gold = dts.AddStringDouble(PlayerPrefsManager.GetInstance().gold, _count);
+                    UserWallet.GetInstance().ShowUserGold();
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("골드 " + _count + " 획득.");
+                    break;
+                case "gupbap":
+                    PlayerPrefsManager.GetInstance().gupbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().gupbap, _count);
+                    UserWallet.GetInstance().ShowUserMilk();
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("국밥 " + _count + " 그릇 획득.");
+                    break;
+                case "ssal":
+                    PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().ssalbap, _count);
+                    UserWallet.GetInstance().ShowUserSSalbap();
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("쌀밥 " + _count + " 그릇 획득.");
+                    break;
+                case "ticket":
+                    PlayerPrefsManager.GetInstance().ticket += int.Parse(_count);
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("입장권 " + _count + " 장 획득.");
+                    break;
 
-            case "kimchi":
-                PlayerPrefsManager.GetInstance().Kimchi = dts.AddStringDouble(PlayerPrefsManager.GetInstance().Kimchi, _count);
-                UserWallet.GetInstance().ShowUserKimchi();
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("깍두기 " + _count + " 개 획득.");
-                break;
+                case "kimchi":
+                    PlayerPrefsManager.GetInstance().Kimchi = dts.AddStringDouble(PlayerPrefsManager.GetInstance().Kimchi, _count);
+                    UserWallet.GetInstance().ShowUserKimchi();
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("깍두기 " + _count + " 개 획득.");
+                    break;
 
-            case "shield":
-                PlayerPrefsManager.GetInstance().ShiledTicket += int.Parse(_count);
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("방패 뽑기권 " + _count + " 장 획득.");
-                break;
+                case "shield":
+                    PlayerPrefsManager.GetInstance().ShiledTicket += int.Parse(_count);
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("방패 뽑기권 " + _count + " 장 획득.");
+                    break;
+            }
+
         }
+        else
+        {
+            switch (_code)
+            {
+                case "key":
+                    PlayerPrefsManager.GetInstance().key += int.Parse(_count);
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("Acquisition keys " + _count + " .");
+                    break;
+                case "diamond":
+                    PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + float.Parse(_count));
+                    UserWallet.GetInstance().ShowUserDia();
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("Acquisition diamonds " + _count + " .");
+                    break;
+                case "gold":
+                    PlayerPrefsManager.GetInstance().gold = dts.AddStringDouble(PlayerPrefsManager.GetInstance().gold, _count);
+                    UserWallet.GetInstance().ShowUserGold();
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("Acquisition golds " + _count + " .");
+                    break;
+                case "gupbap":
+                    PlayerPrefsManager.GetInstance().gupbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().gupbap, _count);
+                    UserWallet.GetInstance().ShowUserMilk();
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("Acquisition Korean soups " + _count + " .");
+                    break;
+                case "ssal":
+                    PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().ssalbap, _count);
+                    UserWallet.GetInstance().ShowUserSSalbap();
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("Acquisition rices " + _count + " .");
+                    break;
+                case "ticket":
+                    PlayerPrefsManager.GetInstance().ticket += int.Parse(_count);
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("Acquisition tikets " + _count + " .");
+                    break;
+
+                case "kimchi":
+                    PlayerPrefsManager.GetInstance().Kimchi = dts.AddStringDouble(PlayerPrefsManager.GetInstance().Kimchi, _count);
+                    UserWallet.GetInstance().ShowUserKimchi();
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("Acquisition radish kimchi " + _count + " .");
+                    break;
+
+                case "shield":
+                    PlayerPrefsManager.GetInstance().ShiledTicket += int.Parse(_count);
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("Acquisition shield tikets " + _count + " .");
+                    break;
+            }
+
+        }
+
     }
 
     /// <summary>
@@ -672,7 +738,10 @@ public class PlayNANOOExample : MonoBehaviour
             {
                 Debug.LogWarning("StorageSave Success ::" + playerPrefsManager.ZZoGGoMiDataSave());
                 PlayerPrefsManager.GetInstance().IN_APP.SetActive(false);
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("데이터가 정상적으로 저장되었습니다. 앱이 재실행됩니다.");
+                if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("데이터가 정상적으로 저장되었습니다. 앱이 재실행됩니다.");
+                else
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("Data has been saved. The app will be relaunched.");
                 /// 데이터 세이브 플러그 세워주고 종료
                 PlayerPrefs.SetInt("isDataSaved", 1);
                 PlayerPrefs.Save();
@@ -685,7 +754,10 @@ public class PlayNANOOExample : MonoBehaviour
             {
                 Debug.LogWarning("StorageSave Fail");
                 PlayerPrefsManager.GetInstance().IN_APP.SetActive(false);
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("서버 데이터 저장 오류. 앱 재실행 후 다시 시도해주세요.");
+                if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("서버 데이터 저장 오류. 앱 재실행 후 다시 시도해주세요.");
+                else
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("Server data storage error. Please re-run the app and try again.");
             }
         });
     }
@@ -822,7 +894,11 @@ public class PlayNANOOExample : MonoBehaviour
             else
             {
                 Debug.LogWarning("StorageLoad Fail");
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("저장된 데이터가 존재하지 않습니다.");
+                if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("저장된 데이터가 존재하지 않습니다.");
+                else
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("There is no stored data.");
+
                 PlayerPrefsManager.GetInstance().IN_APP.SetActive(false);
 
             }

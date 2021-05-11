@@ -97,7 +97,7 @@ public class RankingPage : MonoBehaviour
                 if (isKorean)
                     MaxValuText.text = "최대 맷집";
                 else
-                    MaxValuText.text = "번역 맷집";
+                    MaxValuText.text = "Max Mattzip";
 
                 break;
 
@@ -135,7 +135,7 @@ public class RankingPage : MonoBehaviour
                 if (isKorean)
                     MaxValuText.text = "최대 층수";
                 else
-                    MaxValuText.text = "번역 층수";
+                    MaxValuText.text = "Max Stage";
 
                 break;
 
@@ -173,7 +173,7 @@ public class RankingPage : MonoBehaviour
                 if (isKorean)
                     MaxValuText.text = "최다 콤보";
                 else
-                    MaxValuText.text = "번역 콤보";
+                    MaxValuText.text = "Max Combo";
 
                 break;
 

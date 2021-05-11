@@ -110,8 +110,8 @@ public class RouletteInit : MonoBehaviour
             }
             else
             {
-                r_Content = "번역 800 그릇을 획득했다!";
-                tmpContent = "번역 1600 그릇을 획득했다!";
+                r_Content = "Acquisition Korean soups 800!";
+                tmpContent = "Acquisition Korean soups 1600!";
             }
 
 
@@ -130,8 +130,8 @@ public class RouletteInit : MonoBehaviour
             }
             else
             {
-                r_Content = "번역 5 개를 획득했다!";
-                tmpContent = "번역 10 개를 획득했다!";
+                r_Content = "Acquisition keys 5!";
+                tmpContent = "Acquisition keys 10!";
             }
 
 
@@ -151,8 +151,8 @@ public class RouletteInit : MonoBehaviour
             }
             else
             {
-                r_Content = "번역 400 그릇을 획득했다!";
-                tmpContent = "번역 800 그릇을 획득했다!";
+                r_Content = "Acquisition rices 400!";
+                tmpContent = "Acquisition rices 800!";
             }
 
 
@@ -174,8 +174,8 @@ public class RouletteInit : MonoBehaviour
             }
             else
             {
-                r_Content = "번역 80 개를 획득했다!";
-                tmpContent = "번역 160 개를 획득했다!";
+                r_Content = "Acquisition diamonds 80!";
+                tmpContent = "Acquisition diamonds 160!";
             }
 
 
@@ -197,9 +197,9 @@ public class RouletteInit : MonoBehaviour
             }
             else
             {
-                r_Content = UserWallet.GetInstance().SeetheNatural(double.Parse(pdps)) + " 번역 획득했다!";
+                r_Content = "Acquisition golds " + UserWallet.GetInstance().SeetheNatural(double.Parse(pdps));
                 pdps = dts.multipleStringDouble(pdps, 2d);
-                tmpContent = UserWallet.GetInstance().SeetheNatural(double.Parse(pdps)) + " 번역 획득했다!";
+                tmpContent = "Acquisition golds " + UserWallet.GetInstance().SeetheNatural(double.Parse(pdps));
             }
 
 
@@ -220,8 +220,8 @@ public class RouletteInit : MonoBehaviour
             }
             else
             {
-                r_Content = "번역 1600 그릇을 획득했다!";
-                tmpContent = "번역 3200 그릇을 획득했다!";
+                r_Content = "Acquisition Korean soups 1600!";
+                tmpContent = "Acquisition Korean soups 3200!";
             }
 
 
@@ -241,8 +241,8 @@ public class RouletteInit : MonoBehaviour
             }
             else
             {
-                r_Content = "번역 10 개를 획득했다!";
-                tmpContent = "번역 20 개를 획득했다!";
+                r_Content = "Acquisition keys 10!";
+                tmpContent = "Acquisition keys 20!";
             }
 
 
@@ -261,8 +261,8 @@ public class RouletteInit : MonoBehaviour
             }
             else
             {
-                r_Content = "번역 800 그릇을 획득했다!";
-                tmpContent = "번역 1600 그릇을 획득했다!";
+                r_Content = "Acquisition rices 800!";
+                tmpContent = "Acquisition rices 1600!";
             }
 
 
@@ -285,8 +285,8 @@ public class RouletteInit : MonoBehaviour
             }
             else
             {
-                r_Content = "번역 160 개를 획득했다!";
-                tmpContent = "번역 320 개를 획득했다!";
+                r_Content = "Acquisition diamonds 160!";
+                tmpContent = "Acquisition diamonds 320!";
             }
 
 
@@ -308,9 +308,9 @@ public class RouletteInit : MonoBehaviour
             }
             else
             {
-                r_Content = UserWallet.GetInstance().SeetheNatural(double.Parse(pdps)) + " 번역 획득했다!";
+                r_Content = "Acquisition golds " + UserWallet.GetInstance().SeetheNatural(double.Parse(pdps));
                 pdps = dts.multipleStringDouble(pdps, 2d);
-                tmpContent = UserWallet.GetInstance().SeetheNatural(double.Parse(pdps)) + " 번역 획득했다!";
+                tmpContent = "Acquisition golds " + UserWallet.GetInstance().SeetheNatural(double.Parse(pdps));
             }
 
 
@@ -367,7 +367,10 @@ public class RouletteInit : MonoBehaviour
         }
         else
         {
-            PopUpObjectManager.GetInstance().ShowWarnnigProcess("광고를 준비중입니다. 잠시 후에 시도해주세요.");
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                PopUpObjectManager.GetInstance().ShowWarnnigProcess("광고를 준비중입니다. 잠시 후에 시도해주세요.");
+            else
+                PopUpObjectManager.GetInstance().ShowWarnnigProcess("We are preparing an Ads. Please try later.");
             PlayerPrefsManager.GetInstance().IN_APP.SetActive(false);
 
         }

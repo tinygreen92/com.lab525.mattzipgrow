@@ -97,6 +97,70 @@ public class GameStart : MonoBehaviour
 
     private void Start()
     {
+        //if (PlayerPrefsManager.GetInstance().IsEnglish)
+        //{
+        //    leanObject.SetActive(false);
+        //    leanLocalization.SetCurrentLanguage("English");
+        //}
+        //else
+        //{
+        //    leanObject.SetActive(true);
+        //    leanLocalization.SetCurrentLanguage("Korean");
+        //}
+
+        ///// 오디오 매니저 세팅
+        //audioManager.AudioSetting();
+        ///// 튜토리얼 세팅
+        //tutorialManager.FakeloadingOnOff(true);
+
+        ///// 데이터 세이브가 일어났다면 있던 데이터 지워줌
+        //if (PlayerPrefs.GetInt("isDataSaved", 0) == 1)
+        //{
+        //    /// 닉네임 설정 준비중이면?
+        //    tmpS2 = PlayerPrefs.GetInt("isBeginingS2", 0);
+        //    /// 유료 결제 내역 복구
+        //    tmpVIP = PlayerPrefs.GetInt("VIP", 0);
+
+        //    Debug.LogError("데이터 세이브가 일어났다면 있던 데이터 지워줌");
+
+        //    PlayerPrefs.DeleteAll();
+        //    PlayerPrefs.Save();
+        //    /// 0.6초 뒤에 원래 성능 복구
+        //    Invoke(nameof(InvoAwaker), 0.3f);
+        //}
+        //else
+        //{
+        //    // 튜토리얼 창 활성화.
+        //    tutorialManager.gameObject.SetActive(true);
+        //    /// 튜토리얼 스타트하면 ATK_Lv++;
+        //    tutorialManager.TutoStart();
+        //    // VIP 계급 초기화.
+        //    vipManager.VIPINIT();
+        //}
+
+
+        StartCoroutine(SetPart_01());
+    }
+
+    /// <summary>
+    /// 테스트 환경에서 언어 고르면 true
+    /// </summary>
+    bool isStartLang;
+
+    public void SetStartLang(bool isCheck)
+    {
+        PlayerPrefsManager.GetInstance().IsEnglish = isCheck;
+        isStartLang = true;
+    }
+
+    IEnumerator SetPart_01()
+    {
+        while (!isStartLang)
+        {
+            yield return new WaitForFixedUpdate();
+        }
+
+
         if (PlayerPrefsManager.GetInstance().IsEnglish)
         {
             leanObject.SetActive(false);
@@ -139,11 +203,9 @@ public class GameStart : MonoBehaviour
         }
 
 
-        StartCoroutine(SetPart_01());
-    }
 
-    IEnumerator SetPart_01()
-    {
+
+
         yield return new WaitForSeconds(0.4f);
 
         //튜토리얼 안했어?? 데이터 올 리셋

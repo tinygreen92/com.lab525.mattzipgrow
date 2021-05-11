@@ -75,8 +75,8 @@ public class GoldBoxHintManager : MonoBehaviour
             {
                 case 0:
                     iconObj[0].SetActive(true);
-                    iconObj[3].GetComponent<Text>().text = "번역";
-                    iconObj[3].transform.parent.GetComponent<Text>().text = "번역 A 골드박스 포함 상품";
+                    iconObj[3].GetComponent<Text>().text = "골드박스";
+                    iconObj[3].transform.parent.GetComponent<Text>().text = "A 골드박스 포함 상품";
                     TexObj0[0].text = "10~100개"; // 다이아
                     TexObj0[1].text = "1~3개"; // 열쇠
                     TexObj0[2].text = "100~1000개"; // 국밥
@@ -87,7 +87,7 @@ public class GoldBoxHintManager : MonoBehaviour
 
                 case 1:
                     iconObj[1].SetActive(true);
-                    iconObj[3].GetComponent<Text>().text = "번역 B 골드박스 포함 상품";
+                    iconObj[3].GetComponent<Text>().text = "골드박스";
                     iconObj[3].transform.parent.GetComponent<Text>().text = "B 골드박스 포함 상품";
                     TexObj0[0].text = "10~300개"; // 다이아
                     TexObj0[1].text = "1~5개"; // 열쇠
@@ -99,7 +99,7 @@ public class GoldBoxHintManager : MonoBehaviour
 
                 case 2:
                     iconObj[2].SetActive(true);
-                    iconObj[3].GetComponent<Text>().text = "번역 C 골드박스 포함 상품";
+                    iconObj[3].GetComponent<Text>().text = "골드박스";
                     iconObj[3].transform.parent.GetComponent<Text>().text = "C 골드박스 포함 상품";
                     TexObj0[0].text = "10~500개"; // 다이아
                     TexObj0[1].text = "1~10개"; // 열쇠

@@ -1096,20 +1096,20 @@ public class TutorialManager : MonoBehaviour
         }
         else
         {
-            yield return StartCoroutine(NormalChat("번역 X월," + System.Environment.NewLine + "나는 맷집국에서 태어났다."));
-            yield return StartCoroutine(NormalChat("번역 다를 것 없는" + System.Environment.NewLine + "나날을 보내던 어느날.."));
-            yield return StartCoroutine(NormalChat("번역 무기가 나타났다는" + System.Environment.NewLine + "소문이 돌기 시작했다."));
-            yield return StartCoroutine(NormalChat("번역 맷집 챔피언이었던 아버지는" + System.Environment.NewLine + "전설의 무기의 공격을 버티고 오겠노라고" + System.Environment.NewLine + "당당히 길을 나서셨지만,"));
+            yield return StartCoroutine(NormalChat("I was born," + System.Environment.NewLine + "in a Mattzip country."));
+            yield return StartCoroutine(NormalChat("One day" + System.Environment.NewLine + "that was no different" + System.Environment.NewLine + "from one day"));
+            yield return StartCoroutine(NormalChat("Rumors began to circulate" + System.Environment.NewLine + "that the legendary weapon" + System.Environment.NewLine + "appeared"));
+            yield return StartCoroutine(NormalChat("My father," + System.Environment.NewLine + "who was a mattzip champion at the time," + System.Environment.NewLine + "set out to fight the legendary weapon,"));
             yield return StartCoroutine(PageChange());
-            yield return StartCoroutine(NormalChat("번역 뒤로 나는 더이상" + System.Environment.NewLine + "아버지를 볼 수 없었다."));
-            yield return StartCoroutine(NormalChat("번역 빠져 매일 술로" + System.Environment.NewLine + "달래던 어느날.."));
-            yield return StartCoroutine(NormalChat("번역 아버지의 목소리가" + System.Environment.NewLine + "들리는 듯 하였다."));
-            yield return StartCoroutine(NormalChat("번역 나는 곳을 바라보자" + System.Environment.NewLine + "아버지의 상징이었던 헬멧이 눈에 들어왔고"));
+            yield return StartCoroutine(NormalChat("After that," + System.Environment.NewLine + "I could no longer see my father."));
+            yield return StartCoroutine(NormalChat("One day when I fell for disappointment," + System.Environment.NewLine + "I was drinking every day."));
+            yield return StartCoroutine(NormalChat("It seemed that" + System.Environment.NewLine + "I could hear my father's voice somewhere."));
+            yield return StartCoroutine(NormalChat("As I looked at the sounding place," + System.Environment.NewLine + "the helmet, which used to be the symbol of my father," + System.Environment.NewLine + "was caught in my eyes."));
             yield return StartCoroutine(PageChange());
-            yield return StartCoroutine(NormalChat("번역 바라보니 잊고있던" + System.Environment.NewLine + "아버지와의 추억들이 떠올랐다."));
-            yield return StartCoroutine(NormalChat("감번역정을 주체하지 못한 그 순간,"));
-            yield return StartCoroutine(NormalChat("번역 결심하였다."));
-            yield return StartCoroutine(NormalChat("번역 복수를."));
+            yield return StartCoroutine(NormalChat("Looking at the helmet, I remembered the memories of" + System.Environment.NewLine + "my father I had forgotten"));
+            yield return StartCoroutine(NormalChat("The moment" + System.Environment.NewLine + "when I couldn't control my emotions,"));
+            yield return StartCoroutine(NormalChat("I made up my mind."));
+            yield return StartCoroutine(NormalChat("My father's revenge."));
         }
 
         yield return StartCoroutine(StroyEnd());

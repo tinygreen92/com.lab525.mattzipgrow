@@ -200,7 +200,7 @@ public class IAPManager : MonoBehaviour
             if (isKorean)
                 BuyButton.GetChild(_index).GetChild(1).GetComponent<Text>().text = "구매";
             else
-                BuyButton.GetChild(_index).GetChild(1).GetComponent<Text>().text = "번역";
+                BuyButton.GetChild(_index).GetChild(1).GetComponent<Text>().text = "Buy";
             vatTextObj.SetActive(false);
         }
         /// 현금으로 사는 것들
@@ -225,7 +225,7 @@ public class IAPManager : MonoBehaviour
             if (isKorean)
                 BuyButton.GetChild(_index).GetChild(1).GetComponent<Text>().text = "구매";
             else
-                BuyButton.GetChild(_index).GetChild(1).GetComponent<Text>().text = "번역";
+                BuyButton.GetChild(_index).GetChild(1).GetComponent<Text>().text = "Buy";
             vatTextObj.SetActive(false);
         }
 
@@ -261,723 +261,309 @@ public class IAPManager : MonoBehaviour
     {
         //var ppmDia = PlayerPrefsManager.GetInstance().diamond;
 
-
-        // Compare product name to the generated name constants to determine which product was bought
-        switch (product.Name)
+        if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
         {
+            switch (product.Name)
+            {
 
 
-            case EM_IAPConstants.Product_dia100:
+                case EM_IAPConstants.Product_dia100:
 
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("다이아 100 구매 성공");
-                //PlayerPrefsManager.GetInstance().diamond = dts.AddStringDouble(ppmDia, "100");
-                PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 100);
-                InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
-                InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("다이아 100 구매 성공");
+                    //PlayerPrefsManager.GetInstance().diamond = dts.AddStringDouble(ppmDia, "100");
+                    PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 100);
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
 
-                shoppopup.SetActive(false);
+                    shoppopup.SetActive(false);
 
-                break;
+                    break;
 
-            case EM_IAPConstants.Product_dia600:
+                case EM_IAPConstants.Product_dia600:
 
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("다이아 600 구매 성공");
-                //PlayerPrefsManager.GetInstance().diamond = dts.AddStringDouble(ppmDia, "600");
-                PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 600);
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("다이아 600 구매 성공");
+                    //PlayerPrefsManager.GetInstance().diamond = dts.AddStringDouble(ppmDia, "600");
+                    PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 600);
 
-                InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
-                InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
 
-                shoppopup.SetActive(false);
+                    shoppopup.SetActive(false);
 
 
-                break;
+                    break;
 
-            case EM_IAPConstants.Product_dia1300:
+                case EM_IAPConstants.Product_dia1300:
 
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("다이아 1300 구매 성공");
-                //PlayerPrefsManager.GetInstance().diamond = dts.AddStringDouble(ppmDia, "1300");
-                PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 1300);
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("다이아 1300 구매 성공");
+                    //PlayerPrefsManager.GetInstance().diamond = dts.AddStringDouble(ppmDia, "1300");
+                    PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 1300);
 
-                InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
-                InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
 
-                shoppopup.SetActive(false);
+                    shoppopup.SetActive(false);
 
 
-                break;
+                    break;
 
 
-            case EM_IAPConstants.Product_dia4200:
+                case EM_IAPConstants.Product_dia4200:
 
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("다이아 4200 구매 성공");
-                //PlayerPrefsManager.GetInstance().diamond = dts.AddStringDouble(ppmDia, "4200");
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("다이아 4200 구매 성공");
+                    //PlayerPrefsManager.GetInstance().diamond = dts.AddStringDouble(ppmDia, "4200");
 
-                PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 4200);
+                    PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 4200);
 
 
-                InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
-                InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
 
-                shoppopup.SetActive(false);
-                break;
+                    shoppopup.SetActive(false);
+                    break;
 
 
-            case EM_IAPConstants.Product_dia7500:
+                case EM_IAPConstants.Product_dia7500:
 
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("다이아 7500 구매 성공");
-                //PlayerPrefsManager.GetInstance().diamond = dts.AddStringDouble(ppmDia, "7500");
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("다이아 7500 구매 성공");
+                    //PlayerPrefsManager.GetInstance().diamond = dts.AddStringDouble(ppmDia, "7500");
 
-                PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 7500);
+                    PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 7500);
 
 
-                InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
-                InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
 
-                shoppopup.SetActive(false);
-                break;
+                    shoppopup.SetActive(false);
+                    break;
 
-            case EM_IAPConstants.Product_dia16000:
+                case EM_IAPConstants.Product_dia16000:
 
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("다이아 16000 구매 성공");
-                //PlayerPrefsManager.GetInstance().diamond = dts.AddStringDouble(ppmDia, "16000");
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("다이아 16000 구매 성공");
+                    //PlayerPrefsManager.GetInstance().diamond = dts.AddStringDouble(ppmDia, "16000");
 
 
-                PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 16000);
+                    PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 16000);
 
 
-                InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
-                InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
 
-                shoppopup.SetActive(false);
+                    shoppopup.SetActive(false);
 
 
-                break;
+                    break;
 
 
 
-            /// -------------------------------------------------------------------
+                /// -------------------------------------------------------------------
 
 
-            case EM_IAPConstants.Product_auto:
+                case EM_IAPConstants.Product_auto:
 
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("자동 공격/상자 구매 성공");
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("자동 공격/상자 구매 성공");
 
-                if (PlayerPrefsManager.GetInstance().VIP == 526) PlayerPrefsManager.GetInstance().VIP = 725;
-                else if (PlayerPrefsManager.GetInstance().VIP == 527) PlayerPrefsManager.GetInstance().VIP = 825;
-                else if (PlayerPrefsManager.GetInstance().VIP == 528) PlayerPrefsManager.GetInstance().VIP = 825;
-                else if (PlayerPrefsManager.GetInstance().VIP == 925) PlayerPrefsManager.GetInstance().VIP = 625;
-                else if (PlayerPrefsManager.GetInstance().VIP == 0) PlayerPrefsManager.GetInstance().VIP = 525;
+                    if (PlayerPrefsManager.GetInstance().VIP == 526) PlayerPrefsManager.GetInstance().VIP = 725;
+                    else if (PlayerPrefsManager.GetInstance().VIP == 527) PlayerPrefsManager.GetInstance().VIP = 825;
+                    else if (PlayerPrefsManager.GetInstance().VIP == 528) PlayerPrefsManager.GetInstance().VIP = 825;
+                    else if (PlayerPrefsManager.GetInstance().VIP == 925) PlayerPrefsManager.GetInstance().VIP = 625;
+                    else if (PlayerPrefsManager.GetInstance().VIP == 0) PlayerPrefsManager.GetInstance().VIP = 525;
 
 
-                InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
-                InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
 
-                shoppopup.SetActive(false);
-                break;
+                    shoppopup.SetActive(false);
+                    break;
 
-            case EM_IAPConstants.Product_nad:
+                case EM_IAPConstants.Product_nad:
 
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("광고 제거 구매 성공");
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("광고 제거 구매 성공");
 
-                if (PlayerPrefsManager.GetInstance().VIP == 525) PlayerPrefsManager.GetInstance().VIP = 725;
-                else if (PlayerPrefsManager.GetInstance().VIP == 527) PlayerPrefsManager.GetInstance().VIP = 925;
-                else if (PlayerPrefsManager.GetInstance().VIP == 528) PlayerPrefsManager.GetInstance().VIP = 925;
-                else if (PlayerPrefsManager.GetInstance().VIP == 825) PlayerPrefsManager.GetInstance().VIP = 625;
-                else if (PlayerPrefsManager.GetInstance().VIP == 0) PlayerPrefsManager.GetInstance().VIP = 526;
+                    if (PlayerPrefsManager.GetInstance().VIP == 525) PlayerPrefsManager.GetInstance().VIP = 725;
+                    else if (PlayerPrefsManager.GetInstance().VIP == 527) PlayerPrefsManager.GetInstance().VIP = 925;
+                    else if (PlayerPrefsManager.GetInstance().VIP == 528) PlayerPrefsManager.GetInstance().VIP = 925;
+                    else if (PlayerPrefsManager.GetInstance().VIP == 825) PlayerPrefsManager.GetInstance().VIP = 625;
+                    else if (PlayerPrefsManager.GetInstance().VIP == 0) PlayerPrefsManager.GetInstance().VIP = 526;
 
-                InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
-                InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
 
-                shoppopup.SetActive(false);
-                break;
+                    shoppopup.SetActive(false);
+                    break;
 
-            case EM_IAPConstants.Product_mattzipbuff:
+                case EM_IAPConstants.Product_mattzipbuff:
 
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("공격력 무한 버프 구매 성공");
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("공격력 무한 버프 구매 성공");
 
-                if (PlayerPrefsManager.GetInstance().VIP == 525) PlayerPrefsManager.GetInstance().VIP = 825;
-                else if (PlayerPrefsManager.GetInstance().VIP == 526) PlayerPrefsManager.GetInstance().VIP = 925;
-                else if (PlayerPrefsManager.GetInstance().VIP == 528) PlayerPrefsManager.GetInstance().VIP = 527528;
-                else if (PlayerPrefsManager.GetInstance().VIP == 725) PlayerPrefsManager.GetInstance().VIP = 625;
-                else if (PlayerPrefsManager.GetInstance().VIP == 0) PlayerPrefsManager.GetInstance().VIP = 527;
+                    if (PlayerPrefsManager.GetInstance().VIP == 525) PlayerPrefsManager.GetInstance().VIP = 825;
+                    else if (PlayerPrefsManager.GetInstance().VIP == 526) PlayerPrefsManager.GetInstance().VIP = 925;
+                    else if (PlayerPrefsManager.GetInstance().VIP == 528) PlayerPrefsManager.GetInstance().VIP = 527528;
+                    else if (PlayerPrefsManager.GetInstance().VIP == 725) PlayerPrefsManager.GetInstance().VIP = 625;
+                    else if (PlayerPrefsManager.GetInstance().VIP == 0) PlayerPrefsManager.GetInstance().VIP = 527;
 
-                InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
-                InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
 
-                shoppopup.SetActive(false);
-                break;
+                    shoppopup.SetActive(false);
+                    break;
 
-            case EM_IAPConstants.Product_goldbuff:
+                case EM_IAPConstants.Product_goldbuff:
 
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("골드 무한 버프 구매 성공");
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("골드 무한 버프 구매 성공");
 
-                if (PlayerPrefsManager.GetInstance().VIP == 525) PlayerPrefsManager.GetInstance().VIP = 825;
-                else if (PlayerPrefsManager.GetInstance().VIP == 526) PlayerPrefsManager.GetInstance().VIP = 925;
-                else if (PlayerPrefsManager.GetInstance().VIP == 527) PlayerPrefsManager.GetInstance().VIP = 527528;
-                else if (PlayerPrefsManager.GetInstance().VIP == 725) PlayerPrefsManager.GetInstance().VIP = 625;
-                else if (PlayerPrefsManager.GetInstance().VIP == 0) PlayerPrefsManager.GetInstance().VIP = 528;
+                    if (PlayerPrefsManager.GetInstance().VIP == 525) PlayerPrefsManager.GetInstance().VIP = 825;
+                    else if (PlayerPrefsManager.GetInstance().VIP == 526) PlayerPrefsManager.GetInstance().VIP = 925;
+                    else if (PlayerPrefsManager.GetInstance().VIP == 527) PlayerPrefsManager.GetInstance().VIP = 527528;
+                    else if (PlayerPrefsManager.GetInstance().VIP == 725) PlayerPrefsManager.GetInstance().VIP = 625;
+                    else if (PlayerPrefsManager.GetInstance().VIP == 0) PlayerPrefsManager.GetInstance().VIP = 528;
 
-                InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
-                InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
 
-                shoppopup.SetActive(false);
-                break;
+                    shoppopup.SetActive(false);
+                    break;
 
-            /// --- 신규 생성 목록
+                /// --- 신규 생성 목록
 
-            case EM_IAPConstants.Product_allin:
+                case EM_IAPConstants.Product_allin:
 
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
-                PlayerPrefsManager.GetInstance().VIP = 625;
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
+                    PlayerPrefsManager.GetInstance().VIP = 625;
 
-                InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
-                InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
 
-                shoppopup.SetActive(false);
-                break;
+                    shoppopup.SetActive(false);
+                    break;
 
-            case EM_IAPConstants.Product_autonoad:
+                case EM_IAPConstants.Product_autonoad:
 
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
 
-                if (PlayerPrefsManager.GetInstance().VIP == 527) PlayerPrefsManager.GetInstance().VIP = 625;
-                else if (PlayerPrefsManager.GetInstance().VIP == 528) PlayerPrefsManager.GetInstance().VIP = 625;
-                else if (PlayerPrefsManager.GetInstance().VIP == 825) PlayerPrefsManager.GetInstance().VIP = 625;
-                else if (PlayerPrefsManager.GetInstance().VIP == 925) PlayerPrefsManager.GetInstance().VIP = 625;
-                else PlayerPrefsManager.GetInstance().VIP = 725;
+                    if (PlayerPrefsManager.GetInstance().VIP == 527) PlayerPrefsManager.GetInstance().VIP = 625;
+                    else if (PlayerPrefsManager.GetInstance().VIP == 528) PlayerPrefsManager.GetInstance().VIP = 625;
+                    else if (PlayerPrefsManager.GetInstance().VIP == 825) PlayerPrefsManager.GetInstance().VIP = 625;
+                    else if (PlayerPrefsManager.GetInstance().VIP == 925) PlayerPrefsManager.GetInstance().VIP = 625;
+                    else PlayerPrefsManager.GetInstance().VIP = 725;
 
-                InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
-                InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
 
-                shoppopup.SetActive(false);
-                break;
+                    shoppopup.SetActive(false);
+                    break;
 
-            case EM_IAPConstants.Product_autobuff:
+                case EM_IAPConstants.Product_autobuff:
 
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
 
-                if (PlayerPrefsManager.GetInstance().VIP == 526) PlayerPrefsManager.GetInstance().VIP = 625;
-                else if (PlayerPrefsManager.GetInstance().VIP == 725) PlayerPrefsManager.GetInstance().VIP = 625;
-                else if (PlayerPrefsManager.GetInstance().VIP == 925) PlayerPrefsManager.GetInstance().VIP = 625;
-                else PlayerPrefsManager.GetInstance().VIP = 825;
+                    if (PlayerPrefsManager.GetInstance().VIP == 526) PlayerPrefsManager.GetInstance().VIP = 625;
+                    else if (PlayerPrefsManager.GetInstance().VIP == 725) PlayerPrefsManager.GetInstance().VIP = 625;
+                    else if (PlayerPrefsManager.GetInstance().VIP == 925) PlayerPrefsManager.GetInstance().VIP = 625;
+                    else PlayerPrefsManager.GetInstance().VIP = 825;
 
-                InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
-                InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
 
-                shoppopup.SetActive(false);
-                break;
+                    shoppopup.SetActive(false);
+                    break;
 
-            case EM_IAPConstants.Product_noadbuff:
+                case EM_IAPConstants.Product_noadbuff:
 
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
 
-                if (PlayerPrefsManager.GetInstance().VIP == 525) PlayerPrefsManager.GetInstance().VIP = 625;
-                else if (PlayerPrefsManager.GetInstance().VIP == 725) PlayerPrefsManager.GetInstance().VIP = 625;
-                else if (PlayerPrefsManager.GetInstance().VIP == 825) PlayerPrefsManager.GetInstance().VIP = 625;
-                else PlayerPrefsManager.GetInstance().VIP = 925;
+                    if (PlayerPrefsManager.GetInstance().VIP == 525) PlayerPrefsManager.GetInstance().VIP = 625;
+                    else if (PlayerPrefsManager.GetInstance().VIP == 725) PlayerPrefsManager.GetInstance().VIP = 625;
+                    else if (PlayerPrefsManager.GetInstance().VIP == 825) PlayerPrefsManager.GetInstance().VIP = 625;
+                    else PlayerPrefsManager.GetInstance().VIP = 925;
 
-                InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
-                InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
 
-                shoppopup.SetActive(false);
-                break;
+                    shoppopup.SetActive(false);
+                    break;
 
 
 
+                /// ---------------------- <새로_추가한_패키지_상점> -------------------------
+                /// 
 
+                case EM_IAPConstants.Product_package_01:
 
-            ////
-            ////
-            ////
-            //case EM_IAPConstants.Product_goldmitt:
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
+                    GetMyMoneyItem(0);
 
-            //    int sDataList = PlayerPrefs.GetInt("Pet_BuyData", 000);
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
 
-            //    PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
+                    SomeThingPop.SetActive(false);
+                    break;
 
-            //    if (sDataList == 000)
-            //    {
-            //        PlayerPrefs.SetInt("Pet_BuyData", 100);
-            //    }
-            //    else if (sDataList == 010)
-            //    {
-            //        PlayerPrefs.SetInt("Pet_BuyData", 110);
-            //    }
-            //    else if (sDataList == 001)
-            //    {
-            //        PlayerPrefs.SetInt("Pet_BuyData", 101);
-            //    }
-            //    else if (sDataList == 011)
-            //    {
-            //        PlayerPrefs.SetInt("Pet_BuyData", 111);
-            //    }
-            //    else
-            //    {
-            //        // 중복이면 다이아 더 돌려줘.
-            //        PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 3000);
-            //    }
+                case EM_IAPConstants.Product_package_02:
 
-            //    PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 1000);
-            //    PlayerPrefsManager.GetInstance().gupbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().gupbap, "10000");
-            //    PlayerPrefsManager.GetInstance().key += 50;
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
+                    GetMyMoneyItem(1);
 
-            //    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
-            //    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
 
-            //    shoppopup.SetActive(false);
-            //    break;
+                    SomeThingPop.SetActive(false);
+                    break;
 
+                case EM_IAPConstants.Product_package_03:
 
-            //case EM_IAPConstants.Product_goldboots:
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
+                    GetMyMoneyItem(2);
 
-            //    sDataList = PlayerPrefs.GetInt("Pet_BuyData", 000);
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
 
-            //    PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
+                    SomeThingPop.SetActive(false);
+                    break;
 
-            //    if (sDataList == 000)
-            //    {
-            //        PlayerPrefs.SetInt("Pet_BuyData", 010);
-            //    }
-            //    else if (sDataList == 100)
-            //    {
-            //        PlayerPrefs.SetInt("Pet_BuyData", 110);
-            //    }
-            //    else if (sDataList == 001)
-            //    {
-            //        PlayerPrefs.SetInt("Pet_BuyData", 011);
-            //    }
-            //    else if (sDataList == 101)
-            //    {
-            //        PlayerPrefs.SetInt("Pet_BuyData", 111);
-            //    }
-            //    else
-            //    {
-            //        // 중복이면 다이아 더 돌려줘.
-            //        PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 3000);
-            //    }
+                case EM_IAPConstants.Product_package_04:
 
-            //    PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 1000);
-            //    PlayerPrefsManager.GetInstance().gupbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().gupbap, "10000");
-            //    PlayerPrefsManager.GetInstance().key += 50;
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
+                    GetMyMoneyItem(3);
 
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
 
-            //    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
-            //    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+                    SomeThingPop.SetActive(false);
+                    break;
 
+                case EM_IAPConstants.Product_package_05:
 
-            //    shoppopup.SetActive(false);
-            //    break;
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
+                    GetMyMoneyItem(4);
 
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
 
-            //case EM_IAPConstants.Product_golddduk:
+                    SomeThingPop.SetActive(false);
+                    break;
 
-            //    sDataList = PlayerPrefs.GetInt("Pet_BuyData", 000);
+                case EM_IAPConstants.Product_package_06:
 
-            //    PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
+                    GetMyMoneyItem(5);
 
-            //    if (sDataList == 000)
-            //    {
-            //        PlayerPrefs.SetInt("Pet_BuyData", 001);
-            //    }
-            //    else if (sDataList == 100)
-            //    {
-            //        PlayerPrefs.SetInt("Pet_BuyData", 101);
-            //    }
-            //    else if (sDataList == 010)
-            //    {
-            //        PlayerPrefs.SetInt("Pet_BuyData", 011);
-            //    }
-            //    else if (sDataList == 110)
-            //    {
-            //        PlayerPrefs.SetInt("Pet_BuyData", 111);
-            //    }
-            //    else
-            //    {
-            //        // 중복이면 다이아 더 돌려줘.
-            //        PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 3000);
-            //    }
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
 
+                    SomeThingPop.SetActive(false);
+                    break;
 
-            //    PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 1000);
-            //    PlayerPrefsManager.GetInstance().gupbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().gupbap, "10000");
-            //    PlayerPrefsManager.GetInstance().key += 50;
+                case EM_IAPConstants.Product_package_07:
 
-            //    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
-            //    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
+                    GetMyMoneyItem(6);
 
-            //    shoppopup.SetActive(false);
-            //    break;
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
 
-            //case EM_IAPConstants.Product_goldset:
-
-            //    sDataList = PlayerPrefs.GetInt("Pet_BuyData", 000);
-
-            //    PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
-
-            //    if (sDataList == 000)
-            //    {
-            //        PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 9000);
-            //    }
-            //    else if (sDataList == 100 || sDataList == 010 || sDataList == 001)
-            //    {
-            //        PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 6000);
-            //    }
-            //    else if (sDataList == 110 || sDataList == 011 || sDataList == 101)
-            //    {
-            //        PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 3000);
-            //    }
-
-            //    PlayerPrefs.SetInt("Pet_BuyData", 111);
-
-            //    PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 3000);
-            //    PlayerPrefsManager.GetInstance().gupbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().gupbap, "30000");
-            //    PlayerPrefsManager.GetInstance().key += 200;
-
-            //    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
-            //    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
-
-            //    shoppopup.SetActive(false);
-            //    break;
-
-
-            //case EM_IAPConstants.Product_uniform01:
-
-            //    // 구매 여부 데이터 배열
-            //    string[] uniform_sDataList = (PlayerPrefsManager.GetInstance().Uniform_Data).Split('+');
-
-            //    PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
-
-            //    if (uniform_sDataList[1] != "1")
-            //    {
-            //        // 데이터에 구매 완료 표기
-            //        uniform_sDataList[1] = "1";
-
-            //        // 데이터 새로고침
-            //        string result = "";
-
-            //        result += uniform_sDataList[0] + "+";
-            //        result += uniform_sDataList[1] + "+";
-            //        result += uniform_sDataList[2] + "+";
-            //        result += uniform_sDataList[3] + "+";
-            //        result += uniform_sDataList[4] + "+";
-            //        result += uniform_sDataList[5] + "+";
-            //        result += uniform_sDataList[6];
-
-            //        PlayerPrefsManager.GetInstance().Uniform_Data = result;
-            //    }
-            //    else
-            //    {
-            //        PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 1000);
-            //    }
-
-            //    PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 300);
-            //    PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().ssalbap, "3000");
-            //    PlayerPrefsManager.GetInstance().key += 10;
-
-            //    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
-            //    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
-
-            //    shoppopup.SetActive(false);
-            //    break;
-
-
-
-
-            //case EM_IAPConstants.Product_uniform02:
-
-            //    // 구매 여부 데이터 배열
-            //    uniform_sDataList = (PlayerPrefsManager.GetInstance().Uniform_Data).Split('+');
-
-            //    PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
-
-            //    if (uniform_sDataList[2] != "1")
-            //    {
-            //        // 데이터에 구매 완료 표기
-            //        uniform_sDataList[2] = "1";
-
-            //        // 데이터 새로고침
-            //        string result = "";
-
-            //        result += uniform_sDataList[0] + "+";
-            //        result += uniform_sDataList[1] + "+";
-            //        result += uniform_sDataList[2] + "+";
-            //        result += uniform_sDataList[3] + "+";
-            //        result += uniform_sDataList[4] + "+";
-            //        result += uniform_sDataList[5] + "+";
-            //        result += uniform_sDataList[6];
-
-            //        PlayerPrefsManager.GetInstance().Uniform_Data = result;
-            //    }
-            //    else
-            //    {
-            //        PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 1000);
-            //    }
-
-            //    PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 300);
-            //    PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().ssalbap, "3000");
-            //    PlayerPrefsManager.GetInstance().key += 10;
-
-            //    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
-            //    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
-
-            //    shoppopup.SetActive(false);
-            //    break;
-
-
-
-
-
-            //case EM_IAPConstants.Product_uniform03:
-
-            //    // 구매 여부 데이터 배열
-            //    uniform_sDataList = (PlayerPrefsManager.GetInstance().Uniform_Data).Split('+');
-
-            //    PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
-
-            //    if (uniform_sDataList[3] != "1")
-            //    {
-            //        // 데이터에 구매 완료 표기
-            //        uniform_sDataList[3] = "1";
-
-            //        // 데이터 새로고침
-            //        string result = "";
-
-            //        result += uniform_sDataList[0] + "+";
-            //        result += uniform_sDataList[1] + "+";
-            //        result += uniform_sDataList[2] + "+";
-            //        result += uniform_sDataList[3] + "+";
-            //        result += uniform_sDataList[4] + "+";
-            //        result += uniform_sDataList[5] + "+";
-            //        result += uniform_sDataList[6];
-
-            //        PlayerPrefsManager.GetInstance().Uniform_Data = result;
-            //    }
-            //    else
-            //    {
-            //        PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 1000);
-            //    }
-
-            //    PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 300);
-            //    PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().ssalbap, "3000");
-            //    PlayerPrefsManager.GetInstance().key += 10;
-
-            //    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
-            //    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
-
-            //    shoppopup.SetActive(false);
-            //    break;
-
-
-
-
-            //case EM_IAPConstants.Product_uniform04:
-
-            //    // 구매 여부 데이터 배열
-            //    uniform_sDataList = (PlayerPrefsManager.GetInstance().Uniform_Data).Split('+');
-
-            //    PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
-
-            //    if (uniform_sDataList[4] != "1")
-            //    {
-            //        // 데이터에 구매 완료 표기
-            //        uniform_sDataList[4] = "1";
-
-            //        // 데이터 새로고침
-            //        string result = "";
-
-            //        result += uniform_sDataList[0] + "+";
-            //        result += uniform_sDataList[1] + "+";
-            //        result += uniform_sDataList[2] + "+";
-            //        result += uniform_sDataList[3] + "+";
-            //        result += uniform_sDataList[4] + "+";
-            //        result += uniform_sDataList[5] + "+";
-            //        result += uniform_sDataList[6];
-
-            //        PlayerPrefsManager.GetInstance().Uniform_Data = result;
-            //    }
-            //    else
-            //    {
-            //        PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 2000);
-            //    }
-
-            //    PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 600);
-            //    PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().ssalbap, "6000");
-            //    PlayerPrefsManager.GetInstance().key += 30;
-
-            //    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
-            //    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
-
-            //    shoppopup.SetActive(false);
-            //    break;
-
-
-
-
-            //case EM_IAPConstants.Product_uniform05:
-
-            //    // 구매 여부 데이터 배열
-            //    uniform_sDataList = (PlayerPrefsManager.GetInstance().Uniform_Data).Split('+');
-
-            //    PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
-
-            //    if (uniform_sDataList[5] != "1")
-            //    {
-            //        // 데이터에 구매 완료 표기
-            //        uniform_sDataList[5] = "1";
-
-            //        // 데이터 새로고침
-            //        string result = "";
-
-            //        result += uniform_sDataList[0] + "+";
-            //        result += uniform_sDataList[1] + "+";
-            //        result += uniform_sDataList[2] + "+";
-            //        result += uniform_sDataList[3] + "+";
-            //        result += uniform_sDataList[4] + "+";
-            //        result += uniform_sDataList[5] + "+";
-            //        result += uniform_sDataList[6];
-
-            //        PlayerPrefsManager.GetInstance().Uniform_Data = result;
-            //    }
-            //    else
-            //    {
-            //        PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 2000);
-            //    }
-
-            //    PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 600);
-            //    PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().ssalbap, "6000");
-            //    PlayerPrefsManager.GetInstance().key += 30;
-
-            //    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
-            //    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
-
-            //    shoppopup.SetActive(false);
-            //    break;
-
-
-
-
-            //case EM_IAPConstants.Product_uniform06:
-
-            //    // 구매 여부 데이터 배열
-            //    uniform_sDataList = (PlayerPrefsManager.GetInstance().Uniform_Data).Split('+');
-
-            //    PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
-
-            //    if (uniform_sDataList[6] != "1")
-            //    {
-            //        // 데이터에 구매 완료 표기
-            //        uniform_sDataList[6] = "1";
-
-            //        // 데이터 새로고침
-            //        string result = "";
-
-            //        result += uniform_sDataList[0] + "+";
-            //        result += uniform_sDataList[1] + "+";
-            //        result += uniform_sDataList[2] + "+";
-            //        result += uniform_sDataList[3] + "+";
-            //        result += uniform_sDataList[4] + "+";
-            //        result += uniform_sDataList[5] + "+";
-            //        result += uniform_sDataList[6];
-
-            //        PlayerPrefsManager.GetInstance().Uniform_Data = result;
-            //    }
-            //    else
-            //    {
-            //        PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 3000);
-            //    }
-
-            //    PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 1000);
-            //    PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().ssalbap, "10000");
-            //    PlayerPrefsManager.GetInstance().key += 50;
-
-            //    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
-            //    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
-
-            //    shoppopup.SetActive(false);
-            //    break;
-
-
-
-            /// ---------------------- <새로_추가한_패키지_상점> -------------------------
-            /// 
-
-            case EM_IAPConstants.Product_package_01:
-
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
-                GetMyMoneyItem(0);
-
-                InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
-                InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
-
-                SomeThingPop.SetActive(false);
-                break;
-
-            case EM_IAPConstants.Product_package_02:
-
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
-                GetMyMoneyItem(1);
-
-                InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
-                InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
-
-                SomeThingPop.SetActive(false);
-                break;
-
-            case EM_IAPConstants.Product_package_03:
-
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
-                GetMyMoneyItem(2);
-
-                InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
-                InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
-
-                SomeThingPop.SetActive(false);
-                break;
-
-            case EM_IAPConstants.Product_package_04:
-
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
-                GetMyMoneyItem(3);
-
-                InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
-                InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
-
-                SomeThingPop.SetActive(false);
-                break;
-
-            case EM_IAPConstants.Product_package_05:
-
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
-                GetMyMoneyItem(4);
-
-                InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
-                InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
-
-                SomeThingPop.SetActive(false);
-                break;
-
-            case EM_IAPConstants.Product_package_06:
-
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
-                GetMyMoneyItem(5);
-
-                InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
-                InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
-
-                SomeThingPop.SetActive(false);
-                break;
-
-            case EM_IAPConstants.Product_package_07:
-
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
-                GetMyMoneyItem(6);
-
-                InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
-                InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
-
-                SomeThingPop.SetActive(false);
-                break;
+                    SomeThingPop.SetActive(false);
+                    break;
 
 
 
@@ -987,137 +573,582 @@ public class IAPManager : MonoBehaviour
 
 
 
-            case EM_IAPConstants.Product_limited_01:
+                case EM_IAPConstants.Product_limited_01:
 
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
-                GetMyMoneyItem(7);
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
+                    GetMyMoneyItem(7);
 
-                InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
-                InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
 
-                SomeThingPop.SetActive(false);
-                break;
+                    SomeThingPop.SetActive(false);
+                    break;
 
 
-            case EM_IAPConstants.Product_limited_02:
+                case EM_IAPConstants.Product_limited_02:
 
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
-                GetMyMoneyItem(8);
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
+                    GetMyMoneyItem(8);
 
-                InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
-                InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
 
-                SomeThingPop.SetActive(false);
-                break;
+                    SomeThingPop.SetActive(false);
+                    break;
 
-            case EM_IAPConstants.Product_limited_03:
+                case EM_IAPConstants.Product_limited_03:
 
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
-                GetMyMoneyItem(9);
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
+                    GetMyMoneyItem(9);
 
-                InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
-                InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
 
-                SomeThingPop.SetActive(false);
-                break;
+                    SomeThingPop.SetActive(false);
+                    break;
 
-            case EM_IAPConstants.Product_limited_04:
+                case EM_IAPConstants.Product_limited_04:
 
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
-                GetMyMoneyItem(10);
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
+                    GetMyMoneyItem(10);
 
-                InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
-                InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
 
-                SomeThingPop.SetActive(false);
-                break;
+                    SomeThingPop.SetActive(false);
+                    break;
 
-            case EM_IAPConstants.Product_limited_05:
+                case EM_IAPConstants.Product_limited_05:
 
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
-                GetMyMoneyItem(11);
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
+                    GetMyMoneyItem(11);
 
-                InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
-                InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
 
-                SomeThingPop.SetActive(false);
-                break;
+                    SomeThingPop.SetActive(false);
+                    break;
 
-            case EM_IAPConstants.Product_limited_06:
+                case EM_IAPConstants.Product_limited_06:
 
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
-                GetMyMoneyItem(12);
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
+                    GetMyMoneyItem(12);
 
-                InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
-                InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
 
-                SomeThingPop.SetActive(false);
-                break;
+                    SomeThingPop.SetActive(false);
+                    break;
 
-            case EM_IAPConstants.Product_limited_07:
+                case EM_IAPConstants.Product_limited_07:
 
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
-                GetMyMoneyItem(13);
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
+                    GetMyMoneyItem(13);
 
-                InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
-                InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
 
-                SomeThingPop.SetActive(false);
-                break;
+                    SomeThingPop.SetActive(false);
+                    break;
 
 
                 /// -------------------------------------------------
 
 
 
-            case EM_IAPConstants.Product_day_01:
-                PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Day_05 = 6;
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
-                GetMyMoneyItem(18);
+                case EM_IAPConstants.Product_day_01:
+                    PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Day_05 = 6;
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
+                    GetMyMoneyItem(18);
 
-                InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
-                InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
 
-                SomeThingPop.SetActive(false);
-                break;
-
-
-            case EM_IAPConstants.Product_week_01:
-                PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Week_05 = 99;
-                if (PlayerPrefsManager.GetInstance().dayLimitData[0].weekend_Day == 0)
-                {
-                    PlayerPrefsManager.GetInstance().dayLimitData[0].weekend_Day = UnbiasedTime.Instance.Now().Day;
-                }
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
-                GetMyMoneyItem(23);
-
-                InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
-                InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
-
-                SomeThingPop.SetActive(false);
-                break;
+                    SomeThingPop.SetActive(false);
+                    break;
 
 
-            case EM_IAPConstants.Product_month_01:
+                case EM_IAPConstants.Product_week_01:
+                    PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Week_05 = 99;
+                    if (PlayerPrefsManager.GetInstance().dayLimitData[0].weekend_Day == 0)
+                    {
+                        PlayerPrefsManager.GetInstance().dayLimitData[0].weekend_Day = UnbiasedTime.Instance.Now().Day;
+                    }
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
+                    GetMyMoneyItem(23);
 
-                PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Mouth_05 = 81;
-                if (PlayerPrefsManager.GetInstance().dayLimitData[0].mouth_Day == 0)
-                {
-                    PlayerPrefsManager.GetInstance().dayLimitData[0].mouth_Day = UnbiasedTime.Instance.Now().Day;
-                }
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
-                GetMyMoneyItem(28);
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
 
-                InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
-                InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
-
-                SomeThingPop.SetActive(false);
-                break;
-
+                    SomeThingPop.SetActive(false);
+                    break;
 
 
+                case EM_IAPConstants.Product_month_01:
+
+                    PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Mouth_05 = 81;
+                    if (PlayerPrefsManager.GetInstance().dayLimitData[0].mouth_Day == 0)
+                    {
+                        PlayerPrefsManager.GetInstance().dayLimitData[0].mouth_Day = UnbiasedTime.Instance.Now().Day;
+                    }
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
+                    GetMyMoneyItem(28);
+
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+
+                    SomeThingPop.SetActive(false);
+                    break;
+
+            }
 
         }
+        else
+        {
+            switch (product.Name)
+            {
+
+                case EM_IAPConstants.Product_dia100:
+
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("Dia x 100 purchase success.");
+                    //PlayerPrefsManager.GetInstance().diamond = dts.AddStringDouble(ppmDia, "100");
+                    PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 100);
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+
+                    shoppopup.SetActive(false);
+
+                    break;
+
+                case EM_IAPConstants.Product_dia600:
+
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("Dia x 600 purchase success.");
+                    //PlayerPrefsManager.GetInstance().diamond = dts.AddStringDouble(ppmDia, "600");
+                    PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 600);
+
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+
+                    shoppopup.SetActive(false);
+
+
+                    break;
+
+                case EM_IAPConstants.Product_dia1300:
+
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("Dia x 1,300 purchase success.");
+                    //PlayerPrefsManager.GetInstance().diamond = dts.AddStringDouble(ppmDia, "1300");
+                    PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 1300);
+
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+
+                    shoppopup.SetActive(false);
+
+
+                    break;
+
+
+                case EM_IAPConstants.Product_dia4200:
+
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("Dia x 4,200 purchase success.");
+                    //PlayerPrefsManager.GetInstance().diamond = dts.AddStringDouble(ppmDia, "4200");
+
+                    PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 4200);
+
+
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+
+                    shoppopup.SetActive(false);
+                    break;
+
+
+                case EM_IAPConstants.Product_dia7500:
+
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("Dia x 7,500 purchase success.");
+                    //PlayerPrefsManager.GetInstance().diamond = dts.AddStringDouble(ppmDia, "7500");
+
+                    PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 7500);
+
+
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+
+                    shoppopup.SetActive(false);
+                    break;
+
+                case EM_IAPConstants.Product_dia16000:
+
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("Dia x 16,00 purchase success.");
+                    //PlayerPrefsManager.GetInstance().diamond = dts.AddStringDouble(ppmDia, "16000");
+
+
+                    PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 16000);
+
+
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+
+                    shoppopup.SetActive(false);
+
+
+                    break;
+
+
+
+                /// -------------------------------------------------------------------
+
+
+                case EM_IAPConstants.Product_auto:
+
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("Auto/box purchase success.");
+
+                    if (PlayerPrefsManager.GetInstance().VIP == 526) PlayerPrefsManager.GetInstance().VIP = 725;
+                    else if (PlayerPrefsManager.GetInstance().VIP == 527) PlayerPrefsManager.GetInstance().VIP = 825;
+                    else if (PlayerPrefsManager.GetInstance().VIP == 528) PlayerPrefsManager.GetInstance().VIP = 825;
+                    else if (PlayerPrefsManager.GetInstance().VIP == 925) PlayerPrefsManager.GetInstance().VIP = 625;
+                    else if (PlayerPrefsManager.GetInstance().VIP == 0) PlayerPrefsManager.GetInstance().VIP = 525;
+
+
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+
+                    shoppopup.SetActive(false);
+                    break;
+
+                case EM_IAPConstants.Product_nad:
+
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("Remove Ad purchase success.");
+
+                    if (PlayerPrefsManager.GetInstance().VIP == 525) PlayerPrefsManager.GetInstance().VIP = 725;
+                    else if (PlayerPrefsManager.GetInstance().VIP == 527) PlayerPrefsManager.GetInstance().VIP = 925;
+                    else if (PlayerPrefsManager.GetInstance().VIP == 528) PlayerPrefsManager.GetInstance().VIP = 925;
+                    else if (PlayerPrefsManager.GetInstance().VIP == 825) PlayerPrefsManager.GetInstance().VIP = 625;
+                    else if (PlayerPrefsManager.GetInstance().VIP == 0) PlayerPrefsManager.GetInstance().VIP = 526;
+
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+
+                    shoppopup.SetActive(false);
+                    break;
+
+                case EM_IAPConstants.Product_mattzipbuff:
+
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("Attack buff purchase success.");
+
+                    if (PlayerPrefsManager.GetInstance().VIP == 525) PlayerPrefsManager.GetInstance().VIP = 825;
+                    else if (PlayerPrefsManager.GetInstance().VIP == 526) PlayerPrefsManager.GetInstance().VIP = 925;
+                    else if (PlayerPrefsManager.GetInstance().VIP == 528) PlayerPrefsManager.GetInstance().VIP = 527528;
+                    else if (PlayerPrefsManager.GetInstance().VIP == 725) PlayerPrefsManager.GetInstance().VIP = 625;
+                    else if (PlayerPrefsManager.GetInstance().VIP == 0) PlayerPrefsManager.GetInstance().VIP = 527;
+
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+
+                    shoppopup.SetActive(false);
+                    break;
+
+                case EM_IAPConstants.Product_goldbuff:
+
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("Gold buff purchase success.");
+
+                    if (PlayerPrefsManager.GetInstance().VIP == 525) PlayerPrefsManager.GetInstance().VIP = 825;
+                    else if (PlayerPrefsManager.GetInstance().VIP == 526) PlayerPrefsManager.GetInstance().VIP = 925;
+                    else if (PlayerPrefsManager.GetInstance().VIP == 527) PlayerPrefsManager.GetInstance().VIP = 527528;
+                    else if (PlayerPrefsManager.GetInstance().VIP == 725) PlayerPrefsManager.GetInstance().VIP = 625;
+                    else if (PlayerPrefsManager.GetInstance().VIP == 0) PlayerPrefsManager.GetInstance().VIP = 528;
+
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+
+                    shoppopup.SetActive(false);
+                    break;
+
+                /// --- 신규 생성 목록
+
+                case EM_IAPConstants.Product_allin:
+
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("Package purchase success.");
+                    PlayerPrefsManager.GetInstance().VIP = 625;
+
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+
+                    shoppopup.SetActive(false);
+                    break;
+
+                case EM_IAPConstants.Product_autonoad:
+
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("Package purchase success.");
+
+                    if (PlayerPrefsManager.GetInstance().VIP == 527) PlayerPrefsManager.GetInstance().VIP = 625;
+                    else if (PlayerPrefsManager.GetInstance().VIP == 528) PlayerPrefsManager.GetInstance().VIP = 625;
+                    else if (PlayerPrefsManager.GetInstance().VIP == 825) PlayerPrefsManager.GetInstance().VIP = 625;
+                    else if (PlayerPrefsManager.GetInstance().VIP == 925) PlayerPrefsManager.GetInstance().VIP = 625;
+                    else PlayerPrefsManager.GetInstance().VIP = 725;
+
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+
+                    shoppopup.SetActive(false);
+                    break;
+
+                case EM_IAPConstants.Product_autobuff:
+
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("Package purchase success.");
+
+                    if (PlayerPrefsManager.GetInstance().VIP == 526) PlayerPrefsManager.GetInstance().VIP = 625;
+                    else if (PlayerPrefsManager.GetInstance().VIP == 725) PlayerPrefsManager.GetInstance().VIP = 625;
+                    else if (PlayerPrefsManager.GetInstance().VIP == 925) PlayerPrefsManager.GetInstance().VIP = 625;
+                    else PlayerPrefsManager.GetInstance().VIP = 825;
+
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+
+                    shoppopup.SetActive(false);
+                    break;
+
+                case EM_IAPConstants.Product_noadbuff:
+
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("Package purchase success.");
+
+                    if (PlayerPrefsManager.GetInstance().VIP == 525) PlayerPrefsManager.GetInstance().VIP = 625;
+                    else if (PlayerPrefsManager.GetInstance().VIP == 725) PlayerPrefsManager.GetInstance().VIP = 625;
+                    else if (PlayerPrefsManager.GetInstance().VIP == 825) PlayerPrefsManager.GetInstance().VIP = 625;
+                    else PlayerPrefsManager.GetInstance().VIP = 925;
+
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+
+                    shoppopup.SetActive(false);
+                    break;
+
+
+
+                /// ---------------------- <새로_추가한_패키지_상점> -------------------------
+                /// 
+
+                case EM_IAPConstants.Product_package_01:
+
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("Package purchase success.");
+                    GetMyMoneyItem(0);
+
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+
+                    SomeThingPop.SetActive(false);
+                    break;
+
+                case EM_IAPConstants.Product_package_02:
+
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("Package purchase success.");
+                    GetMyMoneyItem(1);
+
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+
+                    SomeThingPop.SetActive(false);
+                    break;
+
+                case EM_IAPConstants.Product_package_03:
+
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("Package purchase success.");
+                    GetMyMoneyItem(2);
+
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+
+                    SomeThingPop.SetActive(false);
+                    break;
+
+                case EM_IAPConstants.Product_package_04:
+
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("Package purchase success.");
+                    GetMyMoneyItem(3);
+
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+
+                    SomeThingPop.SetActive(false);
+                    break;
+
+                case EM_IAPConstants.Product_package_05:
+
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("Package purchase success.");
+                    GetMyMoneyItem(4);
+
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+
+                    SomeThingPop.SetActive(false);
+                    break;
+
+                case EM_IAPConstants.Product_package_06:
+
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("Package purchase success.");
+                    GetMyMoneyItem(5);
+
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+
+                    SomeThingPop.SetActive(false);
+                    break;
+
+                case EM_IAPConstants.Product_package_07:
+
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("Package purchase success.");
+                    GetMyMoneyItem(6);
+
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+
+                    SomeThingPop.SetActive(false);
+                    break;
+
+
+
+                /// ------------------ 한정 패키지 
+
+
+
+
+
+                case EM_IAPConstants.Product_limited_01:
+
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("Package purchase success.");
+                    GetMyMoneyItem(7);
+
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+
+                    SomeThingPop.SetActive(false);
+                    break;
+
+
+                case EM_IAPConstants.Product_limited_02:
+
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("Package purchase success.");
+                    GetMyMoneyItem(8);
+
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+
+                    SomeThingPop.SetActive(false);
+                    break;
+
+                case EM_IAPConstants.Product_limited_03:
+
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("Package purchase success.");
+                    GetMyMoneyItem(9);
+
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+
+                    SomeThingPop.SetActive(false);
+                    break;
+
+                case EM_IAPConstants.Product_limited_04:
+
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("Package purchase success.");
+                    GetMyMoneyItem(10);
+
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+
+                    SomeThingPop.SetActive(false);
+                    break;
+
+                case EM_IAPConstants.Product_limited_05:
+
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("Package purchase success.");
+                    GetMyMoneyItem(11);
+
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+
+                    SomeThingPop.SetActive(false);
+                    break;
+
+                case EM_IAPConstants.Product_limited_06:
+
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("Package purchase success.");
+                    GetMyMoneyItem(12);
+
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+
+                    SomeThingPop.SetActive(false);
+                    break;
+
+                case EM_IAPConstants.Product_limited_07:
+
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("Package purchase success.");
+                    GetMyMoneyItem(13);
+
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+
+                    SomeThingPop.SetActive(false);
+                    break;
+
+
+                /// -------------------------------------------------
+
+
+
+                case EM_IAPConstants.Product_day_01:
+                    PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Day_05 = 6;
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("Package purchase success.");
+                    GetMyMoneyItem(18);
+
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+
+                    SomeThingPop.SetActive(false);
+                    break;
+
+
+                case EM_IAPConstants.Product_week_01:
+                    PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Week_05 = 99;
+                    if (PlayerPrefsManager.GetInstance().dayLimitData[0].weekend_Day == 0)
+                    {
+                        PlayerPrefsManager.GetInstance().dayLimitData[0].weekend_Day = UnbiasedTime.Instance.Now().Day;
+                    }
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("Package purchase success.");
+                    GetMyMoneyItem(23);
+
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+
+                    SomeThingPop.SetActive(false);
+                    break;
+
+
+                case EM_IAPConstants.Product_month_01:
+
+                    PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Mouth_05 = 81;
+                    if (PlayerPrefsManager.GetInstance().dayLimitData[0].mouth_Day == 0)
+                    {
+                        PlayerPrefsManager.GetInstance().dayLimitData[0].mouth_Day = UnbiasedTime.Instance.Now().Day;
+                    }
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("Package purchase success.");
+                    GetMyMoneyItem(28);
+
+                    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+
+                    SomeThingPop.SetActive(false);
+                    break;
+
+
+
+
+            }
+
+        }
+
+
 
         UserWallet.GetInstance().ShowAllMoney();
         // VIP 승급에 따라 구매버튼 잠그기.
@@ -1132,7 +1163,7 @@ public class IAPManager : MonoBehaviour
     void PurchaseFailedHandler(IAPProduct product, string failureReason)
     {
         //Debug.LogError("The purchase of product " + product.Name + " has failed : " + failureReason);
-        PopUpObjectManager.GetInstance().ShowWarnnigProcess("결제 취소");
+        PopUpObjectManager.GetInstance().ShowWarnnigProcess("Canceled payment.");
 
         // 구매실패시 핸들러 떼주고.
         InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
@@ -1533,70 +1564,144 @@ public class IAPManager : MonoBehaviour
     {
         float diaPass = PlayerPrefs.GetFloat("dDiamond", 0);
 
-        switch (_index)
+        if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
         {
-            case 0:
-                InAppPurchasing.Purchase(EM_IAPConstants.Product_day_01);
-                // 핸들러 등록
-                InAppPurchasing.PurchaseCompleted += PurchaseCompletedHandler;
-                InAppPurchasing.PurchaseFailed += PurchaseFailedHandler;
-                break;
+            switch (_index)
+            {
+                case 0:
+                    InAppPurchasing.Purchase(EM_IAPConstants.Product_day_01);
+                    // 핸들러 등록
+                    InAppPurchasing.PurchaseCompleted += PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed += PurchaseFailedHandler;
+                    break;
 
-            case 1:
-                diaPass = PlayerPrefs.GetFloat("dDiamond", 0) - pakageInfo[14].pakaPrice;
-                if (diaPass < 0)
-                {
-                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("다이아몬드 부족");
-                    return;
-                }
-                PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Day_01 = 46;
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
-                GetMyMoneyItem(14);
-                SomeThingPop.SetActive(false);
-                break;
+                case 1:
+                    diaPass = PlayerPrefs.GetFloat("dDiamond", 0) - pakageInfo[14].pakaPrice;
+                    if (diaPass < 0)
+                    {
+                        PopUpObjectManager.GetInstance().ShowWarnnigProcess("다이아몬드 부족");
+                        return;
+                    }
+                    PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Day_01 = 46;
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
+                    GetMyMoneyItem(14);
+                    SomeThingPop.SetActive(false);
+                    break;
 
-            case 2:
-                diaPass = PlayerPrefs.GetFloat("dDiamond", 0) - pakageInfo[15].pakaPrice;
-                if (diaPass < 0)
-                {
-                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("다이아몬드 부족");
-                    return;
-                }
-                PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Day_02 = 85;
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
-                GetMyMoneyItem(15);
-                SomeThingPop.SetActive(false);
-                break;
+                case 2:
+                    diaPass = PlayerPrefs.GetFloat("dDiamond", 0) - pakageInfo[15].pakaPrice;
+                    if (diaPass < 0)
+                    {
+                        PopUpObjectManager.GetInstance().ShowWarnnigProcess("다이아몬드 부족");
+                        return;
+                    }
+                    PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Day_02 = 85;
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
+                    GetMyMoneyItem(15);
+                    SomeThingPop.SetActive(false);
+                    break;
 
-            case 3:
-                diaPass = PlayerPrefs.GetFloat("dDiamond", 0) - pakageInfo[16].pakaPrice;
-                if (diaPass < 0)
-                {
-                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("다이아몬드 부족");
-                    return;
-                }
-                PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Day_03 = 74;
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
-                GetMyMoneyItem(16);
-                SomeThingPop.SetActive(false);
-                break;
+                case 3:
+                    diaPass = PlayerPrefs.GetFloat("dDiamond", 0) - pakageInfo[16].pakaPrice;
+                    if (diaPass < 0)
+                    {
+                        PopUpObjectManager.GetInstance().ShowWarnnigProcess("다이아몬드 부족");
+                        return;
+                    }
+                    PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Day_03 = 74;
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
+                    GetMyMoneyItem(16);
+                    SomeThingPop.SetActive(false);
+                    break;
 
-            case 4:
-                diaPass = PlayerPrefs.GetFloat("dDiamond", 0) - pakageInfo[17].pakaPrice;
-                if (diaPass < 0)
-                {
-                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("다이아몬드 부족");
-                    return;
-                }
-                PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Day_04 = 47;
-                PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
-                GetMyMoneyItem(17);
-                SomeThingPop.SetActive(false);
-                break;
+                case 4:
+                    diaPass = PlayerPrefs.GetFloat("dDiamond", 0) - pakageInfo[17].pakaPrice;
+                    if (diaPass < 0)
+                    {
+                        PopUpObjectManager.GetInstance().ShowWarnnigProcess("다이아몬드 부족");
+                        return;
+                    }
+                    PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Day_04 = 47;
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("패키지 구매 성공");
+                    GetMyMoneyItem(17);
+                    SomeThingPop.SetActive(false);
+                    break;
 
-            default:
-                break;
+                default:
+                    break;
+            }
+
         }
+        else
+        {
+            switch (_index)
+            {
+                case 0:
+                    InAppPurchasing.Purchase(EM_IAPConstants.Product_day_01);
+                    // 핸들러 등록
+                    InAppPurchasing.PurchaseCompleted += PurchaseCompletedHandler;
+                    InAppPurchasing.PurchaseFailed += PurchaseFailedHandler;
+                    break;
+
+                case 1:
+                    diaPass = PlayerPrefs.GetFloat("dDiamond", 0) - pakageInfo[14].pakaPrice;
+                    if (diaPass < 0)
+                    {
+                        PopUpObjectManager.GetInstance().ShowWarnnigProcess("Not enough diamonds.");
+                        return;
+                    }
+                    PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Day_01 = 46;
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("Package purchase success.");
+                    GetMyMoneyItem(14);
+                    SomeThingPop.SetActive(false);
+                    break;
+
+                case 2:
+                    diaPass = PlayerPrefs.GetFloat("dDiamond", 0) - pakageInfo[15].pakaPrice;
+                    if (diaPass < 0)
+                    {
+                        PopUpObjectManager.GetInstance().ShowWarnnigProcess("Not enough diamonds.");
+                        return;
+                    }
+                    PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Day_02 = 85;
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("Package purchase success.");
+                    GetMyMoneyItem(15);
+                    SomeThingPop.SetActive(false);
+                    break;
+
+                case 3:
+                    diaPass = PlayerPrefs.GetFloat("dDiamond", 0) - pakageInfo[16].pakaPrice;
+                    if (diaPass < 0)
+                    {
+                        PopUpObjectManager.GetInstance().ShowWarnnigProcess("Not enough diamonds.");
+                        return;
+                    }
+                    PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Day_03 = 74;
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("Package purchase success.");
+                    GetMyMoneyItem(16);
+                    SomeThingPop.SetActive(false);
+                    break;
+
+                case 4:
+                    diaPass = PlayerPrefs.GetFloat("dDiamond", 0) - pakageInfo[17].pakaPrice;
+                    if (diaPass < 0)
+                    {
+                        PopUpObjectManager.GetInstance().ShowWarnnigProcess("Not enough diamonds.");
+                        return;
+                    }
+                    PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Day_04 = 47;
+                    PopUpObjectManager.GetInstance().ShowWarnnigProcess("Package purchase success.");
+                    GetMyMoneyItem(17);
+                    SomeThingPop.SetActive(false);
+                    break;
+
+                default:
+                    break;
+            }
+
+        }
+
+
 
         PlayerPrefs.SetFloat("dDiamond", diaPass);
         PlayerPrefs.Save();

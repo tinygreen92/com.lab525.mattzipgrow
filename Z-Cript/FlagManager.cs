@@ -143,7 +143,7 @@ public class FlagManager : MonoBehaviour
         if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
             is3ATK_Desc.text = "공격력 " + string.Format("{0:F2}", tmpATK) + "% 증가";
         else
-            is3ATK_Desc.text = "Increase attack power " + string.Format("{0:F2}", tmpATK) + "%";
+            is3ATK_Desc.text = "<color=#aee571>▲</color> attack power " + string.Format("{0:F2}", tmpATK) + "%";
         /// 소비 골드 표기
         currentAtk = GetPerUpPrice(0, ppm.is3ATK);
         is3ATK_Price.text = UserWallet.GetInstance().SeetheNatural(currentAtk);
@@ -157,7 +157,7 @@ public class FlagManager : MonoBehaviour
         if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
             is4Mattzip_Desc.text = "방어력 " + string.Format("{0:F2}", tmpATK) + "% 증가";
         else
-            is4Mattzip_Desc.text = "Increase defence " + string.Format("{0:F2}", tmpATK) + "%";
+            is4Mattzip_Desc.text = "<color=#aee571>▲</color> defence " + string.Format("{0:F2}", tmpATK) + "%";
         /// 소비 골드 표기
         currentAtk = GetPerUpPrice(2, ppm.is4Mattzip);
         is4Mattzip_Price.text = UserWallet.GetInstance().SeetheNatural(currentAtk);
@@ -171,7 +171,7 @@ public class FlagManager : MonoBehaviour
         if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
             is2Stamina_Desc.text = "체력 " + string.Format("{0:F2}", tmpATK) + "% 증가";
         else
-            is2Stamina_Desc.text = "Increase health " + string.Format("{0:F2}", tmpATK) + "%";
+            is2Stamina_Desc.text = "<color=#aee571>▲</color> health " + string.Format("{0:F2}", tmpATK) + "%";
         /// 소비 골드 표기
         currentAtk = GetPerUpPrice(1, ppm.is2Stamina);
         is2Stamina_Price.text = UserWallet.GetInstance().SeetheNatural(currentAtk);
@@ -186,7 +186,7 @@ public class FlagManager : MonoBehaviour
         if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
             is1Recov_Desc.text = "체력 회복 " + string.Format("{0:F2}", tmpATK) + "% 증가";
         else
-            is1Recov_Desc.text = "Increase health resilience " + string.Format("{0:F2}", tmpATK) + "%";
+            is1Recov_Desc.text = "<color=#aee571>▲</color> health resilience " + string.Format("{0:F2}", tmpATK) + "%";
         /// 소비 골드 표기
         currentAtk = GetPerUpPrice(3, ppm.is1Recov);
         is1Recov_Price.text = UserWallet.GetInstance().SeetheNatural(currentAtk);

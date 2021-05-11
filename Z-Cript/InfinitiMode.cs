@@ -33,7 +33,10 @@ public class InfinitiMode : MonoBehaviour
         // 열쇠 여부 거르고
         if (PlayerPrefsManager.GetInstance().key == 0)
         {
-            PopUpObjectManager.GetInstance().ShowWarnnigProcess("열쇠가 부족하여 입장할 수 없습니다.");
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                PopUpObjectManager.GetInstance().ShowWarnnigProcess("열쇠가 부족하여 입장할 수 없습니다.");
+            else
+                PopUpObjectManager.GetInstance().ShowWarnnigProcess("Not enough key.");
             return;
         }
 
@@ -155,7 +158,10 @@ public class InfinitiMode : MonoBehaviour
     {
         if (PlayerPrefsManager.GetInstance().key <= 0)
         {
-            PopUpObjectManager.GetInstance().ShowWarnnigProcess("열쇠가 부족하여 입장할 수 없습니다.");
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                PopUpObjectManager.GetInstance().ShowWarnnigProcess("열쇠가 부족하여 입장할 수 없습니다.");
+            else
+                PopUpObjectManager.GetInstance().ShowWarnnigProcess("Not enough key.");
             return;
         }
 
@@ -222,7 +228,10 @@ public class InfinitiMode : MonoBehaviour
 
         if (PlayerPrefsManager.GetInstance().key <= 0)
         {
-            PopUpObjectManager.GetInstance().ShowWarnnigProcess("열쇠가 부족하여 입장할 수 없습니다.");
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                PopUpObjectManager.GetInstance().ShowWarnnigProcess("열쇠가 부족하여 입장할 수 없습니다.");
+            else
+                PopUpObjectManager.GetInstance().ShowWarnnigProcess("Not enough key.");
             return;
         }
 

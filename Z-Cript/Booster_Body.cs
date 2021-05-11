@@ -172,7 +172,11 @@ public class Booster_Body : MonoBehaviour
         }
         else
         {
-            PopUpObjectManager.GetInstance().ShowWarnnigProcess("광고를 준비중입니다. 잠시 후에 시도해주세요.");
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                PopUpObjectManager.GetInstance().ShowWarnnigProcess("광고를 준비중입니다. 잠시 후에 시도해주세요.");
+            else
+                PopUpObjectManager.GetInstance().ShowWarnnigProcess("We are preparing an Ads. Please try later.");
+            
             PlayerPrefsManager.GetInstance().IN_APP.SetActive(false);
 
         }

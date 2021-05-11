@@ -451,23 +451,23 @@ public class GatChaManager : MonoBehaviour
         {
 
             Arti01_Lv.text = $"Lv.{ppm.Arti_PunchTouch}  ( Max Lv. 10 )";
-            Arti01_Effect.text = $"번역 터치횟수 {ppm.Arti_PunchTouch}회 증가 ( 레벨당 1회 증가 )";
+            Arti01_Effect.text = $"<color=#aee571>▲</color> the number of touches per {ppm.Arti_PunchTouch}sec.  ( 1 <color=#aee571>▲</color> per Lv. ) ";
 
             Arti02_Lv.text = $"Lv.{ppm.Arti_Mattzip}  ( Max Lv. 1000 )";
             result = ppm.Arti_Mattzip * 0.5f;
-            Arti02_Effect.text = $"번역 {result:F1}% 증가 ( 레벨당 0.5% 증가 )";
+            Arti02_Effect.text = $"<color=#aee571>▲</color> Mattzip {result:F1}% ( 0.5% <color=#aee571>▲</color> per Lv. )";
 
             Arti03_Lv.text = $"Lv.{ppm.Arti_HP}  ( Max Lv. 1000 )";
             result = ppm.Arti_HP * 0.5f;
-            Arti03_Effect.text = $"번역 {result:F1}% 증가 ( 레벨당 0.5% 증가 )";
+            Arti03_Effect.text = $"<color=#aee571>▲</color> helath {result:F1}% ( 0.5% <color=#aee571>▲</color> per Lv. )";
 
             Arti04_Lv.text = $"Lv.{ppm.Arti_GroggyTouch}  ( Max Lv. 49 )";
             result = ppm.Arti_GroggyTouch * 0.1f;
-            Arti04_Effect.text = $"번역 상태 {result:F1}초 감소 ( 레벨당 0.1초 감소 )";
+            Arti04_Effect.text = $"<color=#e53935>▼</color> groggy status {result:F1}sec. ( 0.1sec. <color=#e53935>▼</color> per Lv. )";
 
             Arti05_Lv.text = $"Lv.{ppm.Arti_GAL}  ( Max Lv. 100 )";
             result = ppm.Arti_GAL * 0.1f;
-            Arti05_Effect.text = $"번역 버프 시간 {result:F1}초 증가 ( 레벨당 0.1초 증가 )";
+            Arti05_Effect.text = $"<color=#aee571>▲</color> Korean soup buff {result:F1}sec. ( 0.1sec. <color=#aee571>▲</color> per Lv. )";
 
 
             /// --------------------------------------------------------------- 신규 추가
@@ -475,22 +475,22 @@ public class GatChaManager : MonoBehaviour
 
             Arti06_Lv.text = $"Lv.{ppm.Arti_DefenceTime}  ( Max Lv. 100 )";
             result = ppm.Arti_DefenceTime * 0.1f;
-            Arti06_Effect.text = $"번역 시간 {result:F1}초 감소 ( 레벨당 0.1초 감소 )";
+            Arti06_Effect.text = $"<color=#e53935>▼</color>d defense battle time {result:F1}sec. ( 0.1sec. <color e53935>▼</color> per Lv. )";
 
             Arti07_Lv.text = $"Lv.{ppm.Arti_GoldBox}  ( Max Lv. 300 )";
             result = ppm.Arti_GoldBox * 0.1f;
-            Arti07_Effect.text = $"번역 상자 등장 확률 {result:F1}% 증가 ( 레벨당 0.1% 증가 )";
+            Arti07_Effect.text = $"<color=#aee571>▲</color> appear gift box probability {result:F1}% ( 0.5% <color=#aee571>▲</color> per Lv. )";
 
             Arti08_Lv.text = $"Lv.{ppm.Arti_OffGold}  ( Max Lv. 500 )";
-            Arti08_Effect.text = $"번역 재화 획득량 {ppm.Arti_OffGold}% 증가 ( 레벨당 1% 증가 )";
+            Arti08_Effect.text = $"<color=#aee571>▲</color> acquisition goods {ppm.Arti_OffGold}% ( 1% <color=#aee571>▲</color> per Lv. )";
 
             Arti09_Lv.text = $"Lv.{ppm.Arti_MuganTime}  ( Max Lv. 300 )";
             result = ppm.Arti_MuganTime * 0.1f;
-            Arti09_Effect.text = $"번역 탑 시간 {result:F1}초 증가 ( 레벨당 0.1초 증가 )";
+            Arti09_Effect.text = $"<color=#aee571>▲</color> infinite tower time {result:F1}sec. ( 0.1% <color=#aee571>▲</color> per Lv. )";
 
             Arti10_Lv.text = $"Lv.{ppm.Arti_AttackPower}  ( Max Lv. 1000 )";
             result = ppm.Arti_AttackPower * 0.5f;
-            Arti10_Effect.text = $"번역 {result:F1}% 증가 ( 레벨당 0.5% 증가 )";
+            Arti10_Effect.text = $"<color=#aee571>▲</color> attack power {result:F1}% ( 0.5% <color=#aee571>▲</color> per Lv. )";
 
 
             /// --------------------------------------------------------------- 신규 추가 0608
@@ -498,54 +498,54 @@ public class GatChaManager : MonoBehaviour
 
             Arti11_Lv.text = $"Lv.{ppm.Arti_GoldPer}  ( Max Lv. 1000 )";
             result = ppm.Arti_GoldPer * 0.5f;
-            Arti11_Effect.text = $"번역 획득량 {result:F1}% 증가 ( 레벨당 0.5% 증가 )";
+            Arti11_Effect.text = $"<color=#aee571>▲</color> acquisition gold {result:F1}% ( 0.5% <color=#aee571>▲</color> per Lv. )";
 
             Arti12_Lv.text = $"Lv.{ppm.Arti_LuckyBoxPer}  ( Max Lv. 1000 )";
             result = ppm.Arti_GoldPer * 0.5f;
-            Arti12_Effect.text = $"번역 보상 획득량 {result:F1}% 증가 ( 레벨당 0.5% 증가 )";
+            Arti12_Effect.text = $"<color=#aee571>▲</color> acquisition gift box reward {result:F1}% ( 0.5% <color=#aee571>▲</color> per Lv. )";
 
             Arti13_Lv.text = $"Lv.{ppm.Arti_DefencePer}  ( Max Lv. 500 )";
             result = ppm.Arti_DefencePer * 0.1f;
-            Arti13_Effect.text = $"번역 대미지 {result:F1}% 감소 ( 레벨당 0.1% 감소 )";
+            Arti13_Effect.text = $"<color=#e53935>▼</color> damage in defense battle {result:F1} ( 0.1% <color=#e53935>▼</color> per Lv. )";
 
             Arti14_Lv.text = $"Lv.{ppm.Arti_GoldUpgrade}  ( Max Lv. 500 )";
             result = ppm.Arti_GoldUpgrade * 0.1f;
-            Arti14_Effect.text = $"번역 업그레이드 비용 {result:F1}% 감소 ( 레벨당 0.1% 감소 )";
+            Arti14_Effect.text = $"<color=#e53935>▼</color> godl upgrade cost {result:F1}% ( 0.1% <color=#e53935>▼</color> per Lv. )";
 
             Arti15_Lv.text = $"Lv.{ppm.Arti_InfiReword}  ( Max Lv. 1000 )";
             result = ppm.Arti_InfiReword * 0.5f;
-            Arti15_Effect.text = $"번역 국밥 획득량 {result:F1}% 증가 ( 레벨당 0.5% 증가 )";
+            Arti15_Effect.text = $"<color=#aee571>▲</color> acquisition Korean soup in infinite hold {result:F1}% ( 0.5% <color=#aee571>▲</color> per Lv. )";
 
             Arti16_Lv.text = $"Lv.{ppm.Arti_MiniReword}  ( Max Lv. 1000 )";
             result = ppm.Arti_MiniReword * 0.5f;
-            Arti16_Effect.text = $"번역 쌀밥 획득량 {result:F1}% 증가 ( 레벨당 0.5% 증가 )";
+            Arti16_Effect.text = $"<color=#aee571>▲</color> acquisition rice in minigame {result:F1}% ( 0.5% <color=#aee571>▲</color> per Lv. )";
 
             Arti17_Lv.text = $"Lv.{ppm.Arti_MiniGameTime}  ( Max Lv. 300 )";
             result = ppm.Arti_MiniGameTime * 0.1f;
-            Arti17_Effect.text = $"번역 시간 {result:F1}초 증가 ( 레벨당 0.1초 증가 )";
+            Arti17_Effect.text = $"<color=#aee571>▲</color> minigame times {result:F1}sec. ( 0.1sec. <color=#aee571>▲</color> per Lv. )";
 
 
             /// -------------------------------
             /// 
             new18_Lv.text = $"Lv.{ppm.Arti_DEF_UP}  ( Max Lv. 1000 )";
             result = ppm.Arti_DEF_UP * 0.5f;
-            new18_Effect.text = $"번역 {result:F1}% 증가 ( 레벨당 0.5% 증가 )";
+            new18_Effect.text = $"<color=#aee571>▲</color> defense {result:F1}% ( 0.5% <color=#aee571>▲</color> per Lv. )";
 
             new19_Lv.text = $"Lv.{ppm.Arti_SHILED_UP}  ( Max Lv. 1000 )";
             result = ppm.Arti_SHILED_UP * 0.1f;
-            new19_Effect.text = $"번역 방어력 {result:F1}% 증가 ( 레벨당 0.1% 증가 )";
+            new19_Effect.text = $"<color=#aee571>▲</color> shield defense {result:F1}% ( 0.1% <color=#aee571>▲</color> per Lv. )";
 
             new20_Lv.text = $"Lv.{ppm.Arti_HEALLING_UP}  ( Max Lv. 1000 )";
             result = ppm.Arti_HEALLING_UP * 0.5f;
-            new20_Effect.text = $"번역 {result:F1}% 증가 ( 레벨당 0.5% 증가 )";
+            new20_Effect.text = $"<color=#aee571>▲</color> health resilience {result:F1}% ( 0.5% <color=#aee571>▲</color> per Lv. )";
 
             new21_Lv.text = $"Lv.{ppm.Arti_KIMCHI_UP}  ( Max Lv. 1000 )";
             result = ppm.Arti_KIMCHI_UP * 0.1f;
-            new21_Effect.text = $"번역 획득량 {result:F1}% 증가 ( 레벨당 0.1% 증가 )";
+            new21_Effect.text = $"<color=#aee571>▲</color> acquisition radish kimchi {result:F1}( 0.1% <color=#aee571>▲</color> per Lv. )";
 
             new22_Lv.text = $"Lv.{ppm.Arti_MattGrow_UP}  ( Max Lv. 1000 )";
             result = ppm.Arti_MattGrow_UP * 0.1f;
-            new22_Effect.text = $"번역 증가량 {result:F1}% 증가 ( 레벨당 0.1% 증가 )";
+            new22_Effect.text = $"<color=#aee571>▲</color> acquisition Mattzip {result:F1}% ( 0.1% <color=#aee571>▲</color> per Lv. )";
         }
 
 

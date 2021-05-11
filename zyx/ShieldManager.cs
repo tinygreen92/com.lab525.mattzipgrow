@@ -189,7 +189,7 @@ public class ShieldManager : MonoBehaviour
         if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
             countDailyText.text = "일일 제한 (" + PlayerPrefs.GetInt("Shield10AdsCnt", 0).ToString("D2") + " / 10)";
         else
-            countDailyText.text = "번역 제한 (" + PlayerPrefs.GetInt("Shield10AdsCnt", 0).ToString("D2") + " / 10)";
+            countDailyText.text = "Daily limit (" + PlayerPrefs.GetInt("Shield10AdsCnt", 0).ToString("D2") + " / 10)";
 
 
         /// 창 열기
@@ -225,7 +225,10 @@ public class ShieldManager : MonoBehaviour
         }
         else
         {
-            PopUpObjectManager.GetInstance().ShowWarnnigProcess("광고를 준비중입니다. 잠시 후에 시도해주세요.");
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                PopUpObjectManager.GetInstance().ShowWarnnigProcess("광고를 준비중입니다. 잠시 후에 시도해주세요.");
+            else
+                PopUpObjectManager.GetInstance().ShowWarnnigProcess("We are preparing an Ads. Please try later.");
             PlayerPrefsManager.GetInstance().IN_APP.SetActive(false);
         }
 

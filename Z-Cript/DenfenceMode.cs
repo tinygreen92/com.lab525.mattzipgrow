@@ -260,7 +260,11 @@ public class DenfenceMode : MonoBehaviour
     {
         isPunchStart = false;
         CoolTimeCover.gameObject.SetActive(true);
-        PopUpObjectManager.GetInstance().ShowWarnnigProcess("방어실패. 충분히 성장 후 도전해 주세요.");
+
+        if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+            PopUpObjectManager.GetInstance().ShowWarnnigProcess("방어실패. 충분히 성장 후 도전해 주세요.");
+        else
+            PopUpObjectManager.GetInstance().ShowWarnnigProcess("Defense failure. Please enter after growing enough.");
         Timer.transform.parent.gameObject.SetActive(false);
 
         CoolDownStart(300);
@@ -384,7 +388,10 @@ public class DenfenceMode : MonoBehaviour
         }
         else
         {
-            PopUpObjectManager.GetInstance().ShowWarnnigProcess("광고를 준비중입니다. 잠시 후에 시도해주세요.");
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                PopUpObjectManager.GetInstance().ShowWarnnigProcess("광고를 준비중입니다. 잠시 후에 시도해주세요.");
+            else
+                PopUpObjectManager.GetInstance().ShowWarnnigProcess("We are preparing an Ads. Please try later.");
             PlayerPrefsManager.GetInstance().IN_APP.SetActive(false);
 
         }

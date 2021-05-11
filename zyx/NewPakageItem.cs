@@ -99,7 +99,7 @@ public class NewPakageItem : MonoBehaviour
             if (isKorean)
                 vatText.text = "※ VAT 포함";
             else
-                vatText.text = "번역 ※ VAT 포함";
+                vatText.text = "※ VAT included";
             vatText.gameObject.SetActive(true);
         }
         /// 한정 패키지
@@ -109,7 +109,7 @@ public class NewPakageItem : MonoBehaviour
             if (isKorean)
                 vatText.text = "※ VAT 포함 / 청약철회 불가상품";
             else
-                vatText.text = "번역 ※ VAT 포함 / 청약철회 불가상품";
+                vatText.text = "※ VAT included";
             vatText.gameObject.SetActive(true);
         }
         else
@@ -117,9 +117,11 @@ public class NewPakageItem : MonoBehaviour
             vatText.gameObject.SetActive(false);
         }
 
+        if (isKorean)
+            nameBox.text = tmpInfo.pakaName; /// 해당 아이템은 숫자로 구성되어야 함
+        else
+            nameBox.text = im.pakageEnglishInfos[thisIndex];
 
-        /// 해당 아이템은 숫자로 구성되어야 함
-        nameBox.text = tmpInfo.pakaName;
 
 
         /// 14미만은 결제 금액 표기해주시고
@@ -200,37 +202,37 @@ public class NewPakageItem : MonoBehaviour
             /// 포함 상품 표기
             if (tmpInfo.getDia != 0)
             {
-                shopDesc[0].text = $"번역 x {tmpInfo.getDia:N0}";
+                shopDesc[0].text = $"Diamond x {tmpInfo.getDia:N0}";
                 shopDesc[0].gameObject.SetActive(true);
             }
             if (tmpInfo.getShiled != 0)
             {
-                shopDesc[1].text = $"번역 x {tmpInfo.getShiled:N0}";
+                shopDesc[1].text = $"Shield ticket x {tmpInfo.getShiled:N0}";
                 shopDesc[1].gameObject.SetActive(true);
             }
             if (tmpInfo.getGuapbap != 0)
             {
-                shopDesc[2].text = $"번역 x {tmpInfo.getGuapbap:N0}";
+                shopDesc[2].text = $"Korean soup x {tmpInfo.getGuapbap:N0}";
                 shopDesc[2].gameObject.SetActive(true);
             }
             if (tmpInfo.getSsalbap != 0)
             {
-                shopDesc[3].text = $"번역 x {tmpInfo.getSsalbap:N0}";
+                shopDesc[3].text = $"Rice x {tmpInfo.getSsalbap:N0}";
                 shopDesc[3].gameObject.SetActive(true);
             }
             if (tmpInfo.getKimchi != 0)
             {
-                shopDesc[4].text = $"번역 x {tmpInfo.getKimchi:N0}";
+                shopDesc[4].text = $"Radish kimchi x {tmpInfo.getKimchi:N0}";
                 shopDesc[4].gameObject.SetActive(true);
             }
             if (tmpInfo.getKey != 0)
             {
-                shopDesc[5].text = $"번역 x {tmpInfo.getKey:N0}";
+                shopDesc[5].text = $"Key x {tmpInfo.getKey:N0}";
                 shopDesc[5].gameObject.SetActive(true);
             }
             if (tmpInfo.getTicket != 0)
             {
-                shopDesc[6].text = $"번역 x {tmpInfo.getTicket:N0}";
+                shopDesc[6].text = $"PvP ticket x {tmpInfo.getTicket:N0}";
                 shopDesc[6].gameObject.SetActive(true);
             }
         }

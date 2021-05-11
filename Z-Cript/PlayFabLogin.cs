@@ -555,7 +555,10 @@ public class PlayFabLogin : MonoBehaviour
         (error) =>
         {
             /// 중복 !! 경고 팝업 호출 -> 중복된 닉네임입니다.
-            PopUpObjectManager.GetInstance().ShowWarnnigProcess("중복된 닉네임입니다.");
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                PopUpObjectManager.GetInstance().ShowWarnnigProcess("중복된 닉네임입니다.");
+            else
+                PopUpObjectManager.GetInstance().ShowWarnnigProcess("This is a duplicate nickname.");
         });
     }
 
@@ -642,7 +645,10 @@ public class PlayFabLogin : MonoBehaviour
 
     private void OnLoginFailure(PlayFabError error)
     {
-        PopUpObjectManager.GetInstance().ShowWarnnigProcess("서버 접속 실패");
+        if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+            PopUpObjectManager.GetInstance().ShowWarnnigProcess("서버 접속 실패");
+        else
+            PopUpObjectManager.GetInstance().ShowWarnnigProcess("Server connection failed");
 
         Debug.LogWarning("Something went wrong with your first API call.  :(");
         Debug.LogError("Here's some debug information:");

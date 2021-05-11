@@ -110,7 +110,7 @@ public class QuestManager : MonoBehaviour
             if (isKorean)
                 DailyMiss.GetChild(0).GetChild(2).GetComponent<Text>().text = "횟수 : ( 1 / 1 )";
             else
-                DailyMiss.GetChild(0).GetChild(2).GetComponent<Text>().text = "번역 : ( 1 / 1 )";
+                DailyMiss.GetChild(0).GetChild(2).GetComponent<Text>().text = "Count : ( 1 / 1 )";
             // 보상 받았으면 닫아줌.
             if (day.daily_Abs >= 52525)
             {
@@ -130,7 +130,7 @@ public class QuestManager : MonoBehaviour
             if (isKorean)
                 DailyMiss.GetChild(0).GetChild(2).GetComponent<Text>().text = "횟수 : ( " + day.daily_Abs + " / 1 )";
             else
-                DailyMiss.GetChild(0).GetChild(2).GetComponent<Text>().text = "번역 : ( " + day.daily_Abs + " / 1 )";
+                DailyMiss.GetChild(0).GetChild(2).GetComponent<Text>().text = "Count : ( " + day.daily_Abs + " / 1 )";
         }
 
         if (day.daily_Atk >= 5)
@@ -140,7 +140,7 @@ public class QuestManager : MonoBehaviour
             if (isKorean)
                 DailyMiss.GetChild(1).GetChild(2).GetComponent<Text>().text = "횟수 : ( 5 / 5 )";
             else
-                DailyMiss.GetChild(1).GetChild(2).GetComponent<Text>().text = "번역 : ( 5 / 5 )";
+                DailyMiss.GetChild(1).GetChild(2).GetComponent<Text>().text = "Count : ( 5 / 5 )";
             if (day.daily_Atk >= 52525)
             {
                 dailyBtn[1].GetChild(1).gameObject.SetActive(true);
@@ -160,7 +160,7 @@ public class QuestManager : MonoBehaviour
             if (isKorean)
                 DailyMiss.GetChild(1).GetChild(2).GetComponent<Text>().text = "횟수 : ( " + day.daily_Atk + " / 5 )";
             else
-                DailyMiss.GetChild(1).GetChild(2).GetComponent<Text>().text = "번역 : ( " + day.daily_Atk + " / 5 )";
+                DailyMiss.GetChild(1).GetChild(2).GetComponent<Text>().text = "Count : ( " + day.daily_Atk + " / 5 )";
         }
 
         if (day.daily_HP >= 5)
@@ -170,7 +170,7 @@ public class QuestManager : MonoBehaviour
             if (isKorean)
                 DailyMiss.GetChild(2).GetChild(2).GetComponent<Text>().text = "횟수 : ( 5 / 5 )";
             else
-                DailyMiss.GetChild(2).GetChild(2).GetComponent<Text>().text = "번역 : ( 5 / 5 )";
+                DailyMiss.GetChild(2).GetChild(2).GetComponent<Text>().text = "Count : ( 5 / 5 )";
             if (day.daily_HP >= 52525)
             {
                 dailyBtn[2].GetChild(1).gameObject.SetActive(true);
@@ -190,7 +190,7 @@ public class QuestManager : MonoBehaviour
             if (isKorean)
                 DailyMiss.GetChild(2).GetChild(2).GetComponent<Text>().text = "횟수 : ( " + day.daily_HP + " / 5 )";
             else
-                DailyMiss.GetChild(2).GetChild(2).GetComponent<Text>().text = "번역 : ( " + day.daily_HP + " / 5 )";
+                DailyMiss.GetChild(2).GetChild(2).GetComponent<Text>().text = "Count : ( " + day.daily_HP + " / 5 )";
         }
 
 
@@ -201,7 +201,7 @@ public class QuestManager : MonoBehaviour
             if (isKorean)
                 DailyMiss.GetChild(3).GetChild(2).GetComponent<Text>().text = "횟수 : ( 5 / 5 )";
             else
-                DailyMiss.GetChild(3).GetChild(2).GetComponent<Text>().text = "번역 : ( 5 / 5 )";
+                DailyMiss.GetChild(3).GetChild(2).GetComponent<Text>().text = "Count : ( 5 / 5 )";
             if (day.daily_Punch >= 52525)
             {
                 dailyBtn[3].GetChild(1).gameObject.SetActive(true);
@@ -221,7 +221,7 @@ public class QuestManager : MonoBehaviour
             if (isKorean)
                 DailyMiss.GetChild(3).GetChild(2).GetComponent<Text>().text = "횟수 : ( " + day.daily_Punch + " / 5 )";
             else
-                DailyMiss.GetChild(3).GetChild(2).GetComponent<Text>().text = "번역 : ( " + day.daily_Punch + " / 5 )";
+                DailyMiss.GetChild(3).GetChild(2).GetComponent<Text>().text = "Count : ( " + day.daily_Punch + " / 5 )";
         }
 
 
@@ -232,7 +232,7 @@ public class QuestManager : MonoBehaviour
             if (isKorean)
                 DailyMiss.GetChild(4).GetChild(2).GetComponent<Text>().text = "횟수 : ( 5 / 5 )";
             else
-                DailyMiss.GetChild(4).GetChild(2).GetComponent<Text>().text = "번역 : ( 5 / 5 )";
+                DailyMiss.GetChild(4).GetChild(2).GetComponent<Text>().text = "Count : ( 5 / 5 )";
             if (day.daily_MiniCombo >= 52525)
             {
                 dailyBtn[4].GetChild(1).gameObject.SetActive(true);
@@ -252,7 +252,7 @@ public class QuestManager : MonoBehaviour
             if (isKorean)
                 DailyMiss.GetChild(4).GetChild(2).GetComponent<Text>().text = "횟수 : ( " + day.daily_MiniCombo + " / 5 )";
             else
-                DailyMiss.GetChild(4).GetChild(2).GetComponent<Text>().text = "번역 : ( " + day.daily_MiniCombo + " / 5 )";
+                DailyMiss.GetChild(4).GetChild(2).GetComponent<Text>().text = "Count : ( " + day.daily_MiniCombo + " / 5 )";
         }
 
 
@@ -263,7 +263,7 @@ public class QuestManager : MonoBehaviour
             if (isKorean)
                 DailyMiss.GetChild(5).GetChild(2).GetComponent<Text>().text = "횟수 : ( 1 / 1 )";
             else
-                DailyMiss.GetChild(5).GetChild(2).GetComponent<Text>().text = "번역 : ( 1 / 1 )";
+                DailyMiss.GetChild(5).GetChild(2).GetComponent<Text>().text = "Count : ( 1 / 1 )";
             if (day.daily_ArtiGatcha >= 52525)
             {
                 dailyBtn[5].GetChild(1).gameObject.SetActive(true);
@@ -283,7 +283,7 @@ public class QuestManager : MonoBehaviour
             if (isKorean)
                 DailyMiss.GetChild(5).GetChild(2).GetComponent<Text>().text = "횟수 : ( " + day.daily_ArtiGatcha + " / 1 )";
             else
-                DailyMiss.GetChild(5).GetChild(2).GetComponent<Text>().text = "번역 : ( " + day.daily_ArtiGatcha + " / 1 )";
+                DailyMiss.GetChild(5).GetChild(2).GetComponent<Text>().text = "Count : ( " + day.daily_ArtiGatcha + " / 1 )";
         }
 
 
@@ -295,7 +295,7 @@ public class QuestManager : MonoBehaviour
             if (isKorean)
                 DailyMiss.GetChild(6).GetChild(2).GetComponent<Text>().text = "횟수 : ( 30 / 30 )";
             else
-                DailyMiss.GetChild(6).GetChild(2).GetComponent<Text>().text = "번역 : ( 30 / 30 )";
+                DailyMiss.GetChild(6).GetChild(2).GetComponent<Text>().text = "Count : ( 30 / 30 )";
 
             if (day3.daily_MiniGameCombo >= 52525)
             {
@@ -317,7 +317,7 @@ public class QuestManager : MonoBehaviour
             if (isKorean)
                 DailyMiss.GetChild(6).GetChild(2).GetComponent<Text>().text = "횟수 : ( " + day3.daily_MiniGameCombo + " / 30 )";
             else
-                DailyMiss.GetChild(6).GetChild(2).GetComponent<Text>().text = "번역 : ( " + day3.daily_MiniGameCombo + " / 30 )";
+                DailyMiss.GetChild(6).GetChild(2).GetComponent<Text>().text = "Count : ( " + day3.daily_MiniGameCombo + " / 30 )";
         }
     }
 
@@ -333,7 +333,10 @@ public class QuestManager : MonoBehaviour
         if (dailyBtn[_index].GetChild(1).gameObject.activeSelf) return;
         //보상 획득
         GetDiamond("10");
-        PopUpObjectManager.GetInstance().ShowWarnnigProcess("보상으로 10 다이아를 받았습니다.");
+        if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+            PopUpObjectManager.GetInstance().ShowWarnnigProcess("보상으로 10 다이아를 받았습니다.");
+        else
+            PopUpObjectManager.GetInstance().ShowWarnnigProcess("Received 10 diamonds as a reward.");
         // 다이아 얻으면 커버 씌우기.
         dailyBtn[_index].GetChild(1).gameObject.SetActive(true);
         dailyBtn[_index].GetChild(3).gameObject.SetActive(true);
@@ -470,10 +473,10 @@ public class QuestManager : MonoBehaviour
             }
             else
             {
-                if (i == 0) tmpString = "번역 ";
-                else if (i == 1) tmpString = "번역 ";
-                else if (i == 2) tmpString = "번역 ";
-                else if (i == 3) tmpString = "번역 ";
+                if (i == 0) tmpString = "Defence ";
+                else if (i == 1) tmpString = "Attack ";
+                else if (i == 2) tmpString = "Health ";
+                else if (i == 3) tmpString = "Equipment ";
             }
 
             //
@@ -489,8 +492,8 @@ public class QuestManager : MonoBehaviour
             }
             else
             {
-                txtTop.text = tmpString + (all_UP[i] * 50) + "번역 강화";
-                txt.text = "번역 : ( " + all_M[i] + " / " + (all_UP[i] * 50) + " )";
+                txtTop.text = tmpString + " Strength " + (all_UP[i] * 50);
+                txt.text = "Count : ( " + all_M[i] + " / " + (all_UP[i] * 50) + " )";
             }
 
 
@@ -506,7 +509,7 @@ public class QuestManager : MonoBehaviour
                     if (isKorean)
                         txt.text = "횟수 : ( 1000 / 1000 )";
                     else
-                        txt.text = "번역 : ( 1000 / 1000 )";
+                        txt.text = "Count : ( 1000 / 1000 )";
                     continue;
                 }
                 allBtn[i].GetChild(1).gameObject.SetActive(false);
@@ -555,29 +558,29 @@ public class QuestManager : MonoBehaviour
             {
                 if (i == 4)
                 {
-                    tmpString = "번역 버티기 ";
-                    tmpStringTail = " 회 번역";
+                    tmpString = "Infinite hold ";
+                    tmpStringTail = "";
                 }
                 else if (i == 5)
                 {
-                    tmpString = "번역 ";
-                    tmpStringTail = " 회 번역";
+                    tmpString = "Artifacts ";
+                    tmpStringTail = "";
 
                 }
                 else if (i == 6)
                 {
-                    tmpString = "번역 ";
-                    tmpStringTail = " 회 번역";
+                    tmpString = "Watch Ad ";
+                    tmpStringTail = "";
                 }
                 else if (i == 7)
                 {
-                    tmpString = "번역 탑 ";
-                    tmpStringTail = " 회 번역";
+                    tmpString = "Play infinite tower ";
+                    tmpStringTail = "";
                 }
                 else if (i == 8)
                 {
-                    tmpString = "번역 게임 ";
-                    tmpStringTail = " 회 번역";
+                    tmpString = "Play minigame ";
+                    tmpStringTail = "";
                 }
             }
 
@@ -595,7 +598,7 @@ public class QuestManager : MonoBehaviour
             if (isKorean)
                 txt.text = "횟수 : ( " + all_M[i] + " / " + (all_UP[i] * 10) + " )";
             else
-                txt.text = "횟수 : ( " + all_M[i] + " / " + (all_UP[i] * 10) + " )";
+                txt.text = "Count : ( " + all_M[i] + " / " + (all_UP[i] * 10) + " )";
 
             // 달성했다면 커버 이미지 제거
             if (all_M[i] >= (all_UP[i] * 10))
@@ -608,7 +611,7 @@ public class QuestManager : MonoBehaviour
                     if (isKorean)
                         txt.text = "횟수 : ( 1000 / 1000 )";
                     else
-                        txt.text = "횟수 : ( 1000 / 1000 )";
+                        txt.text = "Count : ( 1000 / 1000 )";
                     continue;
                 }
 
@@ -643,17 +646,14 @@ public class QuestManager : MonoBehaviour
             }
             else
             {
-                tmpStringTail = "번역 하기";
+                tmpStringTail = "";
 
-                if (i == 9) tmpString = "번역 ";
-                else if (i == 10) tmpString = "번역 ";
-                else if (i == 11) tmpString = "번역 ";
-                else if (i == 12) tmpString = "번역 ";
-                else if (i == 13)
-                {
-                    tmpString = "번역 ";
-                    tmpStringTail = "회 하기";
-                }
+                if (i == 9) tmpString = "공/퍼 ";
+                else if (i == 10) tmpString = "체/퍼 ";
+                else if (i == 11) tmpString = "Strengthen special attack power ";
+                else if (i == 12) tmpString = "Strengthen special health ";
+                else if (i == 13) tmpString = "Play PvP ";
+
             }
 
                 //
@@ -670,7 +670,7 @@ public class QuestManager : MonoBehaviour
                 if (isKorean)
                     txt.text = "횟수 : ( " + all_M[i] + " / " + (all_UP[i] * 10) + " )";
                 else
-                    txt.text = "번역 : ( " + all_M[i] + " / " + (all_UP[i] * 10) + " )";
+                    txt.text = "Count : ( " + all_M[i] + " / " + (all_UP[i] * 10) + " )";
 
                 // 달성했다면 커버 이미지 제거
                 if (all_M[i] >= (all_UP[i] * 10))
@@ -683,7 +683,7 @@ public class QuestManager : MonoBehaviour
                         if (isKorean)
                             txt.text = "횟수 : ( 200 / 200 )";
                         else
-                            txt.text = "번역 : ( 200 / 200 )";
+                            txt.text = "Count : ( 200 / 200 )";
                         continue;
                     }
                     allBtn[i].GetChild(1).gameObject.SetActive(false);
@@ -703,7 +703,7 @@ public class QuestManager : MonoBehaviour
                 if (isKorean)
                     txt.text = "횟수 : ( " + all_M[i] + " / " + (all_UP[i] * 50) + " )";
                 else
-                    txt.text = "번역 : ( " + all_M[i] + " / " + (all_UP[i] * 50) + " )";
+                    txt.text = "Count : ( " + all_M[i] + " / " + (all_UP[i] * 50) + " )";
 
                 // 달성했다면 커버 이미지 제거
                 if (all_M[i] >= (all_UP[i] * 50))
@@ -716,7 +716,7 @@ public class QuestManager : MonoBehaviour
                         if (isKorean)
                             txt.text = "횟수 : ( 1000 / 1000 )";
                         else
-                            txt.text = "번역 : ( 1000 / 1000 )";
+                            txt.text = "Count : ( 1000 / 1000 )";
                         continue;
                     }
                     allBtn[i].GetChild(1).gameObject.SetActive(false);
@@ -804,7 +804,11 @@ public class QuestManager : MonoBehaviour
 
         //보상 획득
         GetDiamond("20");
-        PopUpObjectManager.GetInstance().ShowWarnnigProcess("보상으로 20 다이아를 받았습니다.");
+
+        if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+            PopUpObjectManager.GetInstance().ShowWarnnigProcess("보상으로 20 다이아를 받았습니다.");
+        else
+            PopUpObjectManager.GetInstance().ShowWarnnigProcess("Received 20 diamonds as a reward.");
         // 다이아 얻으면 커버 씌우기.
         allBtn[_index].GetChild(1).gameObject.SetActive(true);
         // 십의 자리 하나 올려주기

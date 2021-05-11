@@ -50,12 +50,12 @@ public class MuganMode : MonoBehaviour
         {
             if (Stage >= 201)
             {
-                popupMuganName.text = "번역 !";
+                popupMuganName.text = "Infinite tower clear !";
                 popupMuganName.transform.parent.GetComponent<Button>().enabled = false;
             }
             else
             {
-                popupMuganName.text = Stage + "번역 입장 >";
+                popupMuganName.text = "Stage " + Stage + " admission";
             }
         }
 
@@ -96,7 +96,10 @@ public class MuganMode : MonoBehaviour
         /// 열쇠 체크
         if (PlayerPrefsManager.GetInstance().key <= 0)
         {
-            PopUpObjectManager.GetInstance().ShowWarnnigProcess("열쇠가 부족하여 입장할 수 없습니다.");
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                PopUpObjectManager.GetInstance().ShowWarnnigProcess("열쇠가 부족하여 입장할 수 없습니다.");
+            else
+                PopUpObjectManager.GetInstance().ShowWarnnigProcess("Not enough key.");
             return;
         }
         // 실드  값 초기화
@@ -113,7 +116,7 @@ public class MuganMode : MonoBehaviour
         if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
             stageName.text = "무한의 탑 " + PlayerPrefsManager.GetInstance().MaxGet_MuganTop + "층";
         else
-            stageName.text = "번역 탑 " + PlayerPrefsManager.GetInstance().MaxGet_MuganTop + "층";
+            stageName.text = "Infinite tower " + PlayerPrefsManager.GetInstance().MaxGet_MuganTop;
         //보스 체력 설정
         PlayerPrefsManager.GetInstance().MAX_boss_HP = GetBossHp(PlayerPrefsManager.GetInstance().MaxGet_MuganTop);
         PlayerPrefsManager.GetInstance().bossHP = PlayerPrefsManager.GetInstance().MAX_boss_HP;
@@ -192,7 +195,7 @@ public class MuganMode : MonoBehaviour
         if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
             boss_time.text = "남은 시간 : " + string.Format("{0:f1}", Maxcnt);
         else
-            boss_time.text = "번역 시간 : " + string.Format("{0:f1}", Maxcnt);
+            boss_time.text = "Time remaining : " + string.Format("{0:f1}", Maxcnt);
     }
 
     Coroutine stromking;
@@ -235,7 +238,7 @@ public class MuganMode : MonoBehaviour
                     cnt -= 0.05f;
 
                     boss_Time.fillAmount = cnt / Maxcnt;
-                    boss_time.text = "번역 시간 : " + string.Format("{0:f1}", cnt);
+                    boss_time.text = "Time remaining : " + string.Format("{0:f1}", cnt);
                 }
 
             }
@@ -396,7 +399,10 @@ public class MuganMode : MonoBehaviour
         else
         {
             PlayerPrefsManager.GetInstance().IN_APP.SetActive(false);
-            PopUpObjectManager.GetInstance().ShowWarnnigProcess("광고를 준비중입니다. 잠시 후에 시도해주세요.");
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                PopUpObjectManager.GetInstance().ShowWarnnigProcess("광고를 준비중입니다. 잠시 후에 시도해주세요.");
+            else
+                PopUpObjectManager.GetInstance().ShowWarnnigProcess("We are preparing an Ads. Please try later.");
         }
 
     }
@@ -477,7 +483,11 @@ public class MuganMode : MonoBehaviour
         Left.SetActive(false);
         Right.SetActive(false);
 
-        PopUpObjectManager.GetInstance().ShowWarnnigProcess("무한의 탑 도전실패.");
+        if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+            PopUpObjectManager.GetInstance().ShowWarnnigProcess("무한의 탑 도전실패.");
+        else
+            PopUpObjectManager.GetInstance().ShowWarnnigProcess("Challenge failed");
+
         //퀘스트
         PlayerPrefsManager.GetInstance().questInfo2[0].All_Mugan++;
         isStart = false;

@@ -68,6 +68,37 @@ public class UserWallet : MonoBehaviour
         ShowAllMoney();
     }
 
+
+    public void GotMoney(int _int)
+    {
+        switch (_int)
+        {
+            case 0:
+                PlayerPrefs.SetFloat("dDiamond", PlayerPrefs.GetFloat("dDiamond") + 100);
+                break;
+
+            case 1:
+                PlayerPrefsManager.GetInstance().gupbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().gupbap, "100");
+                break;
+
+            case 2:
+                PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(PlayerPrefsManager.GetInstance().ssalbap, "100");
+                break;
+
+            case 3:
+                PlayerPrefsManager.GetInstance().Kimchi = dts.AddStringDouble(PlayerPrefsManager.GetInstance().Kimchi, "100");
+                break;
+
+
+            default:
+                break;
+        }
+
+
+        ShowAllMoney();
+    }
+
+
     public void All_IN_ONE()
     {
         PlayerPrefsManager.GetInstance().VIP = 625;
@@ -426,7 +457,7 @@ public class UserWallet : MonoBehaviour
             if (isKorean)
                 Desc_Text.text = "골드 상자를 획득했다!";
             else
-                Desc_Text.text = "번역 상자를 획득했다!";
+                Desc_Text.text = "You have acquired a gold box!";
             tmpDps = dts.multipleStringDouble(tmpDps, 5d * (goldPer + (artiGoldPer * 0.01d)));
             Gold_5_Text.text = SeetheNatural(double.Parse(tmpDps));
 
@@ -438,7 +469,7 @@ public class UserWallet : MonoBehaviour
             if (isKorean)
                 Desc_Text.text = "국밥 상자를 획득했다!";
             else
-                Desc_Text.text = "번역 상자를 획득했다!";
+                Desc_Text.text = "You have acquired a Korean soup box!";
 
             target = Random.Range(10, 101);
 
@@ -456,7 +487,7 @@ public class UserWallet : MonoBehaviour
             if (isKorean)
                 Desc_Text.text = "쌀밥 상자를 획득했다!";
             else
-                Desc_Text.text = "번역 상자를 획득했다!";
+                Desc_Text.text = "You have acquired a rice box!";
 
             target = Random.Range(10, 501);
             /// 획득량 % 증가
@@ -507,7 +538,11 @@ public class UserWallet : MonoBehaviour
             //
             PlayerPrefsManager.GetInstance().gold = dts.AddStringDouble(double.Parse(tmpGold), double.Parse(value));
             PopUpObjectManager.GetInstance().GettingGoldMessage(double.Parse(value));
-            PopUpObjectManager.GetInstance().ShowWarnnigProcess(SeetheNatural(double.Parse(value)) + " 골드를 획득하셨습니다.");
+
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                PopUpObjectManager.GetInstance().ShowWarnnigProcess(SeetheNatural(double.Parse(value)) + " 골드를 획득하셨습니다.");
+            else
+                PopUpObjectManager.GetInstance().ShowWarnnigProcess("You have acquired a golds " + SeetheNatural(double.Parse(value)));
 
             Gold_5_Text.text = SeetheNatural(double.Parse(value));
 
@@ -520,7 +555,11 @@ public class UserWallet : MonoBehaviour
             double getAmount = (target * (1.0d + (luckyPer * 0.01d)));
 
             PlayerPrefsManager.GetInstance().gupbap = dts.AddStringDouble(gupbap, getAmount.ToString("f0"));
-            PopUpObjectManager.GetInstance().ShowWarnnigProcess("국밥 " + getAmount.ToString("f0") + " 그릇을 획득하셨습니다.");
+
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                PopUpObjectManager.GetInstance().ShowWarnnigProcess("국밥 " + getAmount.ToString("f0") + " 그릇을 획득하셨습니다.");
+            else
+                PopUpObjectManager.GetInstance().ShowWarnnigProcess("Acquisition Korean soups " + getAmount.ToString("f0") + " .");
 
         }
         else if (Gatcha <= 100f)
@@ -531,7 +570,11 @@ public class UserWallet : MonoBehaviour
             double getAmount = (target * (1.0d + (luckyPer * 0.01d)));
 
             PlayerPrefsManager.GetInstance().ssalbap = dts.AddStringDouble(ssal, getAmount.ToString("f0"));
-            PopUpObjectManager.GetInstance().ShowWarnnigProcess("쌀밥 " + getAmount.ToString("f0") + " 그릇을 획득하셨습니다.");
+
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                PopUpObjectManager.GetInstance().ShowWarnnigProcess("쌀밥 " + getAmount.ToString("f0") + " 그릇을 획득하셨습니다.");
+            else
+                PopUpObjectManager.GetInstance().ShowWarnnigProcess("Acquisition rices " + getAmount.ToString("f0") + " .");
 
         }
 
@@ -555,7 +598,10 @@ public class UserWallet : MonoBehaviour
     {
         if (PlayerPrefsManager.GetInstance().questInfo[0].daily_LMITABS >= 10)
         {
-            PopUpObjectManager.GetInstance().ShowWarnnigProcess("일일 제한 광고 횟수를 모두 소진하셨습니다.");
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                PopUpObjectManager.GetInstance().ShowWarnnigProcess("일일 제한 광고 횟수를 모두 소진하셨습니다.");
+            else
+                PopUpObjectManager.GetInstance().ShowWarnnigProcess("You have exhausted all the daily limit ads.");
             return;
         }
 
@@ -569,7 +615,10 @@ public class UserWallet : MonoBehaviour
         }
         else
         {
-            PopUpObjectManager.GetInstance().ShowWarnnigProcess("광고를 준비중입니다. 잠시 후에 시도해주세요.");
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                PopUpObjectManager.GetInstance().ShowWarnnigProcess("광고를 준비중입니다. 잠시 후에 시도해주세요.");
+            else
+                PopUpObjectManager.GetInstance().ShowWarnnigProcess("We are preparing an Ads. Please try later.");
             PlayerPrefsManager.GetInstance().IN_APP.SetActive(false);
 
         }
@@ -630,7 +679,10 @@ public class UserWallet : MonoBehaviour
         PlayerPrefs.SetFloat("dDiamond", ddd);
         ShowUserDia();
 
-        PopUpObjectManager.GetInstance().ShowWarnnigProcess(targetDia + " 다이아를 획득하셨습니다.");
+        if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+            PopUpObjectManager.GetInstance().ShowWarnnigProcess(targetDia + " 다이아를 획득하셨습니다.");
+        else
+            PopUpObjectManager.GetInstance().ShowWarnnigProcess("You have acquired a diamonds " + targetDia + " .");
 
         /// 퀘스트
         PlayerPrefsManager.GetInstance().questInfo[0].daily_Abs++;
@@ -658,7 +710,7 @@ public class UserWallet : MonoBehaviour
         if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
             DailyText.text = $"일일 제한 10회 ( {PlayerPrefsManager.GetInstance().questInfo[0].daily_LMITABS} / 10 )";
         else
-            DailyText.text = $"번역 제한 10회 ( {PlayerPrefsManager.GetInstance().questInfo[0].daily_LMITABS} / 10 )";
+            DailyText.text = $"Daily limit 10 ( {PlayerPrefsManager.GetInstance().questInfo[0].daily_LMITABS} / 10 )";
     }
 
 

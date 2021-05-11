@@ -546,7 +546,6 @@ public class PunchManager : MonoBehaviour
     //        return false;
     //    }
     //}
-
     // 펀치 목록
     public string[] PunchNames =
     { 

@@ -102,7 +102,7 @@ public class PunchItem : MonoBehaviour
         if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
             DescBox.text = "공격력 " + thisWeaponEffect.ToString("f1") + "% 증가";
         else
-            DescBox.text = "번역 " + thisWeaponEffect.ToString("f1") + "% 증가";
+            DescBox.text = "<color=#aee571>▲</color> attack power " + thisWeaponEffect.ToString("f1") + "%";
         /// 버튼 갱신
         SetGoobapBtn(thisWeaponCost);
     }
@@ -184,7 +184,11 @@ public class PunchItem : MonoBehaviour
         /// 0 렙이면 장착하지말고 리턴
         if (thisWeaponLevel == 0 && thisIndex != 0)
         {
-            PopUpObjectManager.GetInstance().ShowWarnnigProcess("레벨이 0인 장비는 장착할 수 없습니다.");
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                PopUpObjectManager.GetInstance().ShowWarnnigProcess("레벨이 0인 장비는 장착할 수 없습니다.");
+            else
+                PopUpObjectManager.GetInstance().ShowWarnnigProcess("Equipment that is level 0 cannot be equipped.");
+
             return;
         }
 
