@@ -65,7 +65,11 @@ public class TutorialMissionManager : MonoBehaviour
     {
         mMissionInfo[currentMissionIndex++].missionPassOrNot = -1;
         /// 미션 내용 갱신
-        missionText.text = mTitles[currentMissionIndex];
+        if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+            missionText.text = mTitles[currentMissionIndex];
+        else
+            missionText.text = mTitlesEngs[currentMissionIndex];
+
         /// 이미 달성한 경우에 오픈해주기
         UpdateMission(currentMissionIndex);
     }
@@ -167,7 +171,11 @@ public class TutorialMissionManager : MonoBehaviour
             }
         }
         /// 미션 내용 갱신
-        missionText.text = mTitles[currentMissionIndex];
+        if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+            missionText.text = mTitles[currentMissionIndex];
+        else
+            missionText.text = mTitlesEngs[currentMissionIndex];
+
         /// 이미 달성한 경우에 오픈해주기
         if (currentMissionIndex == 1 ||
             currentMissionIndex == 9 ||

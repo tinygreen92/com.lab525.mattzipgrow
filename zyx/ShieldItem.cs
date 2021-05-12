@@ -66,7 +66,12 @@ public class ShieldItem : MonoBehaviour
     void SetDefaltInfo()
     {
         spriteBox.sprite = pm.shieldImgs[thisIndex];
-        NameBox.text = pm.shieldNames[thisIndex];
+
+        if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+            NameBox.text = pm.shieldNames[thisIndex];
+        else
+            NameBox.text = pm.shieldEngNames[thisIndex];
+
         /// 회색 커버
         SetAllGrayCover(thisIndex);
         /// 장착 여부 버튼
@@ -133,8 +138,8 @@ public class ShieldItem : MonoBehaviour
         else
         {
             LevelBox.text = $"Lv. {thisShieldLevel}";
-            DescBox.text = $"<color=#aee571>▲</color> equipped defense {thisShieldEffect:F1}%";
-            ownedBox.text = $"<color=#aee571>▲</color> holding defense {thisDIAEffect:F1}%";
+            DescBox.text = $"<color=#aee571>▲</color> Equipped defense {thisShieldEffect:F1}%";
+            ownedBox.text = $"<color=#aee571>▲</color> Holding defense {thisDIAEffect:F1}%";
             /// 합성 확률
             fussionBox.text = $"Success Chance {thisSuccedFussion:F1}%";
             /// 보유 갯수

@@ -661,6 +661,9 @@ public class ShieldManager : MonoBehaviour
         "RRR",
         "RRR+"
     };
+    [Space]
+    public string[] shieldEngNames;
+
 
     /// <summary>
     /// 호출 시점에서 쉴드 0개 상태라면 초기 세팅

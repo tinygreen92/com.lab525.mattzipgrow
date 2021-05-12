@@ -74,8 +74,11 @@ public class ArtifactPopManager : MonoBehaviour
 
 
         }
+        if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+            DescText.text = mGname[seed] + "획득하였습니다.";
+        else
+            DescText.text = "You got " + mGname[seed];
 
-        DescText.text = mGname[seed] + "획득하였습니다.";
         /// 무야호 사운드
         AudioManager.instance.Btn_Mooyaho();
         gameObject.SetActive(true);

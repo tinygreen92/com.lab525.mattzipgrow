@@ -837,7 +837,7 @@ public class CharacterManager : MonoBehaviour
                     if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
                         result = "국밥 버프 요구 터치 횟수 " + PlayerPrefsManager.GetInstance().Pet_Buff_Lv + "회 차감";
                     else
-                        result = "<color=#e53935>▼</color> number of touches required for soup buff " + PlayerPrefsManager.GetInstance().Pet_Buff_Lv;
+                        result = "<color=#e53935>▼</color> Number of touches required for soup buff " + PlayerPrefsManager.GetInstance().Pet_Buff_Lv;
                     Pet_UP_LV[i].text = "Lv." + PlayerPrefsManager.GetInstance().Pet_Buff_Lv;
                     break;
 
@@ -846,7 +846,7 @@ public class CharacterManager : MonoBehaviour
                     if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
                         result = "맷집 증가량 " + (0.005f * PlayerPrefsManager.GetInstance().Pet_Matt_Up_Lv).ToString("f3") + "% 증가";
                     else
-                        result = "<color=#aee571>▲</color> amount of Mattzip " + (0.005f * PlayerPrefsManager.GetInstance().Pet_Matt_Up_Lv).ToString("f3") + "%";
+                        result = "<color=#aee571>▲</color> Amount of Mattzip " + (0.005f * PlayerPrefsManager.GetInstance().Pet_Matt_Up_Lv).ToString("f3") + "%";
                     Pet_UP_LV[i].text = "Lv." + PlayerPrefsManager.GetInstance().Pet_Matt_Up_Lv;
                     break;
 
@@ -1776,12 +1776,12 @@ public class CharacterManager : MonoBehaviour
             {
                 switch (i)
                 {
-                    case 1: result = "<color=#aee571>▲</color> acquisition gold " + Mathf.FloorToInt(_contents * 1f) + "%"; break;
-                    case 2: result = "<color=#aee571>▲</color> acquisition gold " + Mathf.FloorToInt(_contents * 1f) + "%"; break;
-                    case 3: result = "<color=#aee571>▲</color> acquisition Korean soup " + Mathf.FloorToInt(_contents * 1f) + "%"; break;
-                    case 4: result = "<color=#aee571>▲</color> acquisition Korean soup " + Mathf.FloorToInt(_contents * 1f) + "%"; break;
-                    case 5: result = "<color=#aee571>▲</color> acquisition rice " + Mathf.FloorToInt(_contents * 1f) + "%"; break;
-                    case 6: result = "<color=#aee571>▲</color> acquisition rice " + Mathf.FloorToInt(_contents * 1f) + "%"; break;
+                    case 1: result = "<color=#aee571>▲</color> Acquisition gold " + Mathf.FloorToInt(_contents * 1f) + "%"; break;
+                    case 2: result = "<color=#aee571>▲</color> Acquisition gold " + Mathf.FloorToInt(_contents * 1f) + "%"; break;
+                    case 3: result = "<color=#aee571>▲</color> Acquisition Korean soup " + Mathf.FloorToInt(_contents * 1f) + "%"; break;
+                    case 4: result = "<color=#aee571>▲</color> Acquisition Korean soup " + Mathf.FloorToInt(_contents * 1f) + "%"; break;
+                    case 5: result = "<color=#aee571>▲</color> Acquisition rice " + Mathf.FloorToInt(_contents * 1f) + "%"; break;
+                    case 6: result = "<color=#aee571>▲</color> Acquisition rice " + Mathf.FloorToInt(_contents * 1f) + "%"; break;
                 }
             }
 
@@ -1857,13 +1857,13 @@ public class CharacterManager : MonoBehaviour
             {
                 switch (i)
                 {
-                    case 0: result = "<color=#aee571>▲</color> attack power " + Mathf.FloorToInt(_contents * 1f) + "%"; break;
-                    case 1: result = "<color=#aee571>▲</color> health " + Mathf.FloorToInt(_contents * 1f) + "%"; break;
-                    case 2: result = "<color=#aee571>▲</color> health resilience " + Mathf.FloorToInt(_contents * 1f) + "%"; break;
-                    case 3: result = "<color=#aee571>▲</color> acquisition gold " + (_contents * 0.5d).ToString("f1") + "%"; break;
-                    case 4: result = "<color=#aee571>▲</color> offline rewards " + Mathf.FloorToInt(_contents * 1f) + "%"; break;
-                    case 5: result = "<color=#aee571>▲</color> acquisition Korean soup " + (_contents * 0.5d).ToString("f1") + "%"; break;
-                    case 6: result = "<color=#aee571>▲</color> acquisition rice " + (_contents * 0.5d).ToString("f1") + "%"; break;
+                    case 0: result = "<color=#aee571>▲</color> Attack power " + Mathf.FloorToInt(_contents * 1f) + "%"; break;
+                    case 1: result = "<color=#aee571>▲</color> Health " + Mathf.FloorToInt(_contents * 1f) + "%"; break;
+                    case 2: result = "<color=#aee571>▲</color> Health resilience " + Mathf.FloorToInt(_contents * 1f) + "%"; break;
+                    case 3: result = "<color=#aee571>▲</color> Acquisition gold " + (_contents * 0.5d).ToString("f1") + "%"; break;
+                    case 4: result = "<color=#aee571>▲</color> Offline rewards " + Mathf.FloorToInt(_contents * 1f) + "%"; break;
+                    case 5: result = "<color=#aee571>▲</color> Acquisition Korean soup " + (_contents * 0.5d).ToString("f1") + "%"; break;
+                    case 6: result = "<color=#aee571>▲</color> Acquisition rice " + (_contents * 0.5d).ToString("f1") + "%"; break;
 
                 }
             }

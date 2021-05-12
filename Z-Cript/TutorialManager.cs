@@ -1096,17 +1096,17 @@ public class TutorialManager : MonoBehaviour
         }
         else
         {
-            yield return StartCoroutine(NormalChat("I was born," + System.Environment.NewLine + "in a Mattzip country."));
-            yield return StartCoroutine(NormalChat("One day" + System.Environment.NewLine + "that was no different" + System.Environment.NewLine + "from one day"));
-            yield return StartCoroutine(NormalChat("Rumors began to circulate" + System.Environment.NewLine + "that the legendary weapon" + System.Environment.NewLine + "appeared"));
-            yield return StartCoroutine(NormalChat("My father," + System.Environment.NewLine + "who was a mattzip champion at the time," + System.Environment.NewLine + "set out to fight the legendary weapon,"));
+            yield return StartCoroutine(NormalChat("I was born" + System.Environment.NewLine + "in a Mattzip" + System.Environment.NewLine + "country"));
+            yield return StartCoroutine(NormalChat("A day as usual."));
+            yield return StartCoroutine(NormalChat("There were rumors" + System.Environment.NewLine + "that the legendary" + System.Environment.NewLine + "weapon was appeared."));
+            yield return StartCoroutine(NormalChat("My father," + System.Environment.NewLine + "who was a mattzip champion at the time," + System.Environment.NewLine + "set out to fight the" + System.Environment.NewLine + "legendary weapon,"));
             yield return StartCoroutine(PageChange());
-            yield return StartCoroutine(NormalChat("After that," + System.Environment.NewLine + "I could no longer see my father."));
-            yield return StartCoroutine(NormalChat("One day when I fell for disappointment," + System.Environment.NewLine + "I was drinking every day."));
-            yield return StartCoroutine(NormalChat("It seemed that" + System.Environment.NewLine + "I could hear my father's voice somewhere."));
-            yield return StartCoroutine(NormalChat("As I looked at the sounding place," + System.Environment.NewLine + "the helmet, which used to be the symbol of my father," + System.Environment.NewLine + "was caught in my eyes."));
+            yield return StartCoroutine(NormalChat("After that," + System.Environment.NewLine + "I couldn't see" + System.Environment.NewLine + "my father."));
+            yield return StartCoroutine(NormalChat("One day," + System.Environment.NewLine + "I was drinking alcohol" + System.Environment.NewLine + "to forget my sadness."));
+            yield return StartCoroutine(NormalChat("Somewhere," + System.Environment.NewLine + "I heard my father's" + System.Environment.NewLine + "voice."));
+            yield return StartCoroutine(NormalChat("Let's see" + System.Environment.NewLine + "where the sound comes from," + System.Environment.NewLine + "My father's helmet came into my eyes."));
             yield return StartCoroutine(PageChange());
-            yield return StartCoroutine(NormalChat("Looking at the helmet, I remembered the memories of" + System.Environment.NewLine + "my father I had forgotten"));
+            yield return StartCoroutine(NormalChat("Looking at the helmet," + System.Environment.NewLine + "I thought of a memory" + System.Environment.NewLine + "I had forgotten with my father."));
             yield return StartCoroutine(NormalChat("The moment" + System.Environment.NewLine + "when I couldn't control my emotions,"));
             yield return StartCoroutine(NormalChat("I made up my mind."));
             yield return StartCoroutine(NormalChat("My father's revenge."));

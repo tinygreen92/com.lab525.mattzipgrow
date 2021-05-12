@@ -102,7 +102,7 @@ public class PunchItem : MonoBehaviour
         if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
             DescBox.text = "공격력 " + thisWeaponEffect.ToString("f1") + "% 증가";
         else
-            DescBox.text = "<color=#aee571>▲</color> attack power " + thisWeaponEffect.ToString("f1") + "%";
+            DescBox.text = "<color=#aee571>▲</color> Attack power " + thisWeaponEffect.ToString("f1") + "%";
         /// 버튼 갱신
         SetGoobapBtn(thisWeaponCost);
     }

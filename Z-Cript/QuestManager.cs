@@ -492,7 +492,7 @@ public class QuestManager : MonoBehaviour
             }
             else
             {
-                txtTop.text = tmpString + " Strength " + (all_UP[i] * 50);
+                txtTop.text = tmpString + " Strength";
                 txt.text = "Count : ( " + all_M[i] + " / " + (all_UP[i] * 50) + " )";
             }
 
@@ -587,11 +587,14 @@ public class QuestManager : MonoBehaviour
 
             txtTop = AllMiss.GetChild(i).GetChild(1).GetComponent<Text>();
             txt = AllMiss.GetChild(i).GetChild(2).GetComponent<Text>();
-            
-            
-            
+
+
+
             // 달성해서 다이아 받은 지점에서 10 곱해서 맥스값
-            txtTop.text = tmpString + (all_UP[i] * 10) + tmpStringTail;
+            if (isKorean)
+                txtTop.text = tmpString + (all_UP[i] * 10) + tmpStringTail;
+            else
+                txtTop.text = tmpString;
 
 
             /// 번역
@@ -664,7 +667,10 @@ public class QuestManager : MonoBehaviour
             /// pvp 횟수만 10회 하는 걸로
             if (i == 13)
             {
-                txtTop.text = tmpString + (all_UP[i] * 10) + tmpStringTail; //"회 강화";
+                if (isKorean)
+                    txtTop.text = tmpString + (all_UP[i] * 10) + tmpStringTail; //"회 강화";
+                else
+                    txtTop.text = tmpString; //"회 강화";
 
                 /// 번역
                 if (isKorean)
@@ -697,7 +703,10 @@ public class QuestManager : MonoBehaviour
             // 달성해서 다이아 받은 지점에서 50 곱해서 맥스값
             else
             {
-                txtTop.text = tmpString + (all_UP[i] * 50) + tmpStringTail; //"회 강화";
+                if (isKorean)
+                    txtTop.text = tmpString + (all_UP[i] * 50) + tmpStringTail; //"회 강화";
+                else
+                    txtTop.text = tmpString; //"회 강화";
 
                 /// 번역
                 if (isKorean)

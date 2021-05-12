@@ -13,7 +13,7 @@ public class GatChaManager : MonoBehaviour
     [Space]
     public Transform dummyHome;         // 17개 유물 parent 위에 덮은 오브젝트다 
     public GameObject[] emptyDumm4;     // 디폴트 더미 4개 
-
+    
 
 
     [Header("- 팝업 내용 매니저")]
@@ -345,11 +345,9 @@ public class GatChaManager : MonoBehaviour
         InitDummyArti(artiDataList);
         /// 새아이템 적용
         AddNewItemToGrid();
-
         /// 번역
         if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
         {
-
             Arti01_Lv.text = $"Lv.{ppm.Arti_PunchTouch}  ( Max Lv. 10 )";
             Arti01_Effect.text = $"초당 터치횟수 {ppm.Arti_PunchTouch}회 증가 ( 레벨당 1회 증가 )";
 
@@ -451,7 +449,7 @@ public class GatChaManager : MonoBehaviour
         {
 
             Arti01_Lv.text = $"Lv.{ppm.Arti_PunchTouch}  ( Max Lv. 10 )";
-            Arti01_Effect.text = $"<color=#aee571>▲</color> the number of touches per {ppm.Arti_PunchTouch}sec.  ( 1 <color=#aee571>▲</color> per Lv. ) ";
+            Arti01_Effect.text = $"<color=#aee571>▲</color> The number of touches per {ppm.Arti_PunchTouch}sec.  ( 1 <color=#aee571>▲</color> per Lv. ) ";
 
             Arti02_Lv.text = $"Lv.{ppm.Arti_Mattzip}  ( Max Lv. 1000 )";
             result = ppm.Arti_Mattzip * 0.5f;
@@ -459,11 +457,11 @@ public class GatChaManager : MonoBehaviour
 
             Arti03_Lv.text = $"Lv.{ppm.Arti_HP}  ( Max Lv. 1000 )";
             result = ppm.Arti_HP * 0.5f;
-            Arti03_Effect.text = $"<color=#aee571>▲</color> helath {result:F1}% ( 0.5% <color=#aee571>▲</color> per Lv. )";
+            Arti03_Effect.text = $"<color=#aee571>▲</color> Helath {result:F1}% ( 0.5% <color=#aee571>▲</color> per Lv. )";
 
             Arti04_Lv.text = $"Lv.{ppm.Arti_GroggyTouch}  ( Max Lv. 49 )";
             result = ppm.Arti_GroggyTouch * 0.1f;
-            Arti04_Effect.text = $"<color=#e53935>▼</color> groggy status {result:F1}sec. ( 0.1sec. <color=#e53935>▼</color> per Lv. )";
+            Arti04_Effect.text = $"<color=#e53935>▼</color> Groggy status {result:F1}sec. ( 0.1sec. <color=#e53935>▼</color> per Lv. )";
 
             Arti05_Lv.text = $"Lv.{ppm.Arti_GAL}  ( Max Lv. 100 )";
             result = ppm.Arti_GAL * 0.1f;
@@ -475,22 +473,22 @@ public class GatChaManager : MonoBehaviour
 
             Arti06_Lv.text = $"Lv.{ppm.Arti_DefenceTime}  ( Max Lv. 100 )";
             result = ppm.Arti_DefenceTime * 0.1f;
-            Arti06_Effect.text = $"<color=#e53935>▼</color>d defense battle time {result:F1}sec. ( 0.1sec. <color e53935>▼</color> per Lv. )";
+            Arti06_Effect.text = $"<color=#e53935>▼</color> Defense battle time {result:F1}sec. ( 0.1sec. <color=#e53935>▼</color> per Lv. )";
 
             Arti07_Lv.text = $"Lv.{ppm.Arti_GoldBox}  ( Max Lv. 300 )";
             result = ppm.Arti_GoldBox * 0.1f;
-            Arti07_Effect.text = $"<color=#aee571>▲</color> appear gift box probability {result:F1}% ( 0.5% <color=#aee571>▲</color> per Lv. )";
+            Arti07_Effect.text = $"<color=#aee571>▲</color> Appear gift box probability {result:F1}% ( 0.5% <color=#aee571>▲</color> per Lv. )";
 
             Arti08_Lv.text = $"Lv.{ppm.Arti_OffGold}  ( Max Lv. 500 )";
-            Arti08_Effect.text = $"<color=#aee571>▲</color> acquisition goods {ppm.Arti_OffGold}% ( 1% <color=#aee571>▲</color> per Lv. )";
+            Arti08_Effect.text = $"<color=#aee571>▲</color> Acquisition goods {ppm.Arti_OffGold}% ( 1% <color=#aee571>▲</color> per Lv. )";
 
             Arti09_Lv.text = $"Lv.{ppm.Arti_MuganTime}  ( Max Lv. 300 )";
             result = ppm.Arti_MuganTime * 0.1f;
-            Arti09_Effect.text = $"<color=#aee571>▲</color> infinite tower time {result:F1}sec. ( 0.1% <color=#aee571>▲</color> per Lv. )";
+            Arti09_Effect.text = $"<color=#aee571>▲</color> Infinite tower time {result:F1}sec. ( 0.1% <color=#aee571>▲</color> per Lv. )";
 
             Arti10_Lv.text = $"Lv.{ppm.Arti_AttackPower}  ( Max Lv. 1000 )";
             result = ppm.Arti_AttackPower * 0.5f;
-            Arti10_Effect.text = $"<color=#aee571>▲</color> attack power {result:F1}% ( 0.5% <color=#aee571>▲</color> per Lv. )";
+            Arti10_Effect.text = $"<color=#aee571>▲</color> Attack power {result:F1}% ( 0.5% <color=#aee571>▲</color> per Lv. )";
 
 
             /// --------------------------------------------------------------- 신규 추가 0608
@@ -498,59 +496,59 @@ public class GatChaManager : MonoBehaviour
 
             Arti11_Lv.text = $"Lv.{ppm.Arti_GoldPer}  ( Max Lv. 1000 )";
             result = ppm.Arti_GoldPer * 0.5f;
-            Arti11_Effect.text = $"<color=#aee571>▲</color> acquisition gold {result:F1}% ( 0.5% <color=#aee571>▲</color> per Lv. )";
+            Arti11_Effect.text = $"<color=#aee571>▲</color> Acquisition gold {result:F1}% ( 0.5% <color=#aee571>▲</color> per Lv. )";
 
             Arti12_Lv.text = $"Lv.{ppm.Arti_LuckyBoxPer}  ( Max Lv. 1000 )";
             result = ppm.Arti_GoldPer * 0.5f;
-            Arti12_Effect.text = $"<color=#aee571>▲</color> acquisition gift box reward {result:F1}% ( 0.5% <color=#aee571>▲</color> per Lv. )";
+            Arti12_Effect.text = $"<color=#aee571>▲</color> Acquisition gift box reward {result:F1}% ( 0.5% <color=#aee571>▲</color> per Lv. )";
 
             Arti13_Lv.text = $"Lv.{ppm.Arti_DefencePer}  ( Max Lv. 500 )";
             result = ppm.Arti_DefencePer * 0.1f;
-            Arti13_Effect.text = $"<color=#e53935>▼</color> damage in defense battle {result:F1} ( 0.1% <color=#e53935>▼</color> per Lv. )";
+            Arti13_Effect.text = $"<color=#e53935>▼</color> Damage in defense battle {result:F1} ( 0.1% <color=#e53935>▼</color> per Lv. )";
 
             Arti14_Lv.text = $"Lv.{ppm.Arti_GoldUpgrade}  ( Max Lv. 500 )";
             result = ppm.Arti_GoldUpgrade * 0.1f;
-            Arti14_Effect.text = $"<color=#e53935>▼</color> godl upgrade cost {result:F1}% ( 0.1% <color=#e53935>▼</color> per Lv. )";
+            Arti14_Effect.text = $"<color=#e53935>▼</color> Godl upgrade cost {result:F1}% ( 0.1% <color=#e53935>▼</color> per Lv. )";
 
             Arti15_Lv.text = $"Lv.{ppm.Arti_InfiReword}  ( Max Lv. 1000 )";
             result = ppm.Arti_InfiReword * 0.5f;
-            Arti15_Effect.text = $"<color=#aee571>▲</color> acquisition Korean soup in infinite hold {result:F1}% ( 0.5% <color=#aee571>▲</color> per Lv. )";
+            Arti15_Effect.text = $"<color=#aee571>▲</color> Acquisition Korean soup in infinite hold {result:F1}% ( 0.5% <color=#aee571>▲</color> per Lv. )";
 
             Arti16_Lv.text = $"Lv.{ppm.Arti_MiniReword}  ( Max Lv. 1000 )";
             result = ppm.Arti_MiniReword * 0.5f;
-            Arti16_Effect.text = $"<color=#aee571>▲</color> acquisition rice in minigame {result:F1}% ( 0.5% <color=#aee571>▲</color> per Lv. )";
+            Arti16_Effect.text = $"<color=#aee571>▲</color> Acquisition rice in minigame {result:F1}% ( 0.5% <color=#aee571>▲</color> per Lv. )";
 
             Arti17_Lv.text = $"Lv.{ppm.Arti_MiniGameTime}  ( Max Lv. 300 )";
             result = ppm.Arti_MiniGameTime * 0.1f;
-            Arti17_Effect.text = $"<color=#aee571>▲</color> minigame times {result:F1}sec. ( 0.1sec. <color=#aee571>▲</color> per Lv. )";
+            Arti17_Effect.text = $"<color=#aee571>▲</color> Minigame times {result:F1}sec. ( 0.1sec. <color=#aee571>▲</color> per Lv. )";
 
 
             /// -------------------------------
             /// 
             new18_Lv.text = $"Lv.{ppm.Arti_DEF_UP}  ( Max Lv. 1000 )";
             result = ppm.Arti_DEF_UP * 0.5f;
-            new18_Effect.text = $"<color=#aee571>▲</color> defense {result:F1}% ( 0.5% <color=#aee571>▲</color> per Lv. )";
+            new18_Effect.text = $"<color=#aee571>▲</color> Defense {result:F1}% ( 0.5% <color=#aee571>▲</color> per Lv. )";
 
             new19_Lv.text = $"Lv.{ppm.Arti_SHILED_UP}  ( Max Lv. 1000 )";
             result = ppm.Arti_SHILED_UP * 0.1f;
-            new19_Effect.text = $"<color=#aee571>▲</color> shield defense {result:F1}% ( 0.1% <color=#aee571>▲</color> per Lv. )";
+            new19_Effect.text = $"<color=#aee571>▲</color> Shield defense {result:F1}% ( 0.1% <color=#aee571>▲</color> per Lv. )";
 
             new20_Lv.text = $"Lv.{ppm.Arti_HEALLING_UP}  ( Max Lv. 1000 )";
             result = ppm.Arti_HEALLING_UP * 0.5f;
-            new20_Effect.text = $"<color=#aee571>▲</color> health resilience {result:F1}% ( 0.5% <color=#aee571>▲</color> per Lv. )";
+            new20_Effect.text = $"<color=#aee571>▲</color> Health resilience {result:F1}% ( 0.5% <color=#aee571>▲</color> per Lv. )";
 
             new21_Lv.text = $"Lv.{ppm.Arti_KIMCHI_UP}  ( Max Lv. 1000 )";
             result = ppm.Arti_KIMCHI_UP * 0.1f;
-            new21_Effect.text = $"<color=#aee571>▲</color> acquisition radish kimchi {result:F1}( 0.1% <color=#aee571>▲</color> per Lv. )";
+            new21_Effect.text = $"<color=#aee571>▲</color> Acquisition radish kimchi {result:F1}( 0.1% <color=#aee571>▲</color> per Lv. )";
 
             new22_Lv.text = $"Lv.{ppm.Arti_MattGrow_UP}  ( Max Lv. 1000 )";
             result = ppm.Arti_MattGrow_UP * 0.1f;
-            new22_Effect.text = $"<color=#aee571>▲</color> acquisition Mattzip {result:F1}% ( 0.1% <color=#aee571>▲</color> per Lv. )";
+            new22_Effect.text = $"<color=#aee571>▲</color> Acquisition Mattzip {result:F1}% ( 0.1% <color=#aee571>▲</color> per Lv. )";
         }
 
 
 
-            /// -----------------------------------------
+        /// -----------------------------------------
 
 
 
@@ -886,8 +884,10 @@ public class GatChaManager : MonoBehaviour
                 ppm.Arti_PunchTouch = I_Arti_PunchTouch;
                 goto HELL;
             }
-
-            name[seed] = "\'런닝화\'를 ";
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                name[seed] = "\'런닝화\'를 ";
+            else
+                name[seed] = "\'Running shoes\'";
             index[seed] = 0;
 
         }
@@ -903,7 +903,10 @@ public class GatChaManager : MonoBehaviour
                 ppm.Arti_Mattzip = I_Arti_Mattzip;
                 goto HELL;
             }
-            name[seed] = "\'헤드기어\'를 ";
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                name[seed] = "\'헤드기어\'를 ";
+            else
+                name[seed] = "\'Head gear\'";
             index[seed] = 1;
 
         }
@@ -917,7 +920,10 @@ public class GatChaManager : MonoBehaviour
                 ppm.Arti_HP = I_Arti_HP;
                 goto HELL;
             }
-            name[seed] = "\'줄넘기\'를 ";
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                name[seed] = "\'줄넘기\'를 ";
+            else
+                name[seed] = "\'Jump Rope\'";
             index[seed] = 2;
 
 
@@ -932,7 +938,10 @@ public class GatChaManager : MonoBehaviour
                 ppm.Arti_GroggyTouch = I_Arti_GroggyTouch;
                 goto HELL;
             }
-            name[seed] = "\'물총\'을 ";
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                name[seed] = "\'물총\'을 ";
+            else
+                name[seed] = "\'Water gun\'";
             index[seed] = 3;
 
 
@@ -947,7 +956,10 @@ public class GatChaManager : MonoBehaviour
                 ppm.Arti_GAL = I_Arti_GAL;
                 goto HELL;
             }
-            name[seed] = "\'국밥\'을 ";
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                name[seed] = "\'국밥\'을 ";
+            else
+                name[seed] = "\'Korean soup\'";
             index[seed] = 4;
 
         }
@@ -961,7 +973,10 @@ public class GatChaManager : MonoBehaviour
                 ppm.Arti_DefenceTime = I_Arti_DefenceTime;
                 goto HELL;
             }
-            name[seed] = "\'모래시계\'를 ";
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                name[seed] = "\'모래시계\'를 ";
+            else
+                name[seed] = "\'Hourglass\'";
             index[seed] = 5;
 
         }
@@ -975,7 +990,10 @@ public class GatChaManager : MonoBehaviour
                 ppm.Arti_GoldBox = I_Arti_GoldBox;
                 goto HELL;
             }
-            name[seed] = "\'선물상자\'를 ";
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                name[seed] = "\'선물상자\'를 ";
+            else
+                name[seed] = "\'Gift box\'";
             index[seed] = 6;
 
         }
@@ -989,7 +1007,10 @@ public class GatChaManager : MonoBehaviour
                 ppm.Arti_OffGold = I_Arti_OffGold;
                 goto HELL;
             }
-            name[seed] = "\'머니건\'을 ";
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                name[seed] = "\'머니건\'을 ";
+            else
+                name[seed] = "\'Money gun\'";
             index[seed] = 7;
 
         }
@@ -1003,7 +1024,10 @@ public class GatChaManager : MonoBehaviour
                 ppm.Arti_MuganTime = I_Arti_MuganTime;
                 goto HELL;
             }
-            name[seed] = "\'땡땡 종\'을 ";
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                name[seed] = "\'땡땡 종\'을 ";
+            else
+                name[seed] = "\'Bell\'";
             index[seed] = 8;
 
         }
@@ -1017,7 +1041,10 @@ public class GatChaManager : MonoBehaviour
                 ppm.Arti_AttackPower = I_Arti_AttackPower;
                 goto HELL;
             }
-            name[seed] = "\'샌드백\'을 ";
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                name[seed] = "\'샌드백\'을 ";
+            else
+                name[seed] = "\'Punching bag\'";
             index[seed] = 9;
 
         }
@@ -1036,7 +1063,10 @@ public class GatChaManager : MonoBehaviour
                 ppm.Arti_GoldPer = I_Arti_GoldPer;
                 goto HELL;
             }
-            name[seed] = "\'돈주머니\'를 ";
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                name[seed] = "\'돈주머니\'를 ";
+            else
+                name[seed] = "\'Money bag\'";
             index[seed] = 10;
 
         }
@@ -1050,7 +1080,10 @@ public class GatChaManager : MonoBehaviour
                 ppm.Arti_LuckyBoxPer = I_Arti_LuckyBoxPer;
                 goto HELL;
             }
-            name[seed] = "\'돼지저금통\'을 ";
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                name[seed] = "\'돼지저금통\'을 ";
+            else
+                name[seed] = "\'Piggy bank\'";
             index[seed] = 11;
 
         }
@@ -1064,7 +1097,10 @@ public class GatChaManager : MonoBehaviour
                 ppm.Arti_DefencePer = I_Arti_DefencePer;
                 goto HELL;
             }
-            name[seed] = "\'수건\'을 ";
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                name[seed] = "\'수건\'을 ";
+            else
+                name[seed] = "\'Towel\'";
             index[seed] = 12;
 
         }
@@ -1078,7 +1114,10 @@ public class GatChaManager : MonoBehaviour
                 ppm.Arti_GoldUpgrade = I_Arti_GoldUpgrade;
                 goto HELL;
             }
-            name[seed] = "\'할인행사\'를 ";
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                name[seed] = "\'할인행사\'를 ";
+            else
+                name[seed] = "\'Sale chance\'";
             index[seed] = 13;
 
         }
@@ -1092,7 +1131,10 @@ public class GatChaManager : MonoBehaviour
                 ppm.Arti_InfiReword = I_Arti_InfiReword;
                 goto HELL;
             }
-            name[seed] = "\'뚝배기\'를 ";
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                name[seed] = "\'뚝배기\'를 ";
+            else
+                name[seed] = "\'Ttukbaegi\'";
             index[seed] = 14;
 
         }
@@ -1106,7 +1148,10 @@ public class GatChaManager : MonoBehaviour
                 ppm.Arti_MiniReword = I_Arti_MiniReword;
                 goto HELL;
             }
-            name[seed] = "\'밥솥\'을 ";
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                name[seed] = "\'밥솥\'을 ";
+            else
+                name[seed] = "\'Rice cooker\'";
             index[seed] = 15;
 
         }
@@ -1120,7 +1165,10 @@ public class GatChaManager : MonoBehaviour
                 ppm.Arti_MiniGameTime = I_Arti_MiniGameTime;
                 goto HELL;
             }
-            name[seed] = "\'시계\'를 ";
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                name[seed] = "\'시계\'를 ";
+            else
+                name[seed] = "\'Clock\'";
             index[seed] = 16;
 
         }
@@ -1139,7 +1187,10 @@ public class GatChaManager : MonoBehaviour
                 ppm.Arti_DEF_UP = I_Arti_DEF_UP;
                 goto HELL;
             }
-            name[seed] = "\'비브라늄\'을 ";
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                name[seed] = "\'비브라늄\'을 ";
+            else
+                name[seed] = "\'Vibranium\'";
             index[seed] = 17;
 
         }
@@ -1152,7 +1203,10 @@ public class GatChaManager : MonoBehaviour
                 ppm.Arti_SHILED_UP = I_Arti_SHILED_UP;
                 goto HELL;
             }
-            name[seed] = "\'강철망치\'를 ";
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                name[seed] = "\'강철망치\'를 ";
+            else
+                name[seed] = "\'Steel hammer\'";
             index[seed] = 18;
 
         }
@@ -1165,7 +1219,10 @@ public class GatChaManager : MonoBehaviour
                 ppm.Arti_HEALLING_UP = I_Arti_HEALLING_UP;
                 goto HELL;
             }
-            name[seed] = "\'에너지드링크\'를 ";
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                name[seed] = "\'에너지드링크\'를 ";
+            else
+                name[seed] = "\'Energy Drink\'";
             index[seed] = 19;
 
         }
@@ -1178,7 +1235,10 @@ public class GatChaManager : MonoBehaviour
                 ppm.Arti_KIMCHI_UP = I_Arti_KIMCHI_UP;
                 goto HELL;
             }
-            name[seed] = "\'무\'를 ";
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                name[seed] = "\'무\'를 ";
+            else
+                name[seed] = "\'Radish\'";
             index[seed] = 20;
 
         }
@@ -1191,7 +1251,10 @@ public class GatChaManager : MonoBehaviour
                 ppm.Arti_MattGrow_UP = I_Arti_MattGrow_UP;
                 goto HELL;
             }
-            name[seed] = "\'방탄조끼\'를 ";
+            if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                name[seed] = "\'방탄조끼\'를 ";
+            else
+                name[seed] = "\'Bulletproof vest\'";
             index[seed] = 21;
 
         }

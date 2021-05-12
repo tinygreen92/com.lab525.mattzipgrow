@@ -80,7 +80,7 @@ public class QuestItem : MonoBehaviour
         }
         else
         {
-            NameBox.text = $"Training hit {upText * 1000}";
+            NameBox.text = $"Training hit";
             DescBox.text = $"Count : ( {mText} / {upText * 1000} )";
         }
 
