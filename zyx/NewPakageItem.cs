@@ -128,16 +128,7 @@ public class NewPakageItem : MonoBehaviour
         if (thisIndex < 14 || thisIndex == 18 || thisIndex == 23 || thisIndex == 28)
         {
             diaIcon.SetActive(false);
-            /// 원화 / 달러 세팅
-            if (isKorean)
-            {
-                costBox.text = $"₩ {tmpInfo.pakaPrice:N0}";
-            }
-            else
-            {
-                System.Globalization.NumberFormatInfo numberFormat = new System.Globalization.CultureInfo("en-US", false).NumberFormat;
-                costBox.text = tmpInfo.pakaPrice.ToString("C", numberFormat);
-            }
+            costBox.text = $"₩ {tmpInfo.pakaPrice:N0}";
         }
         /// 아니면 다이아 표시
         else

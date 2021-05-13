@@ -206,16 +206,7 @@ public class IAPManager : MonoBehaviour
         /// 현금으로 사는 것들
         else if (_index < 14 || _index == 18 || _index == 23 || _index == 28)
         {
-            /// 원화 / 달러 세팅
-            if (isKorean)
-            {
-                BuyButton.GetChild(_index).GetChild(1).GetComponent<Text>().text = $"₩ {pakageInfo[_index].pakaPrice:N0}";
-            }
-            else
-            {
-                System.Globalization.NumberFormatInfo numberFormat = new System.Globalization.CultureInfo("en-US", false).NumberFormat;
-                BuyButton.GetChild(_index).GetChild(1).GetComponent<Text>().text = pakageInfo[_index].pakaPrice.ToString("C", numberFormat);
-            }
+            BuyButton.GetChild(_index).GetChild(1).GetComponent<Text>().text = $"₩ {pakageInfo[_index].pakaPrice:N0}";
             vatTextObj.SetActive(true);
         }
         /// 다이아로 사는 것들

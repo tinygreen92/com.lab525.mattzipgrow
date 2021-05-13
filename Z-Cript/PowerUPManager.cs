@@ -87,12 +87,15 @@ public class PowerUPManager : MonoBehaviour
         {
             Init();
         }
-        /// TODO : getcomp 쓰는 거 전부 여기로 몰아 넣기
-        thisSCRect = GetComponentInChildren<ScrollRect>();
+
 
         /// TODO : 에니메이션 효과
         if (gameObject.activeSelf) return;
         gameObject.SetActive(true);
+
+        /// TODO : getcomp 쓰는 거 전부 여기로 몰아 넣기
+        thisSCRect = GetComponentInChildren<ScrollRect>();
+
         thisSCRect.horizontalNormalizedPosition = 0f; // 모든 스크롤뷰 왼쪽 정렬 시켜
         verticalSCRect.verticalNormalizedPosition = 1f; // 세로 스크롤 뷰 = 유물 재정렬
 

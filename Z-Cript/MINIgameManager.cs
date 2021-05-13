@@ -327,7 +327,7 @@ public class MINIgameManager : MonoBehaviour
         if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
             PopUpObjectManager.GetInstance().ShowWarnnigProcess("게임 종료.");
         else
-            PopUpObjectManager.GetInstance().ShowWarnnigProcess("finished.");
+            PopUpObjectManager.GetInstance().ShowWarnnigProcess("Finished.");
         //퀘스트
         PlayerPrefsManager.GetInstance().questInfo3[0].All_MiniGame++;
         PlayerPrefsManager.GetInstance().SavequestInfo3();

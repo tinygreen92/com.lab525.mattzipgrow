@@ -939,13 +939,19 @@ public class PlayNANOOExample : MonoBehaviour
 
                 if (iRank < 0)
                 {
-                    PostboxItemSend("diamond", 1000, "시즌 1 종료 보상");
+                    if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                        PostboxItemSend("diamond", 1000, "시즌 1 종료 보상");
+                    else
+                        PostboxItemSend("diamond", 1000, "시즌 1 종료 보상");
                 }
                 /// 101위 부터는 1000개
                 else if (iRank > 0)
                 {
                     int ddd = Mathf.RoundToInt(100000 / iRank);
-                    PostboxItemSend("diamond", ddd, "시즌 1 종료 보상");
+                    if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                        PostboxItemSend("diamond", ddd, "시즌 1 종료 보상");
+                    else
+                        PostboxItemSend("diamond", ddd, "시즌 1 종료 보상");
                 }
                 UserWallet.GetInstance().ShowUserDia();
             }

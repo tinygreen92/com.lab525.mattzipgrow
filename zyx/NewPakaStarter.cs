@@ -33,8 +33,8 @@ public class NewPakaStarter : MonoBehaviour
                 TabNamebox[0].text = "Daily package";
                 TabNamebox[1].text = "Weekly package";
                 TabNamebox[2].text = "Monthly package";
-                TabNamebox[3].text = "일반 패키지";
-                TabNamebox[4].text = "한정 패키지";
+                TabNamebox[3].text = "Package";
+                TabNamebox[4].text = "Limited pack";
             }
         }
 

@@ -714,8 +714,10 @@ public class PlayFabLogin : MonoBehaviour
                         VirtualCurrency = "RC",
                         Price = (int)item.VirtualCurrencyPrices["RC"],
                     };
-
-                    GameObject.Find("PlayNanoo").GetComponent<PlayNANOOExample>().PostboxItemSend("diamond", 1200, "PvP 주간보상");
+                    if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                        GameObject.Find("PlayNanoo").GetComponent<PlayNANOOExample>().PostboxItemSend("diamond", 1200, "PvP 주간보상");
+                    else
+                        GameObject.Find("PlayNanoo").GetComponent<PlayNANOOExample>().PostboxItemSend("diamond", 1200, "Weekly PvP reward");
 
                     PlayFabClientAPI.PurchaseItem(request, OnPurchaseItemSuccess, OnPurchaseItemFail);
                 }
@@ -731,7 +733,10 @@ public class PlayFabLogin : MonoBehaviour
                         VirtualCurrency = "RC",
                         Price = (int)item.VirtualCurrencyPrices["RC"],
                     };
-                    GameObject.Find("PlayNanoo").GetComponent<PlayNANOOExample>().PostboxItemSend("diamond", 960, "PvP 주간보상");
+                    if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                        GameObject.Find("PlayNanoo").GetComponent<PlayNANOOExample>().PostboxItemSend("diamond", 960, "PvP 주간보상");
+                    else
+                        GameObject.Find("PlayNanoo").GetComponent<PlayNANOOExample>().PostboxItemSend("diamond", 960, "Weekly PvP reward");
 
                     PlayFabClientAPI.PurchaseItem(request, OnPurchaseItemSuccess, OnPurchaseItemFail);
                 }
@@ -747,7 +752,10 @@ public class PlayFabLogin : MonoBehaviour
                         VirtualCurrency = "RC",
                         Price = (int)item.VirtualCurrencyPrices["RC"],
                     };
-                    GameObject.Find("PlayNanoo").GetComponent<PlayNANOOExample>().PostboxItemSend("diamond", 640, "PvP 주간보상");
+                    if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                        GameObject.Find("PlayNanoo").GetComponent<PlayNANOOExample>().PostboxItemSend("diamond", 640, "PvP 주간보상");
+                    else
+                        GameObject.Find("PlayNanoo").GetComponent<PlayNANOOExample>().PostboxItemSend("diamond", 640, "Weekly PvP reward");
 
                     PlayFabClientAPI.PurchaseItem(request, OnPurchaseItemSuccess, OnPurchaseItemFail);
                 }
@@ -763,7 +771,10 @@ public class PlayFabLogin : MonoBehaviour
                         VirtualCurrency = "RC",
                         Price = (int)item.VirtualCurrencyPrices["RC"],
                     };
-                    GameObject.Find("PlayNanoo").GetComponent<PlayNANOOExample>().PostboxItemSend("diamond", 500, "PvP 주간보상");
+                    if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                        GameObject.Find("PlayNanoo").GetComponent<PlayNANOOExample>().PostboxItemSend("diamond", 500, "PvP 주간보상");
+                    else
+                        GameObject.Find("PlayNanoo").GetComponent<PlayNANOOExample>().PostboxItemSend("diamond", 500, "Weekly PvP reward");
 
                     PlayFabClientAPI.PurchaseItem(request, OnPurchaseItemSuccess, OnPurchaseItemFail);
                 }
@@ -779,7 +790,10 @@ public class PlayFabLogin : MonoBehaviour
                         VirtualCurrency = "RC",
                         Price = (int)item.VirtualCurrencyPrices["RC"],
                     };
-                    GameObject.Find("PlayNanoo").GetComponent<PlayNANOOExample>().PostboxItemSend("diamond", 400, "PvP 주간보상");
+                    if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                        GameObject.Find("PlayNanoo").GetComponent<PlayNANOOExample>().PostboxItemSend("diamond", 400, "PvP 주간보상");
+                    else
+                        GameObject.Find("PlayNanoo").GetComponent<PlayNANOOExample>().PostboxItemSend("diamond", 400, "Weekly PvP reward");
 
                     PlayFabClientAPI.PurchaseItem(request, OnPurchaseItemSuccess, OnPurchaseItemFail);
                 }
@@ -795,7 +809,10 @@ public class PlayFabLogin : MonoBehaviour
                         VirtualCurrency = "RC",
                         Price = (int)item.VirtualCurrencyPrices["RC"],
                     };
-                    GameObject.Find("PlayNanoo").GetComponent<PlayNANOOExample>().PostboxItemSend("diamond", 300, "PvP 주간보상");
+                    if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                        GameObject.Find("PlayNanoo").GetComponent<PlayNANOOExample>().PostboxItemSend("diamond", 300, "PvP 주간보상");
+                    else
+                        GameObject.Find("PlayNanoo").GetComponent<PlayNANOOExample>().PostboxItemSend("diamond", 300, "Weekly PvP reward");
 
                     PlayFabClientAPI.PurchaseItem(request, OnPurchaseItemSuccess, OnPurchaseItemFail);
                 }
@@ -811,7 +828,10 @@ public class PlayFabLogin : MonoBehaviour
                         VirtualCurrency = "RC",
                         Price = (int)item.VirtualCurrencyPrices["RC"],
                     };
-                    GameObject.Find("PlayNanoo").GetComponent<PlayNANOOExample>().PostboxItemSend("diamond", 200, "PvP 주간보상");
+                    if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                        GameObject.Find("PlayNanoo").GetComponent<PlayNANOOExample>().PostboxItemSend("diamond", 200, "PvP 주간보상");
+                    else
+                        GameObject.Find("PlayNanoo").GetComponent<PlayNANOOExample>().PostboxItemSend("diamond", 200, "Weekly PvP reward");
 
                     PlayFabClientAPI.PurchaseItem(request, OnPurchaseItemSuccess, OnPurchaseItemFail);
                 }
@@ -827,7 +847,10 @@ public class PlayFabLogin : MonoBehaviour
                         VirtualCurrency = "RC",
                         Price = (int)item.VirtualCurrencyPrices["RC"],
                     };
-                    GameObject.Find("PlayNanoo").GetComponent<PlayNANOOExample>().PostboxItemSend("diamond", 100, "PvP 주간보상");
+                    if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                        GameObject.Find("PlayNanoo").GetComponent<PlayNANOOExample>().PostboxItemSend("diamond", 100, "PvP 주간보상");
+                    else
+                        GameObject.Find("PlayNanoo").GetComponent<PlayNANOOExample>().PostboxItemSend("diamond", 100, "Weekly PvP reward");
 
                     PlayFabClientAPI.PurchaseItem(request, OnPurchaseItemSuccess, OnPurchaseItemFail);
                 }
@@ -835,7 +858,7 @@ public class PlayFabLogin : MonoBehaviour
 
             default:
 
-                if (gold > 9) GameObject.Find("PlayNanoo").GetComponent<PlayNANOOExample>().PostboxItemSend("diamond", 150, "PvP 지난시즌 보상");
+                if (gold > 9) GameObject.Find("PlayNanoo").GetComponent<PlayNANOOExample>().PostboxItemSend("diamond", 150, "PvP Last Season Reward.");
 
                 if (catalogItemDic.ContainsKey("Ranking_525"))
                 {
@@ -941,7 +964,10 @@ public class PlayFabLogin : MonoBehaviour
                 if (PlayerPrefsManager.GetInstance().isFirstPVP && gold == 0)
                 {
                     // 해당 시즌 초기화 되면 순위권 아니면(인벤토리에 돈 없으면) 다이아 보상
-                    GameObject.Find("PlayNanoo").GetComponent<PlayNANOOExample>().PostboxItemSend("diamond", 100, "PvP 주간보상");
+                    if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+                        GameObject.Find("PlayNanoo").GetComponent<PlayNANOOExample>().PostboxItemSend("diamond", 100, "PvP 주간보상");
+                    else
+                        GameObject.Find("PlayNanoo").GetComponent<PlayNANOOExample>().PostboxItemSend("diamond", 100, "Weekly PvP reward.");
                 }
                 else
                 {
@@ -1605,14 +1631,29 @@ public class PlayFabLogin : MonoBehaviour
         myBody.transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
         enemyBody.transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
 
-        // 결과 저장
-        tmpString[0] = "막은 대미지       " + UserWallet.GetInstance().SeetheNatural(fBlockedDam * MY_PunchCnt);
-        tmpString[1] = "입힌 대미지      " + UserWallet.GetInstance().SeetheNatural(fAttackedDam * MY_PunchCnt);
-        tmpString[2] = "최종 대미지       " + UserWallet.GetInstance().SeetheNatural((fBlockedDam * MY_PunchCnt) + (fAttackedDam * MY_PunchCnt));
-        /// 에너미
-        tmpString[4] = "막은 대미지       " + UserWallet.GetInstance().SeetheNatural(eBlockedDam * Enemy_PunchCnt);
-        tmpString[5] = "입힌 대미지      " + UserWallet.GetInstance().SeetheNatural(eAttackedDam * Enemy_PunchCnt);
-        tmpString[6] = "최종 대미지       " + UserWallet.GetInstance().SeetheNatural((eBlockedDam * Enemy_PunchCnt) + (eAttackedDam * Enemy_PunchCnt));
+        if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+        {
+            // 결과 저장
+            tmpString[0] = "막은 대미지       " + UserWallet.GetInstance().SeetheNatural(fBlockedDam * MY_PunchCnt);
+            tmpString[1] = "입힌 대미지      " + UserWallet.GetInstance().SeetheNatural(fAttackedDam * MY_PunchCnt);
+            tmpString[2] = "최종 대미지       " + UserWallet.GetInstance().SeetheNatural((fBlockedDam * MY_PunchCnt) + (fAttackedDam * MY_PunchCnt));
+            /// 에너미
+            tmpString[4] = "막은 대미지       " + UserWallet.GetInstance().SeetheNatural(eBlockedDam * Enemy_PunchCnt);
+            tmpString[5] = "입힌 대미지      " + UserWallet.GetInstance().SeetheNatural(eAttackedDam * Enemy_PunchCnt);
+            tmpString[6] = "최종 대미지       " + UserWallet.GetInstance().SeetheNatural((eBlockedDam * Enemy_PunchCnt) + (eAttackedDam * Enemy_PunchCnt));
+        }
+        else
+        {
+            // 결과 저장
+            tmpString[0] = "Blocked damage       " + UserWallet.GetInstance().SeetheNatural(fBlockedDam * MY_PunchCnt);
+            tmpString[1] = "Inflicted damage      " + UserWallet.GetInstance().SeetheNatural(fAttackedDam * MY_PunchCnt);
+            tmpString[2] = "Total damage       " + UserWallet.GetInstance().SeetheNatural((fBlockedDam * MY_PunchCnt) + (fAttackedDam * MY_PunchCnt));
+            /// 에너미
+            tmpString[4] = "Blocked damage       " + UserWallet.GetInstance().SeetheNatural(eBlockedDam * Enemy_PunchCnt);
+            tmpString[5] = "Inflicted damage      " + UserWallet.GetInstance().SeetheNatural(eAttackedDam * Enemy_PunchCnt);
+            tmpString[6] = "Total damage       " + UserWallet.GetInstance().SeetheNatural((eBlockedDam * Enemy_PunchCnt) + (eAttackedDam * Enemy_PunchCnt));
+        }
+
 
         Debug.LogWarning("보상 받고 종료");
 

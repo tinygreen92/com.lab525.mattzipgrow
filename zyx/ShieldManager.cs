@@ -387,6 +387,8 @@ public class ShieldManager : MonoBehaviour
                 break;
         }
         PlayerPrefs.Save();
+        UserWallet.GetInstance().ShowAllMoney();
+
         /// 클릭 막은 상태로 ㄱ
         invibtn.interactable = false;
         /// 서-순
