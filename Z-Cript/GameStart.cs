@@ -149,26 +149,38 @@ public class GameStart : MonoBehaviour
 
     public void SetStartLang(bool isCheck)
     {
-        PlayerPrefsManager.GetInstance().IsEnglish = isCheck;
-        isStartLang = true;
+        PlayerPrefsManager.GetInstance().isDataLoaded = true;
+
+        if (PlayerPrefsManager.GetInstance().IsEnglish)
+        {
+            PlayerPrefsManager.GetInstance().IsEnglish = false;
+            leanLocalization.SetCurrentLanguage("Korean");
+        }
+        else
+        {
+            PlayerPrefsManager.GetInstance().IsEnglish = true;
+            leanLocalization.SetCurrentLanguage("English");
+        }
+        UnityEngine.SceneManagement.SceneManager.LoadScene("SampleScene");
     }
+
 
     IEnumerator SetPart_01()
     {
-        while (!isStartLang)
-        {
-            yield return new WaitForFixedUpdate();
-        }
+        //while (!isStartLang)
+        //{
+        //    yield return new WaitForFixedUpdate();
+        //}
 
 
         if (PlayerPrefsManager.GetInstance().IsEnglish)
         {
-            leanObject.SetActive(false);
+            //leanObject.SetActive(false);
             leanLocalization.SetCurrentLanguage("English");
         }
         else
         {
-            leanObject.SetActive(true);
+            //leanObject.SetActive(true);
             leanLocalization.SetCurrentLanguage("Korean");
         }
 
@@ -276,18 +288,23 @@ public class GameStart : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
 
-
         PlayerPrefsManager.GetInstance().LoadDayLimitData(); /// 일간 주간 월간 데이터 로드
 
-        // 로딩 다 될때까지 무한 대기
+        /// 일 주 월 데이터 로딩 다 될때까지 무한 대기
         while (!PlayerPrefsManager.GetInstance().isReadyDayLimit)
         {
             yield return new WaitForFixedUpdate();
         }
 
+        /// 일 주 월 데이터 로딩 다 될때까지 무한 대기
+        while (!PlayerPrefsManager.GetInstance().isReadySpinReset)
+        {
+            yield return new WaitForFixedUpdate();
+        }
         /// 뉴 패키지 상점 내용물 추가
         /// 뉴 패키지 상점 내용물 추가
         newsObject.SetActive(true);
+
         for (int i = 0; i < news.Length; i++)
         {
             news[i].StartBongbong();

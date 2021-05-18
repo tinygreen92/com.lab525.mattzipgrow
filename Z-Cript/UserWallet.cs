@@ -35,10 +35,7 @@ public class UserWallet : MonoBehaviour
     //public Text DefenceText;
     //public string PunchDPS = "20";
 
-    public void RebootWorld()
-    {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("SampleScene");
-    }
+
 
 
     public void SetKeyAmount(int kkey)

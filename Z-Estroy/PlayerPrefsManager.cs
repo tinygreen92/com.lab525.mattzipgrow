@@ -2971,9 +2971,27 @@ public class PlayerPrefsManager : MonoBehaviour
 
         // 그것을 다시 한번 문자열 값으로 변환해서 
         // 스트링 키값으로 PlayerPrefs에 저장
+        //PlayerPrefs.SetString("shieldInfo", Convert.ToBase64String(memoryStream.GetBuffer()));
         PlayerPrefs.SetString("shieldInfo", Convert.ToBase64String(memoryStream.GetBuffer()));
         PlayerPrefs.Save();
     }
+
+
+    public void SaveShieldBack()
+    {
+        BinaryFormatter binaryFormatter = new BinaryFormatter();
+        MemoryStream memoryStream = new MemoryStream();
+
+        // Info를 바이트 배열로 변환해서 저장
+        binaryFormatter.Serialize(memoryStream, shieldInfo);
+
+        // 그것을 다시 한번 문자열 값으로 변환해서 
+        // 스트링 키값으로 PlayerPrefs에 저장
+        //PlayerPrefs.SetString("shieldInfo", Convert.ToBase64String(memoryStream.GetBuffer()));
+        PlayerPrefs.SetString("shieldInfo_bak", Convert.ToBase64String(memoryStream.GetBuffer()));
+        PlayerPrefs.Save();
+    }
+
 
     public void LoadShieldInfo()
     {
@@ -3998,6 +4016,9 @@ public class PlayerPrefsManager : MonoBehaviour
     [HideInInspector]
     public bool isReadyDayLimit;
 
+    [HideInInspector]
+    public bool isReadySpinReset;
+
     public void SaveDayLimitData()
     {
         BinaryFormatter binaryFormatter = new BinaryFormatter();
@@ -4010,7 +4031,6 @@ public class PlayerPrefsManager : MonoBehaviour
         // 스트링 키값으로 PlayerPrefs에 저장
         PlayerPrefs.SetString("LimitData", Convert.ToBase64String(memoryStream.GetBuffer()));
         PlayerPrefs.Save();
-        isReadyDayLimit = true;
     }
 
     public void LoadDayLimitData()

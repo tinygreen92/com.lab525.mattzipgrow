@@ -1614,7 +1614,7 @@ public class PlayFabLogin : MonoBehaviour
 
 
         //타이머 정지.
-        StopCoroutine(MiniGameCo);
+        if (MiniGameCo != null) StopCoroutine(MiniGameCo);
 
         // 펀치 그만
         PlayerPrefsManager.GetInstance().isPVPtoEnd = true;

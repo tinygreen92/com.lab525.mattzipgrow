@@ -122,6 +122,7 @@ public class MuganMode : MonoBehaviour
         PlayerPrefsManager.GetInstance().bossHP = PlayerPrefsManager.GetInstance().MAX_boss_HP;
         // 입장 완료되면 키 하나 소모
         PlayerPrefsManager.GetInstance().key--;
+        AudioManager.instance.HitVolumeMute(false);
 
         tmm.ExUpdateMission(26); /// 미션 업데이트
         tmm.ExUpdateMission(39); /// 미션 업데이트
@@ -249,7 +250,7 @@ public class MuganMode : MonoBehaviour
 
 
         /// 30초 동안 못이기면 실패.
-        StopCoroutine(stromking);
+        if (stromking != null) StopCoroutine(stromking);
         /// 2번째 기회를 이미 사용했다면 종료
         if (PlayerPrefsManager.GetInstance().isSecondChan)
         {
@@ -275,7 +276,7 @@ public class MuganMode : MonoBehaviour
         isLeftBtnClicked = false;
         isRightBtnClicked = false;
         //타이머 초기화.
-        StopCoroutine(stromking);
+        if (stromking != null) StopCoroutine(stromking);
         // 무한의 탑 층수.
         int Stage = PlayerPrefsManager.GetInstance().MaxGet_MuganTop;
         /// 다이아 지급
@@ -359,7 +360,7 @@ public class MuganMode : MonoBehaviour
         // 이어하기 썼다.
         PlayerPrefsManager.GetInstance().isSecondChan = true;
         // 카운트 멈춰주고.
-        StopCoroutine(stromking);
+        if (stromking != null) StopCoroutine(stromking);
         // 주인공 체력 회복 시키고.
         string maxHP = PlayerPrefsManager.GetInstance().Mat_MaxHP;
         PlayerPrefsManager.GetInstance().Mat_currentHP = maxHP;
@@ -433,7 +434,7 @@ public class MuganMode : MonoBehaviour
         // 이어하기 썼다.
         PlayerPrefsManager.GetInstance().isSecondChan = true;
         // 카운트 멈춰주고.
-        StopCoroutine(stromking);
+        if (stromking != null) StopCoroutine(stromking);
         // 주인공 체력 회복 시키고.
         string maxHP = PlayerPrefsManager.GetInstance().Mat_MaxHP;
         PlayerPrefsManager.GetInstance().Mat_currentHP = maxHP;
@@ -478,7 +479,7 @@ public class MuganMode : MonoBehaviour
         PlayerPrefsManager.GetInstance().isMuGanTopEnd = true;
 
         //타이머 초기화.
-        StopCoroutine(stromking);
+        if (stromking != null) StopCoroutine(stromking);
         //실드 꺼져
         Left.SetActive(false);
         Right.SetActive(false);

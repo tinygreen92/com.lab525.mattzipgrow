@@ -533,7 +533,7 @@ public class MINIgameManager : MonoBehaviour
         isGameEnding = true;
         if (Eatting != null) StopCoroutine(Eatting);
 
-        StopCoroutine(MiniGameCo);
+        if (MiniGameCo != null) StopCoroutine(MiniGameCo);
 
         MiniGameOver();
     }

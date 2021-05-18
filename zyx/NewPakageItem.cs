@@ -57,29 +57,73 @@ public class NewPakageItem : MonoBehaviour
 
         switch (thisIndex)
         {
-            case 7:  if(PlayerPrefs.HasKey("limited_01")) MaxButton.SetActive(true); break;
-            case 8:  if(PlayerPrefs.HasKey("limited_02")) MaxButton.SetActive(true); break;
-            case 9:  if(PlayerPrefs.HasKey("limited_03")) MaxButton.SetActive(true); break;
-            case 10: if(PlayerPrefs.HasKey("limited_04")) MaxButton.SetActive(true); break;
-            case 11: if(PlayerPrefs.HasKey("limited_05")) MaxButton.SetActive(true); break;
-            case 12: if(PlayerPrefs.HasKey("limited_06")) MaxButton.SetActive(true); break;
-            case 13: if(PlayerPrefs.HasKey("limited_07")) MaxButton.SetActive(true); break;
+            case 7:  
+                if(PlayerPrefs.HasKey("limited_01")) MaxButton.SetActive(true);
+                else MaxButton.SetActive(false); break;
+            case 8:  
+                if(PlayerPrefs.HasKey("limited_02")) MaxButton.SetActive(true);
+                else MaxButton.SetActive(false); break;
+            case 9:  
+                if(PlayerPrefs.HasKey("limited_03")) MaxButton.SetActive(true);
+                else MaxButton.SetActive(false); break;
+            case 10: 
+                if(PlayerPrefs.HasKey("limited_04")) MaxButton.SetActive(true);
+                else MaxButton.SetActive(false); break;
+            case 11: 
+                if(PlayerPrefs.HasKey("limited_05")) MaxButton.SetActive(true);
+                else MaxButton.SetActive(false); break;
+            case 12: 
+                if(PlayerPrefs.HasKey("limited_06")) MaxButton.SetActive(true);
+                else MaxButton.SetActive(false); break;
+            case 13: 
+                if(PlayerPrefs.HasKey("limited_07")) MaxButton.SetActive(true);
+                else MaxButton.SetActive(false); break;
 
-            case 14: if(PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Day_01 != 0) MaxButton.SetActive(true); break;
-            case 15: if(PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Day_02 != 0) MaxButton.SetActive(true); break;
-            case 16: if(PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Day_03 != 0) MaxButton.SetActive(true); break;
-            case 17: if(PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Day_04 != 0) MaxButton.SetActive(true); break;
-            case 18: if(PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Day_05 != 0) MaxButton.SetActive(true); break;
-            case 19: if(PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Week_01 != 0) MaxButton.SetActive(true); break;
-            case 20: if(PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Week_02 != 0) MaxButton.SetActive(true); break;
-            case 21: if(PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Week_03 != 0) MaxButton.SetActive(true); break;
-            case 22: if(PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Week_04 != 0) MaxButton.SetActive(true); break;
-            case 23: if(PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Week_05 != 0) MaxButton.SetActive(true); break;
-            case 24: if(PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Mouth_01 != 0) MaxButton.SetActive(true); break;
-            case 25: if(PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Mouth_02 != 0) MaxButton.SetActive(true); break;
-            case 26: if(PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Mouth_03 != 0) MaxButton.SetActive(true); break;
-            case 27: if(PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Mouth_04 != 0) MaxButton.SetActive(true); break;
-            case 28: if(PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Mouth_05 != 0) MaxButton.SetActive(true); break;
+            case 14: 
+                if(PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Day_01 != 0) MaxButton.SetActive(true);
+                else MaxButton.SetActive(false); break;
+            case 15: 
+                if(PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Day_02 != 0) MaxButton.SetActive(true);
+                else MaxButton.SetActive(false); break;
+            case 16: 
+                if(PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Day_03 != 0) MaxButton.SetActive(true);
+                else MaxButton.SetActive(false); break;
+            case 17: 
+                if(PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Day_04 != 0) MaxButton.SetActive(true);
+                else MaxButton.SetActive(false); break;
+            case 18: 
+                if(PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Day_05 != 0) MaxButton.SetActive(true);
+                else MaxButton.SetActive(false); break;
+            case 19: 
+                if(PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Week_01 != 0) MaxButton.SetActive(true);
+                else MaxButton.SetActive(false); break;
+            case 20: 
+                if(PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Week_02 != 0) MaxButton.SetActive(true);
+                else MaxButton.SetActive(false); break;
+            case 21: 
+                if(PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Week_03 != 0) MaxButton.SetActive(true);
+                else MaxButton.SetActive(false); break;
+            case 22: 
+                if(PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Week_04 != 0) MaxButton.SetActive(true);
+                else MaxButton.SetActive(false); break;
+            case 23: 
+                if(PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Week_05 != 0) MaxButton.SetActive(true);
+                else MaxButton.SetActive(false); break;
+            case 24: 
+                if(PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Mouth_01 != 0) MaxButton.SetActive(true);
+                else MaxButton.SetActive(false); break;
+            case 25: 
+                if(PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Mouth_02 != 0) MaxButton.SetActive(true);
+                else MaxButton.SetActive(false); break;
+            case 26: 
+                if(PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Mouth_03 != 0) MaxButton.SetActive(true);
+                else MaxButton.SetActive(false); break;
+            case 27: 
+                if(PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Mouth_04 != 0) MaxButton.SetActive(true);
+                else MaxButton.SetActive(false); break;
+            case 28: 
+                if(PlayerPrefsManager.GetInstance().dayLimitData[0].dia_Mouth_05 != 0) MaxButton.SetActive(true);
+                else MaxButton.SetActive(false); break;
 
             default: break;
         }

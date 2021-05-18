@@ -41,7 +41,7 @@ public class PlayNANOOExample : MonoBehaviour
         /// 우편함 체크
         PostboxCheck();
         /// 오픈 배너 출력
-        Invoke(nameof(OpenBanner), 1.5f);
+        Invoke(nameof(OpenBanner), 0.3f);
     }
 
 
@@ -643,20 +643,36 @@ public class PlayNANOOExample : MonoBehaviour
     /// </summary>
     public void StorageSave()
     {
-        // Show a three button alert and handle its OnComplete event
-        NativeUI.AlertPopup alert = NativeUI.ShowTwoButtonAlert(
+        if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+        {
+            // Show a three button alert and handle its OnComplete event
+            NativeUI.AlertPopup alert = NativeUI.ShowTwoButtonAlert(
             "데이터 저장",
             "데이터 충돌 방지를 위해 앱 데이터 삭제 후 재시작합니다.\n재실행시 데이터 불러오기를 진행해주세요.",
             "취소",
             "확인"
             );
-
-        // Subscribe to the event
-        if (alert != null)
-        {
-            alert.OnComplete += OnAlertCompleteHandler;
+            // Subscribe to the event
+            if (alert != null)
+            {
+                alert.OnComplete += OnAlertCompleteHandler;
+            }
         }
-
+        else
+        {
+            // Show a three button alert and handle its OnComplete event
+            NativeUI.AlertPopup alert = NativeUI.ShowTwoButtonAlert(
+            "Data save",
+            "To prevent data collision, delete the app data and restart.\nPlease proceed with loading data when relaunching.",
+            "Cancel",
+            "Ok"
+            );
+            // Subscribe to the event
+            if (alert != null)
+            {
+                alert.OnComplete += OnAlertCompleteHandler;
+            }
+        }
     }
 
     // The event handler
@@ -839,19 +855,38 @@ public class PlayNANOOExample : MonoBehaviour
     /// </summary>
     public void StorageLoad()
     {
-        // Show a three button alert and handle its OnComplete event
-        NativeUI.AlertPopup alert = NativeUI.ShowTwoButtonAlert(
-            "데이터 불러오기",
-            "서버에 저장된 데이터를 불러오기 위해 앱을 재시작합니다.",
-            "취소",
-            "확인"
-            );
-
-        // Subscribe to the event
-        if (alert != null)
+        if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
         {
-            alert.OnComplete += OnAlertLoadHandler;
+            // Show a three button alert and handle its OnComplete event
+            NativeUI.AlertPopup alert = NativeUI.ShowTwoButtonAlert(
+                "데이터 불러오기",
+                "서버에 저장된 데이터를 불러오기 위해 앱을 재시작합니다.",
+                "취소",
+                "확인"
+                );
+
+            // Subscribe to the event
+            if (alert != null)
+            {
+                alert.OnComplete += OnAlertLoadHandler;
+            }
         }
+        else
+        {
+            // Show a three button alert and handle its OnComplete event
+            NativeUI.AlertPopup alert = NativeUI.ShowTwoButtonAlert(
+            "Data load",
+            "Restart the app to load the data stored on the server.",
+            "Cancel",
+            "Ok"
+            );
+            // Subscribe to the event
+            if (alert != null)
+            {
+                alert.OnComplete += OnAlertCompleteHandler;
+            }
+        }
+
     }
 
     void OnAlertLoadHandler(int buttonIndex)
@@ -942,7 +977,7 @@ public class PlayNANOOExample : MonoBehaviour
                     if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
                         PostboxItemSend("diamond", 1000, "시즌 1 종료 보상");
                     else
-                        PostboxItemSend("diamond", 1000, "시즌 1 종료 보상");
+                        PostboxItemSend("diamond", 1000, "Season 1 end reward");
                 }
                 /// 101위 부터는 1000개
                 else if (iRank > 0)
@@ -951,7 +986,7 @@ public class PlayNANOOExample : MonoBehaviour
                     if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
                         PostboxItemSend("diamond", ddd, "시즌 1 종료 보상");
                     else
-                        PostboxItemSend("diamond", ddd, "시즌 1 종료 보상");
+                        PostboxItemSend("diamond", ddd, "Season 1 end reward");
                 }
                 UserWallet.GetInstance().ShowUserDia();
             }

@@ -192,6 +192,8 @@ public class FriendManager : MonoBehaviour
         {
             UpdateFriend((MyFriend)i);
         }
+
+        UserWallet.GetInstance().ShowAllMoney();
     }
 
 

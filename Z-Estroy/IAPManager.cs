@@ -10,6 +10,9 @@ public class IAPManager : MonoBehaviour
 {
     [Header(" - 패키지 영문 이름 스트링스")]
     public string[] pakageEnglishInfos;
+    [Space]
+    public Text[] shopDesc;
+
     [Header("-패키지 상점 데이터")]
     public TextAsset ta;
     [Space(3f)]
@@ -170,7 +173,7 @@ public class IAPManager : MonoBehaviour
         int _index = int.Parse(SomeParent.name);
 
         /// 회색 버튼이면 클릭 반응없이 리턴 시키기
-        if (SomeParent.GetComponent<NewPakageItem>().IsGrayScale()) 
+        if (SomeParent.GetComponent<NewPakageItem>().IsGrayScale())
             return;
 
 
@@ -220,7 +223,96 @@ public class IAPManager : MonoBehaviour
             vatTextObj.SetActive(false);
         }
 
+        var tmpInfo = GetPakInfo(_index);
 
+        for (int i = 0; i < shopDesc.Length; i++)
+        {
+            shopDesc[i].gameObject.SetActive(false);
+        }
+
+        /// 번역
+        if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+        {
+            ///// 포함 상품 표기
+            //if (tmpInfo.getDia != 0)
+            //{
+            //    shopDesc[0].text = $"다이아 x {tmpInfo.getDia:N0}";
+            //    shopDesc[0].gameObject.SetActive(true);
+            //}
+            //if (tmpInfo.getShiled != 0)
+            //{
+            //    shopDesc[1].text = $"방패뽑기권 x {tmpInfo.getShiled:N0}";
+            //    shopDesc[1].gameObject.SetActive(true);
+            //}
+            //if (tmpInfo.getGuapbap != 0)
+            //{
+            //    shopDesc[2].text = $"국밥 x {tmpInfo.getGuapbap:N0}";
+            //    shopDesc[2].gameObject.SetActive(true);
+            //}
+            //if (tmpInfo.getSsalbap != 0)
+            //{
+            //    shopDesc[3].text = $"쌀밥 x {tmpInfo.getSsalbap:N0}";
+            //    shopDesc[3].gameObject.SetActive(true);
+            //}
+            //if (tmpInfo.getKimchi != 0)
+            //{
+            //    shopDesc[4].text = $"깍두기 x {tmpInfo.getKimchi:N0}";
+            //    shopDesc[4].gameObject.SetActive(true);
+            //}
+            //if (tmpInfo.getKey != 0)
+            //{
+            //    shopDesc[5].text = $"열쇠 x {tmpInfo.getKey:N0}";
+            //    shopDesc[5].gameObject.SetActive(true);
+            //}
+            //if (tmpInfo.getTicket != 0)
+            //{
+            //    shopDesc[6].text = $"PvP입장권 x {tmpInfo.getTicket:N0}";
+            //    shopDesc[6].gameObject.SetActive(true);
+            //}
+
+            shopDesc[0].transform.parent.parent.parent.gameObject.SetActive(false);
+        }
+        else
+        {
+            shopDesc[0].transform.parent.parent.parent.gameObject.SetActive(true);
+
+            /// 포함 상품 표기
+            if (tmpInfo.getDia != 0)
+            {
+                shopDesc[0].text = $"Diamond <color=#2196f3>x {tmpInfo.getDia:N0}</color>";
+                shopDesc[0].gameObject.SetActive(true);
+            }
+            if (tmpInfo.getShiled != 0)
+            {
+                shopDesc[1].text = $"Shield ticket <color=#2196f3>x {tmpInfo.getShiled:N0}</color>";
+                shopDesc[1].gameObject.SetActive(true);
+            }
+            if (tmpInfo.getGuapbap != 0)
+            {
+                shopDesc[2].text = $"Korean soup <color=#2196f3>x {tmpInfo.getGuapbap:N0}</color>";
+                shopDesc[2].gameObject.SetActive(true);
+            }
+            if (tmpInfo.getSsalbap != 0)
+            {
+                shopDesc[3].text = $"Rice <color=#2196f3>x {tmpInfo.getSsalbap:N0}</color>";
+                shopDesc[3].gameObject.SetActive(true);
+            }
+            if (tmpInfo.getKimchi != 0)
+            {
+                shopDesc[4].text = $"Radish kimchi <color=#2196f3>x {tmpInfo.getKimchi:N0}</color>";
+                shopDesc[4].gameObject.SetActive(true);
+            }
+            if (tmpInfo.getKey != 0)
+            {
+                shopDesc[5].text = $"Key <color=#2196f3>x {tmpInfo.getKey:N0}</color>";
+                shopDesc[5].gameObject.SetActive(true);
+            }
+            if (tmpInfo.getTicket != 0)
+            {
+                shopDesc[6].text = $"PvP ticket <color=#2196f3>x {tmpInfo.getTicket:N0}</color>";
+                shopDesc[6].gameObject.SetActive(true);
+            }
+        }
 
 
 

@@ -43,7 +43,7 @@ public class AutoDisposePopUp : MonoBehaviour
 
     private void OnDisable()
     {
-        StopCoroutine(countPerCont);
+        if (countPerCont != null) StopCoroutine(countPerCont);
     }
 
 }

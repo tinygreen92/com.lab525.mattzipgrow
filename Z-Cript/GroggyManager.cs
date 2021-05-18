@@ -149,7 +149,7 @@ public class GroggyManager : MonoBehaviour
         }
         else
         {
-            StopCoroutine(HP_CD);
+            if (HP_CD != null) StopCoroutine(HP_CD);
             StopCoroutine(PostCheckCou());
         }
     }
@@ -244,7 +244,7 @@ public class GroggyManager : MonoBehaviour
         }
         else
         {
-            StopCoroutine(HP_CDforDef);
+            if (HP_CDforDef != null) StopCoroutine(HP_CDforDef);
         }
     }
 
@@ -358,7 +358,7 @@ public class GroggyManager : MonoBehaviour
     public void GroggyOff()
     {
 
-        StopCoroutine(groggyTimer);
+        if (groggyTimer != null) StopCoroutine(groggyTimer);
 
 
         // 고소 코루틴 풀어주고

@@ -361,6 +361,7 @@ public class GotoMINIgame : MonoBehaviour
         GroggyReset();
         //
         AudioManager.instance.MiniGameBGM();
+        AudioManager.instance.HitVolumeMute(false);
 
         MainCamera.position = new Vector3(0, -40, -10);
 

@@ -2267,9 +2267,9 @@ public class CharacterManager : MonoBehaviour
 
         if(CharaLv > 1)
         {
-            Chara_Attack_UP = ((CharaLv - 1) * 5f).ToString("f0");
-            Chara_HP_UP = ((CharaLv - 1) * 50f).ToString("f0");
-            Chara_Recov_UP = ((CharaLv - 1) * 25f).ToString("f0");
+            Chara_Attack_UP = ((CharaLv - 1) * 5f).ToString("f0");  /// 공격력 
+            Chara_HP_UP = ((CharaLv - 1) * 20f).ToString("f0");     /// 체력
+            Chara_Recov_UP = ((CharaLv - 1) * 10f).ToString("f0");  /// 체력 회복력
             //
 
             /// 캐릭터 레벨 올리면 세개가 올라감
@@ -2277,7 +2277,7 @@ public class CharacterManager : MonoBehaviour
             PlayerPrefs.SetString("Chara_HP_UP", Chara_HP_UP);
             PlayerPrefs.SetString("Chara_Recov_UP", Chara_Recov_UP);
             /// 캐릭터 방어력 스탯 값
-            PlayerPrefs.SetFloat("Chara_Defence_UP", (CharaLv - 1) * 5f);
+            PlayerPrefs.SetFloat("Chara_Defence_UP", (CharaLv - 1) * 5f);   /// 방어력
             PlayerPrefs.Save();
         }
 

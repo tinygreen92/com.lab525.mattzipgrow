@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class Booster_Spin : MonoBehaviour
 {
+    [Header("-데일리 팝업")]
     public GameObject dailyPopup;
     [Header("출석 버튼에 달린 카운터")]
     public Text cheackCountText;
@@ -31,6 +32,10 @@ public class Booster_Spin : MonoBehaviour
             Debug.LogError("!!!!! 최신값이 바뀌었다 ResetDailyQuest !!!!!");
 
             ResetDailyQuest();
+        }
+        else
+        {
+            PlayerPrefsManager.GetInstance().isReadySpinReset = true;
         }
     }
 
@@ -107,8 +112,8 @@ public class Booster_Spin : MonoBehaviour
     /// </summary>
     void ResetDailyQuest()
     {
-        /// questInfo[0] 로딩 될때까지 루프
-        if (!PlayerPrefsManager.GetInstance().isReadyWeapon)
+        /// LoadDayLimitData() 로딩 될때까지 루프
+        if (!PlayerPrefsManager.GetInstance().isReadyDayLimit)
         {
             Invoke(nameof(ResetDailyQuest), 0.6f);
             return;
@@ -180,11 +185,11 @@ public class Booster_Spin : MonoBehaviour
             
             /// 일/주/월 저장
             PlayerPrefsManager.GetInstance().SaveDayLimitData();
+            PlayerPrefsManager.GetInstance().isReadySpinReset = true;
 
             /// 퀘스트 정보 갱신
             PlayerPrefsManager.GetInstance().SavequestInfo();
             PlayerPrefsManager.GetInstance().SavequestInfo3();
-
 
             /// 출석창 호출
             dailyPopup.SetActive(true);

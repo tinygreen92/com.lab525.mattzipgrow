@@ -110,8 +110,8 @@ public class RouletteInit : MonoBehaviour
             }
             else
             {
-                r_Content = "Acquisition Korean soups 800!";
-                tmpContent = "Acquisition Korean soups 1600!";
+                r_Content = "Got Korean soups x800";
+                tmpContent = "Got Korean soups x1600";
             }
 
 
@@ -130,8 +130,8 @@ public class RouletteInit : MonoBehaviour
             }
             else
             {
-                r_Content = "Acquisition keys 5!";
-                tmpContent = "Acquisition keys 10!";
+                r_Content = "Got keys x5";
+                tmpContent = "Got keys x10";
             }
 
 
@@ -151,8 +151,8 @@ public class RouletteInit : MonoBehaviour
             }
             else
             {
-                r_Content = "Acquisition rices 400!";
-                tmpContent = "Acquisition rices 800!";
+                r_Content = "Got rices x400";
+                tmpContent = "Got rices x800";
             }
 
 
@@ -174,8 +174,8 @@ public class RouletteInit : MonoBehaviour
             }
             else
             {
-                r_Content = "Acquisition diamonds 80!";
-                tmpContent = "Acquisition diamonds 160!";
+                r_Content = "Got diamonds x80";
+                tmpContent = "Got diamonds x160";
             }
 
 
@@ -197,9 +197,9 @@ public class RouletteInit : MonoBehaviour
             }
             else
             {
-                r_Content = "Acquisition golds " + UserWallet.GetInstance().SeetheNatural(double.Parse(pdps));
+                r_Content = "Got golds x" + UserWallet.GetInstance().SeetheNatural(double.Parse(pdps));
                 pdps = dts.multipleStringDouble(pdps, 2d);
-                tmpContent = "Acquisition golds " + UserWallet.GetInstance().SeetheNatural(double.Parse(pdps));
+                tmpContent = "Got golds x" + UserWallet.GetInstance().SeetheNatural(double.Parse(pdps));
             }
 
 
@@ -220,8 +220,8 @@ public class RouletteInit : MonoBehaviour
             }
             else
             {
-                r_Content = "Acquisition Korean soups 1600!";
-                tmpContent = "Acquisition Korean soups 3200!";
+                r_Content = "Got Korean soups x1600";
+                tmpContent = "Got Korean soups x3200";
             }
 
 
@@ -241,8 +241,8 @@ public class RouletteInit : MonoBehaviour
             }
             else
             {
-                r_Content = "Acquisition keys 10!";
-                tmpContent = "Acquisition keys 20!";
+                r_Content = "Got keys x10";
+                tmpContent = "Got keys x20";
             }
 
 
@@ -261,8 +261,8 @@ public class RouletteInit : MonoBehaviour
             }
             else
             {
-                r_Content = "Acquisition rices 800!";
-                tmpContent = "Acquisition rices 1600!";
+                r_Content = "Got rices x800";
+                tmpContent = "Got rices x1600";
             }
 
 
@@ -285,8 +285,8 @@ public class RouletteInit : MonoBehaviour
             }
             else
             {
-                r_Content = "Acquisition diamonds 160!";
-                tmpContent = "Acquisition diamonds 320!";
+                r_Content = "Got diamonds x160";
+                tmpContent = "Got diamonds x320";
             }
 
 
@@ -308,9 +308,9 @@ public class RouletteInit : MonoBehaviour
             }
             else
             {
-                r_Content = "Acquisition golds " + UserWallet.GetInstance().SeetheNatural(double.Parse(pdps));
+                r_Content = "Got golds x" + UserWallet.GetInstance().SeetheNatural(double.Parse(pdps));
                 pdps = dts.multipleStringDouble(pdps, 2d);
-                tmpContent = "Acquisition golds " + UserWallet.GetInstance().SeetheNatural(double.Parse(pdps));
+                tmpContent = "Got golds x" + UserWallet.GetInstance().SeetheNatural(double.Parse(pdps));
             }
 
 

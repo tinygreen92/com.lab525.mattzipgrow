@@ -141,7 +141,7 @@ public class DailyRewardController : MonoBehaviour
                 if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
                     GetRewordImgText(0, "국밥 500그릇을 얻었다!");
                 else
-                    GetRewordImgText(0, "Got Korean soup 500!");
+                    GetRewordImgText(0, "Got Korean soup x500");
 
                 break;
 
@@ -151,7 +151,7 @@ public class DailyRewardController : MonoBehaviour
                 if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
                     GetRewordImgText(1, "열쇠 5개를 얻었다!");
                 else
-                    GetRewordImgText(1, "Got keys 5!");
+                    GetRewordImgText(1, "Got keys x5");
 
                 break;
 
@@ -162,7 +162,7 @@ public class DailyRewardController : MonoBehaviour
                     GetRewordImgText(2, "다이아 50개를 얻었다!");
                 /// 번역
                 if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
-                    GetRewordImgText(2, "Got diamond 50");
+                    GetRewordImgText(2, "Got diamond x50");
 
                 break;
 
@@ -172,7 +172,7 @@ public class DailyRewardController : MonoBehaviour
                 if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
                     GetRewordImgText(3, "쌀밥 250그릇을 얻었다!");
                 else
-                    GetRewordImgText(3, "Got rice 250!");
+                    GetRewordImgText(3, "Got rice x250");
 
                 break;
 
@@ -182,7 +182,7 @@ public class DailyRewardController : MonoBehaviour
                 if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
                     GetRewordImgText(2, "다이아 100개를 얻었다!");
                 else
-                    GetRewordImgText(2, "Got diamond 100!");
+                    GetRewordImgText(2, "Got diamond x100");
 
                 break;
 
@@ -192,7 +192,7 @@ public class DailyRewardController : MonoBehaviour
                 if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
                     GetRewordImgText(0, "국밥 1000그릇을 얻었다!");
                 else
-                    GetRewordImgText(0, "Got Korean soup 1000!");
+                    GetRewordImgText(0, "Got Korean soup x1000");
 
                 break;
 
@@ -202,7 +202,7 @@ public class DailyRewardController : MonoBehaviour
                 if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
                     GetRewordImgText(1, "열쇠 10개를 얻었다!");
                 else
-                    GetRewordImgText(1, "Got keys 10!");
+                    GetRewordImgText(1, "Got keys x10");
 
                 break;
 
@@ -212,7 +212,7 @@ public class DailyRewardController : MonoBehaviour
                 if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
                     GetRewordImgText(2, "다이아 50개를 얻었다!");
                 else
-                    GetRewordImgText(2, "Got diamond 50!");
+                    GetRewordImgText(2, "Got diamond x50");
 
                 break;
 
@@ -222,7 +222,7 @@ public class DailyRewardController : MonoBehaviour
                 if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
                     GetRewordImgText(3, "쌀밥 500개를 얻었다!");
                 else
-                    GetRewordImgText(3, "Got rice 500!");
+                    GetRewordImgText(3, "Got rice x500");
 
                 break;
 
@@ -232,7 +232,7 @@ public class DailyRewardController : MonoBehaviour
                 if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
                     GetRewordImgText(2, "다이아 150개를 얻었다!");
                 else
-                    GetRewordImgText(2, "Got diamond 150!");
+                    GetRewordImgText(2, "Got diamond x150");
 
                 break;
 
@@ -243,7 +243,7 @@ public class DailyRewardController : MonoBehaviour
                 if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
                     GetRewordImgText(0, "국밥 1500그릇을 얻었다!");
                 else
-                    GetRewordImgText(0, "Got Korean soup 1500!");
+                    GetRewordImgText(0, "Got Korean soup x1500");
 
                 break;
 
@@ -253,7 +253,7 @@ public class DailyRewardController : MonoBehaviour
                 if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
                     GetRewordImgText(1, "열쇠 15개를 얻었다!");
                 else
-                    GetRewordImgText(1, "Got keys 15!");
+                    GetRewordImgText(1, "Got keys x15");
 
                 break;
 
@@ -263,7 +263,7 @@ public class DailyRewardController : MonoBehaviour
                 if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
                     GetRewordImgText(2, "다이아 50개를 얻었다!");
                 else
-                    GetRewordImgText(2, "Got diamond 50!");
+                    GetRewordImgText(2, "Got diamond x50");
 
                 break;
 
@@ -273,7 +273,7 @@ public class DailyRewardController : MonoBehaviour
                 if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
                     GetRewordImgText(3, "쌀밥 750개를 얻었다!");
                 else
-                    GetRewordImgText(3, "Got rice 750!");
+                    GetRewordImgText(3, "Got rice x750");
 
                 break;
 
@@ -283,7 +283,7 @@ public class DailyRewardController : MonoBehaviour
                 if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
                     GetRewordImgText(2, "다이아 200개를 얻었다!");
                 else
-                    GetRewordImgText(2, "Got diamond 200!");
+                    GetRewordImgText(2, "Got diamond x200");
 
                 break;
 
@@ -294,7 +294,7 @@ public class DailyRewardController : MonoBehaviour
                 if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
                     GetRewordImgText(0, "국밥 2000개를 얻었다!");
                 else
-                    GetRewordImgText(0, "Got Korean soup 2000!");
+                    GetRewordImgText(0, "Got Korean soup x2000");
 
                 break;
 
@@ -304,7 +304,7 @@ public class DailyRewardController : MonoBehaviour
                 if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
                     GetRewordImgText(1, "열쇠 20개를 얻었다!");
                 else
-                    GetRewordImgText(1, "Got keys 20!");
+                    GetRewordImgText(1, "Got keys x20");
 
                 break;
 
@@ -314,7 +314,7 @@ public class DailyRewardController : MonoBehaviour
                 if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
                     GetRewordImgText(2, "다이아 50개를 얻었다!");
                 else
-                    GetRewordImgText(2, "Got diamond 50!");
+                    GetRewordImgText(2, "Got diamond x50");
 
                 break;
 
@@ -324,7 +324,7 @@ public class DailyRewardController : MonoBehaviour
                 if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
                     GetRewordImgText(3, "쌀밥 1000그릇을 얻었다!");
                 else
-                    GetRewordImgText(3, "Got rice 1000!");
+                    GetRewordImgText(3, "Got rice x1000");
 
                 break;
 
@@ -334,7 +334,7 @@ public class DailyRewardController : MonoBehaviour
                 if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
                     GetRewordImgText(2, "다이아 250개를 얻었다!");
                 else
-                    GetRewordImgText(2, "Got diamond 250!");
+                    GetRewordImgText(2, "Got diamond x250");
 
                 break;
 
@@ -344,7 +344,7 @@ public class DailyRewardController : MonoBehaviour
                 if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
                     GetRewordImgText(0, "국밥 3000그릇을 얻었다!");
                 else
-                    GetRewordImgText(0, "Got Korean soup 3000!");
+                    GetRewordImgText(0, "Got Korean soup x3000");
 
                 break;
 
@@ -354,7 +354,7 @@ public class DailyRewardController : MonoBehaviour
                 if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
                     GetRewordImgText(1, "열쇠 30개를 얻었다!");
                 else
-                    GetRewordImgText(1, "Got keys 30!");
+                    GetRewordImgText(1, "Got keys x30");
 
                 break;
 
@@ -364,7 +364,7 @@ public class DailyRewardController : MonoBehaviour
                 if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
                     GetRewordImgText(2, "다이아 50개를 얻었다!");
                 else
-                    GetRewordImgText(2, "Got diamond 50!");
+                    GetRewordImgText(2, "Got diamond x50");
 
                 break;
 
@@ -374,7 +374,7 @@ public class DailyRewardController : MonoBehaviour
                 if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
                     GetRewordImgText(3, "쌀밥 2000그릇을 얻었다!");
                 else
-                    GetRewordImgText(3, "Got rice 2000!");
+                    GetRewordImgText(3, "Got rice x2000");
 
                 break;
 
@@ -384,7 +384,7 @@ public class DailyRewardController : MonoBehaviour
                 if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
                     GetRewordImgText(2, "다이아 500개를 얻었다!");
                 else
-                    GetRewordImgText(2, "Got diamond 500!");
+                    GetRewordImgText(2, "Got diamond x500");
 
                 break;
 

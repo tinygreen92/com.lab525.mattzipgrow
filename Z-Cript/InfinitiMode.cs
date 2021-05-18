@@ -166,6 +166,8 @@ public class InfinitiMode : MonoBehaviour
         }
 
         PlayerPrefsManager.GetInstance().key--;
+        AudioManager.instance.HitVolumeMute(false);
+
         tmm.ExUpdateMission(12); /// 미션 업데이트
         tmm.ExUpdateMission(37); /// 미션 업데이트
         tmm.ExUpdateMission(52); /// 미션 업데이트

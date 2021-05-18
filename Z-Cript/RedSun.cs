@@ -21,7 +21,7 @@ public class RedSun : MonoBehaviour
         else
         {
             if (!isCoRunning) return;
-            StopCoroutine(pikapika);
+            if (pikapika != null) StopCoroutine(pikapika);
             HP_UNDER_IMG.SetActive(false);
             isCoRunning = false;
 

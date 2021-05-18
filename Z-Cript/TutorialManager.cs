@@ -1205,7 +1205,7 @@ public class TutorialManager : MonoBehaviour
 
         transform.parent.gameObject.SetActive(false);
         /// 
-        StopCoroutine(Tutorial);
+        if (Tutorial != null) StopCoroutine(Tutorial);
 
         //playNANOO.OpenBanner();
 

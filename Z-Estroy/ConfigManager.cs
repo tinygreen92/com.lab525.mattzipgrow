@@ -183,19 +183,39 @@ public class ConfigManager : MonoBehaviour
     /// </summary>
     public void NativeQuitPop()
     {
-        // Show a three button alert and handle its OnComplete event
-        NativeUI.AlertPopup alert = NativeUI.ShowTwoButtonAlert(
-            "종료",
-            "맷집 키우기를 종료할까요?",
-            "취소",
-            "종료"
-            );
-
-        // Subscribe to the event
-        if (alert != null)
+        if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
         {
-            alert.OnComplete += OnAlertCompleteHandler;
+            // Show a three button alert and handle its OnComplete event
+            NativeUI.AlertPopup alert = NativeUI.ShowTwoButtonAlert(
+                "종료",
+                "맷집 키우기를 종료할까요?",
+                "취소",
+                "종료"
+                );
+
+            // Subscribe to the event
+            if (alert != null)
+            {
+                alert.OnComplete += OnAlertCompleteHandler;
+            }
         }
+        else
+        {
+            // Show a three button alert and handle its OnComplete event
+            NativeUI.AlertPopup alert = NativeUI.ShowTwoButtonAlert(
+                "Quit",
+                "Do you want quit this game?",
+                "Cancel",
+                "Quit"
+                );
+
+            // Subscribe to the event
+            if (alert != null)
+            {
+                alert.OnComplete += OnAlertCompleteHandler;
+            }
+        }
+
     }
 
     // The event handler

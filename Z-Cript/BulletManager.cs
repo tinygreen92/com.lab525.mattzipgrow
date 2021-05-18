@@ -309,9 +309,9 @@ public class BulletManager : MonoBehaviour
             /// 몸통 번쩍거리기
             StartCoroutine(WitheMan(other, isCriiiiiiiii));
             /// 총알 돌아가는 코루틴 정지.
-            StopCoroutine(spinning);
+            if (spinning != null) StopCoroutine(spinning);
         }
-        else if (other.gameObject.tag == "Defence")
+        else if (other.gameObject.tag == "Defence")         /// 방어전
         {
             AudioManager.instance.Btn_hit();
 
@@ -331,7 +331,7 @@ public class BulletManager : MonoBehaviour
 
             StartCoroutine(DefenMan(other));
 
-            StopCoroutine(spinning);
+            if (spinning != null) StopCoroutine(spinning);
 
         }
         else if (other.gameObject.tag == "infiniti")
@@ -358,7 +358,7 @@ public class BulletManager : MonoBehaviour
 
             other.GetComponentInChildren<SpriteRenderer>().color = new Color(1, 1, 1, 128 / 255f);
 
-            StopCoroutine(spinning);
+            if (spinning != null) StopCoroutine(spinning);
 
             //코인말고 국밥  생성
             coin = Lean.Pool.LeanPool.Spawn(PlayerPrefsManager.GetInstance().BapOB, transform.position, transform.rotation);

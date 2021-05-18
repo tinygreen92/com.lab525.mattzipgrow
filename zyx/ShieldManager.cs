@@ -621,6 +621,8 @@ public class ShieldManager : MonoBehaviour
 
     [Header("-초기 데이터")]
     public TextAsset ta;
+    [Header("-수정 데이터")]
+    public TextAsset taback;
     [Header("-무한 스크롤 방패")]
     public Transform InfinityContent;
 
@@ -913,9 +915,14 @@ public class ShieldManager : MonoBehaviour
 
 
 
-    public void sparser()
+    /// <summary>
+    /// 데이터 수정시 사용
+    /// </summary>
+    public void Asparser()
     {
-        string[] line = ta.text.Substring(0, ta.text.Length).Split('\n');
+        PlayerPrefsManager.GetInstance().shieldInfo.Clear();
+
+        string[] line = taback.text.Substring(0, taback.text.Length).Split('\n');
         for (int i = 0; i < line.Length; i++)
         {
             string[] row = line[i].Split('\t');
@@ -931,7 +938,7 @@ public class ShieldManager : MonoBehaviour
                 );
         }
 
-        PlayerPrefsManager.GetInstance().SaveShieldInfo();
+        PlayerPrefsManager.GetInstance().SaveShieldBack();
     }
 
 

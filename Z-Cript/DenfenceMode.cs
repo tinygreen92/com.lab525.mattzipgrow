@@ -207,7 +207,7 @@ public class DenfenceMode : MonoBehaviour
         }
 
         /// 20초 동안 버티면 성공
-        StopCoroutine(stromking);
+        if(stromking != null) StopCoroutine(stromking);
         DefenceSuccess();
     }
 
@@ -239,7 +239,7 @@ public class DenfenceMode : MonoBehaviour
         CoolDownStart(300);
         groggyManager.HP_AutoRecoForDef(false);
         Timer.transform.parent.gameObject.SetActive(false);
-        StopCoroutine(stromking);
+        if (stromking != null) StopCoroutine(stromking);
 
         StartCoroutine(InvoReturnMainGame());
     }
@@ -269,7 +269,7 @@ public class DenfenceMode : MonoBehaviour
 
         CoolDownStart(300);
         groggyManager.HP_AutoRecoForDef(false);
-        StopCoroutine(stromking);
+        if (stromking != null) StopCoroutine(stromking);
 
 
 
@@ -323,7 +323,7 @@ public class DenfenceMode : MonoBehaviour
         /// 버티기 실패하고 사망.
         if (PlayerPrefsManager.GetInstance().DefendTrigger == 1)
         {
-            StopCoroutine(stromking);
+            if (stromking != null) StopCoroutine(stromking);
             DefenceFailed();
             //
             PlayerPrefsManager.GetInstance().DefendTrigger = 0;

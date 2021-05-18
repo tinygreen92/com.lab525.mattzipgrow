@@ -37,6 +37,5 @@ public class NewPakaStarter : MonoBehaviour
                 TabNamebox[4].text = "Limited pack";
             }
         }
-
     }
 }
