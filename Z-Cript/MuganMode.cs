@@ -122,7 +122,7 @@ public class MuganMode : MonoBehaviour
         PlayerPrefsManager.GetInstance().bossHP = PlayerPrefsManager.GetInstance().MAX_boss_HP;
         // 입장 완료되면 키 하나 소모
         PlayerPrefsManager.GetInstance().key--;
-        AudioManager.instance.HitVolumeMute(false);
+        AudioManager.instance.InCodeHitVolMute();
 
         tmm.ExUpdateMission(26); /// 미션 업데이트
         tmm.ExUpdateMission(39); /// 미션 업데이트

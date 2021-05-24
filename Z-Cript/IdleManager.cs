@@ -23,6 +23,7 @@ public class IdleManager : MonoBehaviour
     public void IdleMode_Off()
     {
         moveRoutine = StartCoroutine(ProgressReverse());
+        AudioManager.instance.InCodeHitVolMute();
     }
 
     /// <summary>

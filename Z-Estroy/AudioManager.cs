@@ -56,6 +56,16 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    void Mumumute() => HitVolumeMute(false);
+
+    /// <summary>
+    /// 코드 내부에서만 사용하는거 지연시간 0.6
+    /// </summary>
+    public void InCodeHitVolMute()
+    {
+        Invoke(nameof(Mumumute), 0.6f);
+    }
+
     public void AllMute()
     {
         bgmInfo[0].volume = 0;

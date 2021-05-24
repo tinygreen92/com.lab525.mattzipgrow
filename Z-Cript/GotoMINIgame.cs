@@ -190,6 +190,7 @@ public class GotoMINIgame : MonoBehaviour
             else
                 PopUpObjectManager.GetInstance().ShowWarnnigProcess("Equip the new training equpment.");
 
+            AudioManager.instance.InCodeHitVolMute();
             return;
         }
 
@@ -217,8 +218,7 @@ public class GotoMINIgame : MonoBehaviour
         denfenceMode.CameraOn();
 
         AudioManager.instance.BnextBGM();
-
-
+        AudioManager.instance.InCodeHitVolMute();
     }
 
     /// <summary>
@@ -361,7 +361,7 @@ public class GotoMINIgame : MonoBehaviour
         GroggyReset();
         //
         AudioManager.instance.MiniGameBGM();
-        AudioManager.instance.HitVolumeMute(false);
+        AudioManager.instance.InCodeHitVolMute();
 
         MainCamera.position = new Vector3(0, -40, -10);
 

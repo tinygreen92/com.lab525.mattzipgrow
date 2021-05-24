@@ -37,7 +37,12 @@ public class PlayNANOOExample : MonoBehaviour
         plugin = Plugin.GetInstance();
         plugin.SetUUID(GPGSManager.GetLocalUserId());
         plugin.SetNickname(GPGSManager.GetLocalUserName());
-        plugin.SetLanguage(Configure.PN_LANG_KO);
+
+        if (Lean.Localization.LeanLocalization.CurrentLanguage == "Korean")
+            plugin.SetLanguage(Configure.PN_LANG_KO);
+        else
+            plugin.SetLanguage(Configure.PN_LANG_EN);
+
         /// 우편함 체크
         PostboxCheck();
         /// 오픈 배너 출력
